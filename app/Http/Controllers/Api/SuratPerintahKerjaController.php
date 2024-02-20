@@ -78,7 +78,7 @@ class SuratPerintahKerjaController extends Controller
         ]);
 
         // Return response
-        return new SuratPerintahKerjaResource(true, 'Data SPK Berhasil Ditambahkan!', $surat_Perintah_Kerja);
+        return new SuratPerintahKerjaResource(true, 'Data Surat Perintah Kerja Berhasil Ditambahkan!', $surat_Perintah_Kerja);
     }
 
     /**
@@ -93,7 +93,7 @@ class SuratPerintahKerjaController extends Controller
         $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
 
         //return single post as a resource
-        return new SuratPerintahKerjaResource(true, 'Detail Data Post!', $surat_Perintah_Kerja);
+        return new SuratPerintahKerjaResource(true, 'Detail Data Surat Perintah Kerja!', $surat_Perintah_Kerja);
     }
 
     /**
