@@ -31,7 +31,7 @@ class SuratPerintahKerjaController extends Controller
      */
     public function store(Request $request)
     {
-        //define validation rules
+        // Define validation rules
         $validator = Validator::make($request->all(), [
             'kode_project' => 'required',
             'nama_project' => 'required',
@@ -40,36 +40,44 @@ class SuratPerintahKerjaController extends Controller
             'project_manager' => 'required',
             'no_spk' => 'required',
             'tanggal' => 'required|date',
-            'prioritas' => 'required',
-            'waktu_penyelesaian' => 'required|date',
-            'dokumen_pendukung_type' => 'required',
+            'prioritas' => 'nullable|string',
+            'waktu_penyelesaian' => 'nullable|date',
+            'dokumen_pendukung_type' => 'nullable|string',
             'dokumen_pendukung_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'file_pendukung_lainnya' => 'nullable|string',
         ]);
 
-        //check if validation fails
+        // Check if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        //upload file
-        $destinationPath = '/posts/images';
-        $dokumen_pendukung_file = $request->dokumen_pendukung_file->hashName();
-        $request->dokumen_pendukung_file->move(public_path($destinationPath), $dokumen_pendukung_file);
+        // Handle file upload if exists
+        if ($request->hasFile('dokumen_pendukung_file')) {
+            $destinationPath = '/posts/images';
+            $dokumen_pendukung_file = $request->file('dokumen_pendukung_file')->hashName();
+            $request->file('dokumen_pendukung_file')->move(public_path($destinationPath), $dokumen_pendukung_file);
+        } else {
+            $dokumen_pendukung_file = null;
+        }
+
+        // Create the record
         $surat_Perintah_Kerja = Surat_perintah_kerja::create([
-            'kode_project'        => $request->kode_project,
-            'nama_project'        => $request->nama_project,
-            'user'                => $request->user,
-            'main_contractor'     => $request->main_contractor,
-            'project_manager'     => $request->project_manager,
-            'no_spk'              => $request->no_spk,
-            'tanggal'             => $request->tanggal,
-            'prioritas'           => $request->prioritas,
-            'waktu_penyelesaian'  => $request->waktu_penyelesaian,
-            'dokumen_pendukung_type' => $request->dokumen_pendukung_type, // tipe dokumen pendukung
-            'dokumen_pendukung_file' => $dokumen_pendukung_file, // nama file dokumen pendukung
+            'kode_project' => $request->kode_project,
+            'nama_project' => $request->nama_project,
+            'user' => $request->user,
+            'main_contractor' => $request->main_contractor,
+            'project_manager' => $request->project_manager,
+            'no_spk' => $request->no_spk,
+            'tanggal' => $request->tanggal,
+            'prioritas' => $request->prioritas,
+            'waktu_penyelesaian' => $request->waktu_penyelesaian,
+            'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
+            'dokumen_pendukung_file' => $dokumen_pendukung_file,
+            'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
         ]);
 
-        //return response
+        // Return response
         return new SuratPerintahKerjaResource(true, 'Data SPK Berhasil Ditambahkan!', $surat_Perintah_Kerja);
     }
 
@@ -106,10 +114,11 @@ class SuratPerintahKerjaController extends Controller
             'project_manager'       => 'required',
             'no_spk'                => 'required',
             'tanggal'               => 'required|date',
-            'prioritas'             => 'required',
-            'waktu_penyelesaian'    => 'required|date',
-            'dokumen_pendukung_type' => 'required', // Tipe dokumen pendukung
-            'dokumen_pendukung_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048', // File dokumen pendukung
+            'prioritas' => 'nullable|string',
+            'waktu_penyelesaian' => 'nullable|date',
+            'dokumen_pendukung_type' => 'nullable|string',
+            'dokumen_pendukung_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'file_pendukung_lainnya' => 'nullable|string',
         ]);
 
         // Check if validation fails
@@ -147,9 +156,10 @@ class SuratPerintahKerjaController extends Controller
             'waktu_penyelesaian'    => $request->waktu_penyelesaian,
             'dokumen_pendukung_type' => $request->dokumen_pendukung_type, // Tipe dokumen pendukung
             'dokumen_pendukung_file' => $dokumen_pendukung_file, // Nama file dokumen pendukung
+            'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
         ]);
 
         // Return response
-        return new SuratPerintahKerjaResource(true, 'Data Post Berhasil Diubah!', $surat_Perintah_Kerja);
+        return new SuratPerintahKerjaResource(true, 'Data Surat perintah Kerja Berhasil Diubah!', $surat_Perintah_Kerja);
     }
 }

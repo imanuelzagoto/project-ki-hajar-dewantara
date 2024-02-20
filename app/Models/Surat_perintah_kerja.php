@@ -21,6 +21,7 @@ class Surat_perintah_kerja extends Model
         'waktu_penyelesaian',
         'dokumen_pendukung_type',
         'dokumen_pendukung_file',
+        'file_pendukung_lainnya',
     ];
 
     /**
