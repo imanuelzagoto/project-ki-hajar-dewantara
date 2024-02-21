@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use App\Http\Resources\SuratPerintahKerjaResource;
 
 class SuratPerintahKerjaController extends Controller
@@ -206,12 +205,21 @@ class SuratPerintahKerjaController extends Controller
         return response()->json(['message' => 'Data Surat perintah Kerja berhasil dihapus!', 'success' => true, 'data' => null], 200);
     }
 
-    public function exportPdf()
+    /**
+     * exportPDF
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function exportPDF()
     {
-        $suratPerintahKerjas = Surat_perintah_kerja::latest()->get();
-
-        $pdf = Pdf::loadView('pdf.surat_perintah_kerja', compact('suratPerintahKerjas'));
-
+        // Retrieve Surat Perintah Kerja data
+        $suratPerintahKerjas = Surat_perintah_kerja::all();
+        // Load view for PDF
+        $pdf = PDF::loadView('SPK.surat_perintah_kerja_pdf', compact('suratPerintahKerjas'));
+        // Optionally, you can set additional configurations for the PDF
+        $pdf->setPaper('a4', 'landscape');
+        // Generate PDF
         return $pdf->download('surat_perintah_kerja.pdf');
     }
 }
