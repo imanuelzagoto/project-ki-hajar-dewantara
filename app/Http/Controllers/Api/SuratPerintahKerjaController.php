@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Surat_perintah_kerja;
-use App\Http\Resources\SuratPerintahKerjaResource;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Http\Controllers\Controller;
+use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use App\Http\Resources\SuratPerintahKerjaResource;
 
 class SuratPerintahKerjaController extends Controller
 {
@@ -43,7 +45,7 @@ class SuratPerintahKerjaController extends Controller
             'prioritas' => 'nullable|string',
             'waktu_penyelesaian' => 'nullable|date',
             'dokumen_pendukung_type' => 'nullable|string',
-            'dokumen_pendukung_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,poster,csv,txt|max:2048',
             'file_pendukung_lainnya' => 'nullable|string',
         ]);
 
@@ -84,23 +86,36 @@ class SuratPerintahKerjaController extends Controller
     /**
      * show
      *
-     * @param  mixed $post
+     * @param  mixed $surat_perintah_kerja
      * @return void
      */
     public function show($id)
     {
-        //find post by ID
+        // Find surat perintah kerja by ID
         $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
 
-        //return single post as a resource
-        return new SuratPerintahKerjaResource(true, 'Detail Data Surat Perintah Kerja!', $surat_Perintah_Kerja);
+        // Check if the Surat_perintah_kerja exists
+        if ($surat_Perintah_Kerja) {
+            return new SuratPerintahKerjaResource(true, 'Detail Data Surat Perintah Kerja!', $surat_Perintah_Kerja);
+        } else {
+            return response()->json(['message' => 'Data Surat perintah Kerja tidak ditemukan!'], 404);
+        }
     }
+
+    // public function show($id)
+    // {
+    //     //find post by ID
+    //     $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
+
+    //     //return single surat perintah kerja as a resource
+    //     return new SuratPerintahKerjaResource(true, 'Detail Data Surat Perintah Kerja!', $surat_Perintah_Kerja);
+    // }
 
     /**
      * update
      *
      * @param  mixed $request
-     * @param  mixed $post
+     * @param  mixed $surat_Perintah_Kerja
      * @return void
      */
     public function update(Request $request, $id)
@@ -117,7 +132,7 @@ class SuratPerintahKerjaController extends Controller
             'prioritas' => 'nullable|string',
             'waktu_penyelesaian' => 'nullable|date',
             'dokumen_pendukung_type' => 'nullable|string',
-            'dokumen_pendukung_file' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,poster,csv,txt|max:2048',
             'file_pendukung_lainnya' => 'nullable|string',
         ]);
 
@@ -161,5 +176,42 @@ class SuratPerintahKerjaController extends Controller
 
         // Return response
         return new SuratPerintahKerjaResource(true, 'Data Surat perintah Kerja Berhasil Diubah!', $surat_Perintah_Kerja);
+    }
+
+    /**
+     * destroy
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function destroy($id)
+    {
+        // Find the Surat_perintah_kerja by ID
+        $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
+
+        // Check if the Surat_perintah_kerja exists
+        if (!$surat_Perintah_Kerja) {
+            return response()->json(['message' => 'Data Surat perintah Kerja tidak ditemukan!'], 404);
+        }
+
+        // Delete the associated image if it exists
+        if ($surat_Perintah_Kerja->dokumen_pendukung_file) {
+            Storage::delete('public/posts/images/' . basename($surat_Perintah_Kerja->dokumen_pendukung_file));
+        }
+
+        // Delete the Surat_perintah_kerja
+        $surat_Perintah_Kerja->delete();
+
+        // Return response
+        return response()->json(['message' => 'Data Surat perintah Kerja berhasil dihapus!', 'success' => true, 'data' => null], 200);
+    }
+
+    public function exportPdf()
+    {
+        $suratPerintahKerjas = Surat_perintah_kerja::latest()->get();
+
+        $pdf = Pdf::loadView('pdf.surat_perintah_kerja', compact('suratPerintahKerjas'));
+
+        return $pdf->download('surat_perintah_kerja.pdf');
     }
 }
