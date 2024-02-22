@@ -9,6 +9,7 @@ use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\SuratPerintahKerjaResource;
+use Carbon\Carbon;
 
 class SuratPerintahKerjaController extends Controller
 {
@@ -40,9 +41,10 @@ class SuratPerintahKerjaController extends Controller
             'main_contractor' => 'required',
             'project_manager' => 'required',
             'no_spk' => 'required',
-            'tanggal' => 'required|date',
+            'tanggal' => 'required|date_format:d/m/Y',
             'prioritas' => 'nullable|string',
-            'waktu_penyelesaian' => 'nullable|date',
+            'waktu_penyelesaian' => 'nullable|date_format:d/m/Y',
+            'pic' => 'required',
             'dokumen_pendukung_type' => 'nullable|string',
             'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,poster,csv,txt|max:2048',
             'file_pendukung_lainnya' => 'nullable|string',
@@ -52,6 +54,13 @@ class SuratPerintahKerjaController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        // Manipulasi tanggal 'tanggal' sebelum membuat surat perintah kerja
+        $request['tanggal'] = Carbon::createFromFormat('d/m/Y', $request['tanggal'])->format('Y-m-d');
+
+        // Manipulasi tanggal 'waktu_penyelesaian' sebelum membuat surat perintah kerja
+        $request['waktu_penyelesaian'] = $request['waktu_penyelesaian'] ? Carbon::createFromFormat('d/m/Y', $request['waktu_penyelesaian'])->format('Y-m-d') : null;
+
 
         // Handle file upload if exists
         if ($request->hasFile('dokumen_pendukung_file')) {
@@ -73,6 +82,7 @@ class SuratPerintahKerjaController extends Controller
             'tanggal' => $request->tanggal,
             'prioritas' => $request->prioritas,
             'waktu_penyelesaian' => $request->waktu_penyelesaian,
+            'pic' => $request->pic,
             'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
             'dokumen_pendukung_file' => $dokumen_pendukung_file,
             'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
@@ -101,15 +111,6 @@ class SuratPerintahKerjaController extends Controller
         }
     }
 
-    // public function show($id)
-    // {
-    //     //find post by ID
-    //     $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
-
-    //     //return single surat perintah kerja as a resource
-    //     return new SuratPerintahKerjaResource(true, 'Detail Data Surat Perintah Kerja!', $surat_Perintah_Kerja);
-    // }
-
     /**
      * update
      *
@@ -127,9 +128,10 @@ class SuratPerintahKerjaController extends Controller
             'main_contractor'       => 'required',
             'project_manager'       => 'required',
             'no_spk'                => 'required',
-            'tanggal'               => 'required|date',
+            'tanggal' => 'required|date_format:d/m/Y',
             'prioritas' => 'nullable|string',
-            'waktu_penyelesaian' => 'nullable|date',
+            'waktu_penyelesaian' => 'nullable|date_format:d/m/Y',
+            'pic' => 'required',
             'dokumen_pendukung_type' => 'nullable|string',
             'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,poster,csv,txt|max:2048',
             'file_pendukung_lainnya' => 'nullable|string',
@@ -139,6 +141,13 @@ class SuratPerintahKerjaController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        // Manipulasi tanggal 'tanggal' sebelum memperbarui data surat perintah kerja
+        $request['tanggal'] = Carbon::createFromFormat('d/m/Y', $request['tanggal'])->format('Y-m-d');
+
+        // Manipulasi tanggal 'waktu_penyelesaian' sebelum memperbarui data surat perintah kerja
+        $request['waktu_penyelesaian'] = $request['waktu_penyelesaian'] ? Carbon::createFromFormat('d/m/Y', $request['waktu_penyelesaian'])->format('Y-m-d') : null;
+
 
         // Find the Surat_perintah_kerja by ID
         $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
@@ -168,6 +177,7 @@ class SuratPerintahKerjaController extends Controller
             'tanggal'               => $request->tanggal,
             'prioritas'             => $request->prioritas,
             'waktu_penyelesaian'    => $request->waktu_penyelesaian,
+            'pic' => $request->pic,
             'dokumen_pendukung_type' => $request->dokumen_pendukung_type, // Tipe dokumen pendukung
             'dokumen_pendukung_file' => $dokumen_pendukung_file, // Nama file dokumen pendukung
             'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
@@ -214,11 +224,16 @@ class SuratPerintahKerjaController extends Controller
     public function exportPDF()
     {
         // Retrieve Surat Perintah Kerja data
-        $suratPerintahKerjas = Surat_perintah_kerja::all();
+        $suratPerintahKerjas = Surat_perintah_kerja::get();
+        // Manipulate date formats
+        // dd($suratPerintahKerjas->tanggal);
+
         // Load view for PDF
         $pdf = PDF::loadView('SPK.surat_perintah_kerja_pdf', compact('suratPerintahKerjas'));
+
         // Optionally, you can set additional configurations for the PDF
         $pdf->setPaper('a4', 'landscape');
+
         // Generate PDF
         return $pdf->download('surat_perintah_kerja.pdf');
     }

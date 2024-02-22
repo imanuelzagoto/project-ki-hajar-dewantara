@@ -49,6 +49,7 @@
                 <th>Tanggal</th>
                 <th>Prioritas</th>
                 <th>Waktu Penyelesaian</th>
+                <th>PIC</th>
                 <th>Tipe Dokumen Pendukung</th>
                 <th>File Dokumen Pendukung</th>
                 <th>File Pendukung Lainnya</th>
@@ -66,6 +67,7 @@
                     <td>{{ $suratPerintahKerja->tanggal }}</td>
                     <td>{{ $suratPerintahKerja->prioritas }}</td>
                     <td>{{ $suratPerintahKerja->waktu_penyelesaian }} </td>
+                    <td>{{ $suratPerintahKerja->pic }} </td>
                     <td>{{ $suratPerintahKerja->dokumen_pendukung_type }}</td>
                     <td><a href="{{ asset('posts/images/' . $suratPerintahKerja->dokumen_pendukung_file) }}">Open
                             Document</a></td>

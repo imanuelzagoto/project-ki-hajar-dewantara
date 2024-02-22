@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('prioritas')->nullable();
             $table->date('waktu_penyelesaian')->nullable();
+            $table->string('pic');
             $table->integer('dokumen_pendukung_type')->nullable()->default(1); // 1 = gambar, 2 = kontrak, 3 = brosur
             $table->string('dokumen_pendukung_file')->nullable(); // 1 = gambar, 2 = kontrak, 3 = brosur
             $table->string('file_pendukung_lainnya')->nullable();
