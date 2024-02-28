@@ -142,20 +142,19 @@ class PengajuanDanaController extends Controller
      * @param  mixed $id
      * @return void
      */
-    public function exportPDF()
+    public function exportPDF($id)
     {
-        // Retrieve Surat Perintah Kerja data
-        $pengajuan_danas = PengajuanDana::get();
-        // Manipulate date formats
-        // dd($suratPerintahKerjas->tanggal);
-
+        // Retrieve Surat Perintah Kerja data by ID
+        $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
         // Load view for PDF
         $pdf = PDF::loadView('PD.pengajuan_dana_pdf', compact('pengajuan_danas'));
 
-        // Optionally, you can set additional configurations for the PDF
-        $pdf->setPaper('a4', 'landscape');
+        // // Optionally, you can set additional configurations for the PDF
+        // $pdf->setPaper('a4', 'landscape');
 
         // Generate PDF
+        // return $pdf->stream();
+
         return $pdf->download('pengajuan_dana.pdf');
     }
 }

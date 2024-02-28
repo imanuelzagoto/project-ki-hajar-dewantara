@@ -221,20 +221,19 @@ class SuratPerintahKerjaController extends Controller
      * @param  mixed $id
      * @return void
      */
-    public function exportPDF()
+    public function exportPDF($id)
     {
-        // Retrieve Surat Perintah Kerja data
-        $suratPerintahKerjas = Surat_perintah_kerja::get();
-        // Manipulate date formats
-        // dd($suratPerintahKerjas->tanggal);
-
+        // Retrieve Surat Perintah Kerja data by ID
+        $surat_perintah_kerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
         // Load view for PDF
-        $pdf = PDF::loadView('SPK.surat_perintah_kerja_pdf', compact('suratPerintahKerjas'));
+        $pdf = PDF::loadView('SPK.surat_perintah_kerja_pdf', compact('surat_perintah_kerjas'));
 
-        // Optionally, you can set additional configurations for the PDF
-        $pdf->setPaper('a4', 'landscape');
+        // // Optionally, you can set additional configurations for the PDF
+        // $pdf->setPaper('a4', 'landscape');
 
         // Generate PDF
+        // return $pdf->stream();
+
         return $pdf->download('surat_perintah_kerja.pdf');
     }
 }
