@@ -490,108 +490,123 @@
 </head>
 
 <body>
-    @foreach ($surat_perintah_kerjas as $suratPerintahKerja)
-        <div class="rectangle-outline">
-            <div class="pic-text">PIC : {{ $suratPerintahKerja->pic }}</div>
-            <h2 class="company">PT. SOLUSI INTEK INDONESIA</h2>
-            <h2 class="title1">SURAT PERINTAH KERJA WORKSHOP</h2>
-            <h3 class="teks1">Kepada Yth<span> : </span>Workshop Manager</h3>
-            <p class="teks2">Mohon dapat dilaksanakan pekerjaan di bawah ini :</p>
-            <table>
-                <tr>
-                    <th class="tb" style="width: 185px;">Kode Project</th>
-                    <th style="font-weight: normal">:</th>
-                    <th class="tb" colspan="6">{{ $suratPerintahKerja->kode_project }}</th>
-                </tr>
-                <tr>
-                    <td>Nama Project</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->nama_project }}</td>
-                    <td>NO SPK</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->no_spk }}</td>
-                </tr>
-                <tr>
-                    <td>User</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->user }}</td>
-                    <td>Tanggal</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->tanggal }}</td>
-                </tr>
-                <tr>
-                    <td>Main Contractor</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->main_contractor }}</td>
-                    <td>Prioritas</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->prioritas }}</td>
-                </tr>
-                <tr>
-                    <td>Project Manager</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->project_manager }}</td>
-                    <td>Waktu Penyelesaian</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->waktu_penyelesaian }} </td>
-                </tr>
-            </table>
-            <div class="horizontal-line"></div>
-            <div class="horizontal-line1"></div>
-            <!-- konten -->
-            <p class="dokumen">Dokumen Pendukung</p>
-            <label class="checkbox-container">
-                <input class="box1"> Gambar
-            </label>
-            <label class="checkbox-container">
-                <input class="box2"> Kontrak
-            </label>
-            <label class="checkbox-container">
-                <input class="box3"> Brosur
-            </label>
-            <p class="pendukung">File Pendukung Lainnya:</p>
-            <div class="garis-lurus1"></div>
-            <div class="garis-lurus2"></div>
-            <div class="job-table"></div>
-            <div class="type-work-container">
-                <p class="type-work1">JENIS PEKERJAAN</p>
-                <p class="Job-description">URAIAN PEKERJAAN</p>
-                <div class="garis-lurus3"></div>
-                <div class="garis-lurus3"></div>
-                <div class="garis-lurus4"></div>
-                <p class="teks-tabel">Bersambung ke halaman berikutnya …..........</p>
-                <div class="garis-lurus5"></div>
-                <p class="teks3">Hormat Kami,</p>
+    @if ($surat_perintah_kerjas->isEmpty())
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center">
+                    <img src="no-data.svg" alt="No Data" style="max-width: 100%; height: auto;">
+                    <h2 class="mt-4">Maaf, belum ada surat perintah kerja yang tersedia.</h2>
+                </div>
             </div>
-            <div class="content-ttd">
-                <p class="teks15">1. Nama : Sindu Irawan</p>
-                <p class="teks16">Jabatan : B.O.D</p>
-                <p class="teks17">..........................</p>
-                <p class="teks18">2. Nama : Bayu Nugraha </p>
-                <p class="teks19">Jabatan : General Manager</p>
-                <p class="teks20">..........................</p>
-                <p class="teks21">Form Number : SPK/01/admin/2022</p>
-                <div class="garis-lurus6"></div>
-                <p class="teks14">Jabatan :</p>
-                <p class="teks5">Pemohon</p>
-                <p class="teks13">Nama :</p>
-                <p class="teks6">Penerima</p>
-                <p class="teks7">Menyetujui</p>
-                <p class="teks8">Mengetahui</p>
-                <div class="garis-lurus7"></div>
-                <div class="garis-lurus8"></div>
-                <div class="garis-lurus9"></div>
-                <p class="teks12">Jabatan : </p>
-                <div class="garis-lurus0"></div>
-                <p class="teks11">Nama : </p>
-                <div class="garis-lurus11"></div>
-                <p class="teks0">Jabatan : Koor PM</p>
-                <div class="garis-lurus12"></div>
-                <p class="teks9">Nama : Susilo</p>
-            </div>
-            <div class="garis-lurus13"></div>
         </div>
-    @endforeach
+    @else
+        @foreach ($surat_perintah_kerjas as $suratPerintahKerja)
+            <!-- Judul -->
+            <div class="rectangle-outline">
+                <div class="pic-text">PIC : {{ $suratPerintahKerja->pic }}</div>
+                <h2 class="company">PT. SOLUSI INTEK INDONESIA</h2>
+                <h2 class="title1">SURAT PERINTAH KERJA WORKSHOP</h2>
+                <h3 class="teks1">Kepada Yth<span> : </span>Workshop Manager</h3>
+                <p class="teks2">Mohon dapat dilaksanakan pekerjaan di bawah ini :</p>
+
+                <!--table data -->
+                <table>
+                    <tr>
+                        <th class="tb" style="width: 185px;">Kode Project</th>
+                        <th style="font-weight: normal">:</th>
+                        <th class="tb" colspan="6">{{ $suratPerintahKerja->kode_project }}</th>
+                    </tr>
+                    <tr>
+                        <td>Nama Project</td>
+                        <td>:</td>
+                        <td>{{ $suratPerintahKerja->nama_project }}</td>
+                        <td>NO SPK</td>
+                        <td class="semi-colon">:</td>
+                        <td colspan="3">{{ $suratPerintahKerja->no_spk }}</td>
+                    </tr>
+                    <tr>
+                        <td>User</td>
+                        <td>:</td>
+                        <td>{{ $suratPerintahKerja->user }}</td>
+                        <td>Tanggal</td>
+                        <td class="semi-colon">:</td>
+                        <td colspan="3">{{ $suratPerintahKerja->tanggal }}</td>
+                    </tr>
+                    <tr>
+                        <td>Main Contractor</td>
+                        <td>:</td>
+                        <td>{{ $suratPerintahKerja->main_contractor }}</td>
+                        <td>Prioritas</td>
+                        <td class="semi-colon">:</td>
+                        <td colspan="3">{{ $suratPerintahKerja->prioritas }}</td>
+                    </tr>
+                    <tr>
+                        <td>Project Manager</td>
+                        <td>:</td>
+                        <td>{{ $suratPerintahKerja->project_manager }}</td>
+                        <td>Waktu Penyelesaian</td>
+                        <td class="semi-colon">:</td>
+                        <td colspan="3">{{ $suratPerintahKerja->waktu_penyelesaian }} </td>
+                    </tr>
+                </table>
+                <div class="horizontal-line"></div>
+                <div class="horizontal-line1"></div>
+                <!-- konten -->
+                <p class="dokumen">Dokumen Pendukung</p>
+                <label class="checkbox-container">
+                    <input class="box1"> Gambar
+                </label>
+                <label class="checkbox-container">
+                    <input class="box2"> Kontrak
+                </label>
+                <label class="checkbox-container">
+                    <input class="box3"> Brosur
+                </label>
+                <p class="pendukung">File Pendukung Lainnya:</p>
+                {{-- @endforeach --}}
+                <div class="garis-lurus1"></div>
+                <div class="garis-lurus2"></div>
+                <div class="job-table"></div>
+                <div class="type-work-container">
+                    <p class="type-work1">JENIS PEKERJAAN</p>
+                    <p class="Job-description">URAIAN PEKERJAAN</p>
+                    <div class="garis-lurus3"></div>
+                    <div class="garis-lurus3"></div>
+                    <div class="garis-lurus4"></div>
+                    <p class="teks-tabel">Bersambung ke halaman berikutnya …..........</p>
+                    <div class="garis-lurus5"></div>
+                    <p class="teks3">Hormat Kami,</p>
+                </div>
+                <div class="content-ttd">
+                    <p class="teks15">1. Nama : Sindu Irawan</p>
+                    <p class="teks16">Jabatan : B.O.D</p>
+                    <p class="teks17">..........................</p>
+                    <p class="teks18">2. Nama : Bayu Nugraha </p>
+                    <p class="teks19">Jabatan : General Manager</p>
+                    <p class="teks20">..........................</p>
+                    <p class="teks21">Form Number : SPK/01/admin/2022</p>
+                    <div class="garis-lurus6"></div>
+                    <p class="teks14">Jabatan :</p>
+                    <p class="teks5">Pemohon</p>
+                    <p class="teks13">Nama :</p>
+                    <p class="teks6">Penerima</p>
+                    <p class="teks7">Menyetujui</p>
+                    <p class="teks8">Mengetahui</p>
+                    <div class="garis-lurus7"></div>
+                    <div class="garis-lurus8"></div>
+                    <div class="garis-lurus9"></div>
+                    <p class="teks12">Jabatan : </p>
+                    <div class="garis-lurus0"></div>
+                    <p class="teks11">Nama : </p>
+                    <div class="garis-lurus11"></div>
+                    <p class="teks0">Jabatan : Koor PM</p>
+                    <div class="garis-lurus12"></div>
+                    <p class="teks9">Nama : Susilo</p>
+                </div>
+                <div class="garis-lurus13"></div>
+            </div>
+        @endforeach
+    @endif
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
