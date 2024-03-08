@@ -37,8 +37,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'first_name' => 'nullable|string',
+            'last_name' => 'nullable|string',
             'username' => 'required|string|unique:users',
             'gender' => 'required|string',
             'designation' => 'required|string',
@@ -85,8 +85,8 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'first_name' => 'nullable|string',
+            'last_name' => 'nullable|string',
             'username' => 'required|string|unique:users,username,' . $user->id,
             'gender' => 'required|string',
             'designation' => 'required|string',

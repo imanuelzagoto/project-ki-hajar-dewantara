@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\SuratPerintahKerjaResource;
 use Carbon\Carbon;
 
-class SuratPerintahKerjaController extends Controller
+class SuratPerintahKerjaViewWebController extends Controller
 {
     /**
      * index
@@ -21,7 +21,7 @@ class SuratPerintahKerjaController extends Controller
     public function index()
     {
         $suratPerintahKerjas = Surat_perintah_kerja::latest()->paginate(10);
-        return new SuratPerintahKerjaResource(true, 'List Data Surat Perintah Kerja', $suratPerintahKerjas);
+        return view('surat_perintah_kerja.index')->with('suratPerintahKerjas', $suratPerintahKerjas);
     }
 
 
@@ -89,7 +89,7 @@ class SuratPerintahKerjaController extends Controller
         ]);
 
         // Return response
-        return new SuratPerintahKerjaResource(true, 'Data Surat Perintah Kerja Berhasil Ditambahkan!', $surat_Perintah_Kerja);
+        return redirect(route('surat_perintah_kerja.index'));
     }
 
     /**
@@ -105,9 +105,9 @@ class SuratPerintahKerjaController extends Controller
 
         // Check if the Surat_perintah_kerja exists
         if ($surat_Perintah_Kerja) {
-            return new SuratPerintahKerjaResource(true, 'Detail Data Surat Perintah Kerja!', $surat_Perintah_Kerja);
+            return view('surat_perintah_kerja.surat_perintah_kerja_pdf.blade.php')->with('surat_Perintah_Kerja', $surat_Perintah_Kerja);
         } else {
-            return response()->json(['message' => 'Data Surat perintah Kerja tidak ditemukan!'], 404);
+            return view('page404');
         }
     }
 
@@ -184,7 +184,7 @@ class SuratPerintahKerjaController extends Controller
         ]);
 
         // Return response
-        return new SuratPerintahKerjaResource(true, 'Data Surat perintah Kerja Berhasil Diubah!', $surat_Perintah_Kerja);
+        return redirect(route('surat_perintah_kerja.index'));
     }
 
     /**
@@ -212,7 +212,7 @@ class SuratPerintahKerjaController extends Controller
         $surat_Perintah_Kerja->delete();
 
         // Return response
-        return response()->json(['message' => 'Data Surat perintah Kerja berhasil dihapus!', 'success' => true, 'data' => null], 200);
+        return redirect(route('surat_perintah_kerja.index'));
     }
 
     /**

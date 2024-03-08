@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PengajuanDanaResource;
 use Carbon\Carbon;
 
-class PengajuanDanaController extends Controller
+class PengajuanDanaViewWebController extends Controller
 {
     public function index()
     {
         $pengajuanDanas = PengajuanDana::latest()->paginate(10);
-        return new PengajuanDanaResource(true, 'List Data Pengajuan Dana', $pengajuanDanas);
-        // return view('PengajuanDana.index');
+        // return new PengajuanDanaResource(true, 'List Data Pengajuan Dana', $pengajuanDanas);
+        return view('PengajuanDana.index')->with('pengajuanDanas', $pengajuanDanas);
     }
 
     /**
@@ -56,7 +56,7 @@ class PengajuanDanaController extends Controller
         // Ubah nilai dana_yang_dibutuhkan menjadi format mata uang rupiah
         $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
 
-        return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Disimpan.', $pengajuanDana);
+        return redirect(route('PengajuanDana.index'));
     }
 
     /**
@@ -71,10 +71,10 @@ class PengajuanDanaController extends Controller
         $pengajuanDana = PengajuanDana::find($id);
 
         if (!$pengajuanDana) {
-            return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
+            return redirect(route('page404'));
         }
 
-        return new PengajuanDanaResource(true, 'Detail Data Pengajuan Dana.', $pengajuanDana);
+        return view(route('PengajuanDana.pengajuan_dana_pdf.blade.php'))->with('pengajuanDana', $pengajuanDana);
     }
 
     /**
@@ -121,7 +121,7 @@ class PengajuanDanaController extends Controller
         // Ubah nilai dana_yang_dibutuhkan menjadi format mata uang rupiah
         $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
 
-        return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Diperbarui.', $pengajuanDana);
+        return redirect(route('PengajuanDana.index'));
     }
 
     /**
@@ -140,7 +140,7 @@ class PengajuanDanaController extends Controller
 
         $pengajuanDana->delete();
 
-        return response()->json(['message' => 'Pengajuan Dana berhasil dihapus.'], 200);
+        return redirect(route('PengajuanDana.index'));
     }
 
     /**

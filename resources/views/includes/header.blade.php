@@ -1,61 +1,49 @@
-<div class="">
-    <!-- Logo Header -->
-    <div class="logo-header" data-background-color="blue">
+<div class="main-dashboard">
+    <nav aria-label="breadcrumb">
+        <div class="breadcrumb mt-3 d-flex justify-content-between">
+            <div class="d-lg-none">
+                <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                    data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon">
+                        <i class="icon-menu"></i>
+                    </span>
+                </button>
+            </div>
+            <div class=" d-none d-lg-block d-sm-none breadcrumb-item ml-4"
+                style="font-weight:400; font-size:15px; line-weight:18px;">
+                <span class="mr-2 fs-f5" style="color: #A0AEC0; margin-left:2px;">Pages</span>
+                <span class="mr-2">/</span>
+                <span>
+                    @yield('bredcrum')
+                </span>
+                <span>
+                    @yield('spk')
+                </span>
+                <span>
+                    @yield('PD')
+                </span>
+            </div>
+            <div class="dropdown" style="margin-right: 1.9%;">
+                <button class="btn btn-white btn-sm bg-white dropdown-toggle mt--2" type="button" id="userDropdown"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i style="font-size:1.1rem; color:cadetblue;" class="fa fa-user mr-2"
+                        style="color: #718096"></i>{{ auth()->user()->full_name }}
+                </button>
 
-        <a href="{{ route('dashboard') }}" class="logo">
-            <img src="{{ asset('partas/img/logo.svg') }}" alt="navbar brand" class="navbar-brand">
-        </a>
-        <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
-            data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon">
-                <i class="icon-menu"></i>
-            </span>
-        </button>
-        <button class="topbar-toggler more"><i class="icon-options-vertical"></i></button>
-        <div class="nav-toggle">
-            <button class="btn btn-toggle toggle-sidebar">
-                <i class="icon-menu"></i>
-            </button>
-        </div>
-    </div>
-    <!-- End Logo Header -->
-
-    <!-- Navbar Header -->
-    <nav class="pt-3 navbar navbar-header navbar-expand-lg ">
-
-        <div class="container-fluid">
-            <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
-                <li class="nav-item dropdown hidden-caret">
-                    <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <div class="avatar-sm">
-                            <img src="{{ asset('partas/img/profile.jpg') }}" alt="..."
-                                class="avatar-img rounded-circle">
-                        </div>
-                    </a>
-                    <ul class="dropdown-menu dropdown-user animated fadeIn">
-                        <div class="dropdown-user-scroll scrollbar-outer">
-                            <li>
-                                <div class="user-box">
-                                    <div class="avatar-lg"><img src="{{ asset('partas/img/profile.jpg') }}"
-                                            alt="image profile" class="avatar-img rounded"></div>
-                                    <div class="u-text">
-                                        <h4>{{ auth()->user()->name }}</h4>
-                                        <p class="text-muted">{{ auth()->user()->email }}</p>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" onclick="$('#logout-form').submit()">Keluar</a>
-                            </li>
-                        </div>
-                    </ul>
-                </li>
-            </ul>
+                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li>
+                        <a class="dropdown-item" href="#" onclick="$('#logout-form').submit()"><i
+                                class="fas fa-sign-out-alt"></i> Logout</a>
+                    </li>
+                </div>
+            </div>
         </div>
     </nav>
-    <!-- End Navbar -->
+    <h2 class="text mt--4 font-weight-bold display-6" style="margin-left: 1.4%; color: #2D3748; font-size:17px;">
+        @yield('title')
+    </h2>
 </div>
+<!-- End Navbar -->
 <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
     @csrf
 </form>

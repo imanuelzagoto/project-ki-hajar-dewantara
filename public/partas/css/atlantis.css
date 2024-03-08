@@ -299,7 +299,7 @@ body {
 .logo-header {
   float: left;
   width: 250px;
-  height: 62px;
+  /* height: 62px; */
   line-height: 60px;
   color: #333333;
   z-index: 1001;
@@ -383,7 +383,6 @@ body {
   bottom: 0;
   left: 0;
   width: 250px;
-  margin-top: 62px;
   display: block;
   z-index: 1000;
   color: #ffffff;
@@ -2088,7 +2087,12 @@ body {
   -webkit-box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1);
   -moz-box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1);
   box-shadow: 2px 6px 15px 0px rgba(69, 65, 78, 0.1);
-  border: 0px; }
+  border: 0px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
   .card .card-header, .card-light .card-header {
     padding: 1rem 1.25rem;
     background-color: transparent;

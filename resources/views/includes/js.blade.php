@@ -14,7 +14,7 @@
 <!-- Chart Circle -->
 <script src="{{ asset('partas/js/plugin/chart-circle/circles.min.js') }}"></script>
 <!-- Datatables -->
-<script src="{{ asset('partas/js/plugin/datatables/datatables.min.js') }}"></script>
+<script src="{{ asset('partas/js/datatables.min.js') }}"></script>
 <!-- Bootstrap Notify -->
 <script src="{{ asset('partas/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
 <!-- jQuery Vector Maps -->
@@ -31,6 +31,8 @@
 <script src="{{ asset('partaz/js/jam.js') }}"></script>
 <script src="{{ asset('partas/js/demo.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+{{-- <script src="{{ asset('helper-master/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('helper-master/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script> --}}
 <script>
     Circles.create({
         id: 'circles-1',

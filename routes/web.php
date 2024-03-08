@@ -1,8 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\PDController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\Admin\SPKController;
+use App\Http\Controllers\SuratPerintahKerjaViewWebController;
+use App\Http\Controllers\PengajuanDanaViewWebController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,9 +23,7 @@ Route::get('/', fn () => redirect()->route('login'));
 Route::middleware([
     'auth:sanctum', config('jetstream.auth_session'), 'verified',
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('home');
-    })->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
     // Routes for Users
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -35,5 +36,12 @@ Route::middleware([
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/surat-perintah-kerja', [SPKController::class, 'index'])->name('spks.index');
+    Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
+    Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('PD.index');
+    Route::get('/pengajuan-dana/data', [PengajuanDanaViewWebController::class, 'data'])->name('PD.data');
+    // Route::get('/pengajuan-dana', [PengajuanDanaController::class, 'index'])->name('PD.index');
 });

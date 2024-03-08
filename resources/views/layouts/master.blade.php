@@ -3,7 +3,8 @@
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Persuratan</title>
+    <title>{{ config('app.name') }} | Dashboard</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     <link rel="icon" href="{{ asset('partas/img/icon.ico') }}" type="image/x-icon" />
 
@@ -32,17 +33,20 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link rel="stylesheet" href="{{ asset('partas/css/demo.css') }}">
+    <!-- Datatables -->
+    <link rel="stylesheet" href="{{ asset('/partas/css/datatables.min.css') }}">
 </head>
 
 <body>
     <div class="wrapper">
+        @include('includes.sidebar')
         <!--header -->
-        @include('includes.header')
+
         <!-- end header -->
         <!-- Sidebar -->
-        @include('includes.sidebar')
         <!-- End Sidebar -->
         <div class="main-panel">
+            @include('includes.header')
             <div class="content">
                 @yield('content')
             </div>
