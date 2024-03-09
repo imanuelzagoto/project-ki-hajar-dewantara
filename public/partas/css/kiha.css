@@ -1,0 +1,29 @@
+/* public/partas/css/kiha.css */
+
+/* text title content dashboard */
+.text-dashboard {
+    margin-left: 1.4%;
+    color: #2D3748;
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+    margin-top: -4px;
+}
+
+/* text title content breadcrumb */
+.breadcrumb-item {
+    font-weight:400; font-size:15px; 
+    line-height:18px;
+}
+
+/* text title content pages */
+.span-pages {
+    color: #A0AEC0; 
+    margin-left:epx;
+}
+
+.dropdown {
+    margin-right: 2%;
+}
+
+

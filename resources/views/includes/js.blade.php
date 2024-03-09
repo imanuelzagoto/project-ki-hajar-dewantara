@@ -129,53 +129,52 @@
 </script>
 
 
-<script>
-    // Update the clock every second
-    setInterval(updateClock, 1000);
-
-    function updateClock() {
-        var now = new Date();
-        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
-            'November', 'Desember'
-        ];
-
-        var dateTimeString = '<i class="fas fa-calendar" style="color: yellow;"></i>&nbsp;' + days[now.getDay()] +
-            ', ' + now.getDate() + ' ' +
-            months[now.getMonth()] + ' ' + now.getFullYear() +
-            '&nbsp;&nbsp;<i class="far fa-clock" style="color: red;"></i>&nbsp;' +
-            formatTime(now);
-        document.getElementById('datetime').innerHTML = dateTimeString;
-    }
-
-    function formatTime(date) {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
-        hours = checkTime(hours);
-        minutes = checkTime(minutes);
-        seconds = checkTime(seconds);
-        return hours + ':' + minutes + ':' + seconds;
-    }
-
-    function checkTime(i) {
-        if (i < 10) {
-            i = "0" + i;
-        }
-        return i;
-    }
-
-    // Call updateClock initially to set the clock right away
-    updateClock();
-</script>
-
 
 {{-- JS LOGIN --}}
-{{-- <script src="{{ asset('partaz/js/jquery-3.5.1.min.js') }}"></script> --}}
-<script src="{{ asset('partaz/js/icons/feather-icon/feather.min.js') }}"></script>
-<script src="{{ asset('partaz/js/icons/feather-icon/feather-icon.js') }}"></script>
-<script src="{{ asset('partaz/js/sidebar-menu.js') }}"></script>
-<script src="{{ asset('partaz/js/config.js') }}"></script>
-<script src="{{ asset('partaz/js/bootstrap/popper.min.js') }}"></script>
-<script src="{{ asset('partaz/js/bootstrap/bootstrap.min.js') }}"></script>
-<script src="{{ asset('partaz/js/script.js') }}"></script>
+<script>
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
+<script src="{{ 'partaz/js/icons/feather-icon/feather.min.js' }}"></script>
+<script src="{{ 'partaz/js/icons/feather-icon/feather-icon.js' }}"></script>
+<script src="{{ 'partaz/js/sidebar-menu.js' }}"></script>
+<script src="{{ 'partaz/js/config.js' }}"></script>
+<script src="{{ 'partaz/js/bootstrap/popper.min.js' }}"></script>
+<script src="{{ 'partaz/js/bootstrap/bootstrap.min.js' }}"></script>
+<script src="{{ 'partaz/js/script.js' }}"></script>
+
+
+<script>
+    const togglePassword = document.querySelector('#toggleIcon');
+    const passwordInput = document.querySelector('input[name="password"]');
+
+    togglePassword.addEventListener('click', function(e) {
+        // Toggle the type attribute
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+
+        // Toggle the eye icon
+        if (type === 'password') {
+            togglePassword.classList.remove('data-feather', 'eye-off');
+            togglePassword.classList.add('data-feather', 'eye');
+        } else {
+            togglePassword.classList.remove('data-feather', 'eye');
+            togglePassword.classList.add('data-feather', 'eye-off');
+        }
+    });
+</script>

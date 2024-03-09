@@ -9,9 +9,8 @@
                     </span>
                 </button>
             </div>
-            <div class=" d-none d-lg-block d-sm-none breadcrumb-item ml-4"
-                style="font-weight:400; font-size:15px; line-weight:18px;">
-                <span class="mr-2 fs-f5" style="color: #A0AEC0; margin-left:2px;">Pages</span>
+            <div class="d-none d-lg-block d-sm-none breadcrumb-item ml-4">
+                <span class="span-pages mr-2 fs-f5">Pages</span>
                 <span class="mr-2">/</span>
                 <span>
                     @yield('bredcrum')
@@ -23,7 +22,7 @@
                     @yield('PD')
                 </span>
             </div>
-            <div class="dropdown" style="margin-right: 1.9%;">
+            <div class="dropdown">
                 <button class="btn btn-white btn-sm bg-white dropdown-toggle mt--2" type="button" id="userDropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i style="font-size:1.1rem; color:cadetblue;" class="fa fa-user mr-2"
@@ -39,7 +38,7 @@
             </div>
         </div>
     </nav>
-    <h2 class="text mt--4 font-weight-bold display-6" style="margin-left: 1.4%; color: #2D3748; font-size:17px;">
+    <h2 class="text-dashboard font-weight-bold display-6">
         @yield('title')
     </h2>
 </div>

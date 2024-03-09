@@ -1,0 +1,207 @@
+/* public/partaz/css/piclogin.css */
+
+.codew-png {
+    margin-top: 290px;
+    width: 208.79px; 
+    height: 274.98px;
+    padding-left: 10px;
+}
+
+.textimage {
+    font-size: 48.95px;
+    font-weight: 700;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 470px;
+    letter-spacing: -2%;
+    line-height: 48.95px;
+    white-space: nowrap;
+    margin-left: 32px;
+}
+
+.rectangle {
+    width: 471px;
+    height: 134.05px;
+    border-radius: 26.37px;
+    border: 2.2px solid #FFFFFF;
+    background-color: transparent;
+    margin-top: 628px;
+}
+
+.teks-rectangle {
+    font-family: Helvetica; 
+    font-weight: 400; 
+    font-size: 17.58px; 
+    line-height: 17.58px; 
+    color: #FFFFFF;
+    margin-top: 600px;
+}
+
+.kihadjar-teks {
+    font-family: Helvetica; 
+    font-weight: 400; 
+    font-size: 29.3px; 
+    line-height: 45.42px; 
+    color: #FFFFFF; 
+    margin-top: 80%;
+}
+
+/* heading sign in */
+.signin-heading {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    line-height: 56px;
+    letter-spacing: -2%;
+    color: #4FD1C5;
+    margin-bottom: 40px;
+}
+
+/* welcome login */
+.welcome-message {
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 16px;
+    letter-spacing: -2%;
+    color: #A3AED0;
+    margin-bottom: 40px;
+}
+
+
+/* garis hr */
+.separator-left {
+    position: absolute;
+    /* bottom: calc(50% + 130px + 20px); Menambahkan 20px ke bawah */
+    left: 24.8%;
+    width: 21%;
+    border: none;
+    border-top: 1px solid #E0E5F2;
+    margin-top: -1px; /* Menggeser ke bawah */
+}
+
+.separator-right {
+    position: absolute;
+    /* bottom: calc(50% + 130px + 20px); Menambahkan 20px ke bawah */
+    right: 24.8%;
+    width: 22.5%;
+    border: none;
+    border-top: 1px solid #E0E5F2;
+    margin-top: -1px;
+}
+
+/* label email */
+.email-address {
+    margin-top: 30px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: -2%;
+    color: #2B3674;
+}
+
+/* label password */
+.password-address {
+    margin-top: 80px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: -2%;
+    color: #2B3674;
+}
+
+
+/* kolom input email */
+.custom-input {
+    width: 390px;
+    height: 50px;
+    margin-bottom: 120%;
+}
+
+.custom-input .form-control {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ced4da;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+.custom-input .form-control:focus {
+    border-color: #4FD1C5; /* Warna border saat fokus */
+    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25); /* Efek shadow saat fokus */
+}
+
+/* kolom input password */
+.custom-password-input {
+    width: 390px; 
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.custom-password-input .form-control {
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ced4da;
+    border-radius: 16px;
+    padding: 10px;
+}
+
+
+.custom-password-input .form-control:focus {
+    border-color: #4FD1C5; /* Warna border saat fokus */
+    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25); /* Efek shadow saat fokus */
+}
+
+/* Input email dan password dalam mode fokus */
+input[type=email]:focus,
+input[type=password]:focus {
+    border: 3px solid #3e96d9; /* Warna border berubah menjadi hijau saat input dalam mode fokus */
+    box-shadow: 0 0 0 0.2rem rgba(19, 107, 209, 0.25); /* Efek shadow saat fokus */
+}
+
+
+.copyright {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: left; 
+    padding-left: 180px; 
+    left: 0;
+    color: #A3AED0;
+}
+
+@media (max-width: 768px) {
+    .copyright {
+        text-align: center; 
+        left: 0; 
+        padding-left: 0;
+    }
+}
+
+/* Efek hover untuk tombol Sign In */
+.btn.signin-button {
+    /* Aturan untuk tombol saat tidak dihover */
+    opacity: 1;
+    transition: opacity 0.3s ease; /* Transisi agar efek perubahan berlangsung mulus */
+
+    /* Aturan untuk tombol saat dihover */
+}
+
+.btn.signin-button:hover {
+    opacity: 0.8; /* Mengurangi opacity saat dihover */
+}
+
+.custom-password-input {
+    position: relative;
+}
+
+#toggleIcon {
+    position: absolute;
+    top: 255%;
+    transform: translateY(-50%);
+    right: 17px; /* Sesuaikan jarak dari tepi kanan */
+    cursor: pointer;
+    color: #A3AED0;
+    height: 15.5px;
+    width: 25.33px;
+}
+

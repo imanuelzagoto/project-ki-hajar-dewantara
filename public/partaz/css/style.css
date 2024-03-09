@@ -10836,7 +10836,8 @@ strong {
   right: 10px; }
 
 .login-card {
-  background-color: rgba(36, 105, 92, 0.1);
+  /* background-color: rgba(36, 105, 92, 0.1); */
+  position: relative;
   height: 100vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10854,11 +10855,12 @@ strong {
 .login-form {
   padding: 30px;
   width: 450px;
-  background-color: #fff;
+  /* background-color: #fff; */
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
   margin-left: auto;
+  margin-bottom: 50px;
   margin-right: auto; }
   .login-form h4 {
     text-transform: capitalize;
@@ -10872,8 +10874,16 @@ strong {
   .login-form .btn {
     text-transform: uppercase;
     font-weight: 700;
+    height:54px;
+    width: 390px;
     margin-left: auto;
-    display: block; }
+    margin-top: 115px;
+    background-color: #4FD1C5;
+    color: #fff;
+    font-family: 'DM Sans', sans-serif;
+    font-size:14px;
+    font-weight: 700;
+    border-radius:16px;}
   .login-form p {
     font-weight: 600;
     text-align: center;
@@ -10881,9 +10891,8 @@ strong {
   .login-form .form-group {
     position: relative; }
     .login-form .form-group label {
-      font-weight: 600;
-      text-transform: capitalize;
-      margin-bottom: 5px; }
+      font-weight: 500;
+      text-transform: capitalize;}
     .login-form .form-group .input-group-text {
       background-color: rgba(36, 105, 92, 0.1);
       border: none;

@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\PDController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuratPerintahKerjaViewWebController;
