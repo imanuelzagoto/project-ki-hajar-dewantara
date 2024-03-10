@@ -271,11 +271,10 @@
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         // charts
-        // Ambil data bulanan yang dikirim dari PHP
         var monthly_pengajuan_dana = {!! json_encode($monthly_pengajuan_dana) !!};
         var monthly_pengajuan_spk = {!! json_encode($monthly_pengajuan_spk) !!};
 
-        // Buat array kosong untuk menyimpan total pengajuan dana dan SPK setiap bulan
+        // total pengajuan dana dan SPK setiap bulan
         var total_pengajuan_dana_per_month = [];
         var total_pengajuan_spk_per_month = [];
 
@@ -410,10 +409,11 @@
                     ', Total Pengajuan SPK: ' + total_pengajuan_spk_per_month.reduce((a, b) => a + b, 0),
                 align: 'center',
                 margin: 10,
-                offsetY: 20,
+                offsetY: 10,
                 style: {
                     fontSize: '16px',
-                    color: '#666'
+                    color: '#718EBF',
+                    fontFamily: 'Helvetica'
                 }
             }
         };
@@ -435,8 +435,6 @@
 
         // Render grafik
         chart.render();
-
-
 
 
         // JS Datatable PD dan SPK
