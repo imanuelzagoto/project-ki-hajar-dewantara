@@ -36,7 +36,7 @@
                     <p class="copyright">© 2022 Ki Hadjar Dewantara</p>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2">
+            <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block">
                 <img class="position-absolute start-50 translate-middle codew-png" src="partaz/images/login/codew.png"
                     alt="tempimage">
                 <div class="position-absolute start-50 translate-middle text-white textimage">

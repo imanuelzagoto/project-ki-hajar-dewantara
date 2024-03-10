@@ -4,7 +4,7 @@
     margin-top: 290px;
     width: 208.79px; 
     height: 274.98px;
-    padding-left: 10px;
+    padding-left: 22px;
 }
 
 .textimage {
@@ -15,7 +15,8 @@
     letter-spacing: -2%;
     line-height: 48.95px;
     white-space: nowrap;
-    margin-left: 32px;
+    padding-left: 100px;
+    /* margin-left: 32px; */
 }
 
 .rectangle {
