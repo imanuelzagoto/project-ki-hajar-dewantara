@@ -145,7 +145,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pengajuan_dana_table as $pdt)
+                                            @foreach ($pengajuan_dana_per_day as $pdt)
                                                 <tr
                                                     style="color: #232323; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                                     <td class="text-center" style="font-weight:400;">
@@ -217,7 +217,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($pengajuan_spk_table as $pst)
+                                            @foreach ($pengajuan_spk_per_day as $pst)
                                                 <tr
                                                     style="color: #232323; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                                     <td class="text-center" style="font-weight:400;">
@@ -271,6 +271,38 @@
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
         // charts
+        // Ambil data bulanan yang dikirim dari PHP
+        var monthly_pengajuan_dana = {!! json_encode($monthly_pengajuan_dana) !!};
+        var monthly_pengajuan_spk = {!! json_encode($monthly_pengajuan_spk) !!};
+
+        // Buat array kosong untuk menyimpan total pengajuan dana dan SPK setiap bulan
+        var total_pengajuan_dana_per_month = [];
+        var total_pengajuan_spk_per_month = [];
+
+        // Loop melalui data bulanan dan isi array total pengajuan dana dan SPK
+        for (var i = 0; i < 12; i++) {
+            var monthFoundDana = monthly_pengajuan_dana.find(function(item) {
+                return parseInt(item.month) === i + 1;
+            });
+
+            if (monthFoundDana) {
+                total_pengajuan_dana_per_month.push(monthFoundDana.total);
+            } else {
+                total_pengajuan_dana_per_month.push(0);
+            }
+
+            var monthFoundSPK = monthly_pengajuan_spk.find(function(item) {
+                return parseInt(item.month) === i + 1;
+            });
+
+            if (monthFoundSPK) {
+                total_pengajuan_spk_per_month.push(monthFoundSPK.total);
+            } else {
+                total_pengajuan_spk_per_month.push(0);
+            }
+        }
+
+        // Inisialisasi opsi grafik
         var options = {
             chart: {
                 height: 350,
@@ -286,11 +318,11 @@
             colors: ["#FF1654", "#247BA0"],
             series: [{
                     name: "Pengajuan Dana",
-                    data: [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+                    data: total_pengajuan_dana_per_month
                 },
                 {
                     name: "Pengajuan SPK",
-                    data: [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+                    data: total_pengajuan_spk_per_month
                 }
             ],
             stroke: {
@@ -374,13 +406,8 @@
                 }
             }],
             title: {
-                text: 'Total Pengajuan Dana: ' + [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000].reduce((a,
-                            b) =>
-                        a + b, 0) + ', Total Pengajuan SPK: ' + [0, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900,
-                        1000
-                    ]
-                    .reduce((a, b) => a + b,
-                        0),
+                text: 'Total Pengajuan Dana: ' + total_pengajuan_dana_per_month.reduce((a, b) => a + b, 0) +
+                    ', Total Pengajuan SPK: ' + total_pengajuan_spk_per_month.reduce((a, b) => a + b, 0),
                 align: 'center',
                 margin: 10,
                 offsetY: 20,
@@ -408,6 +435,7 @@
 
         // Render grafik
         chart.render();
+
 
 
 
