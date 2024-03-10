@@ -12,7 +12,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <div class="card" style="border-radius: 8.16px;">
+                <div class="card card-chart" style="border-radius: 8.16px;">
                     <div class="card-header">
                         <h5 class="card-title font-weight-bold"
                             style="color: #2D3748; font-family:Arial, Helvetica, sans-serif; font-size: 18px; line-height:25.2px;">
@@ -275,19 +275,22 @@
             chart: {
                 height: 350,
                 type: "line",
-                stacked: false
+                stacked: false,
+                toolbar: {
+                    show: false
+                }
             },
             dataLabels: {
                 enabled: false
             },
             colors: ["#FF1654", "#247BA0"],
             series: [{
-                    name: "Series A",
-                    data: [1.4, 2, 2.5, 1.5, 2.5, 2.8, 3.8, 4.6]
+                    name: "Pengajuan Dana",
+                    data: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
                 },
                 {
-                    name: "Series B",
-                    data: [20, 29, 37, 36, 44, 45, 50, 58]
+                    name: "Pengajuan SPK",
+                    data: [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
                 }
             ],
             stroke: {
@@ -299,7 +302,15 @@
                 }
             },
             xaxis: {
-                categories: [2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016]
+                type: 'category',
+                categories: ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agu", "Sep", "Okt", "Nov", "Des"],
+                labels: {
+                    rotate: -45,
+                    rotateAlways: true,
+                    style: {
+                        fontSize: '12px'
+                    }
+                }
             },
             yaxis: [{
                     axisTicks: {
@@ -315,7 +326,7 @@
                         }
                     },
                     title: {
-                        text: "Series A",
+                        text: "Pengajuan Dana",
                         style: {
                             color: "#FF1654"
                         }
@@ -336,7 +347,7 @@
                         }
                     },
                     title: {
-                        text: "Series B",
+                        text: "Pengajuan SPK",
                         style: {
                             color: "#247BA0"
                         }
@@ -353,12 +364,49 @@
             legend: {
                 horizontalAlign: "left",
                 offsetX: 40
+            },
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 300
+                    }
+                }
+            }],
+            title: {
+                text: 'Total Pengajuan Dana: ' + [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000].reduce((a, b) =>
+                        a + b, 0) + ', Total Pengajuan SPK: ' + [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
+                    .reduce((a, b) => a + b,
+                        0),
+                align: 'center',
+                margin: 10,
+                offsetY: 20,
+                style: {
+                    fontSize: '16px',
+                    color: '#666'
+                }
             }
         };
 
+        // Tentukan bulan-bulan yang ingin ditambahkan setelah Agustus
+        var additionalMonths = ["Sep", "Okt", "Nov", "Des"];
+
+        // Ambil bulan terakhir dari kategori saat ini
+        var lastMonth = options.xaxis.categories[options.xaxis.categories.length - 1];
+
+        // Jika bulan terakhir adalah Agustus, tambahkan bulan-bulan tambahan
+        if (lastMonth === "Agu") {
+            // Gunakan spread operator untuk menggabungkan array kategori dengan array bulan tambahan
+            options.xaxis.categories.push(...additionalMonths);
+        }
+
+        // Inisialisasi grafik dengan opsi yang telah diperbarui
         var chart = new ApexCharts(document.querySelector("#chart"), options);
 
+        // Render grafik
         chart.render();
+
+
 
         // JS Datatable PD dan SPK
         $(document).ready(function() {
