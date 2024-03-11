@@ -69,14 +69,14 @@
 }
 
 
-.separator-left {
+/* .separator-left {
     position: absolute;
     left: 24.8%;
     width: 21%; /* Mempertahankan lebar pada 21% */
-    border: none;
+    /* border: none;
     border-top: 1px solid #E0E5F2;
     margin-top: -1px;
-}
+} */ 
 
 .separator-left {
     position: absolute;
@@ -154,8 +154,8 @@
 
 /* kolom input password */
 .custom-password-input {
-    width: 394.2px; 
-    height: 52px;
+    width: 391px; 
+    height: 50px;
     margin-bottom: 20px;
 }
 
