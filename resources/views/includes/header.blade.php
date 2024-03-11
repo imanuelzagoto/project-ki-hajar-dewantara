@@ -11,18 +11,25 @@
             </div>
             <div class="d-none d-lg-block d-sm-none breadcrumb-item ml-4">
                 <span class="span-pages mr-2 fs-f5">Pages</span>
-                <span class="mr-2">/</span>
-                <span>
+                <span class="mr-2 slash">/</span>
+                <span class="breadcum-title">
                     @yield('bredcrum')
                 </span>
-                <span>
+                <span class="breadcum-title">
                     @yield('spk')
                 </span>
-                <span>
+                <span class="breadcum-title">
                     @yield('PD')
                 </span>
             </div>
-            <div class="dropdown">
+            <button class="btn btn-white btn-sm mt--2 rounded" type="button" style="float: left; margin-right:3px;">
+                <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #718096;">
+                    Logout
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </button>
+
+            {{-- <div class="dropdown">
                 <button class="btn btn-white btn-sm bg-white dropdown-toggle mt--2" type="button" id="userDropdown"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i style="font-size:1.1rem; color:cadetblue;" class="fa fa-user mr-2"
@@ -35,7 +42,7 @@
                                 class="fas fa-sign-out-alt"></i> Logout</a>
                     </li>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </nav>
     <h2 class="text-dashboard font-weight-bold display-6">

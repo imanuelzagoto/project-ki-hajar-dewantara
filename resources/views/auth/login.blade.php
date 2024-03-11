@@ -36,9 +36,9 @@
                     <p class="copyright">© 2022 Ki Hadjar Dewantara</p>
                 </div>
             </div>
-            <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block">
-                <img class="position-absolute start-50 translate-middle codew-png" src="partaz/images/login/codew.png"
-                    alt="tempimage">
+            <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block position-relative">
+                <img class="position-absolute start-50 translate-middle codew-png"
+                    src="partas/partaz/images/login/codew.png" alt="tempimage">
                 <div class="position-absolute start-50 translate-middle text-white textimage">
                     Ki Hadjar Dewantara
                 </div>
@@ -50,9 +50,10 @@
                 <div class="position-absolute start-50 translate-middle text-center text-white kihadjar-teks">
                     kihadjar.com
                 </div>
-                <img class="bg-img-cover bg-center img-fluid" src="{{ 'partaz/images/login/templogin.jpg' }}"
+                <img class="bg-img-cover bg-center img-fluid" src="{{ 'partas/partaz/images/login/templogin.jpg' }}"
                     alt="looginpage">
             </div>
+
         </div>
     </div>
 @endsection
@@ -62,7 +63,7 @@
 {{-- <section>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-xl-7"><img class="bg-img-cover bg-center" src="{{ asset('partaz/images/login/surattt.png') }}"
+            <div class="col-xl-7"><img class="bg-img-cover bg-center" src="{{ asset('partas/partaz/images/login/surattt.png') }}"
                     alt="looginpage">
             </div>
             <div class="col-xl-5 p-0">

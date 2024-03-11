@@ -24,61 +24,47 @@
             <div class="col-md-4">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="card p-3 custom-card h-100"
-                            style="background-image: url('{{ asset('partas/img/card.png') }}'); 
-                                font-family: Arial, Helvetica, sans-serif; 
-                                background-size: auto 112%; 
-                                background-repeat: no-repeat; 
-                                background-position: center;
-                                color: #FFFFFF;">
+                        <div class="card p-3 custom-card h-100 my-custom-card"
+                            style="background-image: url('{{ asset('partas/img/card.png') }}');">
                             <p style="font-size: 16.44px; font-weight:400; line-height:24.66px;">Dashboard ki hajar
                                 dewantara</p>
-                            <h2 class="font-weight-bold text-white username mt--3"
-                                style="font-size: 39px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; line-height:65.03px; font-weight:700;"
-                                id="greeting">Hello <span id="shortName"></span> !</h2>
+                            <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello <span
+                                    id="shortName"></span> !</h2>
                         </div>
                     </div>
                     <div class="col-md-6 mt-4">
-                        <div class="text-center" style="font-family: Arial, Helvetica, sans-serif;">
-                            <div class="card p-3 font-weight-bold text-center"
-                                style="height: 248px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                <div class="rounded-3 text-white d-flex align-items-center justify-content-center mt-2"
-                                    style="width: 67.68px; height: 67.68px; border-radius: 12.69px; background: #4FD1C5;">
-                                    <i class="fas fa-wallet fa-2x mr-2 mt--1" style="width: 20px; height: 20px;"></i>
+                        <div class="text-center center-card">
+                            <div class="card p-3 font-weight-bold text-center card-pd">
+                                <div
+                                    class="rounded-3 text-white d-flex align-items-center justify-content-center mt-2 round-card">
+                                    <i class="fas fa-wallet fa-2x mr-2 mt--1 iconwallet"></i>
                                 </div>
-                                <h4 class="mt-3"
-                                    style="font-size: 19.04px; line-height: 26.65px; color:#2D3748; font-weight:700;">
+                                <h4 class="mt-3 text-pd">
                                     Pengajuan Dana
                                 </h4>
-                                <h6 style="font-size: 12.69px; line-height: 19.04px; color:#A0AEC0; font-weight:700;">
+                                <h6 class="text-active">
                                     Pengajuan Aktif
                                 </h6>
-                                <hr
-                                    style="width: 100%; border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0));">
-                                <h4 style="font-size:19.04px; font-weight:700; line-height:26.65px;">
-                                    {{ $total_pengajuan_dana }}</h4>
+                                <hr class="hr-card">
+                                <h4 class="total-pengajuan">{{ $total_pengajuan_dana }}</h4>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 mt-4">
                         <div class="text-center" style="font-family: Arial, Helvetica, sans-serif;">
-                            <div class="card p-3 font-weight-bold text-center"
-                                style="height: 248px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                <div class="rounded-3 text-white d-flex align-items-center justify-content-center mt-2"
-                                    style="width: 67.68px; height: 67.68px; border-radius: 12.69px; background: #4FD1C5;">
-                                    <i class="fab fa-paypal fa-2x mt--1" style="width: 20px; height: 20px;"></i>
+                            <div class="card p-3 font-weight-bold text-center card-pd">
+                                <div
+                                    class="rounded-3 text-white d-flex align-items-center justify-content-center mt-2 round-card">
+                                    <i class="fab fa-paypal fa-2x mt--1 iconwallet"></i>
                                 </div>
-                                <h4 class="mt-3"
-                                    style="font-size: 19.04px; line-height: 26.65px; color:#2D3748; font-weight:700;">
+                                <h4 class="mt-3 text-pd">
                                     SPK
                                 </h4>
-                                <h6 style="font-size: 12.69px; line-height: 19.04px; color:#A0AEC0; font-weight:700;">
+                                <h6 class="text-active">
                                     Permintaan Aktif
                                 </h6>
-                                <hr
-                                    style="width: 100%; border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0));">
-                                <h4 style="font-size:19.04px; font-weight:700; line-height:26.65px;">
-                                    {{ $total_pengajuan_spk }}</h4>
+                                <hr class="hr-card">
+                                <h4 class="total-pengajuan">{{ $total_pengajuan_spk }}</h4>
                             </div>
                         </div>
                     </div>
@@ -88,34 +74,29 @@
     </div>
     <div class="row">
         <div class="col-md-6">
-            <div class="font-weight-bold"
-                style="font-family: 'Inter', sans-serif; font-size: 22px; line-height: 26.63px; color: #343C6A; font-weight: 600; margin-left: 19px;">
+            <div class="font-weight-bold text-pt">
                 Permintaan Terakhir
             </div>
         </div>
     </div>
     <!-- Menu Button -->
     <div class="row">
-        <div class="col" style="margin-left: 14px;">
+        <div class="col card-menu">
             <div class="menu mt-3">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" role="tab"
-                            aria-controls="home" aria-selected="true"
-                            style="color: #718EBF; transition: color 0.3s; font-weight: 700; font-family: 'Inter', sans-serif; font-size:16px; line-height:19.36px;">Pengajuan
-                            Dana</button>
+                        <button class="nav-link card-menu-pd active" id="home-tab" data-toggle="tab" data-target="#home"
+                            role="tab" aria-controls="home" aria-selected="true">Pengajuan Dana</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" role="tab"
-                            aria-controls="profile" aria-selected="false"
-                            style="color: #718EBF; transition: color 0.3s; font-weight: 700; font-family: 'Inter', sans-serif; sans-serif; font-size:16px; line-height:19.36px;">Pengajuan
+                        <button class="nav-link card-menu-pd" id="profile-tab" data-toggle="tab" data-target="#profile"
+                            role="tab" aria-controls="profile" aria-selected="false">Pengajuan
                             SPK</button>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-
     <!-- Data Table -->
     <div class="row mt-3">
         <div class="col ml--12">
@@ -127,9 +108,8 @@
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered table-hover" id="TablePengajuanDana">
                                         <thead>
-                                            <tr
-                                                style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
-                                                <th class="text-center">No. Doc</th>
+                                            <tr class="tr-table">
+                                                <th class="text-center">No.Doc</th>
                                                 <th class="text-center">Revisi</th>
                                                 <th class="text-center">Pemohon</th>
                                                 <th class="text-center">Tujuan</th>
@@ -146,8 +126,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($pengajuan_dana_per_day as $pdt)
-                                                <tr
-                                                    style="color: #232323; font-family: 'Inter', sans-serif; line-height:19.36px;">
+                                                <tr class="kolom-td">
                                                     <td class="text-center" style="font-weight:400;">
                                                         {{ $pdt->no_doc }}
                                                     </td>
@@ -176,10 +155,8 @@
                                                         {{ $pdt->no_rekening }}
                                                     </td>
                                                     <td class="justify-content-end" style="font-weight:400;" nowrap>
-                                                        <button class="btn btn-sm btn-outline-primary"
-                                                            style="border-radius: 6px; border: 1px solid #1814F3; padding: 5px 10px;">
-                                                            Edit
-                                                        </button>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-primary btn-action">Edit</button>
                                                         <a href="#" class="fas fa-eye btn btn-sm"
                                                             style="color:#1814F3; font-size:18px; border: none; padding: 0; margin-left:8px;"></a>
 
@@ -203,8 +180,7 @@
                                     <table class="display table table-striped table-hover" id="TablePengajuanSPK"
                                         style="width:100%">
                                         <thead>
-                                            <tr
-                                                style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
+                                            <tr class="tr-table">
                                                 <th class="text-center" nowrap>Nama Project</th>
                                                 <th class="text-center">User</th>
                                                 <th class="text-center" nowrap>Main Contractor</th>
@@ -218,8 +194,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($pengajuan_spk_per_day as $pst)
-                                                <tr
-                                                    style="color: #232323; font-family: 'Inter', sans-serif; line-height:19.36px;">
+                                                <tr class="kolom-td">
                                                     <td class="text-center" style="font-weight:400;">
                                                         {{ $pst->nama_project }}
                                                     </td>
@@ -245,10 +220,8 @@
                                                         {{ $pst->waktu_penyelesaian }}
                                                     </td>
                                                     <td class="justify-content-end" style="font-weight:400;" nowrap>
-                                                        <button class="btn btn-sm btn-outline-primary"
-                                                            style="border-radius: 6px; border: 1px solid #1814F3; padding: 5px 10px;">
-                                                            Edit
-                                                        </button>
+                                                        <button
+                                                            class="btn btn-sm btn-outline-primary btn-action">Edit</button>
                                                         <a href="#" class="fas fa-eye btn btn-sm"
                                                             style="color:#1814F3; font-size:18px; border: none; padding: 0; margin-left:8px;"></a>
 
@@ -267,10 +240,32 @@
             </div>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
-        // charts
+        // JS MENU PENGAJUAN DANA & SPK
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mendapatkan URL saat ini
+            var currentUrl = window.location.href;
+
+            // Mendapatkan elemen menu
+            var menuItems = document.querySelectorAll('.nav-link');
+
+            // Loop melalui setiap elemen menu
+            menuItems.forEach(function(item) {
+                // Mendapatkan URL yang ditargetkan oleh setiap elemen menu
+                var targetUrl = item.getAttribute('data-target');
+
+                // Jika URL saat ini cocok dengan URL yang ditargetkan, tambahkan kelas aktif
+                if (currentUrl.includes(targetUrl)) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        // END JS MENU
+
+        // JS charts
         var monthly_pengajuan_dana = {!! json_encode($monthly_pengajuan_dana) !!};
         var monthly_pengajuan_spk = {!! json_encode($monthly_pengajuan_spk) !!};
 
@@ -436,12 +431,11 @@
         // Render grafik
         chart.render();
 
-
-        // JS Datatable PD dan SPK
+        // JS DATATABLE
         $(document).ready(function() {
             // Inisialisasi DataTable Pengajuan Dana
             $('#TablePengajuanDana').DataTable({
-                "pageLength": 5,
+                "pageLength": getPageLengthFromLocalStorage('TablePengajuanDana'),
                 initComplete: function() {
                     this.api().columns().every(function() {
                         var column = this;
@@ -465,7 +459,7 @@
 
             // Inisialisasi DataTable Pengajuan SPK
             $('#TablePengajuanSPK').DataTable({
-                "pageLength": 5,
+                "pageLength": getPageLengthFromLocalStorage('TablePengajuanSPK'),
                 initComplete: function() {
                     this.api().columns().every(function() {
                         var column = this;
@@ -504,10 +498,32 @@
                 ]);
                 $('#addRowModal').modal('hide');
             });
+
+            // Function to get page length from localStorage
+            function getPageLengthFromLocalStorage(tableId) {
+                var storedLength = localStorage.getItem(tableId + '_pageLength');
+                if (storedLength) {
+                    return parseInt(storedLength);
+                } else {
+                    return 5; // Default page length
+                }
+            }
+
+            // Function to set page length in localStorage
+            $('select[name="TablePengajuanDana_length"]').change(function() {
+                var val = $(this).val();
+                localStorage.setItem('TablePengajuanDana_pageLength', val);
+            });
+
+            $('select[name="TablePengajuanSPK_length"]').change(function() {
+                var val = $(this).val();
+                localStorage.setItem('TablePengajuanSPK_pageLength', val);
+            });
         });
+        // End JS Table
 
 
-        // get name
+        // JS get name
         function getShortName(fullName) {
             // Memisahkan nama pertama dan nama terakhir
             var names = fullName.split(' ');
@@ -569,54 +585,3 @@
         });
     </script>
 @endsection
-
-
-{{-- // JS datatable Pengajuan Dana
-        $(document).ready(function() {
-
-            $('#TablePengajuanDana').DataTable({
-                "pageLength": 5,
-                initComplete: function() {
-                    this.api().columns().every(function() {
-                        var column = this;
-                        var select = $(
-                                '<select class="form-control"><option value=""></option></select>'
-                            )
-                            .appendTo($(column.footer()).empty())
-                            .on('change', function() {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
-
-                                column
-                                    .search(val ? '^' + val + '$' : '', true, false)
-                                    .draw();
-                            });
-
-                        column.data().unique().sort().each(function(d, j) {
-                            select.append('<option value="' + d + '">' + d +
-                                '</option>')
-                        });
-                    });
-                }
-            });
-
-            // Add Row
-            $('#add-row').DataTable({
-                "pageLength": 5,
-            });
-
-            var action =
-                '<td> <div class="form-button-action"> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-primary btn-lg" data-original-title="Edit Task"> <i class="fa fa-edit"></i> </button> <button type="button" data-toggle="tooltip" title="" class="btn btn-link btn-danger" data-original-title="Remove"> <i class="fa fa-times"></i> </button> </div> </td>';
-
-            $('#addRowButton').click(function() {
-                $('#add-row').dataTable().fnAddData([
-                    $("#addName").val(),
-                    $("#addPosition").val(),
-                    $("#addOffice").val(),
-                    action
-                ]);
-                $('#addRowModal').modal('hide');
-
-            });
-        }); --}}

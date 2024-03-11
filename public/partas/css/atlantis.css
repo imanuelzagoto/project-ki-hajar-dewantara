@@ -4305,7 +4305,7 @@ label.error {
 /*      Button States      */
 .btn-white {
   background: #ffffff !important;
-  color: #1a2035 !important; }
+  color: #1a2035 !important;}
   .btn-white:hover, .btn-white:focus, .btn-white:disabled {
     background: #ffffff !important;
     color: #1a2035 !important; }

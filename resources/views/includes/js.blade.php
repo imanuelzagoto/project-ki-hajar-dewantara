@@ -28,7 +28,7 @@
 
 <!-- Atlantis DEMO methods, don't include it in your project! -->
 <script src="{{ asset('partas/js/setting-demo.js') }}"></script>
-<script src="{{ asset('partaz/js/jam.js') }}"></script>
+<script src="{{ asset('partas/partaz/js/jam.js') }}"></script>
 <script src="{{ asset('partas/js/demo.js') }}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 {{-- <script src="{{ asset('helper-master/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
@@ -150,13 +150,13 @@
         }, false);
     })();
 </script>
-<script src="{{ 'partaz/js/icons/feather-icon/feather.min.js' }}"></script>
-<script src="{{ 'partaz/js/icons/feather-icon/feather-icon.js' }}"></script>
-<script src="{{ 'partaz/js/sidebar-menu.js' }}"></script>
-<script src="{{ 'partaz/js/config.js' }}"></script>
-<script src="{{ 'partaz/js/bootstrap/popper.min.js' }}"></script>
-<script src="{{ 'partaz/js/bootstrap/bootstrap.min.js' }}"></script>
-<script src="{{ 'partaz/js/script.js' }}"></script>
+<script src="{{ 'partas/partaz/js/icons/feather-icon/feather.min.js' }}"></script>
+<script src="{{ 'partas/partaz/js/icons/feather-icon/feather-icon.js' }}"></script>
+<script src="{{ 'partas/partaz/js/sidebar-menu.js' }}"></script>
+<script src="{{ 'partas/partaz/js/config.js' }}"></script>
+<script src="{{ 'partas/partaz/js/bootstrap/popper.min.js' }}"></script>
+<script src="{{ 'partas/partaz/js/bootstrap/bootstrap.min.js' }}"></script>
+<script src="{{ 'partas/partaz/js/script.js' }}"></script>
 
 
 <script>
@@ -178,3 +178,5 @@
         }
     });
 </script>
+
+@yield('script')

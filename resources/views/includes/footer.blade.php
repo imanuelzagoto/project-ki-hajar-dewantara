@@ -6,7 +6,7 @@
     </div>
 </footer>
 
-<script type='text/javascript'>
+{{-- <script type='text/javascript'>
     var text = "Kihajar dewantara";
     var speed = 150;
 
@@ -61,4 +61,4 @@
     }
 
     starteffect();
-</script>
+</script> --}}

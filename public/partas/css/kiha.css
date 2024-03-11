@@ -1,25 +1,57 @@
 /* public/partas/css/kiha.css */
 
-/* text title content dashboard */
 .text-dashboard {
-    margin-left: 1.4%;
+    margin-left: 1.2%;
     color: #2D3748;
     font-size: 17px;
-    font-weight: bold;
+    font-weight: 700;
     display: block;
-    margin-top: -4px;
+    margin-top: -20px;
+    font-family: Helvetica, sans-serif;
+}
+
+/* Media queries untuk menyesuaikan margin berdasarkan lebar layar */
+@media screen and (max-width: 768px) {
+    .text-dashboard {
+        margin-left: 2.4%;
+    }
+}
+
+
+/* Media query untuk layar dengan lebar maksimum 768px */
+@media (max-width: 768px) {
+    .text-dashboard {
+        font-size: 1.5rem; /* Ukuran teks saat layar diminimalkan */
+    }
 }
 
 /* text title content breadcrumb */
 .breadcrumb-item {
-    font-weight:400; font-size:15px; 
+    font-weight:400; 
+    font-size:15px; 
     line-height:18px;
+    margin-left: 0.1%;
 }
 
 /* text title content pages */
 .span-pages {
+    font-weight:400; 
+    font-size:15px; 
+    line-height:18px;
     color: #A0AEC0; 
-    margin-left:epx;
+    margin-left:1px;
+    
+}
+
+.breadcum-title {
+    font-weight:400; 
+    font-size:15px; 
+    line-height:18px;
+    color: #2D3748;
+}
+
+.slash {
+    font-size:15px;
 }
 
 .dropdown {
@@ -27,4 +59,169 @@
 }
 
 
+.btn-sm {
+    font-family: Helvetica;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 18px;
+}
 
+.bg-white {
+    background-color: #fff;
+}
+
+.dropdown-item {
+    color: #718096;
+    text-decoration: none;
+}
+
+.brand-logo {
+    width: 230px; border: 2px solid #fff; border-radius: 5px; margin-left: 9.8px; margin-top: 28px;
+}
+
+.sidebar {
+    height: auto;
+}
+
+.hr-rectangle {
+    width: 233.25px; top: 94.5px; left: 24.5px; border: 0 #E0E1E2; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(192, 188, 188, 0.75), rgba(0, 0, 0, 0));
+}
+.text-menu {
+    font-weight:700; 
+    font-size:14px; 
+    line-height:18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.my-custom-card {
+    font-family: Arial, Helvetica, sans-serif; 
+    background-size: auto 112%; 
+    background-repeat: no-repeat; 
+    background-position: center;
+    color: #FFFFFF;
+}
+
+.username {
+    font-size: 39px; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    text-overflow: 
+    ellipsis; line-height:65.03px; 
+    font-weight:700;
+}
+
+.card-pd {
+    height: 248px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+
+}
+
+.round-card {
+    width: 67.68px; height: 67.68px; border-radius: 12.69px; background: #4FD1C5;
+}
+
+.iconwallet {
+    width: 20px; height: 20px;
+}
+
+.center-card {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-pd {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 19.04px; 
+    line-height: 26.65px; 
+    color:#2D3748; 
+    font-weight:700;
+}
+
+.hr-card {
+    width: 100%; border: 0; height: 1px; background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0));
+}
+
+.total-pengajuan {
+    font-size:19.04px; 
+    font-weight:700; 
+    line-height:26.65px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-active {
+    font-size: 12.69px; 
+    line-height: 19.04px; 
+    color:#A0AEC0; 
+    font-weight:700;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.text-pt{
+    font-family: 'Inter', sans-serif;
+    font-size: 21px;
+    line-height: 26.63px;
+    color: #343C6A;
+    font-weight: 600;
+    margin-left: 19px;
+}
+
+.card-menu {
+    margin-left: 20px;
+}
+
+.card-menu-pd {
+    color: #718EBF;
+    transition: color 0.3s;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    font-size:14px;
+    line-height:19.36px;
+}
+
+.nav-link.active {
+    color: rgb(79, 209, 197) !important;
+    border-bottom-color: rgb(79, 209, 197) !important;
+    border-bottom-width: 2px;
+    font-weight: bold;
+}
+
+.nav-link {
+    background-color: transparent;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.tr-table {
+    color: #718EBF; 
+    font-family: 'Inter', sans-serif; 
+    line-height:19.36px;
+}
+
+.kolom-td {
+    color: #232323; 
+    font-family: 'Inter', sans-serif; 
+    line-height:19.36px;
+}
+
+.btn-action {
+    border-radius: 6px; 
+    border: 1px solid #1814F3; 
+    padding: 5px 10px;
+}
+
+.show-button {
+    color:#1814F3; 
+    font-size:18px; 
+    border: none; 
+    padding: 0; 
+    margin-left:8px;
+}
+
+.button-logout {
+    font-family: Helvetica;  
+    font-weight: 700; 
+    font-size: 14px; 
+    line-height: 18px;
+}

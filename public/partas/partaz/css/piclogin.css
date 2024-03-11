@@ -1,4 +1,4 @@
-/* public/partaz/css/piclogin.css */
+/* public/partas/partaz/css/piclogin.css */
 
 .codew-png {
     margin-top: 290px;
@@ -69,26 +69,47 @@
 }
 
 
-/* garis hr */
 .separator-left {
     position: absolute;
-    /* bottom: calc(50% + 130px + 20px); Menambahkan 20px ke bawah */
     left: 24.8%;
-    width: 21%;
-    border: none;
-    border-top: 1px solid #E0E5F2;
-    margin-top: -1px; /* Menggeser ke bawah */
-}
-
-.separator-right {
-    position: absolute;
-    /* bottom: calc(50% + 130px + 20px); Menambahkan 20px ke bawah */
-    right: 24.8%;
-    width: 22.5%;
+    width: 21%; /* Mempertahankan lebar pada 21% */
     border: none;
     border-top: 1px solid #E0E5F2;
     margin-top: -1px;
 }
+
+.separator-left {
+    position: absolute;
+    left: 24.8%;
+    width: 21%; /* Mempertahankan lebar pada 21% */
+    border: none;
+    border-top: 1px solid #E0E5F2;
+    margin-top: -1px;
+}
+
+.separator-right {
+    position: absolute;
+    right: 24.8%; /* Sesuaikan dengan 24.8% untuk mempertahankan jarak yang sama dari tepi */
+    width: 21%; /* Mempertahankan lebar pada 21% */
+    border: none;
+    border-top: 1px solid #E0E5F2;
+    margin-top: -1px;
+}
+
+/* Menambahkan media query untuk menyesuaikan tata letak pada layar yang lebih kecil */
+@media screen and (max-width: 768px) {
+    .separator-left {
+        left: 13%; /* Sesuaikan posisi berdasarkan kebutuhan responsif Anda */
+        width: 29%; /* Sesuaikan lebar berdasarkan kebutuhan responsif Anda */
+    }
+
+    .separator-right {
+        right: 15%; /* Sesuaikan posisi berdasarkan kebutuhan responsif Anda */
+        width: 32%; /* Sesuaikan lebar berdasarkan kebutuhan responsif Anda */
+    }
+}
+
+
 
 /* label email */
 .email-address {
@@ -115,7 +136,7 @@
 .custom-input {
     width: 390px;
     height: 50px;
-    margin-bottom: 120%;
+    margin-bottom: 118%;
 }
 
 .custom-input .form-control {
@@ -127,14 +148,14 @@
 }
 
 .custom-input .form-control:focus {
-    border-color: #4FD1C5; /* Warna border saat fokus */
-    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25); /* Efek shadow saat fokus */
+    border-color: #4FD1C5;
+    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25); 
 }
 
 /* kolom input password */
 .custom-password-input {
-    width: 390px; 
-    height: 50px;
+    width: 394.2px; 
+    height: 52px;
     margin-bottom: 20px;
 }
 
@@ -148,15 +169,15 @@
 
 
 .custom-password-input .form-control:focus {
-    border-color: #4FD1C5; /* Warna border saat fokus */
-    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25); /* Efek shadow saat fokus */
+    border-color: #4FD1C5; 
+    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25);
 }
 
 /* Input email dan password dalam mode fokus */
 input[type=email]:focus,
 input[type=password]:focus {
-    border: 3px solid #3e96d9; /* Warna border berubah menjadi hijau saat input dalam mode fokus */
-    box-shadow: 0 0 0 0.2rem rgba(19, 107, 209, 0.25); /* Efek shadow saat fokus */
+    border: 3px solid #3e96d9;
+    box-shadow: 0 0 0 0.2rem rgba(19, 107, 209, 0.25);
 }
 
 
@@ -180,15 +201,12 @@ input[type=password]:focus {
 
 /* Efek hover untuk tombol Sign In */
 .btn.signin-button {
-    /* Aturan untuk tombol saat tidak dihover */
     opacity: 1;
-    transition: opacity 0.3s ease; /* Transisi agar efek perubahan berlangsung mulus */
-
-    /* Aturan untuk tombol saat dihover */
+    transition: opacity 0.3s ease;
 }
 
 .btn.signin-button:hover {
-    opacity: 0.8; /* Mengurangi opacity saat dihover */
+    opacity: 0.8;
 }
 
 .custom-password-input {
@@ -197,12 +215,14 @@ input[type=password]:focus {
 
 #toggleIcon {
     position: absolute;
-    top: 255%;
+    top: 245%;
     transform: translateY(-50%);
-    right: 17px; /* Sesuaikan jarak dari tepi kanan */
+    right: 17px;
     cursor: pointer;
     color: #A3AED0;
     height: 15.5px;
     width: 25.33px;
 }
+
+
 

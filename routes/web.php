@@ -36,11 +36,12 @@ Route::middleware([
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
-    Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
+    Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('PD.index');
+    // Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('PD.index');
-    Route::get('/pengajuan-dana/data', [PengajuanDanaViewWebController::class, 'data'])->name('PD.data');
-    // Route::get('/pengajuan-dana', [PengajuanDanaController::class, 'index'])->name('PD.index');
-});
+// Route::group(['middleware' => 'auth'], function () {
+//     Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('PD.index');
+//     Route::get('/pengajuan-dana/data', [PengajuanDanaViewWebController::class, 'data'])->name('PD.data');
+//     // Route::get('/pengajuan-dana', [PengajuanDanaController::class, 'index'])->name('PD.index');
+// });
