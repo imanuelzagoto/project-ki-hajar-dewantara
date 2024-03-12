@@ -10,3 +10,4 @@
 /.github export-ignore
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
+* text eol=lf
