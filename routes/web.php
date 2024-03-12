@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SuratPerintahKerjaViewWebController;
 use App\Http\Controllers\PengajuanDanaViewWebController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MasterProjekController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,9 +36,9 @@ Route::middleware([
 });
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
+    Route::get('/master-projek', [MasterProjekController::class, 'index'])->name('master-projek.index');
     Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('PD.index');
-    // Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
+    Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
 });
 
 // Route::group(['middleware' => 'auth'], function () {

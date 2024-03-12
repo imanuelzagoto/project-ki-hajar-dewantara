@@ -10,41 +10,54 @@
             <ul class="nav nav-info">
                 <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('dashboard') }}"
-                        style="border-radius: 15px; height:50px; font-size:16px;">
+                        style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
                             <span class="fas fa-home bg-white text-success mr-2 p-2 border border-white rounded-3"
                                 style="border-radius: 12px;"></span>
-                            <p class="text-menu">Dashboard</p>
+                            <p
+                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
+                                Dashboard
+                            </p>
                         </div>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('master_data') ? 'active' : '' }}">
-                    <a class="nav-link" href="#" style="border-radius: 15px; height:50px; font-size:16px;">
+                <li class="nav-item {{ request()->routeIs('master-projek.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('master-projek.index') }}"
+                        style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
                             <span class="fas fa-database bg-white text-success mr-2 p-2 border border-white rounded-3"
                                 style="border-radius: 12px;"></span>
-                            <p class="text-menu">Master Projek</p>
+                            <p
+                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
+                                Master Projek
+                            </p>
                         </div>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('PD.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('PD.index') }}"
-                        style="border-radius: 15px; height:50px; font-size:16px;">
+                        style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
                             <span
                                 class="fas fa-credit-card bg-white text-success mr-2 p-2 border border-white rounded-3"
                                 style="border-radius: 12px;"></span>
-                            <p class="text-menu">PengajuanDana</p>
+                            <p
+                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
+                                Pengajuan Dana
+                            </p>
                         </div>
                     </a>
                 </li>
                 <li class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('surat_perintah_kerja.index') }}"
-                        style="border-radius: 15px; height:50px; font-size:16px;">
+                        style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
                             <span class="fas fa-chart-bar bg-white text-success mr-2 p-2 border border-white rounded-3"
                                 style="border-radius: 12px;"></span>
-                            <p class="text-menu">Surat Perintah Kerja</p>
+                            <p
+                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
+                                Surat Perintah Kerja
+                            </p>
                         </div>
                     </a>
                 </li>

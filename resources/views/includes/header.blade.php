@@ -16,13 +16,17 @@
                     @yield('bredcrum')
                 </span>
                 <span class="breadcum-title">
+                    @yield('master_projek')
+                </span>
+                <span class="breadcum-title">
                     @yield('spk')
                 </span>
                 <span class="breadcum-title">
                     @yield('PD')
                 </span>
             </div>
-            <button class="btn btn-white btn-sm mt--2 rounded" type="button" style="float: left; margin-right:3px;">
+            <button class="btn btn-sm mt--2 rounded" type="button"
+                style="float: left; margin-right:3px; background-color:#F1F4FA;">
                 <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #718096;">
                     Logout
                     <i class="fas fa-sign-out-alt"></i>

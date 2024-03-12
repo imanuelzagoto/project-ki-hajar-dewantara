@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('/partas/css/datatables.min.css') }}">
 </head>
 
-<body>
+<body style="background-color: #F1F4FA">
     <div class="wrapper">
         @include('includes.sidebar')
         <!--header -->
@@ -46,7 +46,7 @@
                 @yield('content')
             </div>
             <!--footer -->
-            @include('includes.footer')
+            {{-- @include('includes.footer') --}}
             <!-- end footer -->
         </div>
     </div>

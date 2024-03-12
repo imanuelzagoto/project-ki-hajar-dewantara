@@ -12,11 +12,11 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-8">
-                <div class="card card-chart" style="border-radius: 8.16px;">
+                <div class="card card-chart" style="border-radius: 9px;">
                     <div class="card-header">
                         <h5 class="card-title font-weight-bold"
                             style="color: #2D3748; font-family:Arial, Helvetica, sans-serif; font-size: 18px; line-height:25.2px;">
-                            Grafik Bulanan</h5>
+                            Perkembangan Grafik</h5>
                     </div>
                     <div id="chart" style="margin-top: 1%;"></div>
                 </div>
