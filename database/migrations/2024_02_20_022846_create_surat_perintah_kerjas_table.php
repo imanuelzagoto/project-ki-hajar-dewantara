@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('surat_perintah_kerjas', function (Blueprint $table) {
             $table->id();
             $table->string('kode_project');
+            $table->string('pemohon');
             $table->string('nama_project');
             $table->string('user');
             $table->string('main_contractor');

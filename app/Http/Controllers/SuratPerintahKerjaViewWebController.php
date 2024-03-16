@@ -8,8 +8,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\SuratPerintahKerjaResource;
 use Carbon\Carbon;
+use Svg\Tag\Rect;
+use Yajra\DataTables\Facades\DataTables;
 
 class SuratPerintahKerjaViewWebController extends Controller
 {
@@ -18,12 +19,54 @@ class SuratPerintahKerjaViewWebController extends Controller
      *
      * @return void
      */
-    public function index()
+
+    public function index(Request $request)
     {
-        $suratPerintahKerjas = Surat_perintah_kerja::latest()->paginate(10);
-        return view('surat_perintah_kerja.index')->with('suratPerintahKerjas', $suratPerintahKerjas);
+        return view('suratPerintahKerja.index');
     }
 
+    public function data()
+    {
+        $datas = Surat_perintah_kerja::select('*');
+
+        return Datatables::of($datas)
+            ->addIndexColumn()
+            ->addColumn('action', function ($surat_perintah_kerjas) {
+                return '
+                <div style="display: flex;">
+                    <a href="' . route('suratPerintahKerja.edit', $surat_perintah_kerjas->id) . '"
+                        class="fas fa-pen btn btn-sm tooltip-container"
+                        style="color:#4FD1C5; font-size:20px;">
+                        <span class="tooltip-edit">Edit</span>
+                    </a>
+                    <a href="' . route('suratPerintahKerja.show', $surat_perintah_kerjas->id) . '"
+                        class="fas fa-eye btn btn-sm tooltip-container"
+                        style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                        <span class="tooltip-show">View</span>
+                    </a>
+                    <a href="#" 
+                        class="fas fa-trash-alt btn btn-sm tooltip-container" 
+                        style="color:#F31414; font-size:20px;" 
+                        onclick="submitDelete(' . $surat_perintah_kerjas->id . ')">
+                        <span class="tooltip-delete">Delete</span>
+                    </a>
+                    <form id="delete-form-' . $surat_perintah_kerjas->id . '" 
+                        action="' . route('surat_perintah_kerja.destroy', $surat_perintah_kerjas->id) . '" 
+                        method="POST" style="display: none;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                    </form>
+                </div>
+            ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function create()
+    {
+        return view('suratPerintahKerja.create');
+    }
 
     /**
      * store
@@ -36,6 +79,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'kode_project' => 'required',
+            'pemohon' => 'required',
             'nama_project' => 'required',
             'user' => 'required',
             'main_contractor' => 'required',
@@ -55,33 +99,32 @@ class SuratPerintahKerjaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // Manipulasi tanggal 'tanggal' sebelum membuat surat perintah kerja
-        $request['tanggal'] = Carbon::createFromFormat('d/m/Y', $request['tanggal'])->format('Y-m-d');
+        // Manipulate 'tanggal' date before creating the record
+        $tanggal = Carbon::createFromFormat('d/m/Y', $request->tanggal)->format('Y-m-d');
 
-        // Manipulasi tanggal 'waktu_penyelesaian' sebelum membuat surat perintah kerja
-        $request['waktu_penyelesaian'] = $request['waktu_penyelesaian'] ? Carbon::createFromFormat('d/m/Y', $request['waktu_penyelesaian'])->format('Y-m-d') : null;
-
+        // Manipulate 'waktu_penyelesaian' date before creating the record
+        $waktu_penyelesaian = $request->waktu_penyelesaian ? Carbon::createFromFormat('d/m/Y', $request->waktu_penyelesaian)->format('Y-m-d') : null;
 
         // Handle file upload if exists
+        $dokumen_pendukung_file = null;
         if ($request->hasFile('dokumen_pendukung_file')) {
-            $destinationPath = '/posts/images';
+            $destinationPath = '/posts/images'; // change this destination path according to your needs
             $dokumen_pendukung_file = $request->file('dokumen_pendukung_file')->hashName();
             $request->file('dokumen_pendukung_file')->move(public_path($destinationPath), $dokumen_pendukung_file);
-        } else {
-            $dokumen_pendukung_file = null;
         }
 
         // Create the record
         $surat_Perintah_Kerja = Surat_perintah_kerja::create([
             'kode_project' => $request->kode_project,
+            'pemohon' => $request->pemohon,
             'nama_project' => $request->nama_project,
             'user' => $request->user,
             'main_contractor' => $request->main_contractor,
             'project_manager' => $request->project_manager,
             'no_spk' => $request->no_spk,
-            'tanggal' => $request->tanggal,
+            'tanggal' => $tanggal,
             'prioritas' => $request->prioritas,
-            'waktu_penyelesaian' => $request->waktu_penyelesaian,
+            'waktu_penyelesaian' => $waktu_penyelesaian,
             'pic' => $request->pic,
             'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
             'dokumen_pendukung_file' => $dokumen_pendukung_file,
@@ -89,7 +132,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         ]);
 
         // Return response
-        return redirect(route('surat_perintah_kerja.index'));
+        return redirect()->route('suratPerintahKerja.index');
     }
 
     /**
@@ -101,11 +144,29 @@ class SuratPerintahKerjaViewWebController extends Controller
     public function show($id)
     {
         // Find surat perintah kerja by ID
-        $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
+        $suratPerintahKerja = Surat_perintah_kerja::find($id);
 
         // Check if the Surat_perintah_kerja exists
+        if ($suratPerintahKerja) {
+            return view('suratPerintahKerja.show', compact('suratPerintahKerja'));
+        } else {
+            return view('page404');
+        }
+    }
+
+    /**
+     * edit
+     *
+     * @param  mixed $id
+     * @return void
+     */
+    public function edit($id)
+    {
+        // find data spk berdasarkan id
+        $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
+        // check if the spk exists
         if ($surat_Perintah_Kerja) {
-            return view('surat_perintah_kerja.surat_perintah_kerja_pdf.blade.php')->with('surat_Perintah_Kerja', $surat_Perintah_Kerja);
+            return view('suratPerintahKerja.edit')->with('surat_Perintah_Kerja', $surat_Perintah_Kerja);
         } else {
             return view('page404');
         }
@@ -123,6 +184,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'kode_project'          => 'required',
+            'pemohon'               => 'required',
             'nama_project'          => 'required',
             'user'                  => 'required',
             'main_contractor'       => 'required',
@@ -169,6 +231,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Update Surat_perintah_kerja with new or old values
         $surat_Perintah_Kerja->update([
             'kode_project'          => $request->kode_project,
+            'pemohon'               => $request->pemohon,
             'nama_project'          => $request->nama_project,
             'user'                  => $request->user,
             'main_contractor'       => $request->main_contractor,
@@ -184,7 +247,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         ]);
 
         // Return response
-        return redirect(route('surat_perintah_kerja.index'));
+        return redirect(route('suratPerintahKerja.index'));
     }
 
     /**
@@ -195,24 +258,24 @@ class SuratPerintahKerjaViewWebController extends Controller
      */
     public function destroy($id)
     {
-        // Find the Surat_perintah_kerja by ID
+        // Temukan Surat_perintah_kerja berdasarkan ID
         $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
 
-        // Check if the Surat_perintah_kerja exists
+        // Periksa apakah Surat_perintah_kerja ditemukan
         if (!$surat_Perintah_Kerja) {
-            return response()->json(['message' => 'Data Surat perintah Kerja tidak ditemukan!'], 404);
+            return redirect()->back()->with('error', 'Data Surat Perintah Kerja tidak ditemukan!');
         }
 
-        // Delete the associated image if it exists
+        // Hapus gambar terkait jika ada
         if ($surat_Perintah_Kerja->dokumen_pendukung_file) {
             Storage::delete('public/posts/images/' . basename($surat_Perintah_Kerja->dokumen_pendukung_file));
         }
 
-        // Delete the Surat_perintah_kerja
+        // Hapus Surat_perintah_kerja
         $surat_Perintah_Kerja->delete();
 
-        // Return response
-        return redirect(route('surat_perintah_kerja.index'));
+        // Kembalikan respons
+        return redirect()->route('surat_perintah_kerja.index')->with('success', 'Data Surat Perintah Kerja berhasil dihapus.');
     }
 
     /**
@@ -226,7 +289,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Retrieve Surat Perintah Kerja data by ID
         $surat_perintah_kerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
         // Load view for PDF
-        $pdf = PDF::loadView('surat_perintah_kerja.surat_perintah_kerja_pdf', compact('surat_perintah_kerjas'));
+        $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja_pdf', compact('surat_perintah_kerjas'));
 
         // // Optionally, you can set additional configurations for the PDF
         // $pdf->setPaper('a4', 'landscape');

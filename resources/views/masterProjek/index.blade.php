@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('PD')
-    Pengajuan Dana
+@section('master_projek')
+    Master Projek
 @endsection
 
 @section('title')
-    Pengajuan Dana
+    Master Projek
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                     <span class="btn-label">
                         <i class="fa fa-plus"></i>
                     </span>
-                    <span class="tambah-perintah">Tambah Pengajuan</span>
+                    <span class="tambah-perintah">Tambah Perintah</span>
                 </button>
             </div>
         </div>
@@ -25,54 +25,35 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover" id="DataTablePD"
+                            <table class="table table-striped table-bordered table-hover" id="DataTableMP"
                                 style="width:100%">
                                 <thead>
-                                    <tr class="tr-table">
-                                        <th class="text-center">No.Doc</th>
-                                        <th class="text-center">Revisi</th>
-                                        <th class="text-center">Pemohon</th>
-                                        <th class="text-center">Tujuan</th>
-                                        <th class="text-center">Lokasi Pengajuan</th>
-                                        <th class="text-center" style="width:19%;">Tanggal
-                                            Pengajuan</th>
-                                        <th class="text-center" style="width:25%;">Batas Waktu
-                                        </th>
-                                        <th class="text-center" style="width:23%;">Total Dana
-                                        </th>
-                                        <th class="text-center">Metode Penerimaan</th>
+                                    <tr class="tr-table" style="box-sizing: border-box;">
+                                        <th class="text-center">Nama Projek</th>
+                                        <th class="text-center">Kode Projek</th>
+                                        <th class="text-center">Tenggat</th>
+                                        <th class="text-center">Mulai</th>
+                                        <th class="text-center">Akhir</th>
                                         <th class="text-center" nowrap>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pengajuanDanas as $pds)
+                                    @foreach ($masterProjeks as $mps)
                                         <tr class="kolom-td">
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ $pds->no_doc }}
+                                            <td class="text-center" style="font-weight:400; box-sizing: border-box;" nowrap>
+                                                {{ $mps->nama_project }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ $pds->revisi }}
+                                                {{ $mps->kode_project }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ $pds->nama_pemohon }}
+                                                {{ $mps->tenggat }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ $pds->tujuan }}
+                                                {{ \Carbon\Carbon::parse($mps->mulai)->format('d-m-Y') }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ $pds->lokasi }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ Carbon\Carbon::parse($pds->updated_at)->format('H:i d-m-Y') }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ Carbon\Carbon::parse($pds->jangka_waktu)->format('d-m-Y') }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ 'Rp. ' . number_format($pds->dana_yang_dibutuhkan, 0, ',', '.') }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ $pds->no_rekening }}
+                                                {{ \Carbon\Carbon::parse($mps->akhir)->format('d-m-Y') }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
                                                 <a href="#" class="fas fa-pen btn btn-sm tooltip-container"
@@ -100,11 +81,14 @@
         </div>
     </div>
 
-    {{-- <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
+
     <script>
         $(document).ready(function() {
-            var DataTablePD = $('#DataTablePD').DataTable({
-                "pageLength": getPageLengthFromLocalStorage('DataTablePD'),
+            // Mengambil nilai entri per halaman yang tersimpan atau default jika tidak ada
+            var storedPageLength = getPageLengthFromLocalStorage('DataTableMP');
+
+            var DataTablePD = $('#DataTableMP').DataTable({
+                "pageLength": storedPageLength,
                 initComplete: function() {
                     this.api().columns().every(function() {
                         var column = this;
@@ -126,20 +110,20 @@
                 }
             });
 
-            // Function to get page length from localStorage
+            // Function untuk mendapatkan jumlah entri per halaman dari localStorage
             function getPageLengthFromLocalStorage(tableId) {
                 var storedLength = localStorage.getItem(tableId + '_pageLength');
                 if (storedLength) {
                     return parseInt(storedLength);
                 } else {
-                    return 5; // Default page length
+                    return 10; // Default jumlah entri per halaman
                 }
             }
 
-            // Save page length to localStorage
-            $('select[name="DataTablePD_length"]').change(function() {
+            // Menyimpan jumlah entri per halaman ke localStorage saat dipilih
+            $('select[name="DataTableMP_length"]').change(function() {
                 var val = $(this).val();
-                localStorage.setItem('DataTablePD_pageLength', val);
+                localStorage.setItem('DataTableMP_pageLength', val);
             });
         });
     </script>

@@ -1,11 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\SuratPerintahKerjaViewWebController;
-use App\Http\Controllers\PengajuanDanaViewWebController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\MasterProjekController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MasterProjekViewController;
+use App\Http\Controllers\PengajuanDanaViewWebController;
+use App\Http\Controllers\SuratPerintahKerjaViewWebController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -35,12 +36,24 @@ Route::middleware([
     Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
+// Routes Kihajar dewantara
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/master-projek', [MasterProjekController::class, 'index'])->name('master-projek.index');
+    // Routes Master Projek
+    Route::get('/master-projek', [MasterProjekViewController::class, 'index'])->name('master-projek.index');
+
+    // Routes Pengajuan Dana
     Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('PD.index');
+
+    // Routes Surat perintah kerja
+    Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
     Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
+    Route::get('/surat-perintah-kerja/tambah-perintah', [SuratPerintahKerjaViewWebController::class, 'create'])->name('suratPerintahKerja.create');
+    Route::get('/surat-perintah-kerja/{id}/edit', [SuratPerintahKerjaViewWebController::class, 'edit'])->name('suratPerintahKerja.edit');
+    Route::get('/surat-perintah-kerja/{id}', [SuratPerintahKerjaViewWebController::class, 'show'])->name('suratPerintahKerja.show');
+    Route::delete('/surat-perintah-kerja/{id}', [SuratPerintahKerjaViewWebController::class, 'destroy'])->name('surat_perintah_kerja.destroy');
 });
 
+// Route::post('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
 // Route::group(['middleware' => 'auth'], function () {
 //     Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('PD.index');
 //     Route::get('/pengajuan-dana/data', [PengajuanDanaViewWebController::class, 'data'])->name('PD.data');

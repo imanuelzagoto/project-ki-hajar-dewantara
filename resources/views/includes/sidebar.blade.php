@@ -48,7 +48,15 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ? 'active' : '' }}">
+                {{-- <li
+                        class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') || request()->routeIs('suratPerintahKerja.show') ? 'active' : '' }}"> --}}
+                <li
+                    class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ||
+                    request()->routeIs('suratPerintahKerja.create') ||
+                    request()->routeIs('suratPerintahKerja.show') ||
+                    request()->routeIs('suratPerintahKerja.edit')
+                        ? 'active'
+                        : '' }}">
                     <a class="nav-link" href="{{ route('surat_perintah_kerja.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">

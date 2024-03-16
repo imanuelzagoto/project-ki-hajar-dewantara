@@ -36,6 +36,7 @@ class SuratPerintahKerjaController extends Controller
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'kode_project' => 'required',
+            'pemohon' => 'required',
             'nama_project' => 'required',
             'user' => 'required',
             'main_contractor' => 'required',
@@ -74,6 +75,7 @@ class SuratPerintahKerjaController extends Controller
         // Create the record
         $surat_Perintah_Kerja = Surat_perintah_kerja::create([
             'kode_project' => $request->kode_project,
+            'pemohon' => $request->pemohon,
             'nama_project' => $request->nama_project,
             'user' => $request->user,
             'main_contractor' => $request->main_contractor,
@@ -107,7 +109,7 @@ class SuratPerintahKerjaController extends Controller
         if ($surat_Perintah_Kerja) {
             return new SuratPerintahKerjaResource(true, 'Detail Data Surat Perintah Kerja!', $surat_Perintah_Kerja);
         } else {
-            return response()->json(['message' => 'Data Surat perintah Kerja tidak ditemukan!'], 404);
+            return response()->json(['message' => 'Data surat perintah Kerja tidak ditemukan!'], 404);
         }
     }
 
@@ -123,6 +125,7 @@ class SuratPerintahKerjaController extends Controller
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'kode_project'          => 'required',
+            'pemohon'               => 'required',
             'nama_project'          => 'required',
             'user'                  => 'required',
             'main_contractor'       => 'required',
@@ -169,6 +172,7 @@ class SuratPerintahKerjaController extends Controller
         // Update Surat_perintah_kerja with new or old values
         $surat_Perintah_Kerja->update([
             'kode_project'          => $request->kode_project,
+            'pemohon'               => $request->pemohon,
             'nama_project'          => $request->nama_project,
             'user'                  => $request->user,
             'main_contractor'       => $request->main_contractor,
@@ -212,7 +216,7 @@ class SuratPerintahKerjaController extends Controller
         $surat_Perintah_Kerja->delete();
 
         // Return response
-        return response()->json(['message' => 'Data Surat perintah Kerja berhasil dihapus!', 'success' => true, 'data' => null], 200);
+        return response()->json(['message' => 'Data surat perintah Kerja berhasil dihapus!', 'success' => true, 'data' => null], 200);
     }
 
     /**

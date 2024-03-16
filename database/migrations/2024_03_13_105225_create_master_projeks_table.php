@@ -11,12 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_spks', function (Blueprint $table) {
+        Schema::create('master_projeks', function (Blueprint $table) {
             $table->id();
-            $table->string('jenis_pekerjaan')->nullable();
-            $table->string('uraian_pekerjaan')->nullable();
-            $table->date('tanggal')->nullable();
-            $table->time('jam')->nullable();
+            $table->string('nama_project');
+            $table->string('kode_project');
+            $table->date('tenggat')->nullable();
+            $table->date('mulai')->nullable();
+            $table->date('akhir')->nullable();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_spks');
+        Schema::dropIfExists('master_projeks');
     }
 };

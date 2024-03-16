@@ -4,13 +4,17 @@
     Dashboard
 @endsection
 
+@section('pages_home')
+    Pages
+@endsection
+
 @section('title')
     Dashboard
 @endsection
 
 @section('content')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row" style="margin-top: 31.5px;">
             <div class="col-md-8">
                 <div class="card card-chart" style="border-radius: 9px;">
                     <div class="card-header">
@@ -75,7 +79,7 @@
     <div class="row">
         <div class="col-md-6">
             <div class="font-weight-bold text-pt">
-                Permintaan Terakhir
+                Permintaan Hari Ini
             </div>
         </div>
     </div>
@@ -127,41 +131,48 @@
                                         <tbody>
                                             @foreach ($pengajuan_dana_per_day as $pdt)
                                                 <tr class="kolom-td">
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->no_doc }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->revisi }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->nama_pemohon }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->tujuan }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->lokasi }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        {{ $pdt->tanggal }}
+                                                        {{ Carbon\Carbon::parse($pdt->updated_at)->format('H:i d-m-Y') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        {{ $pdt->jangka_waktu }}
+                                                        {{ Carbon\Carbon::parse($pdt->jangka_waktu)->format('d-m-Y') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ 'Rp. ' . number_format($pdt->dana_yang_dibutuhkan, 0, ',', '.') }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->no_rekening }}
                                                     </td>
-                                                    <td class="justify-content-end" style="font-weight:400;" nowrap>
-                                                        <button
-                                                            class="btn btn-sm btn-outline-primary btn-action">Edit</button>
-                                                        <a href="#" class="fas fa-eye btn btn-sm"
-                                                            style="color:#1814F3; font-size:18px; border: none; padding: 0; margin-left:8px;"></a>
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                        <a href="#" class="fas fa-pen btn btn-sm tooltip-container"
+                                                            style="color:#4FD1C5; font-size:20px;">
+                                                            <span class="tooltip-edit">Edit</span>
+                                                        </a>
+                                                        <a href="#" class="fas fa-eye btn btn-sm tooltip-container"
+                                                            style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                            <span class="tooltip-show">View</span>
+                                                        </a>
 
-                                                        <a href="#" class="fas fa-trash-alt btn btn-sm"
-                                                            style="color:#F31414; font-size:17px; border: none; padding: 0;margin-left:8px;"></a>
+                                                        <a href="#"
+                                                            class="fas fa-trash-alt btn btn-sm tooltip-container"
+                                                            style="color:#F31414; font-size:20px;">
+                                                            <span class="tooltip-delete">Delete</span>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -177,7 +188,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="display table table-striped table-hover" id="TablePengajuanSPK"
+                                    <table class="table table-striped table-bordered table-hover" id="TablePengajuanSPK"
                                         style="width:100%">
                                         <thead>
                                             <tr class="tr-table">
@@ -195,38 +206,45 @@
                                         <tbody>
                                             @foreach ($pengajuan_spk_per_day as $pst)
                                                 <tr class="kolom-td">
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;"nowrap>
                                                         {{ $pst->nama_project }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pst->user }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pst->main_contractor }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pst->project_manager }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pst->pic }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;">
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pst->no_spk }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        {{ $pst->tanggal }}
+                                                        {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->tanggal)->format('d-m-Y') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        {{ $pst->waktu_penyelesaian }}
+                                                        {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
                                                     </td>
-                                                    <td class="justify-content-end" style="font-weight:400;" nowrap>
-                                                        <button
-                                                            class="btn btn-sm btn-outline-primary btn-action">Edit</button>
-                                                        <a href="#" class="fas fa-eye btn btn-sm"
-                                                            style="color:#1814F3; font-size:18px; border: none; padding: 0; margin-left:8px;"></a>
+                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                        <a href="#" class="fas fa-pen btn btn-sm tooltip-container"
+                                                            style="color:#4FD1C5; font-size:20px;">
+                                                            <span class="tooltip-edit">Edit</span>
+                                                        </a>
+                                                        <a href="#" class="fas fa-eye btn btn-sm tooltip-container"
+                                                            style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                            <span class="tooltip-show">View</span>
+                                                        </a>
 
-                                                        <a href="#" class="fas fa-trash-alt btn btn-sm"
-                                                            style="color:#F31414; font-size:17px; border: none; padding: 0;margin-left:8px;"></a>
+                                                        <a href="#"
+                                                            class="fas fa-trash-alt btn btn-sm tooltip-container"
+                                                            style="color:#F31414; font-size:20px;">
+                                                            <span class="tooltip-delete">Delete</span>
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -257,7 +275,7 @@
                 // Mendapatkan URL yang ditargetkan oleh setiap elemen menu
                 var targetUrl = item.getAttribute('data-target');
 
-                // Jika URL saat ini cocok dengan URL yang ditargetkan, tambahkan kelas aktif
+                // kondisi URL saat ini cocok dengan URL yang ditargetkan
                 if (currentUrl.includes(targetUrl)) {
                     item.classList.add('active');
                 }
