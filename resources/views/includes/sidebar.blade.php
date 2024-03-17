@@ -34,8 +34,8 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('PD.index') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('PD.index') }}"
+                <li class="nav-item {{ request()->routeIs('pengajuanDana.index') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{ route('pengajuanDana.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
                             <span

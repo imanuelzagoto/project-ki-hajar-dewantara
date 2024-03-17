@@ -1,11 +1,15 @@
 @extends('layouts.master')
 
-@section('bredcrum')
-    Dashboard
-@endsection
-
 @section('pages_home')
     Pages
+@endsection
+
+@section('slash_Home')
+    /
+@endsection
+
+@section('bredcrum')
+    Dashboard
 @endsection
 
 @section('title')

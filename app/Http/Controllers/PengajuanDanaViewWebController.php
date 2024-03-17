@@ -7,16 +7,57 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Models\PengajuanDana;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Resources\PengajuanDanaResource;
 use Carbon\Carbon;
+use Yajra\DataTables\Facades\DataTables;
 
 class PengajuanDanaViewWebController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $pengajuanDanas = PengajuanDana::latest()->paginate(10);
-        // return new PengajuanDanaResource(true, 'List Data Pengajuan Dana', $pengajuanDanas);
-        return view('PengajuanDana.index')->with('pengajuanDanas', $pengajuanDanas);
+        return view('pengajuanDana.index');
+    }
+
+    public function data()
+    {
+        $datas = PengajuanDana::select('*');
+
+        return Datatables::of($datas)
+            ->addIndexColumn()
+            ->addColumn('action', function ($pengajuan_danas) {
+                return '
+            <div style="display: flex;">
+                <a href="' . route('pengajuanDana.edit', $pengajuan_danas->id) . '"
+                    class="fas fa-pen btn btn-sm tooltip-container"
+                    style="color:#4FD1C5; font-size:20px;">
+                    <span class="tooltip-edit">Edit</span>
+                </a>
+                <a href="' . route('pengajuanDana.show', $pengajuan_danas->id) . '"
+                    class="fas fa-eye btn btn-sm tooltip-container"
+                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                    <span class="tooltip-show">View</span>
+                </a>
+                <a href="#" 
+                        class="fas fa-trash-alt btn btn-sm tooltip-container" 
+                        style="color:#F31414; font-size:20px;" 
+                        onclick="submitDelete(' . $pengajuan_danas->id . ')">
+                        <span class="tooltip-delete">Delete</span>
+                    </a>
+                    <form id="delete-form-' . $pengajuan_danas->id . '" 
+                        action="' . route('pengajuanDana.destroy', $pengajuan_danas->id) . '" 
+                        method="POST" style="display: none;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                    </form>
+            </div>
+        ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function create()
+    {
+        return view('pengajuanDana.create');
     }
 
     /**
@@ -56,7 +97,7 @@ class PengajuanDanaViewWebController extends Controller
         // Ubah nilai dana_yang_dibutuhkan menjadi format mata uang rupiah
         $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
 
-        return redirect(route('PengajuanDana.index'));
+        return redirect(route('pengajuanDana.index'));
     }
 
     /**
@@ -68,13 +109,27 @@ class PengajuanDanaViewWebController extends Controller
 
     public function show($id)
     {
+        // Find surat perintah kerja by ID
         $pengajuanDana = PengajuanDana::find($id);
 
-        if (!$pengajuanDana) {
-            return redirect(route('page404'));
+        // Check if the Surat_perintah_kerja exists
+        if ($pengajuanDana) {
+            return view('pengajuanDana.show', compact('pengajuanDana'));
+        } else {
+            return view('page404');
         }
+    }
 
-        return view(route('PengajuanDana.pengajuan_dana_pdf.blade.php'))->with('pengajuanDana', $pengajuanDana);
+    public function edit($id)
+    {
+        // find data spk berdasarkan id
+        $pengajuanDana = PengajuanDana::find($id);
+        // check if the spk exists
+        if ($pengajuanDana) {
+            return view('pengajuanDana.edit')->with('pengajuanDana', $pengajuanDana);
+        } else {
+            return view('page404');
+        }
     }
 
     /**
@@ -121,7 +176,7 @@ class PengajuanDanaViewWebController extends Controller
         // Ubah nilai dana_yang_dibutuhkan menjadi format mata uang rupiah
         $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
 
-        return redirect(route('PengajuanDana.index'));
+        return redirect(route('pengajuanDana.index'));
     }
 
     /**
@@ -140,7 +195,7 @@ class PengajuanDanaViewWebController extends Controller
 
         $pengajuanDana->delete();
 
-        return redirect(route('PengajuanDana.index'));
+        return redirect(route('pengajuanDana.index'));
     }
 
     /**

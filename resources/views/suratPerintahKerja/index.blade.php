@@ -1,11 +1,15 @@
 @extends('layouts.master')
 
-@section('spk')
-    Surat Perintah Kerja
-@endsection
-
 @section('pages_spk')
     Pages
+@endsection
+
+@section('slash_spk')
+    /
+@endsection
+
+@section('spk')
+    Surat Perintah Kerja
 @endsection
 
 @section('titleSPK')
@@ -14,8 +18,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="row" style="margin-top: 13.5px;">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: -15.5px;">
+        <div class="row" style="margin-top: 6.5px;">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: -12.5px;">
                 <form id="dataTableSearchForm" action="#" method="get" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
@@ -24,8 +28,8 @@
                             aria-controls="dataTable">
                     </div>
                 </form>
-                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 filtersbutton"
-                    style="border-radius: 17px; height:42px; font-size:17.18px; font-family: Helvetica, sans-serif; color:#2D3748;border-color:#d4d6d8;background-color: #FFFFFF">
+                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters"
+                    style="border-radius: 17px; height:42px; font-size:17.18px; font-family: Helvetica, sans-serif; color:#2D3748; border-color:#4FD1C5; background-color: #FFFFFF; font-weight:700;">
                     <i class="fas fa-sliders-h"></i> Filters
                 </button>
             </div>
@@ -46,15 +50,17 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="d-flex align-items-center mb-3 d-flex-center">
-                                <select id="entriesPerPage" class="form-control form-control-sm mr-2" style="width: 70px;">
+                                <select id="entriesPerPage" class="form-control form-control-sm mr-2"
+                                    style="width: 70px; border-color:#4FD1C5;">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
-                                <span class="labelentris" style="color: #A0AEC0;">entries per page:</span>
+                                <span class="labelentris" style="color: #A0AEC0;">entries per
+                                    page</span>
                             </div>
-                            <table class="table mb-6" style="width:100%">
+                            <table class="table display-6 mb-6 table-responsive" style="width:100%;">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                         <th class="text-center" nowrap>No</th>
@@ -83,14 +89,56 @@
 
 @push('scripts')
     <script>
+        function submitDelete(id) {
+            event.preventDefault();
+            Swal.fire({
+                title: "<span style='color: #F31414; font-weight: 700;'>HAPUS?</span>",
+                html: "<span style='color: #2D3748; font-weight: 700;'>Apakah Anda yakin ingin menghapus item ini?</span>",
+                // icon: "warning",
+                iconHtml: "<i class='fas fa-trash-alt' style='color: #FFFFFF; background-color: #F31414; border-radius: 50%; padding: 23.5px; font-size: 47px; width:90px; height:90px;'></i>",
+                showCancelButton: true,
+                confirmButtonColor: "#22B37C",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Lanjutkan",
+                customClass: {
+                    title: 'swal2-title-custom',
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "<span style='color: ##22B37C; font-size:25px; font-weight: 700; font-family: Helvetica;'>HAPUS ITEM INI!</span>",
+                        icon: "success",
+                        showConfirmButton: true,
+                        confirmButtonColor: "#22B37C",
+                    }).then((success) => {
+                        if (success.isConfirmed) {
+                            // Submit the form for deletion
+                            document.getElementById('delete-form-' + id).submit();
+                        }
+                    });
+                }
+            });
+        }
+
+        // Function to get page length from localStorage
+        function getPageLengthFromLocalStorage(tableId) {
+            var storedLength = localStorage.getItem(tableId + '_pageLength');
+            return storedLength ? parseInt(storedLength) : 10; // Default page length
+        }
+
         $(function() {
+            // Inisialisasi nilai pilihan entri per halaman dari localStorage
+            var storedPageLength = getPageLengthFromLocalStorage('tableDataSPK');
+            $('#entriesPerPage').val(storedPageLength);
+
             // Inisialisasi DataTables
             var table = $('.table').DataTable({
                 responsive: true,
                 serverside: true,
                 autoWidth: false,
                 bLengthChange: true,
-                lengthMenu: [10, 25, 50, 100], // Menambahkan opsi entri per halaman
+                lengthMenu: [10, 25, 50, 100],
+                pageLength: storedPageLength,
                 ajax: {
                     url: '{{ route('surat_perintah_kerja.data') }}',
                 },
@@ -106,23 +154,23 @@
                     },
                     {
                         data: 'pemohon',
-                        className: 'data-table-cell nowrap'
+                        className: 'data-table-cell text-left nowrap'
                     },
                     {
                         data: 'user',
-                        className: 'data-table-cell nowrap'
+                        className: 'data-table-cell text-left nowrap'
                     },
                     {
                         data: 'main_contractor',
-                        className: 'data-table-cell nowrap'
+                        className: 'data-table-cell text-left nowrap'
                     },
                     {
                         data: 'project_manager',
-                        className: 'data-table-cell nowrap'
+                        className: 'data-table-cell text-left nowrap'
                     },
                     {
                         data: 'pic',
-                        className: 'data-table-cell nowrap'
+                        className: 'data-table-cell text-left nowrap'
                     },
                     {
                         data: 'no_spk',
@@ -159,14 +207,32 @@
                 }
             });
 
-            // Pencarian langsung saat pengguna mengetikkan input
-            $('#dataTableSearchInput').on('input', function() {
-                table.search(this.value).draw();
-            });
-
             // Mengatur jumlah entri per halaman
             $('#entriesPerPage').on('change', function() {
-                table.page.len($(this).val()).draw();
+                var selectedValue = $(this).val();
+                // Simpan nilai yang dipilih ke dalam localStorage
+                localStorage.setItem('tableDataSPK_pageLength', selectedValue);
+                // Terapkan perubahan jumlah entri per halaman ke DataTable
+                table.page.len(selectedValue).draw();
+            });
+
+            // Tambahkan event listener untuk tombol submit
+            $('#filtersButton').on('click', function() {
+                // Dapatkan nilai input pencarian
+                var searchValue = $('#dataTableSearchInput').val().trim();
+
+                // Kirim nilai pencarian ke server menggunakan AJAX
+                table.search(searchValue).draw();
+            });
+
+            // Event listener untuk input di kolom pencarian
+            $('#dataTableSearchInput').on('input', function() {
+                var searchValue = $(this).val().trim();
+
+                if (searchValue === '') {
+                    // menghapus input kolom pencarian dan mengembalikan entri semua entri
+                    table.search('').draw();
+                }
             });
         });
     </script>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MasterProjek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Yajra\DataTables\Facades\DataTables;
 
 class MasterProjekViewController extends Controller
 {
@@ -15,8 +16,50 @@ class MasterProjekViewController extends Controller
      */
     public function index()
     {
-        $masterProjeks = MasterProjek::latest()->paginate(10);
-        return view('masterProjek.index')->with('masterProjeks', $masterProjeks);
+        return view('masterProjek.index');
+    }
+
+    public function data()
+    {
+        $datas = MasterProjek::select('*');
+
+        return Datatables::of($datas)
+            ->addIndexColumn()
+            ->addColumn('action', function ($master_projeks) {
+                return '
+            <div style="display: flex; margin-left:29px;" class="text-center">
+                <a href="' . route('master-projek.edit', $master_projeks->id) . '"
+                    class="fas fa-pen btn btn-sm tooltip-container"
+                    style="color:#4FD1C5; font-size:20px;">
+                    <span class="tooltip-edit">Edit</span>
+                </a>
+                <a href="' . route('master-projek.show', $master_projeks->id) . '"
+                    class="fas fa-eye btn btn-sm tooltip-container"
+                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                    <span class="tooltip-show">View</span>
+                </a>
+                <a href="#" 
+                        class="fas fa-trash-alt btn btn-sm tooltip-container" 
+                        style="color:#F31414; font-size:20px;" 
+                        onclick="submitDelete(' . $master_projeks->id . ')">
+                        <span class="tooltip-delete">Delete</span>
+                    </a>
+                    <form id="delete-form-' . $master_projeks->id . '" 
+                        action="' . route('master-projek.destroy', $master_projeks->id) . '" 
+                        method="POST" style="display: none;">
+                        ' . csrf_field() . '
+                        ' . method_field('DELETE') . '
+                    </form>
+            </div>
+        ';
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+    }
+
+    public function create()
+    {
+        return view('masterProjek.create');
     }
 
     /**
@@ -51,7 +94,7 @@ class MasterProjekViewController extends Controller
         ]);
 
         // return response
-        return redirect()->route('masterProjek.index')->with('success', 'Projek berhasil dibuat');
+        return redirect()->route('master-projek.index')->with('success', 'Projek berhasil dibuat');
     }
 
     /**
@@ -60,6 +103,7 @@ class MasterProjekViewController extends Controller
      * @param  mixed $master_projeks
      * @return void
      */
+
     public function show($id)
     {
         // Find surat perintah kerja by ID
@@ -67,7 +111,19 @@ class MasterProjekViewController extends Controller
 
         // Check if the Surat_perintah_kerja exists
         if ($master_Projeks) {
-            return view('masterProjek.show.blade.php')->with('master_Projeks', $master_Projeks);
+            return view('masterProjek.show', compact('master_Projeks'));
+        } else {
+            return view('page404');
+        }
+    }
+
+    public function edit($id)
+    {
+        // find data spk berdasarkan id
+        $master_Projeks = MasterProjek::find($id);
+        // check if the spk exists
+        if ($master_Projeks) {
+            return view('masterProjek.edit')->with('master_Projeks', $master_Projeks);
         } else {
             return view('page404');
         }
@@ -110,7 +166,7 @@ class MasterProjekViewController extends Controller
             'akhir' => $request->akhir,
         ]);
         // return response
-        return redirect(route('masterProjek.index'));
+        return redirect()->route('master-projek.index');
     }
 
     /**
@@ -132,6 +188,6 @@ class MasterProjekViewController extends Controller
         $masterProjek->delete();
 
         // Return response
-        return redirect(route('masterProjek.index'));
+        return redirect()->route('master-projek.index');
     }
 }

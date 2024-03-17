@@ -9,7 +9,6 @@ use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
-use Svg\Tag\Rect;
 use Yajra\DataTables\Facades\DataTables;
 
 class SuratPerintahKerjaViewWebController extends Controller
@@ -33,18 +32,18 @@ class SuratPerintahKerjaViewWebController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($surat_perintah_kerjas) {
                 return '
-                <div style="display: flex;">
-                    <a href="' . route('suratPerintahKerja.edit', $surat_perintah_kerjas->id) . '"
-                        class="fas fa-pen btn btn-sm tooltip-container"
-                        style="color:#4FD1C5; font-size:20px;">
-                        <span class="tooltip-edit">Edit</span>
-                    </a>
-                    <a href="' . route('suratPerintahKerja.show', $surat_perintah_kerjas->id) . '"
-                        class="fas fa-eye btn btn-sm tooltip-container"
-                        style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                        <span class="tooltip-show">View</span>
-                    </a>
-                    <a href="#" 
+            <div style="display: flex;">
+                <a href="' . route('suratPerintahKerja.edit', $surat_perintah_kerjas->id) . '"
+                    class="fas fa-pen btn btn-sm tooltip-container"
+                    style="color:#4FD1C5; font-size:20px;">
+                    <span class="tooltip-edit">Edit</span>
+                </a>
+                <a href="' . route('suratPerintahKerja.show', $surat_perintah_kerjas->id) . '"
+                    class="fas fa-eye btn btn-sm tooltip-container"
+                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                    <span class="tooltip-show">View</span>
+                </a>
+                <a href="#" 
                         class="fas fa-trash-alt btn btn-sm tooltip-container" 
                         style="color:#F31414; font-size:20px;" 
                         onclick="submitDelete(' . $surat_perintah_kerjas->id . ')">
@@ -56,12 +55,13 @@ class SuratPerintahKerjaViewWebController extends Controller
                         ' . csrf_field() . '
                         ' . method_field('DELETE') . '
                     </form>
-                </div>
-            ';
+            </div>
+        ';
             })
             ->rawColumns(['action'])
             ->make(true);
     }
+
 
     public function create()
     {
