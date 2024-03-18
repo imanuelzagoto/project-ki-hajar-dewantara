@@ -10,6 +10,8 @@
 
 @section('content')
     <div class="container-fluid">
-        <h1>Ini Form Edit</h1>
+        <div class="row">
+            <h1 class="">Ini Form Edit</h1>
+        </div>
     </div>
 @endsection

@@ -42,7 +42,6 @@
     <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
         @csrf
     </form>
-
     <div class="container-fluid">
         <div class="row" style="margin-top: 36px;">
             <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: -12.5px;">

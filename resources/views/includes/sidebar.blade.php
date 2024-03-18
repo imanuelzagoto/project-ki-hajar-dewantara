@@ -21,7 +21,13 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('master-projek.index') ? 'active' : '' }}">
+                <li
+                    class="nav-item {{ request()->routeIs('master-projek.index') ||
+                    request()->routeIs('master-projek.create') ||
+                    request()->routeIs('master-projek.show') ||
+                    request()->routeIs('master-projek.edit')
+                        ? 'active'
+                        : '' }}">
                     <a class="nav-link" href="{{ route('master-projek.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
@@ -34,7 +40,13 @@
                         </div>
                     </a>
                 </li>
-                <li class="nav-item {{ request()->routeIs('pengajuanDana.index') ? 'active' : '' }}">
+                <li
+                    class="nav-item {{ request()->routeIs('pengajuanDana.index') ||
+                    request()->routeIs('pengajuanDana.create') ||
+                    request()->routeIs('pengajuanDana.show') ||
+                    request()->routeIs('pengajuanDana.edit')
+                        ? 'active'
+                        : '' }}">
                     <a class="nav-link" href="{{ route('pengajuanDana.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
