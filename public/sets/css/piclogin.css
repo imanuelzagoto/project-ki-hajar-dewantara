@@ -81,7 +81,7 @@
 .separator-left {
     position: absolute;
     left: 24.8%;
-    width: 21%; /* Mempertahankan lebar pada 21% */
+    width: 21%; 
     border: none;
     border-top: 1px solid #E0E5F2;
     margin-top: -1px;
@@ -89,23 +89,24 @@
 
 .separator-right {
     position: absolute;
-    right: 24.8%; /* Sesuaikan dengan 24.8% untuk mempertahankan jarak yang sama dari tepi */
-    width: 21%; /* Mempertahankan lebar pada 21% */
+    right: 24.8%;
+    width: 23%; 
     border: none;
     border-top: 1px solid #E0E5F2;
     margin-top: -1px;
+    margin-right: 2px;
 }
 
 /* Menambahkan media query untuk menyesuaikan tata letak pada layar yang lebih kecil */
 @media screen and (max-width: 768px) {
     .separator-left {
-        left: 13%; /* Sesuaikan posisi berdasarkan kebutuhan responsif Anda */
-        width: 29%; /* Sesuaikan lebar berdasarkan kebutuhan responsif Anda */
+        left: 13%;
+        width: 29%;
     }
 
     .separator-right {
-        right: 15%; /* Sesuaikan posisi berdasarkan kebutuhan responsif Anda */
-        width: 32%; /* Sesuaikan lebar berdasarkan kebutuhan responsif Anda */
+        right: 15%;
+        width: 32%;
     }
 }
 

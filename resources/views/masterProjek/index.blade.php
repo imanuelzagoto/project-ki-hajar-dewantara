@@ -1,29 +1,55 @@
 @extends('layouts.master')
 
-@section('master_projek')
-    Master Projek
-@endsection
-
-@section('slasMP')
-    /
-@endsection
-
-@section('pagesMP')
-    Pages
-@endsection
-
-@section('titleMP')
-    Master Projek
-@endsection
-
 @section('content')
+    <div class="main-dashboard mt--3">
+        <nav aria-label="breadcrumb">
+            <div class="breadcrumb mt-2 d-flex justify-content-between">
+                <div class="d-lg-none">
+                    <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                        data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <i class="icon-menu"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="d-none d-lg-block d-sm-none breadcrumb-master ml-3">
+                    <span class="span-mp mr-2 fs-f5">
+                        Pages
+                    </span>
+                    <span class="slashMP mr-2">
+                        /
+                    </span>
+                    <span class="breadcum-mp">
+                        Master Projek
+                    </span>
+                </div>
+                <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
+                    style="float: left; margin-right:3px; background-color:#F1F4FA;">
+                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #718096;">
+                        Logout
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                    <span class="tooltip-text">Logout</span>
+                </button>
+            </div>
+        </nav>
+        <div class="col-md-12">
+            <h2 class="text-mp font-weight-bold display-6">
+                Master Projek
+            </h2>
+        </div>
+    </div>
+    <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+        @csrf
+    </form>
+
     <div class="container-fluid">
         <div class="row" style="margin-top: 36px;">
             <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: -12.5px;">
-                <form id="dataTableSearchForm" action="#" method="get" style="height: 44px; width: 255px;" class="mr-2">
+                <form id="dataTableSearchForm" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="dataTableSearchInput" name="search"
+                        <input type="text" id="dataTableSearchInput"
                             class="form-control form-control-sm pl-0 rounded-right" placeholder="Type here...."
                             aria-controls="dataTable">
                     </div>
@@ -54,11 +80,11 @@
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height: 19.36px;">
                                         <th class="text-center" style="width: 5%;" nowrap>No</th>
                                         <th class="text-center" style="width: 20%;" nowrap>Nama Projek</th>
-                                        <th class="text-center" style="width: 10%;" nowrap>Kode Projek</th>
-                                        <th class="text-center" style="width: 15%;" nowrap>Tenggat</th>
-                                        <th class="text-center" style="width: 15%;" nowrap>Mulai</th>
-                                        <th class="text-center" style="width: 15%;" nowrap>Akhir</th>
-                                        <th class="text-center" style="width: 20%;" nowrap>Action</th>
+                                        <th class="text-center" style="width: 15%;" nowrap>Kode Projek</th>
+                                        <th class="text-center" style="width: 20%;" nowrap>Tenggat</th>
+                                        <th class="text-center" style="width: 20%;" nowrap>Mulai</th>
+                                        <th class="text-center" style="width: 20%;" nowrap>Akhir</th>
+                                        <th class="text-center" nowrap>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -79,19 +105,19 @@
             // Inisialisasi DataTables
             var table = $('.tablePD').DataTable({
                 responsive: true,
-                serverside: true,
+                serverSide: true,
                 autoWidth: false,
-                bLengthChange: true,
                 lengthMenu: [10, 25, 50, 100],
                 pageLength: storedPageLength,
                 ajax: {
                     url: '{{ route('master-projek.data') }}',
+                    type: 'GET',
                 },
                 columns: [{
                         data: 'DT_RowIndex',
                         name: 'DT_RowIndex',
-                        searchable: false,
-                        sortable: false
+                        orderable: false,
+                        searchable: false
                     },
                     {
                         data: 'nama_project',
@@ -101,28 +127,17 @@
                         data: 'kode_project',
                         className: 'text-left nowrap'
                     },
-
                     {
                         data: 'tenggat',
-                        className: 'text-center nowrap',
-                        render: function(data) {
-                            return moment(data, 'YYYY-MM-DD HH:mm:ss').format('HH:mm DD-MM-YYYY');
-                        }
+                        className: 'text-center nowrap'
                     },
-
                     {
                         data: 'mulai',
-                        className: 'text-center nowrap',
-                        render: function(data) {
-                            return moment(data, 'YYYY-MM-DD').format('DD-MM-YYYY');
-                        }
+                        className: 'text-center nowrap'
                     },
                     {
                         data: 'akhir',
-                        className: 'text-center nowrap',
-                        render: function(data) {
-                            return moment(data, 'YYYY-MM-DD').format('DD-MM-YYYY');
-                        }
+                        className: 'text-center nowrap'
                     },
                     {
                         data: 'action',
@@ -132,9 +147,8 @@
                     }
                 ],
                 createdRow: function(row, data, dataIndex) {
-                    $(row).find(
-                        'td:eq(0), td:eq(1), td:eq(2), td:eq(3), td:eq(4), td:eq(5), td:eq(6)'
-                    ).css('color', '#232323');
+                    $(row).find('td:eq(0), td:eq(1), td:eq(2), td:eq(3), td:eq(4), td:eq(5), td:eq(6)')
+                        .css('color', '#232323');
                 }
             });
 

@@ -27,7 +27,7 @@ class MasterProjekViewController extends Controller
             ->addIndexColumn()
             ->addColumn('action', function ($master_projeks) {
                 return '
-            <div style="display: flex; margin-left:29px;" class="text-center">
+            <div style="display: flex;" class="text-center">
                 <a href="' . route('master-projek.edit', $master_projeks->id) . '"
                     class="fas fa-pen btn btn-sm tooltip-container"
                     style="color:#4FD1C5; font-size:20px;">

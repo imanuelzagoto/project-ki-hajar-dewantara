@@ -1,26 +1,54 @@
 @extends('layouts.master')
 
-@section('pages_pd')
-    Pages
-@endsection
-
-@section('slash_pd')
-    /
-@endsection
-
-@section('PD')
-    Pengajuan Dana
-@endsection
-
-@section('titlePD')
-    Pengajuan Dana
-@endsection
-
 @section('content')
+    <div class="main-dashboard mt--3">
+        <nav aria-label="breadcrumb">
+            <div class="breadcrumb mt-2 d-flex justify-content-between">
+                <div class="d-lg-none">
+                    <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
+                        data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <i class="icon-menu"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="d-none d-lg-block d-sm-none breadcrumb-pengajuan-dana ml-4">
+                    <span class="span_pd mr-2 fs-f5">
+                        Pages
+                    </span>
+                    <span class="slashPD mr-2">
+                        /
+                    </span>
+                    <span class="breadcum-pd">
+                        Pengajuan Dana
+                    </span>
+                </div>
+                <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
+                    style="float: left; margin-right:3px; background-color:#F1F4FA;">
+                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #718096;">
+                        Logout
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                    <span class="tooltip-text">Logout</span>
+                </button>
+            </div>
+        </nav>
+        <div class="col-md-12">
+            <h2 class="text-pd font-weight-bold display-6">
+                Pengajuan Dana
+            </h2>
+        </div>
+    </div>
+    <!-- End Navbar -->
+    <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+        @csrf
+    </form>
+
     <div class="container-fluid">
         <div class="row" style="margin-top: 27.9px;">
             <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: -12.5px;">
-                <form id="dataTableSearchForm" action="#" method="get" style="height: 44px; width: 255px;" class="mr-2">
+                <form id="dataTableSearchForm" action="#" method="get" style="height: 44px; width: 255px;"
+                    class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
                         <input type="text" id="dataTableSearchInput" name="search"

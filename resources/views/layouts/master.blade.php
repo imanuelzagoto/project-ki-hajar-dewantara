@@ -43,7 +43,7 @@
         <!-- Sidebar -->
         <!-- End Sidebar -->
         <div class="main-panel">
-            @include('includes.header')
+            {{-- @include('includes.header') --}}
             <div class="content">
                 @yield('content')
             </div>

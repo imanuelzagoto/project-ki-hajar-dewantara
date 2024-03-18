@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nama_project');
             $table->string('kode_project');
-            $table->dateTime('tenggat')->nullable();
+            $table->date('tenggat')->nullable();
             $table->date('mulai')->nullable();
             $table->date('akhir')->nullable();
             $table->timestamps();

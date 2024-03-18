@@ -21,15 +21,4 @@ class MasterProjek extends Model
     ];
 
     protected $dates = ['tenggat', 'mulai', 'akhir'];
-
-    /**
-     * Mutator for tenggat attribute.
-     *
-     * @param  string  $value
-     * @return void
-     */
-    public function setTenggatAttribute($value)
-    {
-        $this->attributes['tenggat'] = Carbon::createFromFormat('H:i d-m-Y', $value)->format('Y-m-d H:i:s');
-    }
 }
