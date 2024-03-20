@@ -8,8 +8,10 @@
                     <form action="{{ route('login') }}" method="post" class="theme-form login-form">
                         <h4 class="signin-heading">Sign In</h4>
                         <h6 class="welcome-message">Enter your email and password to sign in!</h6>
-                        <hr class="separator-left">
-                        <hr class="separator-right">
+                        <div class="garis-horizontal">
+                            <div class="bagian"></div>
+                            <div class="bagian"></div>
+                        </div>
                         @csrf
                         <div class="form-group custom-input">
                             <label class="email-address">Email*</label>
@@ -32,28 +34,35 @@
                     </form>
 
                 </div>
-                <div class="col-md-12 text-center">
-                    <p class="copyright">© 2022 Ki Hadjar Dewantara</p>
+                <div class="text-footer-login">
+                    <div class="col-md-12 text-center">
+                        <p class="copyright">© 2022 Ki Hadjar Dewantara</p>
+                    </div>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block position-relative">
-                <img class="position-absolute start-50 translate-middle codew-png" src="sets/images/login/codew.png"
-                    alt="tempimage">
-                <div class="position-absolute start-50 translate-middle text-white textimage">
-                    Ki Hadjar Dewantara
+                <div class="codew-image">
+                    <img class="position-absolute start-50 translate-middle codew-png" src="sets/images/login/codew.png"
+                        alt="tempimage">
                 </div>
-                <div class="position-absolute start-50 translate-middle rectangle"></div>
-
-                <div class="position-absolute start-50 translate-middle text-center text-white teks-rectangle">
-                    An official website for INTEK company
+                <div class="text-center">
+                    <div class="position-absolute start-50 translate-middle text-white dewantara-teks">
+                        Ki Hadjar Dewantara
+                    </div>
                 </div>
-                <div class="position-absolute start-50 translate-middle text-center text-white kihadjar-teks">
-                    kihadjar.com
+                <div class="rectangle-bordered">
+                    <div class="position-absolute start-50 translate-middle rectangle">
+                        <div class="intek-company">
+                            An official website for INTEK company
+                        </div>
+                        <div class="kihajar-com">
+                            kihadjar.com
+                        </div>
+                    </div>
                 </div>
                 <img class="bg-img-cover bg-center img-fluid" src="{{ 'sets/images/login/templogin.jpg' }}"
                     alt="looginpage">
             </div>
-
         </div>
     </div>
 @endsection

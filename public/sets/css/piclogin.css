@@ -2,12 +2,12 @@
 
 .codew-png {
     margin-top: 290px;
-    width: 208.79px; 
+    width: 211.79px;
     height: 274.98px;
-    padding-left: 22px;
+    padding-left: 1px;
 }
 
-.textimage {
+.dewantara-teks {
     font-size: 48.95px;
     font-weight: 700;
     font-family: 'DM Sans', sans-serif;
@@ -15,7 +15,7 @@
     letter-spacing: -2%;
     line-height: 48.95px;
     white-space: nowrap;
-    padding-left: 100px;
+    padding-left: 71px;
     /* margin-left: 32px; */
 }
 
@@ -26,24 +26,25 @@
     border: 2.2px solid #FFFFFF;
     background-color: transparent;
     margin-top: 628px;
+    text-align: center;
 }
 
-.teks-rectangle {
-    font-family: Helvetica; 
-    font-weight: 400; 
-    font-size: 17.58px; 
-    line-height: 17.58px; 
+.intek-company {
+    text-align: center;
     color: #FFFFFF;
-    margin-top: 600px;
+    line-height: 80.58px;
+    font-size: 17.58px;
+    font-family: Helvetica, sans-serif;
+    font-weight: 400;
 }
 
-.kihadjar-teks {
-    font-family: Helvetica; 
-    font-weight: 400; 
-    font-size: 29.3px; 
-    line-height: 45.42px; 
-    color: #FFFFFF; 
-    margin-top: 80%;
+.kihajar-com {
+    line-height: 5px;
+    margin-left: -0.4%;
+    font-family: Helvetica, sans-serif;
+    color: #FFFFFF;
+    font-weight: 400;
+    font-size: 29.3px;
 }
 
 /* heading sign in */
@@ -68,33 +69,20 @@
     margin-bottom: 40px;
 }
 
-
-/* .separator-left {
-    position: absolute;
-    left: 24.8%;
-    width: 21%; /* Mempertahankan lebar pada 21% */
-    /* border: none;
-    border-top: 1px solid #E0E5F2;
-    margin-top: -1px;
-} */ 
-
-.separator-left {
-    position: absolute;
-    left: 24.8%;
-    width: 21%; 
-    border: none;
-    border-top: 1px solid #E0E5F2;
-    margin-top: -1px;
+.garis-horizontal {
+    display: flex;
+    /* Menggunakan flexbox */
+    justify-content: space-between;
+    align-items: center;
 }
 
-.separator-right {
-    position: absolute;
-    right: 24.8%;
-    width: 23%; 
-    border: none;
-    border-top: 1px solid #E0E5F2;
-    margin-top: -1px;
-    margin-right: 2px;
+.bagian {
+    width: 48%;
+    /* Lebar setiap bagian */
+    height: 1px;
+    /* Ketebalan garis */
+    background-color: #E0E5F2;
+    /* Warna garis */
 }
 
 /* Menambahkan media query untuk menyesuaikan tata letak pada layar yang lebih kecil */
@@ -150,12 +138,12 @@
 
 .custom-input .form-control:focus {
     border-color: #4FD1C5;
-    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25); 
+    box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25);
 }
 
 /* kolom input password */
 .custom-password-input {
-    width: 391px; 
+    width: 391px;
     height: 50px;
     margin-bottom: 20px;
 }
@@ -170,7 +158,7 @@
 
 
 .custom-password-input .form-control:focus {
-    border-color: #4FD1C5; 
+    border-color: #4FD1C5;
     box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25);
 }
 
@@ -186,16 +174,16 @@ input[type=password]:focus {
     position: absolute;
     bottom: 0;
     width: 100%;
-    text-align: left; 
-    padding-left: 180px; 
+    text-align: left;
+    padding-left: 180px;
     left: 0;
     color: #A3AED0;
 }
 
 @media (max-width: 768px) {
     .copyright {
-        text-align: center; 
-        left: 0; 
+        text-align: center;
+        left: 0;
         padding-left: 0;
     }
 }
@@ -224,6 +212,3 @@ input[type=password]:focus {
     height: 15.5px;
     width: 25.33px;
 }
-
-
-

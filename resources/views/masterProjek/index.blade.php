@@ -43,8 +43,8 @@
         @csrf
     </form>
     <div class="container-fluid">
-        <div class="row" style="margin-top: 36px;">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: -12.5px;">
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-bottom: 10px;">
                 <form id="dataTableSearchForm" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
@@ -54,7 +54,7 @@
                     </div>
                 </form>
                 <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters"
-                    style="border-radius: 17px; height:42px; font-size:17.18px; font-family: Helvetica, sans-serif; color:#2D3748; border-color:#4FD1C5; background-color: #FFFFFF; font-weight:700;">
+                    style="font-size: 17.18px;">
                     <i class="fas fa-sliders-h"></i> Filters
                 </button>
             </div>
@@ -74,6 +74,17 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="table-responsive">
+                            <div class="d-flex align-items-center mb-3 d-flex-center">
+                                <select id="entriesPerPage" class="form-control form-control-sm mr-2"
+                                    style="width: 70px; border-color:#4FD1C5;">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                <span class="labelentris" style="color: #A0AEC0;">entries per
+                                    page</span>
+                            </div>
                             <table class="table display-6 mb-6 table-responsive tablePD" style="width: 100%;">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height: 19.36px;">

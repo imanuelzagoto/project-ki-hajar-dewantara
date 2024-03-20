@@ -44,8 +44,8 @@
     </form>
 
     <div class="container-fluid">
-        <div class="row" style="margin-top: 27.9px;">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: -12.5px;">
+        <div class="row">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-bottom: 10px;">
                 <form id="dataTableSearchForm" action="#" method="get" style="height: 44px; width: 255px;"
                     class="mr-2">
                     <div class="col mr-1 border-container">
@@ -55,8 +55,7 @@
                             aria-controls="dataTable">
                     </div>
                 </form>
-                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters"
-                    style="border-radius: 17px; height:42px; font-size:17.18px; font-family: Helvetica, sans-serif; color:#2D3748; border-color:#4FD1C5; background-color: #FFFFFF; font-weight:700;">
+                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters">
                     <i class="fas fa-sliders-h"></i> Filters
                 </button>
             </div>
