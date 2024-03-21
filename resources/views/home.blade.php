@@ -140,7 +140,9 @@
                         <div class="card">
                             <div class="card-body ml-4">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" id="TablePengajuanDana">
+                                    <table
+                                        class="element-scrollbar table-responsive table table-striped table-bordered table-hover"
+                                        id="TablePengajuanDana">
                                         <thead>
                                             <tr class="tr-table">
                                                 <th class="text-center">No.Doc</th>
@@ -218,8 +220,9 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" id="TablePengajuanSPK"
-                                        style="width:100%">
+                                    <table
+                                        class="element-scrollbar table-responsive table table-striped table-bordered table-hover"
+                                        id="TablePengajuanSPK" style="width:100%">
                                         <thead>
                                             <tr class="tr-table">
                                                 <th class="text-center" nowrap>Nama Project</th>

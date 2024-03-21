@@ -88,7 +88,7 @@
                                 <span class="labelentris" style="color: #A0AEC0;">entries per
                                     page</span>
                             </div>
-                            <table class="custom-scroll-bar table display-6 mb-6 table-responsive tablePD"
+                            <table class="element-scrollbar table display-6 mb-6 table-responsive tablePD"
                                 style="width:100%;">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">

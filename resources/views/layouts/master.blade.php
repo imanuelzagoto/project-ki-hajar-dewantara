@@ -10,22 +10,6 @@
     <link rel="stylesheet" href="{{ asset('/partas/css/kiha.css') }}">
     <link rel="stylesheet" href="{{ asset('/partas/css/fonts.min.css') }}">
     {{-- <script src="{{ asset('/partas/js/plugin/webfont/webfont.min.js') }}"></script> --}}
-    {{-- <script>
-        WebFont.load({
-            google: {
-                "families": ["Lato:300,400,700,900"]
-            },
-            custom: {
-                "families": ["Flaticon", "Font Awesome 5 Solid", "Font Awesome 5 Regular", "Font Awesome 5 Brands",
-                    "simple-line-icons"
-                ],
-                urls: ['partas/css/fonts.min.css']
-            },
-            active: function() {
-                sessionStorage.fonts = true;
-            }
-        });
-    </script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script>
         WebFont.load({
@@ -55,7 +39,7 @@
 
 {{-- class="master_root custom-scroll-bar" --}}
 
-<body class="master_root custom-scroll-bar" style="background-color: #F1F4FA">
+<body class="element-scrollbar" style="background-color: #F1F4FA">
     <div class="">
         @include('includes.sidebar')
         <!--header -->
@@ -63,9 +47,9 @@
         <!-- end header -->
         <!-- Sidebar -->
         <!-- End Sidebar -->
-        <div class="main-panel ">
+        <div class="main-panel">
             {{-- @include('includes.header') --}}
-            <div class="content ">
+            <div class="content">
                 @yield('content')
             </div>
             <!--footer -->

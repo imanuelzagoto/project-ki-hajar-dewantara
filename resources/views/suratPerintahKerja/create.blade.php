@@ -39,9 +39,9 @@
         @csrf
     </form>
     <div class="container-fluid">
-        <div class="" style="margin-top: 36px;">
+        <div class="element-scrollbar" style="margin-top: 36px;">
             <div class="">
-                <div class="card">
+                <div class="card card-with-scrollbar">
                     <div class="card-body">
                         <div class="row pr-4">
                             <div class="col-12 col-lg-6 col-md-12 col-sm-12 d-flex">
