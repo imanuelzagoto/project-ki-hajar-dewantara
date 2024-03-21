@@ -5,6 +5,7 @@
     width: 211.79px;
     height: 274.98px;
     padding-left: 1px;
+    margin-left: 9px;
 }
 
 .dewantara-teks {
@@ -27,6 +28,74 @@
     background-color: transparent;
     margin-top: 628px;
     text-align: center;
+}
+
+@media screen and (max-width: 768.89px) {
+    .rectangle {
+        width: 370px;
+    }
+
+    .dewantara-teks {
+        font-size: 35px;
+        padding-right: 30px;
+    }
+
+    .codew-png {
+        width: 165px;
+        height: 230px;
+    }
+
+    .copyright {
+        padding-right: 50px;
+        font-size: 12px;
+
+    }
+}
+
+@media screen and (max-height: 651.11px) {
+    .dewantara-teks {
+        font-size: 30px;
+        padding-right: 30px;
+        margin-top: 350px;
+    }
+
+    .codew-png {
+        width: 150px;
+        height: 150px;
+        margin-top: 250px;
+    }
+
+    .copyright {
+        padding-right: 50px;
+        font-size: 12px;
+
+    }
+
+    .rectangle {
+        margin-top: 450px;
+        width: 360px;
+    }
+}
+
+@media screen and (max-width: 934.44px) {
+    .rectangle {
+        width: 370px;
+    }
+
+    .dewantara-teks {
+        font-size: 35px;
+        padding-right: 30px;
+    }
+
+    .codew-png {
+        width: 165px;
+        height: 230px;
+    }
+
+    .copyright {
+        padding-right: 70px;
+        font-size: 12px;
+    }
 }
 
 .intek-company {
@@ -180,13 +249,13 @@ input[type=password]:focus {
     color: #A3AED0;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .copyright {
         text-align: center;
         left: 0;
         padding-left: 0;
     }
-}
+} */
 
 /* Efek hover untuk tombol Sign In */
 .btn.signin-button {

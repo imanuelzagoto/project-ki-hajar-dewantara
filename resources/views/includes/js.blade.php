@@ -43,6 +43,19 @@
 <script src="{{ asset('sets/js/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('sets/js/script.js') }}"></script>
 
+{{-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const body = document.querySelector('body');
+        body.addEventListener('mousemove', function() {
+            body.classList.add('show-scrollbar');
+            clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                body.classList.remove('show-scrollbar');
+            }, 2000); // Hide scrollbar after 2 seconds of inactivity
+        });
+    });
+</script> --}}
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

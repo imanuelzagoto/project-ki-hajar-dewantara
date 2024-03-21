@@ -46,7 +46,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-bottom: 10%;">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 31px;">
                 <form id="dataTableSearchForm" action="#" method="get" style="height: 44px; width: 255px;"
                     class="mr-2">
                     <div class="col mr-1 border-container">
@@ -63,7 +63,7 @@
             </div>
 
             <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
-                <button class="btn btn-perintah mb-3" style="border-radius: 7px;"
+                <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
                     onclick="window.location.href='{{ route('pengajuanDana.create') }}'">
                     <span class="btn-label">
                         <i class="fa fa-plus"></i>
@@ -74,7 +74,7 @@
         </div>
         <div class="row" style="margin-top: 3px;">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="margin-top: 10px;">
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="d-flex align-items-center mb-3 d-flex-center">
@@ -88,7 +88,8 @@
                                 <span class="labelentris" style="color: #A0AEC0;">entries per
                                     page</span>
                             </div>
-                            <table class="table display-6 mb-6 table-responsive tablePD" style="width:100%;">
+                            <table class="custom-scroll-bar table display-6 mb-6 table-responsive tablePD"
+                                style="width:100%;">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                         <th class="text-center" nowrap>No</th>

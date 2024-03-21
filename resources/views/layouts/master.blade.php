@@ -44,6 +44,7 @@
         });
     </script>
 
+
     <link rel="stylesheet" href="{{ asset('/partas/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/partas/css/atlantis.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/partas/css/demo.css') }}">
@@ -52,17 +53,19 @@
     @include('includes.js')
 </head>
 
-<body style="background-color: #F1F4FA">
-    <div class="wrapper">
+{{-- class="master_root custom-scroll-bar" --}}
+
+<body class="master_root custom-scroll-bar" style="background-color: #F1F4FA">
+    <div class="">
         @include('includes.sidebar')
         <!--header -->
 
         <!-- end header -->
         <!-- Sidebar -->
         <!-- End Sidebar -->
-        <div class="main-panel">
+        <div class="main-panel ">
             {{-- @include('includes.header') --}}
-            <div class="content">
+            <div class="content ">
                 @yield('content')
             </div>
             <!--footer -->

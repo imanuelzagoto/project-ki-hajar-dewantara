@@ -31,7 +31,7 @@
         </nav>
         <div class="col-md-12">
             <h2 class="text-mp font-weight-bold display-6">
-                Pengajuan Dana
+                Form Pengisian Pengajuan Dana
             </h2>
         </div>
     </div>
@@ -43,85 +43,129 @@
             <div class="">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row pr-4">
-                            <div class="col-12 col-lg-6 col-md-12 col-sm-12 d-flex">
-                                <span class="font-weight-bold text-lg pr-4 pt-form-create">Project</span>
-                                <div class="d-block w-100">
-                                    <div class="row py-2">
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Kode Project</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Nama Project</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">User</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">Main Contractor</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">Project Manager</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">PIC</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">Penerima</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Tanggal</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Prioritas</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Waktu Penyelesaian</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                    </div>
+                        <div class="row pr-3 pt-3">
+                            <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
+                                    <span class="head-text text-center">Head</span>
+                                    <span class="detail-text">Pengaju</span>
                                 </div>
-                            </div>
-                            <div class="col-12 col-lg-6 col-md-12 col-sm-12 d-flex">
-                                <span class="font-weight-bold text-lg pr-4 pt-form-create">Detail</span>
                                 <div class="d-block w-100">
                                     <div class="row py-2">
-                                        <div class="pt-2 col-12">
-                                            <span class="text-sm">Jenis Pekerjaan</span>
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
                                             <input class="form-control bg-light w-100" type="text">
                                         </div>
-                                        <div class="pt-2 col-12">
-                                            <span class="text-sm">Uraian Pekerjaan</span>
-                                            <textarea class="form-control bg-light w-100" rows="3" style="resize: none;"></textarea>
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
+                                            <input class="form-control bg-light w-100" type="text">
                                         </div>
-                                        <div class="pt-2 col-12">
-                                            <div class="text-sm text-center w-100 mb-2">File Pendukung</div>
-                                            <label for="images" class="drop-container" id="dropcontainer">
-                                                <span class="drop-title">Drop files here</span>
-                                                <input type="file" id="images" accept="image/*" required>
-                                            </label>
+                                        <div class="pr-4 py-2 col-12">
+                                            <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
+                                            <input class="form-control bg-light w-100" type="text">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <div class="d-flex justify-content-center p-4 rounded-pill">
-                                    <button class="btn btn-save" style="border-radius: 25px; font-size: 14px;">
-                                        SAVE
-                                    </button>
+                        <div class="row pr-3 pt-3">
+                            <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
+                                <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
+                                    <span class="head-text text-center">Detail</span>
+                                    <span class="detail-text">Pengaju</span>
                                 </div>
+                                <div class="d-block w-100">
+                                    <div class="row py-2">
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold text-form-detail">Tujuan</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold text-form-detail">Lokasi Pengajuan</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-4">
+                                            <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-4">
+                                            <span class="text-sm font-weight-bold text-form-detail">Total Dana</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-4">
+                                            <span class="text-sm font-weight-bold text-form-detail">Metode Penerimaan</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-12">
+                                            <span class="text-sm font-weight-bold text-form-detail">Uraian Pekerjaan</span>
+                                            <textarea class="form-control bg-light w-100" rows="3" style="resize: none;"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pr-3 pt-3">
+                            <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
+                                    <span class="head-text text-center">Item</span>
+                                    <span class="detail-text">Pengaju</span>
+                                </div>
+                                <div class="d-block w-100">
+                                    <div class="row py-2">
+                                        <div class="pr-4 py-2 col-12">
+                                            <button class="btn btn-sm button-tambah font-weight-bold">
+                                                <span class="btn-label">
+                                                    <i class="icon-plus"></i>
+                                                    Tambah
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <div class="pr-4 py-2 col-3">
+                                            <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-3">
+                                            <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-3">
+                                            <span class="text-sm font-weight-bold text-form-detail">Harga</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-3">
+                                            <span class="text-sm font-weight-bold text-form-detail">Total</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pr-3 pt-3">
+                            <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
+                                    <span class="head-text text-center">Pengaju</span>
+                                    <span class="detail-text">Pengaju</span>
+                                </div>
+                                <div class="d-block w-100">
+                                    <div class="row py-2">
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold text-form-detail">Nama</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-center p-4 rounded-pill">
+                                <button class="btn btn-save" style="border-radius: 25px; font-size: 14px;">
+                                    SAVE
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -129,7 +173,7 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         const dropContainer = document.getElementById("dropcontainer")
         const fileInput = document.getElementById("images")
 
@@ -151,5 +195,5 @@
             dropContainer.classList.remove("drag-active")
             fileInput.files = e.dataTransfer.files
         })
-    </script>
+    </script> --}}
 @endsection

@@ -31,98 +31,56 @@
         </nav>
         <div class="col-md-12">
             <h2 class="text-mp font-weight-bold display-6">
-                Suarat Perintah Kerja
+                Form Pengisian Master Projek
             </h2>
         </div>
     </div>
     <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
         @csrf
     </form>
-
     <div class="container-fluid">
         <div class="" style="margin-top: 36px;">
             <div class="">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row pr-4">
-                            <div class="col-12 col-lg-6 col-md-12 col-sm-12 d-flex">
-                                <span class="font-weight-bold text-lg pr-4 pt-form-create">Project</span>
-                                <div class="d-block w-100">
-                                    <div class="row py-2">
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Kode Project</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Nama Project</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">User</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">Main Contractor</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">Project Manager</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">PIC</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-6">
-                                            <span class="text-sm">Penerima</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Tanggal</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Prioritas</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="form-group col-12 col-md-4">
-                                            <span class="text-sm">Waktu Penyelesaian</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                    </div>
+                        <div class="row pr-3 pt-3">
+                            <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                <div class="font-weight-bold text-lg padding-project pt-form-create">
+                                    <span class="">Project</span>
                                 </div>
-                            </div>
-                            <div class="col-12 col-lg-6 col-md-12 col-sm-12 d-flex">
-                                <span class="font-weight-bold text-lg pr-4 pt-form-create">Detail</span>
                                 <div class="d-block w-100">
                                     <div class="row py-2">
-                                        <div class="pt-2 col-12">
-                                            <span class="text-sm">Jenis Pekerjaan</span>
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold">Nama Project</span>
                                             <input class="form-control bg-light w-100" type="text">
                                         </div>
-                                        <div class="pt-2 col-12">
-                                            <span class="text-sm">Uraian Pekerjaan</span>
-                                            <textarea class="form-control bg-light w-100" rows="3" style="resize: none;"></textarea>
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold">Kode Project</span>
+                                            <input class="form-control bg-light w-100" type="text">
                                         </div>
-                                        <div class="pt-2 col-12">
-                                            <div class="text-sm text-center w-100 mb-2">File Pendukung</div>
-                                            <label for="images" class="drop-container" id="dropcontainer">
-                                                <span class="drop-title">Drop files here</span>
-                                                <input type="file" id="images" accept="image/*" required>
-                                            </label>
+                                        <div class="pr-4 py-2 col-4">
+                                            <span class="text-sm font-weight-bold">Tenggat</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-4">
+                                            <span class="text-sm font-weight-bold">Mulai</span>
+                                            <input class="form-control bg-light w-100" type="text">
+                                        </div>
+                                        <div class="pr-4 py-2 col-4">
+                                            <span class="text-sm font-weight-bold">Akhir / Selesai</span>
+                                            <input class="form-control bg-light w-100" type="text">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="row justify-content-center">
-                            <div class="col-md-6">
-                                <div class="d-flex justify-content-center p-4 rounded-pill">
-                                    <button class="btn btn-save" style="border-radius: 25px; font-size: 14px;">
-                                        SAVE
-                                    </button>
-                                </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-center p-4 rounded-pill">
+                                <button class="btn btn-save" style="border-radius: 25px; font-size: 14px;">
+                                    SAVE
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -130,32 +88,4 @@
             </div>
         </div>
     </div>
-    <script>
-        const dropContainer = document.getElementById("dropcontainer")
-        const fileInput = document.getElementById("images")
-
-        dropContainer.addEventListener("dragover", (e) => {
-            // prevent default to allow drop
-            e.preventDefault()
-        }, false)
-
-        dropContainer.addEventListener("dragenter", () => {
-            dropContainer.classList.add("drag-active")
-        })
-
-        dropContainer.addEventListener("dragleave", () => {
-            dropContainer.classList.remove("drag-active")
-        })
-
-        dropContainer.addEventListener("drop", (e) => {
-            e.preventDefault()
-            dropContainer.classList.remove("drag-active")
-            fileInput.files = e.dataTransfer.files
-        })
-    </script>
 @endsection
-
-{{-- <div class="card-action">
-    <button class="btn btn-success">Submit</button>
-    <button class="btn btn-danger">Cancel</button>
-</div> --}}

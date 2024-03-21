@@ -45,7 +45,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-bottom: 10px;">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 31px;">
                 <form id="dataTableSearchForm" action="#" method="get" style="height: 44px; width: 255px;"
                     class="mr-2">
                     <div class="col mr-1 border-container">
@@ -55,13 +55,13 @@
                             aria-controls="dataTable">
                     </div>
                 </form>
-                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters">
+                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters"
+                    style="font-size: 17.18px;">
                     <i class="fas fa-sliders-h"></i> Filters
                 </button>
             </div>
-
             <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
-                <button class="btn btn-perintah mb-4" style="border-radius: 7px;"
+                <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
                     onclick="window.location.href='{{ route('suratPerintahKerja.create') }}'">
                     <span class="btn-label">
                         <i class="fa fa-plus"></i>
@@ -72,7 +72,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="margin-top: 14px;">
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="d-flex align-items-center mb-3 d-flex-center">
@@ -86,7 +86,8 @@
                                 <span class="labelentris" style="color: #A0AEC0;">entries per
                                     page</span>
                             </div>
-                            <table class="table display-6 mb-6 table-responsive" style="width:100%;">
+                            <table class="content custom-scroll-bar-horizontal table display-6 mb-6 table-responsive"
+                                style="width:100%;">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                         <th class="text-center" nowrap>No</th>

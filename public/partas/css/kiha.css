@@ -1,11 +1,41 @@
 /* public/partas/css/kiha.css */
 .text-sm {
-    font-size: 9pt;
+    font-size: 12px;
+    font-family: Helvetica, sans-serif;
+}
+
+.text-md {
+    font-size: 15px;
+    color: #2D3748;
+    font-family: Helvetica, sans-serif;
 }
 
 .text-lg {
-    font-size: 12pt;
+    font-size: 18px;
+    color: #2D3748;
+    font-family: Helvetica, sans-serif;
 }
+
+.padding-hormat {
+    padding-left: 15px;
+    padding-right: 21px;
+}
+
+.padding-detail {
+    padding-left: 15px;
+    padding-right: 28px;
+}
+
+.padding-project {
+    padding-left: 15px;
+    padding-right: 28px;
+}
+
+.padding-head {
+    padding-left: 15px;
+    padding-right: 20px;
+}
+
 
 .gap-3 {
     gap: 50px;
@@ -13,6 +43,19 @@
 
 .pt-form-create {
     padding-top: 17px;
+}
+
+.pr-teks-pengajuan {
+    padding-top: 17px;
+}
+
+.pt-form-pengajuan {
+    padding-top: 17px;
+}
+
+.pt-form-pengajuan::after {
+    content: "Detail";
+    visibility: hidden;
 }
 
 .text-dashboard {
@@ -26,12 +69,62 @@
     line-height: 19.6px;
 }
 
+.text-form-detail {
+    color: #2D3748;
+}
+
+@media screen and (max-width: 500px) {
+    .text-form-detail {
+        font-size: 8px;
+    }
+
+
+    .detail-text {
+        font-size: 15px;
+    }
+
+    .head-text {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 555.56px) {
+    .text-form-detail {
+        font-size: 8px;
+    }
+
+
+    .detail-text {
+        font-size: 15px;
+    }
+
+    .head-text {
+        font-size: 15px;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .padding-project {
+        padding-left: 15px;
+        padding-right: 23px;
+    }
+
+    .padding-head {
+        padding-left: 15px;
+        padding-right: 21px;
+    }
+
+    .padding-Details {
+        padding-left: 15px;
+        padding-right: 23px;
+    }
+}
+
 @media screen and (max-width: 768px) {
+
     .text-dashboard {
         margin-left: 0;
-        /* Atur margin menjadi 0 saat layar diminimalkan */
         margin-top: 0;
-        /* Atur margin atas menjadi 0 saat layar diminimalkan */
     }
 }
 
@@ -131,6 +224,7 @@
     line-height: 18px;
     color: #A0AEC0;
     margin-left: 1px;
+    font-family: Helvetica, sans-serif;
 
 }
 
@@ -139,6 +233,7 @@
     font-size: 14px;
     line-height: 18px;
     color: #A0AEC0;
+    font-family: Helvetica, sans-serif;
 }
 
 .span_pd {
@@ -146,6 +241,7 @@
     font-size: 14px;
     line-height: 18px;
     color: #A0AEC0;
+    font-family: Helvetica, sans-serif;
 }
 
 .span_spk {
@@ -153,33 +249,40 @@
     font-size: 14px;
     line-height: 18px;
     color: #A0AEC0;
+    font-family: Helvetica, sans-serif;
 }
 
 .slash-home {
     font-size: 15px;
     margin-right: 30px;
+    font-family: Helvetica, sans-serif;
 }
 
 .slashMP {
     font-size: 15px;
     margin-right: 32px;
+    font-family: Helvetica, sans-serif;
 }
 
 .slashPD {
     font-size: 15px;
     margin-right: 30px;
+    font-family: Helvetica, sans-serif;
 }
 
 .slash-spk {
     font-size: 15px;
     margin-right: 30px;
+    font-family: Helvetica, sans-serif;
 }
 
 .breadcum-mp-perintah {
-    font-weight: 400;
+    font-weight: 500;
     font-size: 15px;
     line-height: 18px;
     margin-left: -5.6%;
+    color: #2D3748;
+    font-family: Helvetica, sans-serif;
 }
 
 
@@ -189,6 +292,7 @@
     line-height: 18px;
     color: #2D3748;
     margin-right: 21px;
+    font-family: Helvetica, sans-serif;
 }
 
 .breadcum-mp {
@@ -196,6 +300,7 @@
     font-size: 14px;
     line-height: 18px;
     color: #2D3748;
+    font-family: Helvetica, sans-serif;
 }
 
 .breadcum-pd {
@@ -203,6 +308,7 @@
     font-size: 14px;
     line-height: 18px;
     color: #2D3748;
+    font-family: Helvetica, sans-serif;
 }
 
 .breadcum-spk {
@@ -210,6 +316,7 @@
     font-size: 14px;
     line-height: 18px;
     color: #2D3748;
+    font-family: Helvetica, sans-serif;
 }
 
 
@@ -686,8 +793,146 @@ input[type=file]::file-selector-button:hover {
     max-height: 400px;
 }
 
+.detail-text {
+    visibility: hidden;
+}
 
-/* atur lebar form input
-.custom-width {
-    width: 40%;
+.head-text {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+}
+
+.button-tambah {
+    background-color: #4FD1C5;
+    border-radius: 5.55px;
+    padding: 0 15px;
+    color: #FFFFFF;
+}
+
+.button-tambah .btn-label,
+.button-tambah span {
+    font-size: 12px;
+}
+
+
+
+/* scrolllbar */
+:root {
+    --scrollbar-track-color: #CBD5E0;
+    --scrollbar-color: #4FD1C5;
+    --scrollbar-size: 9px;
+    --scrollbar-minlength: 1.5rem;
+    white-space: nowrap;
+}
+
+
+.custom-scroll-bar::-webkit-scrollbar {
+    height: var(--scrollbar-size);
+    width: var(--scrollbar-size);
+    border-radius: 2rem;
+
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+
+}
+
+.custom-scroll-bar::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color);
+    border-radius: 2rem;
+
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+
+}
+
+.custom-scroll-bar::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 2rem;
+
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+}
+
+.custom-scroll-bar::-webkit-scrollbar-thumb:vertical {
+    min-height: var(--scrollbar-minlength);
+
+}
+
+.custom-scroll-bar::-webkit-scrollbar-thumb:horizontal {
+    min-width: var(--scrollbar-minlength);
+}
+
+
+/* scrolllbar */
+
+/* :root {
+    --scrollbar-track-color: #CBD5E0;
+    --scrollbar-color: #4FD1C5;
+    --scrollbar-size: 9px;
+    --scrollbar-minlength: 1.5rem;
+    white-space: nowrap;
+}
+
+
+.custom-scroll-bar-vertical::-webkit-scrollbar {
+    width: var(--scrollbar-size);
+    border-radius: 2rem;
+}
+
+.custom-scroll-bar-vertical::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color);
+    border-radius: 2rem;
+}
+
+.custom-scroll-bar-vertical::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 2rem;
+}
+
+.custom-scroll-bar-vertical::-webkit-scrollbar-thumb {
+    min-height: var(--scrollbar-minlength);
+}
+
+
+.custom-scroll-bar-horizontal::-webkit-scrollbar {
+    height: var(--scrollbar-size);
+    border-radius: 2rem;
+}
+
+.custom-scroll-bar-horizontal::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color);
+    border-radius: 2rem;
+}
+
+.custom-scroll-bar-horizontal::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-color);
+    border-radius: 2rem;
+}
+
+.custom-scroll-bar-horizontal::-webkit-scrollbar-thumb {
+    min-width: var(--scrollbar-minlength);
+} */
+
+/* Sembunyikan overflow vertikal */
+/* .custom-scroll-bar-horizontal {
+    overflow-x: auto;
+    overflow-y: hidden;
+} */
+
+/* Sembunyikan overflow secara default */
+/* .custom-scroll-bar-vertical {
+    overflow: hidden;
+} */
+
+/* Tampilkan scrollbars saat dihover */
+/* .custom-scroll-bar-vertical:hover,
+.custom-scroll-bar-horizontal:hover {
+    overflow: auto;
 } */

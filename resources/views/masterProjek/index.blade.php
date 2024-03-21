@@ -44,7 +44,7 @@
     </form>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-bottom: 10px;">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 31px;">
                 <form id="dataTableSearchForm" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
@@ -60,7 +60,7 @@
             </div>
 
             <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
-                <button class="btn btn-perintah mb-3" style="border-radius: 7px;"
+                <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
                     onclick="window.location.href='{{ route('master-projek.create') }}'">
                     <span class="btn-label">
                         <i class="fa fa-plus"></i>
@@ -69,9 +69,9 @@
                 </button>
             </div>
         </div>
-        <div class="row" style="margin-top: 3px;">
+        <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card" style="margin-top: 10px;">
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="d-flex align-items-center mb-3 d-flex-center">
@@ -101,7 +101,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
