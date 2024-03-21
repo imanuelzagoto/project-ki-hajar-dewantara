@@ -39,7 +39,7 @@
 
 {{-- class="master_root custom-scroll-bar" --}}
 
-<body class="element-scrollbar" style="background-color: #F1F4FA">
+<body style="background-color: #F1F4FA">
     <div class="">
         @include('includes.sidebar')
         <!--header -->

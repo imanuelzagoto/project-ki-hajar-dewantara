@@ -12,20 +12,25 @@
                         </span>
                     </button>
                 </div>
-                <div class="d-none d-lg-block d-sm-none breadcrumb-spk ml-3">
-                    <span class="span_spk mr-2 fs-f5">
-                        Pages
-                    </span>
-                    <span class="slash-spk mr-2">
-                        /
-                    </span>
-                    <span class="breadcum-spk">
-                        Surat Perintah Kerja
-                    </span>
+                <div class="d-none d-lg-block d-sm-none breadcrumb-item">
+                    <ul class="breadcrumbs">
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
+                                Pages
+                            </a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
+                                style="color: #17a2b8;font-size: 15px; font-weight: 500;">
+                                Surat Perintah Kerja
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
                     style="float: left; margin-right:3px; background-color:#F1F4FA;">
-                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #718096;">
+                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
@@ -35,7 +40,7 @@
         </nav>
         <div class="col-md-12">
             <h2 class="text-spk font-weight-bold display-6">
-                Suarat Perintah Kerja
+                Surat Perintah Kerja
             </h2>
         </div>
     </div>
@@ -86,7 +91,7 @@
                                 <span class="labelentris" style="color: #A0AEC0;">entries per
                                     page</span>
                             </div>
-                            <table class="element-scrollbar table display-6 mb-6 table-responsive" style="width:100%;">
+                            <table class="table display-6 mb-6 table-responsive" style="width:100%;">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                         <th class="text-center" nowrap>No</th>
