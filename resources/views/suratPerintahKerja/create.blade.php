@@ -12,12 +12,27 @@
                         </span>
                     </button>
                 </div>
-                <div class="d-none d-lg-block d-sm-none breadcrumb-tambah-perintah ml-3">
-                    <span class="span_spk mr-2 fs-f5">Pages</span>
-                    <span class="slash-spk mr-2">/</span>
-                    <span class="breadcum-spk" style="color: #A0AEC0;">Surat Perintah Kerja</span>
-                    <span class="slash-spk ml-2">/</span>
-                    <span class="breadcum-mp-perintah">Form Pengisian SPK</span>
+                <div class="d-none d-lg-block d-sm-none breadcrumb-item">
+                    <ul class="breadcrumbs">
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                Pages
+                            </a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                Surat Perintah Kerja
+                            </a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('suratPerintahKerja.create') }}" class="breadcrumbs__link"
+                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
+                                Form Pengisian SPK
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
                     style="float: left; margin-right:3px; background-color:#F1F4FA;">

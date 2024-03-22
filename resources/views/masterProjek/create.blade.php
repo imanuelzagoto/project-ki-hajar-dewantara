@@ -12,16 +12,31 @@
                         </span>
                     </button>
                 </div>
-                <div class="d-none d-lg-block d-sm-none breadcrumb-tambah-perintah ml-3">
-                    <span class="span-mp mr-2 fs-f5">Pages</span>
-                    <span class="slashMP mr-2">/</span>
-                    <span class="breadcum-mp" style="color: #A0AEC0;">Master-projek</span>
-                    <span class="slashMP ml-2">/</span>
-                    <span class="breadcum-mp-perintah">Form Pengisian Master Projek</span>
+                <div class="d-none d-lg-block d-sm-none breadcrumb-item">
+                    <ul class="breadcrumbs">
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('master-projek.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                Pages
+                            </a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('master-projek.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                Master Projek
+                            </a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('master-projek.create') }}" class="breadcrumbs__link"
+                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
+                                Form Pengisian Master Projek
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
                     style="float: left; margin-right:3px; background-color:#F1F4FA;">
-                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #718096;">
+                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>
                     </a>

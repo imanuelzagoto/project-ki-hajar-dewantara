@@ -15,13 +15,13 @@
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
                     <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
-                            <a href="{{ route('dashboard') }}" class="breadcrumbs__link"
+                            <a href="{{ route('home.index') }}" class="breadcrumbs__link"
                                 style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
-                            <a href="{{ route('dashboard') }}" class="breadcrumbs__link"
+                            <a href="{{ route('home.index') }}" class="breadcrumbs__link"
                                 style="color: #17a2b8;font-size: 15px; font-weight: 500;">
                                 Dashboard
                             </a>
@@ -145,9 +145,7 @@
                         <div class="card">
                             <div class="card-body ml-4">
                                 <div class="table-responsive">
-                                    <table
-                                        class="element-scrollbar table-responsive table table-striped table-bordered table-hover"
-                                        id="TablePengajuanDana">
+                                    <table class="table display-6 mb-6 table-responsive" id="TablePengajuanDana">
                                         <thead>
                                             <tr class="tr-table">
                                                 <th class="text-center">No.Doc</th>
@@ -168,13 +166,13 @@
                                         <tbody>
                                             @foreach ($pengajuan_dana_per_day as $pdt)
                                                 <tr class="kolom-td">
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pdt->no_doc }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pdt->revisi }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pdt->nama_pemohon }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
@@ -189,27 +187,34 @@
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ Carbon\Carbon::parse($pdt->jangka_waktu)->format('d-m-Y') }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-right" style="font-weight:400;" nowrap>
                                                         {{ 'Rp. ' . number_format($pdt->dana_yang_dibutuhkan, 0, ',', '.') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->no_rekening }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        <a href="#" class="fas fa-pen btn btn-sm tooltip-container"
+                                                        <a href="{{ route('pengajuan-dana.edit', ['id' => $pdt->id]) }}"
+                                                            class="fas fa-pen btn btn-sm tooltip-container"
                                                             style="color:#4FD1C5; font-size:20px;">
                                                             <span class="tooltip-edit">Edit</span>
                                                         </a>
-                                                        <a href="#" class="fas fa-eye btn btn-sm tooltip-container"
+                                                        <a href="{{ route('pengajuan-dana.show', ['id' => $pdt->id]) }}"
+                                                            class="fas fa-eye btn btn-sm tooltip-container"
                                                             style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
                                                             <span class="tooltip-show">View</span>
                                                         </a>
 
-                                                        <a href="#"
+                                                        <a href=""
                                                             class="fas fa-trash-alt btn btn-sm tooltip-container"
-                                                            style="color:#F31414; font-size:20px;">
+                                                            style="color:#F31414; font-size:20px;"
+                                                            onclick="submitDelete({{ $pdt->id }})">
                                                             <span class="tooltip-delete">Delete</span>
                                                         </a>
+                                                        <form id="delete-form-{{ $pdt->id }}"
+                                                            action="{{ route('pengajuan-dana.delete', $pdt->id) }}"
+                                                            method="get" style="display: none;">
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -225,9 +230,8 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <table
-                                        class="element-scrollbar table-responsive table table-striped table-bordered table-hover"
-                                        id="TablePengajuanSPK" style="width:100%">
+                                    <table class="table display-6 mb-6 table-responsive" id="TablePengajuanSPK"
+                                        style="width:100%">
                                         <thead>
                                             <tr class="tr-table">
                                                 <th class="text-center" nowrap>Nama Project</th>
@@ -244,16 +248,16 @@
                                         <tbody>
                                             @foreach ($pengajuan_spk_per_day as $pst)
                                                 <tr class="kolom-td">
-                                                    <td class="text-center" style="font-weight:400;"nowrap>
+                                                    <td class="text-left" style="font-weight:400;"nowrap>
                                                         {{ $pst->nama_project }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pst->user }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pst->main_contractor }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pst->project_manager }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
@@ -269,20 +273,26 @@
                                                         {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        <a href="#" class="fas fa-pen btn btn-sm tooltip-container"
+                                                        <a href="{{ route('surat-perintah-kerja.edit', ['id' => $pst->id]) }}"
+                                                            class="fas fa-pen btn btn-sm tooltip-container"
                                                             style="color:#4FD1C5; font-size:20px;">
                                                             <span class="tooltip-edit">Edit</span>
                                                         </a>
-                                                        <a href="#" class="fas fa-eye btn btn-sm tooltip-container"
+                                                        <a href="{{ route('surat-perintah-kerja.show', ['id' => $pst->id]) }}"
+                                                            class="fas fa-eye btn btn-sm tooltip-container"
                                                             style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
                                                             <span class="tooltip-show">View</span>
                                                         </a>
-
-                                                        <a href="#"
+                                                        <a href=""
                                                             class="fas fa-trash-alt btn btn-sm tooltip-container"
-                                                            style="color:#F31414; font-size:20px;">
+                                                            style="color:#F31414; font-size:20px;"
+                                                            onclick="submitDelete({{ $pst->id }})">
                                                             <span class="tooltip-delete">Delete</span>
                                                         </a>
+                                                        <form id="delete-form-{{ $pst->id }}"
+                                                            action="{{ route('surat-perintah-kerja.delete', $pst->id) }}"
+                                                            method="get" style="display: none;">
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -300,6 +310,63 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+        function submitDelete(id) {
+            event.preventDefault();
+            Swal.fire({
+                title: "<span style='color: #F31414; font-weight: 700;'>HAPUS?</span>",
+                html: "<span style='color: #2D3748; font-weight: 700;'>Apakah Anda yakin ingin menghapus item ini?</span>",
+                // icon: "warning",
+                iconHtml: "<i class='fas fa-trash-alt' style='color: #FFFFFF; background-color: #F31414; border-radius: 50%; padding: 23.5px; font-size: 47px; width:90px; height:90px;'></i>",
+                showCancelButton: true,
+                confirmButtonColor: "#22B37C",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Lanjutkan",
+                customClass: {
+                    title: 'swal2-title-custom',
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: "<span style='color: #22B37C; font-size:25px; border-radius: 19px; font-weight: 700; font-family: Helvetica;'>SUCCESS</span>",
+                        icon: "success",
+                        showConfirmButton: false,
+                        confirmButtonColor: "#22B37C",
+                    });
+                    setTimeout(() => {
+                        document.getElementById('delete-form-' + id).submit();
+                    }, 2000);
+                }
+            });
+        }
+
+        // function submitPD(id) {
+        //     event.preventDefault();
+        //     Swal.fire({
+        //         title: "<span style='color: #F31414; font-weight: 700;'>HAPUS?</span>",
+        //         html: "<span style='color: #2D3748; font-weight: 700;'>Apakah Anda yakin ingin menghapus item ini?</span>",
+        //         // icon: "warning",
+        //         iconHtml: "<i class='fas fa-trash-alt' style='color: #FFFFFF; background-color: #F31414; border-radius: 50%; padding: 23.5px; font-size: 47px; width:90px; height:90px;'></i>",
+        //         showCancelButton: true,
+        //         confirmButtonColor: "#22B37C",
+        //         cancelButtonColor: "#d33",
+        //         confirmButtonText: "Lanjutkan",
+        //         customClass: {
+        //             title: 'swal2-title-custom',
+        //         },
+        //     }).then((result) => {
+        //         if (result.isConfirmed) {
+        //             Swal.fire({
+        //                 title: "<span style='color: ##22B37C; font-size:25px; font-weight: 700; font-family: Helvetica;'>HAPUS ITEM INI!</span>",
+        //                 icon: "success",
+        //                 showConfirmButton: false,
+        //                 confirmButtonColor: "#22B37C",
+        //             });
+        //             setTimeout(() => {
+        //                 document.getElementById('delete-form-' + id).submit();
+        //             }, 2000);
+        //         }
+        //     });
+        // }
         // JS MENU PENGAJUAN DANA & SPK
         document.addEventListener("DOMContentLoaded", function() {
             // Mendapatkan URL saat ini
@@ -512,7 +579,6 @@
                     });
                 }
             });
-
             // Inisialisasi DataTable Pengajuan SPK
             $('#TablePengajuanSPK').DataTable({
                 "pageLength": getPageLengthFromLocalStorage('TablePengajuanSPK'),

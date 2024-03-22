@@ -43,18 +43,19 @@ class SuratPerintahKerjaViewWebController extends Controller
                     style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
                     <span class="tooltip-show">View</span>
                 </a>
+                
                 <a href="#" 
-                        class="fas fa-trash-alt btn btn-sm tooltip-container" 
-                        style="color:#F31414; font-size:20px;" 
-                        onclick="submitDelete(' . $surat_perintah_kerjas->id . ')">
-                        <span class="tooltip-delete">Delete</span>
-                    </a>
-                    <form id="delete-form-' . $surat_perintah_kerjas->id . '" 
-                        action="' . route('surat_perintah_kerja.destroy', $surat_perintah_kerjas->id) . '" 
-                        method="POST" style="display: none;">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                    </form>
+                    class="fas fa-trash-alt btn btn-sm tooltip-container" 
+                    style="color:#F31414; font-size:20px;" 
+                    onclick="submitDelete(' . $surat_perintah_kerjas->id . ')">
+                    <span class="tooltip-delete">Delete</span>
+                </a>
+                <form id="delete-form-' . $surat_perintah_kerjas->id . '" 
+                    action="' . route('surat_perintah_kerja.destroy', $surat_perintah_kerjas->id) . '" 
+                    method="POST" style="display: none;">
+                    ' . csrf_field() . '
+                    ' . method_field('DELETE') . '
+                </form>
             </div>
         ';
             })

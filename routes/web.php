@@ -24,7 +24,20 @@ Route::get('/', fn () => redirect()->route('login'));
 Route::middleware([
     'auth:sanctum', config('jetstream.auth_session'), 'verified',
 ])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('home.index');
+
+    // Rute untuk pengajuan dana
+    Route::get('/pengajuan-dana/edit/{id}', [HomeController::class, 'editPengajuanDana'])->name('pengajuan-dana.edit');
+    Route::put('/pengajuan-dana/update/{id}', [HomeController::class, 'updatePengajuanDana'])->name('pengajuan-dana.update');
+    Route::get('/pengajuan-dana/show/{id}', [HomeController::class, 'showPengajuanDana'])->name('pengajuan-dana.show');
+    Route::get('/pengajuan-dana/delete/{id}', [HomeController::class, 'destroyPengajuanDana'])->name('pengajuan-dana.delete');
+
+    // Rute untuk Surat Perintah Kerja
+    Route::get('/surat-perintah-kerja/edit/{id}', [HomeController::class, 'editSuratPerintahKerja'])->name('surat-perintah-kerja.edit');
+    Route::put('/surat-perintah-kerja/update/{id}', [HomeController::class, 'updateSuratPerintahKerja'])->name('surat-perintah-kerja.update');
+    Route::get('/surat-perintah-kerja/show/{id}', [HomeController::class, 'showSuratPerintahKerja'])->name('surat-perintah-kerja.show');
+    Route::get('/surat-perintah-kerja/delete/{id}', [HomeController::class, 'destroySuratPerintahKerja'])->name('surat-perintah-kerja.delete');
+
 
     // Routes for Users
     Route::get('/users', [UserController::class, 'index'])->name('users.index');

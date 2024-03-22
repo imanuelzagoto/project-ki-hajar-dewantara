@@ -15,14 +15,14 @@
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
                     <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
-                            <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
+                            <a href="{{ route('master-projek.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
-                            <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #17a2b8   ;font-size: 15px; font-weight: 500;">
+                            <a href="{{ route('master-projek.index') }}" class="breadcrumbs__link"
+                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
                                 Master Projek
                             </a>
                         </li>
@@ -197,6 +197,7 @@
             Swal.fire({
                 title: "<span style='color: #F31414; font-weight: 700;'>HAPUS?</span>",
                 html: "<span style='color: #2D3748; font-weight: 700;'>Apakah Anda yakin ingin menghapus item ini?</span>",
+                // icon: "warning",
                 iconHtml: "<i class='fas fa-trash-alt' style='color: #FFFFFF; background-color: #F31414; border-radius: 50%; padding: 23.5px; font-size: 47px; width:90px; height:90px;'></i>",
                 showCancelButton: true,
                 confirmButtonColor: "#22B37C",
@@ -208,16 +209,14 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
-                        title: "<span style='color: ##22B37C; font-size:25px; font-weight: 700; font-family: Helvetica;'>HAPUS ITEM INI!</span>",
+                        title: "<span style='color: #22B37C; font-size:25px; border-radius: 19px; font-weight: 700; font-family: Helvetica;'>SUCCESS</span>",
                         icon: "success",
-                        showConfirmButton: true,
+                        showConfirmButton: false,
                         confirmButtonColor: "#22B37C",
-                    }).then((success) => {
-                        if (success.isConfirmed) {
-                            // Submit the form for deletion
-                            document.getElementById('delete-form-' + id).submit();
-                        }
                     });
+                    setTimeout(() => {
+                        document.getElementById('delete-form-' + id).submit();
+                    }, 2000);
                 }
             });
         }

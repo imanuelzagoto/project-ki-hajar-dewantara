@@ -16,13 +16,13 @@
                     <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #17a2b8   ;font-size: 15px; font-weight: 500;">
+                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
                                 Pengajuan Dana
                             </a>
                         </li>
@@ -148,20 +148,17 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire({
-                        title: "<span style='color: ##22B37C; font-size:25px; font-weight: 700; font-family: Helvetica;'>HAPUS ITEM INI!</span>",
+                        title: "<span style='color: #22B37C; font-size:25px; border-radius: 19px; font-weight: 700; font-family: Helvetica;'>SUCCESS</span>",
                         icon: "success",
-                        showConfirmButton: true,
+                        showConfirmButton: false,
                         confirmButtonColor: "#22B37C",
-                    }).then((success) => {
-                        if (success.isConfirmed) {
-                            // Submit the form for deletion
-                            document.getElementById('delete-form-' + id).submit();
-                        }
                     });
+                    setTimeout(() => {
+                        document.getElementById('delete-form-' + id).submit();
+                    }, 2000);
                 }
             });
         }
-
         // Function to get page length from localStorage
         function getPageLengthFromLocalStorage(tableId) {
             var storedLength = localStorage.getItem(tableId + '_pageLength');

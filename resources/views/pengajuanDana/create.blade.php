@@ -12,16 +12,31 @@
                         </span>
                     </button>
                 </div>
-                <div class="d-none d-lg-block d-sm-none breadcrumb-tambah-perintah ml-3">
-                    <span class="span_pd mr-2 fs-f5">Pages</span>
-                    <span class="slashPD mr-2">/</span>
-                    <span class="breadcum-pd" style="color: #A0AEC0;">Pengajuan Dana</span>
-                    <span class="slashPD ml-2">/</span>
-                    <span class="breadcum-mp-perintah">Form Pengisian Pengajuan Dana</span>
+                <div class="d-none d-lg-block d-sm-none breadcrumb-item">
+                    <ul class="breadcrumbs">
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                Pages
+                            </a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
+                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                Pengajuan Dana
+                            </a>
+                        </li>
+                        <li class="breadcrumbs__item">
+                            <a href="{{ route('pengajuanDana.create') }}" class="breadcrumbs__link"
+                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
+                                Form Pengisian Pengajuan Dana
+                            </a>
+                        </li>
+                    </ul>
                 </div>
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
                     style="float: left; margin-right:3px; background-color:#F1F4FA;">
-                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #718096;">
+                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
@@ -125,7 +140,11 @@
                                         </div>
                                         <div class="pr-4 py-2 col-3">
                                             <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                            <input class="form-control bg-light w-100" type="text">
+                                            <select class="form-control bg-light w-100">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                            </select>
                                         </div>
                                         <div class="pr-4 py-2 col-3">
                                             <span class="text-sm font-weight-bold text-form-detail">Harga</span>
