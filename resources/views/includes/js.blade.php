@@ -30,31 +30,53 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-
-<!-- Atlantis DEMO methods, don't include it in your project! -->
-{{-- <script src="{{ asset('partas/js/setting-demo.js') }}"></script> --}}
-{{-- <script src="{{ asset('sets/js/jam.js') }}"></script> --}}
-{{-- <script src="{{ asset('partas/js/demo.js') }}"></script> --}}
+{{-- sets/public --}}
+<script src="{{ asset('sets/js/jam.js') }}"></script>
 <script src="{{ asset('sets/js/icons/feather-icon/feather.min.js') }}"></script>
 <script src="{{ asset('sets/js/icons/feather-icon/feather-icon.js') }}"></script>
-{{-- <script src="{{ asset('sets/js/sidebar-menu.js') }}"></script> --}}
 <script src="{{ asset('sets/js/config.js') }}"></script>
 <script src="{{ asset('sets/js/bootstrap/popper.min.js') }}"></script>
 <script src="{{ asset('sets/js/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('sets/js/script.js') }}"></script>
 
-{{-- <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const body = document.querySelector('body');
-        body.addEventListener('mousemove', function() {
-            body.classList.add('show-scrollbar');
-            clearTimeout(this.timer);
-            this.timer = setTimeout(() => {
-                body.classList.remove('show-scrollbar');
-            }, 2000); // Hide scrollbar after 2 seconds of inactivity
-        });
-    });
-</script> --}}
+<script>
+    // Update the clock every second
+    setInterval(updateClock, 1000);
+
+    function updateClock() {
+        var now = new Date();
+        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+            'November', 'Desember'
+        ];
+
+        // Set timezone to Asia/Jakarta
+        var options = {
+            timeZone: 'Asia/Jakarta',
+            weekday: 'long'
+        };
+        var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
+
+        var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
+            months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
+            formatTime(now);
+        document.getElementById('datetime').innerHTML = dateTimeString;
+    }
+
+    function formatTime(date) {
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+        hours = hours < 10 ? '0' + hours : hours;
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+        var strTime = hours + ':' + minutes + ':' + seconds;
+        return strTime;
+    }
+
+    // Call updateClock initially to set the clock right away
+    updateClock();
+</script>
 
 
 <script>

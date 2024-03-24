@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\HomeController;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\MasterProjekController;
 use App\Http\Controllers\API\SuratPerintahKerjaController;
@@ -51,4 +52,14 @@ Route::prefix('spk')->group(function () {
     Route::get('surat-perintah-kerja/{surat_perintah_kerja}', [SuratPerintahKerjaController::class, 'show'])->name('surat-perintah-kerja.show');
     Route::patch('surat-perintah-kerja/{surat_perintah_kerja}', [SuratPerintahKerjaController::class, 'update'])->name('surat-perintah-kerja.update');
     Route::delete('surat-perintah-kerja/{surat_perintah_kerja}', [SuratPerintahKerjaController::class, 'destroy'])->name('surat-perintah-kerja.destroy');
+});
+
+Route::prefix('home')->group(function () {
+    Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+    // Endpoint untuk menampilkan semua data pengajuan dana
+    Route::get('/pengajuan-dana-per-day', [HomeController::class, 'getPengajuanDanaPerDay']);
+
+    // Endpoint untuk menampilkan semua data surat perintah kerja
+    Route::get('surat-perintah-kerja', [HomeController::class, 'getAllSuratPerintahKerja'])->name('home.surat-perintah-kerja.all');
 });

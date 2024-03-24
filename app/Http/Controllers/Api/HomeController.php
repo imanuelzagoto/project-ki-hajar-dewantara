@@ -1,14 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\API;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\PengajuanDana;
-use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\DB;
-use App\Models\Surat_perintah_kerja;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-
+use Carbon\Carbon; // Tambahkan ini
+use App\Models\PengajuanDana; // Tambahkan ini
+use App\Models\Surat_perintah_kerja; // Tambahkan ini
+use Illuminate\Support\Facades\DB; // Tambahkan ini
 
 class HomeController extends Controller
 {
@@ -40,42 +39,22 @@ class HomeController extends Controller
             ->with('monthly_pengajuan_spk', $monthly_pengajuan_spk);
     }
 
-    // Crud function Pengajuan dana
+    public function getPengajuanDanaPerDay()
+    {
+        // Mendapatkan tanggal hari ini
+        $today = Carbon::now()->format('Y-m-d');
+
+        // Mengambil data pengajuan dana berdasarkan tanggal hari ini
+        $pengajuan_dana_per_day = PengajuanDana::whereDate('created_at', $today)->get();
+
+        return response()->json($pengajuan_dana_per_day);
+    }
+
+    // Crud Pengajuan dana
     public function editPengajuanDana($id)
     {
         $pengajuanDana = PengajuanDana::findOrFail($id);
         return view('home.pengajuan-dana.edit_pengajuan_dana', compact('pengajuanDana'));
-    }
-
-    public function updatePengajuanDana(Request $request, $id)
-    {
-        try {
-            $request->validate([
-                'nama_pemohon' => 'required|string',
-                'subject' => 'required|string',
-                'tujuan' => 'required|string',
-                'lokasi' => 'required|string',
-                'jangka_waktu' => 'required|date_format:d F Y',
-                'dana_yang_dibutuhkan' => 'required|numeric',
-                'no_rekening' => 'required|string',
-                'catatan' => 'nullable|string',
-                'tanggal' => 'required|date_format:d F Y',
-                'no_doc' => 'required|string',
-                'revisi' => 'nullable|string',
-            ]);
-
-            // cek spk berdasarkan id
-            $suratPerintahKerja = Surat_perintah_kerja::findOrFail($id);
-            $suratPerintahKerja->update($request->all());
-            // success
-            return redirect()->route('home.index')->with('success', 'Data Surat Perintah Kerja berhasil diperbarui');
-        } catch (ModelNotFoundException $exception) {
-            // kondisi pengajuan tidak ditemukan (HTTP 404)
-            return response()->json(['error' => 'Pengajuan tidak ditemukan'], 404);
-        } catch (\Exception $exception) {
-            // kondisi jika terjadi kesalahan validasi atau kesalahan lainnya (HTTP 422)
-            return response()->json(['error' => 'Validasi gagal atau terjadi kesalahan lainnya'], 422);
-        }
     }
 
     public function showPengajuanDana($id)
@@ -91,6 +70,8 @@ class HomeController extends Controller
         return redirect()->route('home.index')->with('success', 'Data pengajuan dana berhasil dihapus');
     }
 
+
+    // Crud Surat Perintah Kerja
     public function editSuratPerintahKerja($id)
     {
         $suratPerintahKerja = Surat_perintah_kerja::findOrFail($id);
@@ -102,6 +83,7 @@ class HomeController extends Controller
         $suratPerintahKerja = Surat_perintah_kerja::findOrFail($id);
         return view('home.surat-perintah-kerja.show_spk', compact('suratPerintahKerja'));
     }
+
     public function  destroySuratPerintahKerja($id)
     {
         Surat_perintah_kerja::where('id', $id)->delete();

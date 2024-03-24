@@ -3,7 +3,7 @@
 @section('content')
     <div class="main-dashboard mt--3">
         <nav aria-label="breadcrumb">
-            <div class="breadcrumb mt-2 d-flex justify-content-between">
+            <div class="breadcrumb mt-1 d-flex justify-content-between">
                 <div class="d-lg-none">
                     <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                         data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,19 +29,31 @@
                     </ul>
                 </div>
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
-                    style="float: left; margin-right:3px; background-color:#F1F4FA;">
+                    style="float: left; margin-left:13px; background-color:#F1F4FA;">
                     <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
-                    <span class="tooltip-text">Logout</span>
+                    <span class="tooltip-text mb-2" style="font-size: 10px;">Logout</span>
                 </button>
             </div>
         </nav>
-        <div class="col-md-12">
-            <h2 class="text-mp font-weight-bold display-6">
-                Master Projek
-            </h2>
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-mp font-weight-bold display-6">
+                    Master Projek
+                </h2>
+            </div>
+            <div class="col-md-6 d-flex justify-content-end">
+                <h2 class="fiturjam font-weight-bold display-6">
+                    <ul class="list-unstyled mb-0">
+                        <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
+                            <i class="fas fa-calendar"></i>&nbsp;
+                            <i class="far fa-clock"></i>&nbsp;
+                        </li>
+                    </ul>
+                </h2>
+            </div>
         </div>
     </div>
     <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
@@ -49,7 +61,7 @@
     </form>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 31px;">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 23px;">
                 <form id="dataTableSearchForm" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>

@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MasterProjekViewController;
 use App\Http\Controllers\PengajuanDanaViewWebController;
@@ -24,29 +24,29 @@ Route::get('/', fn () => redirect()->route('login'));
 Route::middleware([
     'auth:sanctum', config('jetstream.auth_session'), 'verified',
 ])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('home.index');
+    Route::get('/dashboard', [HomeViewController::class, 'index'])->name('home.index');
 
     // Rute untuk pengajuan dana
-    Route::get('/pengajuan-dana/edit/{id}', [HomeController::class, 'editPengajuanDana'])->name('pengajuan-dana.edit');
-    Route::put('/pengajuan-dana/update/{id}', [HomeController::class, 'updatePengajuanDana'])->name('pengajuan-dana.update');
-    Route::get('/pengajuan-dana/show/{id}', [HomeController::class, 'showPengajuanDana'])->name('pengajuan-dana.show');
-    Route::get('/pengajuan-dana/delete/{id}', [HomeController::class, 'destroyPengajuanDana'])->name('pengajuan-dana.delete');
+    Route::get('/pengajuan-dana/edit/{id}', [HomeViewController::class, 'editPengajuanDana'])->name('pengajuan-dana.edit');
+    Route::put('/pengajuan-dana/update/{id}', [HomeViewController::class, 'updatePengajuanDana'])->name('pengajuan-dana.update');
+    Route::get('/pengajuan-dana/show/{id}', [HomeViewController::class, 'showPengajuanDana'])->name('pengajuan-dana.show');
+    Route::get('/pengajuan-dana/delete/{id}', [HomeViewController::class, 'destroyPengajuanDana'])->name('pengajuan-dana.delete');
 
     // Rute untuk Surat Perintah Kerja
-    Route::get('/surat-perintah-kerja/edit/{id}', [HomeController::class, 'editSuratPerintahKerja'])->name('surat-perintah-kerja.edit');
-    Route::put('/surat-perintah-kerja/update/{id}', [HomeController::class, 'updateSuratPerintahKerja'])->name('surat-perintah-kerja.update');
-    Route::get('/surat-perintah-kerja/show/{id}', [HomeController::class, 'showSuratPerintahKerja'])->name('surat-perintah-kerja.show');
-    Route::get('/surat-perintah-kerja/delete/{id}', [HomeController::class, 'destroySuratPerintahKerja'])->name('surat-perintah-kerja.delete');
+    Route::get('/surat-perintah-kerja/edit/{id}', [HomeViewController::class, 'editSuratPerintahKerja'])->name('surat-perintah-kerja.edit');
+    Route::put('/surat-perintah-kerja/update/{id}', [HomeViewController::class, 'updateSuratPerintahKerja'])->name('surat-perintah-kerja.update');
+    Route::get('/surat-perintah-kerja/show/{id}', [HomeViewController::class, 'showSuratPerintahKerja'])->name('surat-perintah-kerja.show');
+    Route::get('/surat-perintah-kerja/delete/{id}', [HomeViewController::class, 'destroySuratPerintahKerja'])->name('surat-perintah-kerja.delete');
 
 
-    // Routes for Users
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
+    // // Routes for Users
+    // Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    // Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
+    // Route::post('/users', [UserController::class, 'store'])->name('users.store');
+    // Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+    // Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
+    // Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
+    // Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
 });
 
 // Routes Kihajar dewantara
