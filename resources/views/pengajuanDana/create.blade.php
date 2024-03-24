@@ -130,7 +130,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row pr-3 pt-3">
+                        <div class="row pr-3 pt-3" id="itemFields">
                             <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                 <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
                                     <span class="head-text text-center">Item</span>
@@ -139,7 +139,7 @@
                                 <div class="d-block w-100">
                                     <div class="row py-2">
                                         <div class="pr-4 py-2 col-12">
-                                            <button class="btn btn-sm button-tambah font-weight-bold">
+                                            <button id="tambahField" class="btn btn-sm button-tambah font-weight-bold">
                                                 <span class="btn-label">
                                                     <i class="icon-plus"></i>
                                                     Tambah
@@ -204,27 +204,40 @@
             </div>
         </div>
     </div>
-    {{-- <script>
-        const dropContainer = document.getElementById("dropcontainer")
-        const fileInput = document.getElementById("images")
-
-        dropContainer.addEventListener("dragover", (e) => {
-            // prevent default to allow drop
-            e.preventDefault()
-        }, false)
-
-        dropContainer.addEventListener("dragenter", () => {
-            dropContainer.classList.add("drag-active")
-        })
-
-        dropContainer.addEventListener("dragleave", () => {
-            dropContainer.classList.remove("drag-active")
-        })
-
-        dropContainer.addEventListener("drop", (e) => {
-            e.preventDefault()
-            dropContainer.classList.remove("drag-active")
-            fileInput.files = e.dataTransfer.files
-        })
-    </script> --}}
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $("#tambahField").click(function() {
+                var newRow = `
+            <div class="pr-2 py-2 col-11" style="margin-left: 8.2%;"> <!-- Mengubah margin-left dan padding-right -->
+                <div class="row">
+                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
+                        <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
+                        <input class="form-control bg-light" type="text" style="width:94.2%">
+                    </div>
+                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
+                        <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                        <select class="form-control bg-light" style="width:94.2%">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
+                        <span class="text-sm font-weight-bold text-form-detail">Harga</span>
+                        <input class="form-control bg-light" type="text" style="width:94.2%">
+                    </div>
+                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
+                        <span class="text-sm font-weight-bold text-form-detail">Total</span>
+                        <input class="form-control bg-light" type="text" style="width:94.2%">
+                    </div>
+                </div>
+            </div>`;
+
+                $("#itemFields").append(newRow);
+            });
+        });
+    </script>
+@endpush
