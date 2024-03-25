@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="breadcrumbs ul-header-mp">
+                    <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('home.index') }}" class="breadcrumbs__link"
                                 style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
@@ -379,6 +379,7 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script>
+        // JS DELETE
         function submitDelete(id) {
             event.preventDefault();
             Swal.fire({
@@ -427,6 +428,8 @@
             });
         });
         // END JS MENU
+
+
 
         // JS charts
         var monthly_pengajuan_dana = {!! json_encode($monthly_pengajuan_dana) !!};
@@ -593,6 +596,8 @@
 
         // Render grafik
         chart.render();
+        // End JS Chart
+
 
         // JS get name
         function getShortName(fullName) {

@@ -170,6 +170,22 @@
     }
 }
 
+@media screen and (max-width: 1440px) {
+    .text-dashboard {
+        padding-left: 1px;
+    }
+
+    .text-mp {
+        padding-left: 6px;
+    }
+}
+
+@media screen and (max-width: 1800px) {
+    .text-dashboard {
+        padding-right: 5px;
+    }
+}
+
 @media screen and (max-width: 555.56px) {
     .text-dashboard {
         padding-left: 18px;
@@ -221,7 +237,7 @@
 
 @media screen and (max-width: 1560px) and (min-width: 992.22px) {
     .text-mp {
-        margin-left: 18px;
+        margin-left: 11px;
     }
 
     .fiturjam {
@@ -534,6 +550,12 @@
     color: #718096;
     margin-right: -12px;
 }
+
+/* @media screen and (max-width: 1440px) {
+    .button-logout {
+        margin-right: -px;
+    }
+} */
 
 /* CSS untuk tooltip */
 .tooltip-container {

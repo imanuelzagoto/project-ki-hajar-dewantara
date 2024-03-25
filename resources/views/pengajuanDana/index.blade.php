@@ -30,7 +30,7 @@
                 </div>
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
                     style="float: left; margin-right:3px; background-color:#F1F4FA;">
-                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
+                    <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14; margin-left:15px;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>
                     </a>

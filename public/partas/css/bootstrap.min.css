@@ -7134,6 +7134,12 @@ button.bg-dark:hover {
     justify-content: space-between !important
 }
 
+@media screen and (max-width: 1800px) and (max-width: 1440px) {
+    .justify-content-between {
+        margin-left: -8px;
+    }
+}
+
 .justify-content-around {
     -ms-flex-pack: distribute !important;
     justify-content: space-around !important

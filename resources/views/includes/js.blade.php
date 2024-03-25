@@ -40,8 +40,13 @@
 <script src="{{ asset('sets/js/script.js') }}"></script>
 
 <script>
-    // Update the clock every second
-    setInterval(updateClock, 1000);
+    // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        // Panggil updateClock secara berkala setiap detik
+        setInterval(updateClock, 1000);
+        // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
+        updateClock();
+    });
 
     function updateClock() {
         var now = new Date();
@@ -60,7 +65,14 @@
         var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
             months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
             formatTime(now);
-        document.getElementById('datetime').innerHTML = dateTimeString;
+
+        var datetimeElement = document.getElementById('datetime');
+        if (datetimeElement) {
+            // Perbarui innerHTML elemen 'datetime' jika ditemukan
+            datetimeElement.innerHTML = dateTimeString;
+        } else {
+            console.error("Datetime element not found.");
+        }
     }
 
     function formatTime(date) {
@@ -73,9 +85,6 @@
         var strTime = hours + ':' + minutes + ':' + seconds;
         return strTime;
     }
-
-    // Call updateClock initially to set the clock right away
-    updateClock();
 </script>
 
 
