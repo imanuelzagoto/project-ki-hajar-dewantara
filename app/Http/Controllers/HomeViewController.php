@@ -7,6 +7,7 @@ use App\Models\PengajuanDana;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Models\Surat_perintah_kerja;
+use illuminate\Support\Facades\Session;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 
@@ -14,6 +15,10 @@ class HomeViewController extends Controller
 {
     public function index()
     {
+
+        // data api
+        // dd(Session::get('user'));
+        // dd(Session::get('token'));
         // Data per hari
         $today = Carbon::now()->format('Y-m-d');
         $pengajuan_dana_per_day = PengajuanDana::whereDate('created_at', $today)->get();

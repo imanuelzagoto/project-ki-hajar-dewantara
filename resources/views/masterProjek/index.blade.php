@@ -115,6 +115,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
                                 </tbody>
                             </table>
                         </div>
@@ -146,23 +147,23 @@
                         searchable: false
                     },
                     {
-                        data: 'nama_project',
+                        data: 'project_name',
                         className: 'text-left nowrap'
                     },
                     {
-                        data: 'kode_project',
+                        data: 'code_project',
                         className: 'text-left nowrap'
                     },
                     {
-                        data: 'tenggat',
+                        data: 'deadline',
                         className: 'text-center nowrap'
                     },
                     {
-                        data: 'mulai',
+                        data: 'start',
                         className: 'text-center nowrap'
                     },
                     {
-                        data: 'akhir',
+                        data: 'end',
                         className: 'text-center nowrap'
                     },
                     {

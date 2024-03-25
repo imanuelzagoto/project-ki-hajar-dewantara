@@ -13,12 +13,12 @@ class MasterProjek extends Model
     protected $table = 'master_projeks';
 
     protected $fillable = [
-        'nama_project',
-        'kode_project',
-        'tenggat',
-        'mulai',
-        'akhir',
+        'project_name',
+        'code_project',
+        'deadline',
+        'start',
+        'end',
     ];
 
-    protected $dates = ['tenggat', 'mulai', 'akhir'];
+    protected $dates = ['deadline', 'start', 'end'];
 }

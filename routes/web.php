@@ -6,6 +6,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\MasterProjekViewController;
 use App\Http\Controllers\PengajuanDanaViewWebController;
 use App\Http\Controllers\SuratPerintahKerjaViewWebController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Auth;
+
 
 
 /*
@@ -19,11 +24,70 @@ use App\Http\Controllers\SuratPerintahKerjaViewWebController;
 |
 */
 
-Route::get('/', fn () => redirect()->route('login'));
 
-Route::middleware([
-    'auth:sanctum', config('jetstream.auth_session'), 'verified',
-])->group(function () {
+// UserService Login Logout
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('loginnew');
+
+Route::get('/', function () {
+    if (!Session::has('token')) {
+        return view('auth.login');
+    } else {
+        return redirect('/dashboard');
+    }
+});
+
+// Route::get('/register', function () {
+//     return view('auth.register');
+// })->name('registnew');
+
+Route::post('/loginservice', function () {
+
+    $loginServiceUrl = env('LOGIN_SERVICE_URL');
+    $response = Http::post($loginServiceUrl, [
+        'email' => request('email'),
+        'password' => request('password'),
+    ]);
+    // dd($response['status']);
+    if (!empty($response['status'])) {
+        if ($response['status'] == 200) {
+            $userData = $response['user'];
+            $token = $response['token'];
+            Session::put('token', $token);
+            Session::put('user', $userData);
+
+            $session = Session::get('token');
+
+            return redirect()->route('home.index');
+        } else {
+            return redirect('/')->with('message', 'Failed Login, 404 Internal Server Error');
+        }
+    } else {
+        return redirect('/')->with('message', 'Invalid Credentials');
+    }
+})->name('loginservice');
+
+Route::post('/logoutservice', function (Request $request) {
+    Session::forget('token');
+    Auth::logout();
+
+    $request->session()->invalidate();
+
+    $request->session()->regenerateToken();
+
+    return redirect('/');
+})->name('logoutService');
+Route::get('/login', function () {
+    if (!Session::has('token')) {
+        return view('auth.login');
+    } else {
+        return redirect('/dashboard');
+    }
+});
+
+// Routes Kihajar dewantara
+Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [HomeViewController::class, 'index'])->name('home.index');
 
     // Rute untuk pengajuan dana
@@ -37,20 +101,6 @@ Route::middleware([
     Route::put('/surat-perintah-kerja/update/{id}', [HomeViewController::class, 'updateSuratPerintahKerja'])->name('surat-perintah-kerja.update');
     Route::get('/surat-perintah-kerja/show/{id}', [HomeViewController::class, 'showSuratPerintahKerja'])->name('surat-perintah-kerja.show');
     Route::get('/surat-perintah-kerja/delete/{id}', [HomeViewController::class, 'destroySuratPerintahKerja'])->name('surat-perintah-kerja.delete');
-
-
-    // Routes for Users
-    Route::get('/users', [UserController::class, 'index'])->name('users.index');
-    Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
-    Route::post('/users', [UserController::class, 'store'])->name('users.store');
-    Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
-    Route::get('/users/{user}/edit', [UserController::class, 'edit'])->name('users.edit');
-    Route::put('/users/{user}', [UserController::class, 'update'])->name('users.update');
-    Route::delete('/users/{user}', [UserController::class, 'destroy'])->name('users.destroy');
-});
-
-// Routes Kihajar dewantara
-Route::group(['middleware' => 'auth'], function () {
     // Routes Master Projek
     Route::get('/master-projek/data', [MasterProjekViewController::class, 'data'])->name('master-projek.data');
     Route::get('/master-projek', [MasterProjekViewController::class, 'index'])->name('master-projek.index');

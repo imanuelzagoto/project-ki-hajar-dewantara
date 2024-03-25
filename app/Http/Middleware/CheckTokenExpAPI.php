@@ -8,26 +8,28 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Session;
 
-class Authenticate
+class CheckTokenExpAPI
 {
-    public function handle(Request $request, Closure $next): Response
+
+    public function handle(Request $request, Closure $next)
     {
-        // dd(Session::has('token'));
-        if (Session::has('token')) {
-            $token = Session::get('token');
+        if ($request->header('Authorization')) {
+            $token = str_replace('Bearer ', '', $request->header('Authorization'));
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
             ])->get('https://gerry.intek.co.id/api/check-token');
-            // dd($token);
+
             if ($response->successful() && $response['valid']) {
-                // Token masih valid, lanjutkan ke rute yang diminta
                 return $next($request);
-                // return redirect('/dashboard')->with('message', 'Success login');
             } else {
-                return redirect('/')->with('message', 'Session Habis Silahkan Login Ulang');
+                return response()->json([
+                    'message' => 'Invalid token or session expired.',
+                ], 401);
             }
         } else {
-            return redirect('/')->with('message', 'Please try again');
+            return response()->json([
+                'message' => 'Unauthorized. Missing Authorization header.',
+            ], 401);
         }
     }
 }

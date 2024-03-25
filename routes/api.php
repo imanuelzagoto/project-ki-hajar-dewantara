@@ -19,10 +19,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/login', [UserServiceController::class, 'loginUser']);
+Route::post('/login', [UserServiceController::class, 'loginUser'])->name('loginuser');
+
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout', [UserServiceController::class, 'logout']);
-    Route::get('users', [UserServiceController::class, 'getUser']);
+    Route::post('/logout', [UserServiceController::class, 'logout']);
+    Route::get('/user', [UserServiceController::class, 'getUser']);
+    Route::get('/user-data', [UserServiceController::class, 'getUserData']);
+    Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 });
 
 Route::prefix('mp')->group(function () {

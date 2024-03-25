@@ -22,16 +22,16 @@ class MasterProjekFactory extends Factory
      */
     public function definition()
     {
-        $mulai = $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');
-        $tenggat = $this->faker->dateTimeBetween($mulai, '+1 year')->format('Y-m-d H:i:s');
-        $akhir = $this->faker->dateTimeBetween($tenggat, '+1 year')->format('Y-m-d');
+        $start = $this->faker->dateTimeBetween('-1 year', 'now')->format('Y-m-d');
+        $deadline = $this->faker->dateTimeBetween($start, '+1 year')->format('Y-m-d H:i:s');
+        $end = $this->faker->dateTimeBetween($deadline, '+1 year')->format('Y-m-d');
 
         return [
-            'nama_project' => $this->faker->sentence,
-            'kode_project' => $this->faker->word,
-            'tenggat' => $tenggat,
-            'mulai' => $mulai,
-            'akhir' => $akhir,
+            'project_name' => $this->faker->sentence,
+            'code_project' => $this->faker->word,
+            'deadline' => $deadline,
+            'start' => $start,
+            'end' => $end,
         ];
     }
 }

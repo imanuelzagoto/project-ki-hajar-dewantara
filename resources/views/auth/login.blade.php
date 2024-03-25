@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xl-6 col-lg-6 col-md-6 order-lg-1 order-md-1">
                 <div class="login-card">
-                    <form action="{{ route('login') }}" method="post" class="theme-form login-form">
+                    <form action="{{ route('loginservice') }}" method="post" class="theme-form login-form">
                         <h4 class="signin-heading">Sign In</h4>
                         <h6 class="welcome-message">Enter your email and password to sign in!</h6>
                         <div class="garis-horizontal">
@@ -15,7 +15,7 @@
                         @csrf
                         <div class="form-group custom-input">
                             <label class="email-address">Email*</label>
-                            <input class="form-control" type="email" name="email" required
+                            <input class="form-control" id="email" type="email" name="email" required
                                 placeholder="mail@simmmple.com">
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
@@ -23,7 +23,8 @@
                         </div>
                         <div class="form-group custom-password-input">
                             <label class="password-address">Password*</label>
-                            <input class="form-control" type="password" name="password" required placeholder="*********">
+                            <input class="form-control" id="password" type="password" name="password" required
+                                placeholder="*********">
                             <i data-feather="eye" id="toggleIcon" class="toggle-password"></i>
                             @error('password')
                                 <span class="text-danger">{{ $message }}</span>
@@ -65,4 +66,33 @@
             </div>
         </div>
     </div>
+
+
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ajaxy/1.6.1/scripts/jquery.ajaxy.min.js"
+        integrity="sha512-bztGAvCE/3+a1Oh0gUro7BHukf6v7zpzrAb3ReWAVrt+bVNNphcl2tDTKCBr5zk7iEDmQ2Bv401fX3jeVXGIcA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script> --}}
+
+    {{-- <script>
+        $(document).ready(function() {
+            $('#loginForm').submit(function(e) {
+                e.preventDefault();
+                var formData = $(this).serialize();
+                $.ajax({
+                    url: '{{ route('loginuser') }}',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        console.log(JSON.stringify(response.user));
+                        localStorage.setItem('token', response.token);
+                        localStorage.setItem('user', JSON.stringify(response.user));
+                        // Redirect ke halaman home.index
+                        window.location.href = '{{ route('home.index') }}';
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script> --}}
 @endsection

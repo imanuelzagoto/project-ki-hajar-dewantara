@@ -79,8 +79,8 @@
                             style="background-image: url('{{ asset('partas/img/card.png') }}');">
                             <p style="font-size: 16.44px; font-weight:400; line-height:24.66px;">Dashboard ki hajar
                                 dewantara</p>
-                            <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello <span
-                                    id="shortName"></span> !</h2>
+                            <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
+                                {{ Session::get('user')['username'] }}<span id="shortName"></span> !</h2>
                         </div>
                     </div>
                     <div class="col-md-6 mt-4">
@@ -598,67 +598,9 @@
         chart.render();
         // End JS Chart
 
+        //sini
 
-        // JS get name
-        function getShortName(fullName) {
-            // Memisahkan nama pertama dan nama terakhir
-            var names = fullName.split(' ');
-            var firstName = names[0];
-            var lastName = names[names.length - 1];
-
-            // Mengambil inisial dari nama terakhir
-            var lastNameInitial = lastName.charAt(0);
-
-            // Menggabungkan nama pertama dengan inisial nama terakhir
-            var shortName = firstName + ' ' + lastNameInitial;
-
-            // Jika panjang nama pertama lebih dari 6 karakter, maka persingkat nama pertama
-            if (firstName.length > 9) {
-                shortName = firstName.substring(0, 6);
-            }
-
-            return shortName;
-        }
-
-        // Mendapatkan nama pengguna dan mempersingkatnya menggunakan JavaScript
-        var fullName = "<?php echo auth()->user()->full_name; ?>";
-        var shortName = getShortName(fullName);
-
-        // Mengisi elemen span dengan nama yang dipersingkat
-        document.getElementById('shortName').innerText = shortName;
-
-        // Mengambil semua tombol menu
-        var menuButtons = document.querySelectorAll('.nav-link');
-
-        // Menambahkan event listener pada setiap tombol menu
-        menuButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                // Menghapus kelas 'active' dari semua tombol menu
-                menuButtons.forEach(function(btn) {
-                    btn.classList.remove('active');
-                    btn.style.color = '#718EBF';
-                    btn.style.borderBottomColor = 'transparent';
-                });
-
-                // Menambahkan kelas 'active' ke tombol menu yang diklik
-                this.classList.add('active');
-                this.style.color = '#4FD1C5';
-                this.style.borderBottomColor = '#4FD1C5';
-
-                // Menyembunyikan semua tab
-                var tabs = document.querySelectorAll('.tab-pane');
-                tabs.forEach(function(tab) {
-                    tab.classList.remove('show');
-                    tab.classList.remove('active');
-                });
-
-                // Menampilkan tab yang sesuai dengan tombol menu yang diklik
-                var targetTabId = this.getAttribute('data-target');
-                var targetTab = document.querySelector(targetTabId);
-                targetTab.classList.add('show');
-                targetTab.classList.add('active');
-            });
-        });
+        //sini
     </script>
 @endsection
 

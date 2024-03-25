@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Http;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Session;
 
-class Authenticate
+class CheckTokenExp
 {
     public function handle(Request $request, Closure $next): Response
     {
         // dd(Session::has('token'));
-        if (Session::has('token')) {
+        if(Session::has('token')){
             $token = Session::get('token');
             $response = Http::withHeaders([
                 'Authorization' => 'Bearer ' . $token,
@@ -22,12 +22,14 @@ class Authenticate
             if ($response->successful() && $response['valid']) {
                 // Token masih valid, lanjutkan ke rute yang diminta
                 return $next($request);
-                // return redirect('/dashboard')->with('message', 'Success login');
-            } else {
-                return redirect('/')->with('message', 'Session Habis Silahkan Login Ulang');
+            }else {
+                return redirect()->route('loginnew')->with('message','Session Habis Silahkan Login Ulang');
             }
-        } else {
-            return redirect('/')->with('message', 'Please try again');
+        }else {
+            return redirect()->route('loginnew')->with('message','Please try again');
         }
+
+
+
     }
 }

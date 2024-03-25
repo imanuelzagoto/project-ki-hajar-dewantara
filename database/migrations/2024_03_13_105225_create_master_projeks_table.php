@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('master_projeks', function (Blueprint $table) {
             $table->id();
-            $table->string('nama_project');
-            $table->string('kode_project');
-            $table->date('tenggat')->nullable();
-            $table->date('mulai')->nullable();
-            $table->date('akhir')->nullable();
+            $table->string('project_name');
+            $table->string('code_project');
+            $table->date('deadline')->nullable();
+            $table->date('start')->nullable();
+            $table->date('end')->nullable();
             $table->timestamps();
         });
     }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\MasterProjek;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -14,14 +16,38 @@ class MasterProjekViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Response $response)
     {
+
+        // $datas = MasterProjek::all();
+        // foreach ($datas as $data) {
+        //     dd($data);
+        // }
+
         return view('masterProjek.index');
     }
 
     public function data()
     {
-        $datas = MasterProjek::select('*');
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'http://172.15.1.97/api/projects',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $datas = json_decode($response);
+        // $datas = MasterProjek::all();
+        // dd($datas);
 
         return Datatables::of($datas)
             ->addIndexColumn()
@@ -68,15 +94,15 @@ class MasterProjekViewController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function store(Request $request)
+    public function store(Request $request, Response $response)
     {
         // Define Validation rules
         $validator = Validator::make($request->all(), [
-            'nama_project' => 'required',
-            'kode_project' => 'required',
-            'tenggat' => 'nullable|date',
-            'mulai' => 'nullable|date',
-            'akhir' => 'nullable|date',
+            'project_name' => 'required',
+            'code_project' => 'required',
+            'deadline' => 'nullable|date',
+            'start' => 'nullable|date',
+            'end' => 'nullable|date',
         ]);
 
         // check if validation fails
@@ -84,13 +110,21 @@ class MasterProjekViewController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+
+        $response = Http::get("http://172.15.1.97/api/projects");
+
+        if ($response->OK()) {
+            $project = $response->json();
+            dd($project);
+        }
+
         // Create new MasterProjek instance
         $master_Projeks = MasterProjek::create([
-            'nama_project' => $request->input('nama_project'),
-            'kode_project' => $request->input('kode_project'),
-            'tenggat' => $request->input('tenggat'),
-            'mulai' => $request->input('mulai'),
-            'akhir' => $request->input('akhir'),
+            'project_name' => $request->input('project_name'),
+            'code_project' => $request->input('code_project'),
+            'deadline' => $request->input('deadline'),
+            'start' => $request->input('start'),
+            'end' => $request->input('end'),
         ]);
 
         // return response
@@ -145,11 +179,11 @@ class MasterProjekViewController extends Controller
         }
         // Define validation rules
         $validator = Validator::make($request->all(), [
-            'nama_project' => 'required',
-            'kode_project' => 'required',
-            'tenggat' => 'nullable|date',
-            'mulai' => 'nullable|date',
-            'akhir' => 'nullable|date',
+            'project_name' => 'required',
+            'code_project' => 'required',
+            'deadline' => 'nullable|date',
+            'start' => 'nullable|date',
+            'end' => 'nullable|date',
         ]);
 
         // periksa jika validasi gagal
@@ -159,11 +193,11 @@ class MasterProjekViewController extends Controller
 
         // update nilai baru master projek
         $masterProjek->update([
-            'nama_project' => $request->nama_project,
-            'kode_project' => $request->kode_project,
-            'tenggat' => $request->tenggat,
-            'mulai' => $request->mulai,
-            'akhir' => $request->akhir,
+            'project_name' => $request->project_name,
+            'code_project' => $request->code_project,
+            'deadline' => $request->deadline,
+            'start' => $request->start,
+            'end' => $request->end,
         ]);
         // return response
         return redirect()->route('master-projek.index');

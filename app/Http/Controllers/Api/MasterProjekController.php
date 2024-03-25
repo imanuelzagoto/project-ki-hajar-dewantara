@@ -30,11 +30,11 @@ class MasterProjekController extends Controller
     {
         // Define validation rules
         $validator = Validator::make($request->all(), [
-            'nama_project' => 'required',
-            'kode_project' => 'required',
-            'tenggat' => 'nullable|date',
-            'mulai' => 'nullable|date',
-            'akhir' => 'nullable|date',
+            'project_name' => 'required',
+            'code_project' => 'required',
+            'deadline' => 'nullable|date',
+            'start' => 'nullable|date',
+            'end' => 'nullable|date',
         ]);
 
         // check if validation fails
@@ -44,11 +44,11 @@ class MasterProjekController extends Controller
 
         // Create new MasterProjek instance
         $master_Projeks = masterProjek::create([
-            'nama_project' => $request->nama_project,
-            'kode_project' => $request->kode_project,
-            'tenggat' => $request->tenggat,
-            'mulai' => $request->mulai,
-            'akhir' => $request->akhir,
+            'project_name' => $request->project_name,
+            'code_project' => $request->code_project,
+            'deadline' => $request->deadline,
+            'start' => $request->start,
+            'end' => $request->end,
         ]);
 
         // return reponse
@@ -92,11 +92,11 @@ class MasterProjekController extends Controller
 
         // Define validation rules
         $validator = Validator::make($request->all(), [
-            'nama_project' => 'required',
-            'kode_project' => 'required',
-            'tenggat' => 'nullable|date',
-            'mulai' => 'nullable|date',
-            'akhir' => 'nullable|date',
+            'project_name' => 'required',
+            'code_project' => 'required',
+            'deadline' => 'nullable|date',
+            'start' => 'nullable|date',
+            'end' => 'nullable|date',
         ]);
 
         // periksa jika validasi gagal
@@ -106,11 +106,11 @@ class MasterProjekController extends Controller
 
         // update nilai baru master projek
         $masterProjek->update([
-            'nama_project' => $request->nama_project,
-            'kode_project' => $request->kode_project,
-            'tenggat' => $request->tenggat,
-            'mulai' => $request->mulai,
-            'akhir' => $request->akhir,
+            'project_name' => $request->project_name,
+            'code_project' => $request->code_project,
+            'deadline' => $request->deadline,
+            'start' => $request->start,
+            'end' => $request->end,
         ]);
 
         // return resonse
