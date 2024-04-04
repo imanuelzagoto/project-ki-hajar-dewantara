@@ -65,12 +65,11 @@
                 <form id="dataTableSearchForm" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="dataTableSearchInput"
-                            class="form-control form-control-sm pl-0 rounded-right" placeholder="Type here...."
-                            aria-controls="dataTable">
+                        <input type="text" id="searchProject" class="form-control form-control-sm pl-0 rounded-right"
+                            placeholder="Type here...." aria-controls="dataTable">
                     </div>
                 </form>
-                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters"
+                <button type="button" id="filtersButtonProject" class="btn btn-sm btn-outline-info ml-2 btn-filters"
                     style="font-size: 17.18px;">
                     <i class="fas fa-sliders-h"></i> Filters
                 </button>
@@ -92,8 +91,8 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="d-flex align-items-center mb-3 d-flex-center">
-                                <select id="entriesPerPage" class="form-control form-control-sm mr-2"
-                                    style="width: 70px; border-color:#4FD1C5;">
+                                <select id="showEntriesProject" class="form-control form-control-sm mr-2"
+                                    style="width: 70px;">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -102,12 +101,13 @@
                                 <span class="labelentris" style="color: #A0AEC0;">entries per
                                     page</span>
                             </div>
-                            <table class="table display-6 mb-6 table-responsive tablePD" style="width: 100%;">
+                            <table class="table display-6 mb-6 table-responsive tablePD" style="width: 100%;"
+                                id="tableProject">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height: 19.36px;">
                                         <th class="text-center" style="width: 5%;" nowrap>No</th>
-                                        <th class="text-center" style="width: 20%;" nowrap>Nama Projek</th>
-                                        <th class="text-center" style="width: 15%;" nowrap>Kode Projek</th>
+                                        <th class="text-left" style="width: 20%;" nowrap>Nama Projek</th>
+                                        <th class="text-left" style="width: 15%;" nowrap>Kode Projek</th>
                                         <th class="text-center" style="width: 20%;" nowrap>Tenggat</th>
                                         <th class="text-center" style="width: 20%;" nowrap>Mulai</th>
                                         <th class="text-center" style="width: 20%;" nowrap>Akhir</th>
@@ -115,7 +115,55 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach ($projects as $project)
+                                        {{-- {{ dd($project['id']) }} --}}
+                                        @php
+                                            $i += 1;
+                                        @endphp
+                                        <tr class="kolom-td">
+                                            <td class="text-left" style="font-weight:400;"nowrap>
+                                                {{ $i }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                                {{ $project['project_name'] }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                                {{ $project['code_project'] }}
+                                            </td>
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ Carbon\Carbon::parse($project['deadline'])->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ Carbon\Carbon::parse($project['start'])->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ Carbon\Carbon::parse($project['end'])->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
 
+                                                <a href="{{ route('master-projek.edit', ['id' => $project['id']]) }}"
+                                                    class="fas fa-pen btn btn-sm tooltip-container"
+                                                    style="color:#4FD1C5; font-size:20px;">
+                                                    <span class="tooltip-edit">Edit</span>
+                                                </a>
+
+                                                <a href="/master-projek/delete/{{ $project['id'] }}"
+                                                    class="fas fa-trash-alt btn btn-sm tooltip-container"
+                                                    style="color:#F31414; font-size:20px;"
+                                                    onclick="submitDelete({{ $project['id'] }})">
+                                                    <span class="tooltip-delete">Delete</span>
+                                                </a>
+                                                <form id="delete-form-{{ $project['id'] }}"
+                                                    action="{{ route('master-projek.delete', $project['id']) }}"
+                                                    method="get" style="display: none;">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -124,87 +172,9 @@
             </div>
         </div>
     </div>
-@endsection
 
-@push('scripts')
     <script>
-        $(function() {
-            // Inisialisasi DataTables
-            var table = $('.tablePD').DataTable({
-                responsive: true,
-                serverSide: true,
-                autoWidth: false,
-                lengthMenu: [10, 25, 50, 100],
-                pageLength: storedPageLength,
-                ajax: {
-                    url: '{{ route('master-projek.data') }}',
-                    type: 'GET',
-                },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'project_name',
-                        className: 'text-left nowrap'
-                    },
-                    {
-                        data: 'code_project',
-                        className: 'text-left nowrap'
-                    },
-                    {
-                        data: 'deadline',
-                        className: 'text-center nowrap'
-                    },
-                    {
-                        data: 'start',
-                        className: 'text-center nowrap'
-                    },
-                    {
-                        data: 'end',
-                        className: 'text-center nowrap'
-                    },
-                    {
-                        data: 'action',
-                        className: 'text-center nowrap',
-                        orderable: false,
-                        searchable: false
-                    }
-                ],
-                createdRow: function(row, data, dataIndex) {
-                    $(row).find('td:eq(0), td:eq(1), td:eq(2), td:eq(3), td:eq(4), td:eq(5), td:eq(6)')
-                        .css('color', '#232323');
-                }
-            });
-
-            // Mengatur jumlah entri per halaman
-            var storedPageLength = getPageLengthFromLocalStorage('tablePD');
-            $('#entriesPerPage').val(storedPageLength);
-            $('#entriesPerPage').on('change', function() {
-                var selectedValue = $(this).val();
-                // Simpan nilai yang dipilih ke dalam localStorage
-                localStorage.setItem('tablePD_pageLength', selectedValue);
-                // Terapkan perubahan jumlah entri per halaman ke DataTable
-                table.page.len(selectedValue).draw();
-            });
-
-            // Tambahkan event listener untuk tombol filter
-            $('#filtersButton').on('click', function() {
-                var searchValue = $('#dataTableSearchInput').val().trim();
-                table.search(searchValue).draw();
-            });
-
-            // Event listener untuk input di kolom pencarian
-            $('#dataTableSearchInput').on('input', function() {
-                var searchValue = $(this).val().trim();
-                if (searchValue === '') {
-                    table.search('').draw();
-                }
-            });
-        });
-
+        // JS DELETE
         function submitDelete(id) {
             event.preventDefault();
             Swal.fire({
@@ -233,11 +203,74 @@
                 }
             });
         }
+    </script>
+@endsection
 
-        // Function to get page length from localStorage
-        function getPageLengthFromLocalStorage(tableId) {
-            var storedLength = localStorage.getItem(tableId + '_pageLength');
-            return storedLength ? parseInt(storedLength) : 10; // Default page length
-        }
+@push('scripts')
+    <script>
+        // JS DATATABLE
+        $(document).ready(function() {
+            // Function to get page length from localStorage
+            function getPageLengthFromLocalStorage(tableId) {
+                var storedLength = localStorage.getItem(tableId + '_pageLength');
+                if (storedLength) {
+                    return parseInt(storedLength);
+                } else {
+                    return 10; // Default page length
+                }
+            }
+
+            // table spk
+            var tableProject = $('#tableProject').DataTable({
+                "pageLength": getPageLengthFromLocalStorage('tableProject'),
+                // "info": false, // Menonaktifkan pesan info
+                // "paging": false,
+                initComplete: function() {
+                    this.api().columns().every(function() {
+                        var column = this;
+                        var select = $(
+                                '<select class="form-control"><option value=""></option></select>'
+                            )
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                column.search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function(d, j) {
+                            select.append('<option value="' + d + '">' + d +
+                                '</option>');
+                        });
+                    });
+                }
+            });
+
+            // Set value for show entries dropdown on page load
+            $('#showEntriesProject').val(getPageLengthFromLocalStorage('tableProject'));
+
+            // fitur show entri
+            $('#showEntriesProject').change(function() {
+                var val = $(this).val();
+                tableProject.page.len(val).draw();
+                localStorage.setItem('tableProject', val);
+            });
+
+
+            // fitur search
+            $('#filtersButtonProject').click(function() {
+                var searchText = $('#searchProject').val();
+                tableProject.search(searchText).draw();
+            });
+
+            // Memantau perubahan pada input pencarian
+            $('#searchProject').on('input', function() {
+                var searchText = $(this).val();
+                if (!searchText.trim()) {
+                    tableProject.search('').draw();
+                }
+            });
+        });
+        // End JS Table
     </script>
 @endpush

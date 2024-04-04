@@ -153,39 +153,14 @@
         <div class="col ml--12">
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 10px;">
-                        <form id="dataTableSearchFormPengajuanDana" action="#" method="get"
-                            style="height: 44px; width: 255px;" class="mr-2">
-                            <div class="col mr-1 border-container">
-                                <i class="fas fa-search"></i>
-                                <input type="text" id="searchPengajuanDana" name="search"
-                                    class="form-control form-control-sm pl-0 rounded-right" placeholder="Type here...."
-                                    aria-controls="dataTable">
-                            </div>
-                        </form>
-                        <button type="button" id="filtersButtonPengajuanDana"
-                            class="btn btn-sm btn-outline-info ml-2 btn-filters" style="font-size: 17.18px;">
-                            <i class="fas fa-sliders-h"></i> Filters
-                        </button>
-                    </div>
                     <div class="col-md-12">
-                        <div class="card mt-lg-3 card-table-pd">
+                        <div class="card mt-lg-2 card-table-pd">
                             <div class="card-body ml-4">
                                 <div class="table-responsive">
-                                    <div class="d-flex align-items-center mb-3 d-flex-center">
-                                        <select id="showEntriesPengajuanDana" class="form-control form-control-sm mr-2"
-                                            style="width: 70px; border-color:#4FD1C5;">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select>
-                                        <span class="labelentris" style="color: #A0AEC0;">entries per
-                                            page</span>
-                                    </div>
                                     <table class="table display-6 mb-6 table-responsive" id="TablePengajuanDana">
                                         <thead>
                                             <tr class="tr-table">
+                                                <th class="text-left"nowrap>ID</th>
                                                 <th class="text-left"nowrap>No.Doc</th>
                                                 <th class="text-left"nowrap>Revisi</th>
                                                 <th class="text-left"nowrap>Pemohon</th>
@@ -203,12 +178,21 @@
                                                 <th class="text-center" nowrap>Metode<br>
                                                     <span style="display:block; text-align:center;">Penerimaan</span>
                                                 </th>
-                                                <th class="text-center" nowrap>Action</th>
+                                                {{-- <th class="text-center" nowrap>Action</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $i = 0;
+                                            @endphp
                                             @foreach ($pengajuan_dana_per_day as $pdt)
+                                                @php
+                                                    $i += 1;
+                                                @endphp
                                                 <tr class="kolom-td">
+                                                    <td class="text-left" style="font-weight:400;"nowrap>
+                                                        {{ $i }}
+                                                    </td>
                                                     <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pdt->no_doc }}
                                                     </td>
@@ -228,36 +212,13 @@
                                                         {{ Carbon\Carbon::parse($pdt->updated_at)->format('H:i d-m-Y') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        {{ Carbon\Carbon::parse($pdt->jangka_waktu)->format('d-m-Y') }}
+                                                        {{ Carbon\Carbon::parse($pdt->batas_waktu)->format('d-m-Y') }}
                                                     </td>
                                                     <td class="text-right" style="font-weight:400;" nowrap>
-                                                        {{ 'Rp. ' . number_format($pdt->dana_yang_dibutuhkan, 0, ',', '.') }}
+                                                        {{ 'Rp. ' . number_format($pdt->total_dana, 0, ',', '.') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
-                                                        {{ $pdt->no_rekening }}
-                                                    </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
-                                                        <a href="{{ route('pengajuan-dana.edit', ['id' => $pdt->id]) }}"
-                                                            class="fas fa-pen btn btn-sm tooltip-container"
-                                                            style="color:#4FD1C5; font-size:20px;">
-                                                            <span class="tooltip-edit">Edit</span>
-                                                        </a>
-                                                        <a href="{{ route('pengajuan-dana.show', ['id' => $pdt->id]) }}"
-                                                            class="fas fa-eye btn btn-sm tooltip-container"
-                                                            style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                            <span class="tooltip-show">View</span>
-                                                        </a>
-
-                                                        <a href=""
-                                                            class="fas fa-trash-alt btn btn-sm tooltip-container"
-                                                            style="color:#F31414; font-size:20px;"
-                                                            onclick="submitDelete({{ $pdt->id }})">
-                                                            <span class="tooltip-delete">Delete</span>
-                                                        </a>
-                                                        <form id="delete-form-{{ $pdt->id }}"
-                                                            action="{{ route('pengajuan-dana.delete', $pdt->id) }}"
-                                                            method="get" style="display: none;">
-                                                        </form>
+                                                        {{ $pdt->metode_penerimaan }}
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -269,26 +230,11 @@
                     </div>
                 </div>
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 10px;">
-                        <form id="dataTableSearchFormPengajuanSPK" action="#" method="get"
-                            style="height: 44px; width: 255px;" class="mr-2">
-                            <div class="col mr-1 border-container">
-                                <i class="fas fa-search"></i>
-                                <input type="text" id="searchPengajuanSPK" name="search"
-                                    class="form-control form-control-sm pl-0 rounded-right" placeholder="Type here...."
-                                    aria-controls="dataTable">
-                            </div>
-                        </form>
-                        <button type="button" id="filtersButtonPengajuanSPK"
-                            class="btn btn-sm btn-outline-info ml-2 btn-filters" style="font-size: 17.18px;">
-                            <i class="fas fa-sliders-h"></i> Filters
-                        </button>
-                    </div>
                     <div class="col-md-12">
-                        <div class="card mt-lg-3 card-table-spk">
+                        <div class="card mt-lg-2 card-table-spk">
                             <div class="card-body">
                                 <div class="table-responsive">
-                                    <div class="d-flex align-items-center mb-3 d-flex-center">
+                                    {{-- <div class="d-flex align-items-center mb-3 d-flex-center">
                                         <select id="showEntriesPengajuanSPK" class="form-control form-control-sm mr-2"
                                             style="width: 70px; border-color:#4FD1C5;">
                                             <option value="10">10</option>
@@ -298,11 +244,12 @@
                                         </select>
                                         <span class="labelentris" style="color: #A0AEC0;">entries per
                                             page</span>
-                                    </div>
+                                    </div> --}}
                                     <table class="table display-6 mb-6 table-responsive" id="TablePengajuanSPK"
                                         style="width:100%">
                                         <thead>
                                             <tr class="tr-table">
+                                                <th class="text-left" nowrap>ID</th>
                                                 <th class="text-left" nowrap>Nama Project</th>
                                                 <th class="text-left" nowrap>User</th>
                                                 <th class="text-left" nowrap>Main Contractor</th>
@@ -311,12 +258,21 @@
                                                 <th class="text-center" nowrap style="width:25%;">No SPK</th>
                                                 <th class="text-center" nowrap style="width:23%;">Tanggal</th>
                                                 <th class="text-center" nowrap>Tanggal selesai</th>
-                                                <th class="text-center" nowrap>Action</th>
+                                                {{-- <th class="text-center" nowrap>Action</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $i = 0;
+                                            @endphp
                                             @foreach ($pengajuan_spk_per_day as $pst)
+                                                @php
+                                                    $i += 1;
+                                                @endphp
                                                 <tr class="kolom-td">
+                                                    <td class="text-left" style="font-weight:400;"nowrap>
+                                                        {{ $i }}
+                                                    </td>
                                                     <td class="text-left" style="font-weight:400;"nowrap>
                                                         {{ $pst->nama_project }}
                                                     </td>
@@ -340,28 +296,6 @@
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
-                                                    </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
-                                                        <a href="{{ route('surat-perintah-kerja.edit', ['id' => $pst->id]) }}"
-                                                            class="fas fa-pen btn btn-sm tooltip-container"
-                                                            style="color:#4FD1C5; font-size:20px;">
-                                                            <span class="tooltip-edit">Edit</span>
-                                                        </a>
-                                                        <a href="{{ route('surat-perintah-kerja.show', ['id' => $pst->id]) }}"
-                                                            class="fas fa-eye btn btn-sm tooltip-container"
-                                                            style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                            <span class="tooltip-show">View</span>
-                                                        </a>
-                                                        <a href=""
-                                                            class="fas fa-trash-alt btn btn-sm tooltip-container"
-                                                            style="color:#F31414; font-size:20px;"
-                                                            onclick="submitDelete({{ $pst->id }})">
-                                                            <span class="tooltip-delete">Delete</span>
-                                                        </a>
-                                                        <form id="delete-form-{{ $pst->id }}"
-                                                            action="{{ route('surat-perintah-kerja.delete', $pst->id) }}"
-                                                            method="get" style="display: none;">
-                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -621,6 +555,8 @@
             // Inisialisasi DataTable Pengajuan Dana
             var tablePengajuanDana = $('#TablePengajuanDana').DataTable({
                 "pageLength": getPageLengthFromLocalStorage('TablePengajuanDana'),
+                "info": false, // Menonaktifkan pesan info
+                "paging": false,
                 initComplete: function() {
                     this.api().columns().every(function() {
                         var column = this;
@@ -648,6 +584,8 @@
             // Inisialisasi DataTable Pengajuan SPK
             var tablePengajuanSPK = $('#TablePengajuanSPK').DataTable({
                 "pageLength": getPageLengthFromLocalStorage('TablePengajuanSPK'),
+                "info": false, // Menonaktifkan pesan info
+                "paging": false,
                 initComplete: function() {
                     this.api().columns().every(function() {
                         var column = this;

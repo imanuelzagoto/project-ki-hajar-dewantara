@@ -584,7 +584,7 @@
                     <p class="teks18">2. Nama : Bayu Nugraha </p>
                     <p class="teks19">Jabatan : General Manager</p>
                     <p class="teks20">..........................</p>
-                    <p class="teks21">Form Number : SPK/01/admin/2022</p>
+                    <p class="teks21">Form Number : {{ $suratPerintahKerja->form_number }}</p>
                     <div class="garis-lurus6"></div>
                     <p class="teks14">Jabatan :</p>
                     <p class="teks5">Pemohon</p>

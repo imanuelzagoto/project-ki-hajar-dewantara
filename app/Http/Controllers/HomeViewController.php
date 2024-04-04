@@ -15,17 +15,25 @@ class HomeViewController extends Controller
 {
     public function index()
     {
-
         // data api
         // dd(Session::get('user'));
         // dd(Session::get('token'));
         // Data per hari
         $today = Carbon::now()->format('Y-m-d');
-        $pengajuan_dana_per_day = PengajuanDana::whereDate('created_at', $today)->get();
-        $total_pengajuan_dana = $pengajuan_dana_per_day->count();
+        $pengajuan_dana_per_day = PengajuanDana::whereDate('created_at', $today)
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
 
-        $pengajuan_spk_per_day = Surat_perintah_kerja::whereDate('created_at', $today)->get();
-        $total_pengajuan_spk = $pengajuan_spk_per_day->count();
+        $total_pengajuan_dana = PengajuanDana::whereDate('created_at', $today)->count();
+
+        $pengajuan_spk_per_day = Surat_perintah_kerja::whereDate('created_at', $today)
+            ->orderBy('id', 'desc')
+            ->take(5)
+            ->get();
+        // dd($pengajuan_spk_per_day);
+        $total_pengajuan_spk = Surat_perintah_kerja::whereDate('created_at', $today)->count();
+        // $total_pengajuan_spk = $pengajuan_spk_per_day->count();
 
         // Data per bulan
         $monthly_pengajuan_dana = PengajuanDana::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))

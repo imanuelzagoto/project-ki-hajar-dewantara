@@ -8,6 +8,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Session;
 
 class MasterProjekViewController extends Controller
 {
@@ -17,17 +18,6 @@ class MasterProjekViewController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Response $response)
-    {
-
-        // $datas = MasterProjek::all();
-        // foreach ($datas as $data) {
-        //     dd($data);
-        // }
-
-        return view('masterProjek.index');
-    }
-
-    public function data()
     {
         $curl = curl_init();
 
@@ -45,42 +35,11 @@ class MasterProjekViewController extends Controller
         $response = curl_exec($curl);
 
         curl_close($curl);
-        $datas = json_decode($response);
-        // $datas = MasterProjek::all();
-        // dd($datas);
 
-        return Datatables::of($datas)
-            ->addIndexColumn()
-            ->addColumn('action', function ($master_projeks) {
-                return '
-            <div style="display: flex;" class="text-center">
-                <a href="' . route('master-projek.edit', $master_projeks->id) . '"
-                    class="fas fa-pen btn btn-sm tooltip-container"
-                    style="color:#4FD1C5; font-size:20px;">
-                    <span class="tooltip-edit">Edit</span>
-                </a>
-                <a href="' . route('master-projek.show', $master_projeks->id) . '"
-                    class="fas fa-eye btn btn-sm tooltip-container"
-                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                    <span class="tooltip-show">View</span>
-                </a>
-                <a href="#" 
-                        class="fas fa-trash-alt btn btn-sm tooltip-container" 
-                        style="color:#F31414; font-size:20px;" 
-                        onclick="submitDelete(' . $master_projeks->id . ')">
-                        <span class="tooltip-delete">Delete</span>
-                    </a>
-                    <form id="delete-form-' . $master_projeks->id . '" 
-                        action="' . route('master-projek.destroy', $master_projeks->id) . '" 
-                        method="POST" style="display: none;">
-                        ' . csrf_field() . '
-                        ' . method_field('DELETE') . '
-                    </form>
-            </div>
-        ';
-            })
-            ->rawColumns(['action'])
-            ->make(true);
+        $projects = json_decode($response, true)['data'];
+        // dd($projects);
+        // Mengirimkan data proyek ke tampilan
+        return view('masterProjek.index', ['projects' => $projects]);
     }
 
     public function create()
@@ -94,39 +53,39 @@ class MasterProjekViewController extends Controller
      * @param  mixed $request
      * @return void
      */
-    public function store(Request $request, Response $response)
+    public function store(Request $request)
     {
-        // Define Validation rules
+        // dd($request);
+        // Define validation rules
         $validator = Validator::make($request->all(), [
             'project_name' => 'required',
             'code_project' => 'required',
             'deadline' => 'nullable|date',
-            'start' => 'nullable|date',
-            'end' => 'nullable|date',
+            'start' => 'nullable|date'
         ]);
 
         // check if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+        $curl = curl_init();
 
-
-        $response = Http::get("http://172.15.1.97/api/projects");
-
-        if ($response->OK()) {
-            $project = $response->json();
-            dd($project);
-        }
-
-        // Create new MasterProjek instance
-        $master_Projeks = MasterProjek::create([
-            'project_name' => $request->input('project_name'),
-            'code_project' => $request->input('code_project'),
-            'deadline' => $request->input('deadline'),
-            'start' => $request->input('start'),
-            'end' => $request->input('end'),
-        ]);
-
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => env('API_MASTER_PROJECT') . 'projects/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => array('project_name' => $request->project_name, 'code_project' => $request->code_project, 'deadline' => $request->deadline, 'start' => $request->start),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: ' . Session::get('token')
+            ),
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
         // return response
         return redirect()->route('master-projek.index')->with('success', 'Projek berhasil dibuat');
     }
@@ -153,11 +112,29 @@ class MasterProjekViewController extends Controller
 
     public function edit($id)
     {
-        // find data spk berdasarkan id
-        $master_Projeks = MasterProjek::find($id);
-        // check if the spk exists
-        if ($master_Projeks) {
-            return view('masterProjek.edit')->with('master_Projeks', $master_Projeks);
+
+        $url = 'http://172.15.1.97/api/projects/' . $id;
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+
+        $masterProjek = json_decode($response, true)['data'];
+        // dd($projects);
+
+        if ($masterProjek) {
+            return view('masterProjek.edit')->with('masterProjek', $masterProjek);
         } else {
             return view('page404');
         }
@@ -172,36 +149,28 @@ class MasterProjekViewController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $masterProjek = MasterProjek::find($id);
-
-        if (!$masterProjek) {
-            return response()->json(['message' => 'Data master projek tidak ditemukan!'], 404);
-        }
-        // Define validation rules
         $validator = Validator::make($request->all(), [
             'project_name' => 'required',
             'code_project' => 'required',
             'deadline' => 'nullable|date',
-            'start' => 'nullable|date',
-            'end' => 'nullable|date',
+            'start' => 'nullable|date'
         ]);
 
-        // periksa jika validasi gagal
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 422);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
-        // update nilai baru master projek
-        $masterProjek->update([
-            'project_name' => $request->project_name,
-            'code_project' => $request->code_project,
-            'deadline' => $request->deadline,
-            'start' => $request->start,
-            'end' => $request->end,
-        ]);
-        // return response
-        return redirect()->route('master-projek.index');
+        $response = Http::withHeaders([
+            'Authorization' => Session::get('token')
+        ])->put(env('API_MASTER_PROJECT') . 'projects/' . $id, $request->all());
+
+        if ($response->successful()) {
+            return redirect()->route('master-projek.index')->with('success', 'Projek berhasil diperbarui');
+        } else {
+            return redirect()->route('master-projek.index')->with('error', 'Gagal memperbarui projek');
+        }
     }
+
 
     /**
      * destroy
@@ -211,17 +180,23 @@ class MasterProjekViewController extends Controller
      */
     public function destroy($id)
     {
-        $masterProjek = MasterProjek::find($id);
+        $url = 'http://172.15.1.97/api/projects/' . $id;
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'DELETE',
+        ));
 
-        // check if the master projek exists
-        if (!$masterProjek) {
-            return response()->json(['message' => 'Data master projek tidak ditemukan!'], 404);
-        }
+        $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-        // Delete the 'Master Projek'
-        $masterProjek->delete();
-
-        // Return response
-        return redirect()->route('master-projek.index');
+        curl_close($curl);
+        return redirect()->route('master-projek.index')->with('success', 'Data berhasil dihapus');
     }
 }

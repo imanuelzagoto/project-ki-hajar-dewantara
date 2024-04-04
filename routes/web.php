@@ -90,38 +90,45 @@ Route::get('/login', function () {
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [HomeViewController::class, 'index'])->name('home.index');
 
-    // Rute untuk pengajuan dana
+    // Rute HOME untuk pengajuan dana
     Route::get('/pengajuan-dana/edit/{id}', [HomeViewController::class, 'editPengajuanDana'])->name('pengajuan-dana.edit');
     Route::put('/pengajuan-dana/update/{id}', [HomeViewController::class, 'updatePengajuanDana'])->name('pengajuan-dana.update');
     Route::get('/pengajuan-dana/show/{id}', [HomeViewController::class, 'showPengajuanDana'])->name('pengajuan-dana.show');
     Route::get('/pengajuan-dana/delete/{id}', [HomeViewController::class, 'destroyPengajuanDana'])->name('pengajuan-dana.delete');
 
-    // Rute untuk Surat Perintah Kerja
+    // Rute HOME untuk Surat Perintah Kerja
     Route::get('/surat-perintah-kerja/edit/{id}', [HomeViewController::class, 'editSuratPerintahKerja'])->name('surat-perintah-kerja.edit');
     Route::put('/surat-perintah-kerja/update/{id}', [HomeViewController::class, 'updateSuratPerintahKerja'])->name('surat-perintah-kerja.update');
     Route::get('/surat-perintah-kerja/show/{id}', [HomeViewController::class, 'showSuratPerintahKerja'])->name('surat-perintah-kerja.show');
     Route::get('/surat-perintah-kerja/delete/{id}', [HomeViewController::class, 'destroySuratPerintahKerja'])->name('surat-perintah-kerja.delete');
+
     // Routes Master Projek
-    Route::get('/master-projek/data', [MasterProjekViewController::class, 'data'])->name('master-projek.data');
+    // Route::get('/master-projek/data', [MasterProjekViewController::class, 'data'])->name('master-projek.data');
     Route::get('/master-projek', [MasterProjekViewController::class, 'index'])->name('master-projek.index');
     Route::get('/master-projek/tambah-perintah', [MasterProjekViewController::class, 'create'])->name('master-projek.create');
-    Route::get('/master-projek/{id}/edit', [MasterProjekViewController::class, 'edit'])->name('master-projek.edit');
-    Route::get('/master-projek/{id}', [MasterProjekViewController::class, 'show'])->name('master-projek.show');
-    Route::delete('/master-projek/{id}', [MasterProjekViewController::class, 'destroy'])->name('master-projek.destroy');
+    Route::post('/master-projek/store', [MasterProjekViewController::class, 'store'])->name('master-projek.store');
+    Route::put('/master-projek/update/{id}', [MasterProjekViewController::class, 'update'])->name('master-projek.update');
+    Route::get('/master-projek/edit/{id}', [MasterProjekViewController::class, 'edit'])->name('master-projek.edit');
+    Route::get('/master-projek/show/{id}', [MasterProjekViewController::class, 'show'])->name('master-projek.show');
+    Route::get('/master-projek/delete/{id}', [MasterProjekViewController::class, 'destroy'])->name('master-projek.delete');
 
     // Routes Pengajuan Dana
-    Route::get('/pengajuan-dana/data', [PengajuanDanaViewWebController::class, 'data'])->name('pengajuanDana.data');
+    // Route::get('/pengajuan-dana/data', [PengajuanDanaViewWebController::class, 'data'])->name('pengajuanDana.data');
     Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('pengajuanDana.index');
     Route::get('/pengajuan-dana/tambah-pengajuan', [PengajuanDanaViewWebController::class, 'create'])->name('pengajuanDana.create');
-    Route::get('/pengajuan-dana/{id}/edit', [PengajuanDanaViewWebController::class, 'edit'])->name('pengajuanDana.edit');
-    Route::get('/pengajuan-dana/{id}', [PengajuanDanaViewWebController::class, 'show'])->name('pengajuanDana.show');
-    Route::delete('/pengajuan-dana/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.destroy');
+    Route::post('/pengajuan-dana/store', [PengajuanDanaViewWebController::class, 'store'])->name('pengajuanDana.store');
+    Route::get('/pengajuan-dana/edit/{id}', [PengajuanDanaViewWebController::class, 'edit'])->name('pengajuanDana.edit');
+    Route::put('/pengajuan-dana/update/{id}', [PengajuanDanaViewWebController::class, 'update'])->name('pengajuanDana.update');
+    Route::get('/pengajuan-dana/show/{id}', [PengajuanDanaViewWebController::class, 'show'])->name('pengajuanDana.show');
+    Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
 
     // Routes Surat perintah kerja
-    Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
+    // Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
     Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
     Route::get('/surat-perintah-kerja/tambah-perintah', [SuratPerintahKerjaViewWebController::class, 'create'])->name('suratPerintahKerja.create');
-    Route::get('/surat-perintah-kerja/{id}/edit', [SuratPerintahKerjaViewWebController::class, 'edit'])->name('suratPerintahKerja.edit');
-    Route::get('/surat-perintah-kerja/{id}', [SuratPerintahKerjaViewWebController::class, 'show'])->name('suratPerintahKerja.show');
-    Route::delete('/surat-perintah-kerja/{id}', [SuratPerintahKerjaViewWebController::class, 'destroy'])->name('surat_perintah_kerja.destroy');
+    Route::post('/surat-perintah-kerja/store', [SuratPerintahKerjaViewWebController::class, 'store'])->name('suratPerintahKerja.store');
+    Route::put('/surat-perintah-kerja/update/{id}', [SuratPerintahKerjaViewWebController::class, 'update'])->name('suratPerintahKerja.update');
+    Route::get('/surat-perintah-kerja/edit/{id}', [SuratPerintahKerjaViewWebController::class, 'edit'])->name('suratPerintahKerja.edit');
+    Route::get('/surat-perintah-kerja/show/{id}', [SuratPerintahKerjaViewWebController::class, 'show'])->name('suratPerintahKerja.show');
+    Route::get('/surat-perintah-kerja/delete/{id}', [SuratPerintahKerjaViewWebController::class, 'destroy'])->name('surat_perintah_kerja.delete');
 });

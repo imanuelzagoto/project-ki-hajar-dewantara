@@ -12,21 +12,22 @@ class PengajuanDana extends Model
 
     protected $fillable = [
         'nama_pemohon',
+        'jabatan_pemohon',
         'subject',
         'tujuan',
         'lokasi',
-        'jangka_waktu',
-        'dana_yang_dibutuhkan',
-        'no_rekening',
+        'batas_waktu',
+        'total_dana',
+        'metode_penerimaan',
         'catatan',
-        'tanggal',
+        'tanggal_pengajuan',
         'no_doc',
         'revisi',
     ];
 
     protected $dates = [
-        'tanggal',
-        'jangka_waktu',
+        'tanggal_pengajuan',
+        'batas_waktu',
     ];
 
     /**

@@ -29,14 +29,15 @@ class PengajuanDanaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_pemohon' => 'required|string',
+            'jabatan_pemohon' => 'required|string',
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'jangka_waktu' => 'required|date_format:d F Y',
-            'dana_yang_dibutuhkan' => 'required|numeric',
-            'no_rekening' => 'required|string',
+            'batas_waktu' => 'required|date_format:d F Y',
+            'total_dana' => 'required|numeric',
+            'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
-            'tanggal' => 'required|date_format:d F Y',
+            'tanggal_pengajuan' => 'required|date_format:d F Y',
             'no_doc' => 'required|string',
             'revisi' => 'nullable|string',
         ]);
@@ -45,15 +46,9 @@ class PengajuanDanaController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // Manipulasi tanggal 'tanggal' sebelum memperbarui data surat perintah kerja
-        $request['tanggal'] = Carbon::createFromFormat('d F Y', $request['tanggal'])->format('Y-m-d');
-
-        // Manipulasi tanggal 'waktu_penyelesaian' sebelum memperbarui data surat perintah kerja
-        $request['jangka_waktu'] = $request['jangka_waktu'] ? Carbon::createFromFormat('d F Y', $request['jangka_waktu'])->format('Y-m-d') : null;
-
+        $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
+        $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
         $pengajuanDana = PengajuanDana::create($request->all());
-
-        // Ubah nilai dana_yang_dibutuhkan menjadi format mata uang rupiah
         $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
 
         return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Disimpan.', $pengajuanDana);
@@ -88,14 +83,15 @@ class PengajuanDanaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nama_pemohon' => 'required|string',
+            'jabatan_pemohon' => 'required|string',
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'jangka_waktu' => 'required|date_format:d F Y',
-            'dana_yang_dibutuhkan' => 'required|numeric',
-            'no_rekening' => 'required|string',
+            'batas_waktu' => 'required|date_format:d F Y',
+            'total_dana' => 'required|numeric',
+            'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
-            'tanggal' => 'required|date_format:d F Y',
+            'tanggal_pengajuan' => 'required|date_format:d F Y',
             'no_doc' => 'required|string',
             'revisi' => 'nullable|string',
         ]);
@@ -110,15 +106,9 @@ class PengajuanDanaController extends Controller
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
 
-        // Manipulasi tanggal 'tanggal' sebelum memperbarui data surat perintah kerja
-        $request['tanggal'] = Carbon::createFromFormat('d F Y', $request['tanggal'])->format('Y-m-d');
-
-        // Manipulasi tanggal 'waktu_penyelesaian' sebelum memperbarui data surat perintah kerja
-        $request['jangka_waktu'] = $request['jangka_waktu'] ? Carbon::createFromFormat('d F Y', $request['jangka_waktu'])->format('Y-m-d') : null;
-
+        $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
+        $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
         $pengajuanDana->update($request->all());
-
-        // Ubah nilai dana_yang_dibutuhkan menjadi format mata uang rupiah
         $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
 
         return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Diperbarui.', $pengajuanDana);
@@ -154,14 +144,12 @@ class PengajuanDanaController extends Controller
         // Retrieve Surat Perintah Kerja data by ID
         $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
         // Load view for PDF
-        $pdf = PDF::loadView('PD.pengajuan_dana_pdf', compact('pengajuan_danas'));
-
+        $pdf = PDF::loadView('pengajuanDana.pengajuan_dana_pdf', compact('pengajuan_danas'));
         // // Optionally, you can set additional configurations for the PDF
         // $pdf->setPaper('a4', 'landscape');
-
         // Generate PDF
         // return $pdf->stream();
-
-        return $pdf->download('pengajuan_dana.pdf');
+        return $pdf->stream("", array("Attachment" => false));
+        // return $pdf->download('pengajuan_dana.pdf');
     }
 }

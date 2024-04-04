@@ -37,6 +37,11 @@ class SuratPerintahKerjaController extends Controller
         $validator = Validator::make($request->all(), [
             'kode_project' => 'required',
             'pemohon' => 'required',
+            'penerima' => 'nullable|string',
+            'menyetujui' => 'nullable|string',
+            'jabatan_1' => 'required',
+            'jabatan_2' => 'nullable|string',
+            'jabatan_3' => 'nullable|string',
             'nama_project' => 'required',
             'user' => 'required',
             'main_contractor' => 'required',
@@ -46,6 +51,8 @@ class SuratPerintahKerjaController extends Controller
             'prioritas' => 'nullable|string',
             'waktu_penyelesaian' => 'nullable|date_format:d/m/Y',
             'pic' => 'required',
+            'jenis_pekerjaan' => 'required',
+            'uraian_pekerjaan' => 'required',
             'dokumen_pendukung_type' => 'nullable|string',
             'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,poster,csv,txt|max:2048',
             'file_pendukung_lainnya' => 'nullable|string',
@@ -76,6 +83,11 @@ class SuratPerintahKerjaController extends Controller
         $surat_Perintah_Kerja = Surat_perintah_kerja::create([
             'kode_project' => $request->kode_project,
             'pemohon' => $request->pemohon,
+            'penerima' => $request->penerima,
+            'menyetujui' => $request->menyetujui,
+            'jabatan_1' => $request->jabatan_1,
+            'jabatan_2' => $request->jabatan_2,
+            'jabatan_3' => $request->jabatan_3,
             'nama_project' => $request->nama_project,
             'user' => $request->user,
             'main_contractor' => $request->main_contractor,
@@ -85,8 +97,10 @@ class SuratPerintahKerjaController extends Controller
             'prioritas' => $request->prioritas,
             'waktu_penyelesaian' => $request->waktu_penyelesaian,
             'pic' => $request->pic,
+            'jenis_pekerjaan' => $request->jenis_pekerjaan,
+            'uraian_pekerjaan' => $request->uraian_pekerjaan,
             'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
-            'dokumen_pendukung_file' => $dokumen_pendukung_file,
+            'dokumen_pendukung_file' => $request->dokumen_pendukung_file,
             'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
         ]);
 
@@ -126,6 +140,11 @@ class SuratPerintahKerjaController extends Controller
         $validator = Validator::make($request->all(), [
             'kode_project'          => 'required',
             'pemohon'               => 'required',
+            'penerima'               => 'nullable|string',
+            'menyetujui'               => 'nullable|string',
+            'jabatan_1'               => 'required',
+            'jabatan_2'               => 'nullable|string',
+            'jabatan_3'               => 'nullable|string',
             'nama_project'          => 'required',
             'user'                  => 'required',
             'main_contractor'       => 'required',
@@ -135,8 +154,10 @@ class SuratPerintahKerjaController extends Controller
             'prioritas' => 'nullable|string',
             'waktu_penyelesaian' => 'nullable|date_format:d/m/Y',
             'pic' => 'required',
+            'jenis_pekerjaan'               => 'required',
+            'uraian_pekerjaan'               => 'required',
             'dokumen_pendukung_type' => 'nullable|string',
-            'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,pdf,poster,csv,txt|max:2048',
+            'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,poster,pdf,csv,txt|max:2048',
             'file_pendukung_lainnya' => 'nullable|string',
         ]);
 
@@ -173,6 +194,11 @@ class SuratPerintahKerjaController extends Controller
         $surat_Perintah_Kerja->update([
             'kode_project'          => $request->kode_project,
             'pemohon'               => $request->pemohon,
+            'penerima'               => $request->penerima,
+            'menyetujui'               => $request->menyetujui,
+            'jabatan_1'               => $request->jabatan_1,
+            'jabatan_2'               => $request->jabatan_2,
+            'jabatan_3'               => $request->jabatan_3,
             'nama_project'          => $request->nama_project,
             'user'                  => $request->user,
             'main_contractor'       => $request->main_contractor,
@@ -182,8 +208,10 @@ class SuratPerintahKerjaController extends Controller
             'prioritas'             => $request->prioritas,
             'waktu_penyelesaian'    => $request->waktu_penyelesaian,
             'pic' => $request->pic,
-            'dokumen_pendukung_type' => $request->dokumen_pendukung_type, // Tipe dokumen pendukung
-            'dokumen_pendukung_file' => $dokumen_pendukung_file, // Nama file dokumen pendukung
+            'jenis_pekerjaan'               => $request->jenis_pekerjaan,
+            'uraian_pekerjaan'               => $request->uraian_pekerjaan,
+            'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
+            'dokumen_pendukung_file' => $request->dokumen_pendukung_file,
             'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
         ]);
 
@@ -230,14 +258,12 @@ class SuratPerintahKerjaController extends Controller
         // Retrieve Surat Perintah Kerja data by ID
         $surat_perintah_kerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
         // Load view for PDF
-        $pdf = PDF::loadView('surat_perintah_kerja.surat_perintah_kerja_pdf', compact('surat_perintah_kerjas'));
-
+        $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja_pdf', compact('surat_perintah_kerjas'));
         // // Optionally, you can set additional configurations for the PDF
         // $pdf->setPaper('a4', 'landscape');
-
         // Generate PDF
         // return $pdf->stream();
-
-        return $pdf->download('surat_perintah_kerja.pdf');
+        return $pdf->stream("", array("Attachment" => false));
+        // return $pdf->download('surat_perintah_kerja.pdf');
     }
 }

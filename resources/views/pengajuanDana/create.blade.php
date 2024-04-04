@@ -73,7 +73,7 @@
                         <div class="row pr-3 pt-3">
                             <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                 <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
-                                    <span class="head-text text-center">Head</span>
+                                    <span class="head-title">Head</span>
                                     <span class="detail-text">Pengaju</span>
                                 </div>
                                 <div class="d-block w-100">
@@ -97,7 +97,7 @@
                         <div class="row pr-3 pt-3">
                             <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
                                 <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
-                                    <span class="head-text text-center">Detail</span>
+                                    <span class="head-detail">Detail</span>
                                     <span class="detail-text">Pengaju</span>
                                 </div>
                                 <div class="d-block w-100">
@@ -118,9 +118,19 @@
                                             <span class="text-sm font-weight-bold text-form-detail">Total Dana</span>
                                             <input class="form-control bg-light w-100" type="text">
                                         </div>
-                                        <div class="pr-4 py-2 col-4">
-                                            <span class="text-sm font-weight-bold text-form-detail">Metode Penerimaan</span>
-                                            <input class="form-control bg-light w-100" type="text">
+                                        <div class="pr-4 py-2 col-2" id="container_method">
+                                            <span class="text-sm font-weight-bold text-form-detail">Metode
+                                                Penerimaan</span>
+                                            <select id="metodePenerimaan" class="form-control bg-light w-100">
+                                                <option value="debit">Debit</option>
+                                                <option value="cash">Cash</option>
+                                            </select>
+                                        </div>
+                                        <div id="nomorRekeningInput" class="pr-4 col-2" style="margin-top: 28px;">
+                                            <span class="text-sm font-weight-bold text-form-detail"></span>
+                                            <input class="form-control bg-light w-100" type="text"
+                                                placeholder="Masukan nomor rekening"
+                                                style="font-size: 10px; font-weight: bold; color: #92A1BB;">
                                         </div>
                                         <div class="pr-4 py-2 col-12">
                                             <span class="text-sm font-weight-bold text-form-detail">Uraian Pekerjaan</span>
@@ -133,7 +143,7 @@
                         <div class="row pr-3 pt-3" id="itemFields">
                             <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                 <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
-                                    <span class="head-text text-center">Item</span>
+                                    <span class="head-item">Item</span>
                                     <span class="detail-text">Pengaju</span>
                                 </div>
                                 <div class="d-block w-100">
@@ -173,7 +183,7 @@
                         <div class="row pr-3 pt-3">
                             <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                 <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
-                                    <span class="head-text text-center">Pengaju</span>
+                                    <span class="head-text">Pengaju</span>
                                     <span class="detail-text">Pengaju</span>
                                 </div>
                                 <div class="d-block w-100">
@@ -190,13 +200,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="d-flex justify-content-center p-4 rounded-pill">
-                                <button class="btn btn-save" style="border-radius: 25px; font-size: 14px;">
-                                    SAVE
-                                </button>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="d-flex justify-content-center p-4 rounded-pill">
+                                    <button class="btn btn-save"
+                                        style="border-radius: 25px; font-weight:700; font-size: 14px;">
+                                        SAVE
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -204,6 +215,24 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // JS metode penerimaan
+        document.getElementById('metodePenerimaan').addEventListener('change', function() {
+            var selectedValue = this.value;
+            var nomorRekeningInput = document.getElementById('nomorRekeningInput');
+            if (selectedValue === 'debit') {
+                nomorRekeningInput.style.display = 'block';
+                document.getElementById('container_method').classList.remove('col-4');
+                document.getElementById('container_method').classList.add('col-2');
+            } else {
+                document.getElementById('container_method').classList.remove('col-2');
+                document.getElementById('container_method').classList.add('col-4');
+                nomorRekeningInput.style.display = 'none';
+            }
+        });
+        // end JS Metode penerimaan
+    </script>
 @endsection
 
 @push('scripts')

@@ -1,6 +1,11 @@
 /* public/partas/css/kiha.css */
 
 /* header */
+.disabled_input {
+    pointer-events: none;
+    background: #d9d9d9 !important;
+}
+
 .breadcrumbs {
     padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
@@ -123,8 +128,16 @@
     color: #2D3748;
 }
 
+.text-form-spk {
+    color: #2D3748;
+}
+
 @media screen and (max-width: 500px) {
     .text-form-detail {
+        font-size: 8px;
+    }
+
+    .text-form-spk {
         font-size: 8px;
     }
 
@@ -133,7 +146,15 @@
         font-size: 15px;
     }
 
+    .hide-project {
+        font-size: 15px;
+    }
+
     .head-text {
+        font-size: 15px;
+    }
+
+    .head-project {
         font-size: 15px;
     }
 }
@@ -143,12 +164,23 @@
         font-size: 8px;
     }
 
+    .text-form-spk {
+        font-size: 8px;
+    }
 
     .detail-text {
         font-size: 15px;
     }
 
+    .hide-project {
+        font-size: 15px;
+    }
+
     .head-text {
+        font-size: 15px;
+    }
+
+    .head-project {
         font-size: 15px;
     }
 }
@@ -180,6 +212,12 @@
     }
 }
 
+@media screen and (max-width: 1455.56px) {
+    .text-mp {
+        padding-left: 0.6%;
+    }
+}
+
 @media screen and (max-width: 1800px) {
     .text-dashboard {
         padding-right: 5px;
@@ -208,7 +246,7 @@
 }
 
 .text-mp {
-    margin-left: 2.6%;
+    margin-left: 4.2%;
     color: #2D3748;
     font-size: 17px;
     font-weight: 700;
@@ -228,6 +266,7 @@
 @media screen and (max-width: 990.00px) and (min-width: 555.56px) {
     .text-mp {
         margin-left: 18px;
+        margin-top: -19px;
     }
 
     .fiturjam {
@@ -235,9 +274,27 @@
     }
 }
 
+@media screen and (max-width: 991.11px) {
+    .text-mp {
+        margin-bottom: -5px;
+    }
+}
+
+@media screen and (max-width: 568.89px) {
+    .text-mp {
+        margin-bottom: -5px;
+    }
+}
+
+/* @media screen and (max-width: 568.89px) {
+    .text-mp {
+        margin-bottom: -5px;
+    }
+} */
+
 @media screen and (max-width: 1560px) and (min-width: 992.22px) {
     .text-mp {
-        margin-left: 11px;
+        margin-left: 29px;
     }
 
     .fiturjam {
@@ -850,7 +907,59 @@ input[type=file]::file-selector-button:hover {
     visibility: hidden;
 }
 
+.hide-project {
+    visibility: hidden;
+}
+
 .head-text {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+}
+
+.head-item {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 29px;
+}
+
+.head-detail {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 19px;
+}
+
+.head-title {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 24px;
+}
+
+.head-project {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 2px;
+}
+
+.dtl-text {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 20px;
+}
+
+.item-text {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 31px;
+}
+
+.pengaju-text {
     visibility: visible;
     position: absolute;
     margin-top: 1px;
@@ -885,4 +994,49 @@ input[type=file]::file-selector-button:hover {
     background: #4FD1C5;
     border-radius: 20px;
     height: 4px;
+}
+
+
+.text-area {
+    height: 115px;
+}
+
+.text-checkbox {
+    font-size: 14px;
+    padding-top: 1px;
+    padding-left: 3px;
+    line-height: 19.6px;
+    font-weight: 700;
+    font-family: Helvetica, sans-serif;
+}
+
+.form-checkbox-kontrak {
+    width: 73px;
+    margin-bottom: 10px;
+    background-color: #F8F9FA;
+    margin-left: 10px;
+}
+
+.form-checkbox-brosur {
+    width: 73px;
+    margin-bottom: 10px;
+    background-color: #F8F9FA;
+    margin-left: 10px;
+}
+
+.form-checkbox-gambar {
+    width: 73px;
+    margin-bottom: 10px;
+    background: #F8F9FA;
+}
+
+@media screen and (max-width: 555.56px) {
+    .text-checkbox {
+        font-size: 8px;
+    }
+}
+
+.btn-modal-spk {
+    background-color: #4FD1C5;
+    color: #FFFFFF;
 }

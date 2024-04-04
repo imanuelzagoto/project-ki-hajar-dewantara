@@ -14,14 +14,15 @@ return new class extends Migration
         Schema::create('pengajuan_danas', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pemohon');
+            $table->string('jabatan_pemohon');
             $table->string('subject');
             $table->string('tujuan');
             $table->string('lokasi');
-            $table->date('jangka_waktu');
-            $table->decimal('dana_yang_dibutuhkan', 15, 2);
-            $table->string('no_rekening');
+            $table->date('batas_waktu');
+            $table->decimal('total_dana', 15, 2);
+            $table->string('metode_penerimaan');
             $table->string('catatan')->nullable();
-            $table->date('tanggal');
+            $table->date('tanggal_pengajuan');
             $table->string('no_doc');
             $table->string('revisi')->nullable();
             $table->timestamps();

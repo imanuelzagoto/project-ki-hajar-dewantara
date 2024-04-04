@@ -70,46 +70,53 @@
             <div class="">
                 <div class="card">
                     <div class="card-body">
-                        <div class="row pr-3 pt-3">
-                            <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
-                                <div class="font-weight-bold text-lg padding-project pt-form-create">
-                                    <span class="">Project</span>
-                                </div>
-                                <div class="d-block w-100">
-                                    <div class="row py-2">
-                                        <div class="pr-4 py-2 col-6">
-                                            <span class="text-sm font-weight-bold">Nama Project</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="pr-4 py-2 col-6">
-                                            <span class="text-sm font-weight-bold">Kode Project</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="pr-4 py-2 col-4">
-                                            <span class="text-sm font-weight-bold">Tenggat</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="pr-4 py-2 col-4">
-                                            <span class="text-sm font-weight-bold">Mulai</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="pr-4 py-2 col-4">
-                                            <span class="text-sm font-weight-bold">Akhir / Selesai</span>
-                                            <input class="form-control bg-light w-100" type="text">
+                        <form action="{{ url('/master-projek/store') }}" method="post">
+                            @csrf
+                            <div class="row pr-3 pt-3">
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                    <div class="font-weight-bold text-lg padding-project pt-form-create">
+                                        <span class="">Project</span>
+                                    </div>
+                                    <div class="d-block w-100">
+                                        <div class="row py-2">
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold">Nama Project</span>
+                                                <input name="project_name" class="form-control bg-light w-100"
+                                                    type="text">
+                                            </div>
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold">Kode Project</span>
+                                                <input name="code_project" class="form-control bg-light w-100"
+                                                    type="text">
+                                            </div>
+                                            <div class="pr-4 py-2 col-4">
+                                                <span class="text-sm font-weight-bold">Tenggat</span>
+                                                <input name="deadline" class="form-control bg-light w-100" type="date">
+                                            </div>
+                                            <div class="pr-4 py-2 col-4">
+                                                <span class="text-sm font-weight-bold">Mulai</span>
+                                                <input name="start" class="form-control bg-light w-100" type="date">
+                                            </div>
+                                            <div class="pr-4 py-2 col-4">
+                                                <span class="text-sm font-weight-bold">Akhir / Selesai</span>
+                                                <input name="end" class="form-control bg-light w-100" type="date"
+                                                    disabled>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="d-flex justify-content-center p-4 rounded-pill">
-                                <button class="btn btn-save" style="border-radius: 25px; font-size: 14px;">
-                                    SAVE
-                                </button>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-center p-4 rounded-pill">
+                                        <button class="btn btn-save" type="submit"
+                                            style="border-radius: 25px; font-weight:bold; font-size: 14px;">
+                                            SAVE
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

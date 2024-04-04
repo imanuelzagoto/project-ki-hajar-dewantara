@@ -13,6 +13,11 @@ class Surat_perintah_kerja extends Model
     protected $fillable = [
         'kode_project',
         'pemohon',
+        'penerima',
+        'menyetujui',
+        'jabatan_1',
+        'jabatan_2',
+        'jabatan_3',
         'nama_project',
         'user',
         'main_contractor',
@@ -22,9 +27,12 @@ class Surat_perintah_kerja extends Model
         'prioritas',
         'waktu_penyelesaian',
         'pic',
+        'jenis_pekerjaan',
+        'uraian_pekerjaan',
         'dokumen_pendukung_type',
         'dokumen_pendukung_file',
         'file_pendukung_lainnya',
+        'form_number',
     ];
 
     protected $dates = [

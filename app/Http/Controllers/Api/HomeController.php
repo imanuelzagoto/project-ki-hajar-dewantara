@@ -15,10 +15,14 @@ class HomeController extends Controller
     {
         // Data per hari
         $today = Carbon::now()->format('Y-m-d');
-        $pengajuan_dana_per_day = PengajuanDana::whereDate('created_at', $today)->get();
+        $pengajuan_dana_per_day = PengajuanDana::whereDate('created_at', $today)
+            ->orderBy('id', 'desc')
+            ->get();
         $total_pengajuan_dana = $pengajuan_dana_per_day->count();
 
-        $pengajuan_spk_per_day = Surat_perintah_kerja::whereDate('created_at', $today)->get();
+        $pengajuan_spk_per_day =  Surat_perintah_kerja::whereDate('created_at', $today)
+            ->orderBy('id', 'desc')
+            ->get();
         $total_pengajuan_spk = $pengajuan_spk_per_day->count();
 
         // Data per bulan

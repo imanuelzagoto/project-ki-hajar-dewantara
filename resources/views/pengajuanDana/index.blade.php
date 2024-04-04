@@ -69,19 +69,19 @@
                     class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
-                        <input type="text" id="dataTableSearchInput" name="search"
+                        <input type="text" id="searchPD" name="search"
                             class="form-control form-control-sm pl-0 rounded-right" placeholder="Type here...."
                             aria-controls="dataTable">
                     </div>
                 </form>
-                <button type="button" id="filtersButton" class="btn btn-sm btn-outline-info ml-2 btn-filters"
+                <button type="button" id="filtersButtonPD" class="btn btn-sm btn-outline-info ml-2 btn-filters"
                     style="font-size: 17.18px;">
                     <i class="fas fa-sliders-h"></i> Filters
                 </button>
             </div>
 
             <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
-                <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
+                <button class="btn btn-perintah mb-1" style="border-radius: 19px;"
                     onclick="window.location.href='{{ route('pengajuanDana.create') }}'">
                     <span class="btn-label">
                         <i class="fa fa-plus"></i>
@@ -96,8 +96,8 @@
                     <div class="card-body">
                         <div class="table-responsive">
                             <div class="d-flex align-items-center mb-3 d-flex-center">
-                                <select id="entriesPerPage" class="form-control form-control-sm mr-2"
-                                    style="width: 70px; border-color:#4FD1C5;">
+                                <select id="showEntriesPD" class="form-control form-control-sm mr-2"
+                                    style="width: 70px; border-color:#E2E8F0;">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
@@ -106,14 +106,14 @@
                                 <span class="labelentris" style="color: #A0AEC0;">entries per
                                     page</span>
                             </div>
-                            <table class="element-scrollbar table display-6 mb-6 table-responsive tablePD"
-                                style="width:100%;">
+                            <table class="element-scrollbar table display-6 mb-6 table-responsive" style="width:100%;"
+                                id='tablePengajuanDana'>
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                         <th class="text-center" nowrap>No</th>
-                                        <th class="text-center" nowrap>No.Doc</th>
-                                        <th class="text-center" nowrap>Revisi</th>
-                                        <th class="text-center" nowrap>Pemohon</th>
+                                        <th class="text-left" nowrap>No.Doc</th>
+                                        <th class="text-left" nowrap>Revisi</th>
+                                        <th class="text-left" nowrap>Pemohon</th>
                                         <th class="text-center" nowrap>Tujuan</th>
                                         <th class="text-center" nowrap>Lokasi<br>
                                             <span style="display:block; text-align:center;">Pengajuan</span>
@@ -132,6 +132,88 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach ($pengajuanDanas as $pdts)
+                                        @php
+                                            $i += 1;
+                                        @endphp
+                                        <tr class="kolom-td">
+                                            <td class="text-left" style="font-weight:400;"nowrap>
+                                                {{ $i }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                                {{ $pdts->no_doc }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                                {{ $pdts->revisi }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                                {{ $pdts->nama_pemohon }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                                {{ $pdts->tujuan }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ $pdts->lokasi }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ Carbon\Carbon::parse($pdts->updated_at)->format('H:i d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ Carbon\Carbon::parse($pdts->batas_waktu)->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-right" style="font-weight:400;" nowrap>
+                                                {{ 'Rp. ' . number_format($pdts->total_dana, 0, ',', '.') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ $pdts->metode_penerimaan }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+
+                                                <a href="/pengajuan-dana/edit/{{ $pdts->id }}"
+                                                    class="fas fa-pen btn btn-sm tooltip-container"
+                                                    style="color:#4FD1C5; font-size:20px;">
+                                                    <span class="tooltip-edit">Edit</span>
+                                                </a>
+
+                                                {{-- Show modal --}}
+                                                {{-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg">
+                                                        <div class="modal-content">
+                                                            @include('pengajuanDana.show')
+                                                        </div>
+                                                    </div>
+                                                </div> --}}
+
+                                                {{-- <a href="{{ route('suratPerintahKerja.show', ['id' => $spk->id]) }}"
+                                                    target="_blank" type="button"
+                                                    class="fas fa-eye btn btn-sm tooltip-container"
+                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                    <span class="tooltip-show">View</span>
+                                                </a> --}}
+
+                                                <a href="/pengajuan-dana/show/{{ $pdts->id }}" target="_blank"
+                                                    type="button" class="fas fa-eye btn btn-sm tooltip-container"
+                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                    <span class="tooltip-show">View</span>
+                                                </a>
+
+                                                <a href="/pengajuan-dana/delete/{{ $pdts->id }}"
+                                                    class="fas fa-trash-alt btn btn-sm tooltip-container"
+                                                    style="color:#F31414; font-size:20px;"
+                                                    onclick="submitDelete({{ $pdts->id }})">
+                                                    <span class="tooltip-delete">Delete</span>
+                                                </a>
+                                                <form id="delete-form-{{ $pdts->id }}"
+                                                    action="/pengajuan-dana/delete/{{ $pdts->id }}" method="get"
+                                                    style="display: none;">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -140,10 +222,9 @@
             </div>
         </div>
     </div>
-@endsection
 
-@push('scripts')
     <script>
+        // JS DELETE
         function submitDelete(id) {
             event.preventDefault();
             Swal.fire({
@@ -172,150 +253,74 @@
                 }
             });
         }
-        // Function to get page length from localStorage
-        function getPageLengthFromLocalStorage(tableId) {
-            var storedLength = localStorage.getItem(tableId + '_pageLength');
-            return storedLength ? parseInt(storedLength) : 10; // Default page length
-        }
+    </script>
+@endsection
 
-        $(function() {
-            // Inisialisasi nilai pilihan entri per halaman dari localStorage
-            var storedPageLength = getPageLengthFromLocalStorage('tableDataPD');
-            $('#entriesPerPage').val(storedPageLength);
+@push('scripts')
+    <script>
+        // JS DATATABLE
+        $(document).ready(function() {
+            // Function to get page length from localStorage
+            function getPageLengthFromLocalStorage(tableId) {
+                var storedLength = localStorage.getItem(tableId + '_pageLength');
+                if (storedLength) {
+                    return parseInt(storedLength);
+                } else {
+                    return 10; // Default page length
+                }
+            }
 
-            // Inisialisasi DataTables
-            var table = $('.tablePD').DataTable({
-                responsive: true,
-                serverside: true,
-                autoWidth: false,
-                bLengthChange: true,
-                lengthMenu: [10, 25, 50, 100],
-                pageLength: storedPageLength,
-                ajax: {
-                    url: '{{ route('pengajuanDana.data') }}',
-                },
-                columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        searchable: false,
-                        sortable: false
-                    },
-
-                    {
-                        data: 'no_doc',
-                        className: 'data-table-cell text-left nowrap',
-                        createdCell: function(td, cellData, rowData, row, col) {
-                            $(td).css('text-align', 'left');
-                        }
-                    },
-
-                    {
-                        data: 'revisi',
-                        className: 'data-table-cell text-left nowrap'
-                    },
-
-                    {
-                        data: 'nama_pemohon',
-                        className: 'data-table-cell text-left nowrap'
-                    },
-
-                    {
-                        data: 'tujuan',
-                        className: 'data-table-cell text-left nowrap',
-                        createdCell: function(td, cellData, rowData, row, col) {
-                            $(td).css('text-align', 'left');
-                        }
-                    },
-
-                    {
-                        data: 'lokasi',
-                        className: 'data-table-cell text-center nowrap',
-                        createdCell: function(td, cellData, rowData, row, col) {
-                            $(td).css('text-align', 'center');
-                        }
-                    },
-
-                    {
-                        data: 'updated_at',
-                        className: 'data-table-cell nowrap',
-                        render: function(data) {
-                            // Mengubah format tanggal
-                            return moment(data, 'YYYY-MM-DD HH:mm:ss').format('HH:mm DD-MM-YYYY');
-                        },
-                        createdCell: function(td, cellData, rowData, row, col) {
-                            $(td).css('text-align', 'center');
-                        }
-                    },
-
-                    {
-                        data: 'jangka_waktu',
-                        className: 'data-table-cell text-center nowrap',
-                        render: function(data) {
-                            // Mengubah format waktu penyelesaian
-                            return moment(data, 'DYYYY-MM-DD').format('DD-MM-YYYY');
-                        }
-                    },
-
-                    {
-                        data: 'dana_yang_dibutuhkan',
-                        className: 'data-table-cell text-right nowrap',
-                        render: function(data) {
-                            // Mengubah format uang ke format yang diinginkan
-                            var formattedMoney = 'Rp. ' + parseFloat(data).toLocaleString('id-ID', {
-                                minimumFractionDigits: 0
+            // table spk
+            var tablePengajuanDana = $('#tablePengajuanDana').DataTable({
+                "pageLength": getPageLengthFromLocalStorage('tablePengajuanDana'),
+                // "info": false, // Menonaktifkan pesan info
+                // "paging": false,
+                initComplete: function() {
+                    this.api().columns().every(function() {
+                        var column = this;
+                        var select = $(
+                                '<select class="form-control"><option value=""></option></select>'
+                            )
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function() {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                                column.search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
                             });
 
-                            return formattedMoney;
-                        }
-                    },
-
-                    {
-                        data: 'no_rekening',
-                        className: 'data-table-cell text-center nowrap'
-                    },
-
-                    {
-                        data: 'action',
-                        className: 'text-center',
-                        orderable: false,
-                        searchable: false
-                    }
-                ],
-                createdRow: function(row, data, dataIndex) {
-                    // Menerapkan warna teks pada kolom dari id hingga waktu_penyelesaian
-                    $(row).find(
-                        'td:eq(0), td:eq(1), td:eq(2), td:eq(3), td:eq(4), td:eq(5), td:eq(6), td:eq(7), td:eq(8), td:eq(9), td:eq(10)'
-                    ).css('color', '#232323');
+                        column.data().unique().sort().each(function(d, j) {
+                            select.append('<option value="' + d + '">' + d +
+                                '</option>');
+                        });
+                    });
                 }
             });
 
-            // Mengatur jumlah entri per halaman
-            $('#entriesPerPage').on('change', function() {
-                var selectedValue = $(this).val();
-                // Simpan nilai yang dipilih ke dalam localStorage
-                localStorage.setItem('tableDataPD_pageLength', selectedValue);
-                // Terapkan perubahan jumlah entri per halaman ke DataTable
-                table.page.len(selectedValue).draw();
+            // Set value for show entries dropdown on page load
+            $('#showEntriesPD').val(getPageLengthFromLocalStorage('tablePengajuanDana'));
+
+            // fitur show entri
+            $('#showEntriesPD').change(function() {
+                var val = $(this).val();
+                tablePengajuanDana.page.len(val).draw();
+                localStorage.setItem('tablePengajuanDana_pageLength', val);
             });
 
-            // Tambahkan event listener untuk tombol submit
-            $('#filtersButton').on('click', function() {
-                // Dapatkan nilai input pencarian
-                var searchValue = $('#dataTableSearchInput').val().trim();
 
-                // Kirim nilai pencarian ke server menggunakan AJAX
-                table.search(searchValue).draw();
+            // fitur search
+            $('#filtersButtonPD').click(function() {
+                var searchText = $('#searchPD').val();
+                tablePengajuanDana.search(searchText).draw();
             });
 
-            // Event listener untuk input di kolom pencarian
-            $('#dataTableSearchInput').on('input', function() {
-                var searchValue = $(this).val().trim();
-
-                if (searchValue === '') {
-                    // menghapus input kolom pencarian dan mengembalikan entri semua entri
-                    table.search('').draw();
+            // Memantau perubahan pada input pencarian
+            $('#searchPD').on('input', function() {
+                var searchText = $(this).val();
+                if (!searchText.trim()) {
+                    tablePengajuanDana.search('').draw();
                 }
             });
         });
+        // End JS Table
     </script>
 @endpush
