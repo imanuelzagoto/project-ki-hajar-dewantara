@@ -37,24 +37,24 @@
                     <span class="tooltip-text">Logout</span>
                 </button>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-mp font-weight-bold display-6">
+                        Surat Perintah Kerja (SPK)
+                    </h2>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <h2 class="fiturjam font-weight-bold display-6">
+                        <ul class="list-unstyled mb-0">
+                            <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
+                                <i class="fas fa-calendar"></i>&nbsp;
+                                <i class="far fa-clock"></i>&nbsp;
+                            </li>
+                        </ul>
+                    </h2>
+                </div>
+            </div>
         </nav>
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="text-mp font-weight-bold display-6">
-                    Surat Perintah Kerja (SPK)
-                </h2>
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <h2 class="fiturjam font-weight-bold display-6">
-                    <ul class="list-unstyled mb-0">
-                        <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
-                            <i class="fas fa-calendar"></i>&nbsp;
-                            <i class="far fa-clock"></i>&nbsp;
-                        </li>
-                    </ul>
-                </h2>
-            </div>
-        </div>
     </div>
     <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
         @csrf
@@ -106,13 +106,13 @@
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                         <th class="text-center" nowrap>No</th>
+                                        <th class="text-center" style="width:25%;" nowrap>No SPK</th>
                                         <th class="text-center" nowrap>Nama Project</th>
                                         <th class="text-center" nowrap>Pemohon</th>
                                         <th class="text-left" nowrap>User</th>
                                         <th class="text-center" nowrap>Main Contractor</th>
                                         <th class="text-center" nowrap>Project Manager</th>
                                         <th class="text-left" style="width:19%;" nowrap>PIC</th>
-                                        <th class="text-center" style="width:25%;" nowrap>No SPK</th>
                                         <th class="text-center" style="width:23%;" nowrap>Tanggal</th>
                                         <th class="text-center" nowrap>Tanggal selesai</th>
                                         <th class="text-center" nowrap>Action</th>
@@ -129,6 +129,9 @@
                                         <tr class="kolom-td">
                                             <td class="text-center" style="font-weight:400;"nowrap>
                                                 {{ $i }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                {{ $spk->no_spk }}
                                             </td>
                                             <td class="text-left" style="font-weight:400;" nowrap>
                                                 {{ $spk->nama_project }}
@@ -147,9 +150,6 @@
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
                                                 {{ $spk->pic }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ $spk->no_spk }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
                                                 {{ Carbon\Carbon::createFromFormat('d/m/y', $spk->tanggal)->format('d-m-Y') }}

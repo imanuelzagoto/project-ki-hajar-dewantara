@@ -13,7 +13,6 @@ use Yajra\DataTables\Facades\DataTables;
 class PengajuanDanaViewWebController extends Controller
 {
 
-
     public function index(Request $request)
     {
         $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
@@ -40,7 +39,8 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date_format:d F Y',
-            'total_dana' => 'required|numeric',
+            'nominal' => 'required|numeric',
+            'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date_format:d F Y',
@@ -55,7 +55,7 @@ class PengajuanDanaViewWebController extends Controller
         $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
         $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
         $pengajuanDana = PengajuanDana::create($request->all());
-        $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
+        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
 
         return redirect(route('pengajuanDana.index'));
     }
@@ -70,15 +70,10 @@ class PengajuanDanaViewWebController extends Controller
     public function show($id)
     {
         // Find surat perintah kerja by ID
-        $pengajuan_danas = PengajuanDana::find($id);
-        $pdf = PDF::loadView('pengajuanDana.pengajuan_dana_pdf', compact('pengajuan_danas'));
+        $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
+        $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
+        $pdf->setPaper(array(0, 0, 609.45, 841.7), 'landscape');
         return $pdf->stream();
-        // // Check if the Surat_perintah_kerja exists
-        // if ($pengajuanDana) {
-        //     return view('pengajuanDana.show', compact('pengajuanDana'));
-        // } else {
-        //     return view('page404');
-        // }
     }
 
     public function edit($id)
@@ -109,7 +104,8 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date_format:d F Y',
-            'total_dana' => 'required|numeric',
+            'nominal' => 'required|numeric',
+            'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date_format:d F Y',
@@ -129,7 +125,7 @@ class PengajuanDanaViewWebController extends Controller
         $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
         $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
         $pengajuanDana->update($request->all());
-        $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
+        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
 
         return redirect(route('pengajuanDana.index'));
     }

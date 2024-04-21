@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('tujuan');
             $table->string('lokasi');
             $table->date('batas_waktu');
-            $table->decimal('total_dana', 15, 2);
+            $table->decimal('nominal', 15, 2);
+            $table->string('terbilang');
             $table->string('metode_penerimaan');
             $table->string('catatan')->nullable();
             $table->date('tanggal_pengajuan');

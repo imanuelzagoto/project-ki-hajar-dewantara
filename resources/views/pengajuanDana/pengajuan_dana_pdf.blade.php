@@ -45,36 +45,19 @@
             <table>
                 <thead>
                     <tr>
-                        <th>Nama Pemohon</th>
-                        <th>Subject</th>
-                        <th>Tujuan</th>
-                        <th>Lokasi</th>
-                        <th>Jangka Waktu</th>
-                        <th>Dana yang Dibutuhkan</th>
-                        <th>No.Rekening</th>
-                        <th>Catatan</th>
                         <th>Tanggal</th>
                         <th>No.Doc</th>
                         <th>Revisi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach ($pengajuan_danas as $pds) --}}
-                    {{-- <tr>
-                        <td>{{ $pds->nama_pemohon }}</td>
-                        <td>{{ $pds->jabatan_pemohon }}</td>
-                        <td>{{ $pds->subject }}</td>
-                        <td>{{ $pds->tujuan }}</td>
-                        <td>{{ $pds->lokasi }}</td>
-                        <td>{{ $pds->batas_waktu }}</td>
-                        <td>{{ number_format($pds->total_dana, 0, ',', '.') }}</td>
-                        <td>{{ $pds->metode_penerimaan }}</td>
-                        <td>{{ $pds->catatan }}</td>
-                        <td>{{ $pds->tanggal_pengajuan }}</td>
-                        <td>{{ $pds->no_doc }}</td>
-                        <td>{{ $pds->revisi }}</td>
-                    </tr> --}}
-                    {{-- @endforeach --}}
+                    @foreach ($pengajuan_danas as $pds)
+                        <tr>
+                            <td>{{ $pds->tanggal_pengajuan }}</td>
+                            <td>{{ $pds->no_doc }}</td>
+                            <td>{{ $pds->revisi }}</td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
     </div>

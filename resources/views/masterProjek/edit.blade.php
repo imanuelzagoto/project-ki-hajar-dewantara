@@ -43,24 +43,24 @@
                     <span class="tooltip-text">Logout</span>
                 </button>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-mp font-weight-bold display-6">
+                        Edit Form Master Projek
+                    </h2>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <h2 class="fiturjam font-weight-bold display-6">
+                        <ul class="list-unstyled mb-0">
+                            <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
+                                <i class="fas fa-calendar"></i>&nbsp;
+                                <i class="far fa-clock"></i>&nbsp;
+                            </li>
+                        </ul>
+                    </h2>
+                </div>
+            </div>
         </nav>
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="text-mp font-weight-bold display-6">
-                    Edit Form Master Projek
-                </h2>
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <h2 class="fiturjam font-weight-bold display-6">
-                    <ul class="list-unstyled mb-0">
-                        <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
-                            <i class="fas fa-calendar"></i>&nbsp;
-                            <i class="far fa-clock"></i>&nbsp;
-                        </li>
-                    </ul>
-                </h2>
-            </div>
-        </div>
     </div>
     <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
         @csrf
@@ -84,7 +84,7 @@
                                                 <span class="text-sm font-weight-bold">Nama Project</span>
                                                 <input name="project_name" class="form-control bg-light w-100"
                                                     type="text"
-                                                    value="{{ old('project_name', $masterProjek['project_name']) }}}">
+                                                    value="{{ old('project_name', $masterProjek['project_name']) }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold">Kode Project</span>

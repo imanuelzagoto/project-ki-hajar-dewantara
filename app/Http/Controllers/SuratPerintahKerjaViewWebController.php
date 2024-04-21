@@ -13,12 +13,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class SuratPerintahKerjaViewWebController extends Controller
 {
-    /**
-     * index
-     *
-     * @return void
-     */
-
     function numberToRomanRepresentation($number)
     {
         $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
@@ -113,12 +107,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // Manipulate 'tanggal' date before creating the record
-        // $tanggal = Carbon::createFromFormat('d/m/Y', $request->tanggal)->format('Y-m-d');
-
-        // Manipulate 'waktu_penyelesaian' date before creating the record
-        // $waktu_penyelesaian = $request->waktu_penyelesaian ? Carbon::createFromFormat('d/m/Y', $request->waktu_penyelesaian)->format('Y-m-d') : null;
-
         // Handle file upload if exists
         $dokumen_pendukung_file = null;
         if ($request->hasFile('dokumen_pendukung_file')) {
@@ -126,7 +114,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             $dokumen_pendukung_file = $request->file('dokumen_pendukung_file')->hashName();
             $request->file('dokumen_pendukung_file')->move(public_path($destinationPath), $dokumen_pendukung_file);
         }
-
 
         // Create the record
         $surat_Perintah_Kerja = Surat_perintah_kerja::create([
@@ -177,7 +164,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Find surat perintah kerja by ID
         $surat_perintah_kerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
         // Load view for PDF
-        $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja_pdf', compact('surat_perintah_kerjas'));
+        $pdf = PDF::loadView('suratPerintahKerja.show', compact('surat_perintah_kerjas'));
         return $pdf->stream();
     }
 

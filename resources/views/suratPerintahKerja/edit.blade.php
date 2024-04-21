@@ -47,9 +47,13 @@
         <div class="row">
             <div class="col-md-6">
                 <h2 class="text-mp font-weight-bold display-6">
-                    Edit Form SPK
+                    Edit Form SPK <span style="font-size: 22px; padding-left:8px;">&rArr;</span>
+                    <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                        {{ $suratPerintahKerjas->no_spk }}
+                    </span>
                 </h2>
             </div>
+
             <div class="col-md-6 d-flex justify-content-end">
                 <h2 class="fiturjam font-weight-bold display-6">
                     <ul class="list-unstyled mb-0">

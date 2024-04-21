@@ -1,128 +1,430 @@
-<div class="modal-header">
-    <button type="button" class="btn btn-primary">Export</button>
-</div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengajuan Dana</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
 
-{{-- <div class="modal-body">
-    <p>Ini adalah konten modal. Anda dapat menambahkan apa pun di sini, seperti teks, gambar, formulir, dll.</p>
-</div> --}}
+        table {
+            width: 100%;
+        }
 
-{{-- <div class="rectangle-outline">
-    <div class="pic-text">PIC :
-        {{ $spk->pic }}</div>
-    <h2 class="company">PT. SOLUSI INTEK INDONESIA</h2>
-    <h2 class="title1">SURAT PERINTAH KERJA WORKSHOP
-    </h2>
-    <h3 class="teks1">Kepada Yth<span> :
-        </span>Workshop Manager</h3>
-    <p class="teks2">Mohon dapat dilaksanakan
-        pekerjaan di bawah ini :</p>
+        th,
+        td {
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            font-weight: 0;
+        }
 
-    <table>
-        <tr>
-            <th class="tb" style="width: 185px;">
-                Kode Project</th>
-            <th style="font-weight: normal">:</th>
-            <th class="tb" colspan="6">
-                {{ $spk->kode_project }}
-            </th>
-        </tr>
-        <tr>
-            <td>Nama Project</td>
-            <td>:</td>
-            <td>{{ $spk->nama_project }}
-            </td>
-            <td>NO SPK</td>
-            <td class="semi-colon">:</td>
-            <td colspan="3">
-                {{ $spk->no_spk }}</td>
-        </tr>
-        <tr>
-            <td>User</td>
-            <td>:</td>
-            <td>{{ $spk->user }}</td>
-            <td>Tanggal</td>
-            <td class="semi-colon">:</td>
-            <td colspan="3">
-                {{ $spk->tanggal }}</td>
-        </tr>
-        <tr>
-            <td>Main Contractor</td>
-            <td>:</td>
-            <td>{{ $spk->main_contractor }}
-            </td>
-            <td>Prioritas</td>
-            <td class="semi-colon">:</td>
-            <td colspan="3">
-                {{ $spk->prioritas }}
-            </td>
-        </tr>
-        <tr>
-            <td>Project Manager</td>
-            <td>:</td>
-            <td>{{ $spk->project_manager }}
-            </td>
-            <td>Waktu Penyelesaian</td>
-            <td class="semi-colon">:</td>
-            <td colspan="3">
-                {{ $spk->waktu_penyelesaian }}
-            </td>
-        </tr>
-    </table>
-    <div class="horizontal-line"></div>
-    <div class="horizontal-line1"></div>
-    <p class="dokumen">Dokumen Pendukung</p>
-    <label class="checkbox-container">
-        <input class="box1"> Gambar
-    </label>
-    <label class="checkbox-container">
-        <input class="box2"> Kontrak
-    </label>
-    <label class="checkbox-container">
-        <input class="box3"> Brosur
-    </label>
-    <p class="pendukung">File Pendukung Lainnya:</p>
-    <div class="garis-lurus1"></div>
-    <div class="garis-lurus2"></div>
-    <div class="job-table"></div>
-    <div class="type-work-container">
-        <p class="type-work1">JENIS PEKERJAAN</p>
-        <p class="Job-description">URAIAN PEKERJAAN</p>
-        <div class="garis-lurus3"></div>
-        <div class="garis-lurus3"></div>
-        <div class="garis-lurus4"></div>
-        <p class="teks-tabel">Bersambung ke halaman
-            berikutnya …..........</p>
-        <div class="garis-lurus5"></div>
-        <p class="teks3">Hormat Kami,</p>
-    </div>
-    <div class="content-ttd">
-        <p class="teks15">1. Nama : Sindu Irawan</p>
-        <p class="teks16">Jabatan : B.O.D</p>
-        <p class="teks17">..........................
-        </p>
-        <p class="teks18">2. Nama : Bayu Nugraha </p>
-        <p class="teks19">Jabatan : General Manager</p>
-        <p class="teks20">..........................
-        </p>
-        <p class="teks21">Form Number :
-            SPK/01/admin/2022</p>
-        <div class="garis-lurus6"></div>
-        <p class="teks14">Jabatan :</p>
-        <p class="teks5">Pemohon</p>
-        <p class="teks13">Nama :</p>
-        <p class="teks6">Penerima</p>
-        <p class="teks7">Menyetujui</p>
-        <p class="teks8">Mengetahui</p>
-        <div class="garis-lurus7"></div>
-        <div class="garis-lurus8"></div>
-        <div class="garis-lurus9"></div>
-        <p class="teks12">Jabatan : </p>
-        <div class="garis-lurus0"></div>
-        <p class="teks11">Nama : </p>
-        <div class="garis-lurus11"></div>
-        <p class="teks0">Jabatan : Koor PM</p>
-        <div class="garis-lurus12"></div>
-        <p class="teks9">Nama : Susilo</p>
-    </div>
-    <div class="garis-lurus13"></div>
-</div> --}}
+        .table-header {
+            width: 80px;
+        }
+
+        .text-pengajuan-dana {
+            font-size: 23px;
+            text-align: center;
+            font-weight: bold;
+            vertical-align: top;
+            width: 10px;
+        }
+
+        .text-date-table {
+            font-size: 10px;
+        }
+
+        .coloumn-tanggal-pengajuan {
+            font-size: 14.5px;
+            border-bottom: 0px;
+            width: 120px;
+            padding-left: 3px;
+        }
+
+        .coloumn-no-doc {
+            font-size: 14.5px;
+            border-bottom: 0px;
+            border-top: 0px;
+            padding-left: 3px;
+        }
+
+        .column-revisi {
+            border-top: 0px;
+            font-size: 14.5px;
+            padding-left: 3px;
+        }
+
+        .column-subject {
+            width: 266px;
+            font-size: 14.5px;
+            padding-left: 3px;
+        }
+
+        .column_nama_pemohon {
+            font-size: 14.5px;
+            padding-left: 3px;
+        }
+
+        .data_tujuan {
+            font-size: 14.5px;
+            padding-left: 8px;
+        }
+
+        .data_lokasi {
+            font-size: 14.5px;
+            padding-left: 8px;
+        }
+
+        .data_batas_waktu {
+            font-size: 14.5px;
+            padding-left: 8px;
+        }
+
+        .data_nominal {
+            font-size: 14.5px;
+            padding-left: 8px;
+        }
+
+        .data_no_rekening {
+            font-size: 14.5px;
+            padding-left: 8px;
+        }
+
+        .data_catatan {
+            font-size: 14.5px;
+            padding-left: 8px;
+        }
+
+        .teks_drafting {
+            font-size: 14.5px;
+            padding-left: 8px;
+        }
+
+        .column-diajukan {
+            font-size: 14.5px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .column_persetujuan {
+            font-size: 14.5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    @php
+        $i = 0;
+    @endphp
+    @foreach ($pengajuan_danas as $pds)
+        @php
+            $i += 1;
+        @endphp
+        <div class="header-pengajuan-dana">
+            <table>
+                <thead>
+                    <tr>
+                        <th colspan="3" rowspan="3" class="table-header"></th>
+                        <th colspan="3" rowspan="3" class="text-pengajuan-dana">FORM PENGAJUAN DANA</th>
+                        <th class="coloumn-tanggal-pengajuan">Date</th>
+                        <th style="width: 150px; padding-left:3px; font-size:14.5px;">
+                            {{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->format('d F Y') }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="coloumn-no-doc">No.Doc.</td>
+                        <td style="padding-left:3px; font-size:14.5px;">{{ $pds->no_doc }}</td>
+                    </tr>
+                    <tr>
+                        <td class="column-revisi">Rev.</td>
+                        <td style="padding-left:3px; font-size:14.5px;">{{ $pds->revisi }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="column-subject">
+                        Subject
+                        <span style="padding-left: 200px;">:</span>
+                    </th>
+                    <th style="padding-left:3px; font-size:14.5px;">{{ $pds->subject }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="column_nama_pemohon">
+                        Nama Pemohon
+                        <span style="padding-left: 143.5px;">:</span>
+                    </td>
+                    <td style="padding-left:3px; font-size:14.5px;">{{ $pds->nama_pemohon }}</td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+
+        <div class="form_list_pengajuan_dana">
+            <div class="data_tujuan">
+                1.
+                <span style="padding-left: 3px; font-size: 14.5px;">Tujuan</span>
+                <span style="padding-left: 181.8px; font-size: 14.5px;">:</span>
+                <span style="padding-left: 10px; font-size: 14.5px;">{{ $pds->tujuan }}</span>
+            </div>
+            <div class="data_lokasi">
+                2.
+                <span style="padding-left: 4px; font-size: 14.5px;">Lokasi</span>
+                <span style="padding-left: 183px; font-size: 14.5px;">:</span>
+                <span style="padding-left: 10px; font-size: 14.5px;">{{ $pds->lokasi }}</span>
+            </div>
+            <div class="data_batas_waktu">
+                3.
+                <span style="padding-left: 3px; font-size: 14.5px;">Jangka waktu permohonan</span>
+                <span style="padding-left: 52.2px; font-size: 14.5px;">:</span>
+                <span style="padding-left: 6.8px; font-size: 14.5px;">
+                    {{ \Carbon\Carbon::parse($pds->batas_waktu)->format('d F Y') }}
+                </span>
+            </div>
+            <div class="data_nominal">
+                4.
+                <span style="padding-left: 3px; font-size: 14.5px;">Dana yang dibutuhkan</span>
+                <span style="padding-left: 81.2px; font-size: 14.5px;">:</span>
+                <span style="padding-left: 12px; font-size: 14.5px;">
+                    Rp
+                </span>
+                <span style="padding-left: 11px; font-size: 14.5px;">
+                    {{ number_format($pds->nominal, 0, ',', '.') }}
+                </span>
+                <span style="padding-left: 5px; font-size: 14px; font-style:italic;">
+                    {{ $pds->terbilang }}
+                </span>
+            </div>
+            <div class="data_no_rekening">
+                5.
+                <span style="padding-left: 4px; font-size: 14.5px;">No. Rekening</span>
+                <span style="padding-left: 137.6px; font-size: 14.5px;">:</span>
+                <span
+                    style="padding-left: 10px; font-size: 14.5px; font-weight:bold;">{{ $pds->metode_penerimaan }}</span>
+            </div>
+            <div class="data_catatan">
+                6.
+                <span style="padding-left: 4px; font-size: 14.5px;">Catatan</span>
+                <span style="padding-left: 175px; font-size: 14.5px;">:</span>
+                <span style="padding-left: 10px; font-size: 14.5px;">{{ $pds->catatan }}</span>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th rowspan="3" style="width: 20px; font-size:14px; text-align:center;">
+                        NO
+                    </th>
+                    <th colspan="3" rowspan="3" style="text-align: center; font-size:14px; width:67px;">Item</th>
+                    <th colspan="2" style="text-align: center; font-size:14px; width:40px;">Item</th>
+                    <th colspan="2" style="text-align: center; font-size:14px;">Harga</th>
+                    <th style="text-align: center; font-size:14px; width:300px;">Total</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="2" rowspan="2" style="text-align: center; padding-bottom:10px;">
+                        <span>( a )</span>
+                    </td>
+                    <td colspan="2" rowspan="2" style="text-align: center; padding-bottom:10px;">
+                        <span>( b )</span>
+                    </td>
+                    <td style="text-align: center; padding-bottom:10px;">
+                        <span>(c)</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center; padding-bottom:10px;">
+                        <span>( c )=( b )x( a )</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">{{ $i }}.</td>
+                    <td colspan="3">US-1565</td>
+                    <td style="text-align: center;">1</td>
+                    <td style="text-align: center;">Iot</td>
+                    <td colspan="2" style="text-align: right; padding-right:5px;">60.000.000</td>
+                    <td style="text-align: right; padding-right:5px;">60.000.000</td>
+                </tr>
+                <tr>
+                    <td colspan="8" style="font-weight: bold; text-align: right; padding-right:5px;">Sub Total</td>
+                    <td style="text-align: right; padding-right:5px; font-weight:bold;">60.000.000</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="teks_finnaly">
+            <div class="teks_drafting">
+                Demikian drafting pengajuan dana ini saya sampaikan atas bantuan dan kerja samanya saya ucapkan terima
+                kasih.
+            </div>
+        </div>
+        <br>
+
+        <table>
+            <thead>
+                <tr>
+                    <th class="column-diajukan">
+                        Diajukan Oleh,
+                    </th>
+                    <th style="width:5px; border:none;"></th>
+                    <th colspan="5" class="column_persetujuan">Diperiksa dan Disetujui oleh,</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3" style="text-align: center; width: 60px;"></td>
+                    <td style="border:none;"></td>
+                    <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
+                    <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
+                    <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
+                    <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
+                    <td rowspan="3" style="text-align: center; height:60px; width:60px;"></td>
+
+                </tr>
+                <tr>
+                    <td style="border:none;"></td>
+                </tr>
+                <tr>
+                    <td style="border:none;"></td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Nama
+                        <span style="padding-left: 30px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">{{ $pds->nama_pemohon }}</span>
+                    </td>
+                    <td style="border:none;"></td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Nama
+                        <span style="padding-left: 18px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">Bu Yani</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Nama
+                        <span style="padding-left: 18px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">Bayu</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Nama
+                        <span style="padding-left: 18px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">Sindu Irawan</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Nama
+                        <span style="padding-left: 18px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">Victor</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Nama
+                        <span style="padding-left: 18px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">Erwin Danuaji</span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Jabatan
+                        <span style="padding-left: 10px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">{{ $pds->jabatan_pemohon }}</span>
+                    </td>
+                    <td style="border:none;"></td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Jabatan
+                        <span style="padding-left: 7px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">GM</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Jabatan
+                        <span style="padding-left: 7px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">GM</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Jabatan
+                        <span style="padding-left: 7px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">BOD</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Jabatan
+                        <span style="padding-left: 7px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">BOD</span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Jabatan
+                        <span style="padding-left: 7px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;">BOD</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Date
+                        <span style="padding-left: 25.3px;">:</span>
+                        <span
+                            style="padding-left: 3px; font-size:12.5px;">{{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->format('d F Y') }}</span>
+                    </td>
+                    <td style="border:none;"></td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Date
+                        <span style="padding-left: 25.3px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Date
+                        <span style="padding-left: 25.3px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Date
+                        <span style="padding-left: 25.3px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Date
+                        <span style="padding-left: 25.3px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                    </td>
+                    <td style="padding-left: 3px; font-size:12.5px;">
+                        Date
+                        <span style="padding-left: 25.3px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+    @endforeach
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
+</body>
+
+{{-- @foreach ($pengajuan_danas as $pds) --}}
+{{-- <tr>
+                        <td>{{ $pds->nama_pemohon }}</td>
+                        <td>{{ $pds->jabatan_pemohon }}</td>
+                        <td>{{ $pds->subject }}</td>
+                        <td>{{ $pds->tujuan }}</td>
+                        <td>{{ $pds->lokasi }}</td>
+                        <td>{{ $pds->batas_waktu }}</td>
+                        <td>{{ number_format($pds->niminal, 0, ',', '.') }}</td>
+                        <td>{{ $pds->metode_penerimaan }}</td>
+                        <td>{{ $pds->catatan }}</td>
+                        <td>{{ $pds->tanggal_pengajuan }}</td>
+                        <td>{{ $pds->no_doc }}</td>
+                        <td>{{ $pds->revisi }}</td>
+                    </tr> --}}
+{{-- @endforeach --}}

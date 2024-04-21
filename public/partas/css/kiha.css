@@ -93,7 +93,7 @@
 }
 
 .text-dashboard {
-    margin-left: 2.6%;
+    margin-left: 4.2%;
     color: #2D3748;
     font-size: 20px;
     font-weight: 700;
@@ -203,12 +203,13 @@
 }
 
 @media screen and (max-width: 1440px) {
-    .text-dashboard {
-        padding-left: 1px;
+    .text-mp {
+        left: -7px;
+        position: relative;
     }
 
-    .text-mp {
-        padding-left: 6px;
+    .text-dashboard {
+        padding-left: 10px;
     }
 }
 

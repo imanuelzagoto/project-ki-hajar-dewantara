@@ -34,7 +34,8 @@ class PengajuanDanaController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date_format:d F Y',
-            'total_dana' => 'required|numeric',
+            'nominal' => 'required|numeric',
+            'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date_format:d F Y',
@@ -49,7 +50,7 @@ class PengajuanDanaController extends Controller
         $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
         $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
         $pengajuanDana = PengajuanDana::create($request->all());
-        $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
+        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
 
         return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Disimpan.', $pengajuanDana);
     }
@@ -88,7 +89,8 @@ class PengajuanDanaController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date_format:d F Y',
-            'total_dana' => 'required|numeric',
+            'nominal' => 'required|numeric',
+            'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date_format:d F Y',
@@ -109,7 +111,7 @@ class PengajuanDanaController extends Controller
         $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
         $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
         $pengajuanDana->update($request->all());
-        $pengajuanDana->dana_yang_dibutuhkan = 'Rp. ' . number_format($pengajuanDana->dana_yang_dibutuhkan, 0, ',', '.');
+        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
 
         return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Diperbarui.', $pengajuanDana);
     }

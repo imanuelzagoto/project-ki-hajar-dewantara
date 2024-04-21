@@ -37,24 +37,24 @@
                     <span class="tooltip-text mb-2" style="font-size: 10px;">Logout</span>
                 </button>
             </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2 class="text-dashboard font-weight-bold display-6">
+                        Dashboard
+                    </h2>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end">
+                    <h2 class="fiturjam font-weight-bold display-6">
+                        <ul class="list-unstyled mb-0">
+                            <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
+                                <i class="fas fa-calendar"></i>&nbsp;
+                                <i class="far fa-clock"></i>&nbsp;
+                            </li>
+                        </ul>
+                    </h2>
+                </div>
+            </div>
         </nav>
-        <div class="row">
-            <div class="col-md-6">
-                <h2 class="text-dashboard font-weight-bold display-6">
-                    Dashboard
-                </h2>
-            </div>
-            <div class="col-md-6 d-flex justify-content-end">
-                <h2 class="fiturjam font-weight-bold display-6">
-                    <ul class="list-unstyled mb-0">
-                        <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
-                            <i class="fas fa-calendar"></i>&nbsp;
-                            <i class="far fa-clock"></i>&nbsp;
-                        </li>
-                    </ul>
-                </h2>
-            </div>
-        </div>
     </div>
     <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
         @csrf
@@ -215,7 +215,7 @@
                                                         {{ Carbon\Carbon::parse($pdt->batas_waktu)->format('d-m-Y') }}
                                                     </td>
                                                     <td class="text-right" style="font-weight:400;" nowrap>
-                                                        {{ 'Rp. ' . number_format($pdt->total_dana, 0, ',', '.') }}
+                                                        {{ 'Rp. ' . number_format($pdt->nominal, 0, ',', '.') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->metode_penerimaan }}
