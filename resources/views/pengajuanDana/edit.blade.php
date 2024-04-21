@@ -79,15 +79,11 @@
                                 <div class="d-block w-100">
                                     <div class="row py-2">
                                         <div class="pr-4 py-2 col-6">
-                                            <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
-                                            <input class="form-control bg-light w-100" type="text">
-                                        </div>
-                                        <div class="pr-4 py-2 col-6">
                                             <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
                                             <input class="form-control bg-light w-100" type="text">
                                         </div>
-                                        <div class="pr-4 py-2 col-12">
-                                            <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
+                                        <div class="pr-4 py-2 col-6">
+                                            <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
                                             <input class="form-control bg-light w-100" type="text">
                                         </div>
                                     </div>
@@ -107,7 +103,7 @@
                                             <input class="form-control bg-light w-100" type="text">
                                         </div>
                                         <div class="pr-4 py-2 col-6">
-                                            <span class="text-sm font-weight-bold text-form-detail">Lokasi Pengajuan</span>
+                                            <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
                                             <input class="form-control bg-light w-100" type="text">
                                         </div>
                                         <div class="pr-4 py-2 col-2">
@@ -137,7 +133,7 @@
                                                 style="font-size: 10px; font-weight: bold; color: #92A1BB;">
                                         </div>
                                         <div class="pr-4 py-2 col-12">
-                                            <span class="text-sm font-weight-bold text-form-detail">Uraian Pekerjaan</span>
+                                            <span class="text-sm font-weight-bold text-form-detail">Catatan</span>
                                             <textarea class="form-control bg-light w-100" rows="3" style="resize: none;"></textarea>
                                         </div>
                                     </div>
