@@ -54,8 +54,25 @@ class PengajuanDanaViewWebController extends Controller
 
         $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
         $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
-        $pengajuanDana = PengajuanDana::create($request->all());
-        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
+        $pengajuanDanas = PengajuanDana::create($request->all());
+        $pengajuanDanas->nominal = 'Rp. ' . number_format($pengajuanDanas->nominal, 0, ',', '.');
+
+        // Create the record
+        $pengajuanDanas = PengajuanDana::create([
+            'nama_pemohon' => $request->nama_pemohon,
+            'jabatan_pemohon' => $request->jabatan_pemohon,
+            'subject' => $request->subject,
+            'tujuan' => $request->tujuan,
+            'lokasi' => $request->lokasi,
+            'batas_waktu' => $request->batas_waktu,
+            'nominal' => $request->nominal,
+            'terbilang' => $request->terbilang,
+            'metode_penerimaan' => $request->metode_penerimaan,
+            'catatan' => $request->catatan,
+            'tanggal_pengajuan' => $request->tanggal_pengajuan,
+            'no_doc' => $request->no_doc,
+            'revisi' => $request->revisi,
+        ]);
 
         return redirect(route('pengajuanDana.index'));
     }
@@ -117,15 +134,31 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $pengajuanDana = PengajuanDana::find($id);
+        $pengajuanDanas = PengajuanDana::find($id);
 
-        if (!$pengajuanDana) {
+        if (!$pengajuanDanas) {
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
         $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
         $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
-        $pengajuanDana->update($request->all());
-        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
+        $pengajuanDanas->update($request->all());
+        $pengajuanDanas->nominal = 'Rp. ' . number_format($pengajuanDanas->nominal, 0, ',', '.');
+
+        $pengajuanDanas->update([
+            'nama_pemohon' => $request->nama_pemohon,
+            'jabatan_pemohon' => $request->jabatan_pemohon,
+            'subject' => $request->subject,
+            'tujuan' => $request->tujuan,
+            'lokasi' => $request->lokasi,
+            'batas_waktu' => $request->batas_waktu,
+            'nominal' => $request->nominal,
+            'terbilang' => $request->terbilang,
+            'metode_penerimaan' => $request->metode_penerimaan,
+            'catatan' => $request->catatan,
+            'tanggal_pengajuan' => $request->tanggal_pengajuan,
+            'no_doc' => $request->no_doc,
+            'revisi' => $request->revisi,
+        ]);
 
         return redirect(route('pengajuanDana.index'));
     }

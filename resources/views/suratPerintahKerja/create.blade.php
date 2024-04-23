@@ -273,7 +273,7 @@
             let project_id = $('#project_id').find(":selected").val();
             console.log(project_id)
             var settings = {
-                "url": "http://172.15.1.97/api/projects/" + project_id,
+                "url": "http://172.15.2.134/api/projects/" + project_id,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

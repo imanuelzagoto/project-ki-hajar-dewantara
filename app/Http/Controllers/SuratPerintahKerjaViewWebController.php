@@ -45,7 +45,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://172.15.1.97/api/projects',
+            CURLOPT_URL => 'http://172.15.2.134/api/projects',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -116,7 +116,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         }
 
         // Create the record
-        $surat_Perintah_Kerja = Surat_perintah_kerja::create([
+        $suratPerintahKerjas = Surat_perintah_kerja::create([
             'form_number' => 'spk',
             'kode_project' => $request->kode_project,
             'pemohon' => $request->pemohon,
@@ -141,10 +141,10 @@ class SuratPerintahKerjaViewWebController extends Controller
             'file_pendukung_lainnya' => $request->file_pendukung_lainnya
         ]);
         // 022/FPD/ADM/I/2024
-        $datas = Surat_perintah_kerja::where('id', $surat_Perintah_Kerja->id)->first();
+        $datas = Surat_perintah_kerja::where('id', $suratPerintahKerjas->id)->first();
         $datetime = explode('-', $datas->created_at);
-        $no_spk = $surat_Perintah_Kerja->id . '-SPK/SII/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
-        $datas = Surat_perintah_kerja::where('id', $surat_Perintah_Kerja->id)->update([
+        $no_spk = $suratPerintahKerjas->id . '-SPK/SII/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
+        $datas = Surat_perintah_kerja::where('id', $suratPerintahKerjas->id)->update([
             'no_spk' => $no_spk,
             'form_number' => $no_spk
         ]);
@@ -161,10 +161,9 @@ class SuratPerintahKerjaViewWebController extends Controller
      */
     public function show($id)
     {
-        // Find surat perintah kerja by ID
-        $surat_perintah_kerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
-        // Load view for PDF
-        $pdf = PDF::loadView('suratPerintahKerja.show', compact('surat_perintah_kerjas'));
+        $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
+        $pdf = PDF::loadView('suratPerintahKerja.show', compact('suratPerintahKerjas'));
+        $pdf->setPaper(array(0, 0, 1010.45, 841.7), 'landscape');
         return $pdf->stream();
     }
 
@@ -179,7 +178,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://172.15.1.97/api/projects',
+            CURLOPT_URL => 'http://172.15.2.134/api/projects',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -243,13 +242,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        // dd($request->tanggal);
-        // Manipulasi tanggal 'tanggal' sebelum memperbarui data surat perintah kerja
-        // $request['tanggal'] = Carbon::createFromFormat('d/m/Y', $request['tanggal'])->format('Y-m-d');
-
-        // Manipulasi tanggal 'waktu_penyelesaian' sebelum memperbarui data surat perintah kerja
-        // $request['waktu_penyelesaian'] = $request['waktu_penyelesaian'] ? Carbon::createFromFormat('d/m/Y', $request['waktu_penyelesaian'])->format('Y-m-d') : null;
-
         // dd($id);
         // Find the Surat_perintah_kerja by ID
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
@@ -327,20 +319,20 @@ class SuratPerintahKerjaViewWebController extends Controller
     public function destroy($id)
     {
         // Temukan Surat_perintah_kerja berdasarkan ID
-        $surat_Perintah_Kerja = Surat_perintah_kerja::find($id);
+        $suratPerintahKerjas = Surat_perintah_kerja::find($id);
 
         // Periksa apakah Surat_perintah_kerja ditemukan
-        if (!$surat_Perintah_Kerja) {
+        if (!$suratPerintahKerjas) {
             return redirect()->back()->with('error', 'Data Surat Perintah Kerja tidak ditemukan!');
         }
 
         // Hapus gambar terkait jika ada
-        if ($surat_Perintah_Kerja->dokumen_pendukung_file) {
-            Storage::delete('public/posts/images/' . basename($surat_Perintah_Kerja->dokumen_pendukung_file));
+        if ($suratPerintahKerjas->dokumen_pendukung_file) {
+            Storage::delete('public/posts/images/' . basename($suratPerintahKerjas->dokumen_pendukung_file));
         }
 
         // Hapus Surat_perintah_kerja
-        $surat_Perintah_Kerja->delete();
+        $suratPerintahKerjas->delete();
 
         // Kembalikan respons
         return redirect('/surat-perintah-kerja')->with('success', 'Data Surat Perintah Kerja berhasil dihapus.');
@@ -354,13 +346,8 @@ class SuratPerintahKerjaViewWebController extends Controller
      */
     public function exportPDF($id)
     {
-        // Retrieve Surat Perintah Kerja data by ID
-        $surat_perintah_kerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
-        // Load view for PDF
-        $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja_pdf', compact('surat_perintah_kerjas'));
-        // $pdf->setPaper('a4', 'landscape');
-        // Generate PDF
-        // return $pdf->stream();
+        $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
+        $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja_pdf', compact('suratPerintahKerjas'));
         return $pdf->download('surat_perintah_kerja.pdf');
     }
 }

@@ -2,613 +2,392 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Surat Perintah Kerja</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
         body {
-            margin: 7px;
-            /* height: 6000px; */
+            font-family: Arial, sans-serif;
         }
 
-        .rectangle-outline {
-            width: 730px;
-            height: 987px;
+        .box_surat_perintah_kerja {
+            width: 1050px;
+            height: 1240px;
             border: 2px solid black;
+            right: 13px;
             position: relative;
-            left: -25px;
         }
 
-        .rectangle-outline::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0.4%;
+        .right-box-position {
             border-right: 2px solid black;
-            height: 100%;
+            height: 1240.4px;
+            position: relative;
+            right: 4px;
+            bottom: 5px;
         }
 
-        .pic-text {
+        .name-pic {
             font-family: arial, sans-serif;
             text-align: right;
             padding-right: 6%;
             padding-top: 1%;
             margin-top: 5px;
             margin-bottom: 5px;
-            font-size: 13px;
+            font-size: 13pt;
             font-weight: bold;
             top: 5px;
             right: 5px;
             color: #000;
         }
 
-        .header-text {
+        .title_company {
             font-family: arial, sans-serif;
-            font-size: 9pt;
-            text-align: center;
-        }
-
-        .title-company {
             color: #1066ad;
-            margin-bottom: 5px;
-            margin-top: 5px;
-        }
-
-        .title-spk {
-            color: #000000;
-            margin-top: 5px;
-            margin-bottom: 5px;
-        }
-
-        .header-teks-yth {
-            font-family: Arial, sans-serif;
-        }
-
-        .teks-yth {
-            padding-left: 16.5%;
-            font-size: 10pt;
-        }
-
-        .teks-yth span {
-            padding: 0 7px;
-        }
-
-        .pelaksanaan {
-            padding-left: 17.9%;
-            font-size: 10pt;
-            position: relative;
-            top: -9px;
-        }
-
-        .spk-table {
-            border: 1px solid black;
-        }
-
-        table,
-        th,
-        td {
-            border: 1px solid black;
-            border-collapse: collapse;
-        }
-
-        table {
-            margin-left: 11px;
-            width: 97%;
-        }
-
-
-        .tb {
-            font-family: Arial, sans-serif;
-            font-size: 11.5pt;
-            font-weight: bold;
-            text-align: left;
-        }
-
-        td {
-            text-align: left;
-            font-family: Arial, sans-serif;
-            font-size: 10pt;
-        }
-
-        .semi-colon {
+            font-size: 18pt;
             text-align: center;
-            width: 12px;
-        }
-
-        .horizontal-line {
-            border-top: 1px solid black;
-            width: 99.3%;
-            margin-top: 25px;
-        }
-
-        .horizontal-line1 {
-            border-top: 1px solid black;
-            width: 99.3%;
-            margin-top: 2.3px;
-        }
-
-        .dokumen {
-            display: inline-block;
-            margin-right: 20px;
-            font-size: 10pt;
-            font-family: Arial, sans-serif;
-            padding-left: 1.8%;
-            margin-top: 26px;
-        }
-
-        .checkbox-container {
-            display: inline-block;
-            margin-right: 10px;
-            margin-bottom: 10px;
-            width: 118px;
-            font-family: Arial, sans-serif;
-            font-size: 10pt;
-            padding-left: 29px;
-
-        }
-
-        .box1 {
-            width: 20px;
-            height: 24px;
-            border: 1px solid #000;
-        }
-
-        .box2 {
-            width: 18px;
-            height: 24px;
-            border: 1px solid #000;
-        }
-
-        .box3 {
-            width: 14px;
-            height: 24px;
-            border: 1px solid #000;
-            margin-left: 4px;
-        }
-
-        .pendukung {
-            position: relative;
-            font-size: 10pt;
-            font-family: Arial, sans-serif;
-            padding-left: 1.8%;
-            width: 150px;
-            top: -15px;
-        }
-
-        .pendukung::after {
-            content: '';
-            position: absolute;
-            width: 412px;
-            height: 1px;
-            background-color: black;
-            margin-left: 13px;
-            top: 12px;
-        }
-
-        .garis-lurus1 {
-            border-top: 1px solid black;
-            width: 99.3%;
-            margin-bottom: 60px;
-            margin-top: -20px;
-            /* Ubah nilai margin-top */
-        }
-
-        .garis-lurus2 {
-            border-top: 1px solid black;
-            width: 99.3%;
-            margin-top: -58px;
-            /* Ubah nilai margin-top */
-        }
-
-        .job-table {
-            border-top: 1px solid black;
-            width: 97.8%;
-            margin-top: 15px;
-            margin-left: 12px;
-        }
-
-        .job-table::before,
-        .job-table::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 1px;
-            height: 33%;
-            background-color: black;
-        }
-
-        .job-table::before {
-            left: -10px;
-            margin-top: 50.4%;
-            margin-left: 3%;
-        }
-
-        .job-table::after {
-            right: -10px;
-            margin-right: 71.8%;
-            margin-top: 50.4%;
-        }
-
-        .type-work-container {
-            font-size: 10pt;
-            font-family: Arial, sans-serif;
+            margin-bottom: 5px;
+            margin-top: 5px;
             font-weight: bold;
         }
 
-        .type-work1,
-        .Job-description {
-            display: inline-block;
-            margin: 10px 0 0 0;
-            padding: 0;
-        }
-
-        .type-work1 {
-            margin-left: 51px;
+        .sub-title-spk {
+            font-family: arial, sans-serif;
+            color: #000000;
+            font-size: 18pt;
+            text-align: center;
             position: relative;
-        }
-
-        .Job-description {
-            margin-left: 193px;
-            position: relative;
-        }
-
-        .garis-lurus3 {
-            border: none;
-            border-top: 1px solid black;
-            width: 97.8%;
-            margin-top: 3px;
-            margin-left: 12px;
-            margin-bottom: -8px;
-        }
-
-        .garis-lurus4 {
-            border-bottom: 1px solid black;
-            width: 97.8%;
-            margin-top: 38%;
-            margin-left: 12px;
-        }
-
-        .garis-lurus5 {
-            border-bottom: 1px solid black;
-            width: 97.8%;
-            margin-top: -1.8%;
-            margin-left: 12px;
-        }
-
-        .teks3 {
-            text-align: 11pt;
-            font-family: Arial, sans-serif;
-            margin-top: 2%;
-            margin-left: 3%;
-            font-weight: normal;
-        }
-
-        .garis-lurus6 {
-            border-top: 3.3px solid black;
-            width: 98%;
-            margin-left: 12px;
-        }
-
-
-
-        .garis-lurus7 {
-            border-bottom: 3.3px solid black;
-            width: 98%;
-            margin-top: 25.3%;
-            margin-left: 12px;
-        }
-
-
-        .ttd {
-            font-size: 10pt;
-            font-family: Arial, sans-serif;
+            bottom: 6px;
             font-weight: bold;
         }
 
-        .teks-tabel {
+        .Yth {
             font-family: Arial, sans-serif;
-            text-align: 10pt;
-            font-weight: normal;
-            margin-left: 61%;
-            margin-top: 1%;
-        }
-
-        .content-ttd {
-            font-family: Calibri, sans-serif;
-            font-size: 10.5pt;
-        }
-
-        .teks5::before,
-        .teks5::before,
-        .teks6::before,
-        .teks7::before,
-        .teks8::before,
-        .teks13,
-        .teks14,
-        .teks15,
-        .teks16,
-        .teks17,
-        .teks18,
-        .teks19,
-        .teks20,
-        .teks21,
-        .garis-lurus8,
-        .garis-lurus9,
-        .garis-lurus0,
-        .garis-lurus11,
-        .garis-lurus12 {
-            content: "";
-            border-left: 3px solid black;
-            height: 99.2%;
-            position: absolute;
-            left: -17.7px;
-            top: -2.5%;
-        }
-
-        .teks13 {
-            border: none;
-            margin-top: 124.4%;
-            margin-left: 51.6%;
-        }
-
-        .teks14 {
-            border: none;
-            margin-top: 127.3%;
-            margin-left: 51.6%;
-        }
-
-        .teks15 {
-            border: none;
-            margin-top: 109%;
-            margin-left: 74.2%;
-        }
-
-        .teks16 {
-            border: none;
-            margin-top: 111.4%;
-            margin-left: 76%;
-        }
-
-        .teks17 {
-            border: none;
-            margin-top: 118.6%;
-            margin-left: 76%;
-        }
-
-        .teks18 {
-            border: none;
-            margin-top: 121.5%;
-            margin-left: 74.2%;
-        }
-
-        .teks19 {
-            border: none;
-            margin-top: 124%;
-            margin-left: 76%;
-        }
-
-        .teks20 {
-            border: none;
-            margin-top: 130%;
-            margin-left: 76%;
-        }
-
-        .teks21 {
-            border: none;
-            margin-top: 136%;
-            margin-left: 76%;
-            font-family: Arial, sans-serif;
-            font-size: 8pt;
+            padding-left: 18%;
+            font-size: 17pt;
             font-weight: bold;
-        }
-
-        .garis-lurus8 {
-            margin-top: 105%;
-            height: 21.5%;
-            margin-left: 101.5%;
-            border: 2px solid black;
-        }
-
-        .garis-lurus9 {
-            margin-top: 105%;
-            height: 21.5%;
-            margin-left: 27%;
-            border: 2px solid black;
-        }
-
-        .garis-lurus0 {
-            margin-top: 105%;
-            height: 21.5%;
-            margin-left: 48.8%;
-            border: 2px solid black;
-        }
-
-        .garis-lurus11 {
-            margin-top: 105%;
-            height: 21.5%;
-            margin-left: 72.5%;
-            border: 2px solid black;
-        }
-
-        .garis-lurus12 {
-            margin-top: 105%;
-            height: 21.5%;
-            margin-left: 73.2%;
-            border: 2px solid black;
-        }
-
-        .teks5,
-        .teks6,
-        .teks7,
-        .teks8 {
-            display: inline-block;
-            margin: 10px 0 0 0;
-            padding: 0;
-        }
-
-        .teks5 {
-            margin-left: 4%;
             position: relative;
+            bottom: 20px;
         }
 
-        .teks6 {
-            margin-left: 14%;
+        .teks-pelaksanaan {
+            font-family: Arial, sans-serif;
             position: relative;
+            bottom: 27px;
+            left: 32.8%;
+            font-size: 13pt;
         }
 
-        .teks7 {
-            margin-left: 13%;
+        .border_horizontal_1 {
+            border-bottom: 2px solid black;
+            width: 1044px;
             position: relative;
+            left: 4px;
+            top: 3%;
         }
 
-        .teks8 {
-            margin-left: 13%;
+        .border_horizontal_2 {
+            border-bottom: 2px solid black;
+            width: 1044px;
             position: relative;
+            top: 0.8%;
         }
 
-        .teks9 {
-            margin-top: -10.3%;
-            margin-left: 4%;
+        .border_horizontal_3 {
+            border-bottom: 2px solid black;
+            width: 1044px;
+            position: relative;
+            left: 4px;
+            top: 2%;
         }
 
-        .teks0 {
-            margin-left: 4%;
-            margin-top: -7.2%;
+        .border_horizontal_4 {
+            border-bottom: 2px solid black;
+            width: 1044px;
+            position: relative;
+            top: 1%;
         }
 
-        .teks11 {
-            margin-top: -10.5%;
-            margin-left: 27%;
+        .border_horizontal_5 {
+            border-bottom: 4px solid black;
+            width: 1045px;
+            position: relative;
+            top: 25%;
+            margin-left: 3px;
         }
 
-        .teks12 {
-            margin-left: 26.6%;
-            margin-top: -7.5%;
+        .teks_dokumen_pendukung {
+            padding-left: 2.9%;
+            position: relative;
+            top: 4%;
         }
 
-        .garis-lurus13 {
-            border-bottom: 3px solid black;
-            width: 99.5%;
-            margin-top: 22px;
+        .teks_file_pendukung {
+            padding-left: 2.9%;
+            position: relative;
+            top: 5%;
         }
     </style>
 </head>
 
 <body>
-    @foreach ($surat_perintah_kerjas as $suratPerintahKerja)
-        <!-- Judul -->
-        <div class="rectangle-outline">
-            <div class="pic-text">
-                PIC : {{ $suratPerintahKerja->pic }}
-            </div>
-            <div class="header-text">
-                <h2 class="title-company">PT. SOLUSI INTEK INDONESIA</h2>
-                <h2 class="title-spk">SURAT PERINTAH KERJA WORKSHOP</h2>
-            </div>
-            <div class="header-teks-yth">
-                <div class="teks-yth">
-                    <h3>Kepada Yth<span> : </span>Workshop Manager</h3>
-                    <p class="pelaksanaan">Mohon dapat dilaksanakan pekerjaan di bawah ini :</p>
+    @foreach ($suratPerintahKerjas as $suratPerintahKerja)
+        <div class="box_surat_perintah_kerja">
+            <div class="right-box-position">
+                <div class="name-pic">
+                    <Span>PIC : {{ $suratPerintahKerja->pic }}</Span>
+                </div>
+                <div class="title_company">
+                    <span>PT. SOLUSI INTEK INDONESIA</span>
+                </div>
+                <div class="sub-title-spk">
+                    <span>SURAT PERINTAH KERJA WORKSHOP</span>
+                </div>
+                <br>
+                <div class="Yth">
+                    Kepada Yth
+                    <span style="padding-left:5px;">:</span>
+                    <span style="padding-left:6px;">Workshop Manager</span>
+                </div>
+                <div class="teks-pelaksanaan">
+                    <span style="letter-spacing: 1px;">Mohon dapat dilaksanakan pekerjaan di bawah ini :</span>
+                </div>
+                <div class="table-project-spk">
+                    <table
+                        style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px;">
+                        <thead>
+                            <tr>
+                                <th style="border: 2px solid black; font-size:19px; line-height:normal; width:308px; padding-left:5px;"
+                                    nowrap>
+                                    Kode Project
+                                </th>
+                                <th style="border: 2px solid black; font-size:19px; line-height:normal; font-weight:normal; width:21px; padding-left:5px;"
+                                    nowrap>
+                                    :
+                                </th>
+                                <th colspan="4"
+                                    style="border: 2px solid black; font-size:19px; line-height:normal; padding-left:5px;"
+                                    nowrap>
+                                    {{ $suratPerintahKerja->kode_project }}
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>Nama project</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
+                                    {{ $suratPerintahKerja->nama_project }}</td>
+                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>
+                                    <span style="font-weight: bold;">NO SPK</span>
+                                </td>
+                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px; width:264px;">
+                                    {{ $suratPerintahKerja->no_spk }}</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>User</td>
+                                <td style="border: 2px solid black; padding-left:px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
+                                    {{ $suratPerintahKerja->user }}</td>
+                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Tanggal</td>
+                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;">
+                                    {{ $suratPerintahKerja->tanggal }}</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>Main Contractor</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
+                                    {{ $suratPerintahKerja->main_contractor }}</td>
+                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Prioritas
+                                </td>
+                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;">
+                                    {{ $suratPerintahKerja->prioritas }}</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>Project Manager</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
+                                    {{ $suratPerintahKerja->project_manager }}</td>
+                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Waktu
+                                    Penyelesaian</td>
+                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;">
+                                    {{ $suratPerintahKerja->waktu_penyelesaian }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="border_horizontal">
+                        <div class="border_horizontal_1">
+                            <div class="border_horizontal_2">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="supporting documents">
+                    <div class="chekbox-dokumen">
+                        <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
+                        <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
+                            <input class="box1" style="width: 20px; border: 2px solid #000;  width:2.7%; height:4%;">
+                            <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
+                        </span>
+                        <span class="checkbox_kontrak" style="position: relative; top:5%; left:25.5%; width:10%;">
+                            <input class="box2" style="width: 20px; border: 2px solid #000;  width:2.5%; height:4%;">
+                            <span class="teks_kontrak" style="position: relative; bottom:1%;">Kontrak</span>
+                        </span>
+                        <span class="checkbox_brosur" style="position: relative; top:5%; left:33%; width:10%;">
+                            <input class="box3" style="width: 20px; border: 2px solid #000;  width:1.9%; height:4%;">
+                            <span class="teks_brosur" style="position: relative; bottom:1%;">Brosur</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="other_supporting">
+                    <span class="teks_file_pendukung">File Pendukung Lainnya :</span>
+                    <hr style="background-color:#000; height:0.5px; width:58%; position: relative; top:2.5%;">
+                </div>
+
+                <div class="border_horizontal">
+                    <div class="border_horizontal_3">
+                        <div class="border_horizontal_4">
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <table
+                    style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1.5px solid black; font-size:17px; text-align:center; line-height:normal; width:340px; padding-left:5px;"
+                                nowrap>
+                                JENIS PEKERJAAN
+                            </th>
+                            <th style="border: 1.5px solid black; font-size:17px; border-right:none; text-align:center; line-height:normal; width:664px; padding-left:16px;"
+                                nowrap>
+                                URAIAN PEKERJAAN
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="border: 1.5px solid black;"></td>
+                            <td style="border: 1.5px solid black; border-right:none;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
+                                {{ $suratPerintahKerja->jenis_pekerjaan }}</td>
+                            <td
+                                style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
+                                {{ $suratPerintahKerja->uraian_pekerjaan }}</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 1.5px solid black; padding-left:5px;"></td>
+                            <td
+                                style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
+                                Bersambung kehalaman berikutnya.............
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <br>
+                <div class="teks_hormat_kami">
+                    <span style="position: relative; padding-left:3%;">Hormat Kami,</span>
+                </div>
+                <table
+                    style="border-collapse: collapse; width: 98%; margin: 0 auto; position: relative; left: 8px; margin-top:10px;">
+                    <thead>
+                        <tr>
+                            <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black;"
+                                nowrap>
+                                <span style="font-weight: normal; padding-left:7px;">Pemohon</span>
+                            </th>
+                            <th style="border: 3px solid black; border-right: 6px solid black;" nowrap>
+                                <span style="font-weight: normal; padding-left:7px;">Penerima</span>
+                            </th>
+                            <th style="border: 3px solid black; border-right: 6px solid black;" nowrap>
+                                <span style="font-weight: normal; padding-left:7px;">Menyetujui</span>
+                            </th>
+                            <th style="border: 3px solid black;" nowrap>
+                                <span style="font-weight: normal; padding-left:7px;">Mengetahui</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td
+                                style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                        <tr>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
+                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
+                            <td style="border: 3px solid black;">4</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form_number_spk">
+                    <span style="font-size: 10pt; font-weight:bold; position: relative; padding-left:79%;">
+                        Form Number : {{ $suratPerintahKerja->form_number }}</span>
+                    <div class="border_horizontal">
+                        <div class="border_horizontal_5">
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!--table data -->
-            <table>
-                <tr>
-                    <th class="tb" style="width: 185px;">Kode Project</th>
-                    <th style="font-weight: normal">:</th>
-                    <th class="tb" colspan="6">{{ $suratPerintahKerja->kode_project }}</th>
-                </tr>
-                <tr>
-                    <td>Nama Project</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->nama_project }}</td>
-                    <td>NO SPK</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->no_spk }}</td>
-                </tr>
-                <tr>
-                    <td>User</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->user }}</td>
-                    <td>Tanggal</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->tanggal }}</td>
-                </tr>
-                <tr>
-                    <td>Main Contractor</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->main_contractor }}</td>
-                    <td>Prioritas</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->prioritas }}</td>
-                </tr>
-                <tr>
-                    <td>Project Manager</td>
-                    <td>:</td>
-                    <td>{{ $suratPerintahKerja->project_manager }}</td>
-                    <td>Waktu Penyelesaian</td>
-                    <td class="semi-colon">:</td>
-                    <td colspan="3">{{ $suratPerintahKerja->waktu_penyelesaian }} </td>
-                </tr>
-            </table>
-            <div class="horizontal-line"></div>
-            <div class="horizontal-line1"></div>
-            <!-- konten -->
-
-            <p class="dokumen">Dokumen Pendukung</p>
-            <label class="checkbox-container">
-                <input class="box1"> Gambar
-            </label>
-            <label class="checkbox-container">
-                <input class="box2"> Kontrak
-            </label>
-            <label class="checkbox-container">
-                <input class="box3"> Brosur
-            </label>
-            <p class="pendukung">File Pendukung Lainnya:</p>
-            {{-- @endforeach --}}
-            <div class="garis-lurus1"></div>
-            <div class="garis-lurus2"></div>
-            <div class="job-table"></div>
-            <div class="type-work-container">
-                <p class="type-work1">JENIS PEKERJAAN</p>
-                <p class="Job-description">URAIAN PEKERJAAN</p>
-                <div class="garis-lurus3"></div>
-                <div class="garis-lurus3"></div>
-                <div class="garis-lurus4"></div>
-                <p class="teks-tabel">Bersambung ke halaman berikutnya …..........</p>
-                <div class="garis-lurus5"></div>
-                <p class="teks3">Hormat Kami,</p>
-            </div>
-            <div class="content-ttd">
-                <p class="teks15">1. Nama : Sindu Irawan</p>
-                <p class="teks16">Jabatan : B.O.D</p>
-                <p class="teks17">..........................</p>
-                <p class="teks18">2. Nama : Bayu Nugraha </p>
-                <p class="teks19">Jabatan : General Manager</p>
-                <p class="teks20">..........................</p>
-                <p class="teks21">Form Number : {{ $suratPerintahKerja->form_number }}</p>
-                <div class="garis-lurus6"></div>
-                <p class="teks14">Jabatan :</p>
-                <p class="teks5">Pemohon</p>
-                <p class="teks13">Nama :</p>
-                <p class="teks6">Penerima</p>
-                <p class="teks7">Menyetujui</p>
-                <p class="teks8">Mengetahui</p>
-                <div class="garis-lurus7"></div>
-                <div class="garis-lurus8"></div>
-                <div class="garis-lurus9"></div>
-                <p class="teks12">Jabatan : </p>
-                <div class="garis-lurus0"></div>
-                <p class="teks11">Nama : </p>
-                <div class="garis-lurus11"></div>
-                <p class="teks0">Jabatan : Koor PM</p>
-                <div class="garis-lurus12"></div>
-                <p class="teks9">Nama : Susilo</p>
-            </div>
-            <div class="garis-lurus13"></div>
         </div>
     @endforeach
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
 </body>

@@ -152,11 +152,12 @@
                                                 {{ $spk->pic }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ Carbon\Carbon::createFromFormat('d/m/y', $spk->tanggal)->format('d-m-Y') }}
+                                                {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->tanggal)->format('d-m-Y') }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ Carbon\Carbon::createFromFormat('d/m/y', $spk->waktu_penyelesaian)->format('d-m-Y') }}
+                                                {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->waktu_penyelesaian)->format('d-m-Y') }}
                                             </td>
+
                                             <td class="text-center" style="font-weight:400;" nowrap>
                                                 <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
                                                     class="fas fa-pen btn btn-sm tooltip-container"

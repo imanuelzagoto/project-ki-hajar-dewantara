@@ -22,7 +22,7 @@ class MasterProjekViewController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://172.15.1.97/api/projects',
+            CURLOPT_URL => env('API_MASTER_PROJECT') . 'projects/',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -112,8 +112,7 @@ class MasterProjekViewController extends Controller
 
     public function edit($id)
     {
-
-        $url = 'http://172.15.1.97/api/projects/' . $id;
+        $url = 'http://172.15.2.134/api/projects/' . $id;
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
@@ -180,7 +179,7 @@ class MasterProjekViewController extends Controller
      */
     public function destroy($id)
     {
-        $url = 'http://172.15.1.97/api/projects/' . $id;
+        $url = 'http://172.15.2.134/api/projects/' . $id;
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,

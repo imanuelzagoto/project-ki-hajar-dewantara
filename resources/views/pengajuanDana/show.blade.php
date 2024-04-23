@@ -304,102 +304,102 @@
                 <tr>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Nama
-                        <span style="padding-left: 30px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">{{ $pds->nama_pemohon }}</span>
+                        <span style="padding-left: 20px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>{{ $pds->nama_pemohon }}</span>
                     </td>
                     <td style="border:none;"></td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Nama
                         <span style="padding-left: 18px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">Bu Yani</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>Bu Yani</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Nama
                         <span style="padding-left: 18px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">Bayu</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>Bayu</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Nama
                         <span style="padding-left: 18px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">Sindu Irawan</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>Sindu Irawan</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Nama
                         <span style="padding-left: 18px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">Victor</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>Victor</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Nama
                         <span style="padding-left: 18px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">Erwin Danuaji</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>Erwin Danuaji</span>
                     </td>
 
                 </tr>
                 <tr>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Jabatan
-                        <span style="padding-left: 10px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">{{ $pds->jabatan_pemohon }}</span>
+                        <span style="padding-left: 8px;">:</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>{{ $pds->jabatan_pemohon }}</span>
                     </td>
                     <td style="border:none;"></td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Jabatan
                         <span style="padding-left: 7px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">GM</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>GM</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Jabatan
                         <span style="padding-left: 7px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">GM</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>GM</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Jabatan
                         <span style="padding-left: 7px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">BOD</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>BOD</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Jabatan
                         <span style="padding-left: 7px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">BOD</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>BOD</span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Jabatan
                         <span style="padding-left: 7px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;">BOD</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>BOD</span>
                     </td>
                 </tr>
                 <tr>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Date
                         <span style="padding-left: 25.3px;">:</span>
-                        <span
-                            style="padding-left: 3px; font-size:12.5px;">{{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->format('d F Y') }}</span>
+                        <span style="padding-left: 3px; font-size:12.5px;"
+                            nowrap>{{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->format('d F Y') }}</span>
                     </td>
                     <td style="border:none;"></td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Date
                         <span style="padding-left: 25.3px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                        <span style="padding-left: 3px; font-size:12.5px;"nowrap></span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Date
                         <span style="padding-left: 25.3px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Date
                         <span style="padding-left: 25.3px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Date
                         <span style="padding-left: 25.3px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
                     </td>
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Date
                         <span style="padding-left: 25.3px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;"></span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
                     </td>
                 </tr>
             </tbody>

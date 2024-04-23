@@ -117,6 +117,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('pengajuanDana.index');
     Route::get('/pengajuan-dana/tambah-pengajuan', [PengajuanDanaViewWebController::class, 'create'])->name('pengajuanDana.create');
     Route::post('/pengajuan-dana/store', [PengajuanDanaViewWebController::class, 'store'])->name('pengajuanDana.store');
+    Route::put('/pengajuan-dana/update/{id}', [PengajuanDanaViewWebController::class, 'update'])->name('pengajuanDana.update');
     Route::get('/pengajuan-dana/edit/{id}', [PengajuanDanaViewWebController::class, 'edit'])->name('pengajuanDana.edit');
     Route::put('/pengajuan-dana/update/{id}', [PengajuanDanaViewWebController::class, 'update'])->name('pengajuanDana.update');
     Route::get('/pengajuan-dana/show/{id}', [PengajuanDanaViewWebController::class, 'show'])->name('pengajuanDana.show');
