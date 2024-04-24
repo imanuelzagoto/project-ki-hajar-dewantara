@@ -272,46 +272,25 @@
     </div>
     <script>
         function changeProjectName() {
-            let project_id = $('#project_id').val();
-            console.log(project_id);
-
-            // Ganti URL API berdasarkan lingkungan
-            let apiUrl = '';
-            if (env === 'development') {
-                apiUrl = 'http://172.15.2.134/api/';
-            } else if (env === 'production') {
-                // URL API untuk lingkungan produksi
-                apiUrl = 'http://api.prod.com/';
-            } else {
-                // Default URL API jika lingkungan tidak dikenali
-                apiUrl = 'http://default.api.com/';
-            }
-
+            let project_id = $('#project_id').find(":selected").val();
+            console.log(project_id)
             var settings = {
-                url: apiUrl + "projects/" + project_id,
-                method: "GET",
-                timeout: 0,
-                headers: {
+                "url": "http://172.15.2.134/api/projects/" + project_id,
+                "method": "GET",
+                "timeout": 0,
+                "headers": {
                     "Accept": "application/json",
                     "Authorization": "{{ Session::get('token') }}"
                 },
             };
 
-            $.ajax(settings)
-                .done(function(response) {
-                    console.log(response);
-                    if (response && response.data) {
-                        $('#nama').val(response.data.project_name);
-                        $('#kode_project_hidden').val(response.data.code_project);
-                    } else {
-                        console.log("Data tidak ditemukan");
-                    }
-                })
-                .fail(function(xhr, status, error) {
-                    console.log("Kesalahan saat melakukan permintaan AJAX: " + status);
-                });
-        }
+            $.ajax(settings).done(function(response) {
+                console.log(response.data.code_project)
+                $('#nama').val(response.data.project_name);
+                $('#kode_project_hidden').val(response.data.code_project);
+            });
 
+        }
         // JS textarea
         const textarea = document.getElementById('uraian-pekerjaan');
         // fungsi mengubah ukuran dinamis
