@@ -80,13 +80,13 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
                                                 <input type="hidden" id="kode_project_hidden" name="kode_project">
                                                 <select id="project_id" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
-                                                    <option value="" disabled selected>
-                                                        -- Pilih Kode Project --
+                                                    <option value="" disabled selected>-- Pilih Kode Project --
                                                     </option>
                                                     @foreach ($projects as $p)
                                                         <option value="{{ $p['id'] }}">{{ $p['code_project'] }}
@@ -95,11 +95,11 @@
                                                 </select>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail ">Nama
-                                                    Project</span>
-                                                <input name="nama_project" class="form-control  w-100 disabled_input"
+                                                <span class="text-sm font-weight-bold text-form-detail">Nama Project</span>
+                                                <input name="nama_project" class="form-control w-100 disabled_input"
                                                     id="nama" type="text">
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
                                                 <input name="user" class="form-control bg-light w-100" type="text">
@@ -270,25 +270,34 @@
     </div>
     <script>
         function changeProjectName() {
-            let project_id = $('#project_id').find(":selected").val();
-            console.log(project_id)
+            let project_id = $('#project_id').val(); // Menggunakan .val() untuk mendapatkan nilai select
+            console.log(project_id);
+
             var settings = {
-                "url": "http://172.15.2.134/api/projects/" + project_id,
-                "method": "GET",
-                "timeout": 0,
-                "headers": {
+                url: "http://172.15.2.134/api/projects/" + project_id,
+                method: "GET",
+                timeout: 0,
+                headers: {
                     "Accept": "application/json",
                     "Authorization": "{{ Session::get('token') }}"
                 },
             };
 
-            $.ajax(settings).done(function(response) {
-                console.log(response.data.code_project)
-                $('#nama').val(response.data.project_name);
-                $('#kode_project_hidden').val(response.data.code_project);
-            });
-
+            $.ajax(settings)
+                .done(function(response) {
+                    console.log(response);
+                    if (response && response.data) {
+                        $('#nama').val(response.data.project_name);
+                        $('#kode_project_hidden').val(response.data.code_project);
+                    } else {
+                        console.log("Data tidak ditemukan");
+                    }
+                })
+                .fail(function(xhr, status, error) {
+                    console.log("Kesalahan saat melakukan permintaan AJAX: " + status);
+                });
         }
+
         // JS textarea
         const textarea = document.getElementById('uraian-pekerjaan');
         // fungsi mengubah ukuran dinamis
