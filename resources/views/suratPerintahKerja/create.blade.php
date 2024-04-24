@@ -86,7 +86,8 @@
                                                 <input type="hidden" id="kode_project_hidden" name="kode_project">
                                                 <select id="project_id" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
-                                                    <option value="" disabled selected>-- Pilih Kode Project --
+                                                    <option value="" disabled selected>
+                                                        -- Pilih Kode Project --
                                                     </option>
                                                     @foreach ($projects as $p)
                                                         <option value="{{ $p['id'] }}">{{ $p['code_project'] }}
@@ -95,8 +96,9 @@
                                                 </select>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Nama Project</span>
-                                                <input name="nama_project" class="form-control w-100 disabled_input"
+                                                <span class="text-sm font-weight-bold text-form-detail ">Nama
+                                                    Project</span>
+                                                <input name="nama_project" class="form-control  w-100 disabled_input"
                                                     id="nama" type="text">
                                             </div>
 
@@ -270,11 +272,23 @@
     </div>
     <script>
         function changeProjectName() {
-            let project_id = $('#project_id').val(); // Menggunakan .val() untuk mendapatkan nilai select
+            let project_id = $('#project_id').val();
             console.log(project_id);
 
+            // Ganti URL API berdasarkan lingkungan
+            let apiUrl = '';
+            if (env === 'development') {
+                apiUrl = 'http://172.15.2.134/api/';
+            } else if (env === 'production') {
+                // URL API untuk lingkungan produksi
+                apiUrl = 'http://api.prod.com/';
+            } else {
+                // Default URL API jika lingkungan tidak dikenali
+                apiUrl = 'http://default.api.com/';
+            }
+
             var settings = {
-                url: "http://172.15.2.134/api/projects/" + project_id,
+                url: apiUrl + "projects/" + project_id,
                 method: "GET",
                 timeout: 0,
                 headers: {
