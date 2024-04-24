@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use GuzzleHttp\Client;
 use Carbon\Carbon;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -43,50 +42,32 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function create()
     {
-        // Inisialisasi cURL
         $curl = curl_init();
 
-        // Set opsi cURL
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'http://172.15.2.134/api/projects',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 30,
+            CURLOPT_TIMEOUT => 0,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
         ));
 
-        // Eksekusi permintaan cURL
         $response = curl_exec($curl);
 
-        // Tangani kesalahan jika ada
-        if ($response === false) {
-            $error_message = curl_error($curl);
-            // Lakukan penanganan kesalahan sesuai kebutuhan Anda
-            // Misalnya, lempar exception atau tampilkan pesan kesalahan
-            return "Error: $error_message";
-        }
-
-        // Tutup koneksi cURL
         curl_close($curl);
 
-        // Decode respons JSON
-        $data = json_decode($response, true);
+        $projects = json_decode($response, true)['data'];
+        // foreach ($projects as $project) {
+        //     dd($project['id']);
+        // }
+        // dd($projects);
 
-        // Periksa apakah respons berhasil dan memiliki data yang diperlukan
-        if (isset($data['success']) && $data['success'] && isset($data['data'])) {
-            $projects = $data['data'];
-        } else {
-            // Tangani kasus di mana respons tidak sesuai dengan yang diharapkan
-            return "Error: Invalid response format";
-        }
-
-        // Kembalikan tampilan dengan data proyek
-        return view('suratPerintahKerja.create')->with('projects', $projects);
+        return view('suratPerintahKerja.create')
+            ->with('projects', $projects);
     }
-
 
     /**
      * store
