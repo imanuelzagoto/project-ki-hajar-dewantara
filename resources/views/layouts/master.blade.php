@@ -8,7 +8,7 @@
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
     {{-- <link rel="icon" href="{{ asset('/partas/img/surattt.png') }}" type="image/x-icon" /> --}}
     <link rel="stylesheet" href="{{ asset('/partas/css/kiha.css') }}">
-    <link rel="stylesheet" href="{{ asset('/partas/css/fonts.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('/partas/css/fonts.min.css') }}"> --}}
     {{-- <script src="{{ asset('/partas/js/plugin/webfont/webfont.min.js') }}"></script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     {{-- <script>
