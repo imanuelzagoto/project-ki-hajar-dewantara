@@ -254,6 +254,9 @@
             </div>
         </div>
     </div>
+@endsection
+
+@push('scripts')
     <script>
         function changeProjectName() {
             let project_id = $('#project_id').find(":selected").val();
@@ -313,4 +316,4 @@
             fileInput.files = e.dataTransfer.files
         })
     </script>
-@endsection
+@endpush
