@@ -17,29 +17,18 @@ class MasterProjekViewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Response $response)
+    public function index()
     {
-        $curl = curl_init();
+        $response = Http::get(env('API_MASTER_PROJECT') . 'projects');
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_MASTER_PROJECT') . 'projects/',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        $projects = json_decode($response, true)['data'];
-        // dd($projects);
-        // Mengirimkan data proyek ke tampilan
-        return view('masterProjek.index', ['projects' => $projects]);
+        // Periksa apakah permintaan berhasil.
+        if ($response->successful()) {
+            $projects = $response->json()['data'];
+            return view('masterProjek.index', ['projects' => $projects]);
+        } else {
+            // Handle kesalahan jika permintaan tidak berhasil.
+            return redirect()->back()->with('error', 'Failed to fetch projects from API');
+        }
     }
 
     public function create()

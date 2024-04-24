@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -136,12 +139,13 @@
                     <Span>PIC : {{ $suratPerintahKerja->pic }}</Span>
                 </div>
                 <div class="title_company">
-                    <span>PT. SOLUSI INTEK INDONESIA</span>
+                    <span style="font-family: "Times New Roman", Times, serif; ">PT. SOLUSI INTEK INDONESIA</span>
                 </div>
                 <div class="sub-title-spk">
-                    <span>SURAT PERINTAH KERJA WORKSHOP</span>
+                    <span style="font-family: "Times New Roman" , Times, serif; ">SURAT PERINTAH KERJA WORKSHOP</span>
                 </div>
                 <br>
+
                 <div class="Yth">
                     Kepada Yth
                     <span style="padding-left:5px;">:</span>
@@ -150,6 +154,7 @@
                 <div class="teks-pelaksanaan">
                     <span style="letter-spacing: 1px;">Mohon dapat dilaksanakan pekerjaan di bawah ini :</span>
                 </div>
+
                 <div class="table-project-spk">
                     <table
                         style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px;">
@@ -185,7 +190,7 @@
                             </tr>
                             <tr>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>User</td>
-                                <td style="border: 2px solid black; padding-left:px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>
                                     {{ $suratPerintahKerja->user }}</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Tanggal</td>
@@ -224,6 +229,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="supporting documents">
                     <div class="chekbox-dokumen">
                         <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
@@ -241,6 +247,7 @@
                         </span>
                     </div>
                 </div>
+
                 <div class="other_supporting">
                     <span class="teks_file_pendukung">File Pendukung Lainnya :</span>
                     <hr style="background-color:#000; height:0.5px; width:58%; position: relative; top:2.5%;">
@@ -253,130 +260,257 @@
                     </div>
                 </div>
                 <br>
-                <table
-                    style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
-                    <thead>
-                        <tr>
-                            <th style="border: 1.5px solid black; font-size:17px; text-align:center; line-height:normal; width:340px; padding-left:5px;"
-                                nowrap>
-                                JENIS PEKERJAAN
-                            </th>
-                            <th style="border: 1.5px solid black; font-size:17px; border-right:none; text-align:center; line-height:normal; width:664px; padding-left:16px;"
-                                nowrap>
-                                URAIAN PEKERJAAN
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="border: 1.5px solid black;"></td>
-                            <td style="border: 1.5px solid black; border-right:none;"></td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
-                                {{ $suratPerintahKerja->jenis_pekerjaan }}</td>
-                            <td
-                                style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
-                                {{ $suratPerintahKerja->uraian_pekerjaan }}</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1.5px solid black; padding-left:5px;"></td>
-                            <td
-                                style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
-                                Bersambung kehalaman berikutnya.............
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                
+                <div class="detail_spk">
+                    <table style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
+                        <thead>
+                            <tr>
+                                <th style="border: 1.5px solid black; font-size:17px; text-align:center; line-height:normal; width:340px; padding-left:5px;"
+                                    nowrap>
+                                    JENIS PEKERJAAN
+                                </th>
+                                <th style="border: 1.5px solid black; font-size:17px; border-right:none; text-align:center; line-height:normal; width:664px; padding-left:16px;"
+                                    nowrap>
+                                    URAIAN PEKERJAAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="border: 1.5px solid black;"></td>
+                                <td style="border: 1.5px solid black; border-right:none;"></td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
+                                    {{ $suratPerintahKerja->jenis_pekerjaan }}
+                                </td>
+                                <td
+                                    style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
+                                    {{ $suratPerintahKerja->uraian_pekerjaan }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1.5px solid black; padding-left:5px;"></td>
+                                <td
+                                    style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
+                                    Bersambung kehalaman berikutnya.............
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <br>
-                <br>
-                <div class="teks_hormat_kami">
+
+                <div class="teks_hormat_kami" style="margin-top: 2%;">
                     <span style="position: relative; padding-left:3%;">Hormat Kami,</span>
                 </div>
-                <table
-                    style="border-collapse: collapse; width: 98%; margin: 0 auto; position: relative; left: 8px; margin-top:10px;">
-                    <thead>
-                        <tr>
-                            <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black;"
-                                nowrap>
-                                <span style="font-weight: normal; padding-left:7px;">Pemohon</span>
-                            </th>
-                            <th style="border: 3px solid black; border-right: 6px solid black;" nowrap>
-                                <span style="font-weight: normal; padding-left:7px;">Penerima</span>
-                            </th>
-                            <th style="border: 3px solid black; border-right: 6px solid black;" nowrap>
-                                <span style="font-weight: normal; padding-left:7px;">Menyetujui</span>
-                            </th>
-                            <th style="border: 3px solid black;" nowrap>
-                                <span style="font-weight: normal; padding-left:7px;">Mengetahui</span>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td
-                                style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">1</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">2</td>
-                            <td style="border: 3px solid black; border-right: 6px solid black;">3</td>
-                            <td style="border: 3px solid black;">4</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="form_number_spk">
+
+                <div class="table_persetujuan" style="margin-top: 1%;">
+                    <table
+                        style="border-collapse: collapse; width: 98%; margin: 0 auto; position: relative; left: 8px; margin-top:10px;">
+                        <thead>
+                            <tr>
+                                <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black;"
+                                    nowrap>
+                                    <span style="font-weight: normal; padding-left:7px;">Pemohon</span>
+                                </th>
+                                <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black;"
+                                    nowrap>
+                                    <span style="font-weight: normal; padding-left:7px;">Penerima</span>
+                                </th>
+                                <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black;"
+                                    nowrap>
+                                    <span style="font-weight: normal; padding-left:7px;">Menyetujui</span>
+                                </th>
+                                <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:3px solid black;"
+                                    nowrap>
+                                    <span style="font-weight: normal; padding-left:7px;">Mengetahui</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                    <span style="padding-left: 5px;">1.</span>
+                                    <span>Nama</span>
+                                    <span style="padding-left: 12px;">:</span>
+                                    <span>Sindu Irawan</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                    <span style="padding-left: 21px;">Jabatan</span>
+                                    <span>:</span>
+                                    <span>BOD</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; ">
+                                    <span style="visibility: hidden;">4</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
+                                    <span style="visibility: hidden;">4</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; padding-left:2%;">
+                                    <span style="padding-left:18px;">...........................</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                </td>
+                                <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                        <span style="padding-left: 5px;">2.</span>
+                                        <span>Nama</span>
+                                        <span style="padding-left: 12px;">:</span>
+                                        <span>Bayu Nugraha</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                    <span style="padding-left: 21px;">Jabatan</span>
+                                    <span>:</span>
+                                    <span>General Manager</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                    <span class="nama_pemohon">Nama</span>
+                                    <span style="padding-left: 15px;">:</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->pemohon }}</span>
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                    <span class="nama_penerima">Nama</span>
+                                    <span style="padding-left: 15px;">:</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->penerima }}</span>
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                    <span class="nama_menyetujui">Nama</span>
+                                    <span style="padding-left: 15px;">:</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->menyetujui }}</span>
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
+                                    <span style="visibility: hidden;">4</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                    <span class="Jabatan_pemohon">Jabatan</span>
+                                    <span>:</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->jabatan_1 }}</span>
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                    <span class="Jabatan_pemohon">Jabatan</span>
+                                    <span>:</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->jabatan_2 }}</span>
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                    <span class="Jabatan_pemohon">Jabatan</span>
+                                    <span>:</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->jabatan_3 }}</span>
+                                </td>
+                                <td
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                    <span style="padding-left:21px;">...........................</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                <td
+                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
+                                    <span style="visibility: hidden;">4</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="form_number_spk" style="margin-top: 2%;">
                     <span style="font-size: 10pt; font-weight:bold; position: relative; padding-left:79%;">
                         Form Number : {{ $suratPerintahKerja->form_number }}</span>
                     <div class="border_horizontal">
@@ -386,8 +520,10 @@
                 </div>
             </div>
         </div>
-    @endforeach
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-    </script>
+ @endforeach
+                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+                        </script>
 </body>
+
+</html>

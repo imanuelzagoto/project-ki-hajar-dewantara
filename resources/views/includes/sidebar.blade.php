@@ -3,7 +3,7 @@
         <div class="sidebar-content">
             <div class="brand">
                 <a data-toggle="collapse" href="{{ route('home.index') }}" aria-expanded="true" class="brand-name">
-                    <img src="{{ asset('partas/img/logo.png') }}" alt="BLogo" class="brand-logo">
+                    <img src="{{ asset('partas/img/Logo.png') }}" alt="BLogo" class="brand-logo">
                 </a>
             </div>
             <hr class="mt-4 hr-rectangle">

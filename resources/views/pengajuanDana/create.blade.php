@@ -82,11 +82,24 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="subject" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="revisi" class="form-control bg-light w-100" type="text"
+                                                    required>
+                                            </div>
+                                            <div class="row pr-3 pt-3">
+                                                <div class="pr-4 py-2 col-6" style="display: none;">
+                                                    <input name="tanggal_pengajuan" id="tanggalPengajuan" type="date"
+                                                        class="form-control bg-light w-100" required>
+                                                </div>
+                                            </div>
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail"></span>
+                                                <input name="no_doc" id="noDoc" type="hidden"
+                                                    class="form-control bg-light w-100" required>
                                             </div>
                                         </div>
                                     </div>
@@ -102,41 +115,49 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tujuan</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="tujuan" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="lokasi" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-2">
                                                 <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
-                                                <input class="form-control bg-light w-100" type="date">
+                                                <input name="batas_waktu" class="form-control bg-light w-100"
+                                                    type="date" required>
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="nominal" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Terbilang</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="terbilang" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-2" id="container_method">
                                                 <span class="text-sm font-weight-bold text-form-detail">Metode
                                                     Penerimaan</span>
-                                                <select id="metodePenerimaan" class="form-control bg-light w-100">
-                                                    <option value="debit">Debit</option>
-                                                    <option value="cash">Cash</option>
+                                                <select id="metodePenerimaan" name="metode_penerimaan"
+                                                    class="form-control bg-light w-100">
+                                                    <option value="Debit">Debit</option>
+                                                    <option value="Cash">Cash</option>
                                                 </select>
                                             </div>
                                             <div id="nomorRekeningInput" class="pr-4 col-2" style="margin-top: 28px;">
-                                                <span class="text-sm font-weight-bold text-form-detail"></span>
-                                                <input class="form-control bg-light w-100" type="text"
-                                                    placeholder="Masukan nomor rekening"
+                                                <span class="text-sm font-weight-bold text-form-detail">Nomor
+                                                    Rekening</span>
+                                                <input name="nomor_rekening" class="form-control bg-light w-100"
+                                                    type="text" placeholder="Masukan nomor rekening"
                                                     style="font-size: 10px; font-weight: bold; color: #92A1BB;">
                                             </div>
+
                                             <div class="pr-4 py-2 col-12">
                                                 <span class="text-sm font-weight-bold text-form-detail">Catatan</span>
-                                                <textarea class="form-control bg-light w-100" rows="3" style="resize: none;"></textarea>
+                                                <textarea name="catatan" class="form-control bg-light w-100" rows="3" style="resize: none;"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -193,11 +214,13 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nama</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="nama_pemohon" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input class="form-control bg-light w-100" type="text">
+                                                <input name="jabatan_pemohon" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
                                         </div>
                                     </div>
@@ -207,7 +230,7 @@
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
                                         <button class="btn btn-save"
-                                            style="border-radius: 25px; font-weight:700; font-size: 14px;">
+                                            style="border-radius: 25px; font-weight:bold; font-size: 14px;">
                                             SAVE
                                         </button>
                                     </div>
@@ -219,6 +242,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         // JS metode penerimaan
@@ -237,6 +261,60 @@
         });
         // end JS Metode penerimaan
     </script>
+
+    <script>
+        // Get the current date
+        var currentDate = new Date();
+
+        // Get year, month, and day
+        var year = currentDate.getFullYear();
+        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+        var day = ('0' + currentDate.getDate()).slice(-2);
+
+        // Format the date as yyyy-mm-dd
+        var formattedDate = year + '-' + month + '-' + day;
+
+        // Set the value of the hidden input field
+        document.getElementById('tanggalPengajuan').value = formattedDate;
+    </script>
+
+    {{-- <script>
+        // Fungsi untuk mengonversi bulan menjadi angka Romawi
+        function bulanToRomawi(bulan) {
+            var romawi = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII'];
+            return romawi[bulan - 1];
+        }
+
+        // Fungsi untuk mengisi nilai dan submit form
+        function submitForm() {
+            // Mendapatkan tanggal hari ini
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = today.getMonth() + 1; // Bulan dimulai dari 0
+
+            // Konversi bulan menjadi angka Romawi
+            var romawiBulan = bulanToRomawi(month);
+
+            var nomorUrutDataBaru = 1;
+
+            // Membuat no_doc dengan format yang diinginkan
+            var noDoc = nomorUrutDataBaru + "/FPD/ADM/" + romawiBulan + "/" + year;
+
+            // Isi nilai pada input tanggal_pengajuan
+            document.getElementById('tanggalPengajuan').value = today.toISOString().split('T')[0];
+
+            // Isi nilai pada input no_doc
+            document.getElementById('noDoc').value = noDoc;
+
+            // Submit form
+            document.getElementById('hiddenForm').submit();
+        }
+
+        // Panggil fungsi submitForm saat halaman dimuat
+        window.addEventListener('DOMContentLoaded', function() {
+            submitForm();
+        });
+    </script> --}}
 @endsection
 
 @push('scripts')

@@ -24,6 +24,7 @@ class PengajuanDana extends Model
         'tanggal_pengajuan',
         'no_doc',
         'revisi',
+        'form_number'
     ];
 
     protected $dates = [

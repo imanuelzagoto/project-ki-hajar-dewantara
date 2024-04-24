@@ -347,7 +347,7 @@ class SuratPerintahKerjaViewWebController extends Controller
     public function exportPDF($id)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
-        $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja_pdf', compact('suratPerintahKerjas'));
+        $pdf = PDF::loadView('suratPerintahKerja.show', compact('suratPerintahKerjas'));
         return $pdf->download('surat_perintah_kerja.pdf');
     }
 }

@@ -12,6 +12,21 @@ use Yajra\DataTables\Facades\DataTables;
 
 class PengajuanDanaViewWebController extends Controller
 {
+    function numberToRomanRepresentation($number)
+    {
+        $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
+        $returnValue = '';
+        while ($number > 0) {
+            foreach ($map as $roman => $int) {
+                if ($number >= $int) {
+                    $number -= $int;
+                    $returnValue .= $roman;
+                    break;
+                }
+            }
+        }
+        return $returnValue;
+    }
 
     public function index(Request $request)
     {
@@ -38,13 +53,12 @@ class PengajuanDanaViewWebController extends Controller
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'batas_waktu' => 'required|date_format:d F Y',
+            'batas_waktu' => 'required',
             'nominal' => 'required|numeric',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
-            'tanggal_pengajuan' => 'required|date_format:d F Y',
-            'no_doc' => 'required|string',
+            'tanggal_pengajuan' => 'required',
             'revisi' => 'nullable|string',
         ]);
 
@@ -52,13 +66,13 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
-        $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
-        $pengajuanDanas = PengajuanDana::create($request->all());
-        $pengajuanDanas->nominal = 'Rp. ' . number_format($pengajuanDanas->nominal, 0, ',', '.');
+        // Format tanggal_pengajuan dan batas_waktu jika perlu
+        // $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
+        // $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
 
-        // Create the record
+        // Buat rekaman
         $pengajuanDanas = PengajuanDana::create([
+            'form_number' => 'doc_pd',
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'subject' => $request->subject,
@@ -70,12 +84,21 @@ class PengajuanDanaViewWebController extends Controller
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
-            'no_doc' => $request->no_doc,
+            'no_doc' => 'doc_pd', // Saya asumsikan no_doc akan diberikan nilai 'doc_pd' juga
             'revisi' => $request->revisi,
+        ]);
+
+        // Buat nomor dokumen dan update rekaman dengan nomor dokumen
+        $datetime = explode('-', $pengajuanDanas->created_at);
+        $no_doc = $pengajuanDanas->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
+        $pengajuanDanas->update([
+            'no_doc' => $no_doc,
+            'form_number' => $no_doc
         ]);
 
         return redirect(route('pengajuanDana.index'));
     }
+
 
     /**
      * show
