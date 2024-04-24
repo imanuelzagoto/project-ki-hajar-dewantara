@@ -8,8 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
-use Yajra\DataTables\Facades\DataTables;
+// use Carbon\Carbon;
+// use Yajra\DataTables\Facades\DataTables;
 
 class SuratPerintahKerjaViewWebController extends Controller
 {

@@ -234,22 +234,6 @@
                                                 <input name="jabatan_3" class="form-control bg-light w-100"
                                                     type="text">
                                             </div>
-                                            {{-- <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui 1</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui 2</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
