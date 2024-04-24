@@ -1,6 +1,10 @@
 @extends('layouts.master')
 
 @section('content')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <div class="main-dashboard mt--3">
         <nav aria-label="breadcrumb">
             <div class="breadcrumb mt-1 d-flex justify-content-between">
@@ -172,7 +176,7 @@
                                             <td class="text-center" style="font-weight:400;" nowrap>
 
                                                 <a href="/pengajuan-dana/edit/{{ $pdts->id }}"
-                                                    class="fas fa-pen btn btn-sm tooltip-container"
+                                                    class="fa fa-pencil btn btn-sm tooltip-container"
                                                     style="color:#4FD1C5; font-size:20px;">
                                                     <span class="tooltip-edit">Edit</span>
                                                 </a>

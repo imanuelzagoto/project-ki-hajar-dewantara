@@ -8,8 +8,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
-use Yajra\DataTables\Facades\DataTables;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Http;
+// use Carbon\Carbon;
+// use Yajra\DataTables\Facades\DataTables;
 
 class SuratPerintahKerjaViewWebController extends Controller
 {
@@ -42,32 +44,27 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function create()
     {
-        $curl = curl_init();
+        try {
+            // Ambil data proyek menggunakan Laravel HTTP client
+            $response = Http::get(env('API_MASTER_PROJECT') . 'projects');
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://172.15.2.134/api/projects',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
+            // Periksa apakah permintaan berhasil dan respon memiliki data yang diperlukan
+            if ($response->successful()) {
+                $projects = $response->json()['data'];
+            } else {
+                // Tangani kasus di mana respons tidak sesuai dengan yang diharapkan
+                return "Error: Invalid response format";
+            }
 
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        $projects = json_decode($response, true)['data'];
-        // foreach ($projects as $project) {
-        //     dd($project['id']);
-        // }
-        // dd($projects);
-
-        return view('suratPerintahKerja.create')
-            ->with('projects', $projects);
+            // Kembalikan tampilan dengan data proyek
+            return view('suratPerintahKerja.create')->with('projects', $projects);
+        } catch (\Exception $e) {
+            // Tangani kesalahan jika ada
+            return "Error: " . $e->getMessage();
+        }
     }
+
+
 
     /**
      * store

@@ -101,7 +101,7 @@ class MasterProjekViewController extends Controller
 
     public function edit($id)
     {
-        $url = 'http://172.15.2.134/api/projects/' . $id;
+        $url = env('API_MASTER_PROJECT') . 'projects/' . $id;
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
