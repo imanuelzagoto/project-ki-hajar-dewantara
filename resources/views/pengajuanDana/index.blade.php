@@ -168,7 +168,7 @@
                                                 {{ Carbon\Carbon::parse($pdts->batas_waktu)->format('d-m-Y') }}
                                             </td>
                                             <td class="text-right" style="font-weight:400;" nowrap>
-                                                {{ 'Rp. ' . number_format($pdts->nominal, 0, ',', '.') }}
+                                                {{ 'Rp. ' . number_format($pdts->subtotal, 0, ',', '.') }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
                                                 {{ $pdts->metode_penerimaan }}

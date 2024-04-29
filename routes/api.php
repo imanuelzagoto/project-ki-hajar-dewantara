@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::prefix('mp')->group(function () {
     // Master Projek
+    Route::get('getProject', [MasterProjekController::class, 'getProject'])->name('master-projek.getProject');
     Route::get('master-projek', [MasterProjekController::class, 'index'])->name('master-projek.index');
     Route::post('master-projek', [MasterProjekController::class, 'store'])->name('master-projek.store');
     Route::get('master-projek/{id}', [MasterProjekController::class, 'show'])->name('master-projek.show');

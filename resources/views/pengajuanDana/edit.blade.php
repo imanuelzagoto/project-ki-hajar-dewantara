@@ -107,7 +107,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row pr-3 pt-3">
+                            <div class="row pr-3">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
                                     <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
                                         <span class="head-detail">Detail</span>
@@ -118,48 +118,56 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tujuan</span>
                                                 <input name="tujuan" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                    value="{{ $pengajuanDanas->tujuan }}" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
                                                 <input name="lokasi" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                    value="{{ $pengajuanDanas->lokasi }}" required>
                                             </div>
                                             <div class="pr-4 py-2 col-2">
                                                 <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
                                                 <input name="batas_waktu" class="form-control bg-light w-100"
-                                                    type="date" required>
+                                                    value="{{ $pengajuanDanas->batas_waktu }}" type="date" required>
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
-                                                <input name="nominal" class="form-control bg-light w-100" type="text"
+                                                <input style="text-align: right;" name="subtotal"
+                                                    class="form-control bg-light w-100" type="text"
+                                                    value="{{ number_format($pengajuanDanas->subtotal, 0, ',', '.') }}"
                                                     required>
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Terbilang</span>
                                                 <input name="terbilang" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                    value="{{ $pengajuanDanas->terbilang }}" type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-2" id="container_method">
                                                 <span class="text-sm font-weight-bold text-form-detail">Metode
                                                     Penerimaan</span>
-                                                <select id="metodePenerimaan" name="metode_penerimaan"
+                                                <select id="metode_penerimaan" name="metode_penerimaan"
                                                     class="form-control bg-light w-100">
-                                                    <option value="Debit">Debit</option>
-                                                    <option value="Cash">Cash</option>
+                                                    <option value="debit"
+                                                        {{ $pengajuanDanas->metode_penerimaan === 'debit' ? 'selected' : '' }}>
+                                                        Debit</option>
+                                                    <option value="cash"
+                                                        {{ $pengajuanDanas->metode_penerimaan === 'cash' ? 'selected' : '' }}>
+                                                        Cash</option>
                                                 </select>
                                             </div>
-                                            <div id="nomorRekeningInput" class="pr-4 col-2" style="margin-top: 28px;">
+
+                                            <div id="nomorRekeningInput" class="pr-4 col-2" style="margin-top: 8px;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nomor
                                                     Rekening</span>
-                                                <input name="nomor_rekening" class="form-control bg-light w-100"
-                                                    type="text" placeholder="Masukan nomor rekening"
+                                                <input id="nomor_rekening" name="metode_penerimaan"
+                                                    class="form-control bg-light w-100" type="text"
+                                                    placeholder="Masukan nomor rekening"
+                                                    value="{{ $pengajuanDanas->metode_penerimaan }}"
                                                     style="font-size: 10px; font-weight: bold; color: #92A1BB;">
                                             </div>
 
                                             <div class="pr-4 py-2 col-12">
                                                 <span class="text-sm font-weight-bold text-form-detail">Catatan</span>
-                                                <textarea name="catatan" class="form-control bg-light w-100" rows="3" style="resize: none;"></textarea>
                                             </div>
                                         </div>
                                     </div>
@@ -188,11 +196,7 @@
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                                <select class="form-control bg-light w-100">
-                                                    <option value="1">1</option>
-                                                    <option value="2">2</option>
-                                                    <option value="3">3</option>
-                                                </select>
+                                                <input class="form-control bg-light w-100" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Harga</span>
@@ -217,12 +221,13 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nama</span>
                                                 <input name="nama_pemohon" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                    type="text" value="{{ $pengajuanDanas->nama_pemohon }}" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
                                                 <input name="jabatan_pemohon" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                    type="text" value="{{ $pengajuanDanas->jabatan_pemohon }}"
+                                                    required>
                                             </div>
                                         </div>
                                     </div>
@@ -247,20 +252,42 @@
 
     <script>
         // JS metode penerimaan
-        document.getElementById('metodePenerimaan').addEventListener('change', function() {
-            var selectedValue = this.value;
-            var nomorRekeningInput = document.getElementById('nomorRekeningInput');
-            if (selectedValue === 'debit') {
-                nomorRekeningInput.style.display = 'block';
-                document.getElementById('container_method').classList.remove('col-4');
-                document.getElementById('container_method').classList.add('col-2');
-            } else {
-                document.getElementById('container_method').classList.remove('col-2');
-                document.getElementById('container_method').classList.add('col-4');
-                nomorRekeningInput.style.display = 'none';
+        document.getElementById("metode_penerimaan").addEventListener("change", function() {
+            var selectedOption = this.value;
+            var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+            var containerMethod = document.getElementById("container_method");
+
+            // Menampilkan atau menyembunyikan kolom input nomor rekening berdasarkan opsi yang dipilih
+            nomorRekeningInput.style.display = selectedOption === "debit" ? "block" : "none";
+
+            // Menetapkan nilai input nomor rekening sesuai dengan opsi yang dipilih
+            if (selectedOption === 'debit') {
+                containerMethod.classList.remove('col-4');
+                containerMethod.classList.add('col-2');
+                document.getElementById("nomor_rekening").value = ""; // Kosongkan nilai input nomor rekening
+            } else if (selectedOption === 'cash') {
+                containerMethod.classList.remove('col-2');
+                containerMethod.classList.add('col-4');
+                document.getElementById("nomor_rekening").value =
+                    "Cash"; // Set nilai input nomor rekening menjadi "Cash"
             }
         });
         // end JS Metode penerimaan
+
+
+        // Get the current date
+        var currentDate = new Date();
+
+        // Get year, month, and day
+        var year = currentDate.getFullYear();
+        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+        var day = ('0' + currentDate.getDate()).slice(-2);
+
+        // Format the date as yyyy-mm-dd
+        var formattedDate = year + '-' + month + '-' + day;
+
+        // Set the value of the hidden input field
+        document.getElementById('tanggalPengajuan').value = formattedDate;
     </script>
 @endsection
 

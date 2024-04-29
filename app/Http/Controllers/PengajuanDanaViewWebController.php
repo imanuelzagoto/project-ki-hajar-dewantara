@@ -54,7 +54,7 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required',
-            'nominal' => 'required|numeric',
+            'subtotal' => 'required|numeric',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
@@ -66,10 +66,6 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // Format tanggal_pengajuan dan batas_waktu jika perlu
-        // $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
-        // $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
-
         // Buat rekaman
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
@@ -79,12 +75,12 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => $request->tujuan,
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
-            'nominal' => $request->nominal,
+            'subtotal' => $request->subtotal,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
-            'no_doc' => 'doc_pd', // Saya asumsikan no_doc akan diberikan nilai 'doc_pd' juga
+            'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
 
@@ -144,7 +140,7 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date_format:d F Y',
-            'nominal' => 'required|numeric',
+            'subtotal' => 'required|numeric',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
@@ -162,10 +158,6 @@ class PengajuanDanaViewWebController extends Controller
         if (!$pengajuanDanas) {
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
-        $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
-        $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
-        $pengajuanDanas->update($request->all());
-        $pengajuanDanas->nominal = 'Rp. ' . number_format($pengajuanDanas->nominal, 0, ',', '.');
 
         $pengajuanDanas->update([
             'nama_pemohon' => $request->nama_pemohon,
@@ -174,7 +166,7 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => $request->tujuan,
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
-            'nominal' => $request->nominal,
+            'subtotal' => $request->subtotal,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,
@@ -213,17 +205,8 @@ class PengajuanDanaViewWebController extends Controller
      */
     public function exportPDF($id)
     {
-        // Retrieve Surat Perintah Kerja data by ID
         $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
-        // Load view for PDF
         $pdf = PDF::loadView('pengajuanDana.pengajuan_dana_pdf', compact('pengajuan_danas'));
-
-        // // Optionally, you can set additional configurations for the PDF
-        // $pdf->setPaper('a4', 'landscape');
-
-        // Generate PDF
-        // return $pdf->stream();
         return $pdf->stream("", array("Attachment" => false));
-        // return $pdf->download('pengajuan_dana.pdf');
     }
 }

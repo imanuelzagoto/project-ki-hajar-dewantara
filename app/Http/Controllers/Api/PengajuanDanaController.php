@@ -19,12 +19,22 @@ class PengajuanDanaController extends Controller
         // return view('PengajuanDana.index');
     }
 
-    /**
-     * store
-     *
-     * @param  mixed $request
-     * @return void
-     */
+    function numberToRomanRepresentation($number)
+    {
+        $map = array('M' => 1000, 'CM' => 900, 'D' => 500, 'CD' => 400, 'C' => 100, 'XC' => 90, 'L' => 50, 'XL' => 40, 'X' => 10, 'IX' => 9, 'V' => 5, 'IV' => 4, 'I' => 1);
+        $returnValue = '';
+        while ($number > 0) {
+            foreach ($map as $roman => $int) {
+                if ($number >= $int) {
+                    $number -= $int;
+                    $returnValue .= $roman;
+                    break;
+                }
+            }
+        }
+        return $returnValue;
+    }
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -33,13 +43,13 @@ class PengajuanDanaController extends Controller
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'batas_waktu' => 'required|date_format:d F Y',
-            'nominal' => 'required|numeric',
+            'batas_waktu' => 'required',
+            'subtotal' => 'required|numeric',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
+            'nomor_rekening' => 'nullable|string',
             'catatan' => 'nullable|string',
-            'tanggal_pengajuan' => 'required|date_format:d F Y',
-            'no_doc' => 'required|string',
+            'tanggal_pengajuan' => 'required',
             'revisi' => 'nullable|string',
         ]);
 
@@ -52,7 +62,34 @@ class PengajuanDanaController extends Controller
         $pengajuanDana = PengajuanDana::create($request->all());
         $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
 
-        return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Disimpan.', $pengajuanDana);
+        // Buat rekaman
+        $pengajuanDanas = PengajuanDana::create([
+            'form_number' => 'doc_pd',
+            'nama_pemohon' => $request->nama_pemohon,
+            'jabatan_pemohon' => $request->jabatan_pemohon,
+            'subject' => $request->subject,
+            'tujuan' => $request->tujuan,
+            'lokasi' => $request->lokasi,
+            'batas_waktu' => $request->batas_waktu,
+            'subtotal' => $request->subtotal,
+            'terbilang' => $request->terbilang,
+            'metode_penerimaan' => $request->metode_penerimaan,
+            'nomor_rekening' => $request->nomor_rekening,
+            'catatan' => $request->catatan,
+            'tanggal_pengajuan' => $request->tanggal_pengajuan,
+            'no_doc' => 'doc_pd',
+            'revisi' => $request->revisi,
+        ]);
+
+        // Buat nomor dokumen dan update rekaman dengan nomor dokumen
+        $datetime = explode('-', $pengajuanDanas->created_at);
+        $no_doc = $pengajuanDanas->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
+        $pengajuanDanas->update([
+            'no_doc' => $no_doc,
+            'form_number' => $no_doc
+        ]);
+
+        return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Disimpan.', $pengajuanDanas);
     }
 
     /**
@@ -89,9 +126,10 @@ class PengajuanDanaController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date_format:d F Y',
-            'nominal' => 'required|numeric',
+            'subtotal' => 'required|numeric',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
+            'nomor_rekening' => 'nullable|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date_format:d F Y',
             'no_doc' => 'required|string',
@@ -143,15 +181,8 @@ class PengajuanDanaController extends Controller
      */
     public function exportPDF($id)
     {
-        // Retrieve Surat Perintah Kerja data by ID
         $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
-        // Load view for PDF
         $pdf = PDF::loadView('pengajuanDana.pengajuan_dana_pdf', compact('pengajuan_danas'));
-        // // Optionally, you can set additional configurations for the PDF
-        // $pdf->setPaper('a4', 'landscape');
-        // Generate PDF
-        // return $pdf->stream();
         return $pdf->stream("", array("Attachment" => false));
-        // return $pdf->download('pengajuan_dana.pdf');
     }
 }

@@ -17,7 +17,7 @@ class PengajuanDana extends Model
         'tujuan',
         'lokasi',
         'batas_waktu',
-        'nominal',
+        'subtotal',
         'terbilang',
         'metode_penerimaan',
         'catatan',

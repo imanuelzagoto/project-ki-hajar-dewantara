@@ -176,10 +176,6 @@
         font-size: 15px;
     }
 
-    .head-text {
-        font-size: 15px;
-    }
-
     .head-project {
         font-size: 15px;
     }
@@ -916,6 +912,7 @@ input[type=file]::file-selector-button:hover {
     visibility: visible;
     position: absolute;
     margin-top: 1px;
+    padding-left: 22px;
 }
 
 .head-item {
@@ -1040,4 +1037,41 @@ input[type=file]::file-selector-button:hover {
 .btn-modal-spk {
     background-color: #4FD1C5;
     color: #FFFFFF;
+}
+
+.button-delete {
+    margin-top: 46%;
+}
+
+@media screen and (max-width: 1600.00px) {
+    .button-delete {
+        margin-top: 47.4%;
+        margin-left: 2px;
+        height: 38px;
+    }
+}
+
+.JS-button-delete {
+    position: relative;
+    right: 12px;
+}
+
+.input_name_item {
+    position: relative;
+    right: 8px;
+}
+
+.column_input_name_item {
+    position: relative;
+    right: 25px;
+}
+
+.column-name-pemohon {
+    position: relative;
+    left: 24px;
+}
+
+.column-jabatan {
+    position: relative;
+    right: 37px;
 }
