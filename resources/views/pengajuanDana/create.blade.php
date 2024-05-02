@@ -296,7 +296,7 @@
                 <input name="total" id="inputTotal_1" class="form-control bg-light text-right total" type="text" style="width:99%; position:relative; left:16px; bottom:15px;" required readonly>
             </div>
             <div class="pr-4 py-2 col-1">
-                <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px;" disabled>
+                <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px; margin-top: 47.4%; margin-left: 9px; height: 38px;" disabled>
                     <i class="fa-solid fa-minus"></i>
                 </button>
             </div>
@@ -339,7 +339,7 @@
                     <input name="total" id="inputTotal_${$('.total').length + 1}" class="form-control bg-light text-right total" type="text" style="width:100%; position:relative; left:10px;" required readonly>
                 </div>
                 <div class="pr-4 py-2 col-1 JS-button-delete">
-                    <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%;"><i class="fa-solid fa-minus"></i></button>
+                    <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: 7px;"><i class="fa-solid fa-minus"></i></button>
                 </div>
             </div>`;
                 $("#itemFields").append(newRow);

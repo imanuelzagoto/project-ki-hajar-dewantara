@@ -1054,8 +1054,8 @@ input[type=file]::file-selector-button:hover {
 
 @media screen and (max-width: 1600.00px) {
     .button-delete {
-        margin-top: 47.4%;
-        margin-left: 9px;
+        margin-top: 6%;
+        margin-left: 7px;
         height: 38px;
     }
 }
