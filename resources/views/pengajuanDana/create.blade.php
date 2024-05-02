@@ -296,7 +296,7 @@
                 <input name="total" id="inputTotal_1" class="form-control bg-light text-right total" type="text" style="width:99%; position:relative; left:16px; bottom:15px;" required readonly>
             </div>
             <div class="pr-4 py-2 col-1">
-                <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px; margin-top: 47.4%; margin-left: 9px; height: 38px;" disabled>
+                <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px; margin-top: 47.4%; margin-left: 7px; height: 38px;" disabled>
                     <i class="fa-solid fa-minus"></i>
                 </button>
             </div>
