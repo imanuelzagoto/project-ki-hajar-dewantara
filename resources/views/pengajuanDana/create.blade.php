@@ -336,7 +336,7 @@
                         </div>
                         <div class="pr-4 py-2 col-3">
                             <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
-                            <input name="total" id="inputTotal_${$('.total').length + 1}" class="form-control bg-light text-right total" type="text" style="width:219.2px; position:relative; left:2px;" required readonly>
+                            <input name="total" id="inputTotal_${$('.total').length + 1}" class="form-control bg-light text-right total" type="text" style="width:218.2px; position:relative; left:4px;" required readonly>
                         </div>
                         <div class="pr-4 py-2 col-1 JS-button-delete">
                             <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: 0.2px;"><i class="fa-solid fa-minus"></i></button>
