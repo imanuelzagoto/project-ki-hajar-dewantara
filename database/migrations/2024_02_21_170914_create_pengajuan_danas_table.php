@@ -19,7 +19,11 @@ return new class extends Migration
             $table->string('tujuan');
             $table->string('lokasi');
             $table->date('batas_waktu');
-            $table->decimal('subtotal', 15, 2);
+            $table->unsignedBigInteger('subtotal');
+            $table->unsignedBigInteger('total');
+            $table->string('nama_item');
+            $table->unsignedInteger('jumlah');
+            $table->unsignedBigInteger('harga');
             $table->string('terbilang');
             $table->string('metode_penerimaan');
             $table->string('catatan')->nullable();

@@ -83,30 +83,27 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
-                                                <input name="subject" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $pengajuanDanas->subject }}" required>
+                                                <input name="subject" value="{{ $pengajuanDanas->subject }}"
+                                                    class="form-control bg-light w-100" type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
-                                                <input name="revisi" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $pengajuanDanas->revisi }}" required>
+                                                <input name="revisi" value="{{ $pengajuanDanas->revisi }}"
+                                                    class="form-control bg-light w-100" type="text" required>
                                             </div>
-                                            <div class="row
-                                                    pr-3 pt-3">
+                                            <div class="row pr-3 pt-3">
                                                 <div class="pr-4 py-2 col-6" style="display: none;">
-                                                    <input name="tanggal_pengajuan" id="tanggalPengajuan" type="date"
+                                                    <input name="tanggal_pengajuan"
+                                                        value="{{ $pengajuanDanas->tanggal_pengajuan }}"
+                                                        id="tanggalPengajuan" type="date"
                                                         class="form-control bg-light w-100" required>
                                                 </div>
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"></span>
-                                                <input name="no_doc" id="noDoc" type="hidden"
-                                                    class="form-control bg-light w-100" required>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row pr-3">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
                                     <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
@@ -117,30 +114,29 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tujuan</span>
-                                                <input name="tujuan" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $pengajuanDanas->tujuan }}" required>
+                                                <input name="tujuan" value="{{ $pengajuanDanas->tujuan }}"
+                                                    class="form-control bg-light w-100" type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
-                                                <input name="lokasi" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $pengajuanDanas->lokasi }}" required>
+                                                <input name="lokasi" value="{{ $pengajuanDanas->lokasi }}"
+                                                    class="form-control bg-light w-100" type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-2">
                                                 <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
-                                                <input name="batas_waktu" class="form-control bg-light w-100"
-                                                    value="{{ $pengajuanDanas->batas_waktu }}" type="date" required>
+                                                <input name="batas_waktu" value="{{ $pengajuanDanas->batas_waktu }}"
+                                                    class="form-control bg-light w-100" type="date" required>
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
-                                                <input style="text-align: right;" name="subtotal"
-                                                    class="form-control bg-light w-100" type="text"
-                                                    value="{{ number_format($pengajuanDanas->subtotal, 0, ',', '.') }}"
-                                                    required>
+                                                <input name="subtotal" value="{{ $pengajuanDanas->subtotal }}"
+                                                    id="subtotalInput" style="text-align: right;"
+                                                    class="form-control bg-light w-100" type="text" required readonly>
                                             </div>
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Terbilang</span>
-                                                <input name="terbilang" class="form-control bg-light w-100"
-                                                    value="{{ $pengajuanDanas->terbilang }}" type="text" required>
+                                                <input name="terbilang" value="{{ $pengajuanDanas->terbilang }}"
+                                                    class="form-control bg-light w-100" type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-2" id="container_method">
                                                 <span class="text-sm font-weight-bold text-form-detail">Metode
@@ -168,11 +164,14 @@
 
                                             <div class="pr-4 py-2 col-12">
                                                 <span class="text-sm font-weight-bold text-form-detail">Catatan</span>
+                                                <textarea name="catatan" class="form-control bg-light w-100" rows="3" style="resize: none;">{{ $pengajuanDanas->catatan }}</textarea>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row pr-3 pt-3" id="itemFields">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                     <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
@@ -185,96 +184,57 @@
                                                 <button id="tambahField"
                                                     class="btn btn-sm button-tambah font-weight-bold">
                                                     <span class="btn-label">
-                                                        <i class="icon-plus"></i>
+                                                        <i class="fa-solid fa-plus"></i>
                                                         Tambah
                                                     </span>
                                                 </button>
                                             </div>
-                                            <div class="pr-4 py-2 col-3">
-                                                <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-3">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-3">
-                                                <span class="text-sm font-weight-bold text-form-detail">Harga</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-3">
-                                                <span class="text-sm font-weight-bold text-form-detail">Total</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row pr-3 pt-3">
-                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
-                                    <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
-                                        <span class="head-text">Pengaju</span>
-                                        <span class="detail-text">Pengaju</span>
-                                    </div>
-                                    <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Nama</span>
-                                                <input name="nama_pemohon" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $pengajuanDanas->nama_pemohon }}" required>
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_pemohon" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $pengajuanDanas->jabatan_pemohon }}"
-                                                    required>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row justify-content-center">
-                                <div class="col-md-6">
-                                    <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button class="btn btn-save"
-                                            style="border-radius: 25px; font-weight:bold; font-size: 14px;">
-                                            SAVE
-                                        </button>
+                    </div>
+                    <div class="row pr-3">
+                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                            <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
+                                <span class="head-text">Pengaju</span>
+                                <span class="detail-text">Pengaju</span>
+                            </div>
+                            <div class="d-block w-100">
+                                <div class="row py-2">
+                                    <div class="pr-4 py-2 col-6 column-name-pemohon">
+                                        <span class="text-sm font-weight-bold text-form-detail">Nama</span>
+                                        <input name="nama_pemohon" value="{{ $pengajuanDanas->nama_pemohon }}"
+                                            class="form-control bg-light" style="width: 427px;" type="text" required>
+                                    </div>
+                                    <div class="pr-4 py-2 col-6 column-jabatan">
+                                        <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                        <input name="jabatan_pemohon" value="{{ $pengajuanDanas->jabatan_pemohon }}"
+                                            class="form-control bg-light" style="width: 508px;" type="text" required>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <div class="d-flex justify-content-center p-4 rounded-pill">
+                                <button class="btn btn-save"
+                                    style="border-radius: 25px; font-weight:bold; font-size: 14px;">
+                                    SAVE
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        // JS metode penerimaan
-        document.getElementById("metode_penerimaan").addEventListener("change", function() {
-            var selectedOption = this.value;
-            var nomorRekeningInput = document.getElementById("nomorRekeningInput");
-            var containerMethod = document.getElementById("container_method");
-
-            // Menampilkan atau menyembunyikan kolom input nomor rekening berdasarkan opsi yang dipilih
-            nomorRekeningInput.style.display = selectedOption === "debit" ? "block" : "none";
-
-            // Menetapkan nilai input nomor rekening sesuai dengan opsi yang dipilih
-            if (selectedOption === 'debit') {
-                containerMethod.classList.remove('col-4');
-                containerMethod.classList.add('col-2');
-                document.getElementById("nomor_rekening").value = ""; // Kosongkan nilai input nomor rekening
-            } else if (selectedOption === 'cash') {
-                containerMethod.classList.remove('col-2');
-                containerMethod.classList.add('col-4');
-                document.getElementById("nomor_rekening").value =
-                    "Cash"; // Set nilai input nomor rekening menjadi "Cash"
-            }
-        });
-        // end JS Metode penerimaan
-
-
         // Get the current date
         var currentDate = new Date();
 
@@ -294,35 +254,90 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            // Menampilkan kolom pertama saat halaman dimuat
+            var firstRow = `
+    <div class="row py-2" style="margin-left: 105px;">
+        <div class="pr-4 py-2 col-3">
+            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px; bottom:15px;">Nama item</span>
+            <input name="nama_item" id="inputNama_item_1" class="form-control bg-light input_name_item" type="text" style="width: 232px; position:relative; left:3px; bottom:15px;" value="{{ $pengajuanDanas->nama_item }}" required>
+        </div>
+        <div class="pr-4 py-2 col-2">
+            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:20px; bottom:15px;">Jumlah</span>
+            <input name="jumlah" id="inputJumlah_1" class="form-control bg-light jumlah" type="number" style="width: 97%; text-align:center; position:relative; left:20px; bottom:15px;" value="{{ $pengajuanDanas->jumlah }}" required>
+        </div>
+        <div class="pr-4 py-2 col-3">
+            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:17px; bottom:15px;">Harga</span>
+            <input name="harga" id="inputHarga_1" class="form-control bg-light harga" type="text" style="width: 98%; text-align:right; position:relative; left:16px; bottom:15px;" value="{{ $pengajuanDanas->harga }}" required>
+        </div>
+        <div class="pr-4 py-2 col-3">
+            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:16px; bottom:15px;">Total</span>
+            <input name="total" id="inputTotal_1" class="form-control bg-light text-right total" type="text" style="width:99%; position:relative; left:16px; bottom:15px;" value="{{ $pengajuanDanas->total }}" required readonly>
+        </div>
+        <div class="pr-4 py-2 col-1">
+            <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px;" disabled>
+                <i class="fa-solid fa-minus"></i>
+            </button>
+        </div>
+    </div>`;
+            $("#itemFields").append(firstRow);
+
+            // Fungsi untuk menghitung total
+            function hitungTotal(row) {
+                var jumlah = $(row).find('.jumlah').val();
+                var harga = $(row).find('.harga').val();
+                var total = jumlah * harga;
+                $(row).find('.total').val(total);
+            }
+
+            // Event listener untuk input jumlah dan harga
+            $(document).on('input', '.jumlah, .harga', function() {
+                var row = $(this).closest('.row');
+                hitungTotal(row);
+                hitungSubtotal();
+            });
+
+            // Event listener untuk tombol tambah
             $("#tambahField").click(function() {
                 var newRow = `
-            <div class="pr-2 py-2 col-11" style="margin-left: 8.2%;"> <!-- Mengubah margin-left dan padding-right -->
-                <div class="row">
-                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
-                        <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
-                        <input class="form-control bg-light" type="text" style="width:94.2%">
-                    </div>
-                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
-                        <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                        <select class="form-control bg-light" style="width:94.2%">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                        </select>
-                    </div>
-                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
-                        <span class="text-sm font-weight-bold text-form-detail">Harga</span>
-                        <input class="form-control bg-light" type="text" style="width:94.2%">
-                    </div>
-                    <div class="pr-2 py-2 col-3"> <!-- Menyesuaikan lebar kolom -->
-                        <span class="text-sm font-weight-bold text-form-detail">Total</span>
-                        <input class="form-control bg-light" type="text" style="width:94.2%">
-                    </div>
-                </div>
-            </div>`;
-
+        <div class="row py-2" style="margin-left: 119px;">
+            <div class="pr-4 py-2 col-3">
+                <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:10px;">Nama item</span>
+                <input name="nama_item" id="inputNama_item_${$('.input_name_item').length + 1}" class="form-control bg-light" type="text" style="width: 231px; position: relative; right: 10px;" value="{{ $pengajuanDanas->nama_item }}" required>
+            </div>
+            <div class="pr-4 py-2 col-2">
+                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:9px;">Jumlah</span>
+                <input name="jumlah" id="inputJumlah_${$('.jumlah').length + 1}" class="form-control bg-light jumlah" type="number" style="width: 99%; position:relative; left:9px; text-align:center;" value="{{ $pengajuanDanas->jumlah }}" required>
+            </div>
+            <div class="pr-4 py-2 col-3">
+                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:8px;">Harga</span>
+                <input name="harga" id="inputHarga_${$('.harga').length + 1}" class="form-control bg-light harga" type="text" style="width: 98%; text-align:right; position:relative; left:8px;" value="{{ $pengajuanDanas->harga }}" required>
+            </div>
+            <div class="pr-4 py-2 col-3">
+                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:10px;">Total</span>
+                <input name="total" id="inputTotal_${$('.total').length + 1}" class="form-control bg-light text-right total" type="text" style="width:100%; position:relative; left:10px;" value="{{ $pengajuanDanas->total }}" required readonly>
+            </div>
+            <div class="pr-4 py-2 col-1 JS-button-delete">
+                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%;"><i class="fa-solid fa-minus"></i></button>
+            </div>
+        </div>`;
                 $("#itemFields").append(newRow);
             });
+
+            // Event listener untuk tombol hapus
+            $(document).on('click', '.JS-delete-btn', function() {
+                $(this).closest('.row').remove();
+                hitungSubtotal();
+            });
+
+            // Fungsi untuk menghitung subtotal
+            function hitungSubtotal() {
+                var subtotal = 0;
+                $('.total').each(function() {
+                    subtotal += parseInt($(this).val()) || 0;
+                });
+                // Tampilkan subtotal
+                $('#subtotalInput').val(subtotal);
+            }
         });
     </script>
 @endpush

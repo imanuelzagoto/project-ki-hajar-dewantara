@@ -10,22 +10,39 @@ use Illuminate\Support\Facades\Validator;
 
 class MasterProjekController extends Controller
 {
-    /**
-     * index
-     *
-     * @return void
-     */
     public function index()
     {
         $masterProjeks = MasterProjek::latest()->paginate(10);
         return new MasterProjekResource(true, 'List Master Data Projek', $masterProjeks);
     }
 
-    /**
-     * 
-     * @param  mixed $request
-     *  @return void
-     */
+    public function getProject()
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => env('API_MASTER_PROJECT') . 'projects/',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            // CURLOPT_HTTPHEADER => array(
+            //     'Authorization: Bearer 2090|kNk4AhUdsFKr5S0Pb34T1SomoreDGndbdBIPcXVO7907a2a8'
+            // ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        $projects = json_decode($response, true)['data'];
+        // dd($projects);
+        return new MasterProjekResource(true, 'List Master Data Projek', $projects);
+    }
+
+
     public function store(Request $request)
     {
         // Define validation rules
@@ -33,14 +50,14 @@ class MasterProjekController extends Controller
             'project_name' => 'required',
             'code_project' => 'required',
             'deadline' => 'nullable|date',
-            'start' => 'nullable|date',
-            'end' => 'nullable|date',
+            'start' => 'nullable|date'
         ]);
 
         // check if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
 
         // Create new MasterProjek instance
         $master_Projeks = masterProjek::create([
@@ -55,12 +72,7 @@ class MasterProjekController extends Controller
         return new MasterProjekResource(true, 'Data Master Projek Berhasil Ditambahkan!', $master_Projeks);
     }
 
-    /**
-     * show
-     *
-     * @param  mixed $master_projeks
-     * @return void
-     */
+
     public function show($id)
     {
         // Find Master Projek by ID
@@ -74,37 +86,8 @@ class MasterProjekController extends Controller
         }
     }
 
-    public function getProject()
-    {
-        $curl = curl_init();
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://172.15.2.134/api/projects',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-            CURLOPT_HTTPHEADER => array(
-                'Authorization: Bearer 2090|kNk4AhUdsFKr5S0Pb34T1SomoreDGndbdBIPcXVO7907a2a8'
-            ),
-        ));
 
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-        return $response;
-    }
-
-    /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $master_projeks
-     * @return void
-     */
     public function update(Request $request, $id)
     {
 
@@ -141,12 +124,7 @@ class MasterProjekController extends Controller
         return new MasterProjekResource(true, 'Data Master Projek Berhasil Diperbarui!', $masterProjek);
     }
 
-    /**
-     * destroy
-     *
-     * @param  mixed $id
-     * @return void
-     */
+
     public function destroy($id)
     {
         // find the 'master projek' by ID

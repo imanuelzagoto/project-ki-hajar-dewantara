@@ -7,8 +7,6 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Models\PengajuanDana;
 use Illuminate\Support\Facades\Validator;
-use Carbon\Carbon;
-use Yajra\DataTables\Facades\DataTables;
 
 class PengajuanDanaViewWebController extends Controller
 {
@@ -53,12 +51,16 @@ class PengajuanDanaViewWebController extends Controller
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'batas_waktu' => 'required',
-            'subtotal' => 'required|numeric',
+            'batas_waktu' => 'required|date',
+            'subtotal' => 'required|integer',
+            'total' => 'required|integer',
+            'nama_item' => 'required|string',
+            'jumlah' => 'required|integer',
+            'harga' => 'required|integer',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
-            'tanggal_pengajuan' => 'required',
+            'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
         ]);
 
@@ -76,6 +78,10 @@ class PengajuanDanaViewWebController extends Controller
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
             'subtotal' => $request->subtotal,
+            'total' => $request->total,
+            'nama_item' => $request->nama_item,
+            'jumlah' => $request->jumlah,
+            'harga' => $request->harga,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,
@@ -92,8 +98,12 @@ class PengajuanDanaViewWebController extends Controller
             'form_number' => $no_doc
         ]);
 
-        return redirect(route('pengajuanDana.index'));
+        return redirect()->route('pengajuanDana.index');
     }
+
+
+
+
 
 
     /**
@@ -139,13 +149,16 @@ class PengajuanDanaViewWebController extends Controller
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'batas_waktu' => 'required|date_format:d F Y',
+            'batas_waktu' => 'required',
             'subtotal' => 'required|numeric',
+            'total' => 'required|numeric',
+            'nama_item' => 'required|string',
+            'jumlah' => 'required|string',
+            'harga' => 'required|numeric',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
-            'tanggal_pengajuan' => 'required|date_format:d F Y',
-            'no_doc' => 'required|string',
+            'tanggal_pengajuan' => 'required',
             'revisi' => 'nullable|string',
         ]);
 
@@ -160,6 +173,7 @@ class PengajuanDanaViewWebController extends Controller
         }
 
         $pengajuanDanas->update([
+            'form_number' => 'doc_pd',
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'subject' => $request->subject,
@@ -167,11 +181,15 @@ class PengajuanDanaViewWebController extends Controller
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
             'subtotal' => $request->subtotal,
+            'total' => $request->total,
+            'nama_item' => $request->total,
+            'jumlah' => $request->jumlah,
+            'harga' => $request->harga,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
-            'no_doc' => $request->no_doc,
+            // 'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
 

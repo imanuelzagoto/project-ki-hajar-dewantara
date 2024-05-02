@@ -128,11 +128,13 @@
                                                 <input name="batas_waktu" class="form-control bg-light w-100"
                                                     type="date" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
                                                 <input name="subtotal" id="subtotalInput" style="text-align: right;"
-                                                    class="form-control bg-light w-100" type="text">
+                                                    class="form-control bg-light w-100" type="text" required readonly>
                                             </div>
+
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Terbilang</span>
                                                 <input name="terbilang" class="form-control bg-light w-100"
@@ -192,19 +194,24 @@
                     <div class="row pr-3">
                         <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                             <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
-                                <span class="head-text">Pengaju</span>
+                                <span class="head-text"
+                                    style="position: relative; bottom:23px; right:27px;">Pengaju</span>
                                 <span class="detail-text">Pengaju</span>
                             </div>
                             <div class="d-block w-100">
                                 <div class="row py-2">
                                     <div class="pr-4 py-2 col-6 column-name-pemohon">
-                                        <span class="text-sm font-weight-bold text-form-detail">Nama</span>
-                                        <input name="nama_pemohon" class="form-control bg-light" style="width: 427px;"
+                                        <span class="text-sm font-weight-bold text-form-detail"
+                                            style="position: relative; bottom:26px; right:73px;">Nama</span>
+                                        <input name="nama_pemohon" class="form-control bg-light"
+                                            style="width: 427px; position:relative; bottom:27px; right:73px;"
                                             type="text" required>
                                     </div>
                                     <div class="pr-4 py-2 col-6 column-jabatan">
-                                        <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                        <input name="jabatan_pemohon" class="form-control bg-light" style="width: 508px;"
+                                        <span class="text-sm font-weight-bold text-form-detail"
+                                            style="position: relative; bottom:26px; right:35px;">Jabatan</span>
+                                        <input name="jabatan_pemohon" class="form-control bg-light"
+                                            style="width: 508px; position:relative; bottom:27px; right:40px;"
                                             type="text" required>
                                     </div>
                                 </div>
@@ -215,7 +222,7 @@
                         <div class="col-md-6">
                             <div class="d-flex justify-content-center p-4 rounded-pill">
                                 <button class="btn btn-save"
-                                    style="border-radius: 25px; font-weight:bold; font-size: 14px;">
+                                    style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:20px;">
                                     SAVE
                                 </button>
                             </div>
@@ -268,156 +275,74 @@
 
 @push('scripts')
     <script>
-        // document.addEventListener("DOMContentLoaded", function() {
-        //     var selectJumlah = document.createElement('select');
-        //     selectJumlah.setAttribute('name', 'jumlah');
-        //     selectJumlah.setAttribute('id', 'jumlahInput');
-        //     selectJumlah.classList.add('form-control', 'bg-light');
-        //     selectJumlah.style.width = '97%';
-        //     selectJumlah.style.marginLeft = '6%';
-        //     selectJumlah.style.textAlign = 'center';
-
-        //     // Set batasan atas jumlah opsi
-        //     var maxOptions = 1000;
-
-        //     // Generate options for select
-        //     for (var i = 1; i <= maxOptions; i++) {
-        //         var option = document.createElement('option');
-        //         option.value = i;
-        //         option.text = i;
-        //         selectJumlah.appendChild(option);
-        //     }
-
-        //     // Replace input with select
-        //     var inputJumlah = document.querySelector('input[name="jumlah"]');
-        //     if (inputJumlah) {
-        //         inputJumlah.parentNode.replaceChild(selectJumlah, inputJumlah);
-        //     }
-
-        //     // Rest of your existing code
-        //     var inputHarga = document.querySelector('input[name="harga"]');
-        //     var inputTotal = document.querySelector('input[name="total"]');
-        //     var inputSubtotal = document.getElementById('subtotalInput');
-
-        //     // Menambahkan event listener untuk input jumlah dan harga
-        //     if (selectJumlah && inputHarga) {
-        //         selectJumlah.addEventListener('change', updateTotalAndSubtotal);
-        //         inputHarga.addEventListener('input', updateTotalAndSubtotal);
-        //     }
-
-        //     // Fungsi untuk mengupdate total dan subtotal serta format nilai menjadi format Rupiah
-        //     function updateTotalAndSubtotal() {
-        //         var jumlah = parseFloat(selectJumlah.value) || 0;
-        //         var harga = parseFloat(inputHarga.value.replace(/[^\d]/g, '')) || 0;
-        //         var subtotal = jumlah * harga;
-        //         var total = formatRupiah(subtotal);
-
-        //         // Mengupdate nilai input subtotal
-        //         inputSubtotal.value = subtotal.toFixed(2);
-
-        //         // Mengupdate nilai input total dan memformatnya sebagai format Rupiah
-        //         inputTotal.value = total;
-        //     }
-
-        //     // Fungsi untuk memformat nilai menjadi format mata uang Rupiah dengan pemisah ribuan
-        //     function formatRupiah(angka) {
-        //         return 'Rp. ' + angka.toLocaleString('id-ID');
-        //     }
-
-        //     // Menangani input harga
-        //     inputHarga.addEventListener('input', function() {
-        //         var value = inputHarga.value.replace(/[^\d]/g, '');
-        //         if (value.length > 0) {
-        //             var number = parseInt(value);
-        //             inputHarga.value = formatRupiah(number);
-        //         } else {
-        //             inputHarga.value = '';
-        //         }
-        //     });
-        // });
-
-
         $(document).ready(function() {
             // Menampilkan kolom pertama saat halaman dimuat
             var firstRow = `
         <div class="row py-2" style="margin-left: 105px;">
+            <div class="pr-4 py-2 col-3">
+                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px; bottom:15px;">Nama item</span>
+                <input name="nama_item" id="inputNama_item_1" class="form-control bg-light input_name_item" type="text" style="width: 232px; position:relative; left:3px; bottom:15px;" required>
+            </div>
+            <div class="pr-4 py-2 col-2">
+                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:20px; bottom:15px;">Jumlah</span>
+                <input name="jumlah" id="inputJumlah_1" class="form-control bg-light jumlah" type="number" style="width: 97%; text-align:center; position:relative; left:20px; bottom:15px;" required>
+            </div>
+            <div class="pr-4 py-2 col-3">
+                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:17px; bottom:15px;">Harga</span>
+                <input name="harga" id="inputHarga_1" class="form-control bg-light harga" type="text" style="width: 98%; text-align:right; position:relative; left:16px; bottom:15px;" required>
+            </div>
+            <div class="pr-4 py-2 col-3">
+                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:16px; bottom:15px;">Total</span>
+                <input name="total" id="inputTotal_1" class="form-control bg-light text-right total" type="text" style="width:99%; position:relative; left:16px; bottom:15px;" required readonly>
+            </div>
             <div class="pr-4 py-2 col-1">
                 <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px;" disabled>
                     <i class="fa-solid fa-minus"></i>
                 </button>
             </div>
-            <div class="pr-4 py-2 col-3">
-                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; right:8px;">Nama item</span>
-                <input name="nama_item" class="form-control bg-light input_name_item" type="text" style="width: 232px;" required>
-            </div>
-            <div class="pr-4 py-2 col-2">
-                <span class="text-sm font-weight-bold text-form-detail" style="padding-left:6%;">Jumlah</span>
-                <input name="jumlah" id="jumlahInput" class="form-control bg-light" type="number" style="width: 97%; margin-left:6%; text-align:center;">
-            </div>
-            <div class="pr-4 py-2 col-3">
-                <span class="text-sm font-weight-bold text-form-detail" style="padding-left:3%">Harga</span>
-                <input name="harga" id="hargaInput" class="form-control bg-light" type="text" style="width: 98%; margin-left:3%; text-align:right;">
-            </div>
-            <div class="pr-4 py-2 col-3">
-                <span class="text-sm font-weight-bold text-form-detail" style="padding-left: 2px;">Total</span>
-                <input name="total" id="totalInput" class="form-control bg-light text-right" type="text" style="width:99%;" disabled>
-            </div>
         </div>`;
             $("#itemFields").append(firstRow);
 
-            // Logika untuk menghitung total dan subtotal
+            // Fungsi untuk menghitung total
             function hitungTotal(row) {
-                var jumlah = parseFloat($(row).find('[name="jumlah"]').val()) || 0;
-                var harga = parseFloat($(row).find('[name="harga"]').val().replace(/[^\d.]/g, '')) ||
-                    0; // Menghapus karakter non-digit
+                var jumlah = $(row).find('.jumlah').val();
+                var harga = $(row).find('.harga').val();
                 var total = jumlah * harga;
-                $(row).find('[name="total"]').val(total); // Menghapus .toFixed(2)
-                return total;
+                $(row).find('.total').val(total);
             }
 
-            function hitungSubtotal() {
-                var subtotal = 0;
-                $(".row.py-2").each(function() {
-                    subtotal += parseFloat($(this).find('[name="total"]').val()) || 0;
-                });
-                $("#subtotalInput").val(subtotal); // Menghapus .toFixed(2)
-            }
-
-
-
+            // Event listener untuk input jumlah dan harga
+            $(document).on('input', '.jumlah, .harga', function() {
+                var row = $(this).closest('.row');
+                hitungTotal(row);
+                hitungSubtotal();
+            });
 
             // Event listener untuk tombol tambah
             $("#tambahField").click(function() {
                 var newRow = `
             <div class="row py-2" style="margin-left: 119px;">
-                <div class="pr-4 py-2 col-1 JS-button-delete">
-                    <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; right:40px;"><i class="fa-solid fa-minus"></i></button>
-                </div>
                 <div class="pr-4 py-2 col-3">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:17px;">Nama item</span>
-                    <input name="nama_item" class="form-control bg-light" type="text" style="width: 230px; position: relative; right:20px;" required>
+                    <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:10px;">Nama item</span>
+                    <input name="nama_item" id="inputNama_item_${$('.input_name_item').length + 1}" class="form-control bg-light" type="text" style="width: 231px; position: relative; right: 10px;" required>
                 </div>
                 <div class="pr-4 py-2 col-2">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position: relative; left:-4px;">Jumlah</span>
-                    <input name="jumlah" id="jumlahInput" class="form-control bg-light" type="number" style="width: 97%; margin-left:6%; text-align:center; position: relative; right:13px">
+                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:9px;">Jumlah</span>
+                    <input name="jumlah" id="inputJumlah_${$('.jumlah').length + 1}" class="form-control bg-light jumlah" type="number" style="width: 99%; position:relative; left:9px; text-align:center;" required>
                 </div>
                 <div class="pr-4 py-2 col-3">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:7px;">Harga</span>
-                    <input name="harga" id="hargaInput" class="form-control bg-light" type="text" style="width: 99%; margin-left:3%; text-align:right; position: relative; right:13px">
+                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:8px;">Harga</span>
+                    <input name="harga" id="inputHarga_${$('.harga').length + 1}" class="form-control bg-light harga" type="text" style="width: 98%; text-align:right; position:relative; left:8px;" required>
                 </div>
                 <div class="pr-4 py-2 col-3">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:7px;">Total</span>
-                    <input name="total" id="totalInput" class="form-control bg-light text-right" type="text" style="width:99%; position: relative; right:9px" disabled>
+                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:10px;">Total</span>
+                    <input name="total" id="inputTotal_${$('.total').length + 1}" class="form-control bg-light text-right total" type="text" style="width:100%; position:relative; left:10px;" required readonly>
+                </div>
+                <div class="pr-4 py-2 col-1 JS-button-delete">
+                    <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%;"><i class="fa-solid fa-minus"></i></button>
                 </div>
             </div>`;
                 $("#itemFields").append(newRow);
-            });
-
-            // Event listener untuk menghitung total saat input jumlah/harga berubah
-            $(document).on('change', '[name="jumlah"], [name="harga"]', function() {
-                var row = $(this).closest('.row.py-2');
-                hitungTotal(row);
-                hitungSubtotal();
             });
 
             // Event listener untuk tombol hapus
@@ -425,6 +350,16 @@
                 $(this).closest('.row').remove();
                 hitungSubtotal();
             });
+
+            // Fungsi untuk menghitung subtotal
+            function hitungSubtotal() {
+                var subtotal = 0;
+                $('.total').each(function() {
+                    subtotal += parseInt($(this).val()) || 0;
+                });
+                // Tampilkan subtotal
+                $('#subtotalInput').val(subtotal);
+            }
         });
     </script>
 @endpush
