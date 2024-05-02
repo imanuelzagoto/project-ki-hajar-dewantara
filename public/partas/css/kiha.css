@@ -207,6 +207,12 @@
     .text-dashboard {
         padding-left: 1px;
     }
+
+    .button-delete {
+        margin-top: 6px;
+        margin-left: 7px;
+        height: 38px;
+    }
 }
 
 @media screen and (max-width: 1455.56px) {
@@ -1053,6 +1059,7 @@ input[type=file]::file-selector-button:hover {
         height: 38px;
     }
 }
+
 
 .JS-button-delete {
     position: relative;
