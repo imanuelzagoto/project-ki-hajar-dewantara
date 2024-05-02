@@ -204,14 +204,14 @@
                                         <span class="text-sm font-weight-bold text-form-detail"
                                             style="position: relative; bottom:26px; right:73px;">Nama</span>
                                         <input name="nama_pemohon" class="form-control bg-light"
-                                            style="width: 427px; position:relative; bottom:27px; right:73px;"
+                                            style="width: 433px; position:relative; bottom:27px; right:73px;"
                                             type="text" required>
                                     </div>
                                     <div class="pr-4 py-2 col-6 column-jabatan">
                                         <span class="text-sm font-weight-bold text-form-detail"
-                                            style="position: relative; bottom:26px; right:35px;">Jabatan</span>
+                                            style="position: relative; bottom:26px; right:48px;">Jabatan</span>
                                         <input name="jabatan_pemohon" class="form-control bg-light"
-                                            style="width: 515px; position:relative; bottom:27px; right:40px;"
+                                            style="width: 516px; position:relative; bottom:27px; right:48px;"
                                             type="text" required>
                                     </div>
                                 </div>
@@ -288,15 +288,15 @@
                         <input name="jumlah" id="inputJumlah_1" class="form-control bg-light jumlah" type="number" style="width: 130px; text-align:center; position:relative; left:17px; bottom:15px;" required>
                     </div>
                     <div class="pr-4 py-2 col-3">
-                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:14px; bottom:15px;">Harga</span>
-                        <input name="harga" id="inputHarga_1" class="form-control bg-light harga" type="text" style="width: 211.3px; text-align:right; position:relative; left:14px; bottom:15px;" required>
+                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:16px; bottom:15px;">Harga</span>
+                        <input name="harga" id="inputHarga_1" class="form-control bg-light harga" type="text" style="width: 213px; text-align:right; position:relative; left:15px; bottom:15px;" required>
                     </div>
                     <div class="pr-4 py-2 col-3">
                         <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:13px; bottom:15px;">Total</span>
                         <input name="total" id="inputTotal_1" class="form-control bg-light text-right total" type="text" style="width:218px; position:relative; left:13px; bottom:15px;" required readonly>
                     </div>
                     <div class="pr-4 py-2 col-1">
-                        <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px; margin-top: 6px; margin-left: -6px; height: 38px;" disabled>
+                        <button class="btn btn-sm btn-danger delete-btn font-weight-bold button-delete" style="font-size: 14px; margin-top: 6px; margin-left: -2px; height: 38px;" disabled>
                             <i class="fa-solid fa-minus"></i>
                         </button>
                     </div>
@@ -324,22 +324,22 @@
                     <div class="row py-2" style="margin-left: 119px;">
                         <div class="pr-4 py-2 col-3">
                             <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Nama item</span>
-                            <input name="nama_item" id="inputNama_item_${$('.input_name_item').length + 1}" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 8px;" required>
+                            <input name="nama_item" id="inputNama_item_${$('.input_name_item').length + 1}" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 11px;" required>
                         </div>
                         <div class="pr-4 py-2 col-2">
-                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:7px;">Jumlah</span>
-                            <input name="jumlah" id="inputJumlah_${$('.jumlah').length + 1}" class="form-control bg-light jumlah" type="number" style="width: 99%; position:relative; left:9px; text-align:center;" required>
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Jumlah</span>
+                            <input name="jumlah" id="inputJumlah_${$('.jumlah').length + 1}" class="form-control bg-light jumlah" type="number" style="width: 99.1%; position:relative; left:5px; text-align:center;" required>
                         </div>
                         <div class="pr-4 py-2 col-3">
-                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:7px;">Harga</span>
-                            <input name="harga" id="inputHarga_${$('.harga').length + 1}" class="form-control bg-light harga" type="text" style="width: 98%; text-align:right; position:relative; left:8px;" required>
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px;">Harga</span>
+                            <input name="harga" id="inputHarga_${$('.harga').length + 1}" class="form-control bg-light harga" type="text" style="width: 99%; text-align:right; position:relative; left:4px;" required>
                         </div>
                         <div class="pr-4 py-2 col-3">
                             <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
-                            <input name="total" id="inputTotal_${$('.total').length + 1}" class="form-control bg-light text-right total" type="text" style="width:219.2px; position:relative; left:5px;" required readonly>
+                            <input name="total" id="inputTotal_${$('.total').length + 1}" class="form-control bg-light text-right total" type="text" style="width:219.2px; position:relative; left:2px;" required readonly>
                         </div>
                         <div class="pr-4 py-2 col-1 JS-button-delete">
-                            <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: 5.2px;"><i class="fa-solid fa-minus"></i></button>
+                            <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: 0.2px;"><i class="fa-solid fa-minus"></i></button>
                         </div>
                     </div>`;
                 $("#itemFields").append(newRow);
