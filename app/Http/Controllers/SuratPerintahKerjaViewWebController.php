@@ -114,14 +114,14 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Create the record
         $suratPerintahKerjas = Surat_perintah_kerja::create([
             'form_number' => 'spk',
-            'code' => $request->kode_project,
+            'code' => $request->code,
             'pemohon' => $request->pemohon,
             'penerima' => $request->penerima,
             'menyetujui' => $request->menyetujui,
             'jabatan_1' => $request->jabatan_1,
             'jabatan_2' => $request->jabatan_2,
             'jabatan_3' => $request->jabatan_3,
-            'title' => $request->nama_project,
+            'title' => $request->title,
             'user' => $request->user,
             'main_contractor' => $request->main_contractor,
             'project_manager' => $request->project_manager,
@@ -261,14 +261,14 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Update Surat_perintah_kerja with new or old values
         if ($request->dokumen_pendukung_file) {
             $suratPerintahKerjas->update([
-                'code'          => $request->kode_project,
+                'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,
                 'menyetujui'               => $request->menyetujui,
                 'jabatan_1'               => $request->jabatan_1,
                 'jabatan_2'               => $request->jabatan_2,
                 'jabatan_3'               => $request->jabatan_3,
-                'title'          => $request->nama_project,
+                'title'          => $request->title,
                 'user'                  => $request->user,
                 'main_contractor'       => $request->main_contractor,
                 'project_manager'       => $request->project_manager,
@@ -284,14 +284,14 @@ class SuratPerintahKerjaViewWebController extends Controller
             ]);
         } else {
             $suratPerintahKerjas->update([
-                'code'          => $request->kode_project,
+                'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,
                 'menyetujui'               => $request->menyetujui,
                 'jabatan_1'               => $request->jabatan_1,
                 'jabatan_2'               => $request->jabatan_2,
                 'jabatan_3'               => $request->jabatan_3,
-                'title'          => $request->nama_project,
+                'title'          => $request->title,
                 'user'                  => $request->user,
                 'main_contractor'       => $request->main_contractor,
                 'project_manager'       => $request->project_manager,

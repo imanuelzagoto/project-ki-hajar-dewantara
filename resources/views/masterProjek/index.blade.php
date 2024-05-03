@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <h2 class="fiturjam font-weight-bold display-6">
-                        <ul class="list-unstyled mb-0">
+                        <ul class="list-unstyled mb-0" style="margin-top: 3px;">
                             <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
                                 <i class="fas fa-calendar"></i>&nbsp;
                                 <i class="far fa-clock"></i>&nbsp;
@@ -80,13 +80,13 @@
             </div>
 
             <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
-                <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
+                {{-- <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
                     onclick="window.location.href='{{ route('master-projek.create') }}'">
                     <span class="btn-label">
                         <i class="fa fa-plus"></i>
                     </span>
                     <span class="tambah-perintah">Tambah Perintah</span>
-                </button>
+                </button> --}}
             </div>
         </div>
         <div class="row">
@@ -149,11 +149,11 @@
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
 
-                                                <a href="{{ route('master-projek.edit', ['id' => $project['id']]) }}"
+                                                {{-- <a href="{{ route('master-projek.edit', ['id' => $project['id']]) }}"
                                                     class="fas fa-pencil-alt btn btn-sm tooltip-container"
                                                     style="color:#4FD1C5; font-size:20px;">
                                                     <span class="tooltip-edit">Edit</span>
-                                                </a>
+                                                </a> --}}
 
                                                 <a href="/master-projek/delete/{{ $project['id'] }}"
                                                     class="fas fa-trash-alt btn btn-sm tooltip-container"

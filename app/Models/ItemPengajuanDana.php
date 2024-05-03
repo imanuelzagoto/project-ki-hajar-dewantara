@@ -12,6 +12,7 @@ class ItemPengajuanDana extends Model
     protected $fillable = [
         'nama_item',
         'jumlah',
+        'satuan',
         'harga',
         'total',
     ];

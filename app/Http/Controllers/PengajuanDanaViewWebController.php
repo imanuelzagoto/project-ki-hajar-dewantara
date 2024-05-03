@@ -51,6 +51,7 @@ class PengajuanDanaViewWebController extends Controller
             'total' => 'required|integer',
             'nama_item.*' => 'required|string',
             'jumlah.*' => 'required|integer',
+            'satuan.*' => 'required|string',
             'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
@@ -91,11 +92,12 @@ class PengajuanDanaViewWebController extends Controller
         ]);
 
         // Proses untuk menyimpan detail item dinamis
-        $items = $request->only('nama_item', 'jumlah', 'harga');
+        $items = $request->only('nama_item', 'jumlah', 'satuan', 'harga');
         foreach ($items['nama_item'] as $key => $item) {
             $pengajuanDanas->items()->create([
                 'nama_item' => $item,
                 'jumlah' => $items['jumlah'][$key],
+                'satuan' => $item,
                 'harga' => $items['harga'][$key],
                 'total' => $items['jumlah'][$key] * $items['harga'][$key],
             ]);
@@ -136,6 +138,7 @@ class PengajuanDanaViewWebController extends Controller
             'batas_waktu' => 'required|date',
             'nama_item.*' => 'required|string',
             'jumlah.*' => 'required|integer',
+            'satuan.*' => 'required|string',
             'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
@@ -157,6 +160,7 @@ class PengajuanDanaViewWebController extends Controller
         // Ambil data item dari request
         $nama_items = $request->input('nama_item');
         $jumlahs = $request->input('jumlah');
+        $satuans = $request->input('satuan');
         $hargas = $request->input('harga');
 
         // Hapus item yang sudah ada untuk entri pengajuan dana ini
@@ -169,6 +173,7 @@ class PengajuanDanaViewWebController extends Controller
             $item = new ItemPengajuanDana(); // Ganti dengan model Anda
             $item->nama_item = $nama_item;
             $item->jumlah = $jumlahs[$key];
+            $item->satuan = $nama_item;
             $item->harga = $hargas[$key];
             $item->total = $jumlahs[$key] * $hargas[$key]; // Kalkulasi total
             $subtotal += $item->total; // Tambahkan ke subtotal
@@ -185,7 +190,7 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => $request->tujuan,
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
-            'subtotal' => $subtotal, // Menggunakan subtotal yang baru dihitung
+            'subtotal' => $subtotal,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,

@@ -87,25 +87,24 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
-                                                <input type="hidden" id="kode_project_hidden" name="kode_project"
-                                                    value="{{ $suratPerintahKerjas->kode_project }}">
+                                                <input type="hidden" id="kode_project_hidden" name="code"
+                                                    value="{{ $suratPerintahKerjas->code }}">
                                                 <select id="project_id" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
                                                     <option value="{{ $suratPerintahKerjas->id }}" selected>
-                                                        {{ $suratPerintahKerjas->kode_project }}</option>
+                                                        {{ $suratPerintahKerjas->code }}</option>
                                                     @foreach ($projects as $p)
-                                                        <option value="{{ $p['id'] }}">{{ $p['code_project'] }}
-                                                        </option>
+                                                        <option value="{{ $p['id'] }}">{{ $p['code'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail ">Nama
-                                                    Project</span>
-                                                <input name="nama_project" class="form-control  w-100 disabled_input"
+                                                <span class="text-sm font-weight-bold text-form-detail ">Nama Project</span>
+                                                <input name="title" class="form-control w-100 disabled_input"
                                                     id="nama" type="text"
-                                                    value="{{ $suratPerintahKerjas->nama_project }}">
+                                                    value="{{ $suratPerintahKerjas->title }}">
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
                                                 <input name="user" class="form-control bg-light w-100" type="text"
@@ -293,7 +292,7 @@
             </div>
         </div>
     </div>
-    <script>
+    {{-- <script>
         function changeProjectName() {
             let project_id = $('#project_id').find(":selected").val();
             console.log(project_id)
@@ -364,5 +363,32 @@
                 document.getElementById("fileName").innerText = "";
             }
         });
-    </script>
+    </script> --}}
 @endsection
+
+<script>
+    function changeProjectName() {
+        // Dapatkan elemen select
+        var select = document.getElementById("project_id");
+
+        // Dapatkan nilai yang dipilih
+        var selectedValue = select.value;
+
+        // Dapatkan daftar proyek dari PHP (gunakan JSON atau metode lain untuk mentransfer data)
+        var projects = {!! json_encode($projects) !!};
+
+        // Temukan proyek yang sesuai dengan nilai yang dipilih
+        var selectedProject = projects.find(function(project) {
+            return project.id == selectedValue;
+        });
+
+        // Periksa apakah proyek ditemukan
+        if (selectedProject) {
+            // Dapatkan elemen input untuk nama proyek
+            var projectNameInput = document.getElementById("nama");
+
+            // Update nilai input dengan nilai title dari proyek yang sesuai
+            projectNameInput.value = selectedProject.title;
+        }
+    }
+</script>

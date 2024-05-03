@@ -46,9 +46,17 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="text-mp font-weight-bold display-6">
-                        Edit Form Pengajuan Dana
+                        Edit Form Pengajuan Dana <span style="font-size: 22px; padding-left:8px;">&rArr;</span>
+                        <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                            {{ $pengajuanDanas->no_doc }}
+                        </span>
                     </h2>
                 </div>
+                {{-- <div class="col-md-6">
+                    <h2 class="text-mp font-weight-bold display-6">
+                        Edit Form Pengajuan Dana
+                    </h2>
+                </div> --}}
                 <div class="col-md-6 d-flex justify-content-end">
                     <h2 class="fiturjam font-weight-bold display-6">
                         <ul class="list-unstyled mb-0">
@@ -191,90 +199,8 @@
                                             </div>
                                         </div>
 
-                                        <div class="row py-2">
-                                            {{-- <script>
-                                                $(document).ready(function() {
-                                                    // Menampilkan kolom pertama saat halaman dimuat
-                                                    addNewRow();
-
-                                                    // Event listener untuk tombol tambah
-                                                    $("#tambahField").click(function() {
-                                                        addNewRow();
-                                                    });
-
-                                                    // Event listener untuk tombol hapus
-                                                    $(document).on('click', '.JS-delete-btn', function() {
-                                                        $(this).closest('.row').remove();
-                                                        hitungSubtotal();
-                                                        activateDeleteButtons
-                                                            (); // Memastikan status tombol delete yang sesuai setelah menghapus baris
-                                                    });
-
-                                                    // Fungsi untuk menambahkan baris baru
-                                                    function addNewRow() {
-                                                        var newRow = `
-                                                <div class="row py-2" style="margin-left: 119px;">
-                                                    <div class="pr-4 py-2 col-3">
-                                                        <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Nama item</span>
-                                                        <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 11px;" required>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Jumlah</span>
-                                                        <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 99.1%; position:relative; left:5px; text-align:center;" required>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-3">
-                                                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px;">Harga</span>
-                                                        <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 99%; text-align:right; position:relative; left:4px;" required>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-3">
-                                                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
-                                                        <input name="total" class="form-control bg-light text-right total" type="text" style="width:218.2px; position:relative; left:4px;" required readonly>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-1 JS-button-delete">
-                                                        <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: -17px;" disabled><i class="fa-solid fa-minus"></i></button>
-                                                    </div>
-                                                </div>`;
-                                                        $("#itemFields").append(newRow);
-
-                                                        // Mengaktifkan tombol delete di kolom kedua
-                                                        activateDeleteButtons();
-                                                    }
-
-                                                    // Event listener untuk input jumlah dan harga
-                                                    $(document).on('input', '.jumlah, .harga', function() {
-                                                        var row = $(this).closest('.row');
-                                                        hitungTotal(row);
-                                                        hitungSubtotal();
-                                                    });
-
-                                                    // Fungsi untuk menghitung total
-                                                    function hitungTotal(row) {
-                                                        var jumlah = $(row).find('.jumlah').val();
-                                                        var harga = $(row).find('.harga').val();
-                                                        var total = jumlah * harga;
-                                                        $(row).find('.total').val(total);
-                                                    }
-
-                                                    // Fungsi untuk menghitung subtotal
-                                                    function hitungSubtotal() {
-                                                        var subtotal = 0;
-                                                        $('.total').each(function() {
-                                                            subtotal += parseInt($(this).val()) || 0;
-                                                        });
-                                                        // Tampilkan subtotal
-                                                        $('#subtotalInput').val(subtotal);
-                                                    }
-
-                                                    // Fungsi untuk mengaktifkan atau menonaktifkan tombol delete
-                                                    function activateDeleteButtons() {
-                                                        // Menonaktifkan tombol delete di kolom pertama
-                                                        $('.JS-button-delete').first().find('.JS-delete-btn').prop('disabled', true);
-                                                        // Mengaktifkan tombol delete di kolom kedua
-                                                        $('.JS-button-delete').not(':first').find('.JS-delete-btn').prop('disabled', false);
-                                                    }
-                                                });
-                                            </script> --}}
-                                        </div>
+                                        {{-- <div class="row py-2">
+                                        </div> --}}
 
                                     </div>
                                 </div>
@@ -340,6 +266,139 @@
         </script>
     @endsection
 
+    {{-- @push('scripts')
+        <script>
+            $(document).ready(function() {
+                // Menampilkan kolom pertama saat halaman dimuat
+                displayItems(); // Menampilkan item yang sudah ada
+
+                // Event listener untuk tombol tambah
+                $("#tambahField").click(function() {
+                    addNewRow();
+                });
+
+                // Event listener untuk tombol hapus
+                $(document).on('click', '.JS-delete-btn', function() {
+                    $(this).closest('.row').remove();
+                    hitungSubtotal();
+                    activateDeleteButtons();
+                });
+
+                // Event listener untuk input jumlah dan harga
+                $(document).on('input', '.jumlah, .harga', function() {
+                    var row = $(this).closest('.row');
+                    hitungTotal(row);
+                    hitungSubtotal();
+                });
+
+                // Fungsi untuk menambahkan baris baru
+                function addNewRow() {
+                    var newRow = `
+                        <div class="row py-2" style="margin-left: 119px;">
+                            <div class="pr-4 py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Nama item</span>
+                                <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 183.1px; position: relative; right: 13px;" required>
+                            </div>
+                            <div class="pr-4 py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:-50px;">Jumlah</span>
+                                <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 101.1%; position:relative; left:-51px; text-align:center;" required>
+                            </div>
+                            <div class="pr-4 py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px;">Harga</span>
+                                <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 99%; text-align:right; position:relative; left:4px;" required>
+                            </div>
+                            <div class="pr-4 py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
+                                <input name="total" class="form-control bg-light text-right total" type="text" style="width:218.2px; position:relative; left:4px;" required readonly>
+                            </div>
+                            <div class="pr-4 py-2 col-1 JS-button-delete">
+                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: -17px;"><i class="fa-solid fa-minus"></i></button>
+                            </div>
+                        </div>`;
+                    $("#itemFields").append(newRow);
+                }
+
+                // Menampilkan data item yang sudah ada pada form
+                function displayItems() {
+                    var existingItems = {!! json_encode($pengajuanDanas->items) !!}; // Mengambil data item dari server
+                    if (existingItems && existingItems.length > 0) {
+                        existingItems.forEach(function(item) {
+                            var newRow = `
+                    <div class="row py-2" style="margin-left: 119px;">
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Nama item</span>
+                            <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 11px;" value="${item.nama_item}" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Jumlah</span>
+                            <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 99.1%; position:relative; left:5px; text-align:center;" value="${item.jumlah}" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Satuan</span>
+                            <input name="satuan[]" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 11px;" value="${item.satuan}" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px;">Harga</span>
+                            <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 99%; text-align:right; position:relative; left:4px;" value="${item.harga}" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
+                            <input name="total" class="form-control bg-light text-right total" type="text" style="width:218.2px; position:relative; left:4px;" value="${item.total}" required readonly>
+                        </div>
+                        <div class="pr-4 py-2 col-1 JS-button-delete">
+                            <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: -17px;"><i class="fa-solid fa-minus"></i></button>
+                        </div>
+                    </div>`;
+                            $("#itemFields").append(newRow);
+                        });
+                    }
+                }
+
+                // Fungsi untuk menghitung total
+                function hitungTotal(row) {
+                    var jumlah = $(row).find('.jumlah').val();
+                    var harga = $(row).find('.harga').val();
+                    var total = jumlah * harga;
+                    $(row).find('.total').val(total);
+                }
+
+                // Fungsi untuk menghitung subtotal
+                function hitungSubtotal() {
+                    var subtotal = 0;
+                    $('.total').each(function() {
+                        subtotal += parseInt($(this).val()) || 0;
+                    });
+                    // Tampilkan subtotal
+                    $('#subtotalInput').val(subtotal);
+                }
+
+                // Fungsi untuk mengaktifkan atau menonaktifkan tombol delete
+                function activateDeleteButtons() {
+                    // Menonaktifkan tombol delete di kolom pertama
+                    $('.JS-button-delete').first().find('.JS-delete-btn').prop('disabled', true);
+                    // Mengaktifkan tombol delete di kolom kedua
+                    $('.JS-button-delete').not(':first').find('.JS-delete-btn').prop('disabled', false);
+                }
+
+                // Validasi formulir sebelum diserahkan
+                $('#formId').submit(function() {
+                    var isValid = true;
+                    $('.jumlah, .harga').each(function() {
+                        if ($(this).val() === '') {
+                            isValid = false;
+                            return false; // Hentikan iterasi jika ada satu field kosong
+                        }
+                    });
+                    if (!isValid) {
+                        alert('Mohon isi semua field.');
+                    }
+                    return isValid;
+                });
+            });
+        </script>
+    @endpush --}}
+
+
     @push('scripts')
         <script>
             $(document).ready(function() {
@@ -368,28 +427,35 @@
                 // Fungsi untuk menambahkan baris baru
                 function addNewRow() {
                     var newRow = `
-            <div class="row py-2" style="margin-left: 119px;">
-                <div class="pr-4 py-2 col-3">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Nama item</span>
-                    <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 11px;" required>
-                </div>
-                <div class="pr-4 py-2 col-2">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Jumlah</span>
-                    <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 99.1%; position:relative; left:5px; text-align:center;" required>
-                </div>
-                <div class="pr-4 py-2 col-3">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px;">Harga</span>
-                    <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 99%; text-align:right; position:relative; left:4px;" required>
-                </div>
-                <div class="pr-4 py-2 col-3">
-                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
-                    <input name="total" class="form-control bg-light text-right total" type="text" style="width:218.2px; position:relative; left:4px;" required readonly>
-                </div>
-                <div class="pr-4 py-2 col-1 JS-button-delete">
-                    <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: -17px;"><i class="fa-solid fa-minus"></i></button>
-                </div>
-            </div>`;
+                    <div class="row py-2" style="margin-left: 119px;">
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; right:11px;">Nama item</span>
+                            <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 170px; position:relative; right:13px;" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:16px;">Jumlah</span>
+                            <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 142px; position:relative; right:-15px;" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:16px;">Satuan</span>
+                            <input name="satuan[]" class="form-control bg-light" type="text" style="width: 160px; position:relative; right:-14px;" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:32px;">Harga</span>
+                            <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 170px; position:relative; left:31px;" required>
+                        </div>
+                        <div class="pr-4 py-2 col-2">
+                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:58px">Total</span>
+                            <input name="total" class="form-control bg-light text-right total" type="text" style="width: 170px; position:relative; left:58px;" required readonly>
+                        </div>
+                        <div class="pr-4 py-2 col-1 JS-button-delete">
+                            <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="position:relative; left:74px; top:24px;"><i class="fa-solid fa-minus"></i></button>
+                        </div>
+                    </div>`;
                     $("#itemFields").append(newRow);
+
+                    // Setelah menambahkan baris baru, aktifkan kembali tombol delete yang sesuai
+                    activateDeleteButtons();
                 }
 
                 // Menampilkan data item yang sudah ada pada form
@@ -398,27 +464,31 @@
                     if (existingItems && existingItems.length > 0) {
                         existingItems.forEach(function(item) {
                             var newRow = `
-                    <div class="row py-2" style="margin-left: 119px;">
-                        <div class="pr-4 py-2 col-3">
-                            <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Nama item</span>
-                            <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 11px;" value="${item.nama_item}" required>
-                        </div>
-                        <div class="pr-4 py-2 col-2">
-                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Jumlah</span>
-                            <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 99.1%; position:relative; left:5px; text-align:center;" value="${item.jumlah}" required>
-                        </div>
-                        <div class="pr-4 py-2 col-3">
-                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px;">Harga</span>
-                            <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 99%; text-align:right; position:relative; left:4px;" value="${item.harga}" required>
-                        </div>
-                        <div class="pr-4 py-2 col-3">
-                            <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
-                            <input name="total" class="form-control bg-light text-right total" type="text" style="width:218.2px; position:relative; left:4px;" value="${item.total}" required readonly>
-                        </div>
-                        <div class="pr-4 py-2 col-1 JS-button-delete">
-                            <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: -17px;"><i class="fa-solid fa-minus"></i></button>
-                        </div>
-                    </div>`;
+                            <div class="row py-2" style="margin-left: 119px;">
+                                <div class="pr-4 py-2 col-2">
+                                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; right:11px;">Nama item</span>
+                                    <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 170px; position:relative; right:13px;" value="${item.nama_item}" required>
+                                </div>
+                                <div class="pr-4 py-2 col-2">
+                                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:16px;">Jumlah</span>
+                                    <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 142px; position:relative; right:-15px;" value="${item.jumlah}" required>
+                                </div>
+                                <div class="pr-4 py-2 col-2">
+                                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:16px;">Satuan</span>
+                                    <input name="satuan[]" class="form-control bg-light" type="text" style="width: 160px; position:relative; right:-14px;" value="${item.satuan}" required>
+                                </div>
+                                <div class="pr-4 py-2 col-2">
+                                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:32px;">Harga</span>
+                                    <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 170px; position:relative; left:31px;" value="${item.harga}" required>
+                                </div>
+                                <div class="pr-4 py-2 col-2">
+                                    <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:58px">Total</span>
+                                    <input name="total" class="form-control bg-light text-right total" type="text" style="width: 170px; position:relative; left:58px;" value="${item.total}" required readonly>
+                                </div>
+                                <div class="pr-4 py-2 col-1 JS-button-delete">
+                                    <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="position:relative; left:74px; top:24px;"><i class="fa-solid fa-minus"></i></button>
+                                </div>
+                            </div>`;
                             $("#itemFields").append(newRow);
                         });
                     }

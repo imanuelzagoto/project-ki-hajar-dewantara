@@ -16,6 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('pengajuan_dana_id');
             $table->string('nama_item');
             $table->unsignedInteger('jumlah');
+            $table->string('satuan');
             $table->unsignedBigInteger('harga');
             $table->unsignedBigInteger('total');
             $table->timestamps();

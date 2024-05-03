@@ -264,7 +264,7 @@
                         <td style="text-align: center;">{{ $i }}.</td>
                         <td colspan="3">{{ $item->nama_item }}</td>
                         <td style="text-align: center;">{{ $item->jumlah }}</td>
-                        <td style="text-align: center;">{{ $item->nama_item }}</td>
+                        <td style="text-align: center;">{{ $item->satuan }}</td>
                         <td colspan="2" style="text-align: right; padding-right:5px;">
                             {{ number_format($item->harga, 0, ',', '.') }}</td>
                         <td style="text-align: right; padding-right:5px;">

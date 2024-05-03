@@ -80,11 +80,10 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
                                                 <input type="hidden" id="kode_project_hidden" name="code">
-                                                <select id="project_id" class="form-control bg-light w-100"
+                                                <select id="project_id" name="code" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
                                                     <option value="" disabled selected>
                                                         -- Pilih Kode Project --
@@ -96,11 +95,16 @@
                                                 </select>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail ">Nama
-                                                    Project</span>
+                                                <span class="text-sm font-weight-bold text-form-detail">Nama Projek</span>
                                                 <input name="title" class="form-control w-100 disabled_input"
-                                                    id="nama" type="text">
+                                                    id="nama" type="text" required>
                                             </div>
+                                            {{-- <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail ">Nama
+                                                    Projek</span>
+                                                <input name="title" class="form-control w-100 disabled_input"
+                                                    id="nama" value="{{ $p['title'] }}" type="text">
+                                            </div> --}}
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
@@ -256,7 +260,34 @@
     </div>
 @endsection
 
-@push('scripts')
+<script>
+    function changeProjectName() {
+        // Dapatkan elemen select
+        var select = document.getElementById("project_id");
+
+        // Dapatkan nilai yang dipilih
+        var selectedValue = select.value;
+
+        // Dapatkan daftar proyek dari PHP (gunakan JSON atau metode lain untuk mentransfer data)
+        var projects = {!! json_encode($projects) !!};
+
+        // Temukan proyek yang sesuai dengan nilai yang dipilih
+        var selectedProject = projects.find(function(project) {
+            return project.id == selectedValue;
+        });
+
+        // Periksa apakah proyek ditemukan
+        if (selectedProject) {
+            // Dapatkan elemen input untuk nama proyek
+            var projectNameInput = document.getElementById("nama");
+
+            // Update nilai input dengan nilai title dari proyek yang sesuai
+            projectNameInput.value = selectedProject.title;
+        }
+    }
+</script>
+
+{{-- @push('scripts')
     <script>
         function changeProjectName() {
             let project_id = $('#project_id').find(":selected").val();
@@ -272,9 +303,9 @@
             };
 
             $.ajax(settings).done(function(response) {
-                console.log(response.data.code_project)
-                $('#nama').val(response.data.project_name);
-                $('#kode_project_hidden').val(response.data.code_project);
+                console.log(response.data.code)
+                $('#nama').val(response.data.title);
+                $('#kode_project_hidden').val(response.data.code);
             });
 
         }
@@ -316,4 +347,4 @@
             fileInput.files = e.dataTransfer.files
         })
     </script>
-@endpush
+@endpush --}}
