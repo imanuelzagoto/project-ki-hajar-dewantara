@@ -98,8 +98,8 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail ">Nama
                                                     Project</span>
-                                                <input name="title" class="form-control  w-100" id="nama"
-                                                    type="text">
+                                                <input name="title" class="form-control w-100 disabled_input"
+                                                    id="nama" type="text">
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
