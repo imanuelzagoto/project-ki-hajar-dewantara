@@ -18,10 +18,7 @@ class PengajuanDana extends Model
         'lokasi',
         'batas_waktu',
         'subtotal',
-        'total',
-        'nama_item',
-        'jumlah',
-        'harga',
+        // 'total',
         'terbilang',
         'metode_penerimaan',
         'catatan',
@@ -60,5 +57,10 @@ class PengajuanDana extends Model
             return null;
         }
         return Carbon::parse($value)->translatedFormat('d F Y');
+    }
+
+    public function items()
+    {
+        return $this->hasMany(ItemPengajuanDana::class);
     }
 }

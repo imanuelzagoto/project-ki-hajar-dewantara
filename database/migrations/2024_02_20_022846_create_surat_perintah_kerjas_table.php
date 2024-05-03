@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('surat_perintah_kerjas', function (Blueprint $table) {
             $table->id();
-            $table->string('kode_project');
+            $table->string('code');
             $table->string('pemohon');
             $table->string('penerima')->nullable();
             $table->string('menyetujui')->nullable();
             $table->string('jabatan_1');
             $table->string('jabatan_2')->nullable();
             $table->string('jabatan_3')->nullable();
-            $table->string('nama_project');
+            $table->string('title');
             $table->string('user');
             $table->string('main_contractor');
             $table->string('project_manager');

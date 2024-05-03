@@ -83,14 +83,14 @@
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
-                                                <input type="hidden" id="kode_project_hidden" name="kode_project">
+                                                <input type="hidden" id="kode_project_hidden" name="code">
                                                 <select id="project_id" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
                                                     <option value="" disabled selected>
                                                         -- Pilih Kode Project --
                                                     </option>
                                                     @foreach ($projects as $p)
-                                                        <option value="{{ $p['id'] }}">{{ $p['code_project'] }}
+                                                        <option value="{{ $p['id'] }}">{{ $p['code'] }}
                                                         </option>
                                                     @endforeach
                                                 </select>
@@ -98,8 +98,8 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail ">Nama
                                                     Project</span>
-                                                <input name="nama_project" class="form-control  w-100 disabled_input"
-                                                    id="nama" type="text">
+                                                <input name="title" class="form-control  w-100" id="nama"
+                                                    type="text">
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
@@ -262,7 +262,7 @@
             let project_id = $('#project_id').find(":selected").val();
             console.log(project_id)
             var settings = {
-                "url": "http://172.15.2.134/api/projects/" + project_id,
+                "url": "https://luna.intek.co.id/api/get-project" + project_id,
                 "method": "GET",
                 "timeout": 0,
                 "headers": {

@@ -132,20 +132,20 @@
                                                 {{ $i }}
                                             </td>
                                             <td class="text-left" style="font-weight:400;" nowrap>
-                                                {{ $project['project_name'] }}
+                                                {{ $project['title'] }}
                                             </td>
                                             <td class="text-left" style="font-weight:400;" nowrap>
-                                                {{ $project['code_project'] }}
+                                                {{ $project['code'] }}
                                             </td>
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['deadline'])->format('d-m-Y') }}
+                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['start'])->format('d-m-Y') }}
+                                                {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['end'])->format('d-m-Y') }}
+                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
 

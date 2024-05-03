@@ -11,14 +11,14 @@ class Surat_perintah_kerja extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'kode_project',
+        'code',
         'pemohon',
         'penerima',
         'menyetujui',
         'jabatan_1',
         'jabatan_2',
         'jabatan_3',
-        'nama_project',
+        'title',
         'user',
         'main_contractor',
         'project_manager',

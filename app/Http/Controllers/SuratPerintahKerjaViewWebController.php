@@ -8,8 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Surat_perintah_kerja;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-// use Carbon\Carbon;
-// use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Session;
 
 class SuratPerintahKerjaViewWebController extends Controller
 {
@@ -42,10 +41,10 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function create()
     {
+        $token = Session::get('token');
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://172.15.2.134/api/projects',
+            CURLOPT_URL => 'https://luna.intek.co.id/api/get-project',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -53,18 +52,15 @@ class SuratPerintahKerjaViewWebController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer ' . $token,
+            ),
         ));
 
         $response = curl_exec($curl);
-
+        // dd($response);
         curl_close($curl);
-
         $projects = json_decode($response, true)['data'];
-        // foreach ($projects as $project) {
-        //     dd($project['id']);
-        // }
-        // dd($projects);
-
         return view('suratPerintahKerja.create')
             ->with('projects', $projects);
     }
@@ -80,14 +76,14 @@ class SuratPerintahKerjaViewWebController extends Controller
         // dd($request);
         // Define validation rules
         $validator = Validator::make($request->all(), [
-            'kode_project'          => 'required',
+            'code'          => 'required',
             'pemohon'               => 'required',
             'penerima'               => 'nullable|string',
             'menyetujui'               => 'nullable|string',
             'jabatan_1'               => 'required',
             'jabatan_2'               => 'nullable|string',
             'jabatan_3'               => 'nullable|string',
-            'nama_project'          => 'required',
+            'title'          => 'required',
             'user'                  => 'required',
             'main_contractor'       => 'required',
             'project_manager'       => 'required',
@@ -118,14 +114,14 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Create the record
         $suratPerintahKerjas = Surat_perintah_kerja::create([
             'form_number' => 'spk',
-            'kode_project' => $request->kode_project,
+            'code' => $request->kode_project,
             'pemohon' => $request->pemohon,
             'penerima' => $request->penerima,
             'menyetujui' => $request->menyetujui,
             'jabatan_1' => $request->jabatan_1,
             'jabatan_2' => $request->jabatan_2,
             'jabatan_3' => $request->jabatan_3,
-            'nama_project' => $request->nama_project,
+            'title' => $request->nama_project,
             'user' => $request->user,
             'main_contractor' => $request->main_contractor,
             'project_manager' => $request->project_manager,
@@ -148,6 +144,8 @@ class SuratPerintahKerjaViewWebController extends Controller
             'no_spk' => $no_spk,
             'form_number' => $no_spk
         ]);
+
+        // dd($suratPerintahKerjas);
 
         // Return response
         return redirect(route('surat_perintah_kerja.index'));
@@ -175,10 +173,11 @@ class SuratPerintahKerjaViewWebController extends Controller
      */
     public function edit($id)
     {
+        $token = Session::get('token');
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'http://172.15.2.134/api/projects',
+            CURLOPT_URL => 'https://luna.intek.co.id/api/get-project',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -186,6 +185,9 @@ class SuratPerintahKerjaViewWebController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer ' . $token,
+            ),
         ));
 
         $response = curl_exec($curl);
@@ -193,10 +195,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         curl_close($curl);
 
         $projects = json_decode($response, true)['data'];
-        // foreach ($projects as $project) {
-        //     dd($project['id']);
-        // }
-        // dd($projects);
 
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
         return view('suratPerintahKerja.edit')
@@ -216,14 +214,14 @@ class SuratPerintahKerjaViewWebController extends Controller
         // dd($request);
         // Define validation rules
         $validator = Validator::make($request->all(), [
-            'kode_project'          => 'required',
+            'code'          => 'required',
             'pemohon'               => 'required',
             'penerima'               => 'nullable|string',
             'menyetujui'               => 'nullable|string',
             'jabatan_1'               => 'required',
             'jabatan_2'               => 'nullable|string',
             'jabatan_3'               => 'nullable|string',
-            'nama_project'          => 'required',
+            'title'          => 'required',
             'user'                  => 'required',
             'main_contractor'       => 'required',
             'project_manager'       => 'required',
@@ -263,14 +261,14 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Update Surat_perintah_kerja with new or old values
         if ($request->dokumen_pendukung_file) {
             $suratPerintahKerjas->update([
-                'kode_project'          => $request->kode_project,
+                'code'          => $request->kode_project,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,
                 'menyetujui'               => $request->menyetujui,
                 'jabatan_1'               => $request->jabatan_1,
                 'jabatan_2'               => $request->jabatan_2,
                 'jabatan_3'               => $request->jabatan_3,
-                'nama_project'          => $request->nama_project,
+                'title'          => $request->nama_project,
                 'user'                  => $request->user,
                 'main_contractor'       => $request->main_contractor,
                 'project_manager'       => $request->project_manager,
@@ -286,14 +284,14 @@ class SuratPerintahKerjaViewWebController extends Controller
             ]);
         } else {
             $suratPerintahKerjas->update([
-                'kode_project'          => $request->kode_project,
+                'code'          => $request->kode_project,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,
                 'menyetujui'               => $request->menyetujui,
                 'jabatan_1'               => $request->jabatan_1,
                 'jabatan_2'               => $request->jabatan_2,
                 'jabatan_3'               => $request->jabatan_3,
-                'nama_project'          => $request->nama_project,
+                'title'          => $request->nama_project,
                 'user'                  => $request->user,
                 'main_contractor'       => $request->main_contractor,
                 'project_manager'       => $request->project_manager,

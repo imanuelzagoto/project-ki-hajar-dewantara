@@ -186,94 +186,178 @@
                                             </div>
                                         </div>
                                         <div class="row py-2">
+                                            {{-- Script JS ITEM --}}
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                    </div>
-                    <div class="row pr-3">
-                        <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
-                            <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
-                                <span class="head-text"
-                                    style="position: relative; bottom:23px; right:27px;">Pengaju</span>
-                                <span class="detail-text">Pengaju</span>
-                            </div>
-                            <div class="d-block w-100">
-                                <div class="row py-2">
-                                    <div class="pr-4 py-2 col-6 column-name-pemohon">
-                                        <span class="text-sm font-weight-bold text-form-detail"
-                                            style="position: relative; bottom:26px; right:73px;">Nama</span>
-                                        <input name="nama_pemohon" class="form-control bg-light"
-                                            style="width: 433px; position:relative; bottom:27px; right:73px;"
-                                            type="text" required>
+                            <div class="row pr-3">
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                    <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
+                                        <span class="head-text"
+                                            style="position: relative; bottom:2px; right:45px;">Pengaju</span>
+                                        <span class="detail-text">Pengaju</span>
                                     </div>
-                                    <div class="pr-4 py-2 col-6 column-jabatan">
-                                        <span class="text-sm font-weight-bold text-form-detail"
-                                            style="position: relative; bottom:26px; right:48px;">Jabatan</span>
-                                        <input name="jabatan_pemohon" class="form-control bg-light"
-                                            style="width: 516px; position:relative; bottom:27px; right:48px;"
-                                            type="text" required>
+                                    <div class="d-block w-100">
+                                        <div class="row py-2">
+                                            <div class="pr-4 py-2 col-6 column-name-pemohon">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; bottom:5px; right:88px;">Nama</span>
+                                                <input name="nama_pemohon" class="form-control bg-light"
+                                                    style="width: 433px; position:relative; bottom:5px; right:90.2px;"
+                                                    type="text" required>
+                                            </div>
+                                            <div class="pr-4 py-2 col-6 column-jabatan">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; bottom:5px; right:47px;">Jabatan</span>
+                                                <input name="jabatan_pemohon" class="form-control bg-light"
+                                                    style="width: 516px; position:relative; bottom:5px; right:48px;"
+                                                    type="text" required>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col-md-6">
-                            <div class="d-flex justify-content-center p-4 rounded-pill">
-                                <button class="btn btn-save"
-                                    style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:20px;">
-                                    SAVE
-                                </button>
+                            <div class="row justify-content-center">
+                                <div class="col-md-6">
+                                    <div class="d-flex justify-content-center p-4 rounded-pill">
+                                        <button class="btn btn-save"
+                                            style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:5px;">
+                                            SAVE
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>
-    </div>
+        <script>
+            // JS metode penerimaan
+            document.getElementById("metode_penerimaan").addEventListener("change", function() {
+                var selectedOption = this.value;
+                var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+                var containerMethod = document.getElementById("container_method");
 
-    <script>
-        // JS metode penerimaan
-        document.getElementById("metode_penerimaan").addEventListener("change", function() {
-            var selectedOption = this.value;
-            var nomorRekeningInput = document.getElementById("nomorRekeningInput");
-            var containerMethod = document.getElementById("container_method");
+                // Menampilkan atau menyembunyikan kolom input nomor rekening berdasarkan opsi yang dipilih
+                nomorRekeningInput.style.display = selectedOption === "debit" ? "block" : "none";
 
-            // Menampilkan atau menyembunyikan kolom input nomor rekening berdasarkan opsi yang dipilih
-            nomorRekeningInput.style.display = selectedOption === "debit" ? "block" : "none";
+                // Menetapkan nilai name="metode_penerimaan" sesuai dengan opsi yang dipilih
+                if (selectedOption === 'debit') {
+                    containerMethod.classList.remove('col-4');
+                    containerMethod.classList.add('col-2');
+                    document.getElementById("nomor_rekening").value = "";
+                } else if (selectedOption === 'cash') {
+                    containerMethod.classList.remove('col-2');
+                    containerMethod.classList.add('col-4');
+                    document.getElementById("nomor_rekening").value = "Cash";
+                }
+            });
+            // end JS Metode penerimaan
 
-            // Menetapkan nilai name="metode_penerimaan" sesuai dengan opsi yang dipilih
-            if (selectedOption === 'debit') {
-                containerMethod.classList.remove('col-4');
-                containerMethod.classList.add('col-2');
-                document.getElementById("nomor_rekening").value = "";
-            } else if (selectedOption === 'cash') {
-                containerMethod.classList.remove('col-2');
-                containerMethod.classList.add('col-4');
-                document.getElementById("nomor_rekening").value = "Cash";
-            }
-        });
-        // end JS Metode penerimaan
+            // Get the current date
+            var currentDate = new Date();
 
-        // Get the current date
-        var currentDate = new Date();
+            // Get year, month, and day
+            var year = currentDate.getFullYear();
+            var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+            var day = ('0' + currentDate.getDate()).slice(-2);
 
-        // Get year, month, and day
-        var year = currentDate.getFullYear();
-        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-        var day = ('0' + currentDate.getDate()).slice(-2);
+            // Format the date as yyyy-mm-dd
+            var formattedDate = year + '-' + month + '-' + day;
 
-        // Format the date as yyyy-mm-dd
-        var formattedDate = year + '-' + month + '-' + day;
+            // Set the value of the hidden input field
+            document.getElementById('tanggalPengajuan').value = formattedDate;
+        </script>
+    @endsection
 
-        // Set the value of the hidden input field
-        document.getElementById('tanggalPengajuan').value = formattedDate;
-    </script>
-@endsection
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                // Menampilkan kolom pertama saat halaman dimuat
+                addNewRow();
 
-@push('scripts')
+                // Event listener untuk tombol tambah
+                $("#tambahField").click(function() {
+                    addNewRow();
+                });
+
+                // Event listener untuk tombol hapus
+                $(document).on('click', '.JS-delete-btn', function() {
+                    $(this).closest('.row').remove();
+                    hitungSubtotal();
+                    activateDeleteButtons
+                        (); // Memastikan status tombol delete yang sesuai setelah menghapus baris
+                });
+
+                // Fungsi untuk menambahkan baris baru
+                function addNewRow() {
+                    var newRow = `
+                <div class="row py-2" style="margin-left: 119px;">
+                    <div class="pr-4 py-2 col-3">
+                        <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Nama item</span>
+                        <input name="nama_item[]" class="form-control bg-light" type="text" style="width: 231.1px; position: relative; right: 11px;" required>
+                    </div>
+                    <div class="pr-4 py-2 col-2">
+                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Jumlah</span>
+                        <input name="jumlah[]" class="form-control bg-light jumlah" type="number" style="width: 99.1%; position:relative; left:5px; text-align:center;" required>
+                    </div>
+                    <div class="pr-4 py-2 col-3">
+                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:3px;">Harga</span>
+                        <input name="harga[]" class="form-control bg-light harga" type="text" style="width: 99%; text-align:right; position:relative; left:4px;" required>
+                    </div>
+                    <div class="pr-4 py-2 col-3">
+                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:6px;">Total</span>
+                        <input name="total" class="form-control bg-light text-right total" type="text" style="width:218.2px; position:relative; left:4px;" required readonly>
+                    </div>
+                    <div class="pr-4 py-2 col-1 JS-button-delete">
+                        <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:47%; margin-left: -17px;" disabled><i class="fa-solid fa-minus"></i></button>
+                    </div>
+                </div>`;
+                    $("#itemFields").append(newRow);
+
+                    // Mengaktifkan tombol delete di kolom kedua
+                    activateDeleteButtons();
+                }
+
+                // Event listener untuk input jumlah dan harga
+                $(document).on('input', '.jumlah, .harga', function() {
+                    var row = $(this).closest('.row');
+                    hitungTotal(row);
+                    hitungSubtotal();
+                });
+
+                // Fungsi untuk menghitung total
+                function hitungTotal(row) {
+                    var jumlah = $(row).find('.jumlah').val();
+                    var harga = $(row).find('.harga').val();
+                    var total = jumlah * harga;
+                    $(row).find('.total').val(total);
+                }
+
+                // Fungsi untuk menghitung subtotal
+                function hitungSubtotal() {
+                    var subtotal = 0;
+                    $('.total').each(function() {
+                        subtotal += parseInt($(this).val()) || 0;
+                    });
+                    // Tampilkan subtotal
+                    $('#subtotalInput').val(subtotal);
+                }
+
+                // Fungsi untuk mengaktifkan atau menonaktifkan tombol delete
+                function activateDeleteButtons() {
+                    // Menonaktifkan tombol delete di kolom pertama
+                    $('.JS-button-delete').first().find('.JS-delete-btn').prop('disabled', true);
+                    // Mengaktifkan tombol delete di kolom kedua
+                    $('.JS-button-delete').not(':first').find('.JS-delete-btn').prop('disabled', false);
+                }
+            });
+        </script>
+    @endpush
+
+    {{-- @push('scripts')
     <script>
         $(document).ready(function() {
             // Menampilkan kolom pertama saat halaman dimuat
@@ -362,4 +446,4 @@
             }
         });
     </script>
-@endpush
+@endpush --}}

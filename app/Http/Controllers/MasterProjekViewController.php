@@ -7,22 +7,40 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
-use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Session;
 
 class MasterProjekViewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    // public function index(Response $response)
+    // {
+    //     $curl = curl_init();
+
+    //     curl_setopt_array($curl, array(
+    //         CURLOPT_URL => 'https://luna.intek.co.id/api/get-project',
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_ENCODING => '',
+    //         CURLOPT_MAXREDIRS => 10,
+    //         CURLOPT_TIMEOUT => 0,
+    //         CURLOPT_FOLLOWLOCATION => true,
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_CUSTOMREQUEST => 'GET',
+    //     ));
+
+    //     $response = curl_exec($curl);
+    //     curl_close($curl);
+    //     $projects = json_decode($response, true)['data'];
+    //     dd($projects);
+    //     return view('masterProjek.index', ['projects' => $projects]);
+    // }
+
     public function index(Response $response)
     {
+        $token = Session::get('token');
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_MASTER_PROJECT') . 'projects/',
+            CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -30,15 +48,16 @@ class MasterProjekViewController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer ' . $token,
+            ),
         ));
 
         $response = curl_exec($curl);
-
+        // dd($response);
         curl_close($curl);
-
         $projects = json_decode($response, true)['data'];
         // dd($projects);
-        // Mengirimkan data proyek ke tampilan
         return view('masterProjek.index', ['projects' => $projects]);
     }
 

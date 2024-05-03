@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Models\PengajuanDana;
+use App\Models\ItemPengajuanDana;
 use Illuminate\Support\Facades\Validator;
 
 class PengajuanDanaViewWebController extends Controller
@@ -37,12 +38,6 @@ class PengajuanDanaViewWebController extends Controller
         return view('pengajuanDana.create');
     }
 
-    /**
-     * store
-     *
-     * @param  mixed $request
-     * @return void
-     */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -54,9 +49,9 @@ class PengajuanDanaViewWebController extends Controller
             'batas_waktu' => 'required|date',
             'subtotal' => 'required|integer',
             'total' => 'required|integer',
-            'nama_item' => 'required|string',
-            'jumlah' => 'required|integer',
-            'harga' => 'required|integer',
+            'nama_item.*' => 'required|string',
+            'jumlah.*' => 'required|integer',
+            'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
@@ -79,9 +74,6 @@ class PengajuanDanaViewWebController extends Controller
             'batas_waktu' => $request->batas_waktu,
             'subtotal' => $request->subtotal,
             'total' => $request->total,
-            'nama_item' => $request->nama_item,
-            'jumlah' => $request->jumlah,
-            'harga' => $request->harga,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,
@@ -98,49 +90,41 @@ class PengajuanDanaViewWebController extends Controller
             'form_number' => $no_doc
         ]);
 
+        // Proses untuk menyimpan detail item dinamis
+        $items = $request->only('nama_item', 'jumlah', 'harga');
+        foreach ($items['nama_item'] as $key => $item) {
+            $pengajuanDanas->items()->create([
+                'nama_item' => $item,
+                'jumlah' => $items['jumlah'][$key],
+                'harga' => $items['harga'][$key],
+                'total' => $items['jumlah'][$key] * $items['harga'][$key],
+            ]);
+        }
+
         return redirect()->route('pengajuanDana.index');
     }
 
-
-
-
-
-
-    /**
-     * show
-     *
-     * @param  mixed $PengajuanDana
-     * @return void
-     */
 
     public function show($id)
     {
         // Find surat perintah kerja by ID
         $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
         $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
-        $pdf->setPaper(array(0, 0, 609.45, 841.7), 'landscape');
+        $pdf->setPaper(array(0, 0, 899.45, 1200));
         return $pdf->stream();
     }
 
     public function edit($id)
     {
-        // find data spk berdasarkan id
-        $pengajuanDanas = PengajuanDana::find($id);
-        // check if the spk exists
+        $pengajuanDanas = PengajuanDana::with('items')->find($id);
+        // dd($pengajuanDanas->items);
         if ($pengajuanDanas) {
-            return view('pengajuanDana.edit')->with('pengajuanDanas', $pengajuanDanas);
+            return view('pengajuanDana.edit', compact('pengajuanDanas'));
         } else {
             return view('page404');
         }
     }
 
-    /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $PengajuanDana
-     * @return void
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -149,16 +133,14 @@ class PengajuanDanaViewWebController extends Controller
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'batas_waktu' => 'required',
-            'subtotal' => 'required|numeric',
-            'total' => 'required|numeric',
-            'nama_item' => 'required|string',
-            'jumlah' => 'required|string',
-            'harga' => 'required|numeric',
+            'batas_waktu' => 'required|date',
+            'nama_item.*' => 'required|string',
+            'jumlah.*' => 'required|integer',
+            'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
             'catatan' => 'nullable|string',
-            'tanggal_pengajuan' => 'required',
+            'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
         ]);
 
@@ -166,13 +148,36 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $pengajuanDanas = PengajuanDana::find($id);
+        $pengajuanDana = PengajuanDana::find($id);
 
-        if (!$pengajuanDanas) {
+        if (!$pengajuanDana) {
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
 
-        $pengajuanDanas->update([
+        // Ambil data item dari request
+        $nama_items = $request->input('nama_item');
+        $jumlahs = $request->input('jumlah');
+        $hargas = $request->input('harga');
+
+        // Hapus item yang sudah ada untuk entri pengajuan dana ini
+        $pengajuanDana->items()->delete();
+
+        $subtotal = 0; // Menyimpan subtotal
+
+        // Simpan item yang baru dan hitung subtotal
+        foreach ($nama_items as $key => $nama_item) {
+            $item = new ItemPengajuanDana(); // Ganti dengan model Anda
+            $item->nama_item = $nama_item;
+            $item->jumlah = $jumlahs[$key];
+            $item->harga = $hargas[$key];
+            $item->total = $jumlahs[$key] * $hargas[$key]; // Kalkulasi total
+            $subtotal += $item->total; // Tambahkan ke subtotal
+            // Simpan item ke dalam pengajuan dana
+            $pengajuanDana->items()->save($item);
+        }
+
+        // Update data pengajuan dana dengan subtotal yang baru dihitung
+        $pengajuanDana->update([
             'form_number' => 'doc_pd',
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
@@ -180,11 +185,7 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => $request->tujuan,
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
-            'subtotal' => $request->subtotal,
-            'total' => $request->total,
-            'nama_item' => $request->total,
-            'jumlah' => $request->jumlah,
-            'harga' => $request->harga,
+            'subtotal' => $subtotal, // Menggunakan subtotal yang baru dihitung
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,
@@ -193,15 +194,12 @@ class PengajuanDanaViewWebController extends Controller
             'revisi' => $request->revisi,
         ]);
 
+        // Redirect ke halaman index setelah pembaruan berhasil dilakukan
         return redirect(route('pengajuanDana.index'));
     }
 
-    /**
-     * destroy
-     *
-     * @param  mixed $id
-     * @return void
-     */
+
+
     public function destroy($id)
     {
         $pengajuanDana = PengajuanDana::find($id);
@@ -215,12 +213,6 @@ class PengajuanDanaViewWebController extends Controller
         return redirect(route('pengajuanDana.index'));
     }
 
-    /**
-     * exportPDF
-     *
-     * @param  mixed $id
-     * @return void
-     */
     public function exportPDF($id)
     {
         $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();

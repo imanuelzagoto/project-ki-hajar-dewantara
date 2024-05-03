@@ -121,6 +121,7 @@
         $i = 0;
     @endphp
     @foreach ($pengajuan_danas as $pds)
+        {{-- @foreach ($pds->items as $item) --}}
         @php
             $i += 1;
         @endphp
@@ -142,7 +143,7 @@
                     </tr>
                     <tr>
                         <td class="column-revisi">Rev.</td>
-                        <td style="padding-left:3px; font-size:14.5px;">{{ $pds->revisi }}</td>
+                        <td style="padding-left:3px; font-size:14.5px;" nowrap>{{ $pds->revisi }} </td>
                     </tr>
                 </tbody>
             </table>
@@ -200,7 +201,7 @@
                     Rp
                 </span>
                 <span style="padding-left: 11px; font-size: 14.5px;">
-                    {{ number_format($pds->nominal, 0, ',', '.') }}
+                    {{ number_format($pds->subtotal, 0, ',', '.') }}
                 </span>
                 <span style="padding-left: 5px; font-size: 14px; font-style:italic;">
                     {{ $pds->terbilang }}
@@ -227,7 +228,8 @@
                     <th rowspan="3" style="width: 20px; font-size:14px; text-align:center;">
                         NO
                     </th>
-                    <th colspan="3" rowspan="3" style="text-align: center; font-size:14px; width:67px;">Item</th>
+                    <th colspan="3" rowspan="3" style="text-align: center; font-size:14px; width:67px;">Item
+                    </th>
                     <th colspan="2" style="text-align: center; font-size:14px; width:40px;">Item</th>
                     <th colspan="2" style="text-align: center; font-size:14px;">Harga</th>
                     <th style="text-align: center; font-size:14px; width:300px;">Total</th>
@@ -251,24 +253,38 @@
                         <span>( c )=( b )x( a )</span>
                     </td>
                 </tr>
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($pds->items as $item)
+                    @php
+                        $i += 1;
+                    @endphp
+                    <tr>
+                        <td style="text-align: center;">{{ $i }}.</td>
+                        <td colspan="3">{{ $item->nama_item }}</td>
+                        <td style="text-align: center;">{{ $item->jumlah }}</td>
+                        <td style="text-align: center;">{{ $item->nama_item }}</td>
+                        <td colspan="2" style="text-align: right; padding-right:5px;">
+                            {{ number_format($item->harga, 0, ',', '.') }}</td>
+                        <td style="text-align: right; padding-right:5px;">
+                            {{ number_format($item->total, 0, ',', '.') }}</td>
+                    </tr>
+                @endforeach
                 <tr>
-                    <td style="text-align: center;">{{ $i }}.</td>
-                    <td colspan="3">US-1565</td>
-                    <td style="text-align: center;">1</td>
-                    <td style="text-align: center;">Iot</td>
-                    <td colspan="2" style="text-align: right; padding-right:5px;">60.000.000</td>
-                    <td style="text-align: right; padding-right:5px;">60.000.000</td>
-                </tr>
-                <tr>
-                    <td colspan="8" style="font-weight: bold; text-align: right; padding-right:5px;">Sub Total</td>
-                    <td style="text-align: right; padding-right:5px; font-weight:bold;">60.000.000</td>
+                    <td colspan="8" style="font-weight: bold; text-align: right; padding-right:5px;">Sub Total
+                    </td>
+                    <td style="text-align: right; padding-right:5px; font-weight:bold;">
+                        {{ number_format($pds->subtotal, 0, ',', '.') }}
+                    </td>
                 </tr>
             </tbody>
         </table>
 
         <div class="teks_finnaly">
             <div class="teks_drafting">
-                Demikian drafting pengajuan dana ini saya sampaikan atas bantuan dan kerja samanya saya ucapkan terima
+                Demikian drafting pengajuan dana ini saya sampaikan atas bantuan dan kerja samanya saya ucapkan
+                terima
                 kasih.
             </div>
         </div>

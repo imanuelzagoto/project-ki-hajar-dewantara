@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\MasterProjekResource;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class MasterProjekController extends Controller
 {
@@ -18,6 +19,7 @@ class MasterProjekController extends Controller
 
     public function getProject()
     {
+        $token = Session::get('token');
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -29,16 +31,15 @@ class MasterProjekController extends Controller
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'GET',
-            // CURLOPT_HTTPHEADER => array(
-            //     'Authorization: Bearer 2090|kNk4AhUdsFKr5S0Pb34T1SomoreDGndbdBIPcXVO7907a2a8'
-            // ),
+            CURLOPT_HTTPHEADER => array(
+                'Authorization: Bearer ' . $token,
+            ),
         ));
 
         $response = curl_exec($curl);
-
+        // dd($response);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-        // dd($projects);
         return new MasterProjekResource(true, 'List Master Data Projek', $projects);
     }
 
