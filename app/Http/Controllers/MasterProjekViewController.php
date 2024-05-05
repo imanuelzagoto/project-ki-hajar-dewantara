@@ -109,7 +109,7 @@ class MasterProjekViewController extends Controller
 
     public function edit($id)
     {
-        $url = 'http://172.15.2.134/api/projects/' . $id;
+        $url = 'https://luna.intek.co.id/api/get-project' . $id;
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,
@@ -176,7 +176,7 @@ class MasterProjekViewController extends Controller
      */
     public function destroy($id)
     {
-        $url = 'http://172.15.2.134/api/projects/' . $id;
+        $url = 'https://luna.intek.co.id/api/get-project' . $id;
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => $url,

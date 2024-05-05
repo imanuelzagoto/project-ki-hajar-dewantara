@@ -41,7 +41,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $token = Session::get('token');
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://luna.intek.co.id/api/get-project',
+            CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -55,7 +55,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         ));
 
         $response = curl_exec($curl);
-        // dd($response);
+        dd($response);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
         return view('suratPerintahKerja.create')
@@ -159,7 +159,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://luna.intek.co.id/api/get-project',
+            CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
