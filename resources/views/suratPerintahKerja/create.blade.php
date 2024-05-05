@@ -211,7 +211,8 @@
                                                     class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; right:45px;">Jabatan</span>
                                                 <input name="jabatan_1"
                                                     style="width: 518px; position: relative; right:46px;"
                                                     class="form-control bg-light" type="text">
@@ -222,7 +223,8 @@
                                                     class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; right:45px;">Jabatan</span>
                                                 <input name="jabatan_2"
                                                     style="width: 518px; position: relative; right:46px;"
                                                     class="form-control bg-light" type="text">
@@ -233,7 +235,8 @@
                                                     class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; right:45px;">Jabatan</span>
                                                 <input name="jabatan_3"
                                                     style="width: 518px; position: relative; right:46px;"
                                                     class="form-control bg-light" type="text">

@@ -175,6 +175,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
+        // dd($projects);
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
         return view('suratPerintahKerja.edit')
             ->with('suratPerintahKerjas', $suratPerintahKerjas)
@@ -184,7 +185,7 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function update(Request $request, $id)
     {
-        // dd($request);
+        // dd($request->code);
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'code'          => 'required',

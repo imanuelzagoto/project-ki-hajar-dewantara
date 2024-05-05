@@ -91,7 +91,7 @@
                                                     value="{{ $suratPerintahKerjas->code }}">
                                                 <select id="project_id" name="code" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
-                                                    <option value="{{ $suratPerintahKerjas->id }}" selected>
+                                                    <option value="{{ $suratPerintahKerjas->code }}" selected>
                                                         {{ $suratPerintahKerjas->code }}
                                                     </option>
                                                     @foreach ($projects as $p)
@@ -177,16 +177,16 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Uraian
                                                     Pekerjaan</span>
-                                                <textarea name="uraian_pekerjaan" id="uraian-pekerjaan" class="form-control bg-light w-100" rows="3"
-                                                    style="resize: vertical;">{{ $suratPerintahKerjas->uraian_pekerjaan }}</textarea>
+                                                <textarea name="uraian_pekerjaan" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
+                                                    style="resize: vertical; width:430px; position: relative; height:139px">{{ $suratPerintahKerjas->uraian_pekerjaan }}</textarea>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
-                                                    style="padding-top: 4px;">File
+                                                    style="position: relative; right:40px; top:4px;">File
                                                     Pendukung
                                                 </div>
-                                                <div class="d-flex">
+                                                <div class="d-flex" style="position: relative; right:40px;">
                                                     <div class="form-checkbox-gambar d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
                                                             id="checkbox_gambar" value="1"
@@ -206,14 +206,16 @@
                                                         <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
                                                     </div>
                                                 </div>
-                                                <label for="images" class="drop-container" id="dropcontainer">
+                                                <label for="images" class="drop-container" id="dropcontainer"
+                                                    style="position: relative; right:45px;height:99px; width:514px;">
                                                     <span class="drop-title">Drop files here</span>
                                                     <input name="dokumen_pendukung_file" type="file" id="images"
                                                         accept="image/*">
                                                 </label>
 
                                                 @if ($suratPerintahKerjas->dokumen_pendukung_file)
-                                                    <p id="fileName">File yang sudah dipilih:
+                                                    <p id="fileName" style="position: relative; right:39px;">File yang
+                                                        sudah dipilih:
                                                         {{ $suratPerintahKerjas->dokumen_pendukung_file }}</p>
                                                 @endif
                                             </div>
@@ -221,7 +223,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row pr-3 pt-3">
+                            <div class="row pr-3 pb-2" style="position: relative; bottom:18px;">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                     <div class="font-weight-bold text-lg padding-project pt-form-create text-center">
                                         <span class="head-project">Hormat<br>Kami</span>
@@ -231,33 +233,42 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                <input name="pemohon" class="form-control bg-light w-100" type="text"
+                                                <input name="pemohon" class="form-control bg-light"
+                                                    style="width: 432px; position: relative;" type="text"
                                                     value="{{ $suratPerintahKerjas->pemohon }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_1" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->jabatan_1 }}">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; right:45px;">Jabatan</span>
+                                                <input name="jabatan_1" class="form-control bg-light"
+                                                    style="width: 518px; position: relative; right:46px;" type="text"
+                                                    value="{{ $suratPerintahKerjas->jabatan_1 }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                <input name="penerima" class="form-control bg-light w-100" type="text"
+                                                <input name="penerima" class="form-control bg-light"
+                                                    style="width: 432px; position: relative;" type="text"
                                                     value="{{ $suratPerintahKerjas->penerima }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_2" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->jabatan_2 }}">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; right:45px;">Jabatan</span>
+                                                <input name="jabatan_2" class="form-control bg-light"
+                                                    style="width: 518px; position: relative; right:46px;" type="text"
+                                                    value="{{ $suratPerintahKerjas->jabatan_2 }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <input name="menyetujui" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->menyetujui }}">
+                                                <input name="menyetujui" class="form-control bg-light"
+                                                    style="width: 432px; position: relative;" type="text"
+                                                    value="{{ $suratPerintahKerjas->menyetujui }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_3" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->jabatan_3 }}">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; right:45px;">Jabatan</span>
+                                                <input name="jabatan_3" class="form-control bg-light"
+                                                    style="width: 518px; position: relative; right:46px;" type="text"
+                                                    value="{{ $suratPerintahKerjas->jabatan_3 }}">
                                             </div>
                                         </div>
                                     </div>
@@ -267,7 +278,7 @@
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
                                         <button class="btn btn-save"
-                                            style="border-radius: 25px; font-weight:bold; font-size: 14px;">
+                                            style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:10px;">
                                             SAVE
                                         </button>
                                     </div>
