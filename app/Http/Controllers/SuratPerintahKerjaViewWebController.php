@@ -55,7 +55,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         ));
 
         $response = curl_exec($curl);
-        dd($response);
+        // dd($response);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
         return view('suratPerintahKerja.create')
