@@ -215,7 +215,7 @@
                                                         {{ Carbon\Carbon::parse($pdt->batas_waktu)->format('d-m-Y') }}
                                                     </td>
                                                     <td class="text-right" style="font-weight:400;" nowrap>
-                                                        {{ 'Rp. ' . number_format($pdt->nominal, 0, ',', '.') }}
+                                                        {{ 'Rp. ' . number_format($pdt->subtotal, 0, ',', '.') }}
                                                     </td>
                                                     <td class="text-center" style="font-weight:400;" nowrap>
                                                         {{ $pdt->metode_penerimaan }}
@@ -274,7 +274,7 @@
                                                         {{ $i }}
                                                     </td>
                                                     <td class="text-left" style="font-weight:400;"nowrap>
-                                                        {{ $pst->nama_project }}
+                                                        {{ $pst->title }}
                                                     </td>
                                                     <td class="text-left" style="font-weight:400;" nowrap>
                                                         {{ $pst->user }}
@@ -513,28 +513,13 @@
             }
         };
 
-        // Tentukan bulan-bulan yang ingin ditambahkan setelah Agustus
         var additionalMonths = ["Sep", "Okt", "Nov", "Des"];
-
-        // Ambil bulan terakhir dari kategori saat ini
         var lastMonth = options.xaxis.categories[options.xaxis.categories.length - 1];
-
-        // Jika bulan terakhir adalah Agustus, tambahkan bulan-bulan tambahan
         if (lastMonth === "Agu") {
-            // Gunakan spread operator untuk menggabungkan array kategori dengan array bulan tambahan
             options.xaxis.categories.push(...additionalMonths);
         }
-
-        // Inisialisasi grafik dengan opsi yang telah diperbarui
         var chart = new ApexCharts(document.querySelector("#chart"), options);
-
-        // Render grafik
         chart.render();
-        // End JS Chart
-
-        //sini
-
-        //sini
     </script>
 @endsection
 
