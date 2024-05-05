@@ -89,22 +89,17 @@
                                                         -- Pilih Kode Project --
                                                     </option>
                                                     @foreach ($projects as $p)
-                                                        <option value="{{ $p['id'] }}">{{ $p['code'] }}
-                                                        </option>
+                                                        <option value="{{ $p['code'] }}"
+                                                            data-title="{{ $p['title'] }}">{{ $p['code'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nama Projek</span>
                                                 <input name="title" class="form-control w-100 disabled_input"
                                                     id="nama" type="text" required>
                                             </div>
-                                            {{-- <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail ">Nama
-                                                    Projek</span>
-                                                <input name="title" class="form-control w-100 disabled_input"
-                                                    id="nama" value="{{ $p['title'] }}" type="text">
-                                            </div> --}}
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
@@ -164,16 +159,16 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Uraian
                                                     Pekerjaan</span>
-                                                <textarea name="uraian_pekerjaan" id="uraian-pekerjaan" class="form-control bg-light w-100" rows="3"
-                                                    style="resize: vertical;"></textarea>
+                                                <textarea name="uraian_pekerjaan" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
+                                                    style="resize: vertical; width:430px; position: relative; height:139px"></textarea>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
-                                                    style="padding-top: 4px;">File
+                                                    style="position: relative; right:40px; top:4px;">File
                                                     Pendukung
                                                 </div>
-                                                <div class="d-flex">
+                                                <div class="d-flex" style="position: relative; right:40px;">
                                                     <div class="form-checkbox-gambar d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
                                                             id="checkbox_gambar" value="1">
@@ -190,7 +185,8 @@
                                                         <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
                                                     </div>
                                                 </div>
-                                                <label for="images" class="drop-container" id="dropcontainer">
+                                                <label for="images" class="drop-container" id="dropcontainer"
+                                                    style="position: relative; right:45px;height:99px; width:514px;">
                                                     <span class="drop-title">Drop files here</span>
                                                     <input name="dokumen_pendukung_file" type="file" id="images"
                                                         accept="image/*">
@@ -211,32 +207,36 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                <input name="pemohon" class="form-control bg-light w-100" type="text">
+                                                <input name="pemohon" style="width: 432px; position: relative;"
+                                                    class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_1" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <input name="jabatan_1"
+                                                    style="width: 518px; position: relative; right:46px;"
+                                                    class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                <input name="penerima" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <input name="penerima" style="width: 432px; position: relative;"
+                                                    class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_2" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <input name="jabatan_2"
+                                                    style="width: 518px; position: relative; right:46px;"
+                                                    class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <input name="menyetujui" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <input name="menyetujui" style="width: 432px; position: relative;"
+                                                    class="form-control bg-light" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_3" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <input name="jabatan_3"
+                                                    style="width: 518px; position: relative; right:46px;"
+                                                    class="form-control bg-light" type="text">
                                             </div>
                                         </div>
                                     </div>
@@ -258,93 +258,61 @@
             </div>
         </div>
     </div>
-@endsection
-
-<script>
-    function changeProjectName() {
-        // Dapatkan elemen select
-        var select = document.getElementById("project_id");
-
-        // Dapatkan nilai yang dipilih
-        var selectedValue = select.value;
-
-        // Dapatkan daftar proyek dari PHP (gunakan JSON atau metode lain untuk mentransfer data)
-        var projects = {!! json_encode($projects) !!};
-
-        // Temukan proyek yang sesuai dengan nilai yang dipilih
-        var selectedProject = projects.find(function(project) {
-            return project.id == selectedValue;
-        });
-
-        // Periksa apakah proyek ditemukan
-        if (selectedProject) {
-            // Dapatkan elemen input untuk nama proyek
-            var projectNameInput = document.getElementById("nama");
-
-            // Update nilai input dengan nilai title dari proyek yang sesuai
-            projectNameInput.value = selectedProject.title;
-        }
-    }
-</script>
-
-{{-- @push('scripts')
     <script>
         function changeProjectName() {
-            let project_id = $('#project_id').find(":selected").val();
-            console.log(project_id)
-            var settings = {
-                "url": "https://luna.intek.co.id/api/get-project" + project_id,
-                "method": "GET",
-                "timeout": 0,
-                "headers": {
-                    "Accept": "application/json",
-                    "Authorization": "{{ Session::get('token') }}"
-                },
-            };
-
-            $.ajax(settings).done(function(response) {
-                console.log(response.data.code)
-                $('#nama').val(response.data.title);
-                $('#kode_project_hidden').val(response.data.code);
-            });
-
+            var selectBox = document.getElementById("project_id");
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
+            document.getElementById("nama").value = selectedValue;
         }
-        // JS textarea
-        const textarea = document.getElementById('uraian-pekerjaan');
-        // fungsi mengubah ukuran dinamis
-        function autoResizeTextarea() {
-            // set nilai minnimum agar tidak terlalu kecil
-            textarea.style.height = '130px';
-            // set nilai tinggi textarea
-            textarea.style.height = textarea.scrollHeight + 'px';
-        }
-        // Panggil fungsi autoResizeTextarea()
-        textarea.addEventListener('input', autoResizeTextarea);
-        // panggil autoresize
-        autoResizeTextarea();
-        // End textarea
-
-
-        const dropContainer = document.getElementById("dropcontainer")
-        const fileInput = document.getElementById("images")
-
-        dropContainer.addEventListener("dragover", (e) => {
-            // prevent default to allow drop
-            e.preventDefault()
-        }, false)
-
-        dropContainer.addEventListener("dragenter", () => {
-            dropContainer.classList.add("drag-active")
-        })
-
-        dropContainer.addEventListener("dragleave", () => {
-            dropContainer.classList.remove("drag-active")
-        })
-
-        dropContainer.addEventListener("drop", (e) => {
-            e.preventDefault()
-            dropContainer.classList.remove("drag-active")
-            fileInput.files = e.dataTransfer.files
-        })
     </script>
-@endpush --}}
+@endsection
+
+@push('scripts')
+    <script>
+        // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Panggil updateClock secara berkala setiap detik
+            setInterval(updateClock, 1000);
+            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
+            updateClock();
+        });
+
+        function updateClock() {
+            var now = new Date();
+            var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+                'November', 'Desember'
+            ];
+
+            // Set timezone to Asia/Jakarta
+            var options = {
+                timeZone: 'Asia/Jakarta',
+                weekday: 'long'
+            };
+            var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
+
+            var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
+                months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
+                formatTime(now);
+
+            var datetimeElement = document.getElementById('datetime');
+            if (datetimeElement) {
+                // Perbarui innerHTML elemen 'datetime' jika ditemukan
+                datetimeElement.innerHTML = dateTimeString;
+            } else {
+                console.error("Datetime element not found.");
+            }
+        }
+
+        function formatTime(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var strTime = hours + ':' + minutes + ':' + seconds;
+            return strTime;
+        }
+    </script>
+@endpush

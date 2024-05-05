@@ -234,16 +234,12 @@
             </div>
         </div>
         <script>
-            // JS metode penerimaan
             document.getElementById("metode_penerimaan").addEventListener("change", function() {
                 var selectedOption = this.value;
                 var nomorRekeningInput = document.getElementById("nomorRekeningInput");
                 var containerMethod = document.getElementById("container_method");
-
-                // Menampilkan atau menyembunyikan kolom input nomor rekening berdasarkan opsi yang dipilih
                 nomorRekeningInput.style.display = selectedOption === "debit" ? "block" : "none";
 
-                // Menetapkan nilai name="metode_penerimaan" sesuai dengan opsi yang dipilih
                 if (selectedOption === 'debit') {
                     containerMethod.classList.remove('col-4');
                     containerMethod.classList.add('col-2');
@@ -254,21 +250,61 @@
                     document.getElementById("nomor_rekening").value = "Cash";
                 }
             });
-            // end JS Metode penerimaan
-
-            // Get the current date
             var currentDate = new Date();
 
-            // Get year, month, and day
             var year = currentDate.getFullYear();
             var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
             var day = ('0' + currentDate.getDate()).slice(-2);
-
-            // Format the date as yyyy-mm-dd
             var formattedDate = year + '-' + month + '-' + day;
-
-            // Set the value of the hidden input field
             document.getElementById('tanggalPengajuan').value = formattedDate;
+
+
+
+            // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
+            document.addEventListener('DOMContentLoaded', function() {
+                // Panggil updateClock secara berkala setiap detik
+                setInterval(updateClock, 1000);
+                // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
+                updateClock();
+            });
+
+            function updateClock() {
+                var now = new Date();
+                var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+                    'November', 'Desember'
+                ];
+
+                // Set timezone to Asia/Jakarta
+                var options = {
+                    timeZone: 'Asia/Jakarta',
+                    weekday: 'long'
+                };
+                var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
+
+                var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
+                    months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
+                    formatTime(now);
+
+                var datetimeElement = document.getElementById('datetime');
+                if (datetimeElement) {
+                    // Perbarui innerHTML elemen 'datetime' jika ditemukan
+                    datetimeElement.innerHTML = dateTimeString;
+                } else {
+                    console.error("Datetime element not found.");
+                }
+            }
+
+            function formatTime(date) {
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var seconds = date.getSeconds();
+                hours = hours < 10 ? '0' + hours : hours;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+                var strTime = hours + ':' + minutes + ':' + seconds;
+                return strTime;
+            }
         </script>
     @endsection
 
@@ -277,12 +313,10 @@
             $(document).ready(function() {
                 // Menampilkan kolom pertama saat halaman dimuat
                 addNewRow();
-
                 // Event listener untuk tombol tambah
                 $("#tambahField").click(function() {
                     addNewRow();
                 });
-
                 // Event listener untuk tombol hapus
                 $(document).on('click', '.JS-delete-btn', function() {
                     $(this).closest('.row').remove();
@@ -290,7 +324,6 @@
                     activateDeleteButtons
                         (); // Memastikan status tombol delete yang sesuai setelah menghapus baris
                 });
-
                 // Fungsi untuk menambahkan baris baru
                 function addNewRow() {
                     var newRow = `
@@ -305,7 +338,7 @@
                     </div>
                     <div class="pr-4 py-2 col-2">
                         <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:4px;">Satuan</span>
-                        <input name="satuan[]" class="form-control bg-light" type="text" style="width: 164.1px; position: relative; right: 5px;" required>
+                        <input name="satuan[]" class="form-control bg-light" type="text" style="width: 164.1px; position: relative; right: 5px; text-align:center;" required>
                     </div>
                     <div class="pr-4 py-2 col-2">
                         <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:20px;">Harga</span>

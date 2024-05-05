@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('lokasi');
             $table->date('batas_waktu');
             $table->unsignedBigInteger('subtotal');
-            // $table->unsignedBigInteger('total');
             $table->string('terbilang');
             $table->string('metode_penerimaan');
             $table->string('catatan')->nullable();

@@ -39,54 +39,6 @@
 <script src="{{ asset('sets/js/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('sets/js/script.js') }}"></script>
 
-<script>
-    // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
-    document.addEventListener('DOMContentLoaded', function() {
-        // Panggil updateClock secara berkala setiap detik
-        setInterval(updateClock, 1000);
-        // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
-        updateClock();
-    });
-
-    function updateClock() {
-        var now = new Date();
-        var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-        var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
-            'November', 'Desember'
-        ];
-
-        // Set timezone to Asia/Jakarta
-        var options = {
-            timeZone: 'Asia/Jakarta',
-            weekday: 'long'
-        };
-        var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
-
-        var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
-            months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
-            formatTime(now);
-
-        var datetimeElement = document.getElementById('datetime');
-        if (datetimeElement) {
-            // Perbarui innerHTML elemen 'datetime' jika ditemukan
-            datetimeElement.innerHTML = dateTimeString;
-        } else {
-            console.error("Datetime element not found.");
-        }
-    }
-
-    function formatTime(date) {
-        var hours = date.getHours();
-        var minutes = date.getMinutes();
-        var seconds = date.getSeconds();
-        hours = hours < 10 ? '0' + hours : hours;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        var strTime = hours + ':' + minutes + ':' + seconds;
-        return strTime;
-    }
-</script>
-
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\API\HomeController;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\MasterProjekController;
-use App\Http\Controllers\API\SuratPerintahKerjaController;
-use App\Http\Controllers\API\PengajuanDanaController;
+use App\Http\Controllers\Api\MasterProjekController;
+use App\Http\Controllers\Api\SuratPerintahKerjaController;
+use App\Http\Controllers\Api\PengajuanDanaController;
 use App\Http\Controllers\API\UserServiceController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,8 +28,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home.index');
 });
 
-Route::prefix('mp')->group(function () {
-    // Master Projek
+Route::prefix('masterPoject')->group(function () {
     Route::get('getProject', [MasterProjekController::class, 'getProject'])->name('master-projek.getProject');
     Route::get('master-projek', [MasterProjekController::class, 'index'])->name('master-projek.index');
     Route::post('master-projek', [MasterProjekController::class, 'store'])->name('master-projek.store');
@@ -38,8 +37,7 @@ Route::prefix('mp')->group(function () {
     Route::delete('master-projek/{id}', [MasterProjekController::class, 'destroy'])->name('master-projek.destroy');
 });
 
-Route::prefix('pd')->group(function () {
-    // Pengajuan Dana
+Route::prefix('pengajuanDana')->group(function () {
     Route::get('pengajuan-dana', [PengajuanDanaController::class, 'index'])->name('pengajuan-dana.index');
     Route::post('pengajuan-dana', [PengajuanDanaController::class, 'store'])->name('pengajuan-dana.store');
     Route::get('pengajuan-dana/{id}/export-pdf', [PengajuanDanaController::class, 'exportPDF'])->name('pengajuan-dana.export-pdf');
@@ -48,22 +46,17 @@ Route::prefix('pd')->group(function () {
     Route::delete('pengajuan-dana/{id}', [PengajuanDanaController::class, 'destroy'])->name('pengajuan-dana.destroy');
 });
 
-Route::prefix('spk')->group(function () {
-    // surat perintah kerja
+Route::prefix('suratPerintahKerja')->group(function () {
     Route::get('surat-perintah-kerja', [SuratPerintahKerjaController::class, 'index'])->name('surat-perintah-kerja.index');
     Route::post('surat-perintah-kerja', [SuratPerintahKerjaController::class, 'store'])->name('surat-perintah-kerja.store');
     Route::get('surat-perintah-kerja/{id}/export-pdf', [SuratPerintahKerjaController::class, 'exportPDF'])->name('surat-perintah-kerja.export-pdf');
-    Route::get('surat-perintah-kerja/{surat_perintah_kerja}', [SuratPerintahKerjaController::class, 'show'])->name('surat-perintah-kerja.show');
+    Route::get('surat-perintah-kerja/{id}', [SuratPerintahKerjaController::class, 'show'])->name('surat-perintah-kerja.show');
     Route::patch('surat-perintah-kerja/{surat_perintah_kerja}', [SuratPerintahKerjaController::class, 'update'])->name('surat-perintah-kerja.update');
     Route::delete('surat-perintah-kerja/{surat_perintah_kerja}', [SuratPerintahKerjaController::class, 'destroy'])->name('surat-perintah-kerja.destroy');
 });
 
 Route::prefix('home')->group(function () {
     Route::get('/', [HomeController::class, 'index'])->name('home.index');
-
-    // Endpoint untuk menampilkan semua data pengajuan dana
     Route::get('/pengajuan-dana-per-day', [HomeController::class, 'getPengajuanDanaPerDay']);
-
-    // Endpoint untuk menampilkan semua data surat perintah kerja
     Route::get('surat-perintah-kerja', [HomeController::class, 'getAllSuratPerintahKerja'])->name('home.surat-perintah-kerja.all');
 });

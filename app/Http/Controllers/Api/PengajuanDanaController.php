@@ -8,13 +8,13 @@ use App\Http\Controllers\Controller;
 use App\Models\PengajuanDana;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PengajuanDanaResource;
-use Carbon\Carbon;
+use App\Models\ItemPengajuanDana;
 
 class PengajuanDanaController extends Controller
 {
     public function index()
     {
-        $pengajuanDanas = PengajuanDana::latest()->paginate(10);
+        $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
         return new PengajuanDanaResource(true, 'List Data Pengajuan Dana', $pengajuanDanas);
         // return view('PengajuanDana.index');
     }
@@ -43,13 +43,17 @@ class PengajuanDanaController extends Controller
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'batas_waktu' => 'required',
-            'subtotal' => 'required|numeric',
+            'batas_waktu' => 'required|date',
+            'subtotal' => 'required|integer',
+            'total.*' => 'required|integer',
+            'nama_item.*' => 'required|string',
+            'jumlah.*' => 'required|integer',
+            'satuan.*' => 'required|string',
+            'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
-            'nomor_rekening' => 'nullable|string',
             'catatan' => 'nullable|string',
-            'tanggal_pengajuan' => 'required',
+            'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
         ]);
 
@@ -57,12 +61,6 @@ class PengajuanDanaController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
-        $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
-        $pengajuanDana = PengajuanDana::create($request->all());
-        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
-
-        // Buat rekaman
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
             'nama_pemohon' => $request->nama_pemohon,
@@ -72,16 +70,15 @@ class PengajuanDanaController extends Controller
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
             'subtotal' => $request->subtotal,
+            'total' => $request->total,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
-            'nomor_rekening' => $request->nomor_rekening,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
 
-        // Buat nomor dokumen dan update rekaman dengan nomor dokumen
         $datetime = explode('-', $pengajuanDanas->created_at);
         $no_doc = $pengajuanDanas->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
         $pengajuanDanas->update([
@@ -89,34 +86,40 @@ class PengajuanDanaController extends Controller
             'form_number' => $no_doc
         ]);
 
+        $items = $request->only('nama_item', 'jumlah', 'satuan', 'harga');
+        $subtotal = 0;
+        foreach ($items['nama_item'] as $key => $item) {
+            $subtotal_item = $items['jumlah'][$key] * $items['harga'][$key];
+            $subtotal += $subtotal_item;
+            $pengajuanDanas->items()->create([
+                'nama_item' => $item,
+                'jumlah' => $items['jumlah'][$key],
+                'satuan' => $items['satuan'][$key],
+                'harga' => $items['harga'][$key],
+                'total' => $subtotal_item,
+            ]);
+        }
+        if ($subtotal !== $request->subtotal) {
+            return response()->json(['error' => 'Total keseluruhan tidak sama dengan subtotal.'], 422);
+        }
+
         return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Disimpan.', $pengajuanDanas);
     }
 
-    /**
-     * show
-     *
-     * @param  mixed $PengajuanDana
-     * @return void
-     */
-
     public function show($id)
     {
-        $pengajuanDana = PengajuanDana::find($id);
+        $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
+        $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
+        $pdf->setPaper(array(0, 0, 899.45, 1200));
+        return $pdf->stream();
 
-        if (!$pengajuanDana) {
-            return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
-        }
-
-        return new PengajuanDanaResource(true, 'Detail Data Pengajuan Dana.', $pengajuanDana);
+        // $pengajuanDana = PengajuanDana::find($id);
+        // if (!$pengajuanDana) {
+        //     return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
+        // }
+        // return new PengajuanDanaResource(true, 'Detail Data Pengajuan Dana.', $pengajuanDana);
     }
 
-    /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $PengajuanDana
-     * @return void
-     */
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
@@ -125,14 +128,17 @@ class PengajuanDanaController extends Controller
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
-            'batas_waktu' => 'required|date_format:d F Y',
-            'subtotal' => 'required|numeric',
+            'batas_waktu' => 'required|date',
+            'subtotal' => 'required|integer',
+            'total.*' => 'required|integer',
+            'nama_item.*' => 'required|string',
+            'jumlah.*' => 'required|integer',
+            'satuan.*' => 'required|string',
+            'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
             'metode_penerimaan' => 'required|string',
-            'nomor_rekening' => 'nullable|string',
             'catatan' => 'nullable|string',
-            'tanggal_pengajuan' => 'required|date_format:d F Y',
-            'no_doc' => 'required|string',
+            'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
         ]);
 
@@ -146,20 +152,59 @@ class PengajuanDanaController extends Controller
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
 
-        $request['tanggal_pengajuan'] = Carbon::createFromFormat('d F Y', $request['tanggal_pengajuan'])->format('Y-m-d');
-        $request['batas_waktu'] = $request['batas_waktu'] ? Carbon::createFromFormat('d F Y', $request['batas_waktu'])->format('Y-m-d') : null;
-        $pengajuanDana->update($request->all());
-        $pengajuanDana->nominal = 'Rp. ' . number_format($pengajuanDana->nominal, 0, ',', '.');
+        // Ambil data item dari request
+        $nama_items = $request->input('nama_item');
+        $jumlahs = $request->input('jumlah');
+        $satuans = $request->input('satuan');
+        $hargas = $request->input('harga');
+
+        // Hapus item yang sudah ada untuk entri pengajuan dana ini
+        $pengajuanDana->items()->delete();
+
+        $subtotal = 0;
+
+        // Simpan item yang baru dan hitung subtotal
+        foreach ($nama_items as $key => $nama_item) {
+            $item = new ItemPengajuanDana();
+            $item->nama_item = $nama_item;
+            $item->jumlah = $jumlahs[$key];
+            $item->satuan = $satuans[$key];
+            $item->harga = $hargas[$key];
+            $item->total = $jumlahs[$key] * $hargas[$key];
+            $subtotal += $item->total;
+            $pengajuanDana->items()->save($item);
+        }
+
+        // Update data pengajuan dana dengan subtotal yang baru dihitung
+        $pengajuanDana->update([
+            'form_number' => 'doc_pd',
+            'nama_pemohon' => $request->nama_pemohon,
+            'jabatan_pemohon' => $request->jabatan_pemohon,
+            'subject' => $request->subject,
+            'tujuan' => $request->tujuan,
+            'lokasi' => $request->lokasi,
+            'batas_waktu' => $request->batas_waktu,
+            'subtotal' => $request->subtotal,
+            'total' => $request->total,
+            'terbilang' => $request->terbilang,
+            'metode_penerimaan' => $request->metode_penerimaan,
+            'catatan' => $request->catatan,
+            'tanggal_pengajuan' => $request->tanggal_pengajuan,
+            'no_doc' => 'doc_pd',
+            'revisi' => $request->revisi,
+        ]);
+
+        $datetime = explode('-', $pengajuanDana->created_at);
+        $no_doc = $pengajuanDana->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
+        $pengajuanDana->update([
+            'no_doc' => $no_doc,
+            'form_number' => $no_doc
+        ]);
 
         return new PengajuanDanaResource(true, 'Pengajuan Dana Berhasil Diperbarui.', $pengajuanDana);
     }
 
-    /**
-     * destroy
-     *
-     * @param  mixed $id
-     * @return void
-     */
+
     public function destroy($id)
     {
         $pengajuanDana = PengajuanDana::find($id);
@@ -167,22 +212,17 @@ class PengajuanDanaController extends Controller
         if (!$pengajuanDana) {
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
-
         $pengajuanDana->delete();
-
         return response()->json(['message' => 'Pengajuan Dana berhasil dihapus.'], 200);
     }
 
-    /**
-     * exportPDF
-     *
-     * @param  mixed $id
-     * @return void
-     */
+
     public function exportPDF($id)
     {
+
         $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
         $pdf = PDF::loadView('pengajuanDana.pengajuan_dana_pdf', compact('pengajuan_danas'));
+        $pdf->setPaper(array(0, 0, 899.45, 1200));
         return $pdf->stream("", array("Attachment" => false));
     }
 }

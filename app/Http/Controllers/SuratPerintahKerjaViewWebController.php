@@ -27,11 +27,8 @@ class SuratPerintahKerjaViewWebController extends Controller
         }
         return $returnValue;
     }
-    /**
-     * index
-     *
-     * @return void
-     */
+
+
     public function index(Request $request)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
@@ -65,25 +62,20 @@ class SuratPerintahKerjaViewWebController extends Controller
             ->with('projects', $projects);
     }
 
-    /**
-     * store
-     *
-     * @param  mixed $request
-     * @return void
-     */
+
     public function store(Request $request)
     {
         // dd($request);
         // Define validation rules
         $validator = Validator::make($request->all(), [
-            'code'          => 'required',
+            'code'          => 'required|string',
             'pemohon'               => 'required',
             'penerima'               => 'nullable|string',
             'menyetujui'               => 'nullable|string',
             'jabatan_1'               => 'required',
             'jabatan_2'               => 'nullable|string',
             'jabatan_3'               => 'nullable|string',
-            'title'          => 'required',
+            'title'          => 'required|string',
             'user'                  => 'required',
             'main_contractor'       => 'required',
             'project_manager'       => 'required',
@@ -106,7 +98,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Handle file upload if exists
         $dokumen_pendukung_file = null;
         if ($request->hasFile('dokumen_pendukung_file')) {
-            $destinationPath = '/posts/images'; // change this destination path according to your needs
+            $destinationPath = '/posts/images';
             $dokumen_pendukung_file = $request->file('dokumen_pendukung_file')->hashName();
             $request->file('dokumen_pendukung_file')->move(public_path($destinationPath), $dokumen_pendukung_file);
         }
@@ -145,18 +137,13 @@ class SuratPerintahKerjaViewWebController extends Controller
             'form_number' => $no_spk
         ]);
 
-        // dd($suratPerintahKerjas);
 
+        // dd($suratPerintahKerjas->code);
         // Return response
         return redirect(route('surat_perintah_kerja.index'));
     }
 
-    /**
-     * show
-     *
-     * @param  mixed $surat_perintah_kerja
-     * @return void
-     */
+
     public function show($id)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
@@ -165,12 +152,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         return $pdf->stream();
     }
 
-    /**
-     * edit
-     *
-     * @param  mixed $id
-     * @return void
-     */
+
     public function edit($id)
     {
         $token = Session::get('token');
@@ -191,24 +173,15 @@ class SuratPerintahKerjaViewWebController extends Controller
         ));
 
         $response = curl_exec($curl);
-
         curl_close($curl);
-
         $projects = json_decode($response, true)['data'];
-
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
         return view('suratPerintahKerja.edit')
             ->with('suratPerintahKerjas', $suratPerintahKerjas)
             ->with('projects', $projects);
     }
 
-    /**
-     * update
-     *
-     * @param  mixed $request
-     * @param  mixed $surat_Perintah_Kerja
-     * @return void
-     */
+
     public function update(Request $request, $id)
     {
         // dd($request);
@@ -249,15 +222,12 @@ class SuratPerintahKerjaViewWebController extends Controller
             // Upload file
             $dokumen_pendukung_file = $request->file('dokumen_pendukung_file');
             $dokumen_pendukung_file->storeAs('public/posts/images', $dokumen_pendukung_file->hashName());
-
-            // Delete old file if exists
             if ($suratPerintahKerjas->dokumen_pendukung_file) {
                 Storage::delete('public/posts/images/' . basename($suratPerintahKerjas->dokumen_pendukung_file));
             }
         } else {
             $dokumen_pendukung_file = $suratPerintahKerjas->dokumen_pendukung_file;
         }
-
         // Update Surat_perintah_kerja with new or old values
         if ($request->dokumen_pendukung_file) {
             $suratPerintahKerjas->update([
@@ -308,40 +278,22 @@ class SuratPerintahKerjaViewWebController extends Controller
         return redirect(route('surat_perintah_kerja.index'));
     }
 
-    /**
-     * destroy
-     *
-     * @param  mixed $id
-     * @return void
-     */
+
     public function destroy($id)
     {
         // Temukan Surat_perintah_kerja berdasarkan ID
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
-
-        // Periksa apakah Surat_perintah_kerja ditemukan
         if (!$suratPerintahKerjas) {
             return redirect()->back()->with('error', 'Data Surat Perintah Kerja tidak ditemukan!');
         }
-
-        // Hapus gambar terkait jika ada
         if ($suratPerintahKerjas->dokumen_pendukung_file) {
             Storage::delete('public/posts/images/' . basename($suratPerintahKerjas->dokumen_pendukung_file));
         }
-
-        // Hapus Surat_perintah_kerja
         $suratPerintahKerjas->delete();
-
-        // Kembalikan respons
         return redirect('/surat-perintah-kerja')->with('success', 'Data Surat Perintah Kerja berhasil dihapus.');
     }
 
-    /**
-     * exportPDF
-     *
-     * @param  mixed $id
-     * @return void
-     */
+
     public function exportPDF($id)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();

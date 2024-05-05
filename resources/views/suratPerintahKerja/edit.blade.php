@@ -89,20 +89,23 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
                                                 <input type="hidden" id="kode_project_hidden" name="code"
                                                     value="{{ $suratPerintahKerjas->code }}">
-                                                <select id="project_id" class="form-control bg-light w-100"
+                                                <select id="project_id" name="code" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
                                                     <option value="{{ $suratPerintahKerjas->id }}" selected>
-                                                        {{ $suratPerintahKerjas->code }}</option>
+                                                        {{ $suratPerintahKerjas->code }}
+                                                    </option>
                                                     @foreach ($projects as $p)
-                                                        <option value="{{ $p['id'] }}">{{ $p['code'] }}</option>
+                                                        <option value="{{ $p['code'] }}"
+                                                            data-title="{{ $p['title'] }}">{{ $p['code'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail ">Nama Project</span>
+                                                <span class="text-sm font-weight-bold text-form-detail">Nama Projek</span>
                                                 <input name="title" class="form-control w-100 disabled_input"
-                                                    id="nama" type="text"
-                                                    value="{{ $suratPerintahKerjas->title }}">
+                                                    id="nama" type="text" value="{{ $suratPerintahKerjas->title }}"
+                                                    required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
@@ -256,22 +259,6 @@
                                                 <input name="jabatan_3" class="form-control bg-light w-100"
                                                     type="text" value="{{ $suratPerintahKerjas->jabatan_3 }}">
                                             </div>
-                                            {{-- <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui 1</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui 2</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input class="form-control bg-light w-100" type="text">
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -292,81 +279,17 @@
             </div>
         </div>
     </div>
-    {{-- <script>
+
+    <script>
         function changeProjectName() {
-            let project_id = $('#project_id').find(":selected").val();
-            console.log(project_id)
-            var settings = {
-                "url": "http://172.15.2.134/api/projects/" + project_id,
-                "method": "GET",
-                "timeout": 0,
-                "headers": {
-                    "Accept": "application/json",
-                    "Authorization": "{{ Session::get('token') }}"
-                },
-            };
-
-            $.ajax(settings).done(function(response) {
-                console.log(response.data.code_project)
-                $('#nama').val(response.data.project_name);
-                $('#kode_project_hidden').val(response.data.code_project);
-            });
-
+            var selectBox = document.getElementById("project_id");
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
+            document.getElementById("nama").value = selectedValue;
         }
-        // JS textarea
-        const textarea = document.getElementById('uraian-pekerjaan');
-        // fungsi mengubah ukuran dinamis
-        function autoResizeTextarea() {
-            // set nilai minnimum agar tidak terlalu kecil
-            textarea.style.height = '130px';
-            // set nilai tinggi textarea
-            textarea.style.height = textarea.scrollHeight + 'px';
-        }
-        // Panggil fungsi autoResizeTextarea()
-        textarea.addEventListener('input', autoResizeTextarea);
-        // panggil autoresize
-        autoResizeTextarea();
-        // End textarea
-
-
-
-        // JS file pendukung
-        const existingFile = "{{ $suratPerintahKerjas->dokumen_pendukung_file }}";
-        const fileInput = document.getElementById("images");
-        fileInput.addEventListener("change", function() {
-            const newFile = fileInput.files[0].name;
-            if (newFile) {
-                if (existingFile) {
-                    document.getElementById("fileName").innerText = "";
-                }
-                document.getElementById("fileName").innerText = "File yang sudah dipilih: " + newFile;
-            }
-        });
-        const dropContainer = document.getElementById("dropcontainer");
-        dropContainer.addEventListener("dragover", (e) => {
-            e.preventDefault();
-        }, false);
-
-        dropContainer.addEventListener("dragenter", () => {
-            dropContainer.classList.add("drag-active");
-        });
-
-        dropContainer.addEventListener("dragleave", () => {
-            dropContainer.classList.remove("drag-active");
-        });
-
-        dropContainer.addEventListener("drop", (e) => {
-            e.preventDefault();
-            dropContainer.classList.remove("drag-active");
-            fileInput.files = e.dataTransfer.files;
-            if (existingFile) {
-                document.getElementById("fileName").innerText = "";
-            }
-        });
-    </script> --}}
+    </script>
 @endsection
 
-<script>
+{{-- <script>
     function changeProjectName() {
         // Dapatkan elemen select
         var select = document.getElementById("project_id");
@@ -391,4 +314,54 @@
             projectNameInput.value = selectedProject.title;
         }
     }
-</script>
+</script> --}}
+
+@push('scripts')
+    <script>
+        // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            // Panggil updateClock secara berkala setiap detik
+            setInterval(updateClock, 1000);
+            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
+            updateClock();
+        });
+
+        function updateClock() {
+            var now = new Date();
+            var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+                'November', 'Desember'
+            ];
+
+            // Set timezone to Asia/Jakarta
+            var options = {
+                timeZone: 'Asia/Jakarta',
+                weekday: 'long'
+            };
+            var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
+
+            var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
+                months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
+                formatTime(now);
+
+            var datetimeElement = document.getElementById('datetime');
+            if (datetimeElement) {
+                // Perbarui innerHTML elemen 'datetime' jika ditemukan
+                datetimeElement.innerHTML = dateTimeString;
+            } else {
+                console.error("Datetime element not found.");
+            }
+        }
+
+        function formatTime(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var strTime = hours + ':' + minutes + ':' + seconds;
+            return strTime;
+        }
+    </script>
+@endpush

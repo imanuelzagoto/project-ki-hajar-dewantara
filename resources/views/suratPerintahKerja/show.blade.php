@@ -171,7 +171,7 @@
                                 <th colspan="4"
                                     style="border: 2px solid black; font-size:19px; line-height:normal; padding-left:5px;"
                                     nowrap>
-                                    {{ $suratPerintahKerja->kode_project }}
+                                    {{ $suratPerintahKerja->code }}
                                 </th>
                             </tr>
                         </thead>
@@ -180,7 +180,7 @@
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>Nama project</td>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->nama_project }}</td>
+                                    {{ $suratPerintahKerja->title }}</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>
                                     <span style="font-weight: bold;">NO SPK</span>
                                 </td>

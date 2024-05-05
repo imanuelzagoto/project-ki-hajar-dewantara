@@ -427,20 +427,3 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
 </body>
-
-{{-- @foreach ($pengajuan_danas as $pds) --}}
-{{-- <tr>
-                        <td>{{ $pds->nama_pemohon }}</td>
-                        <td>{{ $pds->jabatan_pemohon }}</td>
-                        <td>{{ $pds->subject }}</td>
-                        <td>{{ $pds->tujuan }}</td>
-                        <td>{{ $pds->lokasi }}</td>
-                        <td>{{ $pds->batas_waktu }}</td>
-                        <td>{{ number_format($pds->niminal, 0, ',', '.') }}</td>
-                        <td>{{ $pds->metode_penerimaan }}</td>
-                        <td>{{ $pds->catatan }}</td>
-                        <td>{{ $pds->tanggal_pengajuan }}</td>
-                        <td>{{ $pds->no_doc }}</td>
-                        <td>{{ $pds->revisi }}</td>
-                    </tr> --}}
-{{-- @endforeach --}}

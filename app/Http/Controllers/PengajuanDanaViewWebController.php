@@ -48,7 +48,7 @@ class PengajuanDanaViewWebController extends Controller
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date',
             'subtotal' => 'required|integer',
-            'total' => 'required|integer',
+            'total.*' => 'required|integer',
             'nama_item.*' => 'required|string',
             'jumlah.*' => 'required|integer',
             'satuan.*' => 'required|string',
@@ -64,7 +64,6 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // Buat rekaman
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
             'nama_pemohon' => $request->nama_pemohon,
@@ -83,23 +82,25 @@ class PengajuanDanaViewWebController extends Controller
             'revisi' => $request->revisi,
         ]);
 
-        // Buat nomor dokumen dan update rekaman dengan nomor dokumen
-        $datetime = explode('-', $pengajuanDanas->created_at);
+        $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->first();
+        $datetime = explode('-', $datas_no_doc->created_at);
         $no_doc = $pengajuanDanas->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
-        $pengajuanDanas->update([
+        $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->update([
             'no_doc' => $no_doc,
             'form_number' => $no_doc
         ]);
 
-        // Proses untuk menyimpan detail item dinamis
         $items = $request->only('nama_item', 'jumlah', 'satuan', 'harga');
+        $subtotal = 0;
         foreach ($items['nama_item'] as $key => $item) {
+            $subtotal_item = $items['jumlah'][$key] * $items['harga'][$key];
+            $subtotal += $subtotal_item;
             $pengajuanDanas->items()->create([
                 'nama_item' => $item,
                 'jumlah' => $items['jumlah'][$key],
-                'satuan' => $item,
+                'satuan' => $items['satuan'][$key],
                 'harga' => $items['harga'][$key],
-                'total' => $items['jumlah'][$key] * $items['harga'][$key],
+                'total' => $subtotal_item,
             ]);
         }
 
@@ -136,6 +137,8 @@ class PengajuanDanaViewWebController extends Controller
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date',
+            'subtotal' => 'required|integer',
+            'total.*' => 'required|integer',
             'nama_item.*' => 'required|string',
             'jumlah.*' => 'required|integer',
             'satuan.*' => 'required|string',
@@ -166,31 +169,31 @@ class PengajuanDanaViewWebController extends Controller
         // Hapus item yang sudah ada untuk entri pengajuan dana ini
         $pengajuanDana->items()->delete();
 
-        $subtotal = 0; // Menyimpan subtotal
+        $subtotal = 0;
 
         // Simpan item yang baru dan hitung subtotal
         foreach ($nama_items as $key => $nama_item) {
-            $item = new ItemPengajuanDana(); // Ganti dengan model Anda
+            $item = new ItemPengajuanDana();
             $item->nama_item = $nama_item;
             $item->jumlah = $jumlahs[$key];
-            $item->satuan = $nama_item;
+            $item->satuan = $satuans[$key];
             $item->harga = $hargas[$key];
-            $item->total = $jumlahs[$key] * $hargas[$key]; // Kalkulasi total
-            $subtotal += $item->total; // Tambahkan ke subtotal
-            // Simpan item ke dalam pengajuan dana
+            $item->total = $jumlahs[$key] * $hargas[$key];
+            $subtotal += $item->total;
             $pengajuanDana->items()->save($item);
         }
 
         // Update data pengajuan dana dengan subtotal yang baru dihitung
         $pengajuanDana->update([
-            'form_number' => 'doc_pd',
+            // 'form_number' => 'doc_pd',
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'subject' => $request->subject,
             'tujuan' => $request->tujuan,
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
-            'subtotal' => $subtotal,
+            'subtotal' => $request->subtotal,
+            'total' => $request->total,
             'terbilang' => $request->terbilang,
             'metode_penerimaan' => $request->metode_penerimaan,
             'catatan' => $request->catatan,

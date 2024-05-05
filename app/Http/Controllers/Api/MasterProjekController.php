@@ -23,7 +23,7 @@ class MasterProjekController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_MASTER_PROJECT') . 'projects/',
+            CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,

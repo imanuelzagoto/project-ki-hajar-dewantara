@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Auth;
 
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -24,11 +23,15 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-
 // UserService Login Logout
 // Route::get('/login', function () {
 //     return view('auth.login');
 // })->name('loginnew');
+
+// Route::get('/register', function () {
+//     return view('auth.register');
+// })->name('registnew');
+
 
 Route::get('/', function () {
     if (!Session::has('token')) {
@@ -37,11 +40,6 @@ Route::get('/', function () {
         return redirect('/dashboard');
     }
 });
-
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('registnew');
-
 Route::post('/loginservice', function () {
 
     $loginServiceUrl = env('LOGIN_SERVICE_URL');
@@ -103,7 +101,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/surat-perintah-kerja/delete/{id}', [HomeViewController::class, 'destroySuratPerintahKerja'])->name('surat-perintah-kerja.delete');
 
     // Routes Master Projek
-    // Route::get('/master-projek/data', [MasterProjekViewController::class, 'data'])->name('master-projek.data');
     Route::get('/master-projek', [MasterProjekViewController::class, 'index'])->name('master-projek.index');
     Route::get('/master-projek/tambah-perintah', [MasterProjekViewController::class, 'create'])->name('master-projek.create');
     Route::post('/master-projek/store', [MasterProjekViewController::class, 'store'])->name('master-projek.store');
@@ -113,7 +110,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/master-projek/delete/{id}', [MasterProjekViewController::class, 'destroy'])->name('master-projek.delete');
 
     // Routes Pengajuan Dana
-    // Route::get('/pengajuan-dana/data', [PengajuanDanaViewWebController::class, 'data'])->name('pengajuanDana.data');
     Route::get('/pengajuan-dana', [PengajuanDanaViewWebController::class, 'index'])->name('pengajuanDana.index');
     Route::get('/pengajuan-dana/tambah-pengajuan', [PengajuanDanaViewWebController::class, 'create'])->name('pengajuanDana.create');
     Route::post('/pengajuan-dana/store', [PengajuanDanaViewWebController::class, 'store'])->name('pengajuanDana.store');
@@ -124,7 +120,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
 
     // Routes Surat perintah kerja
-    // Route::get('/surat-perintah-kerja/data', [SuratPerintahKerjaViewWebController::class, 'data'])->name('surat_perintah_kerja.data');
     Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
     Route::get('/surat-perintah-kerja/tambah-perintah', [SuratPerintahKerjaViewWebController::class, 'create'])->name('suratPerintahKerja.create');
     Route::post('/surat-perintah-kerja/store', [SuratPerintahKerjaViewWebController::class, 'store'])->name('suratPerintahKerja.store');
