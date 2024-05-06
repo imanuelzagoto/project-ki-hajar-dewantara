@@ -46,7 +46,10 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="text-mp font-weight-bold display-6">
-                        Form Pengisian SPK
+                        Form Pengisian SPK <span style="font-size: 22px; padding-left:8px;">&rArr;</span>
+                        <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                            {{ $no_spk }}
+                        </span>
                     </h2>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">

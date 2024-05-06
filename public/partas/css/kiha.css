@@ -760,6 +760,31 @@
     }
 }
 
+.labelentris {
+    color: #A0AEC0;
+    position: relative;
+    left: 91px;
+    bottom: 26px;
+}
+
+
+@media (max-width: 500px) {
+    .labelentris {
+        position: relative;
+        left: 91px;
+    }
+
+    .select_entries {
+        position: relative;
+        left: 10px;
+    }
+
+    .table_master_projek {
+        position: relative;
+        top: 1px;
+    }
+}
+
 .border-container {
     position: relative;
     border: 1px solid #E2E8F0;

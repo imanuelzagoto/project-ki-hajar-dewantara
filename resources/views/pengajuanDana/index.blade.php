@@ -79,7 +79,7 @@
                 </form>
                 <button type="button" id="filtersButtonPD" class="btn btn-sm btn-outline-info ml-2 btn-filters"
                     style="font-size: 17.18px;">
-                    <i class="fas fa-sliders-h"></i> Filters
+                    <i class="fas fa-sliders-h"></i> Search
                 </button>
             </div>
 
@@ -98,18 +98,17 @@
                 <div class="card" style="margin-top: 10px;">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <div class="d-flex align-items-center mb-3 d-flex-center">
-                                <select id="showEntriesPD" class="form-control form-control-sm mr-2"
-                                    style="width: 70px; border-color:#E2E8F0;">
+                            <div class="align-items-center d-flex-center">
+                                <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
+                                    style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
-                                <span class="labelentris" style="color: #A0AEC0;">entries per
-                                    page</span>
+                                <span class="labelentris">entries per page</span>
                             </div>
-                            <table class="element-scrollbar table display-6 mb-6 table-responsive" style="width:100%;"
+                            <table class="element-scrollbar table display-6 mb-6 table-hover" style="width:100px;"
                                 id='tablePengajuanDana'>
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">

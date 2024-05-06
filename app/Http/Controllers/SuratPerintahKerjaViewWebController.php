@@ -28,7 +28,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         return $returnValue;
     }
 
-
     public function index(Request $request)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
@@ -55,13 +54,24 @@ class SuratPerintahKerjaViewWebController extends Controller
         ));
 
         $response = curl_exec($curl);
-        // dd($response);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
+        $no_spk = $this->generateDocumentNumber();
         return view('suratPerintahKerja.create')
-            ->with('projects', $projects);
+            ->with('projects', $projects)
+            ->with('no_spk', $no_spk);
     }
 
+    private function generateDocumentNumber()
+    {
+        $lastId = Surat_perintah_kerja::orderBy('id', 'desc')->first()->id ?? 0;
+        $nextId = $lastId + 1;
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $no_spk = $nextId . '-SPK/SII/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
+        // dd($no_spk);
+        return $no_spk;
+    }
 
     public function store(Request $request)
     {

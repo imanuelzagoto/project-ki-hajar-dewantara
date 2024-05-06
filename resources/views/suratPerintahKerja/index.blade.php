@@ -76,7 +76,7 @@
                 </form>
                 <button type="button" id="filtersButtonSPK" class="btn btn-sm btn-outline-info ml-2 btn-filters"
                     style="font-size: 17.18px;">
-                    <i class="fas fa-sliders-h"></i> Filters
+                    <i class="fas fa-sliders-h"></i> Search
                 </button>
             </div>
             <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
@@ -94,18 +94,17 @@
                 <div class="card" style="margin-top: 14px;">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <div class="d-flex align-items-center mb-3 d-flex-center">
-                                <select id="showEntriesSPK" class="form-control form-control-sm mr-2"
-                                    style="width: 70px; border-color:#E2E8F0;">
+                            <div class="align-items-center d-flex-center">
+                                <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
+                                    style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
                                     <option value="10">10</option>
                                     <option value="25">25</option>
                                     <option value="50">50</option>
                                     <option value="100">100</option>
                                 </select>
-                                <span class="labelentris" style="color: #A0AEC0;">entries per
-                                    page</span>
+                                <span class="labelentris">entries per page</span>
                             </div>
-                            <table class="table display-6 mb-6 table-responsive" style="width:100%;" id="tablespk">
+                            <table class="table display-6 mb-6 table-hover" style="width:100%;" id="tablespk">
                                 <thead>
 
                                     <tr class="column_th">

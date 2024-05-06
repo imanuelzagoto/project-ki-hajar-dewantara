@@ -157,7 +157,7 @@
                         <div class="card mt-lg-2 card-table-pd">
                             <div class="card-body ml-4">
                                 <div class="table-responsive">
-                                    <table class="table display-6 mb-6 table-responsive" id="TablePengajuanDana">
+                                    <table class="table display-6 mb-6 table-hover" id="TablePengajuanDana">
                                         <thead>
                                             <tr class="tr-table">
                                                 <th class="text-left" style="font-weight:700;" nowrap>ID</th>
@@ -235,7 +235,7 @@
                         <div class="card mt-lg-2 card-table-pd">
                             <div class="card-body ml-4">
                                 <div class="table-responsive">
-                                    <table class="table display-6 mb-6 table-responsive" id="TablePengajuanSPK">
+                                    <table class="table display-6 mb-6 table-hover" id="TablePengajuanSPK">
                                         <thead>
                                             <tr class="column_th">
                                                 <th class="text-left" style="font-weight:700;" nowrap>ID</th>
@@ -502,11 +502,11 @@
                 }
             }],
             title: {
-                text: 'Total Pengajuan Dana: ' + total_pengajuan_dana_per_month.reduce((a, b) => a + b, 0) + ',',
+                text: 'Total Pengajuan Dana : ' + total_pengajuan_dana_per_month.reduce((a, b) => a + b, 0),
                 align: 'center',
                 margin: 10,
                 offsetY: 10,
-                offsetX: -100,
+                offsetX: -110,
                 style: {
                     fontSize: '16px',
                     color: '#FF1755',
@@ -514,7 +514,7 @@
                 }
             },
             subtitle: {
-                text: 'Total Pengajuan SPK: ' + total_pengajuan_spk_per_month.reduce((a, b) => a + b, 0),
+                text: 'Total Pengajuan SPK : ' + total_pengajuan_spk_per_month.reduce((a, b) => a + b, 0),
                 align: 'center',
                 margin: 10,
                 offsetY: 10,

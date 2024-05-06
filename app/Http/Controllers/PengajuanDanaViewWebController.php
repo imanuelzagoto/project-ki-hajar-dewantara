@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PengajuanDana;
 use App\Models\ItemPengajuanDana;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Carbon;
 
 class PengajuanDanaViewWebController extends Controller
 {
@@ -35,7 +36,13 @@ class PengajuanDanaViewWebController extends Controller
 
     public function create()
     {
-        return view('pengajuanDana.create');
+        $lastId = PengajuanDana::orderBy('id', 'desc')->first()->id ?? 0;
+        $nextId = $lastId + 1;
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $no_doc = $nextId . '/FPD/ADM/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
+        // dd($no_doc);
+        return view('pengajuanDana.create', compact('no_doc'));
     }
 
     public function store(Request $request)
@@ -104,7 +111,7 @@ class PengajuanDanaViewWebController extends Controller
             ]);
         }
 
-        return redirect()->route('pengajuanDana.index');
+        return redirect()->route('pengajuanDana.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
 

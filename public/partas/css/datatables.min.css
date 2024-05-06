@@ -675,6 +675,12 @@ div.dt-container div.dt-layout-cell {
     margin-top: -20px;
 }
 
+@media (max-width: 500px) {
+    div.dt-container div.dt-layout-cell {
+        margin-top: -50px;
+    }
+}
+
 div.dt-container div.dt-layout-cell.dt-full {
     text-align: center
 }
