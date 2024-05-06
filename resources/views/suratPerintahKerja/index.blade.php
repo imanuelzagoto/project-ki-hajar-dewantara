@@ -107,18 +107,25 @@
                             </div>
                             <table class="table display-6 mb-6 table-responsive" style="width:100%;" id="tablespk">
                                 <thead>
-                                    <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
-                                        <th class="text-center" nowrap>No</th>
-                                        <th class="text-center" style="width:25%;" nowrap>No SPK</th>
-                                        <th class="text-center" nowrap>Nama Project</th>
-                                        <th class="text-center" nowrap>Pemohon</th>
-                                        <th class="text-left" nowrap>User</th>
-                                        <th class="text-center" nowrap>Main Contractor</th>
-                                        <th class="text-center" nowrap>Project Manager</th>
-                                        <th class="text-left" style="width:19%;" nowrap>PIC</th>
-                                        <th class="text-center" style="width:23%;" nowrap>Tanggal</th>
-                                        <th class="text-center" nowrap>Tanggal selesai</th>
-                                        <th class="text-center" nowrap>Action</th>
+
+                                    <tr class="column_th">
+                                        <th class="text-center" style="font-weight: 700;" nowrap>No</th>
+                                        <th class="text-center" style="width:25px; font-weight: 700;" nowrap>No SPK</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>
+                                            Nama Project
+                                        </th>
+                                        <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
+                                        <th class="text-left" style="font-weight: 700;" nowrap>User</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>
+                                            Main Contractor
+                                        </th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>
+                                            Project Manager
+                                        </th>
+                                        <th class="text-left" style="width:19px; font-weight:700;" nowrap>PIC</th>
+                                        <th class="text-center" style="width:23px; font-weight:700;" nowrap>Tanggal</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Tanggal selesai</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -129,38 +136,37 @@
                                         @php
                                             $i += 1;
                                         @endphp
-                                        <tr class="kolom-td">
-                                            <td class="text-center" style="font-weight:400;"nowrap>
+                                        <tr class="Column_td">
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
                                                 {{ $i }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
                                                 {{ $spk->no_spk }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
                                                 {{ $spk->title }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
                                                 {{ $spk->pemohon }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
                                                 {{ $spk->user }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
                                                 {{ $spk->main_contractor }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
                                                 {{ $spk->project_manager }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
                                                 {{ $spk->pic }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
                                                 {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->tanggal)->format('d-m-Y') }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->waktu_penyelesaian)->format('d-m-Y') }}
                                             </td>
-
                                             <td class="text-center" style="font-weight:400;" nowrap>
                                                 <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
                                                     class="fas fa-pen btn btn-sm tooltip-container"

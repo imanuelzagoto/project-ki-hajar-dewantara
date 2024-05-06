@@ -90,7 +90,7 @@
                                     class="rounded-3 text-white d-flex align-items-center justify-content-center mt-2 round-card">
                                     <i class="fas fa-wallet fa-2x mr-2 mt--1 iconwallet"></i>
                                 </div>
-                                <h4 class="mt-3 text-pd">
+                                <h4 class="mt-3 text-pd" style="font-weight:700;">
                                     Pengajuan Dana
                                 </h4>
                                 <h6 class="text-active">
@@ -108,7 +108,7 @@
                                     class="rounded-3 text-white d-flex align-items-center justify-content-center mt-2 round-card">
                                     <i class="fab fa-paypal fa-2x mt--1 iconwallet"></i>
                                 </div>
-                                <h4 class="mt-3 text-pd">
+                                <h4 class="mt-3 text-pd" style="font-weight:700;">
                                     SPK
                                 </h4>
                                 <h6 class="text-active">
@@ -160,22 +160,22 @@
                                     <table class="table display-6 mb-6 table-responsive" id="TablePengajuanDana">
                                         <thead>
                                             <tr class="tr-table">
-                                                <th class="text-left"nowrap>ID</th>
-                                                <th class="text-left"nowrap>No.Doc</th>
-                                                <th class="text-left"nowrap>Revisi</th>
-                                                <th class="text-left"nowrap>Pemohon</th>
-                                                <th class="text-center"nowrap>Tujuan</th>
-                                                <th class="text-center" nowrap>Lokasi<br>
+                                                <th class="text-left" style="font-weight:700;" nowrap>ID</th>
+                                                <th class="text-left" style="font-weight:700;" nowrap>No.Doc</th>
+                                                <th class="text-left" style="font-weight:700;" nowrap>Revisi</th>
+                                                <th class="text-left" style="font-weight:700;" nowrap>Pemohon</th>
+                                                <th class="text-center" style="font-weight:700;" nowrap>Tujuan</th>
+                                                <th class="text-center" style="font-weight:700;" nowrap>Lokasi<br>
                                                     <span style="display:block; text-align:center;">Pengajuan</span>
                                                 </th>
-                                                <th class="text-center" style="width:19%;" nowrap>Tanggal<br>
+                                                <th class="text-center" style="width:19px;" nowrap>Tanggal<br>
                                                     <span style="display:block; text-align:center;">Pengajuan</span>
                                                 </th>
-                                                <th class="text-center" style="width:25%;" nowrap>Batas Waktu
+                                                <th class="text-center" style="width:25px;" nowrap>Batas Waktu
                                                 </th>
-                                                <th class="text-center" style="width:23%;" nowrap>Total Dana
+                                                <th class="text-center" style="width:23px;" nowrap>Total Dana
                                                 </th>
-                                                <th class="text-center" nowrap>Metode<br>
+                                                <th class="text-center" style="font-weight:700;" nowrap>Metode<br>
                                                     <span style="display:block; text-align:center;">Penerimaan</span>
                                                 </th>
                                                 {{-- <th class="text-center" nowrap>Action</th> --}}
@@ -189,35 +189,35 @@
                                                 @php
                                                     $i += 1;
                                                 @endphp
-                                                <tr class="kolom-td">
-                                                    <td class="text-left" style="font-weight:400;"nowrap>
+                                                <tr class="Column_td">
+                                                    <td class="text-left" style="font-weight:500;"nowrap>
                                                         {{ $i }}
                                                     </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:500;" nowrap>
                                                         {{ $pdt->no_doc }}
                                                     </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:500;" nowrap>
                                                         {{ $pdt->revisi }}
                                                     </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:500;" nowrap>
                                                         {{ $pdt->nama_pemohon }}
                                                     </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight:500;" nowrap>
                                                         {{ $pdt->tujuan }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-center" style="font-weight:500;" nowrap>
                                                         {{ $pdt->lokasi }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-center" style="font-weight:500;" nowrap>
                                                         {{ Carbon\Carbon::parse($pdt->updated_at)->format('H:i d-m-Y') }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-center" style="font-weight:500;" nowrap>
                                                         {{ Carbon\Carbon::parse($pdt->batas_waktu)->format('d-m-Y') }}
                                                     </td>
-                                                    <td class="text-right" style="font-weight:400;" nowrap>
+                                                    <td class="text-right" style="font-weight:500;" nowrap>
                                                         {{ 'Rp. ' . number_format($pdt->subtotal, 0, ',', '.') }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-center" style="font-weight:500;" nowrap>
                                                         {{ $pdt->metode_penerimaan }}
                                                     </td>
                                                 </tr>
@@ -229,36 +229,35 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                     <div class="col-md-12">
-                        <div class="card mt-lg-2 card-table-spk">
-                            <div class="card-body">
+                        <div class="card mt-lg-2 card-table-pd">
+                            <div class="card-body ml-4">
                                 <div class="table-responsive">
-                                    {{-- <div class="d-flex align-items-center mb-3 d-flex-center">
-                                        <select id="showEntriesPengajuanSPK" class="form-control form-control-sm mr-2"
-                                            style="width: 70px; border-color:#4FD1C5;">
-                                            <option value="10">10</option>
-                                            <option value="25">25</option>
-                                            <option value="50">50</option>
-                                            <option value="100">100</option>
-                                        </select>
-                                        <span class="labelentris" style="color: #A0AEC0;">entries per
-                                            page</span>
-                                    </div> --}}
-                                    <table class="table display-6 mb-6 table-responsive" id="TablePengajuanSPK"
-                                        style="width:100%">
+                                    <table class="table display-6 mb-6 table-responsive" id="TablePengajuanSPK">
                                         <thead>
-                                            <tr class="tr-table">
-                                                <th class="text-left" nowrap>ID</th>
-                                                <th class="text-left" nowrap>Nama Project</th>
-                                                <th class="text-left" nowrap>User</th>
-                                                <th class="text-left" nowrap>Main Contractor</th>
-                                                <th class="text-left" nowrap>Project Manager</th>
-                                                <th class="text-left" nowrap style="width:19%;">PIC</th>
-                                                <th class="text-center" nowrap style="width:25%;">No SPK</th>
-                                                <th class="text-center" nowrap style="width:23%;">Tanggal</th>
-                                                <th class="text-center" nowrap>Tanggal selesai</th>
-                                                {{-- <th class="text-center" nowrap>Action</th> --}}
+                                            <tr class="column_th">
+                                                <th class="text-left" style="font-weight:700;" nowrap>ID</th>
+                                                <th class="text-center" style="width:25px; font-weight: 700;" nowrap>
+                                                    No SPK
+                                                </th>
+                                                <th class="text-center" style="font-weight: 700;" nowrap>
+                                                    Nama Project
+                                                </th>
+                                                <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
+                                                <th class="text-left" style="font-weight: 700;" nowrap>User</th>
+                                                <th class="text-center" style="font-weight: 700;" nowrap>
+                                                    Main Contractor
+                                                </th>
+                                                <th class="text-center" style="font-weight: 700;" nowrap>
+                                                    Project Manager
+                                                </th>
+                                                <th class="text-left" style="width:19px; font-weight:700;" nowrap>PIC</th>
+                                                <th class="text-center" style="width:23px; font-weight:700;" nowrap>
+                                                    Tanggal</th>
+                                                <th class="text-center" style="font-weight:700;" nowrap>Tanggal selesai
+                                                </th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -269,32 +268,35 @@
                                                 @php
                                                     $i += 1;
                                                 @endphp
-                                                <tr class="kolom-td">
-                                                    <td class="text-left" style="font-weight:400;"nowrap>
+                                                <tr class="Column_td">
+                                                    <td class="text-left" style="font-weight:500;"nowrap>
                                                         {{ $i }}
                                                     </td>
-                                                    <td class="text-left" style="font-weight:400;"nowrap>
-                                                        {{ $pst->title }}
-                                                    </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
-                                                        {{ $pst->user }}
-                                                    </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
-                                                        {{ $pst->main_contractor }}
-                                                    </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
-                                                        {{ $pst->project_manager }}
-                                                    </td>
-                                                    <td class="text-left" style="font-weight:400;" nowrap>
-                                                        {{ $pst->pic }}
-                                                    </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-center" style="font-weight: 500;" nowrap>
                                                         {{ $pst->no_spk }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-left" style="font-weight: 500;" nowrap>
+                                                        {{ $pst->title }}
+                                                    </td>
+                                                    <td class="text-left" style="font-weight: 500;" nowrap>
+                                                        {{ $pst->pemohon }}
+                                                    </td>
+                                                    <td class="text-left" style="font-weight: 500;" nowrap>
+                                                        {{ $pst->user }}
+                                                    </td>
+                                                    <td class="text-left" style="font-weight: 500;" nowrap>
+                                                        {{ $pst->main_contractor }}
+                                                    </td>
+                                                    <td class="text-left" style="font-weight: 500;" nowrap>
+                                                        {{ $pst->project_manager }}
+                                                    </td>
+                                                    <td class="text-center" style="font-weight: 500;" nowrap>
+                                                        {{ $pst->pic }}
+                                                    </td>
+                                                    <td class="text-center" style="font-weight: 500;" nowrap>
                                                         {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->tanggal)->format('d-m-Y') }}
                                                     </td>
-                                                    <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <td class="text-center" style="font-weight:500;" nowrap>
                                                         {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
                                                     </td>
                                                 </tr>
@@ -500,17 +502,32 @@
                 }
             }],
             title: {
-                text: 'Total Pengajuan Dana: ' + total_pengajuan_dana_per_month.reduce((a, b) => a + b, 0) +
-                    ', Total Pengajuan SPK: ' + total_pengajuan_spk_per_month.reduce((a, b) => a + b, 0),
+                text: 'Total Pengajuan Dana: ' + total_pengajuan_dana_per_month.reduce((a, b) => a + b, 0) + ',',
                 align: 'center',
                 margin: 10,
                 offsetY: 10,
+                offsetX: -100,
                 style: {
                     fontSize: '16px',
-                    color: '#718EBF',
+                    color: '#FF1755',
                     fontFamily: 'Helvetica'
                 }
+            },
+            subtitle: {
+                text: 'Total Pengajuan SPK: ' + total_pengajuan_spk_per_month.reduce((a, b) => a + b, 0),
+                align: 'center',
+                margin: 10,
+                offsetY: 10,
+                offsetX: 90,
+                style: {
+                    fontSize: '16px',
+                    color: '#247BA0',
+                    fontFamily: 'Helvetica',
+                    fontWeight: 'bold'
+                }
             }
+
+
         };
 
         var additionalMonths = ["Sep", "Okt", "Nov", "Des"];

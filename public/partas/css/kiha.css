@@ -582,9 +582,15 @@
     line-height: 19.36px;
 }
 
-.kolom-td {
+.Column_td {
     color: #232323;
-    font-family: 'Inter', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 19.36px;
+}
+
+.column_th {
+    color: #718EBF;
+    font-family: Arial, Helvetica, sans-serif;
     line-height: 19.36px;
 }
 

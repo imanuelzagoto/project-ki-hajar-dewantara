@@ -79,15 +79,15 @@
                 </button>
             </div>
 
-            <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
-                {{-- <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
+            {{-- <div class="col-md-6 mb-3 mb-md-0 justify-content-md-end d-md-flex add-button">
+                <button class="btn btn-perintah mb-1" style="border-radius: 7px;"
                     onclick="window.location.href='{{ route('master-projek.create') }}'">
                     <span class="btn-label">
                         <i class="fa fa-plus"></i>
                     </span>
                     <span class="tambah-perintah">Tambah Perintah</span>
-                </button> --}}
-            </div>
+                </button>
+            </div> --}}
         </div>
         <div class="row">
             <div class="col-md-12">
@@ -109,13 +109,13 @@
                                 id="tableProject">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height: 19.36px;">
-                                        <th class="text-center" style="width: 5%;" nowrap>No</th>
-                                        <th class="text-left" style="width: 20%;" nowrap>Nama Projek</th>
-                                        <th class="text-left" style="width: 15%;" nowrap>Kode Projek</th>
-                                        <th class="text-center" style="width: 20%;" nowrap>Tenggat</th>
-                                        <th class="text-center" style="width: 20%;" nowrap>Mulai</th>
-                                        <th class="text-center" style="width: 20%;" nowrap>Akhir</th>
-                                        <th class="text-center" nowrap>Action</th>
+                                        <th class="text-center" style="width: 5px; font-weight:700;" nowrap>No</th>
+                                        <th class="text-left" style="width: 20px; font-weight:700;" nowrap>Nama Projek</th>
+                                        <th class="text-left" style="width: 15px; font-weight:700;" nowrap>Kode Projek</th>
+                                        <th class="text-center" style="width: 20px; font-weight:700;" nowrap>Tenggat</th>
+                                        <th class="text-center" style="width: 20px; font-weight:700;" nowrap>Mulai</th>
+                                        <th class="text-center" style="width: 20px; font-weight:700;" nowrap>Akhir</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -127,27 +127,27 @@
                                         @php
                                             $i += 1;
                                         @endphp
-                                        <tr class="kolom-td">
-                                            <td class="text-left" style="font-weight:400;"nowrap>
+                                        <tr class="Column_td">
+                                            <td class="text-left" style="font-weight:500;"nowrap>
                                                 {{ $i }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $project['title'] }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $project['code'] }}
                                             </td>
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
 
                                                 {{-- <a href="{{ route('master-projek.edit', ['id' => $project['id']]) }}"
                                                     class="fas fa-pencil-alt btn btn-sm tooltip-container"

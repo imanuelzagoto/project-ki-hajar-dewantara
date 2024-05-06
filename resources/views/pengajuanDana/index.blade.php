@@ -113,25 +113,28 @@
                                 id='tablePengajuanDana'>
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
-                                        <th class="text-center" nowrap>No</th>
-                                        <th class="text-left" nowrap>No.Doc</th>
-                                        <th class="text-left" nowrap>Revisi</th>
-                                        <th class="text-left" nowrap>Pemohon</th>
-                                        <th class="text-center" nowrap>Tujuan</th>
-                                        <th class="text-center" nowrap>Lokasi<br>
-                                            <span style="display:block; text-align:center;">Pengajuan</span>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>No</th>
+                                        <th class="text-left" style="font-weight: 700;" nowrap>No.Doc</th>
+                                        <th class="text-left" style="font-weight: 700;" nowrap>Revisi</th>
+                                        <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>Tujuan</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>Lokasi<br>
+                                            <span
+                                                style="display:block; text-align:center; font-weight:700;">Pengajuan</span>
                                         </th>
-                                        <th class="text-center" style="width:19%;" nowrap>Tanggal<br>
-                                            <span style="display:block; text-align:center;">Pengajuan</span>
+                                        <th class="text-center" style="width:19px; font-weight:700;" nowrap>Tanggal<br>
+                                            <span
+                                                style="display:block; text-align:center; font-weight:700;">Pengajuan</span>
                                         </th>
-                                        <th class="text-center" style="width:25%;" nowrap>Batas Waktu
+                                        <th class="text-center" style="width:25px; font-weight:700;" nowrap>Batas Waktu
                                         </th>
-                                        <th class="text-center" style="width:23%;" nowrap>Total Dana
+                                        <th class="text-center" style="width:23px; font-weight:700;" nowrap>Total Dana
                                         </th>
-                                        <th class="text-center" nowrap>Metode<br>
-                                            <span style="display:block; text-align:center;">Penerimaan</span>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>Metode<br>
+                                            <span
+                                                style="display:block; text-align:center; font-weight:700;">Penerimaan</span>
                                         </th>
-                                        <th class="text-center" nowrap>Action</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -142,62 +145,44 @@
                                         @php
                                             $i += 1;
                                         @endphp
-                                        <tr class="kolom-td">
-                                            <td class="text-left" style="font-weight:400;"nowrap>
+                                        <tr class="Column_td">
+                                            <td class="text-left" style="font-weight:500;"nowrap>
                                                 {{ $i }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $pdts->no_doc }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $pdts->revisi }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $pdts->nama_pemohon }}
                                             </td>
-                                            <td class="text-left" style="font-weight:400;" nowrap>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $pdts->tujuan }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ $pdts->lokasi }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ Carbon\Carbon::parse($pdts->updated_at)->format('H:i d-m-Y') }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ Carbon\Carbon::parse($pdts->batas_waktu)->format('d-m-Y') }}
                                             </td>
-                                            <td class="text-right" style="font-weight:400;" nowrap>
+                                            <td class="text-right" style="font-weight:500;" nowrap>
                                                 {{ 'Rp. ' . number_format($pdts->subtotal, 0, ',', '.') }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ $pdts->metode_penerimaan }}
                                             </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
 
                                                 <a href="/pengajuan-dana/edit/{{ $pdts->id }}"
                                                     class="fa fa-pencil btn btn-sm tooltip-container"
                                                     style="color:#4FD1C5; font-size:20px;">
                                                     <span class="tooltip-edit">Edit</span>
                                                 </a>
-
-                                                {{-- Show modal --}}
-                                                {{-- <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                                                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg">
-                                                        <div class="modal-content">
-                                                            @include('pengajuanDana.show')
-                                                        </div>
-                                                    </div>
-                                                </div> --}}
-
-                                                {{-- <a href="{{ route('suratPerintahKerja.show', ['id' => $spk->id]) }}"
-                                                    target="_blank" type="button"
-                                                    class="fas fa-eye btn btn-sm tooltip-container"
-                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                    <span class="tooltip-show">View</span>
-                                                </a> --}}
-
                                                 <a href="/pengajuan-dana/show/{{ $pdts->id }}" target="_blank"
                                                     type="button" class="fas fa-eye btn btn-sm tooltip-container"
                                                     style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">

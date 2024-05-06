@@ -12,8 +12,8 @@
                     <a class="nav-link" href="{{ route('home.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
-                            <span class="fas fa-home bg-white text-success mr-2 p-2 border border-white rounded-3"
-                                style="border-radius: 12px;"></span>
+                            <span class="fas fa-home bg-white text-success mr-2 p-2 border border-light rounded-3"
+                                style="border-radius: 12px; background-color:#F8F9FA;"></span>
                             <p
                                 style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
                                 Dashboard
@@ -31,10 +31,10 @@
                     <a class="nav-link" href="{{ route('master-projek.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
-                            <span class="fas fa-database bg-white text-success mr-2 p-2 border border-white rounded-3"
-                                style="border-radius: 12px;"></span>
+                            <span class="fas fa-database bg-white text-success mr-2 p-2 border border-light rounded-3"
+                                style="border-radius: 12px; background-color:#F8F9FA;"></span>
                             <p
-                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
+                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0; position: relative; left:5px;">
                                 Master Projek
                             </p>
                         </div>
@@ -50,11 +50,10 @@
                     <a class="nav-link" href="{{ route('pengajuanDana.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
-                            <span
-                                class="fas fa-credit-card bg-white text-success mr-2 p-2 border border-white rounded-3"
-                                style="border-radius: 12px;"></span>
+                            <span class="fas fa-credit-card text-success mr-2 p-2 border border-light rounded-3"
+                                style="border-radius: 12px; background-color:#F8F9FA;"></span>
                             <p
-                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
+                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0; position: relative; left:2px;">
                                 Pengajuan Dana
                             </p>
                         </div>
@@ -70,10 +69,10 @@
                     <a class="nav-link" href="{{ route('surat_perintah_kerja.index') }}"
                         style="border-radius: 12px; height:50px; font-size:16px;">
                         <div class="d-flex align-items-center">
-                            <span class="fas fa-chart-bar bg-white text-success mr-2 p-2 border border-white rounded-3"
-                                style="border-radius: 12px;"></span>
+                            <span class="fas fa-chart-bar text-success mr-2 p-2 border border-light rounded-3"
+                                style="border-radius: 12px; background-color:#F8F9FA;"></span>
                             <p
-                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0">
+                                style="font-weight:700; font-size:14px; line-height:18px; font-family: Arial, Helvetica, sans-serif; color:#A0AEC0; position: relative; left:4px;">
                                 Surat Perintah Kerja
                             </p>
                         </div>

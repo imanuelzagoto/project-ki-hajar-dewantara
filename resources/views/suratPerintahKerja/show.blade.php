@@ -139,10 +139,10 @@
                     <Span>PIC : {{ $suratPerintahKerja->pic }}</Span>
                 </div>
                 <div class="title_company">
-                    <span style="font-family: "Times New Roman", Times, serif; ">PT. SOLUSI INTEK INDONESIA</span>
+                    <span style="font-family: Times New Roman, Times, serif; ">PT. SOLUSI INTEK INDONESIA</span>
                 </div>
                 <div class="sub-title-spk">
-                    <span style="font-family: "Times New Roman" , Times, serif; ">SURAT PERINTAH KERJA WORKSHOP</span>
+                    <span style="font-family: Times New Roman, Times, serif; ">SURAT PERINTAH KERJA WORKSHOP</span>
                 </div>
                 <br>
 
@@ -260,9 +260,10 @@
                     </div>
                 </div>
                 <br>
-                
+
                 <div class="detail_spk">
-                    <table style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
+                    <table
+                        style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
                         <thead>
                             <tr>
                                 <th style="border: 1.5px solid black; font-size:17px; text-align:center; line-height:normal; width:340px; padding-left:5px;"
@@ -280,7 +281,8 @@
                                 <td style="border: 1.5px solid black; border-right:none;"></td>
                             </tr>
                             <tr>
-                                <td style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
+                                <td
+                                    style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
                                     {{ $suratPerintahKerja->jenis_pekerjaan }}
                                 </td>
                                 <td
@@ -349,13 +351,13 @@
                             <tr>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
                                     <span style="padding-left: 21px;">Jabatan</span>
@@ -366,13 +368,13 @@
                             <tr>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; ">
                                     <span style="visibility: hidden;">4</span>
@@ -381,13 +383,13 @@
                             <tr>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
                                     <span style="visibility: hidden;">4</span>
@@ -396,13 +398,13 @@
                             <tr>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; padding-left:2%;">
                                     <span style="padding-left:18px;">...........................</span>
@@ -419,20 +421,20 @@
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
                                 </td>
                                 <td
-                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
-                                        <span style="padding-left: 5px;">2.</span>
-                                        <span>Nama</span>
-                                        <span style="padding-left: 12px;">:</span>
-                                        <span>Bayu Nugraha</span>
+                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                    <span style="padding-left: 5px;">2.</span>
+                                    <span>Nama</span>
+                                    <span style="padding-left: 12px;">:</span>
+                                    <span>Bayu Nugraha</span>
                                 </td>
                             </tr>
                             <tr>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
                                 </td>
@@ -494,13 +496,13 @@
                             <tr>
                                 <td
                                     style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                    </td>
+                                </td>
                                 <td
                                     style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
                                     <span style="visibility: hidden;">4</span>
@@ -520,10 +522,10 @@
                 </div>
             </div>
         </div>
- @endforeach
-                        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
-                            integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
-                        </script>
+    @endforeach
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

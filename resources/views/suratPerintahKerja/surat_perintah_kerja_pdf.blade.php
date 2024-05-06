@@ -514,12 +514,12 @@
                     <tr>
                         <th class="tb" style="width: 185px;">Kode Project</th>
                         <th style="font-weight: normal">:</th>
-                        <th class="tb" colspan="6">{{ $suratPerintahKerja->kode_project }}</th>
+                        <th class="tb" colspan="6">{{ $suratPerintahKerja->code }}</th>
                     </tr>
                     <tr>
                         <td>Nama Project</td>
                         <td>:</td>
-                        <td>{{ $suratPerintahKerja->nama_project }}</td>
+                        <td>{{ $suratPerintahKerja->title }}</td>
                         <td>NO SPK</td>
                         <td class="semi-colon">:</td>
                         <td colspan="3">{{ $suratPerintahKerja->no_spk }}</td>
