@@ -11,6 +11,7 @@ class Surat_perintah_kerja extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'code',
         'pemohon',
         'penerima',

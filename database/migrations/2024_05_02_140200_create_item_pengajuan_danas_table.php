@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('item_pengajuan_danas', function (Blueprint $table) {
             $table->unsignedBigInteger('pengajuan_dana_id');
             $table->string('nama_item');
-            $table->unsignedInteger('jumlah');
+            $table->integer('jumlah');
             $table->string('satuan');
-            $table->unsignedBigInteger('harga');
-            $table->unsignedBigInteger('total');
+            $table->string('harga');
+            $table->string('total');
             $table->timestamps();
 
             // Define foreign key constraint

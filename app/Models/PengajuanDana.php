@@ -11,6 +11,7 @@ class PengajuanDana extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id',
         'nama_pemohon',
         'jabatan_pemohon',
         'subject',
@@ -18,9 +19,9 @@ class PengajuanDana extends Model
         'lokasi',
         'batas_waktu',
         'subtotal',
-        // 'total',
         'terbilang',
-        'metode_penerimaan',
+        'tunai',
+        'non_tunai',
         'catatan',
         'tanggal_pengajuan',
         'no_doc',

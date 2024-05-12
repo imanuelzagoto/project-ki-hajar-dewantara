@@ -1,3 +1,15 @@
+<?php
+$userData = Session::get('user');
+$userrole = $userData['modules']['name']; // Ambil peran pengguna dari data pengguna
+
+// dd($userRole);
+// Periksa apakah peran pengguna adalah "Super Admin"
+$isSuperAdmin = $userrole === 'Super Admin';
+$isUser = $userrole === 'user biasa';
+$isDriver = $userrole === 'Driver';
+$isGA = $userrole === 'General Affair';
+$isHR = $userrole === 'Hr';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,6 +55,7 @@
 {{-- class="master_root custom-scroll-bar" --}}
 
 <body style="background-color: #F1F4FA">
+
     <div class="">
         @include('includes.sidebar')
         <!--header -->

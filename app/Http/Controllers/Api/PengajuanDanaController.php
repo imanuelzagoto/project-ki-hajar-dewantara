@@ -16,7 +16,6 @@ class PengajuanDanaController extends Controller
     {
         $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
         return new PengajuanDanaResource(true, 'List Data Pengajuan Dana', $pengajuanDanas);
-        // return view('PengajuanDana.index');
     }
 
     function numberToRomanRepresentation($number)
@@ -51,7 +50,8 @@ class PengajuanDanaController extends Controller
             'satuan.*' => 'required|string',
             'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
-            'metode_penerimaan' => 'required|string',
+            'tunai' => 'required|string',
+            'non_tunai' => 'required|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
@@ -72,7 +72,8 @@ class PengajuanDanaController extends Controller
             'subtotal' => $request->subtotal,
             'total' => $request->total,
             'terbilang' => $request->terbilang,
-            'metode_penerimaan' => $request->metode_penerimaan,
+            'tunai' => $request->tunai,
+            'non_tunai' => $request->non_tunai,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
@@ -112,12 +113,6 @@ class PengajuanDanaController extends Controller
         $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
         $pdf->setPaper(array(0, 0, 899.45, 1200));
         return $pdf->stream();
-
-        // $pengajuanDana = PengajuanDana::find($id);
-        // if (!$pengajuanDana) {
-        //     return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
-        // }
-        // return new PengajuanDanaResource(true, 'Detail Data Pengajuan Dana.', $pengajuanDana);
     }
 
     public function update(Request $request, $id)
@@ -136,7 +131,8 @@ class PengajuanDanaController extends Controller
             'satuan.*' => 'required|string',
             'harga.*' => 'required|integer',
             'terbilang' => 'required|string',
-            'metode_penerimaan' => 'required|string',
+            'tunai' => 'required|string',
+            'non_tunai' => 'required|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
@@ -187,7 +183,8 @@ class PengajuanDanaController extends Controller
             'subtotal' => $request->subtotal,
             'total' => $request->total,
             'terbilang' => $request->terbilang,
-            'metode_penerimaan' => $request->metode_penerimaan,
+            'tunai' => $request->tunai,
+            'non_tunai' => $request->non_tunai,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',

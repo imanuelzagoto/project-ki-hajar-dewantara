@@ -8,7 +8,7 @@
                     <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                         data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon">
-                            <i class="icon-menu"></i>
+                            <i class="fas fa-bars"></i>
                         </span>
                     </button>
                 </div>
@@ -57,7 +57,7 @@
             <div class="col-md-6 d-flex justify-content-end">
                 <h2 class="fiturjam font-weight-bold display-6">
                     <ul class="list-unstyled mb-0">
-                        <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
+                        <li id="datetime" class="datetime_home">
                             <i class="fas fa-calendar"></i>&nbsp;
                             <i class="far fa-clock"></i>&nbsp;
                         </li>

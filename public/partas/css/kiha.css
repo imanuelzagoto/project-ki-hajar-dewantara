@@ -12,6 +12,255 @@
     padding-right: 2px;
 }
 
+.datetime_home {
+    color: #718EBF;
+    font-weight: bold;
+    font-size: 16px;
+    margin-right: 16px;
+}
+
+@media screen and (max-width: 2560px) {
+    .breadcrumbs {
+        position: relative !important;
+        left: 33px !important;
+    }
+
+    .menu_breadcrumbs {
+        position: relative !important;
+        left: 22px !important;
+    }
+
+    .text-dashboard {
+        position: relative !important;
+        right: 23px !important;
+    }
+
+    .my-custom-card {
+        background-size: auto 200px !important;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative !important;
+        right: -2px !important;
+        border-radius: 10px !important;
+        -webkit-border-radius: 10px !important;
+        -moz-border-radius: 10px !important;
+        -ms-border-radius: 10px !important;
+        -o-border-radius: 10px !important;
+    }
+
+    .button-logout {
+        position: relative !important;
+        right: -5px !important;
+        line-height: 1px !important;
+    }
+
+    .datetime_home {
+        position: relative !important;
+        left: 16px !important;
+        font-size: 14.8px !important;
+    }
+}
+
+@media screen and (max-min: 2560px) {
+    .breadcrumbs {
+        position: relative;
+        left: 34px;
+    }
+
+    .menu_breadcrumbs {
+        position: relative;
+        left: 22px;
+    }
+
+    .text-dashboard {
+        position: relative;
+        right: 23px;
+    }
+
+    .my-custom-card {
+        background-size: auto 200px;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative;
+        right: -2px;
+        border-radius: 10px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        -ms-border-radius: 10px;
+        -o-border-radius: 10px;
+    }
+
+    .button-logout {
+        position: relative;
+        right: -5px;
+        line-height: 1px;
+    }
+
+    .datetime_home {
+        position: relative;
+        left: 16px;
+        font-size: 14.8px;
+    }
+}
+
+@media screen and (max-width: 1438px) {
+    .breadcrumbs {
+        position: relative !important;
+        left: 32px !important;
+    }
+
+    .text-dashboard {
+        position: relative !important;
+        right: 24px !important;
+    }
+
+    .menu_breadcrumbs {
+        position: relative !important;
+        left: 22px !important;
+    }
+
+    .my-custom-card {
+        background-size: auto 200px !important;
+        background-repeat: no-repeat;
+        background-position: center;
+        position: relative !important;
+        bottom: 2px;
+        right: 1px !important;
+        height: 158px;
+        width: 365px;
+        color: #FFFFFF;
+        border-radius: 10px !important;
+        -webkit-border-radius: 10px !important;
+        -moz-border-radius: 10px !important;
+        -ms-border-radius: 10px !important;
+        -o-border-radius: 10px !important;
+    }
+
+    .button-logout {
+        position: relative !important;
+        right: -2px !important;
+        line-height: 1px !important;
+    }
+
+    .datetime_home {
+        color: #718EBF !important;
+        font-weight: bold !important;
+        font-size: 14.8px !important;
+        margin-right: 20px !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .breadcrumbs {
+        right: auto !important;
+        left: 11px !important;
+    }
+
+    .dashboard_kihajar {
+        font-size: 13px !important;
+        font-weight: 400 !important;
+        line-height: 24.66px !important;
+    }
+
+    .username {
+        font-size: 27px !important;
+        overflow: hidden !important;
+        white-space: nowrap !important;
+        text-overflow:
+            ellipsis !important;
+        line-height: 65.03px !important;
+        font-weight: 700 !important;
+    }
+
+    .iconwallet {
+        font-size: 30px !important;
+        position: relative !important;
+        left: 24px !important;
+    }
+
+    ww .icon_paypal {
+        font-size: 30px !important;
+        position: relative !important;
+        left: 24px !important;
+        top: 24px !important;
+    }
+
+    .title_card_pd {
+        position: relative !important;
+        top: 40px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+        font-size: 14px !important;
+    }
+
+    .title_card_spk {
+        position: relative !important;
+        top: 44px !important;
+        text-align: center !important;
+        font-weight: 700 !important;
+        font-size: 14px !important;
+    }
+
+    .permintaan_card_spk {
+        position: relative !important;
+        top: 51px !important;
+        text-align: center !important;
+        color: #A1AEC1 !important;
+        font-weight: 700 !important;
+        font-size: 11px !important;
+    }
+
+    .pengajuan_card_spk {
+        position: relative !important;
+        top: 75px !important;
+        text-align: center !important;
+        color: #A1AEC1 !important;
+        font-weight: 700 !important;
+        font-size: 11px !important;
+    }
+
+    .hr-card {
+        width: 100% !important;
+        border: 0 !important;
+        height: 1px !important;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0)) !important;
+    }
+
+    .hr_spk_card {
+        width: 100% !important;
+        border: 0 !important;
+        position: relative !important;
+        top: 25px;
+        height: 1px !important;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0)) !important;
+    }
+
+    .total-pengajuan {
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        position: relative !important;
+        top: 94px !important;
+        left: 44px !important;
+    }
+
+    .total-permintaan {
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        position: relative !important;
+        top: 54px !important;
+        left: 44px !important;
+    }
+
+}
+
+.text-spk {
+    position: relative;
+    right: 1px;
+    top: 7px;
+    font-weight: 700;
+    font-size: 1px;
+}
+
 .breadcrumbs__item {
     display: inline-block;
 }
@@ -93,7 +342,7 @@
 }
 
 .text-dashboard {
-    margin-left: 4.2%;
+    margin-left: 42px;
     color: #2D3748;
     font-size: 20px;
     font-weight: 700;
@@ -157,6 +406,8 @@
     .head-project {
         font-size: 15px;
     }
+
+
 }
 
 @media screen and (max-width: 555.56px) {
@@ -289,12 +540,6 @@
     }
 }
 
-/* @media screen and (max-width: 568.89px) {
-    .text-mp {
-        margin-bottom: -5px;
-    }
-} */
-
 @media screen and (max-width: 1560px) and (min-width: 992.22px) {
     .text-mp {
         margin-left: 29px;
@@ -325,8 +570,6 @@
     }
 }
 
-
-/* text title content breadcrumb */
 .breadcrumb-item {
     font-weight: 400;
     font-size: 14px;
@@ -355,7 +598,6 @@
     margin-left: 1.3%;
 }
 
-/* text title content pages */
 .span_home {
     font-weight: 500;
     font-size: 15px;
@@ -478,10 +720,26 @@
 
 .my-custom-card {
     font-family: Arial, Helvetica, sans-serif;
-    background-size: auto 112%;
+    background-size: auto 200px;
     background-repeat: no-repeat;
     background-position: center;
+    position: relative;
+    bottom: 2px;
+    /* right: 100px; */
+    height: 158px;
+    width: 365px;
     color: #FFFFFF;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.dashboard_kihajar {
+    font-size: 16.44px;
+    font-weight: 400;
+    line-height: 24.66px;
 }
 
 .username {
@@ -494,32 +752,91 @@
     font-weight: 700;
 }
 
-.card-pd {
-    height: 248px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
+.permintaan_card_spk {
+    position: relative;
+    top: 50px;
+    text-align: center;
+    color: #A1AEC1;
+    font-weight: 700;
+    font-size: 13px;
 }
 
-.round-card {
-    width: 67.68px;
-    height: 67.68px;
-    border-radius: 12.69px;
-    background: #4FD1C5;
+.pengajuan_card_spk {
+    position: relative;
+    top: 50px;
+    text-align: center;
+    color: #A1AEC1;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.title_card_pd {
+    position: relative;
+    top: 40px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.title_card_spk {
+    position: relative;
+    top: 41px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
 }
 
 .iconwallet {
-    width: 20px;
-    height: 20px;
+    font-size: 40px;
+    background-color: #4FD1C5;
+    color: #FFFFFF;
+    position: relative;
+    left: 52px;
+    top: 20px;
+    padding: 11px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
 
-.center-card {
-    font-family: Arial, Helvetica, sans-serif;
+.icon_paypal {
+    font-size: 40px;
+    background-color: #4FD1C5;
+    color: #FFFFFF;
+    position: relative;
+    left: 52px;
+    top: 20px;
+    padding: 17px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
+
+.backgorund_card_pd {
+    height: 284px;
+}
+
+.backgorund_card_spk {
+    height: 284px;
+}
+
 
 .hr-card {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0));
+    position: relative;
+    top: 4px;
+}
+
+.hr_spk_card {
     width: 100%;
     border: 0;
     height: 1px;
@@ -527,10 +844,30 @@
 }
 
 .total-pengajuan {
-    font-size: 19.04px;
+    font-size: 20px;
     font-weight: 700;
-    line-height: 26.65px;
-    font-family: Arial, Helvetica, sans-serif;
+    position: relative;
+    top: 84px;
+    left: 76px;
+}
+
+.total-permintaan {
+    font-size: 20px;
+    font-weight: 700;
+    position: relative;
+    top: 78px;
+    left: 76px;
+}
+
+
+.garis_spk {
+    position: relative;
+    top: 66px;
+}
+
+.garis_pengajuan_dana {
+    position: relative;
+    top: 60px;
 }
 
 .text-active {
@@ -614,7 +951,7 @@
     font-size: 15.4px;
     line-height: 18px;
     color: #718096;
-    margin-right: -12px;
+    margin-right: -9px;
 }
 
 /* @media screen and (max-width: 1440px) {
@@ -971,6 +1308,13 @@ input[type=file]::file-selector-button:hover {
     position: absolute;
     margin-top: 1px;
     margin-left: 24px;
+}
+
+.head-pengaju {
+    visibility: visible;
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 0;
 }
 
 .head-project {

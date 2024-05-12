@@ -113,9 +113,13 @@ class SuratPerintahKerjaViewWebController extends Controller
             $request->file('dokumen_pendukung_file')->move(public_path($destinationPath), $dokumen_pendukung_file);
         }
 
+        $userData = Session::get('user');
+        $userId = $userData['id'];
+
         // Create the record
         $suratPerintahKerjas = Surat_perintah_kerja::create([
             'form_number' => 'spk',
+            'user_id' => $userId,
             'code' => $request->code,
             'pemohon' => $request->pemohon,
             'penerima' => $request->penerima,
@@ -183,6 +187,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         ));
 
         $response = curl_exec($curl);
+
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
         // dd($projects);
@@ -242,6 +247,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Update Surat_perintah_kerja with new or old values
         if ($request->dokumen_pendukung_file) {
             $suratPerintahKerjas->update([
+                'user_id' => $request->user_id,
                 'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,
@@ -265,6 +271,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             ]);
         } else {
             $suratPerintahKerjas->update([
+                'user_id' => $request->user_id,
                 'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,

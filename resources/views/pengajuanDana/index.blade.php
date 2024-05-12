@@ -12,12 +12,12 @@
                     <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                         data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon">
-                            <i class="icon-menu"></i>
+                            <i class="fas fa-bars"></i>
                         </span>
                     </button>
                 </div>
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="breadcrumbs">
+                    <ul class="menu_breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
                                 style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
@@ -44,13 +44,14 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="text-mp font-weight-bold display-6">
-                        Pengajuan Dana
+                        Pengajuan Dana <span style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
+                        <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
                     </h2>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <h2 class="fiturjam font-weight-bold display-6">
                         <ul class="list-unstyled mb-0">
-                            <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
+                            <li id="datetime" class="datetime_home">
                                 <i class="fas fa-calendar"></i>&nbsp;
                                 <i class="far fa-clock"></i>&nbsp;
                             </li>
@@ -93,117 +94,117 @@
                 </button>
             </div>
         </div>
-        <div class="row" style="margin-top: 3px;">
+        <div class="row">
             <div class="col-md-12">
                 <div class="card" style="margin-top: 10px;">
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="align-items-center d-flex-center">
-                                <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
-                                    style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                <span class="labelentris">entries per page</span>
-                            </div>
-                            <table class="element-scrollbar table display-6 mb-6 table-hover" style="width:100px;"
-                                id='tablePengajuanDana'>
-                                <thead>
-                                    <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
-                                        <th class="text-center" style="font-weight: 700;" nowrap>No</th>
-                                        <th class="text-left" style="font-weight: 700;" nowrap>No.Doc</th>
-                                        <th class="text-left" style="font-weight: 700;" nowrap>Revisi</th>
-                                        <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
-                                        <th class="text-center" style="font-weight: 700;" nowrap>Tujuan</th>
-                                        <th class="text-center" style="font-weight: 700;" nowrap>Lokasi<br>
-                                            <span
-                                                style="display:block; text-align:center; font-weight:700;">Pengajuan</span>
-                                        </th>
-                                        <th class="text-center" style="width:19px; font-weight:700;" nowrap>Tanggal<br>
-                                            <span
-                                                style="display:block; text-align:center; font-weight:700;">Pengajuan</span>
-                                        </th>
-                                        <th class="text-center" style="width:25px; font-weight:700;" nowrap>Batas Waktu
-                                        </th>
-                                        <th class="text-center" style="width:23px; font-weight:700;" nowrap>Total Dana
-                                        </th>
-                                        <th class="text-center" style="font-weight: 700;" nowrap>Metode<br>
-                                            <span
-                                                style="display:block; text-align:center; font-weight:700;">Penerimaan</span>
-                                        </th>
-                                        <th class="text-center" style="font-weight: 700;" nowrap>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $i = 0;
-                                    @endphp
-                                    @foreach ($pengajuanDanas as $pdts)
-                                        @php
-                                            $i += 1;
-                                        @endphp
-                                        <tr class="Column_td">
-                                            <td class="text-left" style="font-weight:500;"nowrap>
-                                                {{ $i }}
-                                            </td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>
-                                                {{ $pdts->no_doc }}
-                                            </td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>
-                                                {{ $pdts->revisi }}
-                                            </td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>
-                                                {{ $pdts->nama_pemohon }}
-                                            </td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>
-                                                {{ $pdts->tujuan }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ $pdts->lokasi }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($pdts->updated_at)->format('H:i d-m-Y') }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($pdts->batas_waktu)->format('d-m-Y') }}
-                                            </td>
-                                            <td class="text-right" style="font-weight:500;" nowrap>
-                                                {{ 'Rp. ' . number_format($pdts->subtotal, 0, ',', '.') }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ $pdts->metode_penerimaan }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-
-                                                <a href="/pengajuan-dana/edit/{{ $pdts->id }}"
-                                                    class="fa fa-pencil btn btn-sm tooltip-container"
-                                                    style="color:#4FD1C5; font-size:20px;">
-                                                    <span class="tooltip-edit">Edit</span>
-                                                </a>
-                                                <a href="/pengajuan-dana/show/{{ $pdts->id }}" target="_blank"
-                                                    type="button" class="fas fa-eye btn btn-sm tooltip-container"
-                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                    <span class="tooltip-show">View</span>
-                                                </a>
-
-                                                <a href="/pengajuan-dana/delete/{{ $pdts->id }}"
-                                                    class="fas fa-trash-alt btn btn-sm tooltip-container"
-                                                    style="color:#F31414; font-size:20px;"
-                                                    onclick="submitDelete({{ $pdts->id }})">
-                                                    <span class="tooltip-delete">Delete</span>
-                                                </a>
-                                                <form id="delete-form-{{ $pdts->id }}"
-                                                    action="/pengajuan-dana/delete/{{ $pdts->id }}" method="get"
-                                                    style="display: none;">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <div class="align-items-center d-flex-center">
+                            <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
+                                style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="labelentris">entries per page</span>
                         </div>
+                        {{-- <div class="table-responsive"> --}}
+                        <table class="element-scrollbar table-responsive table display-6 table-hover" style="width:100px;"
+                            id='tablePengajuanDana'>
+                            <thead>
+                                <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
+                                    <th class="text-center" style="font-weight: 700;" nowrap>No</th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>No.Doc</th>
+                                    <th class="text-left" style="font-weight: 700;" nowrap>Revisi</th>
+                                    <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>Tujuan</th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>Tanggal <br>
+                                        Pengajuan
+                                    </th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Tanggal <br>
+                                        Pengajuan</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Batas Waktu
+                                    </th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Total Dana
+                                    </th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>Metode <br>
+                                        Penerimaan
+                                    </th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach ($pengajuanDanas as $pdts)
+                                    @php
+                                        $i += 1;
+                                    @endphp
+                                    <tr class="Column_td">
+                                        <td class="text-left" style="font-weight:500;"nowrap>
+                                            {{ $i }}
+                                        </td>
+                                        <td class="text-left" style="font-weight:500;" nowrap>
+                                            {{ $pdts->no_doc }}
+                                        </td>
+                                        <td class="text-left" style="font-weight:500;" nowrap>
+                                            {{ $pdts->revisi }}
+                                        </td>
+                                        <td class="text-left" style="font-weight:500;" nowrap>
+                                            {{ $pdts->nama_pemohon }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ $pdts->tujuan }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ $pdts->lokasi }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($pdts->updated_at)->format('H:i d-m-Y') }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($pdts->batas_waktu)->format('d-m-Y') }}
+                                        </td>
+                                        <td class="text-right" style="font-weight:500;" nowrap>
+                                            {{ 'Rp. ' . number_format(floatval(str_replace(['Rp.', '.', ','], '', $pdts->subtotal)), 0, ',', '.') }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            @if ($pdts->tunai)
+                                                {{ $pdts->tunai }}
+                                            @elseif ($pdts->non_tunai)
+                                                {{ $pdts->non_tunai }}
+                                            @endif
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+
+                                            <a href="/pengajuan-dana/edit/{{ $pdts->id }}"
+                                                class="fa fa-pencil btn btn-sm tooltip-container"
+                                                style="color:#4FD1C5; font-size:20px;">
+                                                <span class="tooltip-edit">Edit</span>
+                                            </a>
+                                            <a href="/pengajuan-dana/show/{{ $pdts->id }}" target="_blank"
+                                                type="button" class="fas fa-eye btn btn-sm tooltip-container"
+                                                style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                <span class="tooltip-show">View</span>
+                                            </a>
+
+                                            <a href="/pengajuan-dana/delete/{{ $pdts->id }}"
+                                                class="fas fa-trash-alt btn btn-sm tooltip-container"
+                                                style="color:#F31414; font-size:20px;"
+                                                onclick="submitDelete({{ $pdts->id }})">
+                                                <span class="tooltip-delete">Delete</span>
+                                            </a>
+                                            <form id="delete-form-{{ $pdts->id }}"
+                                                action="/pengajuan-dana/delete/{{ $pdts->id }}" method="get"
+                                                style="display: none;">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>
@@ -300,7 +301,7 @@
                 if (storedLength) {
                     return parseInt(storedLength);
                 } else {
-                    return 10; // Default page length
+                    return 10;
                 }
             }
 
@@ -331,10 +332,10 @@
             });
 
             // Set value for show entries dropdown on page load
-            $('#showEntriesPD').val(getPageLengthFromLocalStorage('tablePengajuanDana'));
+            $('#showEntriesProject').val(getPageLengthFromLocalStorage('tablePengajuanDana'));
 
             // fitur show entri
-            $('#showEntriesPD').change(function() {
+            $('#showEntriesProject').change(function() {
                 var val = $(this).val();
                 tablePengajuanDana.page.len(val).draw();
                 localStorage.setItem('tablePengajuanDana_pageLength', val);
@@ -352,6 +353,15 @@
                 var searchText = $(this).val();
                 if (!searchText.trim()) {
                     tablePengajuanDana.search('').draw();
+                }
+            });
+
+            // Menambahkan event listener untuk tombol "Enter"
+            $('#searchPD').keypress(function(event) {
+                if (event.keyCode === 13) {
+                    var searchText = $(this).val();
+                    tablePengajuanDana.search(searchText).draw();
+                    event.preventDefault();
                 }
             });
         });

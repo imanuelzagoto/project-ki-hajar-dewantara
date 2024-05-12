@@ -73,6 +73,7 @@ class SuratPerintahKerjaController extends Controller
 
         $suratPerintahKerjas = Surat_perintah_kerja::create([
             'form_number' => 'spk',
+            'user_id' => $request->user_id,
             'code' => $request->code,
             'pemohon' => $request->pemohon,
             'penerima' => $request->penerima,
@@ -158,6 +159,7 @@ class SuratPerintahKerjaController extends Controller
         }
         if ($request->dokumen_pendukung_file) {
             $suratPerintahKerjas->update([
+                'user_id' => $request->user_id,
                 'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,
@@ -181,6 +183,7 @@ class SuratPerintahKerjaController extends Controller
             ]);
         } else {
             $suratPerintahKerjas->update([
+                'user_id' => $request->user_id,
                 'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,

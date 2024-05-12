@@ -11,12 +11,12 @@
                     <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                         data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon">
-                            <i class="icon-menu"></i>
+                            <i class="fas fa-bars"></i>
                         </span>
                     </button>
                 </div>
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="breadcrumbs">
+                    <ul class="menu_breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
                                 style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
@@ -43,13 +43,16 @@
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="text-mp font-weight-bold display-6">
-                        Surat Perintah Kerja (SPK)
+                        Surat Perintah Kerja (SPK) <span
+                            style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
+                        <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                        </span>
                     </h2>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <h2 class="fiturjam font-weight-bold display-6">
                         <ul class="list-unstyled mb-0">
-                            <li id="datetime" style="color: #718EBF; font-weight: bold; font-size: 13px">
+                            <li id="datetime" class="datetime_home">
                                 <i class="fas fa-calendar"></i>&nbsp;
                                 <i class="far fa-clock"></i>&nbsp;
                             </li>
@@ -93,106 +96,105 @@
             <div class="col-md-12">
                 <div class="card" style="margin-top: 14px;">
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <div class="align-items-center d-flex-center">
-                                <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
-                                    style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                <span class="labelentris">entries per page</span>
-                            </div>
-                            <table class="table display-6 mb-6 table-hover" style="width:100%;" id="tablespk">
-                                <thead>
-
-                                    <tr class="column_th">
-                                        <th class="text-center" style="font-weight: 700;" nowrap>No</th>
-                                        <th class="text-center" style="width:25px; font-weight: 700;" nowrap>No SPK</th>
-                                        <th class="text-center" style="font-weight: 700;" nowrap>
-                                            Nama Project
-                                        </th>
-                                        <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
-                                        <th class="text-left" style="font-weight: 700;" nowrap>User</th>
-                                        <th class="text-center" style="font-weight: 700;" nowrap>
-                                            Main Contractor
-                                        </th>
-                                        <th class="text-center" style="font-weight: 700;" nowrap>
-                                            Project Manager
-                                        </th>
-                                        <th class="text-left" style="width:19px; font-weight:700;" nowrap>PIC</th>
-                                        <th class="text-center" style="width:23px; font-weight:700;" nowrap>Tanggal</th>
-                                        <th class="text-center" style="font-weight:700;" nowrap>Tanggal selesai</th>
-                                        <th class="text-center" style="font-weight:700;" nowrap>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        $i = 0;
-                                    @endphp
-                                    @foreach ($suratPerintahKerjas as $spk)
-                                        @php
-                                            $i += 1;
-                                        @endphp
-                                        <tr class="Column_td">
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ $i }}
-                                            </td>
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ $spk->no_spk }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->title }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->pemohon }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->user }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->main_contractor }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->project_manager }}
-                                            </td>
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ $spk->pic }}
-                                            </td>
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->tanggal)->format('d-m-Y') }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->waktu_penyelesaian)->format('d-m-Y') }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
-                                                    class="fas fa-pen btn btn-sm tooltip-container"
-                                                    style="color:#4FD1C5; font-size:20px;">
-                                                    <span class="tooltip-edit">Edit</span>
-                                                </a>
-                                                <a href="/surat-perintah-kerja/show/{{ $spk->id }}" target="_blank"
-                                                    type="button" class="fas fa-eye btn btn-sm tooltip-container"
-                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                    <span class="tooltip-show">View</span>
-                                                </a>
-                                                <a href="/surat-perintah-kerja/delete/{{ $spk->id }}"
-                                                    class="fas fa-trash-alt btn btn-sm tooltip-container" type="button"
-                                                    style="color:#F31414; font-size:20px;"
-                                                    onclick="submitDelete({{ $spk->id }})">
-                                                    <span class="tooltip-delete">Delete</span>
-                                                </a>
-                                                <form id="delete-form-{{ $spk->id }}"
-                                                    action="/surat-perintah-kerja/delete/{{ $spk->id }}"
-                                                    method="get" style="display: none;">
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                        <div class="align-items-center d-flex-center">
+                            <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
+                                style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="labelentris">entries per page</span>
                         </div>
+                        {{-- <div class="table-responsive"> --}}
+                        <table class="table display-6 table-responsive mb-6 table-hover w-100" id="tablespk">
+                            <thead>
+                                <tr class="column_th">
+                                    <th class="text-center" style="font-weight: 700;" nowrap>No</th>
+                                    <th class="text-center" style="width:25px; font-weight: 700;" nowrap>No SPK</th>
+                                    <th class="text-left" style="font-weight: 700;" nowrap>
+                                        Nama Project
+                                    </th>
+                                    <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
+                                    <th class="text-left" style="font-weight: 700;" nowrap>User</th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>
+                                        Main Contractor
+                                    </th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>
+                                        Project Manager
+                                    </th>
+                                    <th class="text-left" style="width:19px; font-weight:700;" nowrap>PIC</th>
+                                    <th class="text-center" style="width:23px; font-weight:700;" nowrap>Tanggal</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Tanggal selesai</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php
+                                    $i = 0;
+                                @endphp
+                                @foreach ($suratPerintahKerjas as $spk)
+                                    @php
+                                        $i += 1;
+                                    @endphp
+                                    <tr class="Column_td">
+                                        <td class="text-center" style="font-weight: 500;" nowrap>
+                                            {{ $i }}
+                                        </td>
+                                        <td class="text-center" style="font-weight: 500;" nowrap>
+                                            {{ $spk->no_spk }}
+                                        </td>
+                                        <td class="text-left" style="font-weight: 500;" nowrap>
+                                            {{ $spk->title }}
+                                        </td>
+                                        <td class="text-left" style="font-weight: 500;" nowrap>
+                                            {{ $spk->pemohon }}
+                                        </td>
+                                        <td class="text-left" style="font-weight: 500;" nowrap>
+                                            {{ $spk->user }}
+                                        </td>
+                                        <td class="text-left" style="font-weight: 500;" nowrap>
+                                            {{ $spk->main_contractor }}
+                                        </td>
+                                        <td class="text-left" style="font-weight: 500;" nowrap>
+                                            {{ $spk->project_manager }}
+                                        </td>
+                                        <td class="text-center" style="font-weight: 500;" nowrap>
+                                            {{ $spk->pic }}
+                                        </td>
+                                        <td class="text-center" style="font-weight: 500;" nowrap>
+                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->tanggal)->format('d-m-Y') }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->waktu_penyelesaian)->format('d-m-Y') }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:400;" nowrap>
+                                            <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
+                                                class="fas fa-pen btn btn-sm tooltip-container"
+                                                style="color:#4FD1C5; font-size:20px;">
+                                                <span class="tooltip-edit">Edit</span>
+                                            </a>
+                                            <a href="/surat-perintah-kerja/show/{{ $spk->id }}" target="_blank"
+                                                type="button" class="fas fa-eye btn btn-sm tooltip-container"
+                                                style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                <span class="tooltip-show">View</span>
+                                            </a>
+                                            <a href="/surat-perintah-kerja/delete/{{ $spk->id }}"
+                                                class="fas fa-trash-alt btn btn-sm tooltip-container" type="button"
+                                                style="color:#F31414; font-size:20px;"
+                                                onclick="submitDelete({{ $spk->id }})">
+                                                <span class="tooltip-delete">Delete</span>
+                                            </a>
+                                            <form id="delete-form-{{ $spk->id }}"
+                                                action="/surat-perintah-kerja/delete/{{ $spk->id }}" method="get"
+                                                style="display: none;">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>
@@ -320,10 +322,10 @@
             });
 
             // Set value for show entries dropdown on page load
-            $('#showEntriesSPK').val(getPageLengthFromLocalStorage('tablespk'));
+            $('#showEntriesProject').val(getPageLengthFromLocalStorage('tablespk'));
 
             // fitur show entri
-            $('#showEntriesSPK').change(function() {
+            $('#showEntriesProject').change(function() {
                 var val = $(this).val();
                 tablespk.page.len(val).draw();
                 localStorage.setItem('tablespk_pageLength', val);
@@ -343,6 +345,16 @@
                     tablespk.search('').draw();
                 }
             });
+
+            // Menambahkan event listener untuk tombol "Enter"
+            $('#searchSPK').keypress(function(event) {
+                if (event.keyCode === 13) {
+                    var searchText = $(this).val();
+                    tablespk.search(searchText).draw();
+                    event.preventDefault();
+                }
+            });
+
         });
         // End JS Table
     </script>

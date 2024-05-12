@@ -85,7 +85,7 @@ Route::get('/login', function () {
 });
 
 // Routes Kihajar dewantara
-Route::group(['middleware' => 'auth'], function () {
+Route::middleware(['middleware' => 'auth'])->group(function () {
     Route::get('/dashboard', [HomeViewController::class, 'index'])->name('home.index');
 
     // Rute HOME untuk pengajuan dana
