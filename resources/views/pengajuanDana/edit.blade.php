@@ -140,7 +140,7 @@
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Terbilang</span>
                                                 <input name="terbilang" value="{{ $pengajuanDanas->terbilang }}"
-                                                    class="form-control bg-light w-100" type="text" required>
+                                                    class="form-control bg-light w-100" type="text" required readonly>
                                             </div>
 
                                             <div class="pr-4 py-2 col-2" id="container_method">

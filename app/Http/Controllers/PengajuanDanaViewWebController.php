@@ -35,9 +35,25 @@ class PengajuanDanaViewWebController extends Controller
 
     public function index(Request $request)
     {
-        $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
+        $userData = Session::get('user');
+        $userrole = $userData['modules']['name'];
+        $userId = $userData['id'];
+
+        if ($userrole === 'Super Admin') {
+            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
+        } elseif ($userrole === 'user biasa') {
+            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        } elseif ($userrole === 'Driver') {
+            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        } elseif ($userrole === 'General Affair') {
+            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        } elseif ($userrole === 'Hr') {
+            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        }
+
         return view('pengajuanDana.index', compact('pengajuanDanas'));
     }
+
 
     public function create()
     {
@@ -45,6 +61,7 @@ class PengajuanDanaViewWebController extends Controller
         $nextId = $lastId + 1;
         $currentYear = date('Y');
         $currentMonth = date('m');
+        // $no_doc = $nextId . '/FPD/' . $userrole . '/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
         $no_doc = $nextId . '/FPD/ADM/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
         // dd($no_doc);
         return view('pengajuanDana.create', compact('no_doc'));
@@ -100,8 +117,24 @@ class PengajuanDanaViewWebController extends Controller
             'revisi' => $request->revisi,
         ]);
 
+        // $userData = Session::get('user');
+        // $userrole = $userData['modules']['name'];
+        // // Pengecekan dan penyingkatan nilai userrole
+        // if ($userrole == "Super Admin") {
+        //     $userrole = "SA";
+        // } elseif ($userrole == "user biasa") {
+        //     $userrole = "UB";
+        // } elseif ($userrole == "Driver") {
+        //     $userrole = "DRV";
+        // } elseif ($userrole == "General Affair") {
+        //     $userrole = "GA";
+        // } elseif ($userrole == "Hr") {
+        //     $userrole = "HR";
+        // }
+
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->first();
         $datetime = explode('-', $datas_no_doc->created_at);
+        // $no_doc = $pengajuanDanas->id . '/FPD/' . $userrole . '/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
         $no_doc = $pengajuanDanas->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->update([
             'no_doc' => $no_doc,
@@ -112,7 +145,7 @@ class PengajuanDanaViewWebController extends Controller
         $subtotal = 0;
         foreach ($items['nama_item'] as $key => $item) {
             $jumlah = intval($items['jumlah'][$key]);
-            $harga = intval(str_replace(['Rp.', '.', ','], '', $items['harga'][$key])); // Menghapus format 'Rp.' dan pemisah ribuan
+            $harga = intval(str_replace(['Rp.', '.', ','], '', $items['harga'][$key]));
             $subtotal_item = $jumlah * $harga;
             $subtotal += $subtotal_item;
 
@@ -121,8 +154,8 @@ class PengajuanDanaViewWebController extends Controller
                 'nama_item' => $item,
                 'jumlah' => $jumlah,
                 'satuan' => $items['satuan'][$key],
-                'harga' => $harga, // Menggunakan harga yang sudah diubah menjadi numerik
-                'total' => $subtotal_item, // Simpan total sebagai numerik tanpa format
+                'harga' => $harga,
+                'total' => $subtotal_item,
             ]);
         }
         $pengajuanDanas->update(['subtotal' => $subtotal]);
@@ -204,7 +237,7 @@ class PengajuanDanaViewWebController extends Controller
             $hargaFloat = (float) str_replace(['Rp.', '.', ','], '', $hargas[$key]);
             $item->harga = $hargaFloat;
 
-            $item->total = $jumlahs[$key] * $hargaFloat; // Hitung total
+            $item->total = $jumlahs[$key] * $hargaFloat;
             $subtotal += $item->total;
             $pengajuanDana->items()->save($item);
         }

@@ -204,15 +204,20 @@
                     {{ number_format($pds->subtotal, 0, ',', '.') }}
                 </span>
                 <span style="padding-left: 5px; font-size: 14px; font-style:italic;">
-                    {{ $pds->terbilang }}
+                    {{ ucfirst($pds->terbilang) }}
                 </span>
             </div>
             <div class="data_no_rekening">
                 5.
                 <span style="padding-left: 4px; font-size: 14.5px;">No. Rekening</span>
                 <span style="padding-left: 137.6px; font-size: 14.5px;">:</span>
-                <span
-                    style="padding-left: 10px; font-size: 14.5px; font-weight:bold;">{{ $pds->metode_penerimaan }}</span>
+                <span style="padding-left: 10px; font-size: 14.5px; font-weight:bold;">
+                    @if ($pds->tunai)
+                        {{ $pds->tunai }}
+                    @elseif ($pds->non_tunai)
+                        {{ $pds->non_tunai }}
+                    @endif
+                </span>
             </div>
             <div class="data_catatan">
                 6.

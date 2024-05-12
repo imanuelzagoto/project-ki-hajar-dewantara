@@ -23,17 +23,17 @@ class HomeViewController extends Controller
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
 
-        // dd($userId);
+        // dd($userrole);
 
 
-        if ($userrole === 'super admin') {
+        if ($userrole === 'Super Admin') {
             $today = Carbon::now()->format('Y-m-d');
-            $pengajuan_dana_per_day = PengajuanDana::whereDate('created_at', $today)
+            $pengajuan_dana_per_day_by_user_id = PengajuanDana::whereDate('created_at', $today)
                 ->orderBy('id', 'desc')
                 ->take(5)
                 ->get();
 
-            $total_pengajuan_dana = PengajuanDana::whereDate('created_at', $today)->count();
+            $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->count();
 
             $pengajuan_spk_per_day = Surat_perintah_kerja::whereDate('created_at', $today)
                 ->orderBy('id', 'desc')
@@ -42,7 +42,7 @@ class HomeViewController extends Controller
             $total_pengajuan_spk = Surat_perintah_kerja::whereDate('created_at', $today)->count();
 
             // Data per bulan
-            $monthly_pengajuan_dana = PengajuanDana::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+            $monthly_pengajuan_dana_by_user_id = PengajuanDana::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
                 ->groupBy(DB::raw('MONTH(created_at)'))
                 ->get();
 
@@ -51,11 +51,14 @@ class HomeViewController extends Controller
                 ->get();
         } elseif ($userrole === 'user biasa') {
             $today = Carbon::now()->format('Y-m-d');
-            $pengajuan_dana_per_day_by_user_id = PengajuanDana::where('created_at', $today)->orWhere('user_id', $userId)
+            $pengajuan_dana_per_day_by_user_id = PengajuanDana::whereDate('created_at', now()->toDateString())
+                ->where('user_id', $userId)
                 ->orderBy('id', 'desc')
                 ->take(5)
                 ->get();
-            $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->orWhere('user_id', $userId)->count();
+
+            // dd($pengajuan_dana_per_day_by_user_id);
+            $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->where('user_id', $userId)->count();
             $monthly_pengajuan_dana_by_user_id = PengajuanDana::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
                 ->groupBy(DB::raw('MONTH(created_at)'))
                 ->get();
@@ -64,8 +67,78 @@ class HomeViewController extends Controller
                 ->orderBy('id', 'desc')
                 ->take(5)
                 ->get();
-            $total_pengajuan_spk = Surat_perintah_kerja::whereDate('created_at', $today)->count();
-            $monthly_pengajuan_spk = Surat_perintah_kerja::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
+            $total_pengajuan_spk = Surat_perintah_kerja::whereDate('created_at', $today)->where('user_id', $userId)->count();
+
+            $monthly_pengajuan_spk = Surat_perintah_kerja::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
+                ->groupBy(DB::raw('MONTH(created_at)'))
+                ->get();
+        } elseif ($userrole === 'Driver') {
+            $today = Carbon::now()->format('Y-m-d');
+            $pengajuan_dana_per_day_by_user_id = PengajuanDana::whereDate('created_at', now()->toDateString())
+                ->where('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+
+            // dd($pengajuan_dana_per_day_by_user_id);
+            $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->where('user_id', $userId)->count();
+            $monthly_pengajuan_dana_by_user_id = PengajuanDana::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
+                ->groupBy(DB::raw('MONTH(created_at)'))
+                ->get();
+
+            $pengajuan_spk_per_day = Surat_perintah_kerja::where('created_at', $today)->orWhere('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+            $total_pengajuan_spk = Surat_perintah_kerja::whereDate('created_at', $today)->where('user_id', $userId)->count();
+
+            $monthly_pengajuan_spk = Surat_perintah_kerja::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
+                ->groupBy(DB::raw('MONTH(created_at)'))
+                ->get();
+        } elseif ($userrole === 'General Affair') {
+            $today = Carbon::now()->format('Y-m-d');
+            $pengajuan_dana_per_day_by_user_id = PengajuanDana::where('created_at', $today)->where('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+
+            $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->where('user_id', $userId)->count();
+
+            $monthly_pengajuan_dana_by_user_id = PengajuanDana::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
+                ->groupBy(DB::raw('MONTH(created_at)'))
+                ->get();
+
+            $pengajuan_spk_per_day = Surat_perintah_kerja::where('created_at', $today)->orWhere('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+
+            $total_pengajuan_spk = Surat_perintah_kerja::whereDate('created_at', $today)->where('user_id', $userId)->count();
+
+            $monthly_pengajuan_spk = Surat_perintah_kerja::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
+                ->groupBy(DB::raw('MONTH(created_at)'))
+                ->get();
+        } elseif ($userrole === 'Hr') {
+            $today = Carbon::now()->format('Y-m-d');
+            $pengajuan_dana_per_day_by_user_id = PengajuanDana::where('created_at', $today)->where('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+
+            $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->where('user_id', $userId)->count();
+
+            $monthly_pengajuan_dana_by_user_id = PengajuanDana::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
+                ->groupBy(DB::raw('MONTH(created_at)'))
+                ->get();
+
+            $pengajuan_spk_per_day = Surat_perintah_kerja::where('created_at', $today)->orWhere('user_id', $userId)
+                ->orderBy('id', 'desc')
+                ->take(5)
+                ->get();
+
+            $total_pengajuan_spk = Surat_perintah_kerja::whereDate('created_at', $today)->where('user_id', $userId)->count();
+
+            $monthly_pengajuan_spk = Surat_perintah_kerja::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))->Where('user_id', $userId)
                 ->groupBy(DB::raw('MONTH(created_at)'))
                 ->get();
         }
@@ -79,7 +152,9 @@ class HomeViewController extends Controller
             ->with('monthly_pengajuan_spk', $monthly_pengajuan_spk);
     }
 
-    // Crud Pengajuan dana
+
+
+
     public function editPengajuanDana($id)
     {
         $pengajuanDana = PengajuanDana::findOrFail($id);
@@ -100,7 +175,6 @@ class HomeViewController extends Controller
     }
 
 
-    // Crud Surat Perintah Kerja
     public function editSuratPerintahKerja($id)
     {
         $suratPerintahKerja = Surat_perintah_kerja::findOrFail($id);

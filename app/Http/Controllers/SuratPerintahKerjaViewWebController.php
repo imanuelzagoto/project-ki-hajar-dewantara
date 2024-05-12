@@ -30,7 +30,21 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function index(Request $request)
     {
-        $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
+        $userData = Session::get('user');
+        $userrole = $userData['modules']['name'];
+        $userId = $userData['id'];
+
+        if ($userrole === 'Super Admin') {
+            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
+        } elseif ($userrole === 'user biasa') {
+            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        } elseif ($userrole === 'Driver') {
+            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        } elseif ($userrole === 'General Affair') {
+            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        } elseif ($userrole === 'Hr') {
+            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        }
 
         return view('suratPerintahKerja.index', compact('suratPerintahKerjas'));
     }
