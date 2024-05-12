@@ -82,31 +82,39 @@
                         <div id="chart" style="margin-top: 1%;"></div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="position: relative; bottom:20px;">
-                                @foreach ($monthly_pengajuan_dana_by_user_id as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:75px; top:5px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_dana">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
+                                    @if ($monthly_pengajuan_dana_by_user_id->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#FF1755">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_dana_by_user_id as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
                             <div style="position: relative; bottom:15px; right:535px;">
-                                @foreach ($monthly_pengajuan_spk as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:34px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">
-                                            :
-                                        </span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">
-                                            {{ $data->total }}
-                                        </span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_spk">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                        :
+                                    </span>
+                                    @if ($monthly_pengajuan_spk->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_spk as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -422,36 +430,42 @@
                                 Perkembangan Grafik
                             </h5>
                         </div>
-
                         <div id="chart" style="margin-top: 1%;"></div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="position: relative; bottom:20px;">
-                                @foreach ($monthly_pengajuan_dana_by_user_id as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:75px; top:5px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_dana">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
+                                    @if ($monthly_pengajuan_dana_by_user_id->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#FF1755">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_dana_by_user_id as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
-
                             <div style="position: relative; bottom:15px; right:535px;">
-                                @foreach ($monthly_pengajuan_spk as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:34px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">
-                                            :
-                                        </span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">
-                                            {{ $data->total }}
-                                        </span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_spk">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                        :
+                                    </span>
+                                    @if ($monthly_pengajuan_spk->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_spk as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -561,8 +575,7 @@
                                                     <th class="text-left" style="font-weight:700;" nowrap>No.Doc</th>
                                                     <th class="text-left" style="font-weight:700;" nowrap>Revisi</th>
                                                     <th class="text-left" style="font-weight:700;" nowrap>Pemohon</th>
-                                                    <th class="text-center" style="font-weight:700;" nowrap>Tujuan
-                                                    </th>
+                                                    <th class="text-center" style="font-weight:700;" nowrap>Tujuan</th>
                                                     <th class="text-center" style="font-weight:700;" nowrap>Lokasi<br>
                                                         <span style="display:block; text-align:center;">Pengajuan</span>
                                                     </th>
@@ -636,8 +649,7 @@
                                                     <th class="text-center" style="font-weight: 700;" nowrap>
                                                         Nama Project
                                                     </th>
-                                                    <th class="text-left" style="font-weight: 700;" nowrap>Pemohon
-                                                    </th>
+                                                    <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
                                                     <th class="text-left" style="font-weight: 700;" nowrap>User</th>
                                                     <th class="text-center" style="font-weight: 700;" nowrap>
                                                         Main Contractor
@@ -645,8 +657,7 @@
                                                     <th class="text-center" style="font-weight: 700;" nowrap>
                                                         Project Manager
                                                     </th>
-                                                    <th class="text-left" style="width:19px; font-weight:700;" nowrap>
-                                                        PIC
+                                                    <th class="text-left" style="width:19px; font-weight:700;" nowrap>PIC
                                                     </th>
                                                     <th class="text-center" style="width:23px; font-weight:700;" nowrap>
                                                         Tanggal</th>
@@ -770,36 +781,42 @@
                                 Perkembangan Grafik
                             </h5>
                         </div>
-
                         <div id="chart" style="margin-top: 1%;"></div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="position: relative; bottom:20px;">
-                                @foreach ($monthly_pengajuan_dana_by_user_id as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:75px; top:5px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_dana">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
+                                    @if ($monthly_pengajuan_dana_by_user_id->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#FF1755">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_dana_by_user_id as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
-
                             <div style="position: relative; bottom:15px; right:535px;">
-                                @foreach ($monthly_pengajuan_spk as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:34px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">
-                                            :
-                                        </span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">
-                                            {{ $data->total }}
-                                        </span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_spk">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                        :
+                                    </span>
+                                    @if ($monthly_pengajuan_spk->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_spk as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1115,36 +1132,42 @@
                                 Perkembangan Grafik
                             </h5>
                         </div>
-
                         <div id="chart" style="margin-top: 1%;"></div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="position: relative; bottom:20px;">
-                                @foreach ($monthly_pengajuan_dana_by_user_id as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:75px; top:5px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_dana">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
+                                    @if ($monthly_pengajuan_dana_by_user_id->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#FF1755">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_dana_by_user_id as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
-
                             <div style="position: relative; bottom:15px; right:535px;">
-                                @foreach ($monthly_pengajuan_spk as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:34px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">
-                                            :
-                                        </span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">
-                                            {{ $data->total }}
-                                        </span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_spk">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                        :
+                                    </span>
+                                    @if ($monthly_pengajuan_spk->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_spk as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -1460,36 +1483,42 @@
                                 Perkembangan Grafik
                             </h5>
                         </div>
-
                         <div id="chart" style="margin-top: 1%;"></div>
                         <div style="display: flex; justify-content: space-between;">
                             <div style="position: relative; bottom:20px;">
-                                @foreach ($monthly_pengajuan_dana_by_user_id as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:75px; top:5px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_dana">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#FF1755"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">:</span>
+                                    @if ($monthly_pengajuan_dana_by_user_id->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#FF1755">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_dana_by_user_id as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#FF1755">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+                                </div>
                             </div>
-
                             <div style="position: relative; bottom:15px; right:535px;">
-                                @foreach ($monthly_pengajuan_spk as $data)
-                                    <div class="total_pengajuan_dana" style="position: relative; left:34px;">
-                                        <span class="fas fa-circle"
-                                            style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                        <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#484E50">
-                                            :
-                                        </span>
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">
-                                            {{ $data->total }}
-                                        </span>
-                                    </div>
-                                @endforeach
+                                <div class="total_pengajuan_spk">
+                                    <span class="fas fa-circle"
+                                        style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
+                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                        :
+                                    </span>
+                                    @if ($monthly_pengajuan_spk->isEmpty())
+                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                    @else
+                                        @foreach ($monthly_pengajuan_spk as $data)
+                                            <span
+                                                style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
+                                        @endforeach
+                                    @endif
+
+                                </div>
                             </div>
                         </div>
                     </div>

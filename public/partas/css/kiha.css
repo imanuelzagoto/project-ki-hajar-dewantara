@@ -25,6 +25,11 @@
         left: 33px !important;
     }
 
+    .total_pengajuan_spk {
+        position: relative !important;
+        left: 34.4px !important;
+    }
+
     .menu_breadcrumbs {
         position: relative !important;
         left: 22px !important;
@@ -528,10 +533,68 @@
     }
 }
 
+.total_pengajuan_dana {
+    position: relative;
+    left: 75px;
+    top: 5px;
+}
+
+.total_pengajuan_spk {
+    position: relative;
+    left: 166.4px;
+}
+
 @media screen and (max-width: 991.11px) {
     .text-mp {
         margin-bottom: -5px;
     }
+
+    .total-permintaan {
+        position: relative !important;
+        left: 59px !important;
+        top: 83px !important;
+    }
+
+    .total-pengajuan {
+        position: relative !important;
+        left: 59px !important;
+        top: 83px !important;
+    }
+
+    .iconwallet {
+        font-size: 37px !important;
+        position: relative !important;
+        left: 39px !important;
+    }
+
+    .icon_paypal {
+        font-size: 38px !important;
+        position: relative !important;
+        left: 34px !important;
+    }
+
+    .garis_spk {
+        position: relative !important;
+        bottom: 1px !important;
+    }
+
+    .total_pengajuan_spk {
+        position: relative !important;
+        left: 166.4px !important;
+    }
+
+    .total_pengajuan_dana {
+        position: relative !important;
+        left: 75px !important;
+        top: 5px !important;
+    }
+
+    .text-dashboard {
+        position: relative !important;
+        right: 38px !important;
+    }
+
+
 }
 
 @media screen and (max-width: 568.89px) {
@@ -762,12 +825,12 @@
 }
 
 .pengajuan_card_spk {
-    position: relative;
-    top: 50px;
-    text-align: center;
-    color: #A1AEC1;
-    font-weight: 700;
-    font-size: 13px;
+    position: relative !important;
+    top: 50px !important;
+    text-align: center !important;
+    color: #A1AEC1 !important;
+    font-weight: 700 !important;
+    font-size: 13px !important;
 }
 
 .title_card_pd {
@@ -848,7 +911,7 @@
     font-weight: 700;
     position: relative;
     top: 84px;
-    left: 76px;
+    left: 79px;
 }
 
 .total-permintaan {
@@ -860,9 +923,9 @@
 }
 
 
-.garis_spk {
-    position: relative;
-    top: 66px;
+.hr_spk_card {
+    position: relative !important;
+    top: 66px !important;
 }
 
 .garis_pengajuan_dana {
