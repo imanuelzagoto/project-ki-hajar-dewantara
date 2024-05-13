@@ -68,7 +68,6 @@
         <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
             @csrf
         </form>
-
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
                 <div class="col-md-8">
@@ -99,17 +98,19 @@
                             </div>
                             <div style="position: relative; bottom:15px; right:535px;">
                                 <div class="total_pengajuan_spk">
-                                    <span class="fas fa-circle"
+                                    <span class="fas fa-circle icon_circle_spk"
                                         style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                    <span class="count_spk"
+                                        style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span class="colon" style="font-size: 14px; font-weight: bold; color:#484E50">
                                         :
                                     </span>
                                     @if ($monthly_pengajuan_spk->isEmpty())
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                        <span class="value_monthly_spk"
+                                            style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
                                     @else
                                         @foreach ($monthly_pengajuan_spk as $data)
-                                            <span
+                                            <span class="value_monthly_spk"
                                                 style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
                                         @endforeach
                                     @endif
@@ -158,7 +159,7 @@
                         <div class="col-md-6 mt-4" style="font-family: Arial, Helvetica, sans-serif;">
                             <div class="card card_count_spk">
                                 <div class="rounded-3 mt-2 backgorund_card_spk">
-                                    <div>
+                                    <div class="card_icon_paypal">
                                         <i class="fab fa-paypal icon_paypal"></i>
                                     </div>
                                     <div class="title_card_spk">
@@ -189,7 +190,6 @@
                 </div>
             </div>
         </div>
-        <!-- Menu Button -->
         <div class="row">
             <div class="col card-menu">
                 <div class="menu mt-3">
@@ -209,7 +209,6 @@
                 </div>
             </div>
         </div>
-        <!-- Data Table -->
         <div class="row mt-3">
             <div class="col ml--12">
                 <div class="tab-content" id="myTabContent">

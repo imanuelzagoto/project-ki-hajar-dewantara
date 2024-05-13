@@ -183,7 +183,7 @@
         left: 24px !important;
     }
 
-    ww .icon_paypal {
+    .icon_paypal {
         font-size: 30px !important;
         position: relative !important;
         left: 24px !important;
@@ -498,9 +498,60 @@
 }
 
 @media screen and (max-width: 768px) {
-    .text-dashboard {
-        margin-left: 0;
+    .d-flex-center {
+        justify-content: center;
+    }
+
+    .value_monthly_spk {
+        position: relative !important;
+        left: 151px !important;
+    }
+
+    .icon_circle_spk {
+        position: relative !important;
+        left: 149px !important;
+    }
+
+    .count_spk {
+        position: relative !important;
+        left: 148px !important;
+    }
+
+    .colon {
+        position: relative !important;
+        left: 150px !important;
+    }
+
+    .text-mp {
+        margin-left: 10px;
         margin-top: 0;
+    }
+
+    .text-spk {
+        margin-left: 2%;
+        margin-top: -6px;
+    }
+
+    .card_icon_walets {
+        position: relative !important;
+        right: 19px !important;
+    }
+
+    .card_icon_paypal {
+        position: relative !important;
+        right: 16px !important;
+    }
+
+    .count_permintaan {
+        position: relative !important;
+        right: 14px !important;
+        bottom: 10px !important;
+    }
+
+    .count_penajuan {
+        position: relative !important;
+        right: 14px !important;
+        bottom: 8px !important;
     }
 }
 
@@ -513,13 +564,6 @@
     margin-top: -20px;
     font-family: Helvetica, sans-serif;
     line-height: 19.6px;
-}
-
-@media screen and (max-width: 768px) {
-    .text-mp {
-        margin-left: 10px;
-        margin-top: 0;
-    }
 }
 
 @media screen and (max-width: 990.00px) and (min-width: 555.56px) {
@@ -625,14 +669,6 @@
 }
 
 /* Media queries untuk menyesuaikan margin berdasarkan lebar layar */
-
-@media screen and (max-width: 768px) {
-    .text-spk {
-        margin-left: 2%;
-        margin-top: -6px;
-    }
-}
-
 .breadcrumb-item {
     font-weight: 400;
     font-size: 14px;
@@ -1152,12 +1188,6 @@
     color: #718EBF;
     font-family: 'Inter', sans-serif;
     line-height: 19.36px;
-}
-
-@media (max-width: 768px) {
-    .d-flex-center {
-        justify-content: center;
-    }
 }
 
 .labelentris {
