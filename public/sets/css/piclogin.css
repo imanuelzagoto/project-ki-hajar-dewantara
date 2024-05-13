@@ -181,12 +181,18 @@
 
 /* label password */
 .password-address {
-    margin-top: 80px;
+    position: relative;
+    top: 38px;
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
-    line-height: 14px;
-    letter-spacing: -2%;
+    /* line-height: 14px;
+    letter-spacing: -2%; */
     color: #2B3674;
+}
+
+.input_password {
+    position: relative;
+    top: 35px;
 }
 
 
@@ -240,22 +246,14 @@ input[type=password]:focus {
 
 
 .copyright {
-    position: absolute;
-    bottom: 0;
+    position: relative;
+    top: 1px;
     width: 100%;
     text-align: left;
     padding-left: 180px;
-    left: 0;
+    right: 29px;
     color: #A3AED0;
 }
-
-/* @media (max-width: 768px) {
-    .copyright {
-        text-align: center;
-        left: 0;
-        padding-left: 0;
-    }
-} */
 
 /* Efek hover untuk tombol Sign In */
 .btn.signin-button {
@@ -271,13 +269,25 @@ input[type=password]:focus {
     position: relative;
 }
 
+.btn.signin_button {
+    position: relative !important;
+    top: 46px !important;
+    width: 390.5px !important;
+    right: 1px !important;
+}
+
 #toggleIcon {
     position: absolute;
-    top: 245%;
+    top: 86px;
     transform: translateY(-50%);
     right: 17px;
     cursor: pointer;
     color: #A3AED0;
     height: 15.5px;
     width: 25.33px;
+}
+
+.text_footer_login {
+    position: relative;
+    top: 1px;
 }

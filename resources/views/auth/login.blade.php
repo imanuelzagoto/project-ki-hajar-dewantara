@@ -20,25 +20,21 @@
                             @error('email')
                                 <span class="text-danger">{{ $message }}</span>
                             @enderror
+                            <div class="form-group custom-password-input">
+                                <label class="password-address">Password*</label>
+                                <input class="form-control input_password" id="password" type="password" name="password"
+                                    required placeholder="*********">
+                                <i data-feather="eye" id="toggleIcon" class="toggle-password"></i>
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="form-group custom-password-input">
-                            <label class="password-address">Password*</label>
-                            <input class="form-control" id="password" type="password" name="password" required
-                                placeholder="*********">
-                            <i data-feather="eye" id="toggleIcon" class="toggle-password"></i>
-                            @error('password')
-                                <span class="text-danger">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <button type="submit" class="btn signin-button">Sign In</button>
+                        <button type="submit" class="btn signin_button">Sign In</button>
                     </form>
-
                 </div>
-                <div class="text-footer-login">
-                    <div class="col-md-12 text-center">
-                        <p class="copyright">© 2022 Ki Hadjar Dewantara</p>
-                    </div>
+                <div class="col-md-12 text-center">
+                    <p class="copyright">© 2022 Ki Hadjar Dewantara</p>
                 </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block position-relative">
