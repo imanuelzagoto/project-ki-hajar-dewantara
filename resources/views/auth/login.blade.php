@@ -33,9 +33,7 @@
                         <button type="submit" class="btn signin_button">Sign In</button>
                     </form>
                 </div>
-                <div class="col-md-12 text-center">
-                    <p class="copyright">© 2022 Ki Hadjar Dewantara</p>
-                </div>
+                <span class="copyright">© 2022 Ki Hadjar Dewantara</span>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block position-relative">
                 <div class="codew-image">
