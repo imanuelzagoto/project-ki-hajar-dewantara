@@ -11,7 +11,7 @@
     @if ($userrole == 'Super Admin')
         <div class="main-dashboard mt--3">
             <nav aria-label="breadcrumb">
-                <div class="breadcrumb mt-1 d-flex justify-content-between">
+                <div class="breadcrumb mt-1 d-flex justify-content-between" id="breadcrumb">
                     <div class="d-lg-none">
                         <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                             data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -64,10 +64,11 @@
                     </div>
                 </div>
             </nav>
+            <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+                @csrf
+            </form>
         </div>
-        <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
-            @csrf
-        </form>
+
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
                 <div class="col-md-8">
@@ -270,7 +271,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                {{ $pdt->non_tunai }}
+                                                                Debit
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -414,10 +415,10 @@
                     </div>
                 </div>
             </nav>
+            <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+                @csrf
+            </form>
         </div>
-        <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
-            @csrf
-        </form>
 
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
@@ -621,7 +622,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                {{ $pdt->non_tunai }}
+                                                                Debit
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -765,10 +766,10 @@
                     </div>
                 </div>
             </nav>
+            <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+                @csrf
+            </form>
         </div>
-        <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
-            @csrf
-        </form>
 
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
@@ -972,7 +973,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                {{ $pdt->non_tunai }}
+                                                                Debit
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -1116,10 +1117,10 @@
                     </div>
                 </div>
             </nav>
+            <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+                @csrf
+            </form>
         </div>
-        <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
-            @csrf
-        </form>
 
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
@@ -1323,7 +1324,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                {{ $pdt->non_tunai }}
+                                                                Debit
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -1467,10 +1468,10 @@
                     </div>
                 </div>
             </nav>
+            <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+                @csrf
+            </form>
         </div>
-        <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
-            @csrf
-        </form>
 
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
@@ -1676,7 +1677,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                {{ $pdt->non_tunai }}
+                                                                Debit
                                                             @endif
                                                         </td>
                                                     </tr>

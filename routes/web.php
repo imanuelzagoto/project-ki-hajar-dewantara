@@ -9,8 +9,9 @@ use App\Http\Controllers\SuratPerintahKerjaViewWebController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
-
+use PhpParser\Node\Stmt\TryCatch;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,16 +24,6 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// UserService Login Logout
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('loginnew');
-
-// Route::get('/register', function () {
-//     return view('auth.register');
-// })->name('registnew');
-
-
 Route::get('/', function () {
     if (!Session::has('token')) {
         return view('auth.login');
@@ -40,31 +31,44 @@ Route::get('/', function () {
         return redirect('/dashboard');
     }
 });
-Route::post('/loginservice', function () {
 
-    $loginServiceUrl = env('LOGIN_SERVICE_URL');
-    $response = Http::post($loginServiceUrl, [
-        'email' => request('email'),
-        'password' => request('password'),
+Route::post('/loginservice', function () {
+    $validator = Validator::make(request()->all(), [
+        'email' => 'required|email',
+        'password' => 'required',
+    ], [
+        'email.required' => 'Email wajib diisi',
+        'email.email' => 'Email tidak valid',
+        'password.required' => 'Password wajib diisi',
     ]);
-    // dd($response['status']);
-    if (!empty($response['status'])) {
-        if ($response['status'] == 200) {
+
+    if ($validator->fails()) {
+        return redirect()->back()->withErrors($validator)->withInput();
+    }
+
+    try {
+        $loginServiceUrl = env('LOGIN_SERVICE_URL');
+        $response = Http::post($loginServiceUrl, [
+            'email' => request('email'),
+            'password' => request('password'),
+        ]);
+
+        if (!empty($response['status']) && $response['status'] == 200) {
             $userData = $response['user'];
             $token = $response['token'];
             Session::put('token', $token);
             Session::put('user', $userData);
 
-            $session = Session::get('token');
-
             return redirect()->route('home.index');
         } else {
-            return redirect('/')->with('message', 'Failed Login, 404 Internal Server Error');
+            $errorMessage = 'Email atau password tidak valid';
+            return redirect()->back()->withErrors(['login' => $errorMessage]);
         }
-    } else {
-        return redirect('/')->with('message', 'Invalid Credentials');
+    } catch (\Throwable $th) {
+        return redirect()->back()->withErrors(['login' => 'Terjadi kesalahan yang tidak terduga. Silakan coba lagi.']);
     }
 })->name('loginservice');
+
 
 Route::post('/logoutservice', function (Request $request) {
     Session::forget('token');

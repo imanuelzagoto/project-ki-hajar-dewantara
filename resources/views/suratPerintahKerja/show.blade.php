@@ -237,6 +237,13 @@
                             <input class="box1" style="width: 20px; border: 2px solid #000;  width:2.7%; height:4%;">
                             <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
                         </span>
+                        {{-- <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
+                            <input class="box1" type="checkbox"
+                                style="width: 20px; border: 2px solid #000;  width:2.7%; height:4%;"
+                                @if ($suratPerintahKerja->dokumen_pendukung_type) checked @endif>
+                            <span class="teks_gambar"
+                                style="position: relative; bottom:1%;">{{ $suratPerintahKerja->dokumen_pendukung_type }}</span>
+                        </span> --}}
                         <span class="checkbox_kontrak" style="position: relative; top:5%; left:25.5%; width:10%;">
                             <input class="box2" style="width: 20px; border: 2px solid #000;  width:2.5%; height:4%;">
                             <span class="teks_kontrak" style="position: relative; bottom:1%;">Kontrak</span>

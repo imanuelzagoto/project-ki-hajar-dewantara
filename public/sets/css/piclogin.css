@@ -167,8 +167,6 @@
     }
 }
 
-
-
 /* label email */
 .email-address {
     margin-top: 30px;
@@ -181,8 +179,6 @@
 
 /* label password */
 .password-address {
-    position: relative;
-    top: 38px;
     font-family: 'DM Sans', sans-serif;
     font-size: 14px;
     /* line-height: 14px;
@@ -190,42 +186,39 @@
     color: #2B3674;
 }
 
-.input_password {
+.custom-input {
     position: relative;
-    top: 35px;
+    margin-bottom: 40px;
 }
 
-
-/* kolom input email */
-.custom-input {
+.form-control {
     width: 390px;
     height: 50px;
-    margin-bottom: 118%;
-}
-
-.custom-input .form-control {
-    width: 100%;
-    height: 100%;
     border: 2px solid #ced4da;
-    border-radius: 16px;
+    border-radius: 16px !important;
     padding: 10px;
+    -webkit-border-radius: 16px !important;
+    -moz-border-radius: 16px !important;
+    -ms-border-radius: 16px !important;
+    -o-border-radius: 16px !important;
 }
 
-.custom-input .form-control:focus {
+.form-control:focus {
     border-color: #4FD1C5;
     box-shadow: 0 0 0 0.2rem rgba(79, 209, 197, 0.25);
 }
 
-/* kolom input password */
-.custom-password-input {
-    width: 391px;
-    height: 50px;
-    margin-bottom: 20px;
+.go-up {
+    position: absolute;
+    margin-top: 0px;
+    margin-left: 10px;
 }
 
 .custom-password-input .form-control {
-    width: 100%;
-    height: 100%;
+    position: relative;
+    width: 391px;
+    height: 50px;
+    margin-bottom: 20px;
     border: 2px solid #ced4da;
     border-radius: 16px;
     padding: 10px;
@@ -240,8 +233,7 @@
 /* Input email dan password dalam mode fokus */
 input[type=email]:focus,
 input[type=password]:focus {
-    border: 3px solid #3e96d9;
-    box-shadow: 0 0 0 0.2rem rgba(19, 107, 209, 0.25);
+    box-shadow: 0 0 0 0.1rem rgb(79, 210, 197);
 }
 
 
@@ -270,10 +262,8 @@ input[type=password]:focus {
 }
 
 .btn.signin_button {
-    position: relative !important;
-    top: 46px !important;
+    margin-top: 39px !important;
     width: 390.5px !important;
-    right: 1px !important;
 }
 
 #toggleIcon {

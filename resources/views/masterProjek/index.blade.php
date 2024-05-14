@@ -59,13 +59,13 @@
                 </div>
             </div>
         </nav>
+        <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+            @csrf
+        </form>
     </div>
-    <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
-        @csrf
-    </form>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 23px;">
+            <div class="col-md-6 align-items-center" style="margin-top: 23px;">
                 <form id="dataTableSearchForm" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
@@ -73,69 +73,58 @@
                             placeholder="Type here...." aria-controls="dataTable">
                     </div>
                 </form>
-                <button type="button" id="filtersButtonProject" class="btn btn-sm btn-outline-info ml-2 btn-filters"
-                    style="font-size: 17.18px;">
-                    <i class="fas fa-sliders-h"></i> Search
-                </button>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" id="filtersButtonProject" class="btn btn-sm btn-outline-info ml-2 btn-filters"
+                        style="font-size: 15.18px; position: relative; top:24px; right:309px;">
+                        <i class="fas fa-sliders-h"></i> Search
+                    </button>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card" style="margin-top: 10px;">
                     <div class="card-body">
+                        <div class="align-items-center d-flex-center">
+                            <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
+                                style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                            </select>
+                            <span class="labelentris">entries per page</span>
+                        </div>
                         <div class="table-responsive">
-                            <div class="align-items-center d-flex-center">
-                                <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
-                                    style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="100">100</option>
-                                </select>
-                                <span class="labelentris">entries per page</span>
-                            </div>
-                            <table class="table display-6 table-hover table_master_projek" id="tableProject"
-                                style="position: relative; bottom:15px;">
+                            <table class="table table-hover" id="tableProject">
                                 <thead>
                                     <tr style="color: #718EBF; font-family: 'Inter', sans-serif;">
                                         <th class="text-left" style="font-weight:700;" nowrap>No</th>
                                         <th class="text-left" style="font-weight:700;" nowrap>Nama Projek</th>
-                                        <th class="text-left" style="width: 15px; font-weight:700;" nowrap>Kode Projek</th>
+                                        <th class="text-left" style="font-weight:700;" nowrap>Kode Projek</th>
                                         <th class="text-center" style="font-weight:700;" nowrap>Tenggat</th>
                                         <th class="text-center" style="font-weight:700;" nowrap>Mulai</th>
                                         <th class="text-center" style="font-weight:700;" nowrap>Akhir</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @php
-                                        $i = 0;
-                                    @endphp
+                                    @php $i = 0; @endphp
                                     @foreach ($projects as $project)
-                                        @php
-                                            $i += 1;
-                                        @endphp
+                                        @php $i += 1; @endphp
                                         <tr>
-                                            <td class="text-left" style="font-weight:500;"nowrap>
-                                                {{ $i }}
+                                            <td class="text-left" style="font-weight:500;" nowrap>{{ $i }}</td>
+                                            <td class="text-left" style="font-weight:500;" nowrap>{{ $project['title'] }}
                                             </td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>
-                                                {{ $project['title'] }}
-                                            </td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>
-                                                {{ $project['code'] }}
-                                            </td>
+                                            <td class="text-left" style="font-weight:500;" nowrap>{{ $project['code'] }}
                                             </td>
                                             <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
-                                            </td>
+                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
                                             <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}
-                                            </td>
+                                                {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}</td>
                                             <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
-                                            </td>
-
+                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -146,7 +135,9 @@
             </div>
         </div>
     </div>
+@endsection
 
+@push('scripts')
     <script>
         // JS DELETE
         function submitDelete(id) {
@@ -177,11 +168,9 @@
                 }
             });
         }
-    </script>
-@endsection
 
-@push('scripts')
-    <script>
+
+
         // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
         document.addEventListener('DOMContentLoaded', function() {
             // Panggil updateClock secara berkala setiap detik

@@ -83,13 +83,11 @@ class SuratPerintahKerjaViewWebController extends Controller
         $currentYear = date('Y');
         $currentMonth = date('m');
         $no_spk = $nextId . '-SPK/SII/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
-        // dd($no_spk);
         return $no_spk;
     }
 
     public function store(Request $request)
     {
-        // dd($request);
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'code'          => 'required|string',
@@ -258,10 +256,13 @@ class SuratPerintahKerjaViewWebController extends Controller
         } else {
             $dokumen_pendukung_file = $suratPerintahKerjas->dokumen_pendukung_file;
         }
+
+        $userData = Session::get('user');
+        $userId = $userData['id'];
         // Update Surat_perintah_kerja with new or old values
         if ($request->dokumen_pendukung_file) {
             $suratPerintahKerjas->update([
-                'user_id' => $request->user_id,
+                'user_id' => $userId,
                 'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,
@@ -285,7 +286,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             ]);
         } else {
             $suratPerintahKerjas->update([
-                'user_id' => $request->user_id,
+                'user_id' => $userId,
                 'code'          => $request->code,
                 'pemohon'               => $request->pemohon,
                 'penerima'               => $request->penerima,

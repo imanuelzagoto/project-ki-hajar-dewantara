@@ -19,10 +19,17 @@
     margin-right: 16px;
 }
 
+@media screen and (min-width: 1600px) {
+    .breadcrumbs {
+        margin-right: 1px;
+    }
+}
+
+
 @media screen and (max-width: 2560px) {
     .breadcrumbs {
-        position: relative !important;
-        left: 33px !important;
+        position: relative;
+        left: 30px;
     }
 
     .total_pengajuan_spk {
@@ -458,6 +465,10 @@
     .text-mp {
         left: -7px;
         position: relative;
+    }
+
+    .breadcrumbs {
+        margin-left: -9px !important;
     }
 
     .text-dashboard {
@@ -1210,8 +1221,8 @@
     }
 
     .table_master_projek {
-        position: relative;
-        top: 1px;
+        position: relative !important;
+        top: 1px !important;
     }
 }
 
@@ -1364,7 +1375,7 @@ input[type=file]::file-selector-button:hover {
 /* scrollbar card body spk */
 .custom-card-body {
     overflow-y: auto;
-    max-height: 400px;
+    max-height: 600px;
 }
 
 .detail-text {

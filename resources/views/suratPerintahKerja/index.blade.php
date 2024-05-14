@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <div class="main-dashboard mt--3">
         <nav aria-label="breadcrumb">
             <div class="breadcrumb mt-1 d-flex justify-content-between">
@@ -32,7 +33,7 @@
                     </ul>
                 </div>
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
-                    style="float: left; margin-right:3px; background-color:#F1F4FA;">
+                    style="float: left; margin-right:3px; background-color:#F1F4FA; margin-bottom:8px;">
                     <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>
@@ -61,10 +62,10 @@
                 </div>
             </div>
         </nav>
+        <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
+            @csrf
+        </form>
     </div>
-    <form action="{{ route('logout') }}" method="post" id="logout-form" style="display: none;">
-        @csrf
-    </form>
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 23px;">
