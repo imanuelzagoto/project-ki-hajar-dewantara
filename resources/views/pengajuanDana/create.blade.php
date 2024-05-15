@@ -86,14 +86,12 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
                                                 <input name="subject" class="form-control bg-light w-100" type="text"
-                                                    required oninvalid="this.setCustomValidity('Subject wajib diisi')"
-                                                    oninput="setCustomValidity('')">
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
                                                 <input name="revisi" class="form-control bg-light w-100" type="text"
-                                                    required oninvalid="this.setCustomValidity('Revisi wajib diisi')"
-                                                    oninput="setCustomValidity('')">
+                                                    required>
                                             </div>
                                             <div class="row pr-3 pt-3">
                                                 <div class="pr-4 py-2 col-6" style="display: none;">
@@ -174,8 +172,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row pr-3 pt-3" id="itemFields">
-                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                            <div class=" pr-3 pt-3" id="itemFields">
+                                <div class=" d-flex ">
                                     <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
                                         <span class="head-item">Item</span>
                                         <span class="detail-text">Pengaju</span>
@@ -183,7 +181,7 @@
                                     <div class="d-block w-100">
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
-                                                <button id="tambahField"
+                                                <button id="tambahField" type="button"
                                                     class="btn btn-sm button-tambah font-weight-bold">
                                                     <span class="btn-label">
                                                         <i class="fa-solid fa-plus"></i>
@@ -196,9 +194,7 @@
                                                     type="text"
                                                     style="font-size: 10px; font-weight: bold; color: #92A1BB; height:10px; width:11px; visibility: hidden;">
                                             </div>
-                                        </div>
-                                        <div class="row py-2">
-                                            {{-- Script JS ITEM --}}
+
                                         </div>
                                     </div>
                                 </div>
@@ -343,31 +339,31 @@
                 // Fungsi untuk menambahkan baris baru
                 function addNewRow() {
                     var newRow = `
-                <div class="row py-2" style="margin-left: 119px;">
-                    <div class="pr-4 py-2 col-2">
-                        <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:13px;">Nama item</span>
-                        <input name="nama_item[]" class="form-control bg-light w-100" type="text" style="position: relative; right: 13.5px;" required>
-                    </div>
-                    <div class="pr-4 py-2 col-2">
-                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:-7px;">Jumlah</span>
-                        <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style="position:relative; left:-11px; text-align:center;" required>
-                    </div>
-                    <div class="pr-4 py-2 col-2">
-                        <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:9px;">Satuan</span>
-                        <input name="satuan[]" class="form-control bg-light w-100" type="text" style="position: relative; right: 10px; text-align:center;" required>
-                    </div>
-                    <div class="pr-4 py-2 col-2">
-                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; right:10px;">Harga</span>
-                        <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right; position:relative; left:-11px; width:157px;" required>
-                    </div>
-                    <div class="pr-4 py-2 col-2">
-                        <span class="text-sm font-weight-bold text-form-detail" style="position:relative; left:17px;">Total</span>
-                        <input name="total" class="form-control bg-light text-right total" type="text" style="position:relative; left:17px; width:195px;" required readonly>
-                    </div>
-                    <div class="pr-4 py-2 col-1 JS-button-delete">
-                        <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px; margin-left: 71px;" disabled><i class="fa-solid fa-minus"></i></button>
-                    </div>
-                </div>`;
+                        <div class="row py-2" style="margin-left: 95px;">
+                            <div class="py-2 col-3">
+                                <span class="text-sm font-weight-bold text-form-detail" >Nama item</span>
+                                <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
+                            </div>
+                            <div class="py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" >Jumlah</span>
+                                <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style=" left:-11px; text-align:center;" required>
+                            </div>
+                            <div class="py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" >Satuan</span>
+                                <input name="satuan[]" class="form-control bg-light w-100" type="text" style=" text-align:center;" required>
+                            </div>
+                            <div class="py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" style="">Harga</span>
+                                <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right; " required>
+                            </div>
+                            <div class="py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail" style="">Total</span>
+                                <input name="total" class="form-control bg-light text-right total" type="text"  required readonly>
+                            </div>
+                            <div class=" py-2 col-1 JS-button-delete">
+                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 20px;" disabled><i class="fa-solid fa-minus"></i></button>
+                            </div>
+                        </div>`;
                     $("#itemFields").append(newRow);
                     activateDeleteButtons();
                 }

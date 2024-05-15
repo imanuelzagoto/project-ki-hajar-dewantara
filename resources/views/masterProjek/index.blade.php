@@ -98,9 +98,9 @@
                             <span class="labelentris">entries per page</span>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-hover" id="tableProject">
+                            <table class="element-scrollbar table display-6 table-hover w-100" id="tableProject">
                                 <thead>
-                                    <tr style="color: #718EBF; font-family: 'Inter', sans-serif;">
+                                    <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                         <th class="text-left" style="font-weight:700;" nowrap>No</th>
                                         <th class="text-left" style="font-weight:700;" nowrap>Nama Projek</th>
                                         <th class="text-left" style="font-weight:700;" nowrap>Kode Projek</th>

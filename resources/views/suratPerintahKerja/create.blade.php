@@ -85,7 +85,7 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
-                                                <input type="hidden" id="kode_project_hidden" name="code">
+                                                <input type="hidden" id="kode_project_hidden" name="code" required>
                                                 <select id="project_id" name="code" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
                                                     <option value="" disabled selected>
@@ -106,28 +106,32 @@
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
-                                                <input name="user" class="form-control bg-light w-100" type="text">
+                                                <input name="user" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Main
                                                     Contractor</span>
                                                 <input name="main_contractor" class="form-control bg-light w-100"
-                                                    type="text">
+                                                    type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Project
                                                     Manager</span>
                                                 <input name="project_manager" class="form-control bg-light w-100"
-                                                    type="text">
+                                                    type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">PIC</span>
-                                                <input name="pic" class="form-control bg-light w-100" type="text">
+                                                <input name="pic" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan</span>
-                                                <input name="tanggal" class="form-control bg-light w-100" type="date">
+                                                <input name="tanggal" class="form-control bg-light w-100" type="date"
+                                                    required>
                                             </div>
                                             <div
                                                 class="pr-4
@@ -158,21 +162,21 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Jenis
                                                     Pekerjaan</span>
                                                 <input name="jenis_pekerjaan" class="form-control bg-light w-100"
-                                                    type="text">
+                                                    type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Uraian
                                                     Pekerjaan</span>
                                                 <textarea name="uraian_pekerjaan" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
-                                                    style="resize: vertical; width:430px; position: relative; height:139px"></textarea>
+                                                    style="height: 138px;" required></textarea>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
-                                                    style="position: relative; right:40px; top:4px;">File
-                                                    Pendukung
+                                                    style="margin-top: 7px;">
+                                                    File Pendukung
                                                 </div>
-                                                <div class="d-flex" style="position: relative; right:40px;">
+                                                <div class="d-flex">
                                                     <div class="form-checkbox-gambar d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
                                                             id="checkbox_gambar" value="1">
@@ -189,8 +193,7 @@
                                                         <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
                                                     </div>
                                                 </div>
-                                                <label for="images" class="drop-container" id="dropcontainer"
-                                                    style="position: relative; right:45px;height:99px; width:514px;">
+                                                <label for="images" class="drop-container" id="dropcontainer">
                                                     <span class="drop-title">Drop files here</span>
                                                     <input name="dokumen_pendukung_file" type="file" id="images"
                                                         accept="image/*">
@@ -211,39 +214,35 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                <input name="pemohon" style="width: 432px; position: relative;"
-                                                    class="form-control bg-light" type="text">
+                                                <input name="pemohon" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:45px;">Jabatan</span>
-                                                <input name="jabatan_1"
-                                                    style="width: 518px; position: relative; right:46px;"
-                                                    class="form-control bg-light" type="text">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <input name="jabatan_1" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                <input name="penerima" style="width: 432px; position: relative;"
-                                                    class="form-control bg-light" type="text">
+                                                <input name="penerima" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:45px;">Jabatan</span>
-                                                <input name="jabatan_2"
-                                                    style="width: 518px; position: relative; right:46px;"
-                                                    class="form-control bg-light" type="text">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <input name="jabatan_2" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <input name="menyetujui" style="width: 432px; position: relative;"
-                                                    class="form-control bg-light" type="text">
+                                                <input name="menyetujui" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:45px;">Jabatan</span>
-                                                <input name="jabatan_3"
-                                                    style="width: 518px; position: relative; right:46px;"
-                                                    class="form-control bg-light" type="text">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <input name="jabatan_3" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
                                         </div>
                                     </div>

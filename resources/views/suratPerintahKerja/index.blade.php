@@ -107,10 +107,10 @@
                             </select>
                             <span class="labelentris">entries per page</span>
                         </div>
-                        {{-- <div class="table-responsive"> --}}
-                        <table class="table display-6 table-responsive mb-6 table-hover w-100" id="tablespk">
+                        <table class="element-scrollbar table-responsive-goto table display-6 table-hover w-100"
+                            id="tablespk">
                             <thead>
-                                <tr class="column_th">
+                                <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                     <th class="text-center" style="font-weight: 700;" nowrap>No</th>
                                     <th class="text-center" style="width:25px; font-weight: 700;" nowrap>No SPK</th>
                                     <th class="text-left" style="font-weight: 700;" nowrap>
@@ -195,7 +195,6 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- </div> --}}
                     </div>
                 </div>
             </div>

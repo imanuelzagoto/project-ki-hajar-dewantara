@@ -19,27 +19,76 @@
     margin-right: 16px;
 }
 
-@media screen and (min-width: 1600px) {
+.breadcrumb{
+    margin-left: 14px;
+}
+
+.breadcrumbs {
+    margin-left: 34px !important;
+}
+
+@media screen and (max-width: 1800px) {
+    /* .breadcrumbs {
+        position: relative !important;
+        left: 18px !important;
+    } */
+
+    .text-dashboard {
+        padding-right: 5px;
+    }
+}
+
+@media screen and (max-width: 1440px) {
+    .text-mp {
+        left: -7px;
+        position: relative;
+    }
+
     .breadcrumbs {
-        margin-right: 1px;
+        margin-left: 34px !important;
+    }
+
+    .text-dashboard {
+        padding-left: 1px;
+    }
+
+    .button-delete {
+        margin-top: 6px;
+        margin-left: 7px;
+        height: 38px;
     }
 }
 
 
 @media screen and (max-width: 2560px) {
-    .breadcrumbs {
-        position: relative;
-        left: 30px;
+    /* .breadcrumbs {
+        position: relative !important;
+        left: 6px !important;
+    } */
+
+    .icon_circle_spk {
+        position: relative !important;
+        left: 107px !important;
     }
 
-    .total_pengajuan_spk {
+    .count_spk {
         position: relative !important;
-        left: 34.4px !important;
+        left: 107px !important;
+    }
+
+    .value_monthly_spk {
+        position: relative !important;
+        left: 109px !important;
+    }
+
+    .colon {
+        position: relative !important;
+        left: 108px !important;
     }
 
     .menu_breadcrumbs {
         position: relative !important;
-        left: 22px !important;
+        left: 20px !important;
     }
 
     .text-dashboard {
@@ -73,53 +122,11 @@
     }
 }
 
-@media screen and (max-min: 2560px) {
-    .breadcrumbs {
-        position: relative;
-        left: 34px;
-    }
-
-    .menu_breadcrumbs {
-        position: relative;
-        left: 22px;
-    }
-
-    .text-dashboard {
-        position: relative;
-        right: 23px;
-    }
-
-    .my-custom-card {
-        background-size: auto 200px;
-        background-repeat: no-repeat;
-        background-position: center;
-        position: relative;
-        right: -2px;
-        border-radius: 10px;
-        -webkit-border-radius: 10px;
-        -moz-border-radius: 10px;
-        -ms-border-radius: 10px;
-        -o-border-radius: 10px;
-    }
-
-    .button-logout {
-        position: relative;
-        right: -5px;
-        line-height: 1px;
-    }
-
-    .datetime_home {
-        position: relative;
-        left: 16px;
-        font-size: 14.8px;
-    }
-}
-
 @media screen and (max-width: 1438px) {
-    .breadcrumbs {
+    /* .breadcrumbs {
         position: relative !important;
         left: 32px !important;
-    }
+    } */
 
     .text-dashboard {
         position: relative !important;
@@ -186,83 +193,29 @@
 
     .iconwallet {
         font-size: 30px !important;
-        position: relative !important;
-        left: 24px !important;
     }
+}
 
-    .icon_paypal {
-        font-size: 30px !important;
-        position: relative !important;
-        left: 24px !important;
-        top: 24px !important;
-    }
+.card_icon_walets {
+    display: flex !important;
+    align-content: center !important;
+    justify-content: center !important;
+    margin-top: 35px;
+    margin-bottom: 20px;
+}
 
-    .title_card_pd {
-        position: relative !important;
-        top: 40px !important;
-        text-align: center !important;
-        font-weight: 700 !important;
-        font-size: 14px !important;
-    }
+.title_card_pd {
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 6px;
+}
 
-    .title_card_spk {
-        position: relative !important;
-        top: 44px !important;
-        text-align: center !important;
-        font-weight: 700 !important;
-        font-size: 14px !important;
-    }
-
-    .permintaan_card_spk {
-        position: relative !important;
-        top: 51px !important;
-        text-align: center !important;
-        color: #A1AEC1 !important;
-        font-weight: 700 !important;
-        font-size: 11px !important;
-    }
-
-    .pengajuan_card_spk {
-        position: relative !important;
-        top: 75px !important;
-        text-align: center !important;
-        color: #A1AEC1 !important;
-        font-weight: 700 !important;
-        font-size: 11px !important;
-    }
-
-    .hr-card {
-        width: 100% !important;
-        border: 0 !important;
-        height: 1px !important;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0)) !important;
-    }
-
-    .hr_spk_card {
-        width: 100% !important;
-        border: 0 !important;
-        position: relative !important;
-        top: 25px;
-        height: 1px !important;
-        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0)) !important;
-    }
-
-    .total-pengajuan {
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        position: relative !important;
-        top: 94px !important;
-        left: 44px !important;
-    }
-
-    .total-permintaan {
-        font-size: 20px !important;
-        font-weight: 700 !important;
-        position: relative !important;
-        top: 54px !important;
-        left: 44px !important;
-    }
-
+.permintaan_card_pd {
+    text-align: center;
+    color: #A1AEC1;
+    font-weight: 700;
+    font-size: 13px;
 }
 
 .text-spk {
@@ -272,6 +225,30 @@
     font-weight: 700;
     font-size: 1px;
 }
+
+.hr-card {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0));
+}
+
+.count_permintaan {
+    display: flex;
+    justify-content: center;
+}
+
+.container_card_bottom {
+    position: absolute;
+    bottom: 25px;
+    width: 100%;
+}
+
+.total-permintaan {
+    font-size: 20px !important;
+    font-weight: 700 !important;
+}
+
 
 .breadcrumbs__item {
     display: inline-block;
@@ -290,8 +267,6 @@
 .breadcrumbs__link:hover {
     text-decoration: underline;
 }
-
-/* end */
 
 
 .text-sm {
@@ -461,36 +436,9 @@
     }
 }
 
-@media screen and (max-width: 1440px) {
-    .text-mp {
-        left: -7px;
-        position: relative;
-    }
-
-    .breadcrumbs {
-        margin-left: -9px !important;
-    }
-
-    .text-dashboard {
-        padding-left: 1px;
-    }
-
-    .button-delete {
-        margin-top: 6px;
-        margin-left: 7px;
-        height: 38px;
-    }
-}
-
 @media screen and (max-width: 1455.56px) {
     .text-mp {
         padding-left: 0.6%;
-    }
-}
-
-@media screen and (max-width: 1800px) {
-    .text-dashboard {
-        padding-right: 5px;
     }
 }
 
@@ -542,28 +490,6 @@
         margin-left: 2%;
         margin-top: -6px;
     }
-
-    .card_icon_walets {
-        position: relative !important;
-        right: 19px !important;
-    }
-
-    .card_icon_paypal {
-        position: relative !important;
-        right: 16px !important;
-    }
-
-    .count_permintaan {
-        position: relative !important;
-        right: 14px !important;
-        bottom: 10px !important;
-    }
-
-    .count_penajuan {
-        position: relative !important;
-        right: 14px !important;
-        bottom: 8px !important;
-    }
 }
 
 .text-mp {
@@ -594,48 +520,19 @@
     top: 5px;
 }
 
-.total_pengajuan_spk {
-    position: relative;
-    left: 166.4px;
-}
-
 @media screen and (max-width: 991.11px) {
     .text-mp {
         margin-bottom: -5px;
     }
 
-    .total-permintaan {
-        position: relative !important;
-        left: 59px !important;
-        top: 83px !important;
-    }
-
-    .total-pengajuan {
-        position: relative !important;
-        left: 59px !important;
-        top: 83px !important;
-    }
-
     .iconwallet {
         font-size: 37px !important;
-        position: relative !important;
-        left: 39px !important;
+        /* position: relative !important;
+        left: 39px !important; */
     }
 
     .icon_paypal {
         font-size: 38px !important;
-        position: relative !important;
-        left: 34px !important;
-    }
-
-    .garis_spk {
-        position: relative !important;
-        bottom: 1px !important;
-    }
-
-    .total_pengajuan_spk {
-        position: relative !important;
-        left: 166.4px !important;
     }
 
     .total_pengajuan_dana {
@@ -679,7 +576,6 @@
     line-height: 19.6px;
 }
 
-/* Media queries untuk menyesuaikan margin berdasarkan lebar layar */
 .breadcrumb-item {
     font-weight: 400;
     font-size: 14px;
@@ -862,48 +758,15 @@
     font-weight: 700;
 }
 
-.permintaan_card_spk {
-    position: relative;
-    top: 50px;
-    text-align: center;
-    color: #A1AEC1;
-    font-weight: 700;
-    font-size: 13px;
-}
-
-.pengajuan_card_spk {
-    position: relative !important;
-    top: 50px !important;
-    text-align: center !important;
-    color: #A1AEC1 !important;
-    font-weight: 700 !important;
-    font-size: 13px !important;
-}
-
-.title_card_pd {
-    position: relative;
-    top: 40px;
-    text-align: center;
-    font-weight: 700;
-    font-size: 16px;
-}
-
-.title_card_spk {
-    position: relative;
-    top: 41px;
-    text-align: center;
-    font-weight: 700;
-    font-size: 16px;
-}
-
 .iconwallet {
-    font-size: 40px;
+    font-size: 41px;
     background-color: #4FD1C5;
     color: #FFFFFF;
-    position: relative;
     left: 52px;
     top: 20px;
     padding: 11px;
+    padding-left: 16px;
+    padding-right: 16px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -915,12 +778,11 @@
     font-size: 40px;
     background-color: #4FD1C5;
     color: #FFFFFF;
-    position: relative;
     left: 52px;
     top: 20px;
-    padding: 17px;
-    padding-bottom: 10px;
-    padding-top: 10px;
+    padding: 13px;
+    padding-left: 20px;
+    padding-right: 20px;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -930,54 +792,24 @@
 
 .backgorund_card_pd {
     height: 284px;
+    position: relative;
+}
+.table-responsive-goto{
+    display:block;
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+@media screen and (min-width: 2000px) {
+    .table-responsive-goto{
+        display:table !important;
+        overflow-x:auto;
+        overflow-y:hidden;
+    }
 }
 
 .backgorund_card_spk {
     height: 284px;
-}
-
-
-.hr-card {
-    width: 100%;
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0));
     position: relative;
-    top: 4px;
-}
-
-.hr_spk_card {
-    width: 100%;
-    border: 0;
-    height: 1px;
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(186, 181, 181, 0.75), rgba(0, 0, 0, 0));
-}
-
-.total-pengajuan {
-    font-size: 20px;
-    font-weight: 700;
-    position: relative;
-    top: 84px;
-    left: 79px;
-}
-
-.total-permintaan {
-    font-size: 20px;
-    font-weight: 700;
-    position: relative;
-    top: 78px;
-    left: 76px;
-}
-
-
-.hr_spk_card {
-    position: relative !important;
-    top: 66px !important;
-}
-
-.garis_pengajuan_dana {
-    position: relative;
-    top: 60px;
 }
 
 .text-active {
@@ -1063,12 +895,6 @@
     color: #718096;
     margin-right: -9px;
 }
-
-/* @media screen and (max-width: 1440px) {
-    .button-logout {
-        margin-right: -px;
-    }
-} */
 
 /* CSS untuk tooltip */
 .tooltip-container {
@@ -1537,8 +1363,29 @@ input[type=file]::file-selector-button:hover {
         margin-left: 7px;
         height: 38px;
     }
+    
+    .breadcrumbs {
+        position: absolute;
+        left: -24px !important;
+        bottom: -12px !important;
+    }
 }
 
+@media screen and (max-width: 1920px) {
+    .breadcrumbs {
+        position: absolute;
+        left: -24px !important;
+        bottom: -12px !important;
+    }
+}
+
+@media screen and (max-width: 2160px) {
+    .breadcrumbs {
+        position: absolute;
+        left: -24px !important;
+        bottom: -12px !important;
+    }
+}
 
 .JS-button-delete {
     position: relative;

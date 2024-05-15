@@ -43,8 +43,9 @@
                         <button type="submit" class="btn signin_button">Masuk</button>
                     </form>
                 </div>
-
-                <span class="copyright">© 2022 Ki Hadjar Dewantara</span>
+                <div>
+                    <span class="copyright">@2024 SIOPS. INTEK Company.</span>
+                </div>
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block position-relative">
                 <div class="codew-image">

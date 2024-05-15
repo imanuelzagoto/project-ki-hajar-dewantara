@@ -48,8 +48,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h2 class="text-dashboard font-weight-bold display-6">
-                            Dashboard <span style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
-                            <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                            Dashboard
                         </h2>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
@@ -68,7 +67,6 @@
                 @csrf
             </form>
         </div>
-
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
                 <div class="col-md-8">
@@ -80,7 +78,7 @@
                             </h5>
                         </div>
                         <div id="chart" style="margin-top: 1%;"></div>
-                        <div style="display: flex; justify-content: space-between;">
+                        <div style="display: flex;">
                             <div style="position: relative; bottom:20px;">
                                 <div class="total_pengajuan_dana">
                                     <span class="fas fa-circle"
@@ -97,7 +95,7 @@
                                     @endif
                                 </div>
                             </div>
-                            <div style="position: relative; bottom:15px; right:535px;">
+                            <div style="position: relative; bottom:16px; margin-left: 16px;">
                                 <div class="total_pengajuan_spk">
                                     <span class="fas fa-circle icon_circle_spk"
                                         style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
@@ -125,7 +123,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
+                                background-attachment: fixed;
+                                background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -142,40 +142,44 @@
                                     <div class="title_card_pd">
                                         <span>Pengajuan Dana</span>
                                     </div>
-                                    <div class="permintaan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Permintaan Aktif</span>
                                     </div>
-                                    <div class="garis_pengajuan_dana">
-                                        <hr class="hr-card">
-                                    </div>
-                                    <div class="count_permintaan">
-                                        <span class="total-permintaan">
-                                            {{ $total_pengajuan_dana_by_user_id }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_dana_by_user_id }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6 mt-4" style="font-family: Arial, Helvetica, sans-serif;">
-                            <div class="card card_count_spk">
-                                <div class="rounded-3 mt-2 backgorund_card_spk">
-                                    <div class="card_icon_paypal">
-                                        <i class="fab fa-paypal icon_paypal"></i>
+                            <div class="card card_count_pengajuan_dana">
+                                <div class="rounded-3 mt-2 backgorund_card_pd">
+                                    <div class="card_icon_walets">
+                                        <i class="fab fa-paypal iconwallet"></i>
                                     </div>
-                                    <div class="title_card_spk">
+                                    <div class="title_card_pd">
                                         <span>SPK</span>
                                     </div>
-                                    <div class="pengajuan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Pengajuan Aktif</span>
                                     </div>
-                                    <div class="garis_spk">
-                                        <hr class="hr_spk_card">
-                                    </div>
-                                    <div class="count_penajuan">
-                                        <span class="total-pengajuan">
-                                            {{ $total_pengajuan_spk }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_spk }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -362,7 +366,7 @@
     @if ($userrole == 'user biasa')
         <div class="main-dashboard mt--3">
             <nav aria-label="breadcrumb">
-                <div class="breadcrumb mt-1 d-flex justify-content-between">
+                <div class="breadcrumb mt-1 d-flex justify-content-between" id="breadcrumb">
                     <div class="d-lg-none">
                         <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                             data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -399,8 +403,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h2 class="text-dashboard font-weight-bold display-6">
-                            Dashboard <span style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
-                            <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                            Dashboard
                         </h2>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
@@ -419,7 +422,6 @@
                 @csrf
             </form>
         </div>
-
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
                 <div class="col-md-8">
@@ -431,7 +433,7 @@
                             </h5>
                         </div>
                         <div id="chart" style="margin-top: 1%;"></div>
-                        <div style="display: flex; justify-content: space-between;">
+                        <div style="display: flex;">
                             <div style="position: relative; bottom:20px;">
                                 <div class="total_pengajuan_dana">
                                     <span class="fas fa-circle"
@@ -448,19 +450,21 @@
                                     @endif
                                 </div>
                             </div>
-                            <div style="position: relative; bottom:15px; right:535px;">
+                            <div style="position: relative; bottom:16px; margin-left: 16px;">
                                 <div class="total_pengajuan_spk">
-                                    <span class="fas fa-circle"
+                                    <span class="fas fa-circle icon_circle_spk"
                                         style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                    <span class="count_spk"
+                                        style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span class="colon" style="font-size: 14px; font-weight: bold; color:#484E50">
                                         :
                                     </span>
                                     @if ($monthly_pengajuan_spk->isEmpty())
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                        <span class="value_monthly_spk"
+                                            style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
                                     @else
                                         @foreach ($monthly_pengajuan_spk as $data)
-                                            <span
+                                            <span class="value_monthly_spk"
                                                 style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
                                         @endforeach
                                     @endif
@@ -474,7 +478,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100% !important; background-repeat: no-repeat; background-attachment: fixed;
+                                background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -491,40 +498,44 @@
                                     <div class="title_card_pd">
                                         <span>Pengajuan Dana</span>
                                     </div>
-                                    <div class="permintaan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Permintaan Aktif</span>
                                     </div>
-                                    <div class="garis_pengajuan_dana">
-                                        <hr class="hr-card">
-                                    </div>
-                                    <div class="count_permintaan">
-                                        <span class="total-permintaan">
-                                            {{ $total_pengajuan_dana_by_user_id }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_dana_by_user_id }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6 mt-4" style="font-family: Arial, Helvetica, sans-serif;">
-                            <div class="card card_count_spk">
-                                <div class="rounded-3 mt-2 backgorund_card_spk">
-                                    <div>
-                                        <i class="fab fa-paypal icon_paypal"></i>
+                            <div class="card card_count_pengajuan_dana">
+                                <div class="rounded-3 mt-2 backgorund_card_pd">
+                                    <div class="card_icon_walets">
+                                        <i class="fab fa-paypal iconwallet"></i>
                                     </div>
-                                    <div class="title_card_spk">
+                                    <div class="title_card_pd">
                                         <span>SPK</span>
                                     </div>
-                                    <div class="pengajuan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Pengajuan Aktif</span>
                                     </div>
-                                    <div class="garis_spk">
-                                        <hr class="hr_spk_card">
-                                    </div>
-                                    <div class="count_penajuan">
-                                        <span class="total-pengajuan">
-                                            {{ $total_pengajuan_spk }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_spk }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -540,7 +551,6 @@
                 </div>
             </div>
         </div>
-        <!-- Menu Button -->
         <div class="row">
             <div class="col card-menu">
                 <div class="menu mt-3">
@@ -560,7 +570,6 @@
                 </div>
             </div>
         </div>
-        <!-- Data Table -->
         <div class="row mt-3">
             <div class="col ml--12">
                 <div class="tab-content" id="myTabContent">
@@ -713,7 +722,7 @@
     @if ($userrole == 'Driver')
         <div class="main-dashboard mt--3">
             <nav aria-label="breadcrumb">
-                <div class="breadcrumb mt-1 d-flex justify-content-between">
+                <div class="breadcrumb mt-1 d-flex justify-content-between" id="breadcrumb">
                     <div class="d-lg-none">
                         <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                             data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -750,8 +759,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h2 class="text-dashboard font-weight-bold display-6">
-                            Dashboard <span style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
-                            <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                            Dashboard
                         </h2>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
@@ -770,7 +778,6 @@
                 @csrf
             </form>
         </div>
-
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
                 <div class="col-md-8">
@@ -782,7 +789,7 @@
                             </h5>
                         </div>
                         <div id="chart" style="margin-top: 1%;"></div>
-                        <div style="display: flex; justify-content: space-between;">
+                        <div style="display: flex;">
                             <div style="position: relative; bottom:20px;">
                                 <div class="total_pengajuan_dana">
                                     <span class="fas fa-circle"
@@ -799,19 +806,21 @@
                                     @endif
                                 </div>
                             </div>
-                            <div style="position: relative; bottom:15px; right:535px;">
+                            <div style="position: relative; bottom:16px; margin-left: 16px;">
                                 <div class="total_pengajuan_spk">
-                                    <span class="fas fa-circle"
+                                    <span class="fas fa-circle icon_circle_spk"
                                         style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                    <span class="count_spk"
+                                        style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span class="colon" style="font-size: 14px; font-weight: bold; color:#484E50">
                                         :
                                     </span>
                                     @if ($monthly_pengajuan_spk->isEmpty())
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                        <span class="value_monthly_spk"
+                                            style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
                                     @else
                                         @foreach ($monthly_pengajuan_spk as $data)
-                                            <span
+                                            <span class="value_monthly_spk"
                                                 style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
                                         @endforeach
                                     @endif
@@ -825,7 +834,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -842,40 +853,44 @@
                                     <div class="title_card_pd">
                                         <span>Pengajuan Dana</span>
                                     </div>
-                                    <div class="permintaan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Permintaan Aktif</span>
                                     </div>
-                                    <div class="garis_pengajuan_dana">
-                                        <hr class="hr-card">
-                                    </div>
-                                    <div class="count_permintaan">
-                                        <span class="total-permintaan">
-                                            {{ $total_pengajuan_dana_by_user_id }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_dana_by_user_id }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6 mt-4" style="font-family: Arial, Helvetica, sans-serif;">
-                            <div class="card card_count_spk">
-                                <div class="rounded-3 mt-2 backgorund_card_spk">
-                                    <div>
-                                        <i class="fab fa-paypal icon_paypal"></i>
+                            <div class="card card_count_pengajuan_dana">
+                                <div class="rounded-3 mt-2 backgorund_card_pd">
+                                    <div class="card_icon_walets">
+                                        <i class="fab fa-paypal iconwallet"></i>
                                     </div>
-                                    <div class="title_card_spk">
+                                    <div class="title_card_pd">
                                         <span>SPK</span>
                                     </div>
-                                    <div class="pengajuan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Pengajuan Aktif</span>
                                     </div>
-                                    <div class="garis_spk">
-                                        <hr class="hr_spk_card">
-                                    </div>
-                                    <div class="count_penajuan">
-                                        <span class="total-pengajuan">
-                                            {{ $total_pengajuan_spk }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_spk }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -891,7 +906,6 @@
                 </div>
             </div>
         </div>
-        <!-- Menu Button -->
         <div class="row">
             <div class="col card-menu">
                 <div class="menu mt-3">
@@ -911,7 +925,6 @@
                 </div>
             </div>
         </div>
-        <!-- Data Table -->
         <div class="row mt-3">
             <div class="col ml--12">
                 <div class="tab-content" id="myTabContent">
@@ -1064,7 +1077,7 @@
     @if ($userrole == 'General Affair')
         <div class="main-dashboard mt--3">
             <nav aria-label="breadcrumb">
-                <div class="breadcrumb mt-1 d-flex justify-content-between">
+                <div class="breadcrumb mt-1 d-flex justify-content-between" id="breadcrumb">
                     <div class="d-lg-none">
                         <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                             data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -1101,8 +1114,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h2 class="text-dashboard font-weight-bold display-6">
-                            Dashboard <span style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
-                            <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                            Dashboard
                         </h2>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
@@ -1121,7 +1133,6 @@
                 @csrf
             </form>
         </div>
-
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
                 <div class="col-md-8">
@@ -1133,7 +1144,7 @@
                             </h5>
                         </div>
                         <div id="chart" style="margin-top: 1%;"></div>
-                        <div style="display: flex; justify-content: space-between;">
+                        <div style="display: flex;">
                             <div style="position: relative; bottom:20px;">
                                 <div class="total_pengajuan_dana">
                                     <span class="fas fa-circle"
@@ -1150,19 +1161,21 @@
                                     @endif
                                 </div>
                             </div>
-                            <div style="position: relative; bottom:15px; right:535px;">
+                            <div style="position: relative; bottom:16px; margin-left: 16px;">
                                 <div class="total_pengajuan_spk">
-                                    <span class="fas fa-circle"
+                                    <span class="fas fa-circle icon_circle_spk"
                                         style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                    <span class="count_spk"
+                                        style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span class="colon" style="font-size: 14px; font-weight: bold; color:#484E50">
                                         :
                                     </span>
                                     @if ($monthly_pengajuan_spk->isEmpty())
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                        <span class="value_monthly_spk"
+                                            style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
                                     @else
                                         @foreach ($monthly_pengajuan_spk as $data)
-                                            <span
+                                            <span class="value_monthly_spk"
                                                 style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
                                         @endforeach
                                     @endif
@@ -1176,7 +1189,9 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -1193,40 +1208,44 @@
                                     <div class="title_card_pd">
                                         <span>Pengajuan Dana</span>
                                     </div>
-                                    <div class="permintaan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Permintaan Aktif</span>
                                     </div>
-                                    <div class="garis_pengajuan_dana">
-                                        <hr class="hr-card">
-                                    </div>
-                                    <div class="count_permintaan">
-                                        <span class="total-permintaan">
-                                            {{ $total_pengajuan_dana_by_user_id }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_dana_by_user_id }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6 mt-4" style="font-family: Arial, Helvetica, sans-serif;">
-                            <div class="card card_count_spk">
-                                <div class="rounded-3 mt-2 backgorund_card_spk">
-                                    <div>
-                                        <i class="fab fa-paypal icon_paypal"></i>
+                            <div class="card card_count_pengajuan_dana">
+                                <div class="rounded-3 mt-2 backgorund_card_pd">
+                                    <div class="card_icon_walets">
+                                        <i class="fab fa-paypal iconwallet"></i>
                                     </div>
-                                    <div class="title_card_spk">
+                                    <div class="title_card_pd">
                                         <span>SPK</span>
                                     </div>
-                                    <div class="pengajuan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Pengajuan Aktif</span>
                                     </div>
-                                    <div class="garis_spk">
-                                        <hr class="hr_spk_card">
-                                    </div>
-                                    <div class="count_penajuan">
-                                        <span class="total-pengajuan">
-                                            {{ $total_pengajuan_spk }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_spk }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1242,7 +1261,6 @@
                 </div>
             </div>
         </div>
-        <!-- Menu Button -->
         <div class="row">
             <div class="col card-menu">
                 <div class="menu mt-3">
@@ -1262,7 +1280,6 @@
                 </div>
             </div>
         </div>
-        <!-- Data Table -->
         <div class="row mt-3">
             <div class="col ml--12">
                 <div class="tab-content" id="myTabContent">
@@ -1415,7 +1432,7 @@
     @if ($userrole == 'Hr')
         <div class="main-dashboard mt--3">
             <nav aria-label="breadcrumb">
-                <div class="breadcrumb mt-1 d-flex justify-content-between">
+                <div class="breadcrumb mt-1 d-flex justify-content-between" id="breadcrumb">
                     <div class="d-lg-none">
                         <button class=" navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse"
                             data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
@@ -1452,8 +1469,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <h2 class="text-dashboard font-weight-bold display-6">
-                            Dashboard <span style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
-                            <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                            Dashboard
                         </h2>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
@@ -1472,7 +1488,6 @@
                 @csrf
             </form>
         </div>
-
         <div class="container-fluid">
             <div class="row" style="margin-top: 34.5px;">
                 <div class="col-md-8">
@@ -1484,7 +1499,7 @@
                             </h5>
                         </div>
                         <div id="chart" style="margin-top: 1%;"></div>
-                        <div style="display: flex; justify-content: space-between;">
+                        <div style="display: flex;">
                             <div style="position: relative; bottom:20px;">
                                 <div class="total_pengajuan_dana">
                                     <span class="fas fa-circle"
@@ -1501,19 +1516,21 @@
                                     @endif
                                 </div>
                             </div>
-                            <div style="position: relative; bottom:15px; right:535px;">
+                            <div style="position: relative; bottom:16px; margin-left: 16px;">
                                 <div class="total_pengajuan_spk">
-                                    <span class="fas fa-circle"
+                                    <span class="fas fa-circle icon_circle_spk"
                                         style="font-size: 12px; font-weight: bold; color:#247BA0"></span>
-                                    <span style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
-                                    <span style="font-size: 14px; font-weight: bold; color:#484E50">
+                                    <span class="count_spk"
+                                        style="font-size: 13px; font-weight: bold; color:#484E50">Total</span>
+                                    <span class="colon" style="font-size: 14px; font-weight: bold; color:#484E50">
                                         :
                                     </span>
                                     @if ($monthly_pengajuan_spk->isEmpty())
-                                        <span style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
+                                        <span class="value_monthly_spk"
+                                            style="font-size: 14px; font-weight: bold; color:#247BA0">0</span>
                                     @else
                                         @foreach ($monthly_pengajuan_spk as $data)
-                                            <span
+                                            <span class="value_monthly_spk"
                                                 style="font-size: 14px; font-weight: bold; color:#247BA0">{{ $data->total }}</span>
                                         @endforeach
                                     @endif
@@ -1527,7 +1544,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; background-attachment: fixed;
+    background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -1544,40 +1562,44 @@
                                     <div class="title_card_pd">
                                         <span>Pengajuan Dana</span>
                                     </div>
-                                    <div class="permintaan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Permintaan Aktif</span>
                                     </div>
-                                    <div class="garis_pengajuan_dana">
-                                        <hr class="hr-card">
-                                    </div>
-                                    <div class="count_permintaan">
-                                        <span class="total-permintaan">
-                                            {{ $total_pengajuan_dana_by_user_id }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_dana_by_user_id }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="col-md-6 mt-4" style="font-family: Arial, Helvetica, sans-serif;">
-                            <div class="card card_count_spk">
-                                <div class="rounded-3 mt-2 backgorund_card_spk">
-                                    <div>
-                                        <i class="fab fa-paypal icon_paypal"></i>
+                            <div class="card card_count_pengajuan_dana">
+                                <div class="rounded-3 mt-2 backgorund_card_pd">
+                                    <div class="card_icon_walets">
+                                        <i class="fab fa-paypal iconwallet"></i>
                                     </div>
-                                    <div class="title_card_spk">
+                                    <div class="title_card_pd">
                                         <span>SPK</span>
                                     </div>
-                                    <div class="pengajuan_card_spk">
+                                    <div class="permintaan_card_pd">
                                         <span>Pengajuan Aktif</span>
                                     </div>
-                                    <div class="garis_spk">
-                                        <hr class="hr_spk_card">
-                                    </div>
-                                    <div class="count_penajuan">
-                                        <span class="total-pengajuan">
-                                            {{ $total_pengajuan_spk }}
-                                        </span>
+                                    <div class="container_card_bottom">
+                                        <div class="garis_pengajuan_dana">
+                                            <hr class="hr-card">
+                                        </div>
+                                        <div class="count_permintaan">
+                                            <span class="total-permintaan">
+                                                {{ $total_pengajuan_spk }}
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1593,7 +1615,6 @@
                 </div>
             </div>
         </div>
-        <!-- Menu Button -->
         <div class="row">
             <div class="col card-menu">
                 <div class="menu mt-3">
@@ -1614,7 +1635,6 @@
                 </div>
             </div>
         </div>
-        <!-- Data Table -->
         <div class="row mt-3">
             <div class="col ml--12">
                 <div class="tab-content" id="myTabContent">

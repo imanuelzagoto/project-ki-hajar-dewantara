@@ -161,7 +161,7 @@
                                                     class="form-control bg-light w-100" type="text"
                                                     placeholder="Masukan nomor rekening"
                                                     value="{{ $pengajuanDanas->non_tunai }}"
-                                                    style="font-size: 10px; font-weight: bold; color: #92A1BB;">
+                                                    style="font-size: 10px; font-weight: bold; color: #92A1BB;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-12">
