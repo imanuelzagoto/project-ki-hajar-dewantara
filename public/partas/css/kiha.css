@@ -1,5 +1,13 @@
 /* public/partas/css/kiha.css */
 
+.side_logo{
+    width: 161px;
+    height: 47px;
+    padding-left: 1px;
+    margin-left: 29px;
+    margin-top: 24px;
+}
+
 /* header */
 .disabled_input {
     pointer-events: none;
@@ -17,6 +25,7 @@
     font-weight: bold;
     font-size: 16px;
     margin-right: 16px;
+
 }
 
 .breadcrumb{

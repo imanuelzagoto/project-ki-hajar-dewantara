@@ -124,7 +124,7 @@
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
                                 style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
-                                background-attachment: fixed;
+                                
                                 background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
@@ -479,8 +479,8 @@
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
                                 style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: 100% 100% !important; background-repeat: no-repeat; background-attachment: fixed;
+    
+    background-size: 100% 100% !important; background-repeat: no-repeat; 
                                 background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
@@ -835,7 +835,7 @@
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
                                 style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
-    background-attachment: fixed;
+    
     background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
@@ -1190,7 +1190,7 @@
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
                                 style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
-    background-attachment: fixed;
+    
     background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
@@ -1544,7 +1544,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; background-attachment: fixed;
+                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; 
     background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>

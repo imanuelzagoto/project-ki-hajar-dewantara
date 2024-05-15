@@ -49,13 +49,8 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 p-0 order-lg-2 order-md-2 d-none d-md-block position-relative">
                 <div class="codew-image">
-                    <img class="position-absolute start-50 translate-middle codew-png" src="sets/images/login/codew.png"
+                    <img class="position-absolute start-50 translate-middle codew-png" src="sets/images/login/plogin.svg"
                         alt="tempimage">
-                </div>
-                <div class="text-center">
-                    <div class="position-absolute start-50 translate-middle text-white dewantara-teks">
-                        Ki Hadjar Dewantara
-                    </div>
                 </div>
                 <div class="rectangle-bordered">
                     <div class="position-absolute start-50 translate-middle rectangle">
@@ -63,7 +58,7 @@
                             An official website for INTEK company
                         </div>
                         <div class="kihajar-com">
-                            kihadjar.com
+                            SIOPS.com
                         </div>
                     </div>
                 </div>
