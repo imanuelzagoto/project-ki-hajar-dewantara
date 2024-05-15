@@ -185,7 +185,7 @@
                                     <span style="font-weight: bold;">NO SPK</span>
                                 </td>
                                 <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px; width:264px;">
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
                                     {{ $suratPerintahKerja->no_spk }}</td>
                             </tr>
                             <tr>
@@ -195,7 +195,7 @@
                                     {{ $suratPerintahKerja->user }}</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Tanggal</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;">
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
                                     {{ $suratPerintahKerja->tanggal }}</td>
                             </tr>
                             <tr>
@@ -205,7 +205,7 @@
                                     {{ $suratPerintahKerja->main_contractor }}</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Prioritas
                                 </td>
-                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
                                 <td style="border: 2px solid black; padding-left:5px;">
                                     {{ $suratPerintahKerja->prioritas }}</td>
                             </tr>
@@ -217,7 +217,7 @@
                                 <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Waktu
                                     Penyelesaian</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;">
+                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
                                     {{ $suratPerintahKerja->waktu_penyelesaian }}</td>
                             </tr>
                         </tbody>
@@ -229,31 +229,30 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="supporting documents">
                     <div class="chekbox-dokumen">
                         <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
                         <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
-                            <input class="box1" style="width: 20px; border: 2px solid #000;  width:2.7%; height:4%;">
+                            <input class="box1" type="checkbox"
+                                style="width: 20px; border: 2px solid #000; width:2.7%; height:4%;"
+                                @if ($suratPerintahKerja->dokumen_pendukung_type == 1) checked @endif>
                             <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
                         </span>
-                        {{-- <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
-                            <input class="box1" type="checkbox"
-                                style="width: 20px; border: 2px solid #000;  width:2.7%; height:4%;"
-                                @if ($suratPerintahKerja->dokumen_pendukung_type) checked @endif>
-                            <span class="teks_gambar"
-                                style="position: relative; bottom:1%;">{{ $suratPerintahKerja->dokumen_pendukung_type }}</span>
-                        </span> --}}
                         <span class="checkbox_kontrak" style="position: relative; top:5%; left:25.5%; width:10%;">
-                            <input class="box2" style="width: 20px; border: 2px solid #000;  width:2.5%; height:4%;">
+                            <input class="box2" type="checkbox"
+                                style="width: 20px; border: 2px solid #000; width:2.5%; height:4%;"
+                                @if ($suratPerintahKerja->dokumen_pendukung_type == 2) checked @endif>
                             <span class="teks_kontrak" style="position: relative; bottom:1%;">Kontrak</span>
                         </span>
                         <span class="checkbox_brosur" style="position: relative; top:5%; left:33%; width:10%;">
-                            <input class="box3" style="width: 20px; border: 2px solid #000;  width:1.9%; height:4%;">
+                            <input class="box3" type="checkbox"
+                                style="width: 20px; border: 2px solid #000; width:1.9%; height:4%;"
+                                @if ($suratPerintahKerja->dokumen_pendukung_type == 3) checked @endif>
                             <span class="teks_brosur" style="position: relative; bottom:1%;">Brosur</span>
                         </span>
                     </div>
                 </div>
+
 
                 <div class="other_supporting">
                     <span class="teks_file_pendukung">File Pendukung Lainnya :</span>

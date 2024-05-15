@@ -8,6 +8,20 @@
     margin-left: 9px;
 }
 
+.eye-icon {
+    font-size: 18px !important;
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    right: 36px;
+}
+
+.password-container{
+    position: relative;
+}
+
 .dewantara-teks {
     font-size: 48.95px;
     font-weight: 700;

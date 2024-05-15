@@ -30,8 +30,11 @@
                         <div class="custom-input">
                             <div class=" ">
                                 <label class="password-address">Password*</label>
-                                <input class="form-control @error('password') is-invalid @enderror" id="password"
-                                    type="password" name="password" placeholder="*********">
+                                <div class="password-container">
+                                    <input class="form-control password-input @error('password') is-invalid @enderror"
+                                        id="password" type="password" name="password" placeholder="Min. 8 characters">
+                                    <i class="fa fa-eye eye-icon" aria-hidden="true"></i>
+                                </div>
                                 @error('password')
                                     <span class="go-up text-danger">{{ $message }}</span>
                                 @enderror
@@ -67,4 +70,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const passwordInput = document.querySelector('.password-input');
+            const eyeIcon = document.querySelector('.eye-icon');
+
+            eyeIcon.addEventListener('click', function() {
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    eyeIcon.classList.remove('fa-eye');
+                    eyeIcon.classList.add('fa-eye-slash');
+                } else {
+                    passwordInput.type = 'password';
+                    eyeIcon.classList.remove('fa-eye-slash');
+                    eyeIcon.classList.add('fa-eye');
+                }
+            });
+        });
+    </script>
 @endsection
