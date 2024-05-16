@@ -15,8 +15,8 @@
 <script src="{{ asset('partas/js/plugin/chart-circle/circles.min.js') }}"></script>
 <!-- Datatables -->
 <script src="{{ asset('partas/js/datatables.min.js') }}"></script>
-<!-- Bootstrap Notify -->
-<script src="{{ asset('partas/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script>
+{{-- <!-- Bootstrap Notify -->
+<script src="{{ asset('partas/js/plugin/bootstrap-notify/bootstrap-notify.min.js') }}"></script> --}}
 <!-- jQuery Vector Maps -->
 <script src="{{ asset('partas/js/plugin/jqvmap/jquery.vmap.min.js') }}"></script>
 <script src="{{ asset('partas/js/plugin/jqvmap/maps/jquery.vmap.world.js') }}"></script>
@@ -38,68 +38,3 @@
 <script src="{{ asset('sets/js/bootstrap/popper.min.js') }}"></script>
 <script src="{{ asset('sets/js/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('sets/js/script.js') }}"></script>
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        'use strict';
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
-        var forms = document.getElementsByClassName('needs-validation');
-        // Loop over them and prevent submission
-        Array.prototype.filter.call(forms, function(form) {
-            form.addEventListener('submit', function(event) {
-                if (form.checkValidity() === false) {
-                    event.preventDefault();
-                    event.stopPropagation();
-                }
-                form.classList.add('was-validated');
-            }, false);
-        });
-
-        // Memastikan toggleIcon ada sebelum menambahkan event listener
-        const togglePasswords = document.querySelectorAll('.toggle-password');
-        togglePasswords.forEach(function(togglePassword) {
-            togglePassword.addEventListener('click', function(e) {
-                const passwordInput = document.querySelector('input[name="password"]');
-                const type = passwordInput.getAttribute('type') === 'password' ? 'text' :
-                    'password';
-                passwordInput.setAttribute('type', type);
-
-                // Toggle the eye icon class
-                if (type === 'password') {
-                    togglePassword.classList.remove('fa-eye-slash');
-                    togglePassword.classList.add('fa-eye');
-                } else {
-                    togglePassword.classList.remove('fa-eye');
-                    togglePassword.classList.add('fa-eye-slash');
-                }
-            });
-        });
-
-        // Menambahkan perilaku tooltip saat mouse diarahkan ke tombol
-        const buttons = document.querySelectorAll('.tooltip-container');
-        buttons.forEach(function(button) {
-            const tooltip = button.querySelector('.tooltip-text');
-            if (tooltip) {
-                button.addEventListener('mouseover', function() {
-                    tooltip.style.visibility = 'visible';
-                    tooltip.style.opacity = '1';
-                });
-
-                button.addEventListener('mouseout', function() {
-                    tooltip.style.visibility = 'hidden';
-                    tooltip.style.opacity = '0';
-                });
-
-                // Memproses logout saat tombol di klik
-                const logoutButton = button.querySelector('.button-logout');
-                if (logoutButton) {
-                    logoutButton.addEventListener('click', function() {
-                        document.getElementById('logout-form').submit();
-                    });
-                }
-            }
-        });
-
-    });
-</script>
