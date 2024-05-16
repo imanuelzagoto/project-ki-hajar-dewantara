@@ -289,12 +289,17 @@
     <script>
         function handleCheckboxClick(checkboxName) {
             var checkboxes = ['gambar', 'kontrak', 'brosur'];
+            var isCurrentCheckboxChecked = document.getElementById('checkbox_' + checkboxName).checked;
+
             checkboxes.forEach(function(name) {
                 if (name !== checkboxName) {
                     document.getElementById('checkbox_' + name).checked = false;
-                    clearFileInput();
                 }
             });
+
+            if (!isCurrentCheckboxChecked) {
+                clearFileInput();
+            }
         }
 
         function clearFileInput() {
@@ -312,13 +317,17 @@
             var checkboxKontrak = document.getElementById('checkbox_kontrak');
             var checkboxBrosur = document.getElementById('checkbox_brosur');
 
-            // if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
-            //     clearFileInput();
-            // }
-
+            // Jika tidak ada checkbox yang dipilih, otomatis pilih checkbox "gambar"
             if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
-                // Automatically select checkbox gambar checkbox if no other checkbox is selected
                 selectCheckbox('gambar');
+            }
+
+            var fileInput = input;
+            var fileName = fileInput.files[0].name;
+
+            var fileNameParagraph = document.getElementById('fileName');
+            if (fileNameParagraph) {
+                fileNameParagraph.innerHTML = "File yang sudah dipilih: " + fileName;
             }
         }
 
@@ -326,6 +335,20 @@
             var checkbox = document.getElementById('checkbox_' + checkboxName);
             checkbox.checked = true;
         }
+
+        // Tambahkan event listener untuk memastikan file input dihapus jika tidak ada checkbox yang dipilih
+        document.querySelectorAll('input[name="dokumen_pendukung_type"]').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var checkboxes = ['gambar', 'kontrak', 'brosur'];
+                var anyCheckboxChecked = checkboxes.some(function(name) {
+                    return document.getElementById('checkbox_' + name).checked;
+                });
+
+                if (!anyCheckboxChecked) {
+                    clearFileInput();
+                }
+            });
+        });
 
         document.getElementById('choosefile').addEventListener('change', function(event) {
             var fileInput = event.target;

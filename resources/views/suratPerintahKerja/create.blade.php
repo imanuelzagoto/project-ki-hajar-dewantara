@@ -274,9 +274,17 @@
             checkboxes.forEach(function(name) {
                 if (name !== checkboxName) {
                     document.getElementById('checkbox_' + name).checked = false;
-                    clearFileInput();
                 }
             });
+
+            // Hapus file input jika tidak ada checkbox yang dipilih
+            var anyCheckboxChecked = checkboxes.some(function(name) {
+                return document.getElementById('checkbox_' + name).checked;
+            });
+
+            if (!anyCheckboxChecked) {
+                clearFileInput();
+            }
         }
 
         function clearFileInput() {
@@ -285,16 +293,14 @@
         }
 
         function handleFileSelect(input) {
-            var checkboxGambar = document.getElementById('checkbox_gambar');
-            var checkboxKontrak = document.getElementById('checkbox_kontrak');
-            var checkboxBrosur = document.getElementById('checkbox_brosur');
+            var checkboxes = ['gambar', 'kontrak', 'brosur'];
 
-            // if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
-            //     clearFileInput();
-            // }
+            // Jika tidak ada checkbox yang dipilih, otomatis pilih checkbox "gambar"
+            var anyCheckboxChecked = checkboxes.some(function(name) {
+                return document.getElementById('checkbox_' + name).checked;
+            });
 
-            if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
-                // Automatically select "gambar" checkbox if no other checkbox is selected
+            if (!anyCheckboxChecked) {
                 selectCheckbox('gambar');
             }
         }
@@ -303,6 +309,22 @@
             var checkbox = document.getElementById('checkbox_' + checkboxName);
             checkbox.checked = true;
         }
+
+        // Tambahkan event listener untuk memastikan file input dihapus jika tidak ada checkbox yang dipilih
+        document.querySelectorAll('input[name="dokumen_pendukung_type"]').forEach(function(checkbox) {
+            checkbox.addEventListener('change', function() {
+                var checkboxes = ['gambar', 'kontrak', 'brosur'];
+                var anyCheckboxChecked = checkboxes.some(function(name) {
+                    return document.getElementById('checkbox_' + name).checked;
+                });
+
+                if (!anyCheckboxChecked) {
+                    clearFileInput();
+                }
+            });
+        });
+
+
 
         // project id
         function changeProjectName() {
