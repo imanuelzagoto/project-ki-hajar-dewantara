@@ -128,6 +128,37 @@
             position: relative;
             top: 5%;
         }
+
+        .checkbox_gambar .box1 {
+            width: 30px;
+            height: 30px;
+            -webkit-appearance: none;
+            appearance: none;
+            background-color: #fff;
+            border: 1px solid #000;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .checkbox_gambar .box1:checked {
+            background-color: #ffffff;
+        }
+
+        .checkbox_gambar .box1:checked::after {
+            content: '✓';
+            font-size: 20px;
+            color: #000000;
+            position: absolute;
+            top: 38%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .checkbox_gambar .box1::before {
+            content: '';
+            display: none;
+        }
     </style>
 </head>
 
@@ -233,22 +264,16 @@
                     <div class="chekbox-dokumen">
                         <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
                         <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
-                            <input class="box1" type="checkbox"
-                                style="width: 20px; border: 2px solid #000; width:2.7%; height:4%;"
-                                @if ($suratPerintahKerja->dokumen_pendukung_type == 1) checked @endif>
+                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->dokumen_pendukung_type == 1) checked @endif>
                             <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
                         </span>
-                        <span class="checkbox_kontrak" style="position: relative; top:5%; left:25.5%; width:10%;">
-                            <input class="box2" type="checkbox"
-                                style="width: 20px; border: 2px solid #000; width:2.5%; height:4%;"
-                                @if ($suratPerintahKerja->dokumen_pendukung_type == 2) checked @endif>
-                            <span class="teks_kontrak" style="position: relative; bottom:1%;">Kontrak</span>
+                        <span class="checkbox_gambar" style="position: relative; top:5%; left:25.5%; width:10%;">
+                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->dokumen_pendukung_type == 2) checked @endif>
+                            <span class="teks_gambar" style="position: relative; bottom:1%;">Kontrak</span>
                         </span>
-                        <span class="checkbox_brosur" style="position: relative; top:5%; left:33%; width:10%;">
-                            <input class="box3" type="checkbox"
-                                style="width: 20px; border: 2px solid #000; width:1.9%; height:4%;"
-                                @if ($suratPerintahKerja->dokumen_pendukung_type == 3) checked @endif>
-                            <span class="teks_brosur" style="position: relative; bottom:1%;">Brosur</span>
+                        <span class="checkbox_gambar" style="position: relative; top:5%; left:33%; width:10%;">
+                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->dokumen_pendukung_type == 3) checked @endif>
+                            <span class="teks_gambar" style="position: relative; bottom:1%;">Brosur</span>
                         </span>
                     </div>
                 </div>
@@ -300,7 +325,6 @@
                                 <td style="border: 1.5px solid black; padding-left:5px;"></td>
                                 <td
                                     style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
-                                    Bersambung kehalaman berikutnya.............
                                 </td>
                             </tr>
                         </tbody>

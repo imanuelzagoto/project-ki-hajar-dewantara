@@ -179,26 +179,28 @@
                                                 <div class="d-flex">
                                                     <div class="form-checkbox-gambar d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
-                                                            id="checkbox_gambar" value="1">
+                                                            id="checkbox_gambar" value="1"
+                                                            onclick="handleCheckboxClick('gambar')">
                                                         <span for="checkbox_gambar" class="text-checkbox">Gambar</span>
                                                     </div>
                                                     <div class="form-checkbox-kontrak d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
-                                                            id="checkbox_kontrak" value="2">
+                                                            id="checkbox_kontrak" value="2"
+                                                            onclick="handleCheckboxClick('kontrak')">
                                                         <span for="checkbox_kontrak" class="text-checkbox">Kontrak</span>
                                                     </div>
                                                     <div class="form-checkbox-brosur d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
-                                                            id="checkbox_brosur" value="3">
+                                                            id="checkbox_brosur" value="3"
+                                                            onclick="handleCheckboxClick('brosur')">
                                                         <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
                                                     </div>
                                                 </div>
-                                                <label for="images" class="drop-container" id="dropcontainer">
+                                                <label for="choosefile" class="drop-container" id="dropcontainer">
                                                     <span class="drop-title">Drop files here</span>
-                                                    <input name="dokumen_pendukung_file" type="file" id="images"
-                                                        accept="image/*">
+                                                    <input name="dokumen_pendukung_file" type="file" id="choosefile"
+                                                        onchange="handleFileSelect(this)">
                                                 </label>
-
                                             </div>
                                         </div>
                                     </div>
@@ -265,6 +267,32 @@
         </div>
     </div>
     <script>
+        function handleCheckboxClick(checkboxName) {
+            var checkboxes = ['gambar', 'kontrak', 'brosur'];
+            checkboxes.forEach(function(name) {
+                if (name !== checkboxName) {
+                    document.getElementById('checkbox_' + name).checked = false;
+                    clearFileInput();
+                }
+            });
+        }
+
+        function clearFileInput() {
+            var fileInput = document.getElementById('choosefile');
+            fileInput.value = '';
+        }
+
+        function handleFileSelect(input) {
+            var checkboxGambar = document.getElementById('checkbox_gambar');
+            var checkboxKontrak = document.getElementById('checkbox_kontrak');
+            var checkboxBrosur = document.getElementById('checkbox_brosur');
+
+            if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
+                clearFileInput();
+            }
+        }
+
+        // project id
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
@@ -275,11 +303,8 @@
 
 @push('scripts')
     <script>
-        // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
         document.addEventListener('DOMContentLoaded', function() {
-            // Panggil updateClock secara berkala setiap detik
             setInterval(updateClock, 1000);
-            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
             updateClock();
         });
 

@@ -133,7 +133,6 @@
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal</span>
                                                 <?php
-                                                // Konversi format tanggal dari "dd/MM/yy" menjadi "yyyy-MM-dd"
                                                 $tanggal = date_format(date_create_from_format('d/m/y', $suratPerintahKerjas->tanggal), 'Y-m-d');
                                                 ?>
                                                 <input name="tanggal" class="form-control bg-light w-100" type="date"
@@ -150,7 +149,6 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Waktu
                                                     Penyelesaian</span>
                                                 <?php
-                                                // Konversi format tanggal dari "dd/MM/yy" menjadi "yyyy-MM-dd"
                                                 $tanggal_penyelesaian = date_format(date_create_from_format('d/m/y', $suratPerintahKerjas->waktu_penyelesaian), 'Y-m-d');
                                                 ?>
                                                 <input name="waktu_penyelesaian" class="form-control bg-light w-100"
@@ -178,45 +176,45 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Uraian
                                                     Pekerjaan</span>
                                                 <textarea name="uraian_pekerjaan" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
-                                                    style="resize: vertical; width:430px; position: relative; height:139px">{{ $suratPerintahKerjas->uraian_pekerjaan }}</textarea>
+                                                    style="height: 138px;" required>{{ $suratPerintahKerjas->uraian_pekerjaan }}</textarea>
                                             </div>
-
                                             <div class="pr-4 py-2 col-6">
                                                 <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
-                                                    style="position: relative; right:40px; top:4px;">File
-                                                    Pendukung
+                                                    style="margin-top: 7px;">
+                                                    File Pendukung
                                                 </div>
-                                                <div class="d-flex" style="position: relative; right:40px;">
+                                                <div class="d-flex">
                                                     <div class="form-checkbox-gambar d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
                                                             id="checkbox_gambar" value="1"
+                                                            onclick="handleCheckboxClick('gambar')"
                                                             {{ $suratPerintahKerjas->dokumen_pendukung_type == 1 ? 'checked' : '' }}>
                                                         <span for="checkbox_gambar" class="text-checkbox">Gambar</span>
                                                     </div>
                                                     <div class="form-checkbox-kontrak d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
                                                             id="checkbox_kontrak" value="2"
+                                                            onclick="handleCheckboxClick('kontrak')"
                                                             {{ $suratPerintahKerjas->dokumen_pendukung_type == 2 ? 'checked' : '' }}>
                                                         <span for="checkbox_kontrak" class="text-checkbox">Kontrak</span>
                                                     </div>
                                                     <div class="form-checkbox-brosur d-flex">
                                                         <input name="dokumen_pendukung_type" type="checkbox"
                                                             id="checkbox_brosur" value="3"
+                                                            onclick="handleCheckboxClick('brosur')"
                                                             {{ $suratPerintahKerjas->dokumen_pendukung_type == 3 ? 'checked' : '' }}>
                                                         <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
                                                     </div>
                                                 </div>
-                                                <label for="images" class="drop-container" id="dropcontainer"
-                                                    style="position: relative; right:45px;height:99px; width:514px;">
+                                                <label for="choosefile" class="drop-container" id="dropcontainer">
                                                     <span class="drop-title">Drop files here</span>
-                                                    <input name="dokumen_pendukung_file" type="file" id="images"
-                                                        accept="image/*">
+                                                    <input name="dokumen_pendukung_file" type="file" id="choosefile"
+                                                        onchange="handleFileSelect(this)">
                                                 </label>
-
                                                 @if ($suratPerintahKerjas->dokumen_pendukung_file)
-                                                    <p id="fileName" style="position: relative; right:39px;">File yang
-                                                        sudah dipilih:
-                                                        {{ $suratPerintahKerjas->dokumen_pendukung_file }}</p>
+                                                    <p id="fileName">File yang
+                                                        sudah dipilih: {{ $suratPerintahKerjas->dokumen_pendukung_file }}
+                                                    </p>
                                                 @endif
                                             </div>
                                         </div>
@@ -233,42 +231,39 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                <input name="pemohon" class="form-control bg-light"
-                                                    style="width: 432px; position: relative;" type="text"
-                                                    value="{{ $suratPerintahKerjas->pemohon }}">
+                                                <input name="pemohon" class="form-control bg-light w-100" type="text"
+                                                    value="{{ $suratPerintahKerjas->pemohon }}" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:45px;">Jabatan</span>
-                                                <input name="jabatan_1" class="form-control bg-light"
-                                                    style="width: 518px; position: relative; right:46px;" type="text"
-                                                    value="{{ $suratPerintahKerjas->jabatan_1 }}">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <input name="jabatan_1" class="form-control bg-light w-100"
+                                                    type="text" value="{{ $suratPerintahKerjas->jabatan_1 }}"
+                                                    required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                <input name="penerima" class="form-control bg-light"
-                                                    style="width: 432px; position: relative;" type="text"
-                                                    value="{{ $suratPerintahKerjas->penerima }}">
+                                                <input name="penerima" class="form-control bg-light w-100" type="text"
+                                                    value="{{ $suratPerintahKerjas->penerima }}" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:45px;">Jabatan</span>
-                                                <input name="jabatan_2" class="form-control bg-light"
-                                                    style="width: 518px; position: relative; right:46px;" type="text"
-                                                    value="{{ $suratPerintahKerjas->jabatan_2 }}">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <input name="jabatan_2" class="form-control bg-light w-100"
+                                                    value="{{ $suratPerintahKerjas->jabatan_2 }}" type="text"
+                                                    required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <input name="menyetujui" class="form-control bg-light"
-                                                    style="width: 432px; position: relative;" type="text"
-                                                    value="{{ $suratPerintahKerjas->menyetujui }}">
+                                                <input name="menyetujui" class="form-control bg-light w-100"
+                                                    type="text" value="{{ $suratPerintahKerjas->menyetujui }}"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:45px;">Jabatan</span>
-                                                <input name="jabatan_3" class="form-control bg-light"
-                                                    style="width: 518px; position: relative; right:46px;" type="text"
-                                                    value="{{ $suratPerintahKerjas->jabatan_3 }}">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <input name="jabatan_3" class="form-control bg-light w-100"
+                                                    type="text" value="{{ $suratPerintahKerjas->jabatan_3 }}"
+                                                    required>
                                             </div>
                                         </div>
                                     </div>
@@ -292,6 +287,49 @@
     </div>
 
     <script>
+        function handleCheckboxClick(checkboxName) {
+            var checkboxes = ['gambar', 'kontrak', 'brosur'];
+            checkboxes.forEach(function(name) {
+                if (name !== checkboxName) {
+                    document.getElementById('checkbox_' + name).checked = false;
+                    clearFileInput();
+                }
+            });
+        }
+
+        function clearFileInput() {
+            var fileInput = document.getElementById('choosefile');
+            fileInput.value = '';
+
+            var fileNameParagraph = document.getElementById('fileName');
+            if (fileNameParagraph) {
+                fileNameParagraph.innerHTML = "File yang sudah dipilih: ";
+            }
+        }
+
+        function handleFileSelect(input) {
+            var checkboxGambar = document.getElementById('checkbox_gambar');
+            var checkboxKontrak = document.getElementById('checkbox_kontrak');
+            var checkboxBrosur = document.getElementById('checkbox_brosur');
+
+            if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
+                clearFileInput();
+            }
+        }
+
+        document.getElementById('choosefile').addEventListener('change', function(event) {
+            var fileInput = event.target;
+            var fileName = fileInput.files[0].name;
+
+            var fileNameParagraph = document.getElementById('fileName');
+            if (fileNameParagraph) {
+                fileNameParagraph.innerHTML = "File yang sudah dipilih: " + fileName;
+            }
+        });
+
+
+
+        // fungsi project
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
@@ -300,40 +338,10 @@
     </script>
 @endsection
 
-{{-- <script>
-    function changeProjectName() {
-        // Dapatkan elemen select
-        var select = document.getElementById("project_id");
-
-        // Dapatkan nilai yang dipilih
-        var selectedValue = select.value;
-
-        // Dapatkan daftar proyek dari PHP (gunakan JSON atau metode lain untuk mentransfer data)
-        var projects = {!! json_encode($projects) !!};
-
-        // Temukan proyek yang sesuai dengan nilai yang dipilih
-        var selectedProject = projects.find(function(project) {
-            return project.id == selectedValue;
-        });
-
-        // Periksa apakah proyek ditemukan
-        if (selectedProject) {
-            // Dapatkan elemen input untuk nama proyek
-            var projectNameInput = document.getElementById("nama");
-
-            // Update nilai input dengan nilai title dari proyek yang sesuai
-            projectNameInput.value = selectedProject.title;
-        }
-    }
-</script> --}}
-
 @push('scripts')
     <script>
-        // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
         document.addEventListener('DOMContentLoaded', function() {
-            // Panggil updateClock secara berkala setiap detik
             setInterval(updateClock, 1000);
-            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
             updateClock();
         });
 

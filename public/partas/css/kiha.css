@@ -1,6 +1,6 @@
 /* public/partas/css/kiha.css */
 
-.side_logo{
+.side_logo {
     width: 161px;
     height: 47px;
     padding-left: 1px;
@@ -28,7 +28,7 @@
 
 }
 
-.breadcrumb{
+.breadcrumb {
     margin-left: 14px;
 }
 
@@ -803,16 +803,18 @@
     height: 284px;
     position: relative;
 }
-.table-responsive-goto{
-    display:block;
-    overflow-x:auto;
-    overflow-y:hidden;
+
+.table-responsive-goto {
+    display: block;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
+
 @media screen and (min-width: 2000px) {
-    .table-responsive-goto{
-        display:table !important;
-        overflow-x:auto;
-        overflow-y:hidden;
+    .table-responsive-goto {
+        display: table !important;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
 }
 
@@ -1372,7 +1374,7 @@ input[type=file]::file-selector-button:hover {
         margin-left: 7px;
         height: 38px;
     }
-    
+
     .breadcrumbs {
         position: absolute;
         left: -24px !important;
@@ -1419,4 +1421,9 @@ input[type=file]::file-selector-button:hover {
 .column-jabatan {
     position: relative;
     right: 37px;
+}
+
+/* warning chekbox */
+.warning {
+    color: red;
 }
