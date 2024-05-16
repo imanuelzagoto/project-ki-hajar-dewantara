@@ -360,8 +360,6 @@
             }
         });
 
-
-
         // fungsi project
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");

@@ -116,6 +116,7 @@ class PengajuanDanaViewWebController extends Controller
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
+        dd($pengajuanDanas->non_tunai);
 
         // $userData = Session::get('user');
         // $userrole = $userData['modules']['name'];
