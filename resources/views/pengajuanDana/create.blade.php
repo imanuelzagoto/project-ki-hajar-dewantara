@@ -13,40 +13,41 @@
                     </button>
                 </div>
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="menu_breadcrumbs">
+                    <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
                                 Pengajuan Dana
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.create') }}" class="breadcrumbs__link"
-                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
+                                style="color: #17a2b8;font-size: 15px; font-weight: 500;">
                                 Form Pengisian Pengajuan Dana
                             </a>
                         </li>
                     </ul>
                 </div>
+
                 <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
-                    style="float: left; margin-right:3px; background-color:#F1F4FA; margin-bottom:8px;">
+                    style="float: left; background-color:#F1F4FA;">
                     <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>
                     </a>
-                    <span class="tooltip-text">Logout</span>
+                    <span class="tooltip-text mb-2" style="font-size: 10px;">Logout</span>
                 </button>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <h2 class="text-mp font-weight-bold display-6">
-                        Form Pengisian Pengajuan Dana <span style="font-size: 22px; padding-left:8px;">&rArr;</span>
+                        Form Pengisian Pengajuan Dana <span style="font-size: 22px; padding-left:5px;">&rArr;</span>
                         <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
                             {{ $no_doc }}
                         </span>

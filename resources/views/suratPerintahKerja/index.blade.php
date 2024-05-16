@@ -16,18 +16,19 @@
                         </span>
                     </button>
                 </div>
+
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="menu_breadcrumbs">
+                    <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
                             <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
-                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
-                                Surat Perintah Kerja
+                                style="color: #17a2b8;font-size: 15px; font-weight: 500;">
+                                Pengajuan Dana
                             </a>
                         </li>
                     </ul>

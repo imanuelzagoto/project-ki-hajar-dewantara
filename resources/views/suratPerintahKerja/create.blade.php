@@ -13,7 +13,7 @@
                     </button>
                 </div>
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="menu_breadcrumbs">
+                    <ul class="header_text_spk">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
                                 style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
@@ -45,7 +45,8 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <h2 class="text-mp font-weight-bold display-6">
+                    <h2 class="form_spk font-weight-bold display-6"
+                        style="position: relative; left:7px; bottom:26px; font-size:20px;">
                         Form Pengisian SPK <span style="font-size: 22px; padding-left:8px;">&rArr;</span>
                         <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
                             {{ $no_spk }}
@@ -69,7 +70,7 @@
         </form>
     </div>
     <div class="container-fluid">
-        <div class="element-scrollbar" style="margin-top: 36px;">
+        <div class="element-scrollbar">
             <div class="">
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
@@ -201,6 +202,7 @@
                                                     <input name="dokumen_pendukung_file" type="file" id="choosefile"
                                                         onchange="handleFileSelect(this)">
                                                 </label>
+
                                             </div>
                                         </div>
                                     </div>
@@ -287,9 +289,19 @@
             var checkboxKontrak = document.getElementById('checkbox_kontrak');
             var checkboxBrosur = document.getElementById('checkbox_brosur');
 
+            // if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
+            //     clearFileInput();
+            // }
+
             if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
-                clearFileInput();
+                // Automatically select "gambar" checkbox if no other checkbox is selected
+                selectCheckbox('gambar');
             }
+        }
+
+        function selectCheckbox(checkboxName) {
+            var checkbox = document.getElementById('checkbox_' + checkboxName);
+            checkbox.checked = true;
         }
 
         // project id

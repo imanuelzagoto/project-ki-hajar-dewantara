@@ -17,16 +17,16 @@
                     </button>
                 </div>
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="menu_breadcrumbs">
+                    <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
-                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
+                                style="color: #17a2b8;font-size: 15px; font-weight: 500;">
                                 Pengajuan Dana
                             </a>
                         </li>
@@ -43,9 +43,8 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <h2 class="text-mp font-weight-bold display-6">
-                        Pengajuan Dana <span style="font-size: 22px; padding-left:8px; display:none;">&rArr;</span>
-                        <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
+                    <h2 class="text-dashboard font-weight-bold display-6">
+                        Pengajuan Dana
                     </h2>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">

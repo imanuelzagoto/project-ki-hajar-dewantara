@@ -17,16 +17,16 @@
                     </button>
                 </div>
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
-                    <ul class="menu_breadcrumbs">
+                    <ul class="breadcrumbs">
                         <li class="breadcrumbs__item">
                             <a href="{{ route('master-projek.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                                style="color: #A0AEC0;font-size: 15px; font-weight: 500;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
                             <a href="{{ route('master-projek.index') }}" class="breadcrumbs__link"
-                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
+                                style="color: #17a2b8;font-size: 15px; font-weight: 500;">
                                 Master Projek
                             </a>
                         </li>
@@ -43,7 +43,7 @@
             </div>
             <div class="row">
                 <div class="col-md-6">
-                    <h2 class="text-mp font-weight-bold display-6">
+                    <h2 class="text-dashboard font-weight-bold display-6">
                         Master Projek
                     </h2>
                 </div>
@@ -65,7 +65,7 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 align-items-center" style="margin-top: 23px;">
+            <div class="col-md-6 mb-3 mb-md-0 d-flex align-items-center" style="margin-top: 23px;">
                 <form id="dataTableSearchForm" style="height: 44px; width: 255px;" class="mr-2">
                     <div class="col mr-1 border-container">
                         <i class="fas fa-search"></i>
@@ -73,14 +73,10 @@
                             placeholder="Type here...." aria-controls="dataTable">
                     </div>
                 </form>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <button type="button" id="filtersButtonProject" class="btn btn-sm btn-outline-info ml-2 btn-filters"
-                        style="font-size: 15.18px; position: relative; top:24px; right:309px;">
-                        <i class="fas fa-sliders-h"></i> Search
-                    </button>
-                </div>
+                <button type="button" id="filtersButtonProject" class="btn btn-sm btn-outline-info ml-2 btn-filters"
+                    style="font-size: 15.18px;">
+                    <i class="fas fa-sliders-h"></i> Search
+                </button>
             </div>
         </div>
         <div class="row">

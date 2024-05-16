@@ -37,9 +37,8 @@
 }
 
 @media screen and (max-width: 1800px) {
-    /* .breadcrumbs {
-        position: relative !important;
-        left: 18px !important;
+    /* .form_spk {
+        padding-left: 10px;
     } */
 
     .text-dashboard {
@@ -48,6 +47,19 @@
 }
 
 @media screen and (max-width: 1440px) {
+    .form_pengajuan_spk {
+        margin-right: 10px !important;
+    }
+
+    .header_text_spk {
+        padding-right: 10px;
+    }
+
+    .form_spk {
+        position: relative;
+        left: -9px !important;
+    }
+
     .text-mp {
         left: -7px;
         position: relative;
@@ -502,7 +514,7 @@
 }
 
 .text-mp {
-    margin-left: 4.2%;
+    margin-left: 20.2px;
     color: #2D3748;
     font-size: 17px;
     font-weight: 700;
@@ -566,7 +578,11 @@
 
 @media screen and (max-width: 1560px) and (min-width: 992.22px) {
     .text-mp {
-        margin-left: 29px;
+        margin-left: 25px;
+    }
+
+    .form_pd {
+        margin-left: 1px;
     }
 
     .fiturjam {
@@ -1373,6 +1389,10 @@ input[type=file]::file-selector-button:hover {
         margin-top: 6%;
         margin-left: 7px;
         height: 38px;
+    }
+
+    .form_spk {
+        margin-left: 15px !important;
     }
 
     .breadcrumbs {

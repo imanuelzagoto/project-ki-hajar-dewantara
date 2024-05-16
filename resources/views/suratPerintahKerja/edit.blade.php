@@ -312,9 +312,19 @@
             var checkboxKontrak = document.getElementById('checkbox_kontrak');
             var checkboxBrosur = document.getElementById('checkbox_brosur');
 
+            // if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
+            //     clearFileInput();
+            // }
+
             if (!checkboxGambar.checked && !checkboxKontrak.checked && !checkboxBrosur.checked) {
-                clearFileInput();
+                // Automatically select checkbox gambar checkbox if no other checkbox is selected
+                selectCheckbox('gambar');
             }
+        }
+
+        function selectCheckbox(checkboxName) {
+            var checkbox = document.getElementById('checkbox_' + checkboxName);
+            checkbox.checked = true;
         }
 
         document.getElementById('choosefile').addEventListener('change', function(event) {
