@@ -32,7 +32,6 @@ class Surat_perintah_kerja extends Model
         'uraian_pekerjaan',
         'dokumen_pendukung_type',
         'dokumen_pendukung_file',
-        'file_pendukung_lainnya',
         'form_number',
     ];
 

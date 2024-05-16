@@ -34,7 +34,6 @@ return new class extends Migration
             $table->string('uraian_pekerjaan');
             $table->integer('dokumen_pendukung_type')->nullable()->default(1);
             $table->string('dokumen_pendukung_file')->nullable();
-            $table->string('file_pendukung_lainnya')->nullable();
             $table->timestamps();
         });
     }

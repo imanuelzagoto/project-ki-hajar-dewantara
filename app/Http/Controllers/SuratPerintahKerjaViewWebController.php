@@ -108,8 +108,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'jenis_pekerjaan'               => 'required',
             'uraian_pekerjaan'               => 'required',
             'dokumen_pendukung_type' => 'nullable|string',
-            // 'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,poster,pdf,csv,txt|max:2048',
-            'file_pendukung_lainnya' => 'nullable|string',
+            'dokumen_pendukung_file' => 'nullable',
         ]);
 
         // Check if validation fails
@@ -152,7 +151,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'uraian_pekerjaan' => $request->uraian_pekerjaan,
             'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
             'dokumen_pendukung_file' => $request->dokumen_pendukung_file,
-            'file_pendukung_lainnya' => $request->file_pendukung_lainnya
         ]);
         // 022/FPD/ADM/I/2024
         $datas = Surat_perintah_kerja::where('id', $suratPerintahKerjas->id)->first();
@@ -233,8 +231,8 @@ class SuratPerintahKerjaViewWebController extends Controller
             'jenis_pekerjaan'               => 'required',
             'uraian_pekerjaan'               => 'required',
             'dokumen_pendukung_type' => 'nullable|string',
-            // 'dokumen_pendukung_file' => 'nullable|file|mimes:jpeg,png,jpg,poster,pdf,csv,txt|max:2048',
-            'file_pendukung_lainnya' => 'nullable|string',
+            'dokumen_pendukung_file' => 'nullable',
+            // 'file_pendukung_lainnya' => 'nullable|string',
         ]);
 
         // Check if validation fails
@@ -282,7 +280,7 @@ class SuratPerintahKerjaViewWebController extends Controller
                 'uraian_pekerjaan'      => $request->uraian_pekerjaan,
                 'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
                 'dokumen_pendukung_file' => $request->dokumen_pendukung_file,
-                'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
+                // 'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
             ]);
         } else {
             $suratPerintahKerjas->update([
