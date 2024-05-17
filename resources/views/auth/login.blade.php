@@ -33,7 +33,7 @@
                                 <div class="password-container">
                                     <input class="form-control password-input @error('password') is-invalid @enderror"
                                         id="password" type="password" name="password" placeholder="Min. 8 characters">
-                                    <i class="fas fa-eye eye-icon" aria-hidden="true"></i>
+                                    <i class="fas fa-eye eye-icon" aria-hidden="true" style="color: #7A7B7D"></i>
                                 </div>
                                 @error('password')
                                     <span class="go-up text-danger">{{ $message }}</span>
