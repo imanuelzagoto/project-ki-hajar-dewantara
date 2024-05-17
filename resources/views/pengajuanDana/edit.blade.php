@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('title')
+    Edit Pengajuan
+@endsection
 @section('content')
     <div class="main-dashboard mt--3">
         <nav aria-label="breadcrumb">
@@ -174,8 +176,8 @@
                                 </div>
                             </div>
 
-                            <div class="row pr-3 pt-3" id="itemFields">
-                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                            <div class=" pr-3 pt-3" id="itemFields">
+                                <div class=" d-flex ">
                                     <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
                                         <span class="head-item">Item</span>
                                         <span class="detail-text">Pengaju</span>
@@ -237,60 +239,9 @@
                                                     <div class=" py-2 col-1 JS-button-delete">
                                                         <button
                                                             class="btn btn-sm btn-danger font-weight-bold JS-delete-btn"
-                                                            style="font-size: 14px; margin-top:21px;position: absolute;right: 36px;"
+                                                            style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;"
                                                             disabled><i class="fa-solid fa-minus"></i></button>
                                                     </div>
-
-
-                                                    {{-- <div class="pr-4 py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail"
-                                                            style="position: relative; right:118px;">Nama item</span>
-                                                        <input name="nama_item[]" value="{{ $item->nama_item }}"
-                                                            class="form-control bg-light w-220" type="text"
-                                                            style="position: relative; right: 119.5px; width:149px;"
-                                                            required>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail"
-                                                            style="position:relative; right:84px;">Jumlah</span>
-                                                        <input name="jumlah[]" value="{{ $item->jumlah }}"
-                                                            class="form-control bg-light jumlah" type="number"
-                                                            style="position:relative; right:84px; width:134px; text-align:center;"
-                                                            required>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail"
-                                                            style="position: relative; right:64px;">Satuan</span>
-                                                        <input name="satuan[]" value="{{ $item->satuan }}"
-                                                            class="form-control bg-light w-220" type="text"
-                                                            style="position: relative; right: 64px; width:132px; text-align:center;"
-                                                            required>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail"
-                                                            style="position:relative; right:47px;">Harga</span>
-                                                        <input name="harga[]"
-                                                            value="{{ 'Rp. ' . number_format($item->harga, 0, ',', '.') }}"
-                                                            class="form-control bg-light harga w-220" type="text"
-                                                            style="text-align:right; position:relative; right: 48px; width:147px;"
-                                                            required>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail"
-                                                            style="position:relative; right:14px;">Total</span>
-                                                        <input name="total"
-                                                            value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}"
-                                                            class="form-control bg-light text-right total w-220"
-                                                            type="text"
-                                                            style="position:relative; right:14px; width:180px;" required
-                                                            readonly>
-                                                    </div>
-                                                    <div class="pr-4 py-2 col-1 JS-button-delete">
-                                                        <button
-                                                            class="btn btn-sm btn-danger font-weight-bold JS-delete-btn w-220"
-                                                            style="font-size: 14px; margin-top:20px; margin-left: 53px;"><i
-                                                                class="fa-solid fa-minus"></i></button>
-                                                    </div> --}}
                                                 </div>
                                             @endforeach
                                         </div>
@@ -450,7 +401,7 @@
                 // Fungsi untuk menambahkan baris baru
                 function addNewRow() {
                     var newRow = `
-                    <div class="row py-2" style="margin-left: 105px; width:100%;">
+                    <div class="row py-2" style="margin-left: 91px;">
                             <div class="py-2 col-3">
                                 <span class="text-sm font-weight-bold text-form-detail" >Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
@@ -472,9 +423,9 @@
                                 <input name="total" class="form-control bg-light text-right total" type="text"  required readonly>
                             </div>
                             <div class=" py-2 col-1 JS-button-delete">
-                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 36px;" disabled><i class="fa-solid fa-minus"></i></button>
+                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 28px;" disabled><i class="fa-solid fa-minus"></i></button>
                             </div>
-                    </div>`;
+                        </div>`;
                     $("#itemFields").append(newRow);
                     activateDeleteButtons();
                 }

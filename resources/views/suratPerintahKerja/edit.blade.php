@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('title')
+    Edit Surat Perintah Kerja
+@endsection
 @section('content')
     <div class="main-dashboard mt--3">
         <nav aria-label="breadcrumb">

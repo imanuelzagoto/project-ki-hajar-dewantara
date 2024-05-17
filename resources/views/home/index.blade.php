@@ -5,7 +5,9 @@
 @endphp
 
 @extends('layouts.master')
-
+@section('title')
+    Dashboard
+@endsection
 @section('content')
 
     @if ($userrole == 'Super Admin')

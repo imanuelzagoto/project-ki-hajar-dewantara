@@ -38,18 +38,3 @@
 <script src="{{ asset('sets/js/bootstrap/popper.min.js') }}"></script>
 <script src="{{ asset('sets/js/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('sets/js/script.js') }}"></script>
-
-
-<script>
-    // Function to update page title
-    function updateTitle(newTitle) {
-        document.title = "{{ config('app.name') }} | " + newTitle;
-    }
-
-    // Event listener for menu item clicks
-    $('.nav-link').click(function(e) {
-        e.preventDefault();
-        var menuItem = $(this).find('p').text().trim();
-        updateTitle(menuItem);
-    });
-</script>

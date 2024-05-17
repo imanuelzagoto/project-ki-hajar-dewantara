@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('title')
+    Tambah Perintah
+@endsection
 @section('content')
     <div class="col-md-12 main-dashboard mt--3">
         <nav aria-label="breadcrumb">
