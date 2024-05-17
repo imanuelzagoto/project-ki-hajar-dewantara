@@ -239,8 +239,8 @@
                                                     <div class=" py-2 col-1 JS-button-delete">
                                                         <button
                                                             class="btn btn-sm btn-danger font-weight-bold JS-delete-btn"
-                                                            style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;"
-                                                            disabled><i class="fa-solid fa-minus"></i></button>
+                                                            style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;"><i
+                                                                class="fa-solid fa-minus"></i></button>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -430,6 +430,52 @@
                     activateDeleteButtons();
                 }
 
+                function updateTerbilang() {
+                    // Mendefinisikan array kata terbilang
+                    var terbilang = [
+                        '', 'satu ', 'dua ', 'tiga ', 'empat ', 'lima ', 'enam ', 'tujuh ', 'delapan ', 'sembilan ',
+                        'sepuluh ',
+                        'sebelas ', 'dua belas ', 'tiga belas ', 'empat belas ', 'lima belas ', 'enam belas ',
+                        'tujuh belas ',
+                        'delapan belas ', 'sembilan belas '
+                    ];
+
+                    // Fungsi untuk mengonversi angka menjadi terbilang
+                    function bilang(n) {
+                        if (n < 20) {
+                            return terbilang[n];
+                        } else if (n < 100) {
+                            return terbilang[Math.floor(n / 10)] + 'puluh ' + terbilang[n % 10];
+                        } else if (n < 200) {
+                            return 'seratus ' + bilang(n - 100);
+                        } else if (n < 1000) {
+                            return terbilang[Math.floor(n / 100)] + 'ratus ' + bilang(n % 100);
+                        } else if (n < 2000) {
+                            return 'seribu ' + bilang(n - 1000);
+                        } else if (n < 1000000) {
+                            return bilang(Math.floor(n / 1000)) + 'ribu ' + bilang(n % 1000);
+                        } else if (n < 1000000000) {
+                            return bilang(Math.floor(n / 1000000)) + 'juta ' + bilang(n % 1000000);
+                        } else if (n < 1000000000000) {
+                            return bilang(Math.floor(n / 1000000000)) + 'miliar ' + bilang(n % 1000000000);
+                        } else if (n < 1000000000000000) {
+                            return bilang(Math.floor(n / 1000000000000)) + 'triliun ' + bilang(n % 1000000000000);
+                        }
+                    }
+
+                    // Mengambil nilai subtotal dari input
+                    var subtotal = parseFloat($('#subtotalInput').val().replace(/[^\d]/g, '')) || 0;
+
+                    // Mengonversi subtotal menjadi terbilang
+                    var terbilangText = bilang(subtotal);
+
+                    // Menambahkan kata "rupiah" di akhir teks terbilang
+                    terbilangText += 'rupiah';
+
+                    // Mengisi kolom terbilang dengan nilai terbilang
+                    $('input[name="terbilang"]').val(terbilangText);
+                }
+
                 $(document).on('input', '.harga', function() {
                     // Panggil fungsi formatRupiah untuk memformat nilai input
                     $(this).val(formatRupiah($(this).val(), "Rp. "));
@@ -460,6 +506,7 @@
                     // Format nilai subtotal sebagai rupiah
                     var formattedSubtotal = formatRupiah(subtotal.toString(), "Rp. ");
                     $('#subtotalInput').val(formattedSubtotal);
+                    updateTerbilang();
                 }
 
                 // Fungsi untuk mengaktifkan atau menonaktifkan tombol delete
