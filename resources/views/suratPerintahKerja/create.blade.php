@@ -331,18 +331,7 @@
                 }
             });
         });
-        // window.onload = function() {
-        //     var form1 = document.getElementById("store_form"); // assuming <form id="form1"
-        //     form1.onsubmit = function() {
-        //         var checkboxes = ['gambar', 'kontrak', 'brosur'];
-        //         var anyCheckboxChecked = checkboxes.some(function(name) {
-        //             return document.getElementById('checkbox_' + name).checked;
-        //         });
 
-
-        //         return true; // allow submission
-        //     }
-        // }
 
         // project id
         function changeProjectName() {
@@ -350,6 +339,14 @@
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
             document.getElementById("nama").value = selectedValue;
         }
+
+        // fungsi untuk newline tag br
+        document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
+            var textarea = event.target;
+            var text = textarea.value;
+            var formattedText = text.replace(/\n/g, '<br>');
+            textarea.value = formattedText;
+        });
     </script>
 @endsection
 

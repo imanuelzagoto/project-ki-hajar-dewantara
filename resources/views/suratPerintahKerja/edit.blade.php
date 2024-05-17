@@ -74,7 +74,8 @@
             <div class="">
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
-                        <form action="/surat-perintah-kerja/update/{{ $suratPerintahKerjas->id }}" method="POST">
+                        <form action="/surat-perintah-kerja/update/{{ $suratPerintahKerjas->id }}"
+                            enctype="multipart/form-data" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="row pr-3 pt-3">
@@ -212,11 +213,17 @@
                                                         onchange="handleFileSelect(this)">
                                                 </label>
                                                 @if ($suratPerintahKerjas->dokumen_pendukung_file)
-                                                    <p id="fileName">File yang
-                                                        sudah dipilih: {{ $suratPerintahKerjas->dokumen_pendukung_file }}
-                                                    </p>
+                                                    <p id="fileName">File yang sudah dipilih:
+                                                        {{ $suratPerintahKerjas->dokumen_pendukung_file }}</p>
                                                 @endif
+
+                                                <!-- Hidden inputs to signal clearing dokumen_pendukung_file and dokumen_pendukung_type -->
+                                                <input type="hidden" id="dokumen_pendukung_file_clear"
+                                                    name="dokumen_pendukung_file_clear" value="false">
+                                                <input type="hidden" id="dokumen_pendukung_type_clear"
+                                                    name="dokumen_pendukung_type_clear" value="false">
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -297,7 +304,20 @@
                 }
             });
 
-            if (!isCurrentCheckboxChecked) {
+            // Hapus file input jika tidak ada checkbox yang dipilih
+            var anyCheckboxChecked = checkboxes.some(function(name) {
+                return document.getElementById('checkbox_' + name).checked;
+            });
+
+            if (anyCheckboxChecked) {
+                if (document.getElementById("choosefile").files.length == 0) {
+                    document.getElementById("choosefile").required = true;
+                }
+            } else {
+                document.getElementById("choosefile").required = false;
+            }
+
+            if (!anyCheckboxChecked) {
                 clearFileInput();
             }
         }
@@ -310,6 +330,10 @@
             if (fileNameParagraph) {
                 fileNameParagraph.innerHTML = "File yang sudah dipilih: ";
             }
+
+            // Set hidden fields to true
+            document.getElementById('dokumen_pendukung_file_clear').value = 'true';
+            document.getElementById('dokumen_pendukung_type_clear').value = 'true';
         }
 
         function handleFileSelect(input) {
@@ -329,6 +353,10 @@
             if (fileNameParagraph) {
                 fileNameParagraph.innerHTML = "File yang sudah dipilih: " + fileName;
             }
+
+            // Reset hidden fields as file is selected
+            document.getElementById('dokumen_pendukung_file_clear').value = 'false';
+            document.getElementById('dokumen_pendukung_type_clear').value = 'false';
         }
 
         function selectCheckbox(checkboxName) {
@@ -360,12 +388,22 @@
             }
         });
 
+
+
         // fungsi project
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
             document.getElementById("nama").value = selectedValue;
         }
+
+        document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
+            var textarea = event.target;
+            var text = textarea.value;
+
+            // Set value textarea dengan teks yang belum diubah
+            textarea.value = text;
+        });
     </script>
 @endsection
 

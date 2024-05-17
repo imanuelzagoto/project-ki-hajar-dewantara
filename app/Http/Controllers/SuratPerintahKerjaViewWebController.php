@@ -255,6 +255,16 @@ class SuratPerintahKerjaViewWebController extends Controller
             $dokumen_pendukung_file = $suratPerintahKerjas->dokumen_pendukung_file;
         }
 
+        // Periksa hidden inputs
+        if ($request->input('dokumen_pendukung_file_clear') == 'true') {
+            $suratPerintahKerjas->dokumen_pendukung_file = null;
+        }
+
+        if ($request->input('dokumen_pendukung_type_clear') == 'true') {
+            $suratPerintahKerjas->dokumen_pendukung_type = null;
+        }
+
+
         $userData = Session::get('user');
         $userId = $userData['id'];
         // Update Surat_perintah_kerja with new or old values
@@ -304,6 +314,8 @@ class SuratPerintahKerjaViewWebController extends Controller
                 'uraian_pekerjaan'      => $request->uraian_pekerjaan,
             ]);
         }
+
+        $suratPerintahKerjas->save();
 
         // Return response
         return redirect(route('surat_perintah_kerja.index'));

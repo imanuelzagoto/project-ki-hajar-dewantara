@@ -318,8 +318,9 @@
                                 </td>
                                 <td
                                     style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
-                                    {{ $suratPerintahKerja->uraian_pekerjaan }}
+                                    {!! nl2br(e($suratPerintahKerja->uraian_pekerjaan)) !!}
                                 </td>
+
                             </tr>
                             <tr>
                                 <td style="border: 1.5px solid black; padding-left:5px;"></td>
