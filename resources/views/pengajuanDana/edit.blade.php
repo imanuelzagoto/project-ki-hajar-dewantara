@@ -197,7 +197,7 @@
                                                     style="font-size: 10px; font-weight: bold; color: #92A1BB; height:10px; width:11px; display:none; visibility:hidden;">
                                             </div>
                                             @foreach ($items as $item)
-                                                <div class="row py-2" style="margin-left: 1px;">
+                                                <div class="row py-2" style="margin-left: 1px; width:100%;">
                                                     <div class="py-2 col-3">
                                                         <span class="text-sm font-weight-bold text-form-detail">Nama
                                                             item</span>
@@ -450,7 +450,7 @@
                 // Fungsi untuk menambahkan baris baru
                 function addNewRow() {
                     var newRow = `
-                    <div class="row py-2" style="margin-left: 105px;">
+                    <div class="row py-2" style="margin-left: 105px; width:100%;">
                             <div class="py-2 col-3">
                                 <span class="text-sm font-weight-bold text-form-detail" >Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>

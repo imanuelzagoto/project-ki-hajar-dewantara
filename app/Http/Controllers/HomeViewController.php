@@ -49,6 +49,7 @@ class HomeViewController extends Controller
             $monthly_pengajuan_spk = Surat_perintah_kerja::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
                 ->groupBy(DB::raw('MONTH(created_at)'))
                 ->get();
+            // dd($monthly_pengajuan_spk);
         } elseif ($userrole === 'user biasa') {
             $today = Carbon::now()->format('Y-m-d');
             $pengajuan_dana_per_day_by_user_id = PengajuanDana::whereDate('created_at', now()->toDateString())

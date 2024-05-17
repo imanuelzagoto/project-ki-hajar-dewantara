@@ -1861,6 +1861,8 @@
                 total_pengajuan_dana_per_month.push(0);
             }
 
+            console.log(total_pengajuan_dana_per_month)
+
             var monthFoundSPK = monthly_pengajuan_spk.find(function(item) {
                 return parseInt(item.month) === i + 1;
             });
@@ -1871,6 +1873,7 @@
                 total_pengajuan_spk_per_month.push(0);
             }
         }
+        console.log(total_pengajuan_spk_per_month)
 
         // Inisialisasi opsi grafik
         var options = {
