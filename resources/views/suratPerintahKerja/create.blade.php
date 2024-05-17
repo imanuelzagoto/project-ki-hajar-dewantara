@@ -74,7 +74,7 @@
             <div class="">
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
-                        <form action="{{ url('/surat-perintah-kerja/store') }}" method="POST">
+                        <form action="{{ url('/surat-perintah-kerja/store') }}" method="POST" id="store_form">
                             @csrf
                             <div class="row pr-3 pt-3">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
@@ -282,6 +282,14 @@
                 return document.getElementById('checkbox_' + name).checked;
             });
 
+            if (anyCheckboxChecked) {
+                if (document.getElementById("choosefile").files.length == 0) {
+                    document.getElementById("choosefile").required = true;
+                }
+            } else {
+                document.getElementById("choosefile").required = false;
+            }
+
             if (!anyCheckboxChecked) {
                 clearFileInput();
             }
@@ -323,8 +331,18 @@
                 }
             });
         });
+        // window.onload = function() {
+        //     var form1 = document.getElementById("store_form"); // assuming <form id="form1"
+        //     form1.onsubmit = function() {
+        //         var checkboxes = ['gambar', 'kontrak', 'brosur'];
+        //         var anyCheckboxChecked = checkboxes.some(function(name) {
+        //             return document.getElementById('checkbox_' + name).checked;
+        //         });
 
 
+        //         return true; // allow submission
+        //     }
+        // }
 
         // project id
         function changeProjectName() {

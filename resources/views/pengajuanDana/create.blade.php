@@ -229,7 +229,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button class="btn btn-save"
+                                        <button class="btn btn-save" type="submit"
                                             style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:5px;">
                                             SAVE
                                         </button>
