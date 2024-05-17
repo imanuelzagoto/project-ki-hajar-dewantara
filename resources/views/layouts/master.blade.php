@@ -15,6 +15,8 @@ $isHR = $userrole === 'Hr';
 
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="{{ asset('sets/images/siops.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('sets/images/siops.svg') }}" type="image/x-icon">
     <title>{{ config('app.name') }} | Dashboard</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta content='width=device-width, initial-scale=1.0, shrink-to-fit=no' name='viewport' />
