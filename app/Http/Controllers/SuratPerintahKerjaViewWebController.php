@@ -34,17 +34,17 @@ class SuratPerintahKerjaViewWebController extends Controller
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
 
-        if ($userrole === 'Super Admin') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
-        } elseif ($userrole === 'user biasa') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'Driver') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'General Affair') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'Hr') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        }
+        // if ($userrole === 'Super Admin') {
+        $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
+        // } elseif ($userrole === 'user biasa') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'Driver') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'General Affair') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'Hr') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // }
 
         return view('suratPerintahKerja.index', compact('suratPerintahKerjas'));
     }
@@ -232,7 +232,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'uraian_pekerjaan'               => 'required',
             'dokumen_pendukung_type' => 'nullable|string',
             'dokumen_pendukung_file' => 'nullable',
-            // 'file_pendukung_lainnya' => 'nullable|string',
         ]);
 
         // Check if validation fails
@@ -290,7 +289,6 @@ class SuratPerintahKerjaViewWebController extends Controller
                 'uraian_pekerjaan'      => $request->uraian_pekerjaan,
                 'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
                 'dokumen_pendukung_file' => $request->dokumen_pendukung_file,
-                // 'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
             ]);
         } else {
             $suratPerintahKerjas->update([

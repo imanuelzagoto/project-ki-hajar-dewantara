@@ -2,7 +2,6 @@
 $userData = Session::get('user');
 $userrole = $userData['modules']['name']; // Ambil peran pengguna dari data pengguna
 
-// dd($userRole);
 // Periksa apakah peran pengguna adalah "Super Admin"
 $isSuperAdmin = $userrole === 'Super Admin';
 $isUser = $userrole === 'user biasa';

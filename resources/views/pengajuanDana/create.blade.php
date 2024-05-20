@@ -342,7 +342,7 @@
                 // Fungsi untuk menambahkan baris baru
                 function addNewRow() {
                     var newRow = `
-                        <div class="row py-2" style="margin-left: 95px;">
+                        <div class="row py-2" style="margin-left: 90px;">
                             <div class="py-2 col-3">
                                 <span class="text-sm font-weight-bold text-form-detail" >Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
@@ -364,7 +364,7 @@
                                 <input name="total" class="form-control bg-light text-right total" type="text"  required readonly>
                             </div>
                             <div class=" py-2 col-1 JS-button-delete">
-                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 20px;" disabled><i class="fa-solid fa-minus"></i></button>
+                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;" disabled><i class="fa-solid fa-minus"></i></button>
                             </div>
                         </div>`;
                     $("#itemFields").append(newRow);
