@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('title')
+    Tambah Pengajuan
+@endsection
 @section('content')
     <div class="main-dashboard mt--3">
         <nav aria-label="breadcrumb">
@@ -117,17 +119,17 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
+                                            <div class="pr-4 py-2 col-5" id="tujuan_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tujuan</span>
                                                 <input name="tujuan" class="form-control bg-light w-100" type="text"
                                                     required>
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
+                                            <div class="pr-4 py-2 col-4" id="lokasi_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
                                                 <input name="lokasi" class="form-control bg-light w-100" type="text"
                                                     required>
                                             </div>
-                                            <div class="pr-4 py-2 col-2">
+                                            <div class="pr-4 py-2 col-3" id="deadline_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
                                                 <input name="batas_waktu" class="form-control bg-light w-100"
                                                     type="date" required>
@@ -150,7 +152,7 @@
                                                     Penerimaan</span>
                                                 <select id="metode_penerimaan" class="form-control bg-light w-100"
                                                     onchange="toggleRekeningInput()">
-                                                    <option value="debit" name="non_tunai">Debit</option>
+                                                    <option value="transfer" name="non_tunai">Transfer</option>
                                                     <option value="Cash" name="tunai">Cash</option>
                                                 </select>
                                             </div>
@@ -162,6 +164,15 @@
                                                 <input id="nomor_rekening" name="non_tunai"
                                                     class="form-control bg-light w-100" type="text"
                                                     placeholder="Masukan nomor rekening"
+                                                    style="font-size: 10px; font-weight: bold; color: #92A1BB;">
+                                            </div>
+
+                                            <div id="namaBankInput" class="pr-4 col-2"
+                                                style="margin-top: 8px; display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Nama Bank</span>
+                                                <input id="namabank" name="nama_bank"
+                                                    class="form-control bg-light w-100" type="text"
+                                                    placeholder="Bank tujuan"
                                                     style="font-size: 10px; font-weight: bold; color: #92A1BB;">
                                             </div>
 
@@ -229,7 +240,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button class="btn btn-save"
+                                        <button class="btn btn-save" type="submit"
                                             style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:5px;">
                                             SAVE
                                         </button>
@@ -242,6 +253,30 @@
             </div>
         </div>
         <script>
+            // window.onload = function() {
+            //     toggleRekeningInput();
+            // };
+
+            // function toggleRekeningInput() {
+            //     var metodePenerimaan = document.getElementById("metode_penerimaan").value;
+            //     var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+            //     var inputTunaiContainer = document.getElementById("input_tunai_container");
+            //     var inputTunai = document.getElementById("inputTunai");
+            //     var containerMethod = document.getElementById("container_method");
+
+            //     if (metodePenerimaan === "transfer") {
+            //         nomorRekeningInput.style.display = "block";
+            //         inputTunaiContainer.style.display = "none";
+            //         inputTunai.value = "";
+            //         containerMethod.classList.remove('col-4');
+            //     } else if (metodePenerimaan === "Cash") {
+            //         nomorRekeningInput.style.display = "none";
+            //         inputTunaiContainer.style.display = "block";
+            //         inputTunai.value = "Cash";
+            //         containerMethod.classList.add('col-4');
+            //     }
+            // }
+
             window.onload = function() {
                 toggleRekeningInput();
             };
@@ -249,20 +284,46 @@
             function toggleRekeningInput() {
                 var metodePenerimaan = document.getElementById("metode_penerimaan").value;
                 var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+                var namaBankInput = document.getElementById("namaBankInput");
+                var nomorRekeningField = document.getElementById("nomor_rekening");
+                var namaBankField = document.getElementById("namabank");
                 var inputTunaiContainer = document.getElementById("input_tunai_container");
                 var inputTunai = document.getElementById("inputTunai");
                 var containerMethod = document.getElementById("container_method");
+                var tujuanContainer = document.getElementById("tujuan_container");
+                var lokasiContainer = document.getElementById("lokasi_container");
+                var deadlineContainer = document.getElementById("deadline_container");
 
-                if (metodePenerimaan === "debit") {
+                if (metodePenerimaan === "transfer") {
                     nomorRekeningInput.style.display = "block";
+                    namaBankInput.style.display = "block";
                     inputTunaiContainer.style.display = "none";
                     inputTunai.value = "";
                     containerMethod.classList.remove('col-4');
+
+                    tujuanContainer.classList.remove('col-6');
+                    tujuanContainer.classList.add('col-5');
+                    lokasiContainer.classList.remove('col-6');
+                    lokasiContainer.classList.add('col-4');
+                    deadlineContainer.classList.remove('col-2');
+                    deadlineContainer.classList.add('col-3');
                 } else if (metodePenerimaan === "Cash") {
                     nomorRekeningInput.style.display = "none";
+                    namaBankInput.style.display = "none";
                     inputTunaiContainer.style.display = "block";
                     inputTunai.value = "Cash";
                     containerMethod.classList.add('col-4');
+
+                    tujuanContainer.classList.remove('col-5');
+                    tujuanContainer.classList.add('col-6');
+                    lokasiContainer.classList.remove('col-4');
+                    lokasiContainer.classList.add('col-6');
+                    deadlineContainer.classList.remove('col-3');
+                    deadlineContainer.classList.add('col-2');
+
+                    // handle untuk menghapus value jika memilih select option Cash
+                    nomorRekeningField.value = null;
+                    namaBankField.value = null;
                 }
             }
 
@@ -276,7 +337,7 @@
 
 
 
-            // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
+            // Fungsi Datetime
             document.addEventListener('DOMContentLoaded', function() {
                 // Panggil updateClock secara berkala setiap detik
                 setInterval(updateClock, 1000);
@@ -340,13 +401,13 @@
                 // Fungsi untuk menambahkan baris baru
                 function addNewRow() {
                     var newRow = `
-                        <div class="row py-2" style="margin-left: 95px;">
+                        <div class="row py-2" style="margin-left: 90px;">
                             <div class="py-2 col-3">
-                                <span class="text-sm font-weight-bold text-form-detail" >Nama item</span>
+                                <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail" >Jumlah</span>
+                                <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
                                 <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style=" left:-11px; text-align:center;" required>
                             </div>
                             <div class="py-2 col-2">
@@ -354,15 +415,15 @@
                                 <input name="satuan[]" class="form-control bg-light w-100" type="text" style=" text-align:center;" required>
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail" style="">Harga</span>
-                                <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right; " required>
+                                <span class="text-sm font-weight-bold text-form-detail">Harga</span>
+                                <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right;" required>
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail" style="">Total</span>
-                                <input name="total" class="form-control bg-light text-right total" type="text"  required readonly>
+                                <span class="text-sm font-weight-bold text-form-detail">Total</span>
+                                <input name="total" class="form-control bg-light text-right total" type="text" required readonly>
                             </div>
                             <div class=" py-2 col-1 JS-button-delete">
-                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 20px;" disabled><i class="fa-solid fa-minus"></i></button>
+                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;" disabled><i class="fa-solid fa-minus"></i></button>
                             </div>
                         </div>`;
                     $("#itemFields").append(newRow);

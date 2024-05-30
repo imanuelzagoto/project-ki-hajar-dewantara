@@ -23,9 +23,9 @@ class Surat_perintah_kerjaFactory extends Factory
     public function definition()
     {
         return [
-            'kode_project' => $this->faker->word,
+            'code' => $this->faker->word,
             'pemohon' => $this->faker->name,
-            'nama_project' => $this->faker->sentence,
+            'applicant_name' => $this->faker->sentence,
             'user' => $this->faker->name,
             'main_contractor' => $this->faker->company,
             'project_manager' => $this->faker->name,

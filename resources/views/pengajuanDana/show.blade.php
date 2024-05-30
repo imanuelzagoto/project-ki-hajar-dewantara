@@ -1,7 +1,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pengajuan Dana</title>
+    <link rel="icon" href="{{ asset('sets/images/siops.svg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('sets/images/siops.svg') }}" type="image/x-icon">
+    <title>{{ config('app.name') }} | Show Pengajuan Dana</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <style>
@@ -133,7 +135,8 @@
                         <th colspan="3" rowspan="3" class="text-pengajuan-dana">FORM PENGAJUAN DANA</th>
                         <th class="coloumn-tanggal-pengajuan">Date</th>
                         <th style="width: 150px; padding-left:3px; font-size:14.5px;">
-                            {{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->format('d F Y') }}</th>
+                            {{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->translatedFormat('d F Y') }}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -190,7 +193,7 @@
                 <span style="padding-left: 3px; font-size: 14.5px;">Jangka waktu permohonan</span>
                 <span style="padding-left: 52.2px; font-size: 14.5px;">:</span>
                 <span style="padding-left: 6.8px; font-size: 14.5px;">
-                    {{ \Carbon\Carbon::parse($pds->batas_waktu)->format('d F Y') }}
+                    {{ \Carbon\Carbon::parse($pds->batas_waktu)->translatedFormat('d F Y') }}
                 </span>
             </div>
             <div class="data_nominal">
@@ -393,8 +396,9 @@
                     <td style="padding-left: 3px; font-size:12.5px;">
                         Date
                         <span style="padding-left: 25.3px;">:</span>
-                        <span style="padding-left: 3px; font-size:12.5px;"
-                            nowrap>{{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->format('d F Y') }}</span>
+                        <span style="padding-left: 3px; font-size:12.5px;" nowrap>
+                            {{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->translatedFormat('d F Y') }}
+                        </span>
                     </td>
                     <td style="border:none;"></td>
                     <td style="padding-left: 3px; font-size:12.5px;">

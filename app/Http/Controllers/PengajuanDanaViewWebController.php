@@ -39,17 +39,17 @@ class PengajuanDanaViewWebController extends Controller
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
 
-        if ($userrole === 'Super Admin') {
-            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
-        } elseif ($userrole === 'user biasa') {
-            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'Driver') {
-            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'General Affair') {
-            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'Hr') {
-            $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        }
+        // if ($userrole === 'Super Admin') {
+        $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
+        // } elseif ($userrole === 'user biasa') {
+        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'Driver') {
+        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'General Affair') {
+        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'Hr') {
+        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // }
 
         return view('pengajuanDana.index', compact('pengajuanDanas'));
     }
@@ -85,6 +85,7 @@ class PengajuanDanaViewWebController extends Controller
             'terbilang' => 'required|string',
             'tunai' => 'nullable|string',
             'non_tunai' => 'nullable|string',
+            'nama_bank' => 'nullable|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
@@ -111,28 +112,12 @@ class PengajuanDanaViewWebController extends Controller
             'terbilang' => $request->terbilang,
             'tunai' => $request->tunai,
             'non_tunai' => $request->non_tunai,
+            'nama_bank' => $request->nama_bank,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
-        dd($pengajuanDanas->non_tunai);
-
-        // $userData = Session::get('user');
-        // $userrole = $userData['modules']['name'];
-        // // Pengecekan dan penyingkatan nilai userrole
-        // if ($userrole == "Super Admin") {
-        //     $userrole = "SA";
-        // } elseif ($userrole == "user biasa") {
-        //     $userrole = "UB";
-        // } elseif ($userrole == "Driver") {
-        //     $userrole = "DRV";
-        // } elseif ($userrole == "General Affair") {
-        //     $userrole = "GA";
-        // } elseif ($userrole == "Hr") {
-        //     $userrole = "HR";
-        // }
-
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->first();
         $datetime = explode('-', $datas_no_doc->created_at);
         // $no_doc = $pengajuanDanas->id . '/FPD/' . $userrole . '/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
@@ -167,7 +152,6 @@ class PengajuanDanaViewWebController extends Controller
 
     public function show($id)
     {
-        // Find surat perintah kerja by ID
         $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
         $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
         $pdf->setPaper(array(0, 0, 899.45, 1200));
@@ -203,6 +187,7 @@ class PengajuanDanaViewWebController extends Controller
             'terbilang' => 'required|string',
             'tunai' => 'nullable|string',
             'non_tunai' => 'nullable|string',
+            'nama_bank' => 'nullable|string',
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
@@ -264,6 +249,7 @@ class PengajuanDanaViewWebController extends Controller
             'terbilang' => $request->terbilang,
             'tunai' => $request->tunai,
             'non_tunai' => $request->non_tunai,
+            'nama_bank' => $request->nama_bank,
             'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',

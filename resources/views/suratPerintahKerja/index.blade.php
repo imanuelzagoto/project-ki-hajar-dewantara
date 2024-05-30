@@ -1,5 +1,7 @@
 @extends('layouts.master')
-
+@section('title')
+    Surat Perintah Kerja
+@endsection
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -108,26 +110,26 @@
                             </select>
                             <span class="labelentris">entries per page</span>
                         </div>
-                        <table class="element-scrollbar table-responsive-goto table display-6 table-hover w-100"
+                        <table class="element-scrollbar table-responsive-goto table table-hover display-6 w-100"
                             id="tablespk">
                             <thead>
                                 <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                     <th class="text-center" style="font-weight: 700;" nowrap>No</th>
                                     <th class="text-center" style="width:25px; font-weight: 700;" nowrap>No SPK</th>
-                                    <th class="text-left" style="font-weight: 700;" nowrap>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>
                                         Nama Project
                                     </th>
-                                    <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
-                                    <th class="text-left" style="font-weight: 700;" nowrap>User</th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>Pemohon</th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>User</th>
                                     <th class="text-center" style="font-weight: 700;" nowrap>
                                         Main Contractor
                                     </th>
                                     <th class="text-center" style="font-weight: 700;" nowrap>
                                         Project Manager
                                     </th>
-                                    <th class="text-left" style="width:19px; font-weight:700;" nowrap>PIC</th>
+                                    <th class="text-center" style="width:19px; font-weight:700;" nowrap>PIC</th>
                                     <th class="text-center" style="width:23px; font-weight:700;" nowrap>Tanggal</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Tanggal selesai</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Tanggal Selesai</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Action</th>
                                 </tr>
                             </thead>
@@ -150,7 +152,7 @@
                                             {{ $spk->title }}
                                         </td>
                                         <td class="text-left" style="font-weight: 500;" nowrap>
-                                            {{ $spk->pemohon }}
+                                            {{ $spk->applicant_name }}
                                         </td>
                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                             {{ $spk->user }}
@@ -165,11 +167,15 @@
                                             {{ $spk->pic }}
                                         </td>
                                         <td class="text-center" style="font-weight: 500;" nowrap>
-                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->tanggal)->format('d-m-Y') }}
+                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->submission_date)->format('d-m-Y') }}
                                         </td>
                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->waktu_penyelesaian)->format('d-m-Y') }}
+                                            {{ $spk->completion_time }}
                                         </td>
+
+
+
+
                                         <td class="text-center" style="font-weight:400;" nowrap>
                                             <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
                                                 class="fas fa-pen btn btn-sm tooltip-container"
@@ -292,7 +298,7 @@
                 if (storedLength) {
                     return parseInt(storedLength);
                 } else {
-                    return 10; // Default page length
+                    return 10;
                 }
             }
 

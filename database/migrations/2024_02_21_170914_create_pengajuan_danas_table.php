@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('terbilang');
             $table->string('tunai')->nullable();
             $table->string('non_tunai')->nullable();
+            $table->string('nama_bank')->nullable();
             $table->string('catatan')->nullable();
             $table->date('tanggal_pengajuan');
             $table->string('no_doc');

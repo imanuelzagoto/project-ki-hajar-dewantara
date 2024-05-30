@@ -5,7 +5,9 @@
 @endphp
 
 @extends('layouts.master')
-
+@section('title')
+    Dashboard
+@endsection
 @section('content')
 
     @if ($userrole == 'Super Admin')
@@ -275,7 +277,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                Debit
+                                                                Transfer
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -329,7 +331,7 @@
                                                             {{ $pst->title }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->pemohon }}
+                                                            {{ $pst->applicant_name }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $pst->user }}
@@ -344,11 +346,12 @@
                                                             {{ $pst->pic }}
                                                         </td>
                                                         <td class="text-center" style="font-weight: 500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->tanggal)->format('d-m-Y') }}
+                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->submission_date)->format('d-m-Y') }}
                                                         </td>
                                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
+                                                            {{ $pst->completion_time }}
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -478,9 +481,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
-    
-    background-size: 100% 100% !important; background-repeat: no-repeat; 
+                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; background-size: 100% 100% !important; background-repeat: no-repeat; 
                                 background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
@@ -631,7 +632,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                Debit
+                                                                Transfer
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -685,7 +686,7 @@
                                                             {{ $pst->title }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->pemohon }}
+                                                            {{ $pst->applicant_name }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $pst->user }}
@@ -700,11 +701,12 @@
                                                             {{ $pst->pic }}
                                                         </td>
                                                         <td class="text-center" style="font-weight: 500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->tanggal)->format('d-m-Y') }}
+                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->submission_date)->format('d-m-Y') }}
                                                         </td>
                                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
+                                                            {{ $pst->completion_time }}
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -834,9 +836,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
-    
-    background-size: 100% 100% !important;">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; background-size: 100% 100% !important; background-repeat: no-repeat; 
+                                background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -986,7 +987,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                Debit
+                                                                Transfer
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -1040,7 +1041,7 @@
                                                             {{ $pst->title }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->pemohon }}
+                                                            {{ $pst->applicant_name }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $pst->user }}
@@ -1055,11 +1056,12 @@
                                                             {{ $pst->pic }}
                                                         </td>
                                                         <td class="text-center" style="font-weight: 500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->tanggal)->format('d-m-Y') }}
+                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->submission_date)->format('d-m-Y') }}
                                                         </td>
                                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
+                                                            {{ $pst->completion_time }}
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -1189,9 +1191,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}');     background-repeat: no-repeat;
-    
-    background-size: 100% 100% !important;">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; background-size: 100% 100% !important; background-repeat: no-repeat; 
+                            background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -1341,7 +1342,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                Debit
+                                                                Transfer
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -1395,7 +1396,7 @@
                                                             {{ $pst->title }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->pemohon }}
+                                                            {{ $pst->applicant_name }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $pst->user }}
@@ -1410,11 +1411,12 @@
                                                             {{ $pst->pic }}
                                                         </td>
                                                         <td class="text-center" style="font-weight: 500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->tanggal)->format('d-m-Y') }}
+                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->submission_date)->format('d-m-Y') }}
                                                         </td>
                                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
+                                                            {{ $pst->completion_time }}
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>
@@ -1544,8 +1546,8 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="p-3 custom-card my-custom-card w-100"
-                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; 
-    background-size: 100% 100% !important;">
+                                style="background-image: url('{{ asset('partas/img/card.png') }}'); background-repeat: no-repeat; background-size: 100% 100% !important; background-repeat: no-repeat; 
+                            background-size: 100% 100% !important;">
                                 <p class="dashboard_kihajar">Dashboard ki hajar
                                     dewantara</p>
                                 <h2 class="font-weight-bold text-white username mt--3" id="greeting">Hello
@@ -1697,7 +1699,7 @@
                                                             @if ($pdt->tunai)
                                                                 {{ $pdt->tunai }}
                                                             @elseif ($pdt->non_tunai)
-                                                                Debit
+                                                                Transfer
                                                             @endif
                                                         </td>
                                                     </tr>
@@ -1752,7 +1754,7 @@
                                                             {{ $pst->title }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->pemohon }}
+                                                            {{ $pst->applicant_name }}
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $pst->user }}
@@ -1767,11 +1769,12 @@
                                                             {{ $pst->pic }}
                                                         </td>
                                                         <td class="text-center" style="font-weight: 500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->tanggal)->format('d-m-Y') }}
+                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->submission_date)->format('d-m-Y') }}
                                                         </td>
                                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->waktu_penyelesaian)->format('d-m-Y') }}
+                                                            {{ $pst->completion_time }}
                                                         </td>
+
                                                     </tr>
                                                 @endforeach
                                             </tbody>

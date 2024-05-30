@@ -34,17 +34,18 @@ class SuratPerintahKerjaViewWebController extends Controller
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
 
-        if ($userrole === 'Super Admin') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
-        } elseif ($userrole === 'user biasa') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'Driver') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'General Affair') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        } elseif ($userrole === 'Hr') {
-            $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        }
+        // if ($userrole === 'Super Admin') {
+        $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
+        // } elseif ($userrole === 'user biasa') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'Driver') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'General Affair') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // } elseif ($userrole === 'Hr') {
+        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
+        // }
+        // dd($suratPerintahKerjas);
 
         return view('suratPerintahKerja.index', compact('suratPerintahKerjas'));
     }
@@ -91,24 +92,26 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'code'          => 'required|string',
-            'pemohon'               => 'required',
-            'penerima'               => 'nullable|string',
-            'menyetujui'               => 'nullable|string',
-            'jabatan_1'               => 'required',
-            'jabatan_2'               => 'nullable|string',
-            'jabatan_3'               => 'nullable|string',
+            'applicant_name'               => 'required|string',
+            'receiver_name'               => 'nullable|string',
+            'approver_name'               => 'required|string',
+            'board_of_directors'               => 'required|string',
+            'applicant_position'               => 'required|string',
+            'receiver_position'               => 'nullable|string',
+            'approver_position'               => 'required|string',
+            'position'               => 'required|string',
             'title'          => 'required|string',
-            'user'                  => 'required',
-            'main_contractor'       => 'required',
-            'project_manager'       => 'required',
-            'tanggal' => 'required',
-            'prioritas' => 'nullable|string',
-            'waktu_penyelesaian' => 'nullable',
-            'pic' => 'required',
-            'jenis_pekerjaan'               => 'required',
-            'uraian_pekerjaan'               => 'required',
-            'dokumen_pendukung_type' => 'nullable|string',
-            'dokumen_pendukung_file' => 'nullable',
+            'user'                  => 'required|string',
+            'main_contractor'       => 'required|string',
+            'project_manager'       => 'required|string',
+            'submission_date' => 'required|string',
+            'priority' => 'required|string',
+            'completion_time' => 'nullable|string',
+            'pic' => 'nullable|string',
+            'job_type'               => 'required|string',
+            'job_description'               => 'required|string',
+            'supporting_document_type' => 'nullable|string',
+            'supporting_document_file' => 'nullable|string',
         ]);
 
         // Check if validation fails
@@ -116,12 +119,13 @@ class SuratPerintahKerjaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $submission_date = date("Y-m-d", strtotime(str_replace('/', '-', $request->submission_date)));
         // Handle file upload if exists
-        $dokumen_pendukung_file = null;
-        if ($request->hasFile('dokumen_pendukung_file')) {
+        $supporting_document_file = null;
+        if ($request->hasFile('supporting_document_file')) {
             $destinationPath = '/posts/images';
-            $dokumen_pendukung_file = $request->file('dokumen_pendukung_file')->hashName();
-            $request->file('dokumen_pendukung_file')->move(public_path($destinationPath), $dokumen_pendukung_file);
+            $supporting_document_file = $request->file('supporting_document_file')->hashName();
+            $request->file('supporting_document_file')->move(public_path($destinationPath), $supporting_document_file);
         }
 
         $userData = Session::get('user');
@@ -132,27 +136,29 @@ class SuratPerintahKerjaViewWebController extends Controller
             'form_number' => 'spk',
             'user_id' => $userId,
             'code' => $request->code,
-            'pemohon' => $request->pemohon,
-            'penerima' => $request->penerima,
-            'menyetujui' => $request->menyetujui,
-            'jabatan_1' => $request->jabatan_1,
-            'jabatan_2' => $request->jabatan_2,
-            'jabatan_3' => $request->jabatan_3,
+            'applicant_name' => $request->applicant_name,
+            'receiver_name' => $request->receiver_name,
+            'approver_name' => $request->approver_name,
+            'board_of_directors' => $request->board_of_directors,
+            'applicant_position' => $request->applicant_position,
+            'receiver_position' => $request->receiver_position,
+            'approver_position' => $request->approver_position,
+            'position' => $request->position,
             'title' => $request->title,
             'user' => $request->user,
             'main_contractor' => $request->main_contractor,
             'project_manager' => $request->project_manager,
             'no_spk' => 'spk',
-            'tanggal' => $request->tanggal,
-            'prioritas' => $request->prioritas,
-            'waktu_penyelesaian' => $request->waktu_penyelesaian,
+            'submission_date' => $submission_date,
+            'priority' => $request->priority,
+            'completion_time' => $request->completion_time,
             'pic' => $request->pic,
-            'jenis_pekerjaan' => $request->jenis_pekerjaan,
-            'uraian_pekerjaan' => $request->uraian_pekerjaan,
-            'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
-            'dokumen_pendukung_file' => $request->dokumen_pendukung_file,
+            'job_type' => $request->job_type,
+            'job_description' => $request->job_description,
+            'supporting_document_type' => $request->supporting_document_type,
+            'supporting_document_file' => $request->supporting_document_file,
         ]);
-        // 022/FPD/ADM/I/2024
+
         $datas = Surat_perintah_kerja::where('id', $suratPerintahKerjas->id)->first();
         $datetime = explode('-', $datas->created_at);
         $no_spk = $suratPerintahKerjas->id . '-SPK/SII/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
@@ -161,9 +167,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'form_number' => $no_spk
         ]);
 
-
-        // dd($suratPerintahKerjas->code);
-        // Return response
         return redirect(route('surat_perintah_kerja.index'));
     }
 
@@ -213,26 +216,27 @@ class SuratPerintahKerjaViewWebController extends Controller
         // dd($request->code);
         // Define validation rules
         $validator = Validator::make($request->all(), [
-            'code'          => 'required',
-            'pemohon'               => 'required',
-            'penerima'               => 'nullable|string',
-            'menyetujui'               => 'nullable|string',
-            'jabatan_1'               => 'required',
-            'jabatan_2'               => 'nullable|string',
-            'jabatan_3'               => 'nullable|string',
-            'title'          => 'required',
-            'user'                  => 'required',
-            'main_contractor'       => 'required',
-            'project_manager'       => 'required',
-            'tanggal' => 'required',
-            'prioritas' => 'nullable|string',
-            'waktu_penyelesaian' => 'nullable',
-            'pic' => 'required',
-            'jenis_pekerjaan'               => 'required',
-            'uraian_pekerjaan'               => 'required',
-            'dokumen_pendukung_type' => 'nullable|string',
-            'dokumen_pendukung_file' => 'nullable',
-            // 'file_pendukung_lainnya' => 'nullable|string',
+            'code'          => 'required|string',
+            'applicant_name'               => 'required|string',
+            'receiver_name'               => 'nullable|string',
+            'approver_name'               => 'required|string',
+            'board_of_directors'               => 'required|string',
+            'applicant_position'               => 'required|string',
+            'receiver_position'               => 'nullable|string',
+            'approver_position'               => 'required|string',
+            'position'               => 'required|string',
+            'title'          => 'required|string',
+            'user'                  => 'required|string',
+            'main_contractor'       => 'required|string',
+            'project_manager'       => 'required|string',
+            'submission_date' => 'required|string',
+            'priority' => 'required|string',
+            'completion_time' => 'nullable|string',
+            'pic' => 'nullable|string',
+            'job_type'               => 'required|string',
+            'job_description'               => 'required|string',
+            'supporting_document_type' => 'nullable|string',
+            'supporting_document_file' => 'nullable',
         ]);
 
         // Check if validation fails
@@ -242,68 +246,80 @@ class SuratPerintahKerjaViewWebController extends Controller
         // dd($id);
         // Find the Surat_perintah_kerja by ID
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
-
         // Check if dokumen_pendukung_file is not empty
-        if ($request->hasFile('dokumen_pendukung_file')) {
-            // Upload file
-            $dokumen_pendukung_file = $request->file('dokumen_pendukung_file');
-            $dokumen_pendukung_file->storeAs('public/posts/images', $dokumen_pendukung_file->hashName());
-            if ($suratPerintahKerjas->dokumen_pendukung_file) {
-                Storage::delete('public/posts/images/' . basename($suratPerintahKerjas->dokumen_pendukung_file));
+        if ($request->hasFile('supporting_document_file')) {
+            $supporting_document_file = $request->file('supporting_document_file');
+            $supporting_document_file->storeAs('public/posts/images', $supporting_document_file->hashName());
+            if ($suratPerintahKerjas->supporting_document_file) {
+                Storage::delete('public/posts/images/' . basename($suratPerintahKerjas->supporting_document_file));
             }
         } else {
-            $dokumen_pendukung_file = $suratPerintahKerjas->dokumen_pendukung_file;
+            $supporting_document_file = $suratPerintahKerjas->supporting_document_file;
+        }
+
+        // Periksa hidden inputs
+        if ($request->input('supporting_document_file_clear') == 'true') {
+            $suratPerintahKerjas->supporting_document_file = null;
+        }
+
+        if ($request->input('supporting_document_type_clear') == 'true') {
+            $suratPerintahKerjas->supporting_document_type = null;
         }
 
         $userData = Session::get('user');
         $userId = $userData['id'];
         // Update Surat_perintah_kerja with new or old values
-        if ($request->dokumen_pendukung_file) {
+        if ($request->supporting_document_file) {
             $suratPerintahKerjas->update([
                 'user_id' => $userId,
-                'code'          => $request->code,
-                'pemohon'               => $request->pemohon,
-                'penerima'               => $request->penerima,
-                'menyetujui'               => $request->menyetujui,
-                'jabatan_1'               => $request->jabatan_1,
-                'jabatan_2'               => $request->jabatan_2,
-                'jabatan_3'               => $request->jabatan_3,
-                'title'          => $request->title,
-                'user'                  => $request->user,
-                'main_contractor'       => $request->main_contractor,
-                'project_manager'       => $request->project_manager,
-                'tanggal'               => $request->tanggal,
-                'prioritas'             => $request->prioritas,
-                'waktu_penyelesaian'    => $request->waktu_penyelesaian,
-                'pic'                   => $request->pic,
-                'jenis_pekerjaan'       => $request->jenis_pekerjaan,
-                'uraian_pekerjaan'      => $request->uraian_pekerjaan,
-                'dokumen_pendukung_type' => $request->dokumen_pendukung_type,
-                'dokumen_pendukung_file' => $request->dokumen_pendukung_file,
-                // 'file_pendukung_lainnya' => $request->file_pendukung_lainnya,
+                'code' => $request->code,
+                'applicant_name' => $request->applicant_name,
+                'receiver_name' => $request->receiver_name,
+                'approver_name' => $request->approver_name,
+                'board_of_directors' => $request->board_of_directors,
+                'applicant_position' => $request->applicant_position,
+                'receiver_position' => $request->receiver_position,
+                'approver_position' => $request->approver_position,
+                'position' => $request->position,
+                'title' => $request->title,
+                'user' => $request->user,
+                'main_contractor' => $request->main_contractor,
+                'project_manager' => $request->project_manager,
+                'submission_date' => $request->submission_date,
+                'priority' => $request->priority,
+                'completion_time' => $request->completion_time,
+                'pic' => $request->pic,
+                'job_type' => $request->job_type,
+                'job_description' => $request->job_description,
+                'supporting_document_type' => $request->supporting_document_type,
+                'supporting_document_file' => $request->supporting_document_file,
             ]);
         } else {
             $suratPerintahKerjas->update([
                 'user_id' => $userId,
                 'code'          => $request->code,
-                'pemohon'               => $request->pemohon,
-                'penerima'               => $request->penerima,
-                'menyetujui'               => $request->menyetujui,
-                'jabatan_1'               => $request->jabatan_1,
-                'jabatan_2'               => $request->jabatan_2,
-                'jabatan_3'               => $request->jabatan_3,
+                'applicant_name' => $request->applicant_name,
+                'receiver_name' => $request->receiver_name,
+                'approver_name' => $request->approver_name,
+                'board_of_directors' => $request->board_of_directors,
+                'applicant_position' => $request->applicant_position,
+                'receiver_position' => $request->receiver_position,
+                'approver_position' => $request->approver_position,
+                'position' => $request->position,
                 'title'          => $request->title,
                 'user'                  => $request->user,
                 'main_contractor'       => $request->main_contractor,
                 'project_manager'       => $request->project_manager,
-                'tanggal'               => $request->tanggal,
-                'prioritas'             => $request->prioritas,
-                'waktu_penyelesaian'    => $request->waktu_penyelesaian,
-                'pic'                   => $request->pic,
-                'jenis_pekerjaan'       => $request->jenis_pekerjaan,
-                'uraian_pekerjaan'      => $request->uraian_pekerjaan,
+                'submission_date' => $request->submission_date,
+                'priority' => $request->priority,
+                'completion_time' => $request->completion_time,
+                'pic' => $request->pic,
+                'job_type' => $request->job_type,
+                'job_description' => $request->job_description,
             ]);
         }
+
+        $suratPerintahKerjas->save();
 
         // Return response
         return redirect(route('surat_perintah_kerja.index'));

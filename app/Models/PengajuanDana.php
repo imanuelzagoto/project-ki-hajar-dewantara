@@ -22,6 +22,7 @@ class PengajuanDana extends Model
         'terbilang',
         'tunai',
         'non_tunai',
+        'nama_bank',
         'catatan',
         'tanggal_pengajuan',
         'no_doc',

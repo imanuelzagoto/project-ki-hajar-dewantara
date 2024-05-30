@@ -325,7 +325,8 @@ table.dataTable td.dt-nowrap {
 table.dataTable th.dt-empty,
 table.dataTable td.dt-empty {
     text-align: center;
-    vertical-align: top
+    vertical-align: top;
+    width: 102%;
 }
 
 table.dataTable th.dt-type-numeric,
@@ -405,8 +406,9 @@ table.dataTable tbody td.dt-body-nowrap {
 table.dataTable {
     width: 100%;
     margin: 0 auto;
-    border-spacing: 0
+    border-spacing: 0;
 }
+
 
 table.dataTable thead th,
 table.dataTable tfoot th {
@@ -844,6 +846,18 @@ div.dt-container .dataTables_scroll div.dt-scroll-body>table>tbody>tr>td>div.dat
 
 div.dt-container.dt-empty-footer tbody>tr:last-child>* {
     border-bottom: 1px solid rgba(0, 0, 0, 0.3)
+}
+
+@media screen and (min-width: 1920px) {
+    div.dt-container.dt-empty-footer tbody>tr:last-child>* {
+        width: 10%;
+    }
+}
+
+@media screen and (min-width: 1800px) {
+    div.dt-container.dt-empty-footer tbody>tr:last-child>* {
+        width: 10%;
+    }
 }
 
 div.dt-container.dt-empty-footer .dt-scroll-body {
