@@ -115,7 +115,7 @@
             border-bottom: 4px solid black;
             width: 1045px;
             position: relative;
-            top: 25%;
+            top: 80%;
             margin-left: 3px;
         }
 
@@ -251,7 +251,8 @@
                                     Penyelesaian</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->completion_time }}</td>
+                                    {{ \Carbon\Carbon::parse($suratPerintahKerja->completion_time)->format('d/m/y') }}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -334,7 +335,7 @@
                 </div>
                 <br>
 
-                <div class="teks_hormat_kami" style="margin-top: 2%;">
+                <div class="teks_hormat_kami" style="margin-top: 4%;">
                     <span style="position: relative; padding-left:3%;">Hormat Kami,</span>
                 </div>
 
@@ -544,12 +545,12 @@
                     </table>
                 </div>
 
-                <div class="form_number_spk" style="margin-top: 2%;">
-                    <span style="font-size: 10pt; font-weight:bold; position: relative; padding-left:79%;">
+                <div class="form_number_spk">
+                    <span style="font-size: 10pt; font-weight:bold; position: relative; top:45%; padding-left:79%;">
                         Form Number : {{ $suratPerintahKerja->form_number }}</span>
-                    <div class="border_horizontal">
-                        <div class="border_horizontal_5">
-                        </div>
+                </div>
+                <div class="border_horizontal">
+                    <div class="border_horizontal_5">
                     </div>
                 </div>
             </div>
