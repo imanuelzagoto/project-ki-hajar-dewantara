@@ -254,11 +254,15 @@
                                                 <input name="approver_position" class="form-control bg-light w-100"
                                                     type="text" required>
                                             </div>
-
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
-                                                <input name="board_of_directors" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <select name="board_of_directors" class="form-control bg-light w-100"
+                                                    required>
+                                                    <option value="" disabled selected></option>
+                                                    <option value="Erwin Danuaji">Erwin Danuaji</option>
+                                                    <option value="Victor">Victor</option>
+                                                    <option value="Sindu Irawan">Sindu Irawan</option>
+                                                </select>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">
@@ -268,7 +272,6 @@
                                                     value="BOD" type="text"
                                                     style="background-color: #D9D9D9 !important;" required>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>

@@ -295,6 +295,37 @@
                                                     type="text" value="{{ $suratPerintahKerjas->approver_position }}"
                                                     required>
                                             </div>
+
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
+                                                <select name="board_of_directors" class="form-control bg-light w-100"
+                                                    required>
+                                                    <option value="" disabled selected
+                                                        {{ $suratPerintahKerjas->board_of_directors == '' ? 'selected' : '' }}>
+                                                    </option>
+                                                    <option value="Erwin Danuaji"
+                                                        {{ $suratPerintahKerjas->board_of_directors == 'Erwin Danuaji' ? 'selected' : '' }}>
+                                                        Erwin Danuaji
+                                                    </option>
+                                                    <option value="Victor"
+                                                        {{ $suratPerintahKerjas->board_of_directors == 'Victor' ? 'selected' : '' }}>
+                                                        Victor
+                                                    </option>
+                                                    <option value="Sindu Irawan"
+                                                        {{ $suratPerintahKerjas->board_of_directors == 'Sindu Irawan' ? 'selected' : '' }}>
+                                                        Sindu Irawan
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Jabatan
+                                                </span>
+                                                <input name="position" class="form-control bg-light w-100 disabled-input"
+                                                    value="BOD" type="text"
+                                                    style="background-color: #D9D9D9 !important;" required>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
