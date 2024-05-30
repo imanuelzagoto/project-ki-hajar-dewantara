@@ -90,7 +90,7 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
                                                 <input type="hidden" id="kode_project_hidden" name="code" required>
                                                 <select id="project_id" name="code" class="form-control bg-light w-100"
-                                                    onchange="changeProjectName()">
+                                                    onchange="changeProjectName()" required>
                                                     <option value="" disabled selected>
                                                         -- Pilih Kode Project --
                                                     </option>
@@ -127,27 +127,31 @@
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">PIC</span>
-                                                <input name="pic" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                <input name="pic" class="form-control bg-light w-100" type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan</span>
-                                                <input name="tanggal" class="form-control bg-light w-100" type="date"
-                                                    required>
+                                                <input id="submission_date" name="submission_date"
+                                                    class="form-control w-100 disabled-input" type="date" required
+                                                    style="background-color: #D9D9D9;">
                                             </div>
-                                            <div
-                                                class="pr-4
-                                                    py-2 col-4">
+
+                                            <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Prioritas</span>
-                                                <input name="prioritas" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <select name="priority" class="form-control bg-light w-100" required>
+                                                    <option value="" disabled selected>-- Pilih
+                                                        Prioritas --</option>
+                                                    <option value="-"> - </option>
+                                                    <option value="Segera">Segera</option>
+                                                </select>
                                             </div>
+
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Waktu
                                                     Penyelesaian</span>
-                                                <input name="waktu_penyelesaian" class="form-control bg-light w-100"
-                                                    type="date">
+                                                <input name="completion_time" class="form-control bg-light w-100"
+                                                    type="date" required>
                                             </div>
                                         </div>
                                     </div>
@@ -164,13 +168,13 @@
                                             <div class="pr-4 py-2 col-12">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jenis
                                                     Pekerjaan</span>
-                                                <input name="jenis_pekerjaan" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <input name="job_type" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Uraian
                                                     Pekerjaan</span>
-                                                <textarea name="uraian_pekerjaan" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
+                                                <textarea name="job_description" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
                                                     style="height: 138px;" required></textarea>
                                             </div>
 
@@ -181,19 +185,19 @@
                                                 </div>
                                                 <div class="d-flex">
                                                     <div class="form-checkbox-gambar d-flex">
-                                                        <input name="dokumen_pendukung_type" type="checkbox"
+                                                        <input name="supporting_document_type" type="checkbox"
                                                             id="checkbox_gambar" value="1"
                                                             onclick="handleCheckboxClick('gambar')">
                                                         <span for="checkbox_gambar" class="text-checkbox">Gambar</span>
                                                     </div>
                                                     <div class="form-checkbox-kontrak d-flex">
-                                                        <input name="dokumen_pendukung_type" type="checkbox"
+                                                        <input name="supporting_document_type" type="checkbox"
                                                             id="checkbox_kontrak" value="2"
                                                             onclick="handleCheckboxClick('kontrak')">
                                                         <span for="checkbox_kontrak" class="text-checkbox">Kontrak</span>
                                                     </div>
                                                     <div class="form-checkbox-brosur d-flex">
-                                                        <input name="dokumen_pendukung_type" type="checkbox"
+                                                        <input name="supporting_document_type" type="checkbox"
                                                             id="checkbox_brosur" value="3"
                                                             onclick="handleCheckboxClick('brosur')">
                                                         <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
@@ -201,7 +205,7 @@
                                                 </div>
                                                 <label for="choosefile" class="drop-container" id="dropcontainer">
                                                     <span class="drop-title">Drop files here</span>
-                                                    <input name="dokumen_pendukung_file" type="file" id="choosefile"
+                                                    <input name="supporting_document_file" type="file" id="choosefile"
                                                         onchange="handleFileSelect(this)">
                                                 </label>
 
@@ -220,36 +224,51 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                <input name="pemohon" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                <input name="applicant_name" class="form-control bg-light w-100"
+                                                    type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_1" class="form-control bg-light w-100"
+                                                <input name="applicant_position" class="form-control bg-light w-100"
                                                     type="text" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                <input name="penerima" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                <input name="receiver_name" class="form-control bg-light w-100"
+                                                    type="text">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_2" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <input name="receiver_position" class="form-control bg-light w-100"
+                                                    type="text">
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <input name="menyetujui" class="form-control bg-light w-100"
+                                                <input name="approver_name" class="form-control bg-light w-100"
                                                     type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="jabatan_3" class="form-control bg-light w-100"
+                                                <input name="approver_position" class="form-control bg-light w-100"
                                                     type="text" required>
                                             </div>
+
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
+                                                <input name="board_of_directors" class="form-control bg-light w-100"
+                                                    type="text" required>
+                                            </div>
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Jabatan
+                                                </span>
+                                                <input name="position" class="form-control bg-light w-100 disabled-input"
+                                                    value="BOD" type="text"
+                                                    style="background-color: #D9D9D9 !important;" required>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +276,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button class="btn btn-save"
+                                        <button class="btn btn-save" type="submit"
                                             style="border-radius: 25px; font-weight:bold; font-size: 14px;">
                                             SAVE
                                         </button>
@@ -271,6 +290,12 @@
         </div>
     </div>
     <script>
+        // function tanggal pengajuan
+        var submissionDateInput = document.getElementById('submission_date');
+        var today = new Date().toISOString().split('T')[0];
+        submissionDateInput.value = today;
+
+        // function chekbox input file
         function handleCheckboxClick(checkboxName) {
             var checkboxes = ['gambar', 'kontrak', 'brosur'];
             checkboxes.forEach(function(name) {
@@ -321,7 +346,7 @@
         }
 
         // Tambahkan event listener untuk memastikan file input dihapus jika tidak ada checkbox yang dipilih
-        document.querySelectorAll('input[name="dokumen_pendukung_type"]').forEach(function(checkbox) {
+        document.querySelectorAll('input[name="supporting_document_type"]').forEach(function(checkbox) {
             checkbox.addEventListener('change', function() {
                 var checkboxes = ['gambar', 'kontrak', 'brosur'];
                 var anyCheckboxChecked = checkboxes.some(function(name) {
@@ -342,13 +367,21 @@
             document.getElementById("nama").value = selectedValue;
         }
 
-        // fungsi untuk newline tag br
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
             var textarea = event.target;
             var text = textarea.value;
-            var formattedText = text.replace(/\n/g, '<br>');
-            textarea.value = formattedText;
+
+            // Set value textarea dengan teks yang belum diubah
+            textarea.value = text;
         });
+
+        // fungsi untuk newline tag br
+        // document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
+        //     var textarea = event.target;
+        //     var text = textarea.value;
+        //     var formattedText = text.replace(/\n/g, '<br>');
+        //     textarea.value = formattedText;
+        // });
     </script>
 @endsection
 

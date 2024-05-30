@@ -95,39 +95,40 @@
                             </select>
                             <span class="labelentris">entries per page</span>
                         </div>
-                        <div class="table-responsive">
-                            <table class="element-scrollbar table display-6 table-hover w-100" id="tableProject">
-                                <thead>
-                                    <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
-                                        <th class="text-left" style="font-weight:700;" nowrap>No</th>
-                                        <th class="text-left" style="font-weight:700;" nowrap>Nama Projek</th>
-                                        <th class="text-left" style="font-weight:700;" nowrap>Kode Projek</th>
-                                        <th class="text-center" style="font-weight:700;" nowrap>Tenggat</th>
-                                        <th class="text-center" style="font-weight:700;" nowrap>Mulai</th>
-                                        <th class="text-center" style="font-weight:700;" nowrap>Akhir</th>
+                        {{-- <div class="table-responsive"> --}}
+                        <table class="element-scrollbar table-responsive-goto table table-hover display-6 w-100"
+                            id="tableProject">
+                            <thead>
+                                <tr>
+                                    <th class="text-left" style="font-weight:700;">No</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Nama Projek</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Kode Projek</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Tenggat</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Mulai</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Akhir</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @php $i = 0; @endphp
+                                @foreach ($projects as $project)
+                                    @php $i += 1; @endphp
+                                    <tr class="Column_td">
+                                        <td class="text-left" style="font-weight:500;">{{ $i }}</td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>{{ $project['title'] }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>{{ $project['code'] }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}</td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    @php $i = 0; @endphp
-                                    @foreach ($projects as $project)
-                                        @php $i += 1; @endphp
-                                        <tr>
-                                            <td class="text-left" style="font-weight:500;" nowrap>{{ $i }}</td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>{{ $project['title'] }}
-                                            </td>
-                                            <td class="text-left" style="font-weight:500;" nowrap>{{ $project['code'] }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}</td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        {{-- </div> --}}
                     </div>
                 </div>
             </div>

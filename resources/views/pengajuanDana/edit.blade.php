@@ -117,21 +117,24 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
+                                            <div class="pr-4 py-2 col-5" id="tujuan_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tujuan</span>
                                                 <input name="tujuan" value="{{ $pengajuanDanas->tujuan }}"
                                                     class="form-control bg-light w-100" type="text" required>
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
+
+                                            <div class="pr-4 py-2 col-4" id="lokasi_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
                                                 <input name="lokasi" value="{{ $pengajuanDanas->lokasi }}"
                                                     class="form-control bg-light w-100" type="text" required>
                                             </div>
-                                            <div class="pr-4 py-2 col-2">
+
+                                            <div class="pr-4 py-2 col-3" id="deadline_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
                                                 <input name="batas_waktu" value="{{ $pengajuanDanas->batas_waktu }}"
                                                     class="form-control bg-light w-100" type="date" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
                                                 <input name="subtotal"
@@ -150,7 +153,7 @@
                                                     Penerimaan</span>
                                                 <select id="metode_penerimaan" class="form-control bg-light w-100"
                                                     onchange="toggleRekeningInput()">
-                                                    <option value="debit" name="non_tunai">Debit</option>
+                                                    <option value="transfer" name="non_tunai">Transfer</option>
                                                     <option value="Cash" name="tunai">Cash</option>
                                                 </select>
                                             </div>
@@ -163,6 +166,15 @@
                                                     class="form-control bg-light w-100" type="text"
                                                     placeholder="Masukan nomor rekening"
                                                     value="{{ $pengajuanDanas->non_tunai }}"
+                                                    style="font-size: 10px; font-weight: bold; color: #92A1BB;">
+                                            </div>
+
+                                            <div id="namaBankInput" class="pr-4 col-2"
+                                                style="margin-top: 8px; display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Nama Bank</span>
+                                                <input id="namabank" name="nama_bank"
+                                                    class="form-control bg-light w-100" type="text"
+                                                    placeholder="Bank tujuan" value="{{ $pengajuanDanas->nama_bank }}"
                                                     style="font-size: 10px; font-weight: bold; color: #92A1BB;">
                                             </div>
 
@@ -286,52 +298,70 @@
                 </div>
             </div>
         </div>
-
         <script>
             window.onload = function() {
-                var debitInput = document.getElementById('nomor_rekening');
-                var cashInput = document.getElementById('inputTunai');
-                var selectElement = document.getElementById('metode_penerimaan');
-                if (cashInput.value.trim() !== '') {
-                    selectElement.value = 'Cash';
-                    document.getElementById('input_tunai_container').style.visibility = 'visible';
-                    document.getElementById('nomorRekeningInput').style.display = 'none';
-                    document.getElementById('container_method').classList.add('col-4');
-                } else {
-                    if (debitInput.value.trim() !== '') {
-                        selectElement.value = 'debit';
-                        document.getElementById('nomorRekeningInput').style.display = 'block';
-                        document.getElementById('input_tunai_container').style.visibility = 'hidden';
-                        document.getElementById('container_method').classList.remove('col-4');
-                    } else {
-                        selectElement.value = 'debit';
-                        document.getElementById('input_tunai_container').style.visibility = 'hidden';
-                        document.getElementById('nomorRekeningInput').style.display = 'block';
-                        document.getElementById('container_method').classList.remove('col-4');
-                    }
-                }
+                setDefaultMetodePenerimaan();
+                toggleRekeningInput();
             };
 
-            function toggleRekeningInput() {
-                var selectedValue = document.getElementById('metode_penerimaan').value;
-                if (selectedValue === 'debit') {
-                    document.getElementById('nomorRekeningInput').style.display = 'block';
-                    document.getElementById('input_tunai_container').style.visibility = 'hidden';
-                    document.getElementById('container_method').classList.remove('col-4');
-                    document.getElementById('nomor_rekening').value = '';
-                    document.getElementById('inputTunai').value = '';
-                } else if (selectedValue === 'Cash') {
-                    document.getElementById('nomorRekeningInput').style.display = 'none';
-                    document.getElementById('input_tunai_container').style.visibility = 'visible';
-                    document.getElementById('container_method').classList.add('col-4');
-                    document.getElementById('inputTunai').value = 'Cash';
+            function setDefaultMetodePenerimaan() {
+                var inputTunai = document.getElementById("inputTunai").value;
+                var metodePenerimaan = document.getElementById("metode_penerimaan");
+
+                if (inputTunai) {
+                    metodePenerimaan.value = "Cash";
                 } else {
-                    document.getElementById('inputTunai').value = '';
+                    metodePenerimaan.value = "transfer";
                 }
             }
-        </script>
 
-        <script>
+            function toggleRekeningInput() {
+                var metodePenerimaan = document.getElementById("metode_penerimaan").value;
+                var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+                var namaBankInput = document.getElementById("namaBankInput");
+                var nomorRekeningField = document.getElementById("nomor_rekening");
+                var namaBankField = document.getElementById("namabank");
+                var inputTunaiContainer = document.getElementById("input_tunai_container");
+                var inputTunai = document.getElementById("inputTunai");
+                var containerMethod = document.getElementById("container_method");
+                var tujuanContainer = document.getElementById("tujuan_container");
+                var lokasiContainer = document.getElementById("lokasi_container");
+                var deadlineContainer = document.getElementById("deadline_container");
+
+                if (metodePenerimaan === "transfer") {
+                    nomorRekeningInput.style.display = "block";
+                    namaBankInput.style.display = "block";
+                    inputTunaiContainer.style.display = "none";
+                    inputTunai.value = "";
+                    containerMethod.classList.remove('col-4');
+
+                    tujuanContainer.classList.remove('col-6');
+                    tujuanContainer.classList.add('col-5');
+                    lokasiContainer.classList.remove('col-6');
+                    lokasiContainer.classList.add('col-4');
+                    deadlineContainer.classList.remove('col-2');
+                    deadlineContainer.classList.add('col-3');
+                } else if (metodePenerimaan === "Cash") {
+                    nomorRekeningInput.style.display = "none";
+                    namaBankInput.style.display = "none";
+                    inputTunaiContainer.style.display = "block";
+                    inputTunai.value = "Cash";
+                    containerMethod.classList.add('col-4');
+
+                    tujuanContainer.classList.remove('col-5');
+                    tujuanContainer.classList.add('col-6');
+                    lokasiContainer.classList.remove('col-4');
+                    lokasiContainer.classList.add('col-6');
+                    deadlineContainer.classList.remove('col-3');
+                    deadlineContainer.classList.add('col-2');
+
+                    // handle untuk menghapus value jika memilih select option Cash
+                    nomorRekeningField.value = null;
+                    namaBankField.value = null;
+                }
+            }
+
+            // Functio  Datetime
             var currentDate = new Date();
             var year = currentDate.getFullYear();
             var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);

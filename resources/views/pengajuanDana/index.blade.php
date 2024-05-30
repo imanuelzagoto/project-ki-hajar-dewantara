@@ -117,7 +117,7 @@
                                     <th class="text-left" style="font-weight: 700;" nowrap>Revisi</th>
                                     <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
                                     <th class="text-center" style="font-weight: 700;" nowrap>Tujuan</th>
-                                    <th class="text-center" style="font-weight: 700;" nowrap>Tanggal <br>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>Lokasi <br>
                                         Pengajuan
                                     </th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Tanggal <br>
@@ -141,7 +141,7 @@
                                         $i += 1;
                                     @endphp
                                     <tr class="Column_td">
-                                        <td class="text-left" style="font-weight:500;"nowrap>
+                                        <td class="text-center" style="font-weight:500;"nowrap>
                                             {{ $i }}
                                         </td>
                                         <td class="text-left" style="font-weight:500;" nowrap>
@@ -172,7 +172,7 @@
                                             @if ($pdts->tunai)
                                                 {{ $pdts->tunai }}
                                             @elseif ($pdts->non_tunai)
-                                                Debit
+                                                Transfer
                                             @endif
                                         </td>
                                         <td class="text-center" style="font-weight:500;" nowrap>

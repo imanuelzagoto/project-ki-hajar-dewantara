@@ -834,6 +834,35 @@
     }
 }
 
+@media screen and (min-width: 1920px) {
+    .table-responsive-goto {
+        display: block !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+
+
+@media screen and (max-width: 1601px) {
+    .table-responsive-goto {
+        display: block !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        width: 102%;
+    }
+}
+
+@media screen and (min-width: 2160px) {
+    .table-responsive-goto {
+        display: table !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+    }
+}
+
+
+
 .backgorund_card_spk {
     height: 284px;
     position: relative;
@@ -1446,4 +1475,10 @@ input[type=file]::file-selector-button:hover {
 /* warning chekbox */
 .warning {
     color: red;
+}
+
+.disabled-input {
+    pointer-events: none;
+    color: #6c757d;
+    opacity: 1;
 }

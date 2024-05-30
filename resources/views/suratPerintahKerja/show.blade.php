@@ -229,7 +229,7 @@
                                 <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Tanggal</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->tanggal }}</td>
+                                    {{ $suratPerintahKerja->submission_date }}</td>
                             </tr>
                             <tr>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>Main Contractor</td>
@@ -240,7 +240,7 @@
                                 </td>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
                                 <td style="border: 2px solid black; padding-left:5px;">
-                                    {{ $suratPerintahKerja->prioritas }}</td>
+                                    {{ $suratPerintahKerja->priority }}</td>
                             </tr>
                             <tr>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>Project Manager</td>
@@ -251,7 +251,7 @@
                                     Penyelesaian</td>
                                 <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
                                 <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->waktu_penyelesaian }}</td>
+                                    {{ $suratPerintahKerja->completion_time }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -266,15 +266,15 @@
                     <div class="chekbox-dokumen">
                         <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
                         <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
-                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->dokumen_pendukung_type == 1) checked @endif>
+                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->supporting_document_type == 1) checked @endif>
                             <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
                         </span>
                         <span class="checkbox_gambar" style="position: relative; top:5%; left:25.5%; width:10%;">
-                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->dokumen_pendukung_type == 2) checked @endif>
+                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->supporting_document_type == 2) checked @endif>
                             <span class="teks_gambar" style="position: relative; bottom:1%;">Kontrak</span>
                         </span>
                         <span class="checkbox_gambar" style="position: relative; top:5%; left:33%; width:10%;">
-                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->dokumen_pendukung_type == 3) checked @endif>
+                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->supporting_document_type == 3) checked @endif>
                             <span class="teks_gambar" style="position: relative; bottom:1%;">Brosur</span>
                         </span>
                     </div>
@@ -316,13 +316,12 @@
                             <tr>
                                 <td
                                     style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
-                                    {{ $suratPerintahKerja->jenis_pekerjaan }}
+                                    {{ $suratPerintahKerja->job_type }}
                                 </td>
                                 <td
                                     style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
-                                    {!! nl2br(e($suratPerintahKerja->uraian_pekerjaan)) !!}
+                                    {!! nl2br(e($suratPerintahKerja->job_description)) !!}
                                 </td>
-
                             </tr>
                             <tr>
                                 <td style="border: 1.5px solid black; padding-left:5px;"></td>
@@ -378,7 +377,7 @@
                                     <span style="padding-left: 5px;">1.</span>
                                     <span>Nama</span>
                                     <span style="padding-left: 12px;">:</span>
-                                    <span>Sindu Irawan</span>
+                                    <span>{{ $suratPerintahKerja->board_of_directors }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -395,7 +394,7 @@
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
                                     <span style="padding-left: 21px;">Jabatan</span>
                                     <span>:</span>
-                                    <span>BOD</span>
+                                    <span>{{ $suratPerintahKerja->position }}</span>
                                 </td>
                             </tr>
                             <tr>
@@ -483,19 +482,19 @@
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
                                     <span class="nama_pemohon">Nama</span>
                                     <span style="padding-left: 15px;">:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->pemohon }}</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->applicant_name }}</span>
                                 </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
                                     <span class="nama_penerima">Nama</span>
                                     <span style="padding-left: 15px;">:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->penerima }}</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->receiver_name }}</span>
                                 </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
                                     <span class="nama_menyetujui">Nama</span>
                                     <span style="padding-left: 15px;">:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->menyetujui }}</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->approver_name }}</span>
                                 </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
@@ -507,19 +506,19 @@
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
                                     <span class="Jabatan_pemohon">Jabatan</span>
                                     <span>:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->jabatan_1 }}</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->applicant_position }}</span>
                                 </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
                                     <span class="Jabatan_pemohon">Jabatan</span>
                                     <span>:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->jabatan_2 }}</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->receiver_position }}</span>
                                 </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
                                     <span class="Jabatan_pemohon">Jabatan</span>
                                     <span>:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->jabatan_3 }}</span>
+                                    <span class="data_pemohon">{{ $suratPerintahKerja->approver_position }}</span>
                                 </td>
                                 <td
                                     style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">

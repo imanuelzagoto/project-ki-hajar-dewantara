@@ -13,31 +13,33 @@ class Surat_perintah_kerja extends Model
     protected $fillable = [
         'user_id',
         'code',
-        'pemohon',
-        'penerima',
-        'menyetujui',
-        'jabatan_1',
-        'jabatan_2',
-        'jabatan_3',
+        'applicant_name',
+        'receiver_name',
+        'approver_name',
+        'board_of_directors',
+        'applicant_position',
+        'receiver_position',
+        'approver_position',
+        'position',
         'title',
         'user',
         'main_contractor',
         'project_manager',
         'no_spk',
-        'tanggal',
-        'prioritas',
-        'waktu_penyelesaian',
+        'submission_date',
+        'priority',
+        'completion_time',
         'pic',
-        'jenis_pekerjaan',
-        'uraian_pekerjaan',
-        'dokumen_pendukung_type',
-        'dokumen_pendukung_file',
+        'job_type',
+        'job_description',
+        'supporting_document_type',
+        'supporting_document_file',
         'form_number',
     ];
 
     protected $dates = [
-        'tanggal',
-        'waktu_penyelesaian',
+        'submission_date',
+        'completion_time',
     ];
 
     /**
@@ -46,7 +48,7 @@ class Surat_perintah_kerja extends Model
      * @param  string  $value
      * @return string
      */
-    public function getTanggalAttribute($value)
+    public function getSubmissionDateAttribute($value)
     {
         return Carbon::parse($value)->translatedFormat('d/m/y');
     }
@@ -57,15 +59,15 @@ class Surat_perintah_kerja extends Model
      * @param  string  $value
      * @return string
      */
-    public function getWaktuPenyelesaianAttribute($value)
+    public function getCompletionTimeAttribute($value)
     {
         // Check if the value is null
         if ($value === null) {
             return null;
         }
 
-        // Parse the value and return the date part only
-        return Carbon::parse($value)->translatedFormat('d/m/y');
+        // Parse the value and return the formatted date
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     /**
