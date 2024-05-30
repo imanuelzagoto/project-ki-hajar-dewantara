@@ -259,73 +259,78 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                <input name="applicant_name" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->applicant_name }}"
-                                                    required>
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="applicant_position" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->applicant_position }}"
-                                                    required>
-                                            </div>
+                                            @foreach ($approvals as $suratPerintahKerjas)
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
+                                                    <input name="applicant_name" class="form-control bg-light w-100"
+                                                        type="text" value="{{ $suratPerintahKerjas->applicant_name }}"
+                                                        required>
+                                                </div>
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                    <input name="applicant_position" class="form-control bg-light w-100"
+                                                        type="text"
+                                                        value="{{ $suratPerintahKerjas->applicant_position }}" required>
+                                                </div>
 
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                <input name="receiver_name" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->receiver_name }}">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="receiver_position" class="form-control bg-light w-100"
-                                                    value="{{ $suratPerintahKerjas->receiver_position }}" type="text">
-                                            </div>
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
+                                                    <input name="receiver_name" class="form-control bg-light w-100"
+                                                        type="text" value="{{ $suratPerintahKerjas->receiver_name }}">
+                                                </div>
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                    <input name="receiver_position" class="form-control bg-light w-100"
+                                                        value="{{ $suratPerintahKerjas->receiver_position }}"
+                                                        type="text">
+                                                </div>
 
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <input name="approver_name" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->approver_name }}"
-                                                    required>
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="approver_position" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->approver_position }}"
-                                                    required>
-                                            </div>
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span
+                                                        class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
+                                                    <input name="approver_name" class="form-control bg-light w-100"
+                                                        type="text" value="{{ $suratPerintahKerjas->approver_name }}"
+                                                        required>
+                                                </div>
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                    <input name="approver_position" class="form-control bg-light w-100"
+                                                        type="text"
+                                                        value="{{ $suratPerintahKerjas->approver_position }}" required>
+                                                </div>
 
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
-                                                <select name="board_of_directors" class="form-control bg-light w-100"
-                                                    required>
-                                                    <option value="" disabled selected
-                                                        {{ $suratPerintahKerjas->board_of_directors == '' ? 'selected' : '' }}>
-                                                    </option>
-                                                    <option value="Erwin Danuaji"
-                                                        {{ $suratPerintahKerjas->board_of_directors == 'Erwin Danuaji' ? 'selected' : '' }}>
-                                                        Erwin Danuaji
-                                                    </option>
-                                                    <option value="Victor"
-                                                        {{ $suratPerintahKerjas->board_of_directors == 'Victor' ? 'selected' : '' }}>
-                                                        Victor
-                                                    </option>
-                                                    <option value="Sindu Irawan"
-                                                        {{ $suratPerintahKerjas->board_of_directors == 'Sindu Irawan' ? 'selected' : '' }}>
-                                                        Sindu Irawan
-                                                    </option>
-                                                </select>
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">
-                                                    Jabatan
-                                                </span>
-                                                <input name="position" class="form-control bg-light w-100 disabled-input"
-                                                    value="BOD" type="text"
-                                                    style="background-color: #D9D9D9 !important;" required>
-                                            </div>
-
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span
+                                                        class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
+                                                    <select name="board_of_directors" class="form-control bg-light w-100"
+                                                        required>
+                                                        <option value="" disabled selected
+                                                            {{ $suratPerintahKerjas->board_of_directors == '' ? 'selected' : '' }}>
+                                                        </option>
+                                                        <option value="Erwin Danuaji"
+                                                            {{ $suratPerintahKerjas->board_of_directors == 'Erwin Danuaji' ? 'selected' : '' }}>
+                                                            Erwin Danuaji
+                                                        </option>
+                                                        <option value="Victor"
+                                                            {{ $suratPerintahKerjas->board_of_directors == 'Victor' ? 'selected' : '' }}>
+                                                            Victor
+                                                        </option>
+                                                        <option value="Sindu Irawan"
+                                                            {{ $suratPerintahKerjas->board_of_directors == 'Sindu Irawan' ? 'selected' : '' }}>
+                                                            Sindu Irawan
+                                                        </option>
+                                                    </select>
+                                                </div>
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">
+                                                        Jabatan
+                                                    </span>
+                                                    <input name="position"
+                                                        class="form-control bg-light w-100 disabled-input" value="BOD"
+                                                        type="text" style="background-color: #D9D9D9 !important;"
+                                                        required>
+                                                </div>
+                                            @endforeach
                                         </div>
                                     </div>
                                 </div>

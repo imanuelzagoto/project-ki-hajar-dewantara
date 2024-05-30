@@ -136,14 +136,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'form_number' => 'spk',
             'user_id' => $userId,
             'code' => $request->code,
-            'applicant_name' => $request->applicant_name,
-            'receiver_name' => $request->receiver_name,
-            'approver_name' => $request->approver_name,
-            'board_of_directors' => $request->board_of_directors,
-            'applicant_position' => $request->applicant_position,
-            'receiver_position' => $request->receiver_position,
-            'approver_position' => $request->approver_position,
-            'position' => $request->position,
             'title' => $request->title,
             'user' => $request->user,
             'main_contractor' => $request->main_contractor,
@@ -157,6 +149,17 @@ class SuratPerintahKerjaViewWebController extends Controller
             'job_description' => $request->job_description,
             'supporting_document_type' => $request->supporting_document_type,
             'supporting_document_file' => $request->supporting_document_file,
+        ]);
+
+        $suratPerintahKerjas->approvals()->create([
+            'applicant_name' => $request->applicant_name,
+            'receiver_name' => $request->receiver_name,
+            'approver_name' => $request->approver_name,
+            'board_of_directors' => $request->board_of_directors,
+            'applicant_position' => $request->applicant_position,
+            'receiver_position' => $request->receiver_position,
+            'approver_position' => $request->approver_position,
+            'position' => $request->position,
         ]);
 
         $datas = Surat_perintah_kerja::where('id', $suratPerintahKerjas->id)->first();
@@ -178,7 +181,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         $pdf->setPaper(array(0, 0, 1010.45, 841.7), 'landscape');
         return $pdf->stream();
     }
-
 
     public function edit($id)
     {
@@ -203,18 +205,19 @@ class SuratPerintahKerjaViewWebController extends Controller
 
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-        // dd($projects);
-        $suratPerintahKerjas = Surat_perintah_kerja::find($id);
-        return view('suratPerintahKerja.edit')
-            ->with('suratPerintahKerjas', $suratPerintahKerjas)
-            ->with('projects', $projects);
-    }
 
+        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals')->find($id);
+        if ($suratPerintahKerjas) {
+            $approvals = $suratPerintahKerjas->approvals;
+            // dd($approvals);
+            return view('suratPerintahKerja.edit', compact('suratPerintahKerjas', 'approvals', 'projects'));
+        } else {
+            return view('page404');
+        }
+    }
 
     public function update(Request $request, $id)
     {
-        // dd($request->code);
-        // Define validation rules
         $validator = Validator::make($request->all(), [
             'code'          => 'required|string',
             'applicant_name'               => 'required|string',
@@ -243,7 +246,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        // dd($id);
         // Find the Surat_perintah_kerja by ID
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
         // Check if dokumen_pendukung_file is not empty
@@ -256,16 +258,13 @@ class SuratPerintahKerjaViewWebController extends Controller
         } else {
             $supporting_document_file = $suratPerintahKerjas->supporting_document_file;
         }
-
         // Periksa hidden inputs
         if ($request->input('supporting_document_file_clear') == 'true') {
             $suratPerintahKerjas->supporting_document_file = null;
         }
-
         if ($request->input('supporting_document_type_clear') == 'true') {
             $suratPerintahKerjas->supporting_document_type = null;
         }
-
         $userData = Session::get('user');
         $userId = $userData['id'];
         // Update Surat_perintah_kerja with new or old values
@@ -273,14 +272,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             $suratPerintahKerjas->update([
                 'user_id' => $userId,
                 'code' => $request->code,
-                'applicant_name' => $request->applicant_name,
-                'receiver_name' => $request->receiver_name,
-                'approver_name' => $request->approver_name,
-                'board_of_directors' => $request->board_of_directors,
-                'applicant_position' => $request->applicant_position,
-                'receiver_position' => $request->receiver_position,
-                'approver_position' => $request->approver_position,
-                'position' => $request->position,
                 'title' => $request->title,
                 'user' => $request->user,
                 'main_contractor' => $request->main_contractor,
@@ -298,14 +289,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             $suratPerintahKerjas->update([
                 'user_id' => $userId,
                 'code'          => $request->code,
-                'applicant_name' => $request->applicant_name,
-                'receiver_name' => $request->receiver_name,
-                'approver_name' => $request->approver_name,
-                'board_of_directors' => $request->board_of_directors,
-                'applicant_position' => $request->applicant_position,
-                'receiver_position' => $request->receiver_position,
-                'approver_position' => $request->approver_position,
-                'position' => $request->position,
                 'title'          => $request->title,
                 'user'                  => $request->user,
                 'main_contractor'       => $request->main_contractor,
@@ -319,12 +302,20 @@ class SuratPerintahKerjaViewWebController extends Controller
             ]);
         }
 
-        $suratPerintahKerjas->save();
+        $suratPerintahKerjas->approvals()->update([
+            'applicant_name' => $request->applicant_name,
+            'receiver_name' => $request->receiver_name,
+            'approver_name' => $request->approver_name,
+            'board_of_directors' => $request->board_of_directors,
+            'applicant_position' => $request->applicant_position,
+            'receiver_position' => $request->receiver_position,
+            'approver_position' => $request->approver_position,
+            'position' => $request->position,
+        ]);
 
-        // Return response
+        $suratPerintahKerjas->save();
         return redirect(route('surat_perintah_kerja.index'));
     }
-
 
     public function destroy($id)
     {

@@ -15,14 +15,6 @@ return new class extends Migration
             $table->id();
             $table->integer('user_id');
             $table->string('code');
-            $table->string('applicant_name');
-            $table->string('receiver_name')->nullable();
-            $table->string('approver_name');
-            $table->string('board_of_directors');
-            $table->string('applicant_position');
-            $table->string('receiver_position')->nullable();
-            $table->string('approver_position');
-            $table->string('position');
             $table->string('title');
             $table->string('user');
             $table->string('main_contractor');
