@@ -263,77 +263,80 @@
                         </div>
                     </div>
                 </div>
-                <div class="supporting documents">
-                    <div class="chekbox-dokumen">
-                        <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
-                        <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
-                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->supporting_document_type == 1) checked @endif>
-                            <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
-                        </span>
-                        <span class="checkbox_gambar" style="position: relative; top:5%; left:25.5%; width:10%;">
-                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->supporting_document_type == 2) checked @endif>
-                            <span class="teks_gambar" style="position: relative; bottom:1%;">Kontrak</span>
-                        </span>
-                        <span class="checkbox_gambar" style="position: relative; top:5%; left:33%; width:10%;">
-                            <input class="box1" type="checkbox" @if ($suratPerintahKerja->supporting_document_type == 3) checked @endif>
-                            <span class="teks_gambar" style="position: relative; bottom:1%;">Brosur</span>
-                        </span>
-                    </div>
-                </div>
-
-
-                <div class="other_supporting">
-                    <span class="teks_file_pendukung">File Pendukung Lainnya :</span>
-                    <hr style="background-color:#000; height:0.5px; width:58%; position: relative; top:2.5%;">
-                </div>
-
-                <div class="border_horizontal">
-                    <div class="border_horizontal_3">
-                        <div class="border_horizontal_4">
+                @foreach ($suratPerintahKerja->details as $detail)
+                    <div class="supporting documents">
+                        <div class="chekbox-dokumen">
+                            <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
+                            <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
+                                <input class="box1" type="checkbox" @if ($detail->supporting_document_type == 1) checked @endif>
+                                <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
+                            </span>
+                            <span class="checkbox_gambar" style="position: relative; top:5%; left:25.5%; width:10%;">
+                                <input class="box1" type="checkbox" @if ($detail->supporting_document_type == 2) checked @endif>
+                                <span class="teks_gambar" style="position: relative; bottom:1%;">Kontrak</span>
+                            </span>
+                            <span class="checkbox_gambar" style="position: relative; top:5%; left:33%; width:10%;">
+                                <input class="box1" type="checkbox" @if ($detail->supporting_document_type == 3) checked @endif>
+                                <span class="teks_gambar" style="position: relative; bottom:1%;">Brosur</span>
+                            </span>
                         </div>
                     </div>
-                </div>
-                <br>
 
-                <div class="detail_spk">
-                    <table
-                        style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
-                        <thead>
-                            <tr>
-                                <th style="border: 1.5px solid black; font-size:17px; text-align:center; line-height:normal; width:340px; padding-left:5px;"
-                                    nowrap>
-                                    JENIS PEKERJAAN
-                                </th>
-                                <th style="border: 1.5px solid black; font-size:17px; border-right:none; text-align:center; line-height:normal; width:664px; padding-left:16px;"
-                                    nowrap>
-                                    URAIAN PEKERJAAN</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="border: 1.5px solid black;"></td>
-                                <td style="border: 1.5px solid black; border-right:none;"></td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
-                                    {{ $suratPerintahKerja->job_type }}
-                                </td>
-                                <td
-                                    style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
-                                    {!! nl2br(e($suratPerintahKerja->job_description)) !!}
-                                </td>
-                            </tr>
-                            <tr>
-                                <td style="border: 1.5px solid black; padding-left:5px;"></td>
-                                <td
-                                    style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br>
+
+                    <div class="other_supporting">
+                        <span class="teks_file_pendukung">File Pendukung Lainnya :</span>
+                        <hr
+                            style="background-color:#000; height:0.5px; width:59%; position: relative; left:5px; top:2.5%;">
+                    </div>
+
+                    <div class="border_horizontal">
+                        <div class="border_horizontal_3">
+                            <div class="border_horizontal_4">
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+
+                    <div class="detail_spk">
+                        <table
+                            style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
+                            <thead>
+                                <tr>
+                                    <th style="border: 1.5px solid black; font-size:17px; text-align:center; line-height:normal; width:340px; padding-left:5px;"
+                                        nowrap>
+                                        JENIS PEKERJAAN
+                                    </th>
+                                    <th style="border: 1.5px solid black; font-size:17px; border-right:none; text-align:center; line-height:normal; width:664px; padding-left:16px;"
+                                        nowrap>
+                                        URAIAN PEKERJAAN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 1.5px solid black;"></td>
+                                    <td style="border: 1.5px solid black; border-right:none;"></td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
+                                        {{ $detail->job_type }}
+                                    </td>
+                                    <td
+                                        style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
+                                        {!! nl2br(e($detail->job_description)) !!}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border: 1.5px solid black; padding-left:5px;"></td>
+                                    <td
+                                        style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                @endforeach
 
                 <div class="teks_hormat_kami" style="margin-top: 4%;">
                     <span style="position: relative; padding-left:3%;">Hormat Kami,</span>
@@ -363,184 +366,186 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
-                                    <span style="padding-left: 5px;">1.</span>
-                                    <span>Nama</span>
-                                    <span style="padding-left: 12px;">:</span>
-                                    <span>{{ $suratPerintahKerja->board_of_directors }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
-                                    <span style="padding-left: 21px;">Jabatan</span>
-                                    <span>:</span>
-                                    <span>{{ $suratPerintahKerja->position }}</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; ">
-                                    <span style="visibility: hidden;">4</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
-                                    <span style="visibility: hidden;">4</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; padding-left:2%;">
-                                    <span style="padding-left:18px;">...........................</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
-                                    <span style="padding-left: 5px;">2.</span>
-                                    <span>Nama</span>
-                                    <span style="padding-left: 12px;">:</span>
-                                    <span>Bayu Nugraha</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
-                                    <span style="padding-left: 21px;">Jabatan</span>
-                                    <span>:</span>
-                                    <span>General Manager</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
-                                    <span class="nama_pemohon">Nama</span>
-                                    <span style="padding-left: 15px;">:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->applicant_name }}</span>
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
-                                    <span class="nama_penerima">Nama</span>
-                                    <span style="padding-left: 15px;">:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->receiver_name }}</span>
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
-                                    <span class="nama_menyetujui">Nama</span>
-                                    <span style="padding-left: 15px;">:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->approver_name }}</span>
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
-                                    <span style="visibility: hidden;">4</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
-                                    <span class="Jabatan_pemohon">Jabatan</span>
-                                    <span>:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->applicant_position }}</span>
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
-                                    <span class="Jabatan_pemohon">Jabatan</span>
-                                    <span>:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->receiver_position }}</span>
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
-                                    <span class="Jabatan_pemohon">Jabatan</span>
-                                    <span>:</span>
-                                    <span class="data_pemohon">{{ $suratPerintahKerja->approver_position }}</span>
-                                </td>
-                                <td
-                                    style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
-                                    <span style="padding-left:21px;">...........................</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td
-                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
-                                </td>
-                                <td
-                                    style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
-                                    <span style="visibility: hidden;">4</span>
-                                </td>
-                            </tr>
+                            @foreach ($suratPerintahKerja->approvals as $approval)
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                        <span style="padding-left: 5px;">1.</span>
+                                        <span>Nama</span>
+                                        <span style="padding-left: 12px;">:</span>
+                                        <span>{{ $approval->board_of_directors }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                        <span style="padding-left: 21px;">Jabatan</span>
+                                        <span>:</span>
+                                        <span>{{ $approval->position }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; ">
+                                        <span style="visibility: hidden;">4</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
+                                        <span style="visibility: hidden;">4</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; padding-left:2%;">
+                                        <span style="padding-left:18px;">...........................</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                        <span style="padding-left: 5px;">2.</span>
+                                        <span>Nama</span>
+                                        <span style="padding-left: 12px;">:</span>
+                                        <span>Bayu Nugraha</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                        <span style="padding-left: 21px;">Jabatan</span>
+                                        <span>:</span>
+                                        <span>General Manager</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                        <span class="nama_pemohon">Nama</span>
+                                        <span style="padding-left: 15px;">:</span>
+                                        <span class="data_pemohon">{{ $approval->applicant_name }}</span>
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                        <span class="nama_penerima">Nama</span>
+                                        <span style="padding-left: 15px;">:</span>
+                                        <span class="data_pemohon">{{ $approval->receiver_name }}</span>
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                        <span class="nama_menyetujui">Nama</span>
+                                        <span style="padding-left: 15px;">:</span>
+                                        <span class="data_pemohon">{{ $approval->approver_name }}</span>
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
+                                        <span style="visibility: hidden;">4</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                        <span class="Jabatan_pemohon">Jabatan</span>
+                                        <span>:</span>
+                                        <span class="data_pemohon">{{ $approval->applicant_position }}</span>
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                        <span class="Jabatan_pemohon">Jabatan</span>
+                                        <span>:</span>
+                                        <span class="data_pemohon">{{ $approval->receiver_position }}</span>
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
+                                        <span class="Jabatan_pemohon">Jabatan</span>
+                                        <span>:</span>
+                                        <span class="data_pemohon">{{ $approval->approver_position }}</span>
+                                    </td>
+                                    <td
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
+                                        <span style="padding-left:21px;">...........................</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
+                                    </td>
+                                    <td
+                                        style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
+                                        <span style="visibility: hidden;">4</span>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

@@ -145,10 +145,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'priority' => $request->priority,
             'completion_time' => $request->completion_time,
             'pic' => $request->pic,
-            'job_type' => $request->job_type,
-            'job_description' => $request->job_description,
-            'supporting_document_type' => $request->supporting_document_type,
-            'supporting_document_file' => $request->supporting_document_file,
         ]);
 
         $suratPerintahKerjas->approvals()->create([
@@ -161,6 +157,8 @@ class SuratPerintahKerjaViewWebController extends Controller
             'approver_position' => $request->approver_position,
             'position' => $request->position,
         ]);
+
+        $suratPerintahKerjas->details()->create(['job_type' => $request->job_type, 'job_description' => $request->job_description, 'supporting_document_type' => $request->supporting_document_type, 'supporting_document_file' => $request->supporting_document_file,]);
 
         $datas = Surat_perintah_kerja::where('id', $suratPerintahKerjas->id)->first();
         $datetime = explode('-', $datas->created_at);
@@ -206,11 +204,12 @@ class SuratPerintahKerjaViewWebController extends Controller
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
 
-        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals')->find($id);
+        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->find($id);
         if ($suratPerintahKerjas) {
             $approvals = $suratPerintahKerjas->approvals;
-            // dd($approvals);
-            return view('suratPerintahKerja.edit', compact('suratPerintahKerjas', 'approvals', 'projects'));
+            $details = $suratPerintahKerjas->details;
+            // dd($details);
+            return view('suratPerintahKerja.edit', compact('suratPerintahKerjas', 'approvals', 'details', 'projects'));
         } else {
             return view('page404');
         }
@@ -242,7 +241,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'supporting_document_file' => 'nullable',
         ]);
 
-        // Check if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
@@ -280,38 +278,21 @@ class SuratPerintahKerjaViewWebController extends Controller
                 'priority' => $request->priority,
                 'completion_time' => $request->completion_time,
                 'pic' => $request->pic,
-                'job_type' => $request->job_type,
-                'job_description' => $request->job_description,
-                'supporting_document_type' => $request->supporting_document_type,
-                'supporting_document_file' => $request->supporting_document_file,
             ]);
         } else {
             $suratPerintahKerjas->update([
-                'user_id' => $userId,
-                'code'          => $request->code,
-                'title'          => $request->title,
-                'user'                  => $request->user,
-                'main_contractor'       => $request->main_contractor,
-                'project_manager'       => $request->project_manager,
-                'submission_date' => $request->submission_date,
-                'priority' => $request->priority,
-                'completion_time' => $request->completion_time,
-                'pic' => $request->pic,
-                'job_type' => $request->job_type,
-                'job_description' => $request->job_description,
+                'user_id' => $userId, 'code' => $request->code, 'title' => $request->title, 'user' => $request->user, 'main_contractor' => $request->main_contractor,
+                'project_manager' => $request->project_manager, 'submission_date' => $request->submission_date, 'priority' => $request->priority, 'completion_time' => $request->completion_time,
+                'pic' => $request->pic, 'job_type' => $request->job_type, 'job_description' => $request->job_description,
             ]);
         }
 
         $suratPerintahKerjas->approvals()->update([
-            'applicant_name' => $request->applicant_name,
-            'receiver_name' => $request->receiver_name,
-            'approver_name' => $request->approver_name,
-            'board_of_directors' => $request->board_of_directors,
-            'applicant_position' => $request->applicant_position,
-            'receiver_position' => $request->receiver_position,
-            'approver_position' => $request->approver_position,
-            'position' => $request->position,
+            'applicant_name' => $request->applicant_name, 'receiver_name' => $request->receiver_name, 'approver_name' => $request->approver_name, 'board_of_directors' => $request->board_of_directors,
+            'applicant_position' => $request->applicant_position, 'receiver_position' => $request->receiver_position, 'approver_position' => $request->approver_position, 'position' => $request->position,
         ]);
+
+        $suratPerintahKerjas->details()->update(['job_type' => $request->job_type, 'job_description' => $request->job_description, 'supporting_document_type' => $request->supporting_document_type, 'supporting_document_file' => $request->supporting_document_file,]);
 
         $suratPerintahKerjas->save();
         return redirect(route('surat_perintah_kerja.index'));
