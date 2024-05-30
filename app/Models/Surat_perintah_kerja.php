@@ -13,14 +13,6 @@ class Surat_perintah_kerja extends Model
     protected $fillable = [
         'user_id',
         'code',
-        'applicant_name',
-        'receiver_name',
-        'approver_name',
-        'board_of_directors',
-        'applicant_position',
-        'receiver_position',
-        'approver_position',
-        'position',
         'title',
         'user',
         'main_contractor',
@@ -104,5 +96,10 @@ class Surat_perintah_kerja extends Model
         return Attribute::make(
             get: fn ($brosur) => asset('/storage/brosur/' . $brosur),
         );
+    }
+
+    public function approvals()
+    {
+        return $this->hasMany(ApprovalData::class);
     }
 }
