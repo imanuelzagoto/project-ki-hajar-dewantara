@@ -15,15 +15,6 @@ class PengajuanDana extends Model
         'nama_pemohon',
         'jabatan_pemohon',
         'subject',
-        'tujuan',
-        'lokasi',
-        'batas_waktu',
-        'subtotal',
-        'terbilang',
-        'tunai',
-        'non_tunai',
-        'nama_bank',
-        'catatan',
         'tanggal_pengajuan',
         'no_doc',
         'revisi',
@@ -35,34 +26,27 @@ class PengajuanDana extends Model
         'batas_waktu',
     ];
 
-    /**
-     * Get the formatted tanggal attribute.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getTanggalAttribute($value)
+    public function getTanggalPengajuanAttribute($value)
     {
-        return Carbon::parse($value)->translatedFormat('d F Y');
+        return Carbon::parse($value)->translatedFormat('d/m/y');
     }
 
-    /**
-     * Get the formatted jangka_waktu attribute.
-     *
-     * @param  string  $value
-     * @return string
-     */
-    public function getJangkaWaktuAttribute($value)
+    public function getBatasWaktuAttribute($value)
     {
         // Check if the value is null
         if ($value === null) {
             return null;
         }
-        return Carbon::parse($value)->translatedFormat('d F Y');
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     public function items()
     {
         return $this->hasMany(ItemPengajuanDana::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(DetailPengajuanDana::class);
     }
 }

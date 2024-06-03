@@ -1472,7 +1472,6 @@ input[type=file]::file-selector-button:hover {
     right: 37px;
 }
 
-/* warning chekbox */
 .warning {
     color: red;
 }

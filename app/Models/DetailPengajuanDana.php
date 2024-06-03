@@ -4,17 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
-class ItemPengajuanDana extends Model
+class DetailPengajuanDana extends Model
 {
     use HasFactory;
-
     protected $fillable = [
-        'nama_item',
-        'jumlah',
-        'satuan',
-        'harga',
-        'total',
+        'tujuan',
+        'lokasi',
+        'batas_waktu',
+        'subtotal',
+        'terbilang',
+        'tunai',
+        'non_tunai',
+        'nama_bank',
+        'catatan',
     ];
 
     public function pengajuanDana()

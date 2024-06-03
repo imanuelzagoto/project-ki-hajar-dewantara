@@ -120,14 +120,20 @@
                                     <div class="d-block w-100">
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-5" id="tujuan_container">
-                                                <span class="text-sm font-weight-bold text-form-detail">Tujuan</span>
-                                                <input name="tujuan" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Tujuan
+                                                </span>
+                                                <input name="tujuan" class="form-control bg-light w-100 disabled-input"
+                                                    type="text" value="Finance"
+                                                    style="background-color: #D9D9D9 !important;" required>
                                             </div>
-                                            <div class="pr-4 py-2 col-4" id="lokasi_container">
+                                            <div class="pr-4 py-2 col-6" id="lokasi_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
-                                                <input name="lokasi" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                <select name="lokasi" class="form-control bg-light w-100" required>
+                                                    <option value="" disabled selected></option>
+                                                    <option value="Tebet">Tebet</option>
+                                                    <option value="Cikunir">Cikunir</option>
+                                                </select>
                                             </div>
                                             <div class="pr-4 py-2 col-3" id="deadline_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
@@ -252,155 +258,168 @@
                 </div>
             </div>
         </div>
-        <script>
-            // window.onload = function() {
-            //     toggleRekeningInput();
-            // };
+    </div>
+    <script>
+        // format huruf kapital pada kolom input terbilang
+        document.addEventListener("DOMContentLoaded", function() {
+            var inputElement = document.querySelector('input[name="terbilang"]');
+            if (inputElement) {
+                var terbilangValue = inputElement.value;
+                inputElement.value = ucfirst(terbilangValue);
+            }
 
-            // function toggleRekeningInput() {
-            //     var metodePenerimaan = document.getElementById("metode_penerimaan").value;
-            //     var nomorRekeningInput = document.getElementById("nomorRekeningInput");
-            //     var inputTunaiContainer = document.getElementById("input_tunai_container");
-            //     var inputTunai = document.getElementById("inputTunai");
-            //     var containerMethod = document.getElementById("container_method");
+            function ucfirst(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1);
+            }
+        });
+        // window.onload = function() {
+        //     toggleRekeningInput();
+        // };
 
-            //     if (metodePenerimaan === "transfer") {
-            //         nomorRekeningInput.style.display = "block";
-            //         inputTunaiContainer.style.display = "none";
-            //         inputTunai.value = "";
-            //         containerMethod.classList.remove('col-4');
-            //     } else if (metodePenerimaan === "Cash") {
-            //         nomorRekeningInput.style.display = "none";
-            //         inputTunaiContainer.style.display = "block";
-            //         inputTunai.value = "Cash";
-            //         containerMethod.classList.add('col-4');
-            //     }
-            // }
+        // function toggleRekeningInput() {
+        //     var metodePenerimaan = document.getElementById("metode_penerimaan").value;
+        //     var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+        //     var inputTunaiContainer = document.getElementById("input_tunai_container");
+        //     var inputTunai = document.getElementById("inputTunai");
+        //     var containerMethod = document.getElementById("container_method");
 
-            window.onload = function() {
-                toggleRekeningInput();
+        //     if (metodePenerimaan === "transfer") {
+        //         nomorRekeningInput.style.display = "block";
+        //         inputTunaiContainer.style.display = "none";
+        //         inputTunai.value = "";
+        //         containerMethod.classList.remove('col-4');
+        //     } else if (metodePenerimaan === "Cash") {
+        //         nomorRekeningInput.style.display = "none";
+        //         inputTunaiContainer.style.display = "block";
+        //         inputTunai.value = "Cash";
+        //         containerMethod.classList.add('col-4');
+        //     }
+        // }
+
+        window.onload = function() {
+            toggleRekeningInput();
+        };
+
+        function toggleRekeningInput() {
+            var metodePenerimaan = document.getElementById("metode_penerimaan").value;
+            var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+            var namaBankInput = document.getElementById("namaBankInput");
+            var nomorRekeningField = document.getElementById("nomor_rekening");
+            var namaBankField = document.getElementById("namabank");
+            var inputTunaiContainer = document.getElementById("input_tunai_container");
+            var inputTunai = document.getElementById("inputTunai");
+            var containerMethod = document.getElementById("container_method");
+            var tujuanContainer = document.getElementById("tujuan_container");
+            var lokasiContainer = document.getElementById("lokasi_container");
+            var deadlineContainer = document.getElementById("deadline_container");
+
+            if (metodePenerimaan === "transfer") {
+                nomorRekeningInput.style.display = "block";
+                namaBankInput.style.display = "block";
+                inputTunaiContainer.style.display = "none";
+                inputTunai.value = "";
+                containerMethod.classList.remove('col-4');
+
+                tujuanContainer.classList.remove('col-6');
+                tujuanContainer.classList.add('col-5');
+                lokasiContainer.classList.remove('col-6');
+                lokasiContainer.classList.add('col-4');
+                deadlineContainer.classList.remove('col-2');
+                deadlineContainer.classList.add('col-3');
+            } else if (metodePenerimaan === "Cash") {
+                nomorRekeningInput.style.display = "none";
+                namaBankInput.style.display = "none";
+                inputTunaiContainer.style.display = "block";
+                inputTunai.value = "Cash";
+                containerMethod.classList.add('col-4');
+
+                tujuanContainer.classList.remove('col-5');
+                tujuanContainer.classList.add('col-6');
+                lokasiContainer.classList.remove('col-4');
+                lokasiContainer.classList.add('col-6');
+                deadlineContainer.classList.remove('col-3');
+                deadlineContainer.classList.add('col-2');
+
+                // handle untuk menghapus value jika memilih select option Cash
+                nomorRekeningField.value = null;
+                namaBankField.value = null;
+            }
+        }
+
+        var currentDate = new Date();
+
+        var year = currentDate.getFullYear();
+        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+        var day = ('0' + currentDate.getDate()).slice(-2);
+        var formattedDate = year + '-' + month + '-' + day;
+        document.getElementById('tanggalPengajuan').value = formattedDate;
+
+
+
+        // Fungsi Datetime
+        document.addEventListener('DOMContentLoaded', function() {
+            // Panggil updateClock secara berkala setiap detik
+            setInterval(updateClock, 1000);
+            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
+            updateClock();
+        });
+
+        function updateClock() {
+            var now = new Date();
+            var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+            var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+                'November', 'Desember'
+            ];
+
+            // Set timezone to Asia/Jakarta
+            var options = {
+                timeZone: 'Asia/Jakarta',
+                weekday: 'long'
             };
+            var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
 
-            function toggleRekeningInput() {
-                var metodePenerimaan = document.getElementById("metode_penerimaan").value;
-                var nomorRekeningInput = document.getElementById("nomorRekeningInput");
-                var namaBankInput = document.getElementById("namaBankInput");
-                var nomorRekeningField = document.getElementById("nomor_rekening");
-                var namaBankField = document.getElementById("namabank");
-                var inputTunaiContainer = document.getElementById("input_tunai_container");
-                var inputTunai = document.getElementById("inputTunai");
-                var containerMethod = document.getElementById("container_method");
-                var tujuanContainer = document.getElementById("tujuan_container");
-                var lokasiContainer = document.getElementById("lokasi_container");
-                var deadlineContainer = document.getElementById("deadline_container");
+            var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
+                months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
+                formatTime(now);
 
-                if (metodePenerimaan === "transfer") {
-                    nomorRekeningInput.style.display = "block";
-                    namaBankInput.style.display = "block";
-                    inputTunaiContainer.style.display = "none";
-                    inputTunai.value = "";
-                    containerMethod.classList.remove('col-4');
-
-                    tujuanContainer.classList.remove('col-6');
-                    tujuanContainer.classList.add('col-5');
-                    lokasiContainer.classList.remove('col-6');
-                    lokasiContainer.classList.add('col-4');
-                    deadlineContainer.classList.remove('col-2');
-                    deadlineContainer.classList.add('col-3');
-                } else if (metodePenerimaan === "Cash") {
-                    nomorRekeningInput.style.display = "none";
-                    namaBankInput.style.display = "none";
-                    inputTunaiContainer.style.display = "block";
-                    inputTunai.value = "Cash";
-                    containerMethod.classList.add('col-4');
-
-                    tujuanContainer.classList.remove('col-5');
-                    tujuanContainer.classList.add('col-6');
-                    lokasiContainer.classList.remove('col-4');
-                    lokasiContainer.classList.add('col-6');
-                    deadlineContainer.classList.remove('col-3');
-                    deadlineContainer.classList.add('col-2');
-
-                    // handle untuk menghapus value jika memilih select option Cash
-                    nomorRekeningField.value = null;
-                    namaBankField.value = null;
-                }
+            var datetimeElement = document.getElementById('datetime');
+            if (datetimeElement) {
+                // Perbarui innerHTML elemen 'datetime' jika ditemukan
+                datetimeElement.innerHTML = dateTimeString;
+            } else {
+                console.error("Datetime element not found.");
             }
+        }
 
-            var currentDate = new Date();
+        function formatTime(date) {
+            var hours = date.getHours();
+            var minutes = date.getMinutes();
+            var seconds = date.getSeconds();
+            hours = hours < 10 ? '0' + hours : hours;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var strTime = hours + ':' + minutes + ':' + seconds;
+            return strTime;
+        }
+    </script>
+@endsection
 
-            var year = currentDate.getFullYear();
-            var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-            var day = ('0' + currentDate.getDate()).slice(-2);
-            var formattedDate = year + '-' + month + '-' + day;
-            document.getElementById('tanggalPengajuan').value = formattedDate;
-
-
-
-            // Fungsi Datetime
-            document.addEventListener('DOMContentLoaded', function() {
-                // Panggil updateClock secara berkala setiap detik
-                setInterval(updateClock, 1000);
-                // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
-                updateClock();
-            });
-
-            function updateClock() {
-                var now = new Date();
-                var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-                var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
-                    'November', 'Desember'
-                ];
-
-                // Set timezone to Asia/Jakarta
-                var options = {
-                    timeZone: 'Asia/Jakarta',
-                    weekday: 'long'
-                };
-                var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
-
-                var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
-                    months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
-                    formatTime(now);
-
-                var datetimeElement = document.getElementById('datetime');
-                if (datetimeElement) {
-                    // Perbarui innerHTML elemen 'datetime' jika ditemukan
-                    datetimeElement.innerHTML = dateTimeString;
-                } else {
-                    console.error("Datetime element not found.");
-                }
-            }
-
-            function formatTime(date) {
-                var hours = date.getHours();
-                var minutes = date.getMinutes();
-                var seconds = date.getSeconds();
-                hours = hours < 10 ? '0' + hours : hours;
-                minutes = minutes < 10 ? '0' + minutes : minutes;
-                seconds = seconds < 10 ? '0' + seconds : seconds;
-                var strTime = hours + ':' + minutes + ':' + seconds;
-                return strTime;
-            }
-        </script>
-    @endsection
-
-    @push('scripts')
-        <script>
-            $(document).ready(function() {
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            addNewRow();
+            $("#tambahField").click(function() {
                 addNewRow();
-                $("#tambahField").click(function() {
-                    addNewRow();
-                });
-                $(document).on('click', '.JS-delete-btn', function() {
-                    $(this).closest('.row').remove();
-                    hitungSubtotal();
-                    activateDeleteButtons
-                        ();
-                });
-                // Fungsi untuk menambahkan baris baru
-                function addNewRow() {
-                    var newRow = `
+            });
+            $(document).on('click', '.JS-delete-btn', function() {
+                $(this).closest('.row').remove();
+                hitungSubtotal();
+                activateDeleteButtons
+                    ();
+            });
+            // Fungsi untuk menambahkan baris baru
+            function addNewRow() {
+                var newRow = `
                         <div class="row py-2" style="margin-left: 90px;">
                             <div class="py-2 col-3">
                                 <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
@@ -426,112 +445,112 @@
                                 <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;" disabled><i class="fa-solid fa-minus"></i></button>
                             </div>
                         </div>`;
-                    $("#itemFields").append(newRow);
-                    activateDeleteButtons();
-                }
+                $("#itemFields").append(newRow);
+                activateDeleteButtons();
+            }
 
-                function updateTerbilang() {
-                    // Mendefinisikan array kata terbilang
-                    var terbilang = [
-                        '', 'satu ', 'dua ', 'tiga ', 'empat ', 'lima ', 'enam ', 'tujuh ', 'delapan ', 'sembilan ',
-                        'sepuluh ',
-                        'sebelas ', 'dua belas ', 'tiga belas ', 'empat belas ', 'lima belas ', 'enam belas ',
-                        'tujuh belas ',
-                        'delapan belas ', 'sembilan belas '
-                    ];
+            function updateTerbilang() {
+                // Mendefinisikan array kata terbilang
+                var terbilang = [
+                    '', 'satu ', 'dua ', 'tiga ', 'empat ', 'lima ', 'enam ', 'tujuh ', 'delapan ', 'sembilan ',
+                    'sepuluh ',
+                    'sebelas ', 'dua belas ', 'tiga belas ', 'empat belas ', 'lima belas ', 'enam belas ',
+                    'tujuh belas ',
+                    'delapan belas ', 'sembilan belas '
+                ];
 
-                    // Fungsi untuk mengonversi angka menjadi terbilang
-                    function bilang(n) {
-                        if (n < 20) {
-                            return terbilang[n];
-                        } else if (n < 100) {
-                            return terbilang[Math.floor(n / 10)] + 'puluh ' + terbilang[n % 10];
-                        } else if (n < 200) {
-                            return 'seratus ' + bilang(n - 100);
-                        } else if (n < 1000) {
-                            return terbilang[Math.floor(n / 100)] + 'ratus ' + bilang(n % 100);
-                        } else if (n < 2000) {
-                            return 'seribu ' + bilang(n - 1000);
-                        } else if (n < 1000000) {
-                            return bilang(Math.floor(n / 1000)) + 'ribu ' + bilang(n % 1000);
-                        } else if (n < 1000000000) {
-                            return bilang(Math.floor(n / 1000000)) + 'juta ' + bilang(n % 1000000);
-                        } else if (n < 1000000000000) {
-                            return bilang(Math.floor(n / 1000000000)) + 'miliar ' + bilang(n % 1000000000);
-                        } else if (n < 1000000000000000) {
-                            return bilang(Math.floor(n / 1000000000000)) + 'triliun ' + bilang(n % 1000000000000);
-                        }
+                // Fungsi untuk mengonversi angka menjadi terbilang
+                function bilang(n) {
+                    if (n < 20) {
+                        return terbilang[n];
+                    } else if (n < 100) {
+                        return terbilang[Math.floor(n / 10)] + 'puluh ' + terbilang[n % 10];
+                    } else if (n < 200) {
+                        return 'seratus ' + bilang(n - 100);
+                    } else if (n < 1000) {
+                        return terbilang[Math.floor(n / 100)] + 'ratus ' + bilang(n % 100);
+                    } else if (n < 2000) {
+                        return 'seribu ' + bilang(n - 1000);
+                    } else if (n < 1000000) {
+                        return bilang(Math.floor(n / 1000)) + 'ribu ' + bilang(n % 1000);
+                    } else if (n < 1000000000) {
+                        return bilang(Math.floor(n / 1000000)) + 'juta ' + bilang(n % 1000000);
+                    } else if (n < 1000000000000) {
+                        return bilang(Math.floor(n / 1000000000)) + 'miliar ' + bilang(n % 1000000000);
+                    } else if (n < 1000000000000000) {
+                        return bilang(Math.floor(n / 1000000000000)) + 'triliun ' + bilang(n % 1000000000000);
                     }
-
-                    // Mengambil nilai subtotal dari input
-                    var subtotal = parseFloat($('#subtotalInput').val().replace(/[^\d]/g, '')) || 0;
-
-                    // Mengonversi subtotal menjadi terbilang
-                    var terbilangText = bilang(subtotal);
-
-                    // Menambahkan kata "rupiah" di akhir teks terbilang
-                    terbilangText += 'rupiah';
-
-                    // Mengisi kolom terbilang dengan nilai terbilang
-                    $('input[name="terbilang"]').val(terbilangText);
                 }
 
-                $(document).on('input', '.harga', function() {
-                    // Panggil fungsi formatRupiah untuk memformat nilai input
-                    $(this).val(formatRupiah($(this).val(), "Rp. "));
-                });
+                // Mengambil nilai subtotal dari input
+                var subtotal = parseFloat($('#subtotalInput').val().replace(/[^\d]/g, '')) || 0;
 
-                // Event listener untuk input jumlah dan harga
-                $(document).on('input', '.jumlah, .harga', function() {
-                    var row = $(this).closest('.row');
-                    hitungTotal(row);
-                    hitungSubtotal();
-                });
+                // Mengonversi subtotal menjadi terbilang
+                var terbilangText = bilang(subtotal);
 
-                // Fungsi untuk menghitung total
-                function hitungTotal(row) {
-                    var jumlah = parseFloat($(row).find('.jumlah').val()) || 0;
-                    var harga = parseFloat($(row).find('.harga').val().replace(/[^\d]/g, '')) || 0;
-                    var total = jumlah * harga;
-                    $(row).find('.total').val(formatRupiah(total.toString(), "Rp. "));
-                }
+                // Menambahkan kata "rupiah" di akhir teks terbilang
+                terbilangText += 'rupiah';
 
-                // Fungsi untuk menghitung subtotal
-                function hitungSubtotal() {
-                    var subtotal = 0;
-                    $('.total').each(function() {
-                        subtotal += parseFloat($(this).val().replace(/[^\d]/g, '')) ||
-                            0;
-                    });
-                    // Format nilai subtotal sebagai rupiah
-                    var formattedSubtotal = formatRupiah(subtotal.toString(), "Rp. ");
-                    $('#subtotalInput').val(formattedSubtotal);
-                    updateTerbilang();
-                }
+                // Mengisi kolom terbilang dengan nilai terbilang
+                $('input[name="terbilang"]').val(terbilangText);
+            }
 
-                // Fungsi untuk mengaktifkan atau menonaktifkan tombol delete
-                function activateDeleteButtons() {
-                    $('.JS-button-delete').first().find('.JS-delete-btn').prop('disabled', true);
-                    $('.JS-button-delete').not(':first').find('.JS-delete-btn').prop('disabled', false);
-                }
-
-                /* Fungsi formatRupiah */
-                function formatRupiah(angka, prefix) {
-                    var number_string = angka.toString().replace(/[^,\d]/g, "").toString(),
-                        split = number_string.split(","),
-                        sisa = split[0].length % 3,
-                        rupiah = split[0].substr(0, sisa),
-                        ribuan = split[0].substr(sisa).match(/\d{3}/gi);
-
-                    // tambahkan titik jika yang di input sudah menjadi angka ribuan
-                    if (ribuan) {
-                        separator = sisa ? "." : "";
-                        rupiah += separator + ribuan.join(".");
-                    }
-
-                    rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
-                    return prefix == undefined ? rupiah : rupiah ? prefix + rupiah : "";
-                }
+            $(document).on('input', '.harga', function() {
+                // Panggil fungsi formatRupiah untuk memformat nilai input
+                $(this).val(formatRupiah($(this).val(), "Rp. "));
             });
-        </script>
-    @endpush
+
+            // Event listener untuk input jumlah dan harga
+            $(document).on('input', '.jumlah, .harga', function() {
+                var row = $(this).closest('.row');
+                hitungTotal(row);
+                hitungSubtotal();
+            });
+
+            // Fungsi untuk menghitung total
+            function hitungTotal(row) {
+                var jumlah = parseFloat($(row).find('.jumlah').val()) || 0;
+                var harga = parseFloat($(row).find('.harga').val().replace(/[^\d]/g, '')) || 0;
+                var total = jumlah * harga;
+                $(row).find('.total').val(formatRupiah(total.toString(), "Rp. "));
+            }
+
+            // Fungsi untuk menghitung subtotal
+            function hitungSubtotal() {
+                var subtotal = 0;
+                $('.total').each(function() {
+                    subtotal += parseFloat($(this).val().replace(/[^\d]/g, '')) ||
+                        0;
+                });
+                // Format nilai subtotal sebagai rupiah
+                var formattedSubtotal = formatRupiah(subtotal.toString(), "Rp. ");
+                $('#subtotalInput').val(formattedSubtotal);
+                updateTerbilang();
+            }
+
+            // Fungsi untuk mengaktifkan atau menonaktifkan tombol delete
+            function activateDeleteButtons() {
+                $('.JS-button-delete').first().find('.JS-delete-btn').prop('disabled', true);
+                $('.JS-button-delete').not(':first').find('.JS-delete-btn').prop('disabled', false);
+            }
+
+            /* Fungsi formatRupiah */
+            function formatRupiah(angka, prefix) {
+                var number_string = angka.toString().replace(/[^,\d]/g, "").toString(),
+                    split = number_string.split(","),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                // tambahkan titik jika yang di input sudah menjadi angka ribuan
+                if (ribuan) {
+                    separator = sisa ? "." : "";
+                    rupiah += separator + ribuan.join(".");
+                }
+
+                rupiah = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+                return prefix == undefined ? rupiah : rupiah ? prefix + rupiah : "";
+            }
+        });
+    </script>
+@endpush

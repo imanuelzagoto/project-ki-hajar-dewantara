@@ -20,18 +20,20 @@ class HomeViewController extends Controller
     public function index()
     {
         $userData = Session::get('user');
-        $userrole = $userData['modules']['name'];
-        $userId = $userData['id'];
+        // $userrole = $userData['modules']['name'];
+        // $userId = $userData['id'];
 
         // dd($userrole);
 
 
         // if ($userrole === 'Super Admin') {
         $today = Carbon::now()->format('Y-m-d');
-        $pengajuan_dana_per_day_by_user_id = PengajuanDana::whereDate('created_at', $today)
+        $pengajuan_dana_per_day_by_user_id = PengajuanDana::with('items', 'details')
+            ->whereDate('created_at', $today)
             ->orderBy('id', 'desc')
             ->take(5)
             ->get();
+        // dd($pengajuan_dana_per_day_by_user_id);
 
         $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->count();
 

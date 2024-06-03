@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('approval_data', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('surat_perintah_kerja_id');
             $table->string('applicant_name');
             $table->string('receiver_name')->nullable();
