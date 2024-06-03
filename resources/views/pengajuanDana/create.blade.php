@@ -125,7 +125,8 @@
                                                 </span>
                                                 <input name="tujuan" class="form-control bg-light w-100 disabled-input"
                                                     type="text" value="Finance"
-                                                    style="background-color: #D9D9D9 !important;" required>
+                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6" id="lokasi_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
@@ -143,14 +144,16 @@
 
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
-                                                <input name="subtotal" id="subtotalInput" style="text-align: right;"
+                                                <input name="subtotal" id="subtotalInput"
+                                                    style="text-align: right; color:black; font-weight:600;"
                                                     class="form-control bg-light w-100" type="text" required readonly>
                                             </div>
 
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Terbilang</span>
                                                 <input name="terbilang" class="form-control bg-light w-100"
-                                                    type="text" required readonly>
+                                                    style="color:black; font-weight:500;" type="text" required
+                                                    readonly>
                                             </div>
 
                                             <div class="pr-4 py-2 col-2" id="container_method">

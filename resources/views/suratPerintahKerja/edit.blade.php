@@ -185,64 +185,72 @@
                                         <span class="hide-project">Project</span>
                                     </div>
                                     <div class="d-block w-100">
-                                        <div class="row py-2">
-                                            <div class="pr-4 py-2 col-12">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jenis
-                                                    Pekerjaan</span>
-                                                <input name="job_type" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $suratPerintahKerjas->job_type }}">
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Uraian
-                                                    Pekerjaan</span>
-                                                <textarea name="job_description" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
-                                                    style="height: 138px;" required>{{ $suratPerintahKerjas->job_description }}</textarea>
-                                            </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
-                                                    style="margin-top: 7px;">
-                                                    File Pendukung
+                                        @php
+                                            $detail = $suratPerintahKerjas->details->first();
+                                        @endphp
+                                        @if ($detail)
+                                            <div class="row py-2">
+                                                <div class="pr-4 py-2 col-12">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Jenis
+                                                        Pekerjaan</span>
+                                                    <input name="job_type" class="form-control bg-light w-100"
+                                                        type="text" value="{{ $detail->job_type }}">
                                                 </div>
-                                                <div class="d-flex">
-                                                    <div class="form-checkbox-gambar d-flex">
-                                                        <input name="supporting_document_type" type="checkbox"
-                                                            id="checkbox_gambar" value="1"
-                                                            onclick="handleCheckboxClick('gambar')"
-                                                            {{ $suratPerintahKerjas->supporting_document_type == 1 ? 'checked' : '' }}>
-                                                        <span for="checkbox_gambar" class="text-checkbox">Gambar</span>
-                                                    </div>
-                                                    <div class="form-checkbox-kontrak d-flex">
-                                                        <input name="supporting_document_type" type="checkbox"
-                                                            id="checkbox_kontrak" value="2"
-                                                            onclick="handleCheckboxClick('kontrak')"
-                                                            {{ $suratPerintahKerjas->supporting_document_type == 2 ? 'checked' : '' }}>
-                                                        <span for="checkbox_kontrak" class="text-checkbox">Kontrak</span>
-                                                    </div>
-                                                    <div class="form-checkbox-brosur d-flex">
-                                                        <input name="supporting_document_type" type="checkbox"
-                                                            id="checkbox_brosur" value="3"
-                                                            onclick="handleCheckboxClick('brosur')"
-                                                            {{ $suratPerintahKerjas->supporting_document_type == 3 ? 'checked' : '' }}>
-                                                        <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
-                                                    </div>
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Uraian
+                                                        Pekerjaan</span>
+                                                    <textarea name="job_description" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
+                                                        style="height: 138px;" required>{{ $detail->job_description }}</textarea>
                                                 </div>
-                                                <label for="choosefile" class="drop-container" id="dropcontainer">
-                                                    <span class="drop-title">Drop files here</span>
-                                                    <input name="supporting_document_file" type="file" id="choosefile"
-                                                        multiple onchange="handleFileSelect(this)">
-                                                </label>
-                                                <div id="fileList" class="mt-2"></div>
-                                                @if ($suratPerintahKerjas->supporting_document_file)
-                                                    <p id="fileName">File yang sudah dipilih:
-                                                        {{ $suratPerintahKerjas->supporting_document_file }}</p>
-                                                @endif
-                                                <!-- Hidden inputs to signal clearing dokumen_pendukung_file and supporting_document_type -->
-                                                <input type="hidden" id="supporting_document_file_clear"
-                                                    name="supporting_document_file_clear" value="false">
-                                                <input type="hidden" id="supporting_document_type_clear"
-                                                    name="supporting_document_type_clear" value="false">
+                                                <div class="pr-4 py-2 col-6">
+                                                    <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
+                                                        style="margin-top: 7px;">
+                                                        File Pendukung
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <div class="form-checkbox-gambar d-flex">
+                                                            <input name="supporting_document_type" type="checkbox"
+                                                                id="checkbox_gambar" value="1"
+                                                                onclick="handleCheckboxClick('gambar')"
+                                                                {{ $detail->supporting_document_type == 1 ? 'checked' : '' }}>
+                                                            <span for="checkbox_gambar"
+                                                                class="text-checkbox">Gambar</span>
+                                                        </div>
+                                                        <div class="form-checkbox-kontrak d-flex">
+                                                            <input name="supporting_document_type" type="checkbox"
+                                                                id="checkbox_kontrak" value="2"
+                                                                onclick="handleCheckboxClick('kontrak')"
+                                                                {{ $detail->supporting_document_type == 2 ? 'checked' : '' }}>
+                                                            <span for="checkbox_kontrak"
+                                                                class="text-checkbox">Kontrak</span>
+                                                        </div>
+                                                        <div class="form-checkbox-brosur d-flex">
+                                                            <input name="supporting_document_type" type="checkbox"
+                                                                id="checkbox_brosur" value="3"
+                                                                onclick="handleCheckboxClick('brosur')"
+                                                                {{ $detail->supporting_document_type == 3 ? 'checked' : '' }}>
+                                                            <span for="checkbox_brosur"
+                                                                class="text-checkbox">Brosur</span>
+                                                        </div>
+                                                    </div>
+                                                    <label for="choosefile" class="drop-container" id="dropcontainer">
+                                                        <span class="drop-title">Drop files here</span>
+                                                        <input name="supporting_document_file" type="file"
+                                                            id="choosefile" multiple onchange="handleFileSelect(this)">
+                                                    </label>
+                                                    {{-- <div id="fileList" class="mt-2"></div> --}}
+                                                    @if ($detail->supporting_document_file)
+                                                        <p id="fileName">File yang sudah dipilih:
+                                                            {{ $detail->supporting_document_file }}</p>
+                                                    @endif
+                                                    <!-- Hidden inputs to signal clearing dokumen_pendukung_file and supporting_document_type -->
+                                                    <input type="hidden" id="supporting_document_file_clear"
+                                                        name="supporting_document_file_clear" value="false">
+                                                    <input type="hidden" id="supporting_document_type_clear"
+                                                        name="supporting_document_type_clear" value="false">
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -346,7 +354,6 @@
             </div>
         </div>
     </div>
-
     <script>
         function handleCheckboxClick(checkboxName) {
             var checkboxes = ['gambar', 'kontrak', 'brosur'];

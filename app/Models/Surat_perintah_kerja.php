@@ -22,10 +22,6 @@ class Surat_perintah_kerja extends Model
         'priority',
         'completion_time',
         'pic',
-        'job_type',
-        'job_description',
-        'supporting_document_type',
-        'supporting_document_file',
         'form_number',
     ];
 
@@ -72,5 +68,10 @@ class Surat_perintah_kerja extends Model
     public function approvals()
     {
         return $this->hasMany(ApprovalData::class);
+    }
+
+    public function details()
+    {
+        return $this->hasMany(DetailSuratPerintahKerja::class);
     }
 }

@@ -117,7 +117,6 @@
                                     <div class="d-block w-100">
                                         @php
                                             $detail = $pengajuanDana->details->first();
-                                            // dd($detail);
                                         @endphp
                                         @if ($detail)
                                             <div class="row py-2">
@@ -127,7 +126,8 @@
                                                     </span>
                                                     <input name="tujuan" class="form-control bg-light w-100 disabled-input"
                                                         type="text" value="{{ $detail->tujuan }}"
-                                                        style="background-color: #D9D9D9 !important;" required>
+                                                        style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
+                                                        required>
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-4" id="lokasi_container">
@@ -163,7 +163,8 @@
                                                     <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
                                                     <input name="subtotal"
                                                         value="{{ 'Rp. ' . number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}"
-                                                        id="subtotalInput" style="text-align: right;"
+                                                        id="subtotalInput"
+                                                        style="text-align: right; color:black; font-weight:600;"
                                                         class="form-control bg-light w-100" type="text" required
                                                         readonly>
                                                 </div>
@@ -171,6 +172,7 @@
                                                     <span
                                                         class="text-sm font-weight-bold text-form-detail">Terbilang</span>
                                                     <input name="terbilang" value="{{ $detail->terbilang }}"
+                                                        style="color:black; font-weight:500;"
                                                         class="form-control bg-light w-100" type="text" required
                                                         readonly>
                                                 </div>

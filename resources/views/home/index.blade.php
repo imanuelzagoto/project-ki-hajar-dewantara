@@ -291,7 +291,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="col-md-12">
                             <div class="card mt-lg-2 card-table-pd">
@@ -325,36 +324,38 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($pengajuan_spk_per_day as $pst)
-                                                    <tr class="Column_td">
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->no_spk }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->title }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->applicant_name }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->user }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->main_contractor }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->project_manager }}
-                                                        </td>
-                                                        <td class="text-center" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->pic }}
-                                                        </td>
-                                                        <td class="text-center" style="font-weight: 500;" nowrap>
-                                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->submission_date)->format('d-m-Y') }}
-                                                        </td>
-                                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ $pst->completion_time }}
-                                                        </td>
+                                                    @foreach ($pst->approvals as $approval)
+                                                        <tr class="Column_td">
+                                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                                {{ $pst->no_spk }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                                {{ $pst->title }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                                {{ $approval->applicant_name }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                                {{ $pst->user }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                                {{ $pst->main_contractor }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                                {{ $pst->project_manager }}
+                                                            </td>
+                                                            <td class="text-center" style="font-weight: 500;" nowrap>
+                                                                {{ $pst->pic }}
+                                                            </td>
+                                                            <td class="text-center" style="font-weight: 500;" nowrap>
+                                                                {{ \Carbon\Carbon::createFromFormat('d/m/y', $pst->submission_date)->format('d-m-Y') }}
+                                                            </td>
+                                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                                {{ $pst->completion_time }}
+                                                            </td>
 
-                                                    </tr>
+                                                        </tr>
+                                                    @endforeach
                                                 @endforeach
                                             </tbody>
                                         </table>

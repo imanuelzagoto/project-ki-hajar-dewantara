@@ -33,21 +33,19 @@ class SuratPerintahKerjaViewWebController extends Controller
         $userData = Session::get('user');
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
-
-        // if ($userrole === 'Super Admin') {
-        $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->get();
-        // } elseif ($userrole === 'user biasa') {
-        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // } elseif ($userrole === 'Driver') {
-        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // } elseif ($userrole === 'General Affair') {
-        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // } elseif ($userrole === 'Hr') {
-        //     $suratPerintahKerjas = Surat_perintah_kerja::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // }
+        $suratPerintahKerjas = Surat_perintah_kerja::with(['approvals', 'details'])->orderBy('created_at', 'desc')->get();
         // dd($suratPerintahKerjas);
-
         return view('suratPerintahKerja.index', compact('suratPerintahKerjas'));
+    }
+
+    private function generateDocumentNumber()
+    {
+        $lastId = Surat_perintah_kerja::orderBy('id', 'desc')->first()->id ?? 0;
+        $nextId = $lastId + 1;
+        $currentYear = date('Y');
+        $currentMonth = date('m');
+        $no_spk = $nextId . '-SPK/SII/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
+        return $no_spk;
     }
 
     public function create()
@@ -77,16 +75,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             ->with('no_spk', $no_spk);
     }
 
-    private function generateDocumentNumber()
-    {
-        $lastId = Surat_perintah_kerja::orderBy('id', 'desc')->first()->id ?? 0;
-        $nextId = $lastId + 1;
-        $currentYear = date('Y');
-        $currentMonth = date('m');
-        $no_spk = $nextId . '-SPK/SII/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
-        return $no_spk;
-    }
-
     public function store(Request $request)
     {
         // Define validation rules
@@ -114,13 +102,11 @@ class SuratPerintahKerjaViewWebController extends Controller
             'supporting_document_file' => 'nullable|string',
         ]);
 
-        // Check if validation fails
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
         $submission_date = date("Y-m-d", strtotime(str_replace('/', '-', $request->submission_date)));
-        // Handle file upload if exists
         $supporting_document_file = null;
         if ($request->hasFile('supporting_document_file')) {
             $destinationPath = '/posts/images';
@@ -130,8 +116,6 @@ class SuratPerintahKerjaViewWebController extends Controller
 
         $userData = Session::get('user');
         $userId = $userData['id'];
-
-        // Create the record
         $suratPerintahKerjas = Surat_perintah_kerja::create([
             'form_number' => 'spk',
             'user_id' => $userId,
@@ -145,12 +129,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'priority' => $request->priority,
             'completion_time' => $request->completion_time,
             'pic' => $request->pic,
-            'job_type' => $request->job_type,
-            'job_description' => $request->job_description,
-            'supporting_document_type' => $request->supporting_document_type,
-            'supporting_document_file' => $request->supporting_document_file,
         ]);
-
         $suratPerintahKerjas->approvals()->create([
             'applicant_name' => $request->applicant_name,
             'receiver_name' => $request->receiver_name,
@@ -161,6 +140,12 @@ class SuratPerintahKerjaViewWebController extends Controller
             'approver_position' => $request->approver_position,
             'position' => $request->position,
         ]);
+        $suratPerintahKerjas->details()->create([
+            'job_type' => $request->job_type,
+            'job_description' => $request->job_description,
+            'supporting_document_type' => $request->supporting_document_type,
+            'supporting_document_file' => $request->supporting_document_file,
+        ]);
 
         $datas = Surat_perintah_kerja::where('id', $suratPerintahKerjas->id)->first();
         $datetime = explode('-', $datas->created_at);
@@ -170,12 +155,12 @@ class SuratPerintahKerjaViewWebController extends Controller
             'form_number' => $no_spk
         ]);
 
-        return redirect(route('surat_perintah_kerja.index'));
+        return redirect(route('surat_perintah_kerja.index'))->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
     public function show($id)
     {
-        $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
+        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->where('id', (int)$id)->get();
         $pdf = PDF::loadView('suratPerintahKerja.show', compact('suratPerintahKerjas'));
         $pdf->setPaper(array(0, 0, 1010.45, 841.7), 'landscape');
         return $pdf->stream();
@@ -185,7 +170,6 @@ class SuratPerintahKerjaViewWebController extends Controller
     {
         $token = Session::get('token');
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
             CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_RETURNTRANSFER => true,
@@ -204,11 +188,11 @@ class SuratPerintahKerjaViewWebController extends Controller
 
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals')->find($id);
-        // dd($suratPerintahKerjas->supporting_document_file);
+        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->find($id);
+        // dd($suratPerintahKerjas->details);
         if ($suratPerintahKerjas) {
             $approvals = $suratPerintahKerjas->approvals;
-            return view('suratPerintahKerja.edit', compact('suratPerintahKerjas', 'approvals', 'projects'));
+            return view('suratPerintahKerja.edit', compact('suratPerintahKerjas', 'projects', 'approvals'));
         } else {
             return view('page404');
         }
@@ -245,64 +229,56 @@ class SuratPerintahKerjaViewWebController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-        // dd($id);
-        // Find the Surat_perintah_kerja by ID
         $suratPerintahKerjas = Surat_perintah_kerja::find($id);
-        // Check if dokumen_pendukung_file is not empty
-        if ($request->hasFile('supporting_document_file')) {
-            $supporting_document_file = $request->file('supporting_document_file');
-            $supporting_document_file->storeAs('public/posts/images', $supporting_document_file->hashName());
-            if ($suratPerintahKerjas->supporting_document_file) {
-                Storage::delete('public/posts/images/' . basename($suratPerintahKerjas->supporting_document_file));
-            }
-        } else {
-            $supporting_document_file = $suratPerintahKerjas->supporting_document_file;
-        }
-
-        // Periksa hidden inputs
-        if ($request->input('supporting_document_file_clear') == 'true') {
-            $suratPerintahKerjas->supporting_document_file = null;
-        }
-
-        if ($request->input('supporting_document_type_clear') == 'true') {
-            $suratPerintahKerjas->supporting_document_type = null;
-        }
-
         $userData = Session::get('user');
         $userId = $userData['id'];
-        // Update Surat_perintah_kerja with new or old values
-        if ($request->supporting_document_file) {
-            $suratPerintahKerjas->update([
-                'user_id' => $userId,
-                'code' => $request->code,
-                'title' => $request->title,
-                'user' => $request->user,
-                'main_contractor' => $request->main_contractor,
-                'project_manager' => $request->project_manager,
-                'submission_date' => $request->submission_date,
-                'priority' => $request->priority,
-                'completion_time' => $request->completion_time,
-                'pic' => $request->pic,
+
+        $suratPerintahKerjas->update([
+            'user_id' => $userId,
+            'code' => $request->code,
+            'title' => $request->title,
+            'user' => $request->user,
+            'main_contractor' => $request->main_contractor,
+            'project_manager' => $request->project_manager,
+            'submission_date' => $request->submission_date,
+            'priority' => $request->priority,
+            'completion_time' => $request->completion_time,
+            'pic' => $request->pic,
+        ]);
+
+        if ($request->hasFile('supporting_document_file')) {
+            $supporting_document_file = $request->file('supporting_document_file');
+            $originalName = $supporting_document_file->getClientOriginalName();
+            $supporting_document_file->storeAs('public/posts/images', $originalName);
+
+            // Hapus file lama jika ada
+            if ($suratPerintahKerjas->details()->first()->supporting_document_file) {
+                Storage::delete('public/posts/images/' . basename($suratPerintahKerjas->details()->first()->supporting_document_file));
+            }
+
+            if ($request->input('supporting_document_file_clear') == 'true') {
+                $suratPerintahKerjas->supporting_document_file = null;
+            }
+
+            if ($request->input('supporting_document_type_clear') == 'true') {
+                $suratPerintahKerjas->supporting_document_type = null;
+            }
+
+            // Perbarui detail dengan nama file asli
+            $suratPerintahKerjas->details()->update([
                 'job_type' => $request->job_type,
                 'job_description' => $request->job_description,
                 'supporting_document_type' => $request->supporting_document_type,
-                'supporting_document_file' => $request->supporting_document_file,
+                'supporting_document_file' => 'public/posts/images/' . $originalName,
             ]);
         } else {
-            $suratPerintahKerjas->update([
-                'user_id' => $userId,
-                'code'          => $request->code,
-                'user'                  => $request->user,
-                'main_contractor'       => $request->main_contractor,
-                'project_manager'       => $request->project_manager,
-                'submission_date' => $request->submission_date,
-                'priority' => $request->priority,
-                'completion_time' => $request->completion_time,
-                'pic' => $request->pic,
+            // Perbarui detail tanpa file
+            $suratPerintahKerjas->details()->update([
                 'job_type' => $request->job_type,
                 'job_description' => $request->job_description,
             ]);
         }
+
 
         $suratPerintahKerjas->approvals()->update([
             'applicant_name' => $request->applicant_name, 'receiver_name' => $request->receiver_name, 'approver_name' => $request->approver_name, 'board_of_directors' => $request->board_of_directors,
@@ -332,7 +308,7 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function exportPDF($id)
     {
-        $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
+        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->where('id', (int)$id)->get();
         $pdf = PDF::loadView('suratPerintahKerja.show', compact('suratPerintahKerjas'));
         return $pdf->download('surat_perintah_kerja.pdf');
     }
