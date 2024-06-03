@@ -228,7 +228,7 @@
                                             <thead>
                                                 <tr class="tr-table">
                                                     <th class="text-left" style="font-weight:700;" nowrap>No.Doc</th>
-                                                    <th class="text-left" style="font-weight:700;" nowrap>Revisi</th>
+                                                    <th class="text-center" style="font-weight:700;" nowrap>Revisi</th>
                                                     <th class="text-left" style="font-weight:700;" nowrap>Pemohon</th>
                                                     <th class="text-center" style="font-weight:700;" nowrap>Tujuan</th>
                                                     <th class="text-center" style="font-weight:700;" nowrap>Lokasi<br>
@@ -248,39 +248,41 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($pengajuan_dana_per_day_by_user_id as $pdt)
-                                                    <tr class="Column_td">
-                                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                                            {{ $pdt->no_doc }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                                            {{ $pdt->revisi }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                                            {{ $pdt->nama_pemohon }}
-                                                        </td>
-                                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                                            {{ $pdt->tujuan }}
-                                                        </td>
-                                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ $pdt->lokasi }}
-                                                        </td>
-                                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ Carbon\Carbon::parse($pdt->updated_at)->format('H:i d-m-Y') }}
-                                                        </td>
-                                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                                            {{ Carbon\Carbon::parse($pdt->batas_waktu)->format('d-m-Y') }}
-                                                        </td>
-                                                        <td class="text-right" style="font-weight:500;" nowrap>
-                                                            {{ 'Rp. ' . number_format(floatval(str_replace(['Rp.', '.', ','], '', $pdt->subtotal)), 0, ',', '.') }}
-                                                        </td>
-                                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                                            @if ($pdt->tunai)
-                                                                {{ $pdt->tunai }}
-                                                            @elseif ($pdt->non_tunai)
-                                                                Transfer
-                                                            @endif
-                                                        </td>
-                                                    </tr>
+                                                    @foreach ($pdt->details as $detail)
+                                                        <tr class="Column_td">
+                                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                                {{ $pdt->no_doc }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                                {{ $pdt->revisi }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                                {{ $pdt->nama_pemohon }}
+                                                            </td>
+                                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                                {{ $detail->tujuan }}
+                                                            </td>
+                                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                                {{ $detail->lokasi }}
+                                                            </td>
+                                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                                {{ Carbon\Carbon::parse($pdt->updated_at)->format('H:i d-m-Y') }}
+                                                            </td>
+                                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                                {{ Carbon\Carbon::parse($detail->batas_waktu)->format('d-m-Y') }}
+                                                            </td>
+                                                            <td class="text-right" style="font-weight:500;" nowrap>
+                                                                {{ 'Rp. ' . number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}
+                                                            </td>
+                                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                                @if ($detail->tunai)
+                                                                    {{ $detail->tunai }}
+                                                                @elseif ($detail->non_tunai)
+                                                                    Transfer
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -583,7 +585,7 @@
                                             <thead>
                                                 <tr class="tr-table">
                                                     <th class="text-left" style="font-weight:700;" nowrap>No.Doc</th>
-                                                    <th class="text-left" style="font-weight:700;" nowrap>Revisi</th>
+                                                    <th class="text-center" style="font-weight:700;" nowrap>Revisi</th>
                                                     <th class="text-left" style="font-weight:700;" nowrap>Pemohon</th>
                                                     <th class="text-center" style="font-weight:700;" nowrap>Tujuan</th>
                                                     <th class="text-center" style="font-weight:700;" nowrap>Lokasi<br>

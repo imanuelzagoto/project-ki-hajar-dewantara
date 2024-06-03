@@ -206,9 +206,9 @@
                                                 <label for="choosefile" class="drop-container" id="dropcontainer">
                                                     <span class="drop-title">Drop files here</span>
                                                     <input name="supporting_document_file" type="file" id="choosefile"
-                                                        onchange="handleFileSelect(this)">
+                                                        multiple onchange="handleFileSelect(this)">
                                                 </label>
-
+                                                <div id="fileList" class="mt-2"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -298,7 +298,7 @@
         var today = new Date().toISOString().split('T')[0];
         submissionDateInput.value = today;
 
-        // function chekbox input file
+        // function checkbox input file
         function handleCheckboxClick(checkboxName) {
             var checkboxes = ['gambar', 'kontrak', 'brosur'];
             checkboxes.forEach(function(name) {
@@ -328,6 +328,7 @@
         function clearFileInput() {
             var fileInput = document.getElementById('choosefile');
             fileInput.value = '';
+            displayFileNames();
         }
 
         function handleFileSelect(input) {
@@ -340,6 +341,27 @@
 
             if (!anyCheckboxChecked) {
                 selectCheckbox('gambar');
+            }
+
+            // Periksa jika lebih dari 3 file yang dipilih
+            if (input.files.length > 3) {
+                alert('Anda hanya bisa mengunggah maksimal 3 file.');
+                input.value = '';
+            } else {
+                displayFileNames();
+            }
+        }
+
+        function displayFileNames() {
+            var fileInput = document.getElementById('choosefile');
+            var fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';
+
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var fileItem = document.createElement('div');
+                fileItem.textContent = files[i].name;
+                fileList.appendChild(fileItem);
             }
         }
 
@@ -362,7 +384,6 @@
             });
         });
 
-
         // project id
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
@@ -377,14 +398,6 @@
             // Set value textarea dengan teks yang belum diubah
             textarea.value = text;
         });
-
-        // fungsi untuk newline tag br
-        // document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
-        //     var textarea = event.target;
-        //     var text = textarea.value;
-        //     var formattedText = text.replace(/\n/g, '<br>');
-        //     textarea.value = formattedText;
-        // });
     </script>
 @endsection
 

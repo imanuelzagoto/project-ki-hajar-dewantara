@@ -173,7 +173,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         return redirect(route('surat_perintah_kerja.index'));
     }
 
-
     public function show($id)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::where('id', (int)$id)->get();
@@ -181,7 +180,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         $pdf->setPaper(array(0, 0, 1010.45, 841.7), 'landscape');
         return $pdf->stream();
     }
-
 
     public function edit($id)
     {
@@ -206,8 +204,8 @@ class SuratPerintahKerjaViewWebController extends Controller
 
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-        // dd($projects);
         $suratPerintahKerjas = Surat_perintah_kerja::with('approvals')->find($id);
+        // dd($suratPerintahKerjas->supporting_document_file);
         if ($suratPerintahKerjas) {
             $approvals = $suratPerintahKerjas->approvals;
             return view('suratPerintahKerja.edit', compact('suratPerintahKerjas', 'approvals', 'projects'));
@@ -216,10 +214,8 @@ class SuratPerintahKerjaViewWebController extends Controller
         }
     }
 
-
     public function update(Request $request, $id)
     {
-        // dd($request->code);
         // Define validation rules
         $validator = Validator::make($request->all(), [
             'code'          => 'required|string',
@@ -318,7 +314,6 @@ class SuratPerintahKerjaViewWebController extends Controller
         // Return response
         return redirect(route('surat_perintah_kerja.index'));
     }
-
 
     public function destroy($id)
     {

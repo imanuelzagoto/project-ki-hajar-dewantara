@@ -229,14 +229,13 @@
                                                 <label for="choosefile" class="drop-container" id="dropcontainer">
                                                     <span class="drop-title">Drop files here</span>
                                                     <input name="supporting_document_file" type="file" id="choosefile"
-                                                        onchange="handleFileSelect(this)"
-                                                        value=" {{ $suratPerintahKerjas->supporting_document_file }}">
+                                                        multiple onchange="handleFileSelect(this)">
                                                 </label>
+                                                <div id="fileList" class="mt-2"></div>
                                                 @if ($suratPerintahKerjas->supporting_document_file)
                                                     <p id="fileName">File yang sudah dipilih:
                                                         {{ $suratPerintahKerjas->supporting_document_file }}</p>
                                                 @endif
-
                                                 <!-- Hidden inputs to signal clearing dokumen_pendukung_file and supporting_document_type -->
                                                 <input type="hidden" id="supporting_document_file_clear"
                                                     name="supporting_document_file_clear" value="false">
@@ -322,9 +321,9 @@
                                                         Jabatan
                                                     </span>
                                                     <input name="position"
-                                                        class="form-control bg-light w-100 disabled-input" value="BOD"
-                                                        type="text" style="background-color: #D9D9D9 !important;"
-                                                        required>
+                                                        class="form-control bg-light w-100 disabled-input"
+                                                        value="{{ $suratPerintahKerjas->position }}" type="text"
+                                                        style="background-color: #D9D9D9 !important;" required>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -349,12 +348,6 @@
     </div>
 
     <script>
-        // // function tanggal pengajuan
-        // var submissionDateInput = document.getElementById('submission_date');
-        // var today = new Date().toISOString().split('T')[0];
-        // submissionDateInput.value = today;
-
-        // function chekbox input file
         function handleCheckboxClick(checkboxName) {
             var checkboxes = ['gambar', 'kontrak', 'brosur'];
             var isCurrentCheckboxChecked = document.getElementById('checkbox_' + checkboxName).checked;
@@ -407,17 +400,39 @@
                 selectCheckbox('gambar');
             }
 
+            // Periksa jika lebih dari 3 file yang dipilih
+            if (input.files.length > 3) {
+                alert('Anda hanya bisa mengunggah maksimal 3 file.');
+                input.value = ''; // Kosongkan input
+            } else {
+                displayFileNames(); // Tampilkan nama file
+            }
+
             var fileInput = input;
-            var fileName = fileInput.files[0].name;
+            var files = fileInput.files;
+            var fileNames = Array.from(files).map(file => file.name).join(', ');
 
             var fileNameParagraph = document.getElementById('fileName');
             if (fileNameParagraph) {
-                fileNameParagraph.innerHTML = "File yang sudah dipilih: " + fileName;
+                fileNameParagraph.innerHTML = "File yang sudah dipilih: " + fileNames;
             }
 
             // Reset hidden fields as file is selected
             document.getElementById('supporting_document_file_clear').value = 'false';
             document.getElementById('supporting_document_type_clear').value = 'false';
+        }
+
+        function displayFileNames() {
+            var fileInput = document.getElementById('choosefile');
+            var fileList = document.getElementById('fileList');
+            fileList.innerHTML = ''; // Kosongkan nama file yang ada
+
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var fileItem = document.createElement('div');
+                fileItem.textContent = files[i].name;
+                fileList.appendChild(fileItem);
+            }
         }
 
         function selectCheckbox(checkboxName) {
@@ -441,15 +456,14 @@
 
         document.getElementById('choosefile').addEventListener('change', function(event) {
             var fileInput = event.target;
-            var fileName = fileInput.files[0].name;
+            var files = fileInput.files;
+            var fileNames = Array.from(files).map(file => file.name).join(', ');
 
             var fileNameParagraph = document.getElementById('fileName');
             if (fileNameParagraph) {
-                fileNameParagraph.innerHTML = "File yang sudah dipilih: " + fileName;
+                fileNameParagraph.innerHTML = "File yang sudah dipilih: " + fileNames;
             }
         });
-
-
 
         // fungsi project
         function changeProjectName() {

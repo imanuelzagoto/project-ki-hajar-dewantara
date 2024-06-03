@@ -39,8 +39,11 @@ class PengajuanDanaViewWebController extends Controller
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
 
+        $pengajuanDanas = PengajuanDana::with(['details', 'items'])->orderBy('created_at', 'desc')->get();
+        return view('pengajuanDana.index', compact('pengajuanDanas'));
         // if ($userrole === 'Super Admin') {
-        $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
+        // $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
+        // dd($pengajuanDanas);
         // } elseif ($userrole === 'user biasa') {
         //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
         // } elseif ($userrole === 'Driver') {
@@ -50,10 +53,7 @@ class PengajuanDanaViewWebController extends Controller
         // } elseif ($userrole === 'Hr') {
         //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
         // }
-
-        return view('pengajuanDana.index', compact('pengajuanDanas'));
     }
-
 
     public function create()
     {
@@ -61,9 +61,7 @@ class PengajuanDanaViewWebController extends Controller
         $nextId = $lastId + 1;
         $currentYear = date('Y');
         $currentMonth = date('m');
-        // $no_doc = $nextId . '/FPD/' . $userrole . '/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
         $no_doc = $nextId . '/FPD/ADM/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
-        // dd($no_doc);
         return view('pengajuanDana.create', compact('no_doc'));
     }
 
@@ -94,30 +92,19 @@ class PengajuanDanaViewWebController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
         $userData = Session::get('user');
         $userId = $userData['id'];
-
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
             'user_id' => $userId,
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'subject' => $request->subject,
-            'tujuan' => $request->tujuan,
-            'lokasi' => $request->lokasi,
-            'batas_waktu' => $request->batas_waktu,
-            'subtotal' => $request->subtotal,
-            'total' => $request->total,
-            'terbilang' => $request->terbilang,
-            'tunai' => $request->tunai,
-            'non_tunai' => $request->non_tunai,
-            'nama_bank' => $request->nama_bank,
-            'catatan' => $request->catatan,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
+
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->first();
         $datetime = explode('-', $datas_no_doc->created_at);
         // $no_doc = $pengajuanDanas->id . '/FPD/' . $userrole . '/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
@@ -125,6 +112,11 @@ class PengajuanDanaViewWebController extends Controller
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->update([
             'no_doc' => $no_doc,
             'form_number' => $no_doc
+        ]);
+
+        $pengajuanDanas->details()->create([
+            'tujuan' => $request->tujuan, 'lokasi' => $request->lokasi, 'batas_waktu' => $request->batas_waktu, 'subtotal' => $request->subtotal, 'total' => $request->total,
+            'terbilang' => $request->terbilang, 'tunai' => $request->tunai, 'non_tunai' => $request->non_tunai, 'nama_bank' => $request->nama_bank, 'catatan' => $request->catatan,
         ]);
 
         $items = $request->only('nama_item', 'jumlah', 'satuan', 'harga');
@@ -137,11 +129,8 @@ class PengajuanDanaViewWebController extends Controller
 
             // Simpan item pengajuan dana
             $pengajuanDanas->items()->create([
-                'nama_item' => $item,
-                'jumlah' => $jumlah,
-                'satuan' => $items['satuan'][$key],
-                'harga' => $harga,
-                'total' => $subtotal_item,
+                'nama_item' => $item, 'jumlah' => $jumlah, 'satuan' => $items['satuan'][$key],
+                'harga' => $harga, 'total' => $subtotal_item,
             ]);
         }
         $pengajuanDanas->update(['subtotal' => $subtotal]);
@@ -152,7 +141,8 @@ class PengajuanDanaViewWebController extends Controller
 
     public function show($id)
     {
-        $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
+        $pengajuan_danas = PengajuanDana::with('items', 'details')->where('id', (int)$id)->get();
+        // dd($pengajuan_danas);
         $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
         $pdf->setPaper(array(0, 0, 899.45, 1200));
         return $pdf->stream();
@@ -160,10 +150,9 @@ class PengajuanDanaViewWebController extends Controller
 
     public function edit($id)
     {
-        $pengajuanDanas = PengajuanDana::with('items')->find($id);
-        $items = $pengajuanDanas->items;
-        if ($pengajuanDanas) {
-            return view('pengajuanDana.edit', compact('pengajuanDanas', 'items'));
+        $pengajuanDana = PengajuanDana::with(['details', 'items'])->find($id);
+        if ($pengajuanDana) {
+            return view('pengajuanDana.edit', compact('pengajuanDana'));
         } else {
             return view('page404');
         }
@@ -198,63 +187,61 @@ class PengajuanDanaViewWebController extends Controller
         }
 
         $pengajuanDana = PengajuanDana::find($id);
-
         if (!$pengajuanDana) {
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
 
-        // Ambil data item dari request
-        $nama_items = $request->input('nama_item');
-        $jumlahs = $request->input('jumlah');
-        $satuans = $request->input('satuan');
-        $hargas = $request->input('harga');
-
-        $pengajuanDana->items()->delete();
-        $subtotal = 0;
-
-        // Simpan item yang baru dan hitung subtotal
-        foreach ($nama_items as $key => $nama_item) {
-            $item = new ItemPengajuanDana();
-            $item->nama_item = $nama_item;
-            $item->jumlah = $jumlahs[$key];
-            $item->satuan = $satuans[$key];
-
-            // Mengubah format harga menjadi numerik
-            $hargaFloat = (float) str_replace(['Rp.', '.', ','], '', $hargas[$key]);
-            $item->harga = $hargaFloat;
-
-            $item->total = $jumlahs[$key] * $hargaFloat;
-            $subtotal += $item->total;
-            $pengajuanDana->items()->save($item);
+        $pengajuanDana = PengajuanDana::findOrFail($id);
+        if (!$pengajuanDana) {
+            return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
 
         $userData = Session::get('user');
         $userId = $userData['id'];
-
-        // Ubah total sesuai format yang diinginkan
-        $totalFloat = (float) str_replace(['Rp.', '.', ','], '', $request->total);
-        $formattedTotal = 'Rp. ' . number_format($totalFloat, 0, ',', '.');
-
         $pengajuanDana->update([
             'form_number' => 'doc_pd',
             'user_id' => $userId,
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'subject' => $request->subject,
+            'tanggal_pengajuan' => $request->tanggal_pengajuan,
+            'no_doc' => 'doc_pd',
+            'revisi' => $request->revisi,
+        ]);
+
+        $pengajuanDana->details()->update([
             'tujuan' => $request->tujuan,
             'lokasi' => $request->lokasi,
             'batas_waktu' => $request->batas_waktu,
-            'subtotal' => $subtotal,
-            'total' => $formattedTotal,
+            'subtotal' => $request->subtotal,
             'terbilang' => $request->terbilang,
             'tunai' => $request->tunai,
             'non_tunai' => $request->non_tunai,
             'nama_bank' => $request->nama_bank,
             'catatan' => $request->catatan,
-            'tanggal_pengajuan' => $request->tanggal_pengajuan,
-            'no_doc' => 'doc_pd',
-            'revisi' => $request->revisi,
         ]);
+
+        $items = $request->only('nama_item', 'jumlah', 'satuan', 'harga');
+        $subtotal = 0;
+        $pengajuanDana->items()->delete();
+
+        foreach ($items['nama_item'] as $key => $item) {
+            $jumlah = intval($items['jumlah'][$key]);
+            $harga = intval(str_replace(['Rp.', '.', ','], '', $items['harga'][$key]));
+            $subtotal_item = $jumlah * $harga;
+            $subtotal += $subtotal_item;
+
+            // Simpan item pengajuan dana yang diperbarui
+            $pengajuanDana->items()->create([
+                'nama_item' => $item,
+                'jumlah' => $jumlah,
+                'satuan' => $items['satuan'][$key],
+                'harga' => $harga,
+                'total' => $subtotal_item,
+            ]);
+        }
+
+        $pengajuanDana->update(['subtotal' => $subtotal]);
 
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDana->id)->first();
         $datetime = explode('-', $datas_no_doc->created_at);
@@ -264,7 +251,7 @@ class PengajuanDanaViewWebController extends Controller
             'form_number' => $no_doc
         ]);
 
-        return redirect(route('pengajuanDana.index'));
+        return redirect()->route('pengajuanDana.index')->with(['success' => 'Data Berhasil Diperbarui!']);
     }
 
     public function destroy($id)

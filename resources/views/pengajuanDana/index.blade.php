@@ -114,7 +114,7 @@
                                 <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
                                     <th class="text-center" style="xfont-weight: 700;" nowrap>No</th>
                                     <th class="text-center" style="font-weight: 700;" nowrap>No.Doc</th>
-                                    <th class="text-left" style="font-weight: 700;" nowrap>Revisi</th>
+                                    <th class="text-center" style="font-weight: 700;" nowrap>Revisi</th>
                                     <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
                                     <th class="text-center" style="font-weight: 700;" nowrap>Tujuan</th>
                                     <th class="text-center" style="font-weight: 700;" nowrap>Lokasi <br>
@@ -137,69 +137,71 @@
                                     $i = 0;
                                 @endphp
                                 @foreach ($pengajuanDanas as $pdts)
-                                    @php
-                                        $i += 1;
-                                    @endphp
-                                    <tr class="Column_td">
-                                        <td class="text-center" style="font-weight:500;"nowrap>
-                                            {{ $i }}
-                                        </td>
-                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                            {{ $pdts->no_doc }}
-                                        </td>
-                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                            {{ $pdts->revisi }}
-                                        </td>
-                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                            {{ $pdts->nama_pemohon }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ $pdts->tujuan }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ $pdts->lokasi }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($pdts->updated_at)->format('H:i d-m-Y') }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($pdts->batas_waktu)->format('d-m-Y') }}
-                                        </td>
-                                        <td class="text-right" style="font-weight:500;" nowrap>
-                                            {{ 'Rp. ' . number_format(floatval(str_replace(['Rp.', '.', ','], '', $pdts->subtotal)), 0, ',', '.') }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            @if ($pdts->tunai)
-                                                {{ $pdts->tunai }}
-                                            @elseif ($pdts->non_tunai)
-                                                Transfer
-                                            @endif
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                    @foreach ($pdts->details as $detail)
+                                        @php
+                                            $i += 1;
+                                        @endphp
+                                        <tr class="Column_td">
+                                            <td class="text-center" style="font-weight:500;"nowrap>
+                                                {{ $i }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                {{ $pdts->no_doc }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                {{ $pdts->revisi }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                {{ $pdts->nama_pemohon }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ $detail->tujuan }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ $detail->lokasi }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ Carbon\Carbon::parse($pdts->updated_at)->format('H:i d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ Carbon\Carbon::parse($detail->batas_waktu)->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-right" style="font-weight:500;" nowrap>
+                                                {{ 'Rp. ' . number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                @if ($detail->tunai)
+                                                    {{ $detail->tunai }}
+                                                @elseif ($detail->non_tunai)
+                                                    Transfer
+                                                @endif
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
 
-                                            <a href="/pengajuan-dana/edit/{{ $pdts->id }}"
-                                                class="fa fa-pencil btn btn-sm tooltip-container"
-                                                style="color:#4FD1C5; font-size:20px;">
-                                                <span class="tooltip-edit">Edit</span>
-                                            </a>
-                                            <a href="/pengajuan-dana/show/{{ $pdts->id }}" target="_blank"
-                                                type="button" class="fas fa-eye btn btn-sm tooltip-container"
-                                                style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                <span class="tooltip-show">View</span>
-                                            </a>
+                                                <a href="/pengajuan-dana/edit/{{ $pdts->id }}"
+                                                    class="fa fa-pencil btn btn-sm tooltip-container"
+                                                    style="color:#4FD1C5; font-size:20px;">
+                                                    <span class="tooltip-edit">Edit</span>
+                                                </a>
+                                                <a href="/pengajuan-dana/show/{{ $pdts->id }}" target="_blank"
+                                                    type="button" class="fas fa-eye btn btn-sm tooltip-container"
+                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                    <span class="tooltip-show">View</span>
+                                                </a>
 
-                                            <a href="/pengajuan-dana/delete/{{ $pdts->id }}"
-                                                class="fas fa-trash-alt btn btn-sm tooltip-container"
-                                                style="color:#F31414; font-size:20px;"
-                                                onclick="submitDelete({{ $pdts->id }})">
-                                                <span class="tooltip-delete">Delete</span>
-                                            </a>
-                                            <form id="delete-form-{{ $pdts->id }}"
-                                                action="/pengajuan-dana/delete/{{ $pdts->id }}" method="get"
-                                                style="display: none;">
-                                            </form>
-                                        </td>
-                                    </tr>
+                                                <a href="/pengajuan-dana/delete/{{ $pdts->id }}"
+                                                    class="fas fa-trash-alt btn btn-sm tooltip-container"
+                                                    style="color:#F31414; font-size:20px;"
+                                                    onclick="submitDelete({{ $pdts->id }})">
+                                                    <span class="tooltip-delete">Delete</span>
+                                                </a>
+                                                <form id="delete-form-{{ $pdts->id }}"
+                                                    action="/pengajuan-dana/delete/{{ $pdts->id }}" method="get"
+                                                    style="display: none;">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>
@@ -208,7 +210,6 @@
             </div>
         </div>
     </div>
-
     <script>
         // JS DELETE
         function submitDelete(id) {

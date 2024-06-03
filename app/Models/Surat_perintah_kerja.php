@@ -34,39 +34,20 @@ class Surat_perintah_kerja extends Model
         'completion_time',
     ];
 
-    /**
-     * Get the formatted tanggal attribute.
-     *
-     * @param  string  $value
-     * @return string
-     */
     public function getSubmissionDateAttribute($value)
     {
         return Carbon::parse($value)->translatedFormat('d/m/y');
     }
 
-    /**
-     * Get the formatted waktu_penyelesaian attribute.
-     *
-     * @param  string  $value
-     * @return string
-     */
     public function getCompletionTimeAttribute($value)
     {
         // Check if the value is null
         if ($value === null) {
             return null;
         }
-
-        // Parse the value and return the formatted date
         return Carbon::parse($value)->format('d-m-Y');
     }
 
-    /**
-     * image
-     *
-     * @return Attribute
-     */
     protected function image(): Attribute
     {
         return Attribute::make(
@@ -74,11 +55,6 @@ class Surat_perintah_kerja extends Model
         );
     }
 
-    /**
-     * kontrak
-     *
-     * @return Attribute
-     */
     protected function kontrak(): Attribute
     {
         return Attribute::make(
@@ -86,11 +62,6 @@ class Surat_perintah_kerja extends Model
         );
     }
 
-    /**
-     * brosur
-     *
-     * @return Attribute
-     */
     protected function brosur(): Attribute
     {
         return Attribute::make(
