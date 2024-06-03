@@ -138,67 +138,65 @@
                                     $i = 0;
                                 @endphp
                                 @foreach ($suratPerintahKerjas as $spk)
-                                    @php
-                                        $i += 1;
-                                    @endphp
-                                    <tr class="Column_td">
-                                        <td class="text-center" style="font-weight: 500;" nowrap>
-                                            {{ $i }}
-                                        </td>
-                                        <td class="text-center" style="font-weight: 500;" nowrap>
-                                            {{ $spk->no_spk }}
-                                        </td>
-                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                            {{ $spk->title }}
-                                        </td>
-                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                            {{ $spk->applicant_name }}
-                                        </td>
-                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                            {{ $spk->user }}
-                                        </td>
-                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                            {{ $spk->main_contractor }}
-                                        </td>
-                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                            {{ $spk->project_manager }}
-                                        </td>
-                                        <td class="text-center" style="font-weight: 500;" nowrap>
-                                            {{ $spk->pic }}
-                                        </td>
-                                        <td class="text-center" style="font-weight: 500;" nowrap>
-                                            {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->submission_date)->format('d-m-Y') }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ $spk->completion_time }}
-                                        </td>
-
-
-
-
-                                        <td class="text-center" style="font-weight:400;" nowrap>
-                                            <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
-                                                class="fas fa-pen btn btn-sm tooltip-container"
-                                                style="color:#4FD1C5; font-size:20px;">
-                                                <span class="tooltip-edit">Edit</span>
-                                            </a>
-                                            <a href="/surat-perintah-kerja/show/{{ $spk->id }}" target="_blank"
-                                                type="button" class="fas fa-eye btn btn-sm tooltip-container"
-                                                style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                <span class="tooltip-show">View</span>
-                                            </a>
-                                            <a href="/surat-perintah-kerja/delete/{{ $spk->id }}"
-                                                class="fas fa-trash-alt btn btn-sm tooltip-container" type="button"
-                                                style="color:#F31414; font-size:20px;"
-                                                onclick="submitDelete({{ $spk->id }})">
-                                                <span class="tooltip-delete">Delete</span>
-                                            </a>
-                                            <form id="delete-form-{{ $spk->id }}"
-                                                action="/surat-perintah-kerja/delete/{{ $spk->id }}" method="get"
-                                                style="display: none;">
-                                            </form>
-                                        </td>
-                                    </tr>
+                                    @foreach ($spk->approvals as $approval)
+                                        @php
+                                            $i += 1;
+                                        @endphp
+                                        <tr class="Column_td">
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
+                                                {{ $i }}
+                                            </td>
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
+                                                {{ $spk->no_spk }}
+                                            </td>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                {{ $spk->title }}
+                                            </td>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                {{ $approval->applicant_name }}
+                                            </td>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                {{ $spk->user }}
+                                            </td>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                {{ $spk->main_contractor }}
+                                            </td>
+                                            <td class="text-left" style="font-weight: 500;" nowrap>
+                                                {{ $spk->project_manager }}
+                                            </td>
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
+                                                {{ $spk->pic }}
+                                            </td>
+                                            <td class="text-center" style="font-weight: 500;" nowrap>
+                                                {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->submission_date)->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ $spk->completion_time }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:400;" nowrap>
+                                                <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
+                                                    class="fas fa-pen btn btn-sm tooltip-container"
+                                                    style="color:#4FD1C5; font-size:20px;">
+                                                    <span class="tooltip-edit">Edit</span>
+                                                </a>
+                                                <a href="/surat-perintah-kerja/show/{{ $spk->id }}" target="_blank"
+                                                    type="button" class="fas fa-eye btn btn-sm tooltip-container"
+                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                    <span class="tooltip-show">View</span>
+                                                </a>
+                                                <a href="/surat-perintah-kerja/delete/{{ $spk->id }}"
+                                                    class="fas fa-trash-alt btn btn-sm tooltip-container" type="button"
+                                                    style="color:#F31414; font-size:20px;"
+                                                    onclick="submitDelete({{ $spk->id }})">
+                                                    <span class="tooltip-delete">Delete</span>
+                                                </a>
+                                                <form id="delete-form-{{ $spk->id }}"
+                                                    action="/surat-perintah-kerja/delete/{{ $spk->id }}"
+                                                    method="get" style="display: none;">
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 @endforeach
                             </tbody>
                         </table>

@@ -142,7 +142,6 @@ class PengajuanDanaViewWebController extends Controller
     public function show($id)
     {
         $pengajuan_danas = PengajuanDana::with('items', 'details')->where('id', (int)$id)->get();
-        // dd($pengajuan_danas);
         $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
         $pdf->setPaper(array(0, 0, 899.45, 1200));
         return $pdf->stream();
@@ -269,7 +268,7 @@ class PengajuanDanaViewWebController extends Controller
 
     public function exportPDF($id)
     {
-        $pengajuan_danas = PengajuanDana::where('id', (int)$id)->get();
+        $pengajuan_danas = PengajuanDana::with('items', 'details')->where('id', (int)$id)->get();
         $pdf = PDF::loadView('pengajuanDana.pengajuan_dana_pdf', compact('pengajuan_danas'));
         return $pdf->stream("", array("Attachment" => false));
     }

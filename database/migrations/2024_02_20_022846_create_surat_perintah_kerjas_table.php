@@ -24,10 +24,6 @@ return new class extends Migration
             $table->string('priority');
             $table->date('completion_time')->nullable();
             $table->string('pic')->nullable();
-            $table->string('job_type');
-            $table->text('job_description');
-            $table->integer('supporting_document_type')->nullable()->default(1);
-            $table->string('supporting_document_file')->nullable();
             $table->timestamps();
         });
     }
