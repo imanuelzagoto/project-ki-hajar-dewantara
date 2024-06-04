@@ -16,6 +16,8 @@ return new class extends Migration
             $table->integer('user_id');
             $table->string('nama_pemohon');
             $table->string('jabatan_pemohon');
+            $table->string('nama_pemeriksa');
+            $table->string('jabatan_pemeriksa');
             $table->string('subject');
             $table->date('tanggal_pengajuan');
             $table->string('no_doc');
