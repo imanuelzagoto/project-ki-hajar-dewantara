@@ -9,7 +9,6 @@
     Dashboard
 @endsection
 @section('content')
-
     @if ($userrole == 'Super Admin')
         <div class="main-dashboard mt--3">
             <nav aria-label="breadcrumb">
@@ -259,7 +258,7 @@
                                                             <td class="text-left" style="font-weight:500;" nowrap>
                                                                 {{ $pdt->nama_pemohon }}
                                                             </td>
-                                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                            <td class="text-center" style="font-weight:500;" nowrap>
                                                                 {{ $detail->tujuan }}
                                                             </td>
                                                             <td class="text-center" style="font-weight:500;" nowrap>
@@ -306,14 +305,15 @@
                                                         Nama Project
                                                     </th>
                                                     <th class="text-left" style="font-weight: 700;" nowrap>Pemohon</th>
-                                                    <th class="text-left" style="font-weight: 700;" nowrap>User</th>
+                                                    <th class="text-center" style="font-weight: 700;" nowrap>User</th>
                                                     <th class="text-center" style="font-weight: 700;" nowrap>
                                                         Main Contractor
                                                     </th>
                                                     <th class="text-center" style="font-weight: 700;" nowrap>
                                                         Project Manager
                                                     </th>
-                                                    <th class="text-left" style="width:19px; font-weight:700;" nowrap>PIC
+                                                    <th class="text-center" style="width:19px; font-weight:700;" nowrap>
+                                                        PIC
                                                     </th>
                                                     <th class="text-center" style="width:23px; font-weight:700;" nowrap>
                                                         Tanggal</th>

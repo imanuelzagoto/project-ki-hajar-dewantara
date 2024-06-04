@@ -14,6 +14,8 @@ class PengajuanDana extends Model
         'user_id',
         'nama_pemohon',
         'jabatan_pemohon',
+        'nama_pemeriksa',
+        'jabatan_pemeriksa',
         'subject',
         'tanggal_pengajuan',
         'no_doc',

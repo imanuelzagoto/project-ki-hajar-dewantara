@@ -307,13 +307,14 @@
                             Diajukan Oleh,
                         </th>
                         <th style="width:5px; border:none;"></th>
-                        <th colspan="5" class="column_persetujuan">Diperiksa dan Disetujui oleh,</th>
+                        <th colspan="6" class="column_persetujuan">Diperiksa dan Disetujui oleh,</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td rowspan="3" style="text-align: center; width: 60px;"></td>
                         <td style="border:none;"></td>
+                        <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
                         <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
                         <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
                         <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
@@ -334,6 +335,12 @@
                             <span style="padding-left: 3px; font-size:12.5px;" nowrap>{{ $pds->nama_pemohon }}</span>
                         </td>
                         <td style="border:none;"></td>
+                        <td style="padding-left: 3px; font-size:12.5px;">
+                            Nama
+                            <span style="padding-left: 18px;">:</span>
+                            <span style="padding-left: 3px; font-size:12.5px;"
+                                nowrap>{{ $pds->nama_pemeriksa }}</span>
+                        </td>
                         <td style="padding-left: 3px; font-size:12.5px;">
                             Nama
                             <span style="padding-left: 18px;">:</span>
@@ -372,6 +379,12 @@
                         <td style="padding-left: 3px; font-size:12.5px;">
                             Jabatan
                             <span style="padding-left: 7px;">:</span>
+                            <span style="padding-left: 3px; font-size:12.5px;"
+                                nowrap>{{ $pds->jabatan_pemeriksa }}</span>
+                        </td>
+                        <td style="padding-left: 3px; font-size:12.5px;">
+                            Jabatan
+                            <span style="padding-left: 7px;">:</span>
                             <span style="padding-left: 3px; font-size:12.5px;" nowrap>GM</span>
                         </td>
                         <td style="padding-left: 3px; font-size:12.5px;">
@@ -404,6 +417,11 @@
                             </span>
                         </td>
                         <td style="border:none;"></td>
+                        <td style="padding-left: 3px; font-size:12.5px;">
+                            Date
+                            <span style="padding-left: 25.3px;">:</span>
+                            <span style="padding-left: 3px; font-size:12.5px;"nowrap></span>
+                        </td>
                         <td style="padding-left: 3px; font-size:12.5px;">
                             Date
                             <span style="padding-left: 25.3px;">:</span>

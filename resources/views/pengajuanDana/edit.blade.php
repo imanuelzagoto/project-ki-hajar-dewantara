@@ -310,6 +310,21 @@
                                                     value="{{ $pengajuanDana->jabatan_pemohon }}"
                                                     class="form-control bg-light w-100" type="text" required>
                                             </div>
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; left:2px;">Pemeriksa</span>
+                                                <input name="nama_pemeriksa" value="{{ $pengajuanDana->nama_pemeriksa }}"
+                                                    class="form-control bg-light w-100" type="text"
+                                                    style="position: relative; left:1px;" required>
+                                            </div>
+                                            <div class="pr-4 py-2 col-6">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position: relative; right:2px;">Jabatan</span>
+                                                <input name="jabatan_pemeriksa"
+                                                    value="{{ $pengajuanDana->jabatan_pemeriksa }}"
+                                                    class="form-control bg-light w-100"
+                                                    style="position: relative; right:3px;" type="text" required>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
