@@ -14,29 +14,30 @@ class RequestApprovalSeeder extends Seeder
      */
     public function run(): void
     {
-        RequestApproval::create([
-            'nama' => "Endar",
-            'jabatan' => "PM Koordinator"
-        ]);
-        RequestApproval::create([
-            'nama' => "Yani",
-            'jabatan' => "GM"
-        ]);
-        RequestApproval::create([
-            'nama' => "Bayu",
-            'jabatan' => "GM"
-        ]);
-        RequestApproval::create([
-            'nama' => "Sindu Irawan",
-            'jabatan' => "BOD"
-        ]);
-        RequestApproval::create([
-            'nama' => "Victor",
-            'jabatan' => "BOD"
-        ]);
-        RequestApproval::create([
-            'nama' => "Erwin Danuaji",
-            'jabatan' => "BOD"
+        RequestApproval::insert([
+            [
+                'nama' => "Endar",
+                'jabatan' => "PM Koordinator"
+            ],
+            [
+                'nama' => "Yani",
+                'jabatan' => "GM"
+            ],
+            [
+                'nama' => "Bayu",
+                'jabatan' => "GM"
+            ],
+            [
+                'nama' => "Sindu Irawan",
+                'jabatan' => "BOD"
+            ],
+            [
+                'nama' => "Victor",
+                'jabatan' => "BOD"
+            ], [
+                'nama' => "Erwin Danuaji",
+                'jabatan' => "BOD"
+            ]
         ]);
 
         // DB::table('request_approvals')->insert([
