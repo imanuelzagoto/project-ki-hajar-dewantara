@@ -5498,7 +5498,8 @@ label {
 }
 
 .form-control:focus {
-   border-color: #3e93ff
+   /* border-color: #3e93ff */
+   border-color: #4FD1C5;
 }
 
 .form-control-lg,

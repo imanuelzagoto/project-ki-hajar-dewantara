@@ -75,7 +75,7 @@
         <div class="" style="margin-top: 36px;">
             <div class="">
                 <div class="card card-with-scrollbar">
-                    <div class="card-body">
+                    <div class="card-body" style="height: 926px;">
                         <form action="{{ url('/pengajuan-dana/store') }}" method="POST">
                             @csrf
                             <div class="row pr-3 pt-3">
@@ -242,16 +242,21 @@
                                                     style="position: relative; right:3px;" type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; left:2px;">Pemeriksa</span>
-                                                <input name="nama_pemeriksa" class="form-control bg-light w-100"
-                                                    type="text" style="position: relative; left:1px;" required>
+                                                <span for="nama_pemeriksa"
+                                                    class="text-sm font-weight-bold text-form-detail">Pemeriksa</span>
+                                                <select name="pemeriksa[]" id="nama_pemeriksa"
+                                                    class="form-control select2" multiple="multiple"
+                                                    style="width: 100% !important;">
+                                                </select>
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:2px;">Jabatan</span>
-                                                <input name="jabatan_pemeriksa" class="form-control bg-light w-100"
-                                                    style="position: relative; right:3px;" type="text" required>
+                                            <div class="pr-4 py-2 col-6"
+                                                style="position: relative !important; right: 4px !important;">
+                                                <span for="nama_menyetujui"
+                                                    class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
+                                                <select name="persetujuan[]" id="nama_menyetujui"
+                                                    class="form-control select2" multiple="multiple"
+                                                    style="width: 100% !important;">
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -262,7 +267,7 @@
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
                                         <button class="btn btn-save" type="submit"
-                                            style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:5px;">
+                                            style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; top:15px;">
                                             SAVE
                                         </button>
                                     </div>
@@ -274,7 +279,109 @@
             </div>
         </div>
     </div>
+
     <script>
+        $(document).ready(function() {
+            function handleNoResults(data, params) {
+                if (data.length === 0) {
+                    return [{
+                            id: 'no_results',
+                            text: 'Hasil tidak ditemukan',
+                            disabled: true
+                        },
+                        // {
+                        //     id: 'no_results',
+                        //     text: 'Hasil tidak ditemukan',
+                        //     disabled: false
+                        // }
+                    ];
+                }
+                return $.map(data, function(item) {
+                    return {
+                        text: item.text,
+                        id: item.id
+                    };
+                });
+            }
+
+            function initializeSelect2(selector, placeholder, otherSelector) {
+                $(selector).select2({
+                    ajax: {
+                        url: '/get-approval',
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                name: params.term
+                            };
+                        },
+                        processResults: function(data, params) {
+                            return {
+                                results: handleNoResults(data, params)
+                            };
+                        },
+                        cache: true
+                    },
+                    multiple: true,
+                    placeholder: `Pilih ${placeholder}`,
+                    width: '100%'
+                }).on('select2:select', function(e) {
+                    var selectedData = e.params.data.id;
+                    var otherSelect = $(otherSelector);
+                    var otherValues = otherSelect.val();
+
+
+                    // Remove the selected item from the other select
+                    otherValues = otherValues.filter(function(value) {
+                        return value !== selectedData;
+                    });
+                    otherSelect.val(otherValues).trigger('change');
+
+
+                    // if (e.params.data.id === 'add_new') {
+                    //     const newData = prompt(`Masukkan ${placeholder.toLowerCase()}:`);
+                    //     if (newData) {
+                    //         const newOption = new Option(newData, newData, true, true);
+                    //         $(selector).append(newOption).trigger('change');
+                    //     }
+                    // }
+                }).on('select2:unselect', function(e) {
+                    var removedData = e.params.data.id;
+                });
+
+            }
+
+            // Initialize select2 for input "Pemeriksa"
+            initializeSelect2('#nama_pemeriksa', 'Pemeriksa', '#nama_menyetujui');
+
+            // Initialize select2 for input "Menyetujui"
+            initializeSelect2('#nama_menyetujui', 'Menyetujui', '#nama_pemeriksa');
+
+            // handling untuk menghapus pilihan yang sama
+            $('#nama_pemeriksa, #nama_menyetujui').on('change', function() {
+
+                var pemeriksaValue = $('#nama_pemeriksa').val();
+                var menyetujuiValue = $('#nama_menyetujui').val();
+
+                // Jika nilai yang sama dipilih di keduanya, hapus nilai tersebut dari pilihan lainnya
+                if (pemeriksaValue && menyetujuiValue) {
+                    var commonValue = pemeriksaValue.filter(function(value) {
+                        return menyetujuiValue.indexOf(value) !== -1;
+                    });
+
+                    if (commonValue.length > 0) {
+                        // menghapus pilihan dari select data yang sama dikolom lain
+                        $('#nama_menyetujui, #nama_pemeriksa').not(this).val(function(index, value) {
+                            return value.filter(function(val) {
+                                return commonValue.indexOf(val) === -1;
+                            });
+                        }).trigger('change');
+                    }
+                }
+            });
+        });
+
+
         // format huruf kapital pada kolom input terbilang
         document.addEventListener("DOMContentLoaded", function() {
             var inputElement = document.querySelector('input[name="terbilang"]');
@@ -288,27 +395,27 @@
             }
         });
         // window.onload = function() {
-        //     toggleRekeningInput();
+        // toggleRekeningInput();
         // };
 
         // function toggleRekeningInput() {
-        //     var metodePenerimaan = document.getElementById("metode_penerimaan").value;
-        //     var nomorRekeningInput = document.getElementById("nomorRekeningInput");
-        //     var inputTunaiContainer = document.getElementById("input_tunai_container");
-        //     var inputTunai = document.getElementById("inputTunai");
-        //     var containerMethod = document.getElementById("container_method");
+        // var metodePenerimaan = document.getElementById("metode_penerimaan").value;
+        // var nomorRekeningInput = document.getElementById("nomorRekeningInput");
+        // var inputTunaiContainer = document.getElementById("input_tunai_container");
+        // var inputTunai = document.getElementById("inputTunai");
+        // var containerMethod = document.getElementById("container_method");
 
-        //     if (metodePenerimaan === "transfer") {
-        //         nomorRekeningInput.style.display = "block";
-        //         inputTunaiContainer.style.display = "none";
-        //         inputTunai.value = "";
-        //         containerMethod.classList.remove('col-4');
-        //     } else if (metodePenerimaan === "Cash") {
-        //         nomorRekeningInput.style.display = "none";
-        //         inputTunaiContainer.style.display = "block";
-        //         inputTunai.value = "Cash";
-        //         containerMethod.classList.add('col-4');
-        //     }
+        // if (metodePenerimaan === "transfer") {
+        // nomorRekeningInput.style.display = "block";
+        // inputTunaiContainer.style.display = "none";
+        // inputTunai.value = "";
+        // containerMethod.classList.remove('col-4');
+        // } else if (metodePenerimaan === "Cash") {
+        // nomorRekeningInput.style.display = "none";
+        // inputTunaiContainer.style.display = "block";
+        // inputTunai.value = "Cash";
+        // containerMethod.classList.add('col-4');
+        // }
         // }
 
         window.onload = function() {
@@ -380,9 +487,23 @@
         });
 
         function updateClock() {
+            // $('#nama_pemeriksa').select2('5');
+            // console.log(document.getElementById('nama_pemeriksa').value());
+            // $('#nama_pemeriksa').val(["1", "5", "6"]).trigger('change');
+            // console.log($('#nama_pemeriksa').val());
+            // var keyData = ["5", "6"];
+            // var valueData = ["Victor - BOD", "Erwin Danuaji - BOD"];
+            // var selectElement = $('#nama_pemeriksa');
+            // selectElement.val(null).trigger('change'); // Clear existing selections
+            // newValues.forEach(function(value) {
+            //     selectElement.append('<option value="' + keyData + '" selected="selected">' + valueData +
+            //         '</option>');
+            // });
+            // selectElement.trigger('change');
             var now = new Date();
             var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
-            var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober',
+            var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',
+                'Oktober',
                 'November', 'Desember'
             ];
 
@@ -394,7 +515,8 @@
             var dayName = new Intl.DateTimeFormat('id-ID', options).format(now);
 
             var dateTimeString = '<i class="fas fa-calendar"></i>&nbsp;' + dayName + ', ' + now.getDate() + ' ' +
-                months[now.getMonth()] + ' ' + now.getFullYear() + '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
+                months[now.getMonth()] + ' ' + now.getFullYear() +
+                '&nbsp;&nbsp;<i class="far fa-clock"></i>&nbsp;' +
                 formatTime(now);
 
             var datetimeElement = document.getElementById('datetime');
@@ -412,7 +534,8 @@
             var seconds = date.getSeconds();
             hours = hours < 10 ? '0' + hours : hours;
             minutes = minutes < 10 ? '0' + minutes : minutes;
-            seconds = seconds < 10 ? '0' + seconds : seconds;
+            seconds = seconds < 10 ? '0' +
+                seconds : seconds;
             var strTime = hours + ':' + minutes + ':' + seconds;
             return strTime;
         }

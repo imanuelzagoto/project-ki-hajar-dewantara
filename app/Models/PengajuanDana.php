@@ -14,8 +14,8 @@ class PengajuanDana extends Model
         'user_id',
         'nama_pemohon',
         'jabatan_pemohon',
-        'nama_pemeriksa',
-        'jabatan_pemeriksa',
+        'pemeriksa',
+        'persetujuan',
         'subject',
         'tanggal_pengajuan',
         'no_doc',
@@ -51,4 +51,9 @@ class PengajuanDana extends Model
     {
         return $this->hasMany(DetailPengajuanDana::class);
     }
+
+    // public function requestapproval()
+    // {
+    //     return $this->hasMany(RequestApproval::class);
+    // }
 }

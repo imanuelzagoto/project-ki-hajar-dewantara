@@ -9,9 +9,15 @@ use App\Models\PengajuanDana;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\PengajuanDanaResource;
 use App\Models\ItemPengajuanDana;
+use Illuminate\Support\Facades\Session;
 
 class PengajuanDanaController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
@@ -61,8 +67,11 @@ class PengajuanDanaController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
+        $userData = Session::get('user');
+        $userId = $userData['id'];
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
+            'user_id' => $userId,
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'subject' => $request->subject,

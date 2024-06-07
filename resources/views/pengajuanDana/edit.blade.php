@@ -310,20 +310,72 @@
                                                     value="{{ $pengajuanDana->jabatan_pemohon }}"
                                                     class="form-control bg-light w-100" type="text" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; left:2px;">Pemeriksa</span>
-                                                <input name="nama_pemeriksa" value="{{ $pengajuanDana->nama_pemeriksa }}"
-                                                    class="form-control bg-light w-100" type="text"
-                                                    style="position: relative; left:1px;" required>
+                                                <span for="nama_pemeriksa"
+                                                    class="text-sm font-weight-bold text-form-detail">Pemeriksa</span>
+                                                <select name="pemeriksa[]" id="nama_pemeriksa"
+                                                    class="form-control select2" multiple="multiple"
+                                                    style="width: 100% !important;">
+                                                    <option value="1"
+                                                        {{ in_array(1, json_decode($pengajuanDana->pemeriksa)) ? 'selected' : '' }}>
+                                                        Endar - PM Koordinator
+                                                    </option>
+                                                    <option value="2"
+                                                        {{ in_array(2, json_decode($pengajuanDana->pemeriksa)) ? 'selected' : '' }}>
+                                                        Yani - GM
+                                                    </option>
+                                                    <option value="3"
+                                                        {{ in_array(3, json_decode($pengajuanDana->pemeriksa)) ? 'selected' : '' }}>
+                                                        Bayu - GM
+                                                    </option>
+                                                    <option value="4"
+                                                        {{ in_array(4, json_decode($pengajuanDana->pemeriksa)) ? 'selected' : '' }}>
+                                                        Sindu Irawan - BOD
+                                                    </option>
+                                                    <option value="5"
+                                                        {{ in_array(5, json_decode($pengajuanDana->pemeriksa)) ? 'selected' : '' }}>
+                                                        Victor - BOD
+                                                    </option>
+                                                    <option value="6"
+                                                        {{ in_array(6, json_decode($pengajuanDana->pemeriksa)) ? 'selected' : '' }}>
+                                                        Erwin Danuaji - BOD
+                                                    </option>
+                                                </select>
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:2px;">Jabatan</span>
-                                                <input name="jabatan_pemeriksa"
-                                                    value="{{ $pengajuanDana->jabatan_pemeriksa }}"
-                                                    class="form-control bg-light w-100"
-                                                    style="position: relative; right:3px;" type="text" required>
+
+                                            <div class="pr-4 py-2 col-6"
+                                                style="position: relative !important; right: 4px !important;">
+                                                <span for="nama_menyetujui"
+                                                    class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
+                                                <select name="persetujuan[]" id="nama_menyetujui"
+                                                    class="form-control select2" multiple="multiple"
+                                                    style="width: 100% !important;">
+                                                    <option value="1"
+                                                        {{ in_array(1, json_decode($pengajuanDana->persetujuan)) ? 'selected' : '' }}>
+                                                        Endar - PM Koordinator
+                                                    </option>
+                                                    <option value="2"
+                                                        {{ in_array(2, json_decode($pengajuanDana->persetujuan)) ? 'selected' : '' }}>
+                                                        Yani - GM
+                                                    </option>
+                                                    <option value="3"
+                                                        {{ in_array(3, json_decode($pengajuanDana->persetujuan)) ? 'selected' : '' }}>
+                                                        Bayu - GM
+                                                    </option>
+                                                    <option value="4"
+                                                        {{ in_array(4, json_decode($pengajuanDana->persetujuan)) ? 'selected' : '' }}>
+                                                        Sindu Irawan - BOD
+                                                    </option>
+                                                    <option value="5"
+                                                        {{ in_array(5, json_decode($pengajuanDana->persetujuan)) ? 'selected' : '' }}>
+                                                        Victor - BOD
+                                                    </option>
+                                                    <option value="6"
+                                                        {{ in_array(6, json_decode($pengajuanDana->persetujuan)) ? 'selected' : '' }}>
+                                                        Erwin Danuaji - BOD
+                                                    </option>
+                                                </select>
                                             </div>
                                         </div>
                                     </div>
@@ -346,6 +398,107 @@
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            function handleNoResults(data, params) {
+                if (data.length === 0) {
+                    return [{
+                            id: 'no_results',
+                            text: 'Hasil tidak ditemukan',
+                            disabled: true
+                        },
+                        // {
+                        //     id: 'no_results',
+                        //     text: 'Hasil tidak ditemukan',
+                        //     disabled: false
+                        // }
+                    ];
+                }
+                return $.map(data, function(item) {
+                    return {
+                        text: item.text,
+                        id: item.id
+                    };
+                });
+            }
+
+            function initializeSelect2(selector, placeholder, otherSelector) {
+                $(selector).select2({
+                    ajax: {
+                        url: '/get-approval',
+                        dataType: 'json',
+                        delay: 250,
+                        data: function(params) {
+                            return {
+                                name: params.term
+                            };
+                        },
+                        processResults: function(data, params) {
+                            return {
+                                results: handleNoResults(data, params)
+                            };
+                        },
+                        cache: true
+                    },
+                    multiple: true,
+                    placeholder: `Pilih ${placeholder}`,
+                    width: '100%'
+                }).on('select2:select', function(e) {
+                    var selectedData = e.params.data.id;
+                    var otherSelect = $(otherSelector);
+                    var otherValues = otherSelect.val();
+
+
+                    // Remove the selected item from the other select
+                    otherValues = otherValues.filter(function(value) {
+                        return value !== selectedData;
+                    });
+                    otherSelect.val(otherValues).trigger('change');
+
+
+                    // if (e.params.data.id === 'add_new') {
+                    //     const newData = prompt(`Masukkan ${placeholder.toLowerCase()}:`);
+                    //     if (newData) {
+                    //         const newOption = new Option(newData, newData, true, true);
+                    //         $(selector).append(newOption).trigger('change');
+                    //     }
+                    // }
+                }).on('select2:unselect', function(e) {
+                    var removedData = e.params.data.id;
+                });
+
+            }
+
+            // Initialize select2 for input "Pemeriksa"
+            initializeSelect2('#nama_pemeriksa', 'Pemeriksa', '#nama_menyetujui');
+
+            // Initialize select2 for input "Menyetujui"
+            initializeSelect2('#nama_menyetujui', 'Menyetujui', '#nama_pemeriksa');
+
+            // handling untuk menghapus pilihan yang sama
+            $('#nama_pemeriksa, #nama_menyetujui').on('change', function() {
+
+                var pemeriksaValue = $('#nama_pemeriksa').val();
+                var menyetujuiValue = $('#nama_menyetujui').val();
+
+                // Jika nilai yang sama dipilih di keduanya, hapus nilai tersebut dari pilihan lainnya
+                if (pemeriksaValue && menyetujuiValue) {
+                    var commonValue = pemeriksaValue.filter(function(value) {
+                        return menyetujuiValue.indexOf(value) !== -1;
+                    });
+
+                    if (commonValue.length > 0) {
+                        // menghapus pilihan dari select data yang sama dikolom lain
+                        $('#nama_menyetujui, #nama_pemeriksa').not(this).val(function(index, value) {
+                            return value.filter(function(val) {
+                                return commonValue.indexOf(val) === -1;
+                            });
+                        }).trigger('change');
+                    }
+                }
+            });
+        });
+
+
         window.onload = function() {
             setDefaultMetodePenerimaan();
             toggleRekeningInput();

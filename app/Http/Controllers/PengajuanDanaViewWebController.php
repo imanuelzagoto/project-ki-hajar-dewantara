@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Models\PengajuanDana;
-use App\Models\ItemPengajuanDana;
+use App\Models\RequestApproval;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 
@@ -55,6 +55,28 @@ class PengajuanDanaViewWebController extends Controller
         // }
     }
 
+    public function getApproval(Request $request)
+    {
+        $tags_approval = [];
+        $search = $request->input('name');
+
+        $tags_approval = RequestApproval::where('nama', 'LIKE', "%$search%")
+            ->orWhere('jabatan', 'LIKE', "%$search%")
+            ->get(['id', 'nama', 'jabatan']);
+
+
+        // Format data untuk ditampilkan dalam select
+        $formatted_tags_approval = [];
+        foreach ($tags_approval as $tag) {
+            $formatted_tags_approval[] = [
+                'id' => $tag->id,
+                'text' => $tag->nama . ' - ' . $tag->jabatan
+            ];
+        }
+
+        return response()->json($formatted_tags_approval);
+    }
+
     public function create()
     {
         $lastId = PengajuanDana::orderBy('id', 'desc')->first()->id ?? 0;
@@ -62,7 +84,9 @@ class PengajuanDanaViewWebController extends Controller
         $currentYear = date('Y');
         $currentMonth = date('m');
         $no_doc = $nextId . '/FPD/ADM/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
-        return view('pengajuanDana.create', compact('no_doc'));
+        $tags_approval_data = RequestApproval::all();
+        // dd($tags_approval_data);
+        return view('pengajuanDana.create', compact('no_doc', 'tags_approval_data'));
     }
 
     public function store(Request $request)
@@ -70,8 +94,8 @@ class PengajuanDanaViewWebController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_pemohon' => 'required|string',
             'jabatan_pemohon' => 'required|string',
-            'nama_pemeriksa' => 'required|string',
-            'jabatan_pemeriksa' => 'required|string',
+            'pemeriksa' => 'nullable|array',
+            'persetujuan' => 'required|array',
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
@@ -94,21 +118,29 @@ class PengajuanDanaViewWebController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
+
+        // Hanya ambil ID dari tags_approval
+        $pemeriksa_ids = array_map('intval', $request->input('pemeriksa'));
+        $persetujuan_ids = array_map('intval', $request->input('persetujuan'));
+
+        // Mengambil data pengguna dari sesi dan ID
         $userData = Session::get('user');
         $userId = $userData['id'];
+
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
             'user_id' => $userId,
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
-            'nama_pemeriksa' => $request->nama_pemeriksa,
-            'jabatan_pemeriksa' => $request->jabatan_pemeriksa,
+            'pemeriksa' => json_encode($pemeriksa_ids),
+            'persetujuan' => json_encode($persetujuan_ids),
             'subject' => $request->subject,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
 
+        // dd($pengajuanDanas);
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->first();
         $datetime = explode('-', $datas_no_doc->created_at);
         // $no_doc = $pengajuanDanas->id . '/FPD/' . $userrole . '/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
@@ -154,8 +186,10 @@ class PengajuanDanaViewWebController extends Controller
     public function edit($id)
     {
         $pengajuanDana = PengajuanDana::with(['details', 'items'])->find($id);
+        $tags_approval_data = RequestApproval::all();
+        // dd($pengajuanDana->tags_approval);
         if ($pengajuanDana) {
-            return view('pengajuanDana.edit', compact('pengajuanDana'));
+            return view('pengajuanDana.edit', compact('pengajuanDana', 'tags_approval_data'));
         } else {
             return view('page404');
         }
@@ -166,8 +200,8 @@ class PengajuanDanaViewWebController extends Controller
         $validator = Validator::make($request->all(), [
             'nama_pemohon' => 'required|string',
             'jabatan_pemohon' => 'required|string',
-            'nama_pemeriksa' => 'required|string',
-            'jabatan_pemeriksa' => 'required|string',
+            'pemeriksa' => 'nullable|array',
+            'persetujuan' => 'required|array',
             'subject' => 'required|string',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
@@ -191,15 +225,14 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $pengajuanDana = PengajuanDana::find($id);
-        if (!$pengajuanDana) {
-            return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
-        }
-
         $pengajuanDana = PengajuanDana::findOrFail($id);
         if (!$pengajuanDana) {
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
+
+        // Hanya ambil ID dari tags_approval
+        $pemeriksa_ids = array_map('intval', $request->input('pemeriksa'));
+        $persetujuan_ids = array_map('intval', $request->input('persetujuan'));
 
         $userData = Session::get('user');
         $userId = $userData['id'];
@@ -208,8 +241,8 @@ class PengajuanDanaViewWebController extends Controller
             'user_id' => $userId,
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
-            'nama_pemeriksa' => $request->nama_pemeriksa,
-            'jabatan_pemeriksa' => $request->jabatan_pemeriksa,
+            'pemeriksa' => json_encode($pemeriksa_ids),
+            'persetujuan' => json_encode($persetujuan_ids),
             'subject' => $request->subject,
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
