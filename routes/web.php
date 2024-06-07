@@ -121,6 +121,9 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     Route::get('/pengajuan-dana/show/{id}', [PengajuanDanaViewWebController::class, 'show'])->name('pengajuanDana.show');
     Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
 
+    // Route for getApproval
+    Route::get('/get-approval', [PengajuanDanaViewWebController::class, 'getApproval'])->name('getApproval');
+
     // Routes Surat perintah kerja
     Route::get('/surat-perintah-kerja', [SuratPerintahKerjaViewWebController::class, 'index'])->name('surat_perintah_kerja.index');
     Route::get('/surat-perintah-kerja/tambah-perintah', [SuratPerintahKerjaViewWebController::class, 'create'])->name('suratPerintahKerja.create');

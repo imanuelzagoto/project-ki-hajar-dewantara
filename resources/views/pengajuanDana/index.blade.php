@@ -308,7 +308,7 @@
             var tablePengajuanDana = $('#tablePengajuanDana').DataTable({
                 "pageLength": getPageLengthFromLocalStorage('tablePengajuanDana'),
                 // "info": false, // Menonaktifkan pesan info
-                // "paging": false,
+                // "paging": true,
                 initComplete: function() {
                     this.api().columns().every(function() {
                         var column = this;

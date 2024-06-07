@@ -819,15 +819,15 @@ div.dt-container .dt-paging {
     color: inherit
 }
 
-.dt-paging {
+/* .dt-paging {
     text-align: center;
 }
 
 .dt-info {
     display: none;
-}
+} */
 
-div.dt-container .dataTables_scroll {
+*/ div.dt-container .dataTables_scroll {
     clear: both
 }
 
