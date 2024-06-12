@@ -46,6 +46,7 @@ Route::post('/loginservice', function () {
 
     try {
         $loginServiceUrl = env('LOGIN_SERVICE_URL');
+        // dd($loginServiceUrl);                
         $response = Http::post($loginServiceUrl, [
             'email' => request('email'),
             'password' => request('password'),

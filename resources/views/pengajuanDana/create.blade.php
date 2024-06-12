@@ -75,11 +75,11 @@
         <div class="" style="margin-top: 36px;">
             <div class="">
                 <div class="card card-with-scrollbar">
-                    <div class="card-body" style="height: 926px;">
+                    <div class="card-body">
                         <form action="{{ url('/pengajuan-dana/store') }}" method="POST">
                             @csrf
                             <div class="row pr-3 pt-3">
-                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
                                     <div class="font-weight-bold text-lg padding-head pr-teks-pengajuan text-center">
                                         <span class="head-title">Head</span>
                                         <span class="detail-text">Pengaju</span>
@@ -91,22 +91,47 @@
                                                 <input name="subject" class="form-control bg-light w-100" type="text"
                                                     required>
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
+
+                                            <div class="pr-4 py-2 col-6" id="container_revisi">
                                                 <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
                                                 <input name="revisi" class="form-control bg-light w-100" type="text"
                                                     required>
                                             </div>
-                                            <div class="row pr-3 pt-3">
-                                                <div class="pr-4 py-2 col-6" style="display: none;">
-                                                    <input name="tanggal_pengajuan" id="tanggalPengajuan" type="date"
-                                                        class="form-control bg-light w-100" required>
-                                                </div>
+
+                                            <div class="pr-4 py-2 col-6" id="container_tanggalPengajuan"
+                                                style="position: relative; bottom:3px;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Tanggal
+                                                    Pengajuan</span>
+                                                <input name="tanggal_pengajuan" id="tanggalPengajuan" type="date"
+                                                    class="form-control w-100 disabled-input-project" required
+                                                    style="background-color: #D9D9D9;">
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"></span>
-                                                <input name="no_doc" id="noDoc" type="hidden"
-                                                    class="form-control bg-light w-100" required>
+
+                                            <div class="pr-4 py-2 col-6" id="container_method">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="display: block;">Projek</span>
+                                                <select id="kode_Project" name="project" class="form-control bg-light w-100"
+                                                    onchange="onchangeProjectid()" required>
+                                                    <option value="" disabled selected></option>
+                                                    <option value="Non Project">Non Project</option>
+                                                    <option value="Project">Project</option>
+                                                </select>
                                             </div>
+
+                                            <div class="pr-4 py-2 col-4" id="container_selectProject"
+                                                style="display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail"
+                                                    style="position:relative; bottom:2.8px;">Pilih Kode Projek</span>
+                                                <select id="selectProject" name="code"
+                                                    class="form-control bg-light selectProject"
+                                                    style="max-width: 100%; width:100%;">
+                                                    <option value="" disabled selected></option>
+                                                    @foreach ($projects as $p)
+                                                        <option value="{{ $p['code'] }}">{{ $p['code'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -123,7 +148,8 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">
                                                     Tujuan
                                                 </span>
-                                                <input name="tujuan" class="form-control bg-light w-100 disabled-input"
+                                                <input name="tujuan"
+                                                    class="form-control bg-light w-100 disabled-input-project"
                                                     type="text" value="Finance"
                                                     style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
                                                     required>
@@ -146,7 +172,8 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
                                                 <input name="subtotal" id="subtotalInput"
                                                     style="text-align: right; color:black; font-weight:600;"
-                                                    class="form-control bg-light w-100" type="text" required readonly>
+                                                    class="form-control bg-light w-100 disabled-input-project"
+                                                    type="text" required readonly>
                                             </div>
 
                                             <div class="pr-4 py-2 col-3">
@@ -156,7 +183,7 @@
                                                     readonly>
                                             </div>
 
-                                            <div class="pr-4 py-2 col-2" id="container_method">
+                                            <div class="pr-4 py-2 col-2" id="container_penerimaan">
                                                 <span class="text-sm font-weight-bold text-form-detail">Metode
                                                     Penerimaan</span>
                                                 <select id="metode_penerimaan" class="form-control bg-light w-100"
@@ -246,7 +273,7 @@
                                                     class="text-sm font-weight-bold text-form-detail">Pemeriksa</span>
                                                 <select name="pemeriksa[]" id="nama_pemeriksa"
                                                     class="form-control select2" multiple="multiple"
-                                                    style="width: 100% !important;">
+                                                    style="width: 100% !important;" required>
                                                 </select>
                                             </div>
                                             <div class="pr-4 py-2 col-6"
@@ -255,7 +282,7 @@
                                                     class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
                                                 <select name="persetujuan[]" id="nama_menyetujui"
                                                     class="form-control select2" multiple="multiple"
-                                                    style="width: 100% !important;">
+                                                    style="width: 100% !important;" required>
                                                 </select>
                                             </div>
                                         </div>
@@ -279,22 +306,84 @@
             </div>
         </div>
     </div>
-
     <script>
+        // select2 code projek
+        function onchangeProjectid() {
+            const projectDropdown = document.getElementById('kode_Project');
+            const selectedValue = projectDropdown.value;
+            const containerSelectProject = document.getElementById('container_selectProject');
+            const selectProject = document.getElementById(
+                'selectProject'); // Ubah ke native JavaScript untuk mengakses atribut 'required'
+
+            // Handling kolom tanggal pengajuan
+            const columnsToResizeTanggal = [
+                document.getElementById('container_tanggalPengajuan')
+            ];
+            // Handling kolom Kode Projek
+            const columnsToResizeProjek = [
+                document.getElementById('container_method')
+            ];
+
+            if (selectedValue === 'Project') {
+                containerSelectProject.style.display = 'block';
+
+                // Mengubah ukuran kolom tanggal pengajuan menjadi col-4
+                columnsToResizeTanggal.forEach(column => {
+                    column.classList.remove('col-6');
+                    column.classList.add('col-4');
+                });
+
+                // Mengubah ukuran kolom revisi menjadi col-4
+                columnsToResizeProjek.forEach(column => {
+                    column.classList.remove('col-6');
+                    column.classList.add('col-4');
+                });
+
+                // Inisialisasi Select2 single
+                $(selectProject).select2({
+                    placeholder: 'Pilih Kode Projek',
+                    allowClear: true
+                });
+
+                // Mengatur 'required' untuk selectProject
+                selectProject.setAttribute('required', 'required');
+            } else {
+                containerSelectProject.style.display = 'none';
+
+                // Mengembalikan ukuran kolom tanggal pengajuan menjadi col-6
+                columnsToResizeTanggal.forEach(column => {
+                    column.classList.remove('col-4');
+                    column.classList.add('col-6');
+                });
+
+                // Mengembalikan ukuran kolom revisi menjadi col-6
+                columnsToResizeProjek.forEach(column => {
+                    column.classList.remove('col-4');
+                    column.classList.add('col-6');
+                });
+
+                // Hapus Select2 jika tidak terlihat
+                $(selectProject).select2('destroy');
+
+                // Hapus 'required' dari selectProject
+                selectProject.removeAttribute('required');
+            }
+        }
+
+        $(document).ready(function() {
+            $('.selectProject').select2();
+        });
+
+
+        // select2 multiple approval
         $(document).ready(function() {
             function handleNoResults(data, params) {
                 if (data.length === 0) {
                     return [{
-                            id: 'no_results',
-                            text: 'Hasil tidak ditemukan',
-                            disabled: true
-                        },
-                        // {
-                        //     id: 'no_results',
-                        //     text: 'Hasil tidak ditemukan',
-                        //     disabled: false
-                        // }
-                    ];
+                        id: 'no_results',
+                        text: 'Hasil tidak ditemukan',
+                        disabled: true
+                    }, ];
                 }
                 return $.map(data, function(item) {
                     return {
@@ -330,21 +419,12 @@
                     var otherSelect = $(otherSelector);
                     var otherValues = otherSelect.val();
 
-
                     // Remove the selected item from the other select
                     otherValues = otherValues.filter(function(value) {
                         return value !== selectedData;
                     });
                     otherSelect.val(otherValues).trigger('change');
 
-
-                    // if (e.params.data.id === 'add_new') {
-                    //     const newData = prompt(`Masukkan ${placeholder.toLowerCase()}:`);
-                    //     if (newData) {
-                    //         const newOption = new Option(newData, newData, true, true);
-                    //         $(selector).append(newOption).trigger('change');
-                    //     }
-                    // }
                 }).on('select2:unselect', function(e) {
                     var removedData = e.params.data.id;
                 });
@@ -381,7 +461,6 @@
             });
         });
 
-
         // format huruf kapital pada kolom input terbilang
         document.addEventListener("DOMContentLoaded", function() {
             var inputElement = document.querySelector('input[name="terbilang"]');
@@ -394,29 +473,6 @@
                 return str.charAt(0).toUpperCase() + str.slice(1);
             }
         });
-        // window.onload = function() {
-        // toggleRekeningInput();
-        // };
-
-        // function toggleRekeningInput() {
-        // var metodePenerimaan = document.getElementById("metode_penerimaan").value;
-        // var nomorRekeningInput = document.getElementById("nomorRekeningInput");
-        // var inputTunaiContainer = document.getElementById("input_tunai_container");
-        // var inputTunai = document.getElementById("inputTunai");
-        // var containerMethod = document.getElementById("container_method");
-
-        // if (metodePenerimaan === "transfer") {
-        // nomorRekeningInput.style.display = "block";
-        // inputTunaiContainer.style.display = "none";
-        // inputTunai.value = "";
-        // containerMethod.classList.remove('col-4');
-        // } else if (metodePenerimaan === "Cash") {
-        // nomorRekeningInput.style.display = "none";
-        // inputTunaiContainer.style.display = "block";
-        // inputTunai.value = "Cash";
-        // containerMethod.classList.add('col-4');
-        // }
-        // }
 
         window.onload = function() {
             toggleRekeningInput();
@@ -430,7 +486,7 @@
             var namaBankField = document.getElementById("namabank");
             var inputTunaiContainer = document.getElementById("input_tunai_container");
             var inputTunai = document.getElementById("inputTunai");
-            var containerMethod = document.getElementById("container_method");
+            var containerMethod = document.getElementById("container_penerimaan");
             var tujuanContainer = document.getElementById("tujuan_container");
             var lokasiContainer = document.getElementById("lokasi_container");
             var deadlineContainer = document.getElementById("deadline_container");
@@ -453,6 +509,7 @@
                 namaBankInput.style.display = "none";
                 inputTunaiContainer.style.display = "block";
                 inputTunai.value = "Cash";
+                // containerMethod.classList.remove('col-2');
                 containerMethod.classList.add('col-4');
 
                 tujuanContainer.classList.remove('col-5');
@@ -487,19 +544,6 @@
         });
 
         function updateClock() {
-            // $('#nama_pemeriksa').select2('5');
-            // console.log(document.getElementById('nama_pemeriksa').value());
-            // $('#nama_pemeriksa').val(["1", "5", "6"]).trigger('change');
-            // console.log($('#nama_pemeriksa').val());
-            // var keyData = ["5", "6"];
-            // var valueData = ["Victor - BOD", "Erwin Danuaji - BOD"];
-            // var selectElement = $('#nama_pemeriksa');
-            // selectElement.val(null).trigger('change'); // Clear existing selections
-            // newValues.forEach(function(value) {
-            //     selectElement.append('<option value="' + keyData + '" selected="selected">' + valueData +
-            //         '</option>');
-            // });
-            // selectElement.trigger('change');
             var now = new Date();
             var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
             var months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September',

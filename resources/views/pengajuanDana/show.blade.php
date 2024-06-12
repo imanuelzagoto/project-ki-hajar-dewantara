@@ -124,7 +124,6 @@
     @endphp
     @foreach ($pengajuan_danas as $pds)
         @foreach ($pds->details as $detail)
-            {{-- @foreach ($pds->items as $item) --}}
             @php
                 $i += 1;
             @endphp
@@ -205,7 +204,6 @@
                         Rp
                     </span>
                     <span style="padding-left: 11px; font-size: 14.5px;">
-                        {{-- {{ number_format($pds->subtotal, 0, ',', '.') }} --}}
                         {{ number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}
                     </span>
                     <span style="padding-left: 5px; font-size: 14px; font-style:italic;">

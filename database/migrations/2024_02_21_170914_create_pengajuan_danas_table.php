@@ -14,9 +14,11 @@ return new class extends Migration
         Schema::create('pengajuan_danas', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->string('project')->nullable();
+            $table->string('code')->nullable();
             $table->string('nama_pemohon');
             $table->string('jabatan_pemohon');
-            $table->text('pemeriksa')->nullable();
+            $table->text('pemeriksa');
             $table->text('persetujuan');
             $table->string('subject');
             $table->date('tanggal_pengajuan');

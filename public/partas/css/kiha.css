@@ -1476,8 +1476,6 @@ input[type=file]::file-selector-button:hover {
     color: red;
 }
 
-.disabled-input {
+.disabled-input-project {
     pointer-events: none;
-    color: #6c757d;
-    opacity: 1;
 }
