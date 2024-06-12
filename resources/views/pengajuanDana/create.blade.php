@@ -307,13 +307,11 @@
         </div>
     </div>
     <script>
-        // select2 code projek
         function onchangeProjectid() {
             const projectDropdown = document.getElementById('kode_Project');
             const selectedValue = projectDropdown.value;
             const containerSelectProject = document.getElementById('container_selectProject');
-            const selectProject = document.getElementById(
-                'selectProject'); // Ubah ke native JavaScript untuk mengakses atribut 'required'
+            const selectProject = document.getElementById('selectProject');
 
             // Handling kolom tanggal pengajuan
             const columnsToResizeTanggal = [
@@ -325,51 +323,53 @@
             ];
 
             if (selectedValue === 'Project') {
+                // Tampilkan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'block';
 
-                // Mengubah ukuran kolom tanggal pengajuan menjadi col-4
+                // Sesuaikan ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-6');
                     column.classList.add('col-4');
                 });
-
-                // Mengubah ukuran kolom revisi menjadi col-4
                 columnsToResizeProjek.forEach(column => {
                     column.classList.remove('col-6');
                     column.classList.add('col-4');
                 });
 
-                // Inisialisasi Select2 single
+                // Inisialisasi Select2 untuk selectProject
                 $(selectProject).select2({
                     placeholder: 'Pilih Kode Projek',
                     allowClear: true
                 });
 
-                // Mengatur 'required' untuk selectProject
+                // Set atribut 'required' untuk selectProject
                 selectProject.setAttribute('required', 'required');
             } else {
+                // Sembunyikan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'none';
 
-                // Mengembalikan ukuran kolom tanggal pengajuan menjadi col-6
+                // Reset ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
                 });
-
-                // Mengembalikan ukuran kolom revisi menjadi col-6
                 columnsToResizeProjek.forEach(column => {
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
                 });
 
-                // Hapus Select2 jika tidak terlihat
+                // Destroy Select2 instance jika sudah ada
                 $(selectProject).select2('destroy');
 
-                // Hapus 'required' dari selectProject
+                // Hapus atribut 'required' dari selectProject
                 selectProject.removeAttribute('required');
+
+                // Hapus nilai yang dipilih dari selectProject
+                selectProject.value = '';
             }
         }
 
+        // Inisialisasi Select2 pada dokumen siap
         $(document).ready(function() {
             $('.selectProject').select2();
         });

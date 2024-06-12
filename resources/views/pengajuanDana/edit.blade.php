@@ -109,29 +109,38 @@
 
                                             <div class="pr-4 py-2 col-6" id="container_method">
                                                 <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="display: block;">Kode Projek</span>
-                                                <select id="kode_Project" class="form-control bg-light w-100"
+                                                    style="display: block;">Projek</span>
+                                                <select id="kode_Project" name="project" class="form-control bg-light w-100"
                                                     onchange="onchangeProjectid()" required>
-                                                    <option value="" disabled selected></option>
-                                                    <option value="{{ $pengajuanDana->code }}" name="code">Non Project
+                                                    <option value="" disabled
+                                                        {{ $pengajuanDana->project == '' ? 'selected' : '' }}></option>
+                                                    <option value="Non Project"
+                                                        {{ $pengajuanDana->project == 'Non Project' ? 'selected' : '' }}>
+                                                        Non Project
                                                     </option>
-                                                    <option value="Project">Project</option>
+                                                    <option value="Project"
+                                                        {{ $pengajuanDana->project == 'Project' ? 'selected' : '' }}>
+                                                        Project
+                                                    </option>
                                                 </select>
                                             </div>
 
                                             <div class="pr-4 py-2 col-4" id="container_selectProject"
                                                 style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position:relative; bottom:2.8px;">Pilih Kode
-                                                    Projek</span>
-                                                <select id="selectProject" class="form-control bg-light selectProject"
-                                                    name="code" style="max-width: 100%; width:100%;" required>
-                                                    <option value="" disabled selected></option>
+                                                    style="position:relative; bottom:2.8px;">Pilih Kode Projek</span>
+                                                <select id="selectProject" name="code"
+                                                    class="form-control bg-light selectProject"
+                                                    style="max-width: 100%; width:100%;">
+                                                    <option value="{{ $pengajuanDana->code }}" selected>
+                                                        {{ $pengajuanDana->code }}
+                                                    </option>
                                                     @foreach ($projects as $p)
                                                         <option value="{{ $p['code'] }}">{{ $p['code'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +172,8 @@
                                                     <span class="text-sm font-weight-bold text-form-detail">Lokasi</span>
                                                     <select name="lokasi" class="form-control bg-light w-100" required>
                                                         <option value="" disabled selected
-                                                            {{ $detail->lokasi == '' ? 'selected' : '' }}></option>
+                                                            {{ $detail->lokasi == '' ? 'selected' : '' }}>
+                                                        </option>
                                                         <option value="Tebet"
                                                             {{ $detail->lokasi == 'Tebet' ? 'selected' : '' }}>
                                                             Tebet
@@ -206,7 +216,7 @@
                                                         readonly>
                                                 </div>
 
-                                                <div class="pr-4 py-2 col-2" id="container_method">
+                                                <div class="pr-4 py-2 col-2" id="container_penerimaan">
                                                     <span class="text-sm font-weight-bold text-form-detail">Metode
                                                         Penerimaan</span>
                                                     <select id="metode_penerimaan" class="form-control bg-light w-100"
@@ -427,12 +437,13 @@
         </div>
     </div>
     <script>
-        // select2 code projek
+        // Handling select code project
         function onchangeProjectid() {
             const projectDropdown = document.getElementById('kode_Project');
             const selectedValue = projectDropdown.value;
             const containerSelectProject = document.getElementById('container_selectProject');
-            const selectProject = $('#selectProject');
+            const selectProject = document.getElementById('selectProject');
+
             // Handling kolom tanggal pengajuan
             const columnsToResizeTanggal = [
                 document.getElementById('container_tanggalPengajuan')
@@ -441,46 +452,81 @@
             const columnsToResizeProjek = [
                 document.getElementById('container_method')
             ];
+
             if (selectedValue === 'Project') {
+                // Tampilkan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'block';
-                // Mengubah ukuran kolom tanggal pengajuan menjadi col-4
+
+                // Sesuaikan ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-6');
                     column.classList.add('col-4');
                 });
-                // Mengubah ukuran kolom revisi menjadi col-4
                 columnsToResizeProjek.forEach(column => {
                     column.classList.remove('col-6');
                     column.classList.add('col-4');
-                    // column.style.width = '10%';
                 });
-                // Inisialisasi Select2 single
-                selectProject.select2({
+
+                // Inisialisasi Select2 untuk selectProject
+                $(selectProject).select2({
                     placeholder: 'Pilih Kode Projek',
                     allowClear: true
                 });
+
+                // Set atribut 'required' untuk selectProject
+                selectProject.setAttribute('required', 'required');
             } else {
+                // Sembunyikan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'none';
-                // Mengembalikan ukuran kolom tanggal pengajuan menjadi col-6
+
+                // Reset ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
                 });
-                // Mengembalikan ukuran kolom revisi menjadi col-6
                 columnsToResizeProjek.forEach(column => {
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
                 });
-                // Hapus Select2 jika tidak terlihat
-                selectProject.select2('destroy');
+
+                // Destroy Select2 instance jika sudah ada
+                $(selectProject).select2('destroy');
+
+                // Hapus atribut 'required' dari selectProject
+                selectProject.removeAttribute('required');
+
+                // Hapus nilai yang dipilih dari selectProject
+                selectProject.value = '';
             }
         }
-        $(document).ready(function() {
-            $('.selectProject').select2();
-        });
-    </script>
 
-    <script>
+        // Inisialisasi pada saat dokumen siap
+        $(document).ready(function() {
+            // Inisialisasi Select2 pada elemen select dengan class .selectProject
+            $('.selectProject').select2();
+
+            // Panggil onchangeProjectid untuk menetapkan kondisi awal
+            onchangeProjectid();
+
+            // Tambahkan logika tambahan untuk memeriksa nilai awal
+            const projectDropdown = document.getElementById('kode_Project');
+            if (projectDropdown.value === 'Project') {
+                // Jika nilai awal adalah "Project", tampilkan kolom pilihan kode proyek
+                const containerSelectProject = document.getElementById('container_selectProject');
+                containerSelectProject.style.display = 'block';
+
+                // Set atribut 'required' untuk selectProject
+                const selectProject = document.getElementById('selectProject');
+                selectProject.setAttribute('required', 'required');
+
+                // Inisialisasi Select2 untuk selectProject dengan nilai awal jika ada
+                $(selectProject).select2({
+                    placeholder: 'Pilih Kode Projek',
+                    allowClear: true
+                });
+            }
+        });
+
         // select multiple approval
         $(document).ready(function() {
             function handleNoResults(data, params) {
@@ -592,7 +638,7 @@
             var namaBankField = document.getElementById("namabank");
             var inputTunaiContainer = document.getElementById("input_tunai_container");
             var inputTunai = document.getElementById("inputTunai");
-            var containerMethod = document.getElementById("container_method");
+            var containerMethod = document.getElementById("container_penerimaan");
             var tujuanContainer = document.getElementById("tujuan_container");
             var lokasiContainer = document.getElementById("lokasi_container");
             var deadlineContainer = document.getElementById("deadline_container");

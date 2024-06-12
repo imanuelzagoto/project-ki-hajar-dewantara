@@ -144,7 +144,7 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $code = $request->input('code');
+        // $code = $request->input('code');
 
         // Hanya ambil ID dari tags_approval
         $pemeriksa_ids = array_map('intval', $request->input('pemeriksa'));
@@ -158,7 +158,7 @@ class PengajuanDanaViewWebController extends Controller
             'form_number' => 'doc_pd',
             'user_id' => $userId,
             'project' => $request->project,
-            'code' => $code,
+            'code' => $request->code,
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'pemeriksa' => json_encode($pemeriksa_ids),
@@ -232,10 +232,9 @@ class PengajuanDanaViewWebController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-
         $pengajuanDana = PengajuanDana::with(['details', 'items'])->find($id);
         $tags_approval_data = RequestApproval::all();
-        // dd($pengajuanDana->tags_approval);
+        // dd($pengajuanDana);
         if ($pengajuanDana) {
             return view('pengajuanDana.edit', compact('pengajuanDana', 'tags_approval_data', 'projects'));
         } else {
@@ -275,7 +274,7 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        $code = $request->input('code');
+        // $code = $request->input('code');
 
         $pengajuanDana = PengajuanDana::findOrFail($id);
         if (!$pengajuanDana) {
@@ -292,7 +291,7 @@ class PengajuanDanaViewWebController extends Controller
             'form_number' => 'doc_pd',
             'user_id' => $userId,
             'project' => $request->project,
-            'code' => $code,
+            'code' => $request->code,
             'nama_pemohon' => $request->nama_pemohon,
             'jabatan_pemohon' => $request->jabatan_pemohon,
             'pemeriksa' => json_encode($pemeriksa_ids),
@@ -302,6 +301,8 @@ class PengajuanDanaViewWebController extends Controller
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
         ]);
+
+        // dd($pengajuanDana->code);
 
         $pengajuanDana->details()->update([
             'tujuan' => $request->tujuan,

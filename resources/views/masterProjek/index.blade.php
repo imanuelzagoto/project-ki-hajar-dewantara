@@ -100,7 +100,7 @@
                             id="tableProject">
                             <thead>
                                 <tr>
-                                    <th class="text-left" style="font-weight:700;">No</th>
+                                    <th class="text-center" style="font-weight:700;">No</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Nama Projek</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Kode Projek</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Tenggat</th>
@@ -113,10 +113,10 @@
                                 @foreach ($projects as $project)
                                     @php $i += 1; @endphp
                                     <tr class="Column_td">
-                                        <td class="text-left" style="font-weight:500;">{{ $i }}</td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>{{ $project['title'] }}
+                                        <td class="text-center" style="font-weight:500;">{{ $i }}</td>
+                                        <td class="text-left" style="font-weight:500;" nowrap>{{ $project['title'] }}
                                         </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>{{ $project['code'] }}
+                                        <td class="text-left" style="font-weight:500;" nowrap>{{ $project['code'] }}
                                         </td>
                                         <td class="text-center" style="font-weight:500;" nowrap>
                                             {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
@@ -167,7 +167,6 @@
                 }
             });
         }
-
 
 
         // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
@@ -262,8 +261,18 @@
             $('#showEntriesProject').change(function() {
                 var val = $(this).val();
                 tableProject.page.len(val).draw();
-                localStorage.setItem('tableProject', val);
+                localStorage.setItem('tableProject_pageLength', val);
             });
+
+            // // Set value for show entries dropdown on page load
+            // $('#showEntriesProject').val(getPageLengthFromLocalStorage('tableProject'));
+
+            // // fitur show entri
+            // $('#showEntriesProject').change(function() {
+            //     var val = $(this).val();
+            //     tableProject.page.len(val).draw();
+            //     localStorage.setItem('tableProject', val);
+            // });
 
 
             // fitur search

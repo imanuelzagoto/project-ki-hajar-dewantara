@@ -241,7 +241,6 @@
             });
         }
 
-
         // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
         document.addEventListener('DOMContentLoaded', function() {
             // Panggil updateClock secara berkala setiap detik
