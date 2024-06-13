@@ -32,7 +32,11 @@ class PengajuanDana extends Model
 
     public function getTanggalPengajuanAttribute($value)
     {
-        return Carbon::parse($value)->translatedFormat('d/m/y');
+        //  Check if the value is null
+        if ($value === null) {
+            return null;
+        }
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     public function getBatasWaktuAttribute($value)

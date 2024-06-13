@@ -302,8 +302,6 @@ class PengajuanDanaViewWebController extends Controller
             'revisi' => $request->revisi,
         ]);
 
-        // dd($pengajuanDana->code);
-
         $pengajuanDana->details()->update([
             'tujuan' => $request->tujuan,
             'lokasi' => $request->lokasi,
