@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('code')->nullable();
             $table->string('nama_pemohon');
             $table->string('jabatan_pemohon');
-            $table->text('pemeriksa');
+            $table->text('pemeriksa')->nullable();
             $table->text('persetujuan');
             $table->string('subject');
             $table->date('tanggal_pengajuan');

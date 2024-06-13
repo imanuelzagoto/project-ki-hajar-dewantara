@@ -94,9 +94,16 @@
                                                     <option value="" disabled selected>
                                                         -- Pilih Kode Project --
                                                     </option>
-                                                    @foreach ($projects as $p)
+                                                    {{-- @foreach ($projects as $p)
                                                         <option value="{{ $p['code'] }}"
                                                             data-title="{{ $p['title'] }}">{{ $p['code'] }}</option>
+                                                    @endforeach --}}
+                                                    @foreach ($projects as $p)
+                                                        @if ($p['code'] !== null)
+                                                            <option value="{{ $p['code'] }}"
+                                                                data-title="{{ $p['title'] }}">{{ $p['code'] }}
+                                                            </option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
