@@ -8,12 +8,6 @@
     margin-top: 24px;
 }
 
-/* header */
-.disabled_input {
-    pointer-events: none;
-    background: #d9d9d9 !important;
-}
-
 .breadcrumbs {
     padding: 10px;
     font-family: Arial, Helvetica, sans-serif;
@@ -1175,9 +1169,17 @@
     background-color: #4FD1C5;
     width: 200px;
     color: #FFFFFF;
-    font-weight: 700;
-    line-height: 68px;
+    line-height: 29px !important;
     font-family: Helvetica, sans-serif;
+    border-radius: 25px !important;
+    font-weight: bold !important;
+    font-size: 14px !important;
+    position: relative;
+    top: 15px;
+    -webkit-border-radius: 25px !important;
+    -moz-border-radius: 25px !important;
+    -ms-border-radius: 25px !important;
+    -o-border-radius: 25px !important;
 }
 
 
@@ -1472,10 +1474,14 @@ input[type=file]::file-selector-button:hover {
     right: 37px;
 }
 
-.warning {
-    color: red;
-}
-
 .disabled-input-project {
     pointer-events: none;
+}
+
+.icon_calender {
+    display: flex !important;
+    justify-content: flex-end;
+    position: relative;
+    bottom: 25px;
+    right: 22px;
 }

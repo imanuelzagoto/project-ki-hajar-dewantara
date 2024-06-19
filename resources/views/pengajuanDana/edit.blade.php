@@ -75,7 +75,8 @@
             <div class="">
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
-                        <form action="/pengajuan-dana/update/{{ $pengajuanDana->id }}" method="POST">
+                        <form action="/pengajuan-dana/update/{{ $pengajuanDana->id }}" method="POST"
+                            onsubmit="return handleSubmit(event)">
                             @csrf
                             @method('PUT')
                             <div class="row pr-3 pt-3">
@@ -101,11 +102,21 @@
                                                 style="position: relative; bottom:3px;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan</span>
+                                                <?php
+                                                if ($pengajuanDana->tanggal_pengajuan) {
+                                                    $tanggal_pengajuan = date('d/m/y', strtotime(str_replace('/', '-', $pengajuanDana->tanggal_pengajuan)));
+                                                } else {
+                                                    $tanggal_pengajuan = '';
+                                                }
+                                                ?>
                                                 <input name="tanggal_pengajuan"
                                                     value="{{ $pengajuanDana->tanggal_pengajuan }}" id="tanggalPengajuan"
-                                                    type="date" class="form-control w-100 disabled-input-project"
-                                                    required style="background-color: #D9D9D9;">
+                                                    class="form-control w-100 disabled-input-project"
+                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
+                                                    required>
+                                                <i class="fa-regular fa-calendar icon_calender"></i>
                                             </div>
+
 
                                             <div class="pr-4 py-2 col-6" id="container_method">
                                                 <span class="text-sm font-weight-bold text-form-detail"
@@ -162,8 +173,8 @@
                                                         Tujuan
                                                     </span>
                                                     <input name="tujuan"
-                                                        class="form-control bg-light w-100 disabled-input" type="text"
-                                                        value="{{ $detail->tujuan }}"
+                                                        class="form-control bg-light w-100 disabled-input-project"
+                                                        type="text" value="{{ $detail->tujuan }}"
                                                         style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
                                                         required>
                                                 </div>
@@ -203,7 +214,7 @@
                                                     <input name="subtotal"
                                                         value="{{ 'Rp. ' . number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}"
                                                         id="subtotalInput"
-                                                        style="text-align: right; color:black; font-weight:600;"
+                                                        style="background-color: #b7b7b7 !important; color: black; text-align: right; font-weight:500;"
                                                         class="form-control bg-light w-100" type="text" required
                                                         readonly>
                                                 </div>
@@ -211,7 +222,7 @@
                                                     <span
                                                         class="text-sm font-weight-bold text-form-detail">Terbilang</span>
                                                     <input name="terbilang" value="{{ $detail->terbilang }}"
-                                                        style="color:black; font-weight:500;"
+                                                        style="background-color: #b7b7b7 !important; color: black; text-align: right; font-weight:500;"
                                                         class="form-control bg-light w-100" type="text" required
                                                         readonly>
                                                 </div>
@@ -234,7 +245,7 @@
                                                         class="form-control bg-light w-100" type="text"
                                                         placeholder="Masukan nomor rekening"
                                                         value="{{ $detail->non_tunai }}"
-                                                        style="font-size: 10px; font-weight: bold; color: #92A1BB;">
+                                                        style="font-size: 11px; color: black; font-weight: 500;" required>
                                                 </div>
 
                                                 <div id="namaBankInput" class="pr-4 col-2"
@@ -244,7 +255,7 @@
                                                     <input id="namabank" name="nama_bank"
                                                         class="form-control bg-light w-100" type="text"
                                                         placeholder="Bank tujuan" value="{{ $detail->nama_bank }}"
-                                                        style="font-size: 10px; font-weight: bold; color: #92A1BB;">
+                                                        style="font-size: 11px; color: black; font-weight: 500;" required>
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-12">
@@ -316,13 +327,14 @@
                                                         <input name="total"
                                                             class="form-control bg-light text-right total" type="text"
                                                             value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}"
+                                                            style="background-color: #b7b7b7 !important; color:black; font-weight:500;"
                                                             required readonly>
                                                     </div>
                                                     <div class=" py-2 col-1 JS-button-delete">
                                                         <button
                                                             class="btn btn-sm btn-danger font-weight-bold JS-delete-btn"
-                                                            style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;"><i
-                                                                class="fa-solid fa-minus"></i></button>
+                                                            style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;"
+                                                            disabled><i class="fa-solid fa-minus"></i></button>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -423,8 +435,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button class="btn btn-save" type="submit"
-                                            style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:8px;">
+                                        <button id="submitSave" class="btn btn-save" type="submit">
                                             SAVE
                                         </button>
                                     </div>
@@ -437,6 +448,19 @@
         </div>
     </div>
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.JS-delete-btn');
+            if (deleteButtons.length > 1) {
+                deleteButtons.forEach((button, index) => {
+                    if (index === 0) {
+                        button.disabled = true;
+                    } else {
+                        button.disabled = false;
+                    }
+                });
+            }
+        });
+
         // Handling select code project
         function onchangeProjectid() {
             const projectDropdown = document.getElementById('kode_Project');
@@ -454,10 +478,7 @@
             ];
 
             if (selectedValue === 'Project') {
-                // Tampilkan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'block';
-
-                // Sesuaikan ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-6');
                     column.classList.add('col-4');
@@ -467,19 +488,14 @@
                     column.classList.add('col-4');
                 });
 
-                // Inisialisasi Select2 untuk selectProject
                 $(selectProject).select2({
                     placeholder: 'Pilih Kode Projek',
                     allowClear: true
                 });
 
-                // Set atribut 'required' untuk selectProject
                 selectProject.setAttribute('required', 'required');
             } else {
-                // Sembunyikan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'none';
-
-                // Reset ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
@@ -488,38 +504,22 @@
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
                 });
-
-                // Destroy Select2 instance jika sudah ada
                 $(selectProject).select2('destroy');
-
-                // Hapus atribut 'required' dari selectProject
                 selectProject.removeAttribute('required');
-
-                // Hapus nilai yang dipilih dari selectProject
                 selectProject.value = '';
             }
         }
 
         // Inisialisasi pada saat dokumen siap
         $(document).ready(function() {
-            // Inisialisasi Select2 pada elemen select dengan class .selectProject
             $('.selectProject').select2();
-
-            // Panggil onchangeProjectid untuk menetapkan kondisi awal
             onchangeProjectid();
-
-            // Tambahkan logika tambahan untuk memeriksa nilai awal
             const projectDropdown = document.getElementById('kode_Project');
             if (projectDropdown.value === 'Project') {
-                // Jika nilai awal adalah "Project", tampilkan kolom pilihan kode proyek
                 const containerSelectProject = document.getElementById('container_selectProject');
                 containerSelectProject.style.display = 'block';
-
-                // Set atribut 'required' untuk selectProject
                 const selectProject = document.getElementById('selectProject');
                 selectProject.setAttribute('required', 'required');
-
-                // Inisialisasi Select2 untuk selectProject dengan nilai awal jika ada
                 $(selectProject).select2({
                     placeholder: 'Pilih Kode Projek',
                     allowClear: true
@@ -585,24 +585,17 @@
 
             // Initialize select2 for input "Pemeriksa"
             initializeSelect2('#nama_pemeriksa', 'Pemeriksa', '#nama_menyetujui');
-
-            // Initialize select2 for input "Menyetujui"
             initializeSelect2('#nama_menyetujui', 'Menyetujui', '#nama_pemeriksa');
-
-            // handling untuk menghapus pilihan yang sama
             $('#nama_pemeriksa, #nama_menyetujui').on('change', function() {
 
                 var pemeriksaValue = $('#nama_pemeriksa').val();
                 var menyetujuiValue = $('#nama_menyetujui').val();
-
-                // Jika nilai yang sama dipilih di keduanya, hapus nilai tersebut dari pilihan lainnya
                 if (pemeriksaValue && menyetujuiValue) {
                     var commonValue = pemeriksaValue.filter(function(value) {
                         return menyetujuiValue.indexOf(value) !== -1;
                     });
 
                     if (commonValue.length > 0) {
-                        // menghapus pilihan dari select data yang sama dikolom lain
                         $('#nama_menyetujui, #nama_pemeriksa').not(this).val(function(index, value) {
                             return value.filter(function(val) {
                                 return commonValue.indexOf(val) === -1;
@@ -656,6 +649,9 @@
                 lokasiContainer.classList.add('col-4');
                 deadlineContainer.classList.remove('col-2');
                 deadlineContainer.classList.add('col-3');
+                nomorRekeningField.setAttribute('required', 'required');
+                namaBankField.setAttribute('required', 'required');
+
             } else if (metodePenerimaan === "Cash") {
                 nomorRekeningInput.style.display = "none";
                 namaBankInput.style.display = "none";
@@ -669,10 +665,10 @@
                 lokasiContainer.classList.add('col-6');
                 deadlineContainer.classList.remove('col-3');
                 deadlineContainer.classList.add('col-2');
-
-                // handle untuk menghapus value jika memilih select option Cash
-                nomorRekeningField.value = null;
-                namaBankField.value = null;
+                nomorRekeningField.removeAttribute('required');
+                namaBankField.removeAttribute('required');
+                nomorRekeningField.value = "";
+                namaBankField.value = "";
             }
         }
 
@@ -726,6 +722,55 @@
             var strTime = hours + ':' + minutes + ':' + seconds;
             return strTime;
         }
+
+        // handling disabled button save
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = document.getElementById('submitSave');
+
+            // Check form validity
+            if (isFormValid(form)) {
+                submitButton.disabled = true;
+                submitButton.innerText = 'Processing...';
+                console.log('Button has been disabled successfully.');
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            } else {
+                console.log('Form is not valid. Please fill out all required fields.');
+            }
+        }
+
+        function isFormValid(form) {
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let allValid = true;
+
+            requiredFields.forEach((field) => {
+                if (!isVisible(field) || field.value.trim() !== '') {
+                    return;
+                }
+                allValid = false;
+            });
+
+            return allValid;
+        }
+
+        function isVisible(elem) {
+            return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+        }
+
+        // Function to handle button save with click enter
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                document.getElementById('submitSave').click();
+            }
+        }
+        document.addEventListener('keydown', handleEnterKey);
+        document.getElementById('submitSave').addEventListener('click', function() {
+            console.log('Submit Save button clicked');
+        });
     </script>
 @endsection
 
@@ -746,29 +791,34 @@
             // Fungsi untuk menambahkan baris baru
             function addNewRow() {
                 var newRow = `
-                    <div class="row py-2" style="margin-left: 91px;">
+                    <div class="row py-2" style="margin-left: 90px;">
                             <div class="py-2 col-3">
-                                <span class="text-sm font-weight-bold text-form-detail" >Nama item</span>
+                                <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
+                        
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail" >Jumlah</span>
+                                <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
                                 <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style=" left:-11px; text-align:center;" required>
+                        
                             </div>
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail" >Satuan</span>
                                 <input name="satuan[]" class="form-control bg-light w-100" type="text" style=" text-align:center;" required>
+                        
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail" style="">Harga</span>
-                                <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right; " required>
+                                <span class="text-sm font-weight-bold text-form-detail">Harga</span>
+                                <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right;"  required>
+                        
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail" style="">Total</span>
-                                <input name="total" class="form-control bg-light text-right total" type="text"  required readonly>
+                                <span class="text-sm font-weight-bold text-form-detail">Total</span>
+                                <input name="total" class="form-control bg-light text-right total disabled-input-project" type="text" style="background-color: #b7b7b7 !important; color:black; text-align: left; font-weight:400;" required readonly>
+                        
                             </div>
                             <div class=" py-2 col-1 JS-button-delete">
-                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 28px;" disabled><i class="fa-solid fa-minus"></i></button>
+                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;"><i class="fa-solid fa-minus"></i></button>
                             </div>
                         </div>`;
                 $("#itemFields").append(newRow);

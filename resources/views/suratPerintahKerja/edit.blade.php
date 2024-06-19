@@ -23,7 +23,7 @@
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
-                            <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
+                            <a id="saveForm" href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
                                 style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
                                 Surat Perintah Kerja
                             </a>
@@ -341,7 +341,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button class="btn btn-save" type="submit"
+                                        <button id="saveButton" class="btn btn-save" type="submit"
                                             style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:10px;">
                                             SAVE
                                         </button>
@@ -478,13 +478,25 @@
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
             document.getElementById("nama").value = selectedValue;
         }
-
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
             var textarea = event.target;
             var text = textarea.value;
-
-            // Set value textarea dengan teks yang belum diubah
             textarea.value = text;
+        });
+
+        // Handling submit save 
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("saveForm").addEventListener("submit", function(event) {
+                const saveButton = document.getElementById("saveButton");
+                saveButton.disabled = true;
+                saveButton.innerText = "Saving...";
+
+                // Optionally disable all form fields
+                const formElements = event.target.elements;
+                for (let i = 0; i < formElements.length; i++) {
+                    formElements[i].disabled = true;
+                }
+            });
         });
     </script>
 @endsection

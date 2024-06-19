@@ -82,7 +82,6 @@ class PengajuanDanaViewWebController extends Controller
     {
         $token = Session::get('token');
         $curl = curl_init();
-        // dd(env('API_MASTER_PROJECT') . 'https://luna.intek.co.id/api/get-project/');
         curl_setopt_array($curl, array(
             // CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_URL => 'https://luna.intek.co.id/api/get-project/',
@@ -101,27 +100,25 @@ class PengajuanDanaViewWebController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-
         $lastId = PengajuanDana::orderBy('id', 'desc')->first()->id ?? 0;
         $nextId = $lastId + 1;
         $currentYear = date('Y');
         $currentMonth = date('m');
         $no_doc = $nextId . '/FPD/ADM/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
         $tags_approval_data = RequestApproval::all();
-        // dd($projects);
         return view('pengajuanDana.create', compact('no_doc', 'tags_approval_data', 'projects'));
     }
 
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'project' =>  'nullable|string',
+            'project' =>  'required|string',
             'code' => 'nullable|string',
             'nama_pemohon' => 'required|string',
             'jabatan_pemohon' => 'required|string',
             'pemeriksa' => 'nullable|array',
             'persetujuan' => 'required|array',
-            'subject' => 'required|string',
+            'subject' => 'required',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date',
@@ -144,16 +141,17 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // $code = $request->input('code');
+        // Default to empty array if null
+        $pemeriksa = $request->input('pemeriksa', []);
+        $persetujuan = $request->input('persetujuan', []);
 
-        // Hanya ambil ID dari tags_approval
-        $pemeriksa_ids = array_map('intval', $request->input('pemeriksa'));
-        $persetujuan_ids = array_map('intval', $request->input('persetujuan'));
+        // Map pemeriksa dan persetujuan menjadi array integer
+        $pemeriksa_ids = array_map('intval', $pemeriksa);
+        $persetujuan_ids = array_map('intval', $persetujuan);
 
         // Mengambil data pengguna dari sesi dan ID
         $userData = Session::get('user');
         $userId = $userData['id'];
-
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
             'user_id' => $userId,
@@ -169,10 +167,8 @@ class PengajuanDanaViewWebController extends Controller
             'revisi' => $request->revisi,
         ]);
 
-        // dd($pengajuanDanas);
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->first();
         $datetime = explode('-', $datas_no_doc->created_at);
-        // $no_doc = $pengajuanDanas->id . '/FPD/' . $userrole . '/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
         $no_doc = $pengajuanDanas->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->update([
             'no_doc' => $no_doc,
@@ -234,7 +230,6 @@ class PengajuanDanaViewWebController extends Controller
         $projects = json_decode($response, true)['data'];
         $pengajuanDana = PengajuanDana::with(['details', 'items'])->find($id);
         $tags_approval_data = RequestApproval::all();
-        // dd($pengajuanDana);
         if ($pengajuanDana) {
             return view('pengajuanDana.edit', compact('pengajuanDana', 'tags_approval_data', 'projects'));
         } else {
@@ -245,13 +240,13 @@ class PengajuanDanaViewWebController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'project' =>  'nullable|string',
+            'project' =>  'required|string',
             'code' => 'nullable|string',
             'nama_pemohon' => 'required|string',
             'jabatan_pemohon' => 'required|string',
             'pemeriksa' => 'nullable|array',
             'persetujuan' => 'required|array',
-            'subject' => 'required|string',
+            'subject' => 'required',
             'tujuan' => 'required|string',
             'lokasi' => 'required|string',
             'batas_waktu' => 'required|date',
@@ -273,8 +268,6 @@ class PengajuanDanaViewWebController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
-
-        // $code = $request->input('code');
 
         $pengajuanDana = PengajuanDana::findOrFail($id);
         if (!$pengajuanDana) {
@@ -335,7 +328,6 @@ class PengajuanDanaViewWebController extends Controller
         }
 
         $pengajuanDana->update(['subtotal' => $subtotal]);
-
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDana->id)->first();
         $datetime = explode('-', $datas_no_doc->created_at);
         $no_doc = $pengajuanDana->id . '/FPD/ADM/' . $this->numberToRomanRepresentation($datetime[1]) . '/' . $datetime[0];

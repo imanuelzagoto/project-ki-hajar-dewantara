@@ -76,7 +76,8 @@
             <div class="">
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
-                        <form action="{{ url('/pengajuan-dana/store') }}" method="POST">
+                        <form id="form_pengajuandana" action="{{ url('/pengajuan-dana/store') }}" method="POST"
+                            onsubmit="return handleSubmit(event)">
                             @csrf
                             <div class="row pr-3 pt-3">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
@@ -89,9 +90,9 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
                                                 <input name="subject" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                    autofocus required>
+                                                <span id="subject-error" class="error-message"></span>
                                             </div>
-
                                             <div class="pr-4 py-2 col-6" id="container_revisi">
                                                 <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
                                                 <input name="revisi" class="form-control bg-light w-100" type="text"
@@ -104,7 +105,7 @@
                                                     Pengajuan</span>
                                                 <input name="tanggal_pengajuan" id="tanggalPengajuan" type="date"
                                                     class="form-control w-100 disabled-input-project" required
-                                                    style="background-color: #D9D9D9;">
+                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
                                             </div>
 
                                             <div class="pr-4 py-2 col-6" id="container_method">
@@ -112,26 +113,26 @@
                                                     style="display: block;">Projek</span>
                                                 <select id="kode_Project" name="project" class="form-control bg-light w-100"
                                                     onchange="onchangeProjectid()" required>
-                                                    <option value="" disabled selected></option>
-                                                    <option value="Non Project">Non Project</option>
+                                                    {{-- <option value="" disabled selected></option> --}}
                                                     <option value="Project">Project</option>
+                                                    <option value="Non Project">Non Project</option>
                                                 </select>
                                             </div>
 
                                             <div class="pr-4 py-2 col-4" id="container_selectProject"
                                                 style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position:relative; bottom:2.8px;">Pilih Kode Projek</span>
+                                                    style="position:relative; bottom:2.8px;">Pilih Kode
+                                                    Projek</span>
                                                 <select id="selectProject" name="code"
                                                     class="form-control bg-light selectProject"
-                                                    style="max-width: 100%; width:100%;">
+                                                    style="max-width: 100%; width:100%;" required>
                                                     <option value="" disabled selected></option>
                                                     @foreach ($projects as $p)
                                                         <option value="{{ $p['code'] }}">{{ $p['code'] }}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +164,8 @@
                                                 </select>
                                             </div>
                                             <div class="pr-4 py-2 col-3" id="deadline_container">
-                                                <span class="text-sm font-weight-bold text-form-detail">Batas Waktu</span>
+                                                <span class="text-sm font-weight-bold text-form-detail">Batas
+                                                    Waktu</span>
                                                 <input name="batas_waktu" class="form-control bg-light w-100"
                                                     type="date" required>
                                             </div>
@@ -171,16 +173,17 @@
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nominal</span>
                                                 <input name="subtotal" id="subtotalInput"
-                                                    style="text-align: right; color:black; font-weight:600;"
-                                                    class="form-control bg-light w-100 disabled-input-project"
-                                                    type="text" required readonly>
+                                                    class="form-control w-100 disabled-input-project" type="text"
+                                                    style="background-color: #D9D9D9 !important; text-align: right; color:black; font-weight:500;"
+                                                    required readonly>
                                             </div>
 
                                             <div class="pr-4 py-2 col-3">
                                                 <span class="text-sm font-weight-bold text-form-detail">Terbilang</span>
-                                                <input name="terbilang" class="form-control bg-light w-100"
-                                                    style="color:black; font-weight:500;" type="text" required
-                                                    readonly>
+                                                <input name="terbilang"
+                                                    class="form-control bg-light w-100 disabled-input-project"
+                                                    style="background-color: #D9D9D9 !important; text-align: right; color:black; font-weight:500;"
+                                                    type="text" required readonly>
                                             </div>
 
                                             <div class="pr-4 py-2 col-2" id="container_penerimaan">
@@ -188,7 +191,7 @@
                                                     Penerimaan</span>
                                                 <select id="metode_penerimaan" class="form-control bg-light w-100"
                                                     onchange="toggleRekeningInput()">
-                                                    <option value="transfer" name="non_tunai">Transfer</option>
+                                                    <option value="transfer">Transfer</option>
                                                     <option value="Cash" name="tunai">Cash</option>
                                                 </select>
                                             </div>
@@ -200,16 +203,17 @@
                                                 <input id="nomor_rekening" name="non_tunai"
                                                     class="form-control bg-light w-100" type="text"
                                                     placeholder="Masukan nomor rekening"
-                                                    style="font-size: 10px; font-weight: bold; color: #92A1BB;">
+                                                    style="font-size: 11px; color: black; font-weight: 500;" required>
                                             </div>
 
                                             <div id="namaBankInput" class="pr-4 col-2"
                                                 style="margin-top: 8px; display: none;">
-                                                <span class="text-sm font-weight-bold text-form-detail">Nama Bank</span>
+                                                <span class="text-sm font-weight-bold text-form-detail">Nama
+                                                    Bank</span>
                                                 <input id="namabank" name="nama_bank"
                                                     class="form-control bg-light w-100" type="text"
                                                     placeholder="Bank tujuan"
-                                                    style="font-size: 10px; font-weight: bold; color: #92A1BB;">
+                                                    style="font-size: 11px; color: black; font-weight: 500;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-12">
@@ -273,7 +277,7 @@
                                                     class="text-sm font-weight-bold text-form-detail">Pemeriksa</span>
                                                 <select name="pemeriksa[]" id="nama_pemeriksa"
                                                     class="form-control select2" multiple="multiple"
-                                                    style="width: 100% !important;" required>
+                                                    style="width: 100% !important;">
                                                 </select>
                                             </div>
                                             <div class="pr-4 py-2 col-6"
@@ -289,12 +293,10 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button class="btn btn-save" type="submit"
-                                            style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; top:15px;">
+                                        <button id="submitSave" class="btn btn-save" type="submit">
                                             SAVE
                                         </button>
                                     </div>
@@ -306,6 +308,7 @@
             </div>
         </div>
     </div>
+
     <script>
         function onchangeProjectid() {
             const projectDropdown = document.getElementById('kode_Project');
@@ -323,10 +326,8 @@
             ];
 
             if (selectedValue === 'Project') {
-                // Tampilkan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'block';
 
-                // Sesuaikan ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-6');
                     column.classList.add('col-4');
@@ -336,19 +337,14 @@
                     column.classList.add('col-4');
                 });
 
-                // Inisialisasi Select2 untuk selectProject
                 $(selectProject).select2({
                     placeholder: 'Pilih Kode Projek',
                     allowClear: true
                 });
 
-                // Set atribut 'required' untuk selectProject
                 selectProject.setAttribute('required', 'required');
             } else {
-                // Sembunyikan kolom pilihan kode proyek
                 containerSelectProject.style.display = 'none';
-
-                // Reset ukuran kolom
                 columnsToResizeTanggal.forEach(column => {
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
@@ -357,21 +353,23 @@
                     column.classList.remove('col-4');
                     column.classList.add('col-6');
                 });
-
-                // Destroy Select2 instance jika sudah ada
                 $(selectProject).select2('destroy');
-
-                // Hapus atribut 'required' dari selectProject
                 selectProject.removeAttribute('required');
-
-                // Hapus nilai yang dipilih dari selectProject
                 selectProject.value = '';
             }
         }
 
         // Inisialisasi Select2 pada dokumen siap
         $(document).ready(function() {
-            $('.selectProject').select2();
+            $('.selectProject').select2({
+                placeholder: 'Pilih Kode Projek',
+                allowClear: true
+            });
+
+            const projectDropdown = document.getElementById('kode_Project');
+            const selectedValue = projectDropdown.value;
+            onchangeProjectid();
+            $(projectDropdown).trigger('change');
         });
 
 
@@ -433,24 +431,17 @@
 
             // Initialize select2 for input "Pemeriksa"
             initializeSelect2('#nama_pemeriksa', 'Pemeriksa', '#nama_menyetujui');
-
-            // Initialize select2 for input "Menyetujui"
             initializeSelect2('#nama_menyetujui', 'Menyetujui', '#nama_pemeriksa');
 
             // handling untuk menghapus pilihan yang sama
             $('#nama_pemeriksa, #nama_menyetujui').on('change', function() {
-
                 var pemeriksaValue = $('#nama_pemeriksa').val();
                 var menyetujuiValue = $('#nama_menyetujui').val();
-
-                // Jika nilai yang sama dipilih di keduanya, hapus nilai tersebut dari pilihan lainnya
                 if (pemeriksaValue && menyetujuiValue) {
                     var commonValue = pemeriksaValue.filter(function(value) {
                         return menyetujuiValue.indexOf(value) !== -1;
                     });
-
                     if (commonValue.length > 0) {
-                        // menghapus pilihan dari select data yang sama dikolom lain
                         $('#nama_menyetujui, #nama_pemeriksa').not(this).val(function(index, value) {
                             return value.filter(function(val) {
                                 return commonValue.indexOf(val) === -1;
@@ -504,12 +495,14 @@
                 lokasiContainer.classList.add('col-4');
                 deadlineContainer.classList.remove('col-2');
                 deadlineContainer.classList.add('col-3');
+                nomorRekeningField.setAttribute('required', 'required');
+                namaBankField.setAttribute('required', 'required');
+
             } else if (metodePenerimaan === "Cash") {
                 nomorRekeningInput.style.display = "none";
                 namaBankInput.style.display = "none";
                 inputTunaiContainer.style.display = "block";
                 inputTunai.value = "Cash";
-                // containerMethod.classList.remove('col-2');
                 containerMethod.classList.add('col-4');
 
                 tujuanContainer.classList.remove('col-5');
@@ -518,10 +511,10 @@
                 lokasiContainer.classList.add('col-6');
                 deadlineContainer.classList.remove('col-3');
                 deadlineContainer.classList.add('col-2');
-
-                // handle untuk menghapus value jika memilih select option Cash
-                nomorRekeningField.value = null;
-                namaBankField.value = null;
+                nomorRekeningField.removeAttribute('required');
+                namaBankField.removeAttribute('required');
+                nomorRekeningField.value = "";
+                namaBankField.value = "";
             }
         }
 
@@ -533,13 +526,9 @@
         var formattedDate = year + '-' + month + '-' + day;
         document.getElementById('tanggalPengajuan').value = formattedDate;
 
-
-
         // Fungsi Datetime
         document.addEventListener('DOMContentLoaded', function() {
-            // Panggil updateClock secara berkala setiap detik
             setInterval(updateClock, 1000);
-            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
             updateClock();
         });
 
@@ -550,8 +539,6 @@
                 'Oktober',
                 'November', 'Desember'
             ];
-
-            // Set timezone to Asia/Jakarta
             var options = {
                 timeZone: 'Asia/Jakarta',
                 weekday: 'long'
@@ -565,7 +552,6 @@
 
             var datetimeElement = document.getElementById('datetime');
             if (datetimeElement) {
-                // Perbarui innerHTML elemen 'datetime' jika ditemukan
                 datetimeElement.innerHTML = dateTimeString;
             } else {
                 console.error("Datetime element not found.");
@@ -583,6 +569,51 @@
             var strTime = hours + ':' + minutes + ':' + seconds;
             return strTime;
         }
+
+        // handling disabled button save
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = document.getElementById('submitSave');
+
+            // Check form validity
+            if (isFormValid(form)) {
+                submitButton.disabled = true;
+                submitButton.innerText = 'Processing...';
+                console.log('Button has been disabled successfully.');
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            } else {
+                console.log('Form is not valid. Please fill out all required fields.');
+            }
+        }
+
+        function isFormValid(form) {
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let allValid = true;
+
+            requiredFields.forEach((field) => {
+                if (!isVisible(field) || field.value.trim() !== '') {
+                    return;
+                }
+                allValid = false;
+            });
+
+            return allValid;
+        }
+
+        function isVisible(elem) {
+            return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+        }
+
+        // function to handle button save with click enter
+        function handleEnterKey(event) {
+            if (event.key === 'Enter') {
+                document.getElementById('submitSave').click();
+            }
+        }
+        document.addEventListener('keydown', handleEnterKey);
     </script>
 @endsection
 
@@ -606,22 +637,27 @@
                             <div class="py-2 col-3">
                                 <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
+                        
                             </div>
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
                                 <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style=" left:-11px; text-align:center;" required>
+                        
                             </div>
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail" >Satuan</span>
                                 <input name="satuan[]" class="form-control bg-light w-100" type="text" style=" text-align:center;" required>
+                        
                             </div>
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Harga</span>
-                                <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right;" required>
+                                <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right;"  required>
+                        
                             </div>
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Total</span>
-                                <input name="total" class="form-control bg-light text-right total" type="text" required readonly>
+                                <input name="total" class="form-control bg-light text-right total disabled-input-project" type="text" style="background-color: #D9D9D9 !important; text-align: left; color:black; font-weight:500;" required>
+                        
                             </div>
                             <div class=" py-2 col-1 JS-button-delete">
                                 <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;" disabled><i class="fa-solid fa-minus"></i></button>
@@ -632,7 +668,6 @@
             }
 
             function updateTerbilang() {
-                // Mendefinisikan array kata terbilang
                 var terbilang = [
                     '', 'satu ', 'dua ', 'tiga ', 'empat ', 'lima ', 'enam ', 'tujuh ', 'delapan ', 'sembilan ',
                     'sepuluh ',
@@ -641,7 +676,6 @@
                     'delapan belas ', 'sembilan belas '
                 ];
 
-                // Fungsi untuk mengonversi angka menjadi terbilang
                 function bilang(n) {
                     if (n < 20) {
                         return terbilang[n];
