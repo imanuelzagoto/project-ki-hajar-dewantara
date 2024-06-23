@@ -6,116 +6,7 @@
     <title>{{ config('app.name') }} | Show Pengajuan Dana</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        th,
-        td {
-            background-color: #ffffff;
-            border: 1px solid #000000;
-            font-weight: 0;
-        }
-
-        .table-header {
-            width: 80px;
-        }
-
-        .text-pengajuan-dana {
-            font-size: 23px;
-            text-align: center;
-            font-weight: bold;
-            vertical-align: top;
-            width: 10px;
-        }
-
-        .text-date-table {
-            font-size: 10px;
-        }
-
-        .coloumn-tanggal-pengajuan {
-            font-size: 14.5px;
-            border-bottom: 0px;
-            width: 120px;
-            padding-left: 3px;
-        }
-
-        .coloumn-no-doc {
-            font-size: 14.5px;
-            border-bottom: 0px;
-            border-top: 0px;
-            padding-left: 3px;
-        }
-
-        .column-revisi {
-            border-top: 0px;
-            font-size: 14.5px;
-            padding-left: 3px;
-        }
-
-        .column-subject {
-            width: 266px;
-            font-size: 14.5px;
-            padding-left: 3px;
-        }
-
-        .column_nama_pemohon {
-            font-size: 14.5px;
-            padding-left: 3px;
-        }
-
-        .data_tujuan {
-            font-size: 14.5px;
-            padding-left: 8px;
-        }
-
-        .data_lokasi {
-            font-size: 14.5px;
-            padding-left: 8px;
-        }
-
-        .data_batas_waktu {
-            font-size: 14.5px;
-            padding-left: 8px;
-        }
-
-        .data_nominal {
-            font-size: 14.5px;
-            padding-left: 8px;
-        }
-
-        .data_no_rekening {
-            font-size: 14.5px;
-            padding-left: 8px;
-        }
-
-        .data_catatan {
-            font-size: 14.5px;
-            padding-left: 8px;
-        }
-
-        .teks_drafting {
-            font-size: 14.5px;
-            padding-left: 8px;
-        }
-
-        .column-diajukan {
-            font-size: 14.5px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .column_persetujuan {
-            font-size: 14.5px;
-            text-align: center;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="pdf.css">
 </head>
 
 <body>
@@ -135,7 +26,6 @@
                             <th colspan="3" rowspan="3" class="text-pengajuan-dana">FORM PENGAJUAN DANA</th>
                             <th class="coloumn-tanggal-pengajuan">Date</th>
                             <th style="width: 150px; padding-left:3px; font-size:14.5px;">
-                                {{-- {{ $pds->tanggal_pengajuan }} --}}
                                 {{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->translatedFormat('d F Y') }}
                             </th>
                         </tr>
@@ -153,86 +43,120 @@
                     </tbody>
                 </table>
             </div>
-            <br>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th class="column-subject">
-                            Subject
-                            <span style="padding-left: 200px;">:</span>
-                        </th>
-                        <th style="padding-left:3px; font-size:14.5px;">{{ $pds->subject }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="column_nama_pemohon">
-                            Nama Pemohon
-                            <span style="padding-left: 143.5px;">:</span>
-                        </td>
-                        <td style="padding-left:3px; font-size:14.5px;">{{ $pds->nama_pemohon }}</td>
-                    </tr>
-                </tbody>
-            </table>
-            <br>
+            <div class="acc_pengajuan_dana" style="position: relative; bottom:0.5%;">
+                <span style="font-size: 13px; font-weight:bold; position: relative; top:1.7%; left:1%;">ACC :</span>
+                @php
+                    $hasData = false;
+                @endphp
+                <ul>
+                    @foreach ($pengajuan_danas as $pds)
+                        @php
+                            $pemeriksa_ids = json_decode($pds->pemeriksa, true);
+                        @endphp
 
-            <div class="form_list_pengajuan_dana">
-                <div class="data_tujuan">
-                    1.
-                    <span style="padding-left: 3px; font-size: 14.5px;">Tujuan</span>
-                    <span style="padding-left: 181.8px; font-size: 14.5px;">:</span>
-                    <span style="padding-left: 10px; font-size: 14.5px;">{{ $detail->tujuan }}</span>
-                </div>
-                <div class="data_lokasi">
-                    2.
-                    <span style="padding-left: 4px; font-size: 14.5px;">Lokasi</span>
-                    <span style="padding-left: 183px; font-size: 14.5px;">:</span>
-                    <span style="padding-left: 9px; font-size: 14.5px;">{{ $detail->lokasi }}</span>
-                </div>
-                <div class="data_batas_waktu">
-                    3.
-                    <span style="padding-left: 3px; font-size: 14.5px;">Jangka waktu permohonan</span>
-                    <span style="padding-left: 52.2px; font-size: 14.5px;">:</span>
-                    <span style="padding-left: 6px; font-size: 14.5px;">
-                        {{ \Carbon\Carbon::parse($detail->batas_waktu)->translatedFormat('d F Y') }}
-                    </span>
-                </div>
-                <div class="data_nominal">
-                    4.
-                    <span style="padding-left: 3px; font-size: 14.5px;">Dana yang dibutuhkan</span>
-                    <span style="padding-left: 81.2px; font-size: 14.5px;">:</span>
-                    <span style="padding-left: 12px; font-size: 14.5px;">
-                        Rp
-                    </span>
-                    <span style="padding-left: 11px; font-size: 14.5px;">
-                        {{ number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}
-                    </span>
-                    <span style="padding-left: 5px; font-size: 14px; font-style:italic;">
-                        {{ ucfirst($detail->terbilang) }}
-                    </span>
-                </div>
-                <div class="data_no_rekening">
-                    5.
-                    <span style="padding-left: 4px; font-size: 14.5px;">No. Rekening</span>
-                    <span style="padding-left: 137.6px; font-size: 14.5px;">:</span>
-                    <span style="padding-left: 6px; font-size: 14.5px; font-weight:bold;">
-                        @if ($detail->tunai)
-                            {{ $detail->tunai }}
-                        @elseif ($detail->non_tunai)
-                            {{ $detail->non_tunai }}
+                        @if (is_array($pemeriksa_ids) && count($pemeriksa_ids) > 0)
+                            @foreach ($pemeriksa_ids as $id)
+                                @php
+                                    $approvalData = $tags_approval_data->firstWhere('id', $id);
+                                @endphp
+
+                                @if ($approvalData)
+                                    @php
+                                        $hasData = true;
+                                    @endphp
+                                    <li style="font-size: 13px; position: relative; left:3%; top:1px;">
+                                        {{ $approvalData->nama }} - {{ $approvalData->jabatan }}
+                                    </li>
+                                @endif
+                            @endforeach
                         @endif
-                    </span>
-                </div>
-                <div class="data_catatan">
-                    6.
-                    <span style="padding-left: 4px; font-size: 14.5px;">Catatan</span>
-                    <span style="padding-left: 175px; font-size: 14.5px;">:</span>
-                    <span style="padding-left: 9px; font-size: 14.5px;">{{ $detail->catatan }}</span>
-                </div>
+                    @endforeach
+                    @if (!$hasData)
+                        <li style="font-size: 13px; position: relative; left:3%;">-</li>
+                    @endif
+                </ul>
             </div>
 
-            <div class="items">
+            <div class="head_pengajuan_dana">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="column-subject">
+                                Subject
+                                <span style="padding-left: 200px;">:</span>
+                            </th>
+                            <th style="padding-left:3px; font-size:14.5px;">{{ $pds->subject }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="column_nama_pemohon">
+                                Nama Pemohon
+                                <span style="padding-left: 143.5px;">:</span>
+                            </td>
+                            <td style="padding-left:3px; font-size:14.5px;">{{ $pds->nama_pemohon }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="detail_pengajuan_dana">
+                <ol style="position: relative; right:2%;">
+                    <li class="tujuan">
+                        <span class="label_tujuan">Tujuan</span>
+                        <span style="position: relative; left: 17.2%;">:</span>
+                        <span class="nilai_tujuan" style="position: relative; left:18.2%;">{{ $detail->tujuan }}</span>
+                    </li>
+
+                    <li class="lokasi">
+                        <span class="label_lokasi">Lokasi</span>
+                        <span style="position: relative; left: 17.4%;">:</span>
+                        <span class="nilai_lokasi" style="position: relative; left:18.4%;">{{ $detail->lokasi }}</span>
+                    </li>
+
+                    <li class="jangka_waktu">
+                        <span class="label_jangka_waktu">Jangka Waktu Permohonan</span>
+                        <span style="position: relative; left: 4.5%;">:</span>
+                        <span class="nilai_jangka_waktu"
+                            style="position: relative; left:5.5%;">{{ \Carbon\Carbon::parse($detail->batas_waktu)->translatedFormat('d F Y') }}</span>
+                    </li>
+
+                    <li class="nominal">
+                        <span class="label_nominal">Dana yang dibutuhkan</span>
+                        <span style="position: relative; left: 7.7%;">:</span>
+                        <span style="position: relative; left:9.3%;">Rp</span>
+                        <span class="nilai_nominal" style="position: relative; left:10.7%;">
+                            {{ number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}</span>
+                        <span class="nilai_terbilang"
+                            style="position: relative; left:11.8%; font-size: 14px; font-style:italic;">
+                            {{ ucfirst($detail->terbilang) }}
+                        </span>
+                    </li>
+
+                    <li class="nomor_rekening">
+                        <span class="label_rekening">No. Rekening</span>
+                        <span style="position: relative; left: 13.1%;">:</span>
+                        <span class="nilai_lokasi" style="position: relative; left: 13.7%; font-weight:bold;">
+                            @if ($detail->tunai)
+                                {{ $detail->tunai }}
+                            @elseif ($detail->non_tunai)
+                                {{ $detail->non_tunai }}
+                            @endif
+                        </span>
+                    </li>
+
+                    <li class="catatan">
+                        <span class="label_catatan">Catatan</span>
+                        <span style="position: relative; left: 16.6%;">:</span>
+                        <span class="nilai_catatan" style="position: relative; left: 17.2%;">
+                            {{ $detail->catatan }}
+                        </span>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="items_pengajuan_dana">
                 <table>
                     <thead>
                         <tr>
@@ -248,7 +172,6 @@
 
                         </tr>
                     </thead>
-                    {{-- style="page-break-before: always; display: table-header-group;" --}}
                     <thead>
                         <tr>
                             <th colspan="2" rowspan="2" style="text-align: center; padding-bottom:10px;">
@@ -306,7 +229,30 @@
                 </div>
             </div>
             <br>
-            <div class="footer" style="page-break-inside: avoid;">
+
+            @php
+                $pds = $pengajuan_danas->first();
+                $persetujuanIds = json_decode($pds->persetujuan, true);
+                $pemeriksaIds = json_decode($pds->pemeriksa, true);
+                $approvalData = [];
+
+                foreach ($tags_approval_data as $approval) {
+                    if (in_array($approval->id, $persetujuanIds)) {
+                        $approvalData[$approval->id] = [
+                            'nama' => $approval->nama,
+                            'jabatan' => $approval->jabatan,
+                        ];
+                    }
+                }
+            @endphp
+
+            @php
+                $totalCols = 6;
+                $activeCols = count($approvalData);
+                $colspan = $totalCols - ($totalCols - $activeCols);
+            @endphp
+
+            <div class="approval_pengajuan_dana" style="page-break-inside: avoid;">
                 <table>
                     <thead>
                         <tr>
@@ -314,20 +260,18 @@
                                 Diajukan Oleh,
                             </th>
                             <th style="width:5px; border:none;"></th>
-                            <th colspan="6" class="column_persetujuan">Diperiksa dan Disetujui oleh,</th>
+                            <th colspan="{{ $colspan }}" class="column_persetujuan">Diperiksa dan Disetujui
+                                oleh,</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td rowspan="3" style="text-align: center; width: 60px;"></td>
+                            <td rowspan="3" style="text-align: center; width: 60px;" id="kolom_pemohon"></td>
                             <td style="border:none;"></td>
-                            <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
-                            <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
-                            <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
-                            <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
-                            <td rowspan="3" style="text-align: center; height:80px; width:60px;"></td>
-                            <td rowspan="3" style="text-align: center; height:60px; width:60px;"></td>
-
+                            @foreach ($approvalData as $id => $data)
+                                <td rowspan="3" style="text-align: center; height:80px; width:60px;"
+                                    id="id_{{ $id }}"></td>
+                            @endforeach
                         </tr>
                         <tr>
                             <td style="border:none;"></td>
@@ -336,130 +280,458 @@
                             <td style="border:none;"></td>
                         </tr>
                         <tr>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Nama
-                                <span style="padding-left: 20px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;"
-                                    nowrap>{{ $pds->nama_pemohon }}</span>
-                            </td>
-                            <td style="border:none;"></td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Nama
-                                <span style="padding-left: 18px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;"
-                                    nowrap>{{ $pds->nama_pemeriksa }}</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Nama
-                                <span style="padding-left: 18px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>Bu Yani</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Nama
-                                <span style="padding-left: 18px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>Bayu</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Nama
-                                <span style="padding-left: 18px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>Sindu Irawan</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Nama
-                                <span style="padding-left: 18px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>Victor</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Nama
-                                <span style="padding-left: 18px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>Erwin Danuaji</span>
+                            <td class="flex-container" style="font-size:12.5px;" id="kolom_nama_pemohon">
+                                <span class="label_nama">Nama</span>
+                                <span class="colon_nama">:</span>
+                                <span class="value_nama" nowrap>{{ $pds->nama_pemohon }}</span>
                             </td>
 
+                            <td style="border:none;"></td>
+
+                            @foreach ($approvalData as $id => $data)
+                                <td style="font-size:12px;">
+                                    <span class="label_nama">Nama</span>
+                                    <span class="colon_nama">:</span>
+                                    <span class="value_nama" nowrap>{{ $data['nama'] }}</span>
+                                </td>
+                            @endforeach
+                        </tr>
+
+                        <tr>
+                            <td class="flex-container" style="font-size:12.5px;" id="kolom_jabatan_pemohon">
+                                <span class="label_jabatan">Jabatan</span>
+                                <span class="colon_jabatan">:</span>
+                                <span class="value_jabatan" nowrap>{{ $pds->jabatan_pemohon }}</span>
+                            </td>
+
+                            <td style="border:none;"></td>
+
+                            @foreach ($approvalData as $id => $data)
+                                <td style="font-size:12px;">
+                                    <span class="label_jabatan">Jabatan</span>
+                                    <span class="colon_jabatan">:</span>
+                                    <span class="value_jabatan" nowrap>{{ $data['jabatan'] }}</span>
+                                </td>
+                            @endforeach
                         </tr>
                         <tr>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Jabatan
-                                <span style="padding-left: 8px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;"
-                                    nowrap>{{ $pds->jabatan_pemohon }}</span>
+                            <td class="flex-container" style="font-size:12.5px;">
+                                <span class="label_date">Date</span>
+                                <span class="colon_date">:</span>
+                                <span class="value_date"
+                                    nowrap>{{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->translatedFormat('d F Y') }}</span>
                             </td>
                             <td style="border:none;"></td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Jabatan
-                                <span style="padding-left: 7px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;"
-                                    nowrap>{{ $pds->jabatan_pemeriksa }}</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Jabatan
-                                <span style="padding-left: 7px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>GM</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Jabatan
-                                <span style="padding-left: 7px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>GM</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Jabatan
-                                <span style="padding-left: 7px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>BOD</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Jabatan
-                                <span style="padding-left: 7px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>BOD</span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Jabatan
-                                <span style="padding-left: 7px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>BOD</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Date
-                                <span style="padding-left: 25.3px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap>
-                                    {{ $pds->tanggal_pengajuan }}
-                                    {{-- {{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->translatedFormat('d F Y') }} --}}
-                                </span>
-                            </td>
-                            <td style="border:none;"></td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Date
-                                <span style="padding-left: 25.3px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;"nowrap></span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Date
-                                <span style="padding-left: 25.3px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;"nowrap></span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Date
-                                <span style="padding-left: 25.3px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Date
-                                <span style="padding-left: 25.3px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Date
-                                <span style="padding-left: 25.3px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
-                            </td>
-                            <td style="padding-left: 3px; font-size:12.5px;">
-                                Date
-                                <span style="padding-left: 25.3px;">:</span>
-                                <span style="padding-left: 3px; font-size:12.5px;" nowrap></span>
-                            </td>
+                            @foreach ($approvalData as $id => $data)
+                                <td style="font-size:12.5px;" id="date_id_{{ $id }}">
+                                    <span class="label_date">Date</span>
+                                    <span class="colon_date_approval">:</span>
+                                    <span class="value_date" nowrap></span>
+                                </td>
+                            @endforeach
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+            {{-- <div class="approval_pengajuan_dana" style="page-break-inside: avoid;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="column-diajukan">
+                                Diajukan Oleh,
+                            </th>
+                            <th style="width:5px; border:none;"></th>
+                            <th colspan="6" class="column_persetujuan">Diperiksa dan Disetujui
+                                oleh,</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td rowspan="3" style="text-align: center; width: 60px;" id="kolom_pemohon"></td>
+                            <td style="border:none;"></td>
+                            <td rowspan="3" style="text-align: center; height:80px; width:60px;" id="id_1">
+                            </td>
+                            <td rowspan="3" style="text-align: center; height:80px; width:60px;" id="id_2">
+                            </td>
+                            <td rowspan="3" style="text-align: center; height:80px; width:60px;" id="id_3">
+                            </td>
+                            <td rowspan="3" style="text-align: center; height:80px; width:60px;" id="id_4">
+                            </td>
+                            <td rowspan="3" style="text-align: center; height:80px; width:60px;" id="id_5">
+                            </td>
+                            <td rowspan="3" style="text-align: center; height:60px; width:60px;" id="id_6">
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td style="border:none;"></td>
+                        </tr>
+                        <tr>
+                            <td style="border:none;"></td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12.5px;" id="kolom_nama_pemohon">
+                                <span style="position: relative; 3%">Nama</span>
+                                <span style="position:relative; left: 9%;">
+                                    :
+                                </span>
+                                <span style="position:relative; left: 6%;" nowrap>
+                                    {{ $pds->nama_pemohon }}
+                                </span>
+                            </td>
+
+                            <td style="border:none;"></td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Nama</span>
+                                <span style="position:relative; left: 9%;">
+                                    :
+                                </span>
+                                <span style="position:relative; left: 6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 1)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->nama }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Nama</span>
+                                <span style="position:relative; left: 9%;">
+                                    :
+                                </span>
+                                <span style="position:relative; left: 6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 2)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->nama }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Nama</span>
+                                <span style="position:relative; left: 9%;">
+                                    :
+                                </span>
+                                <span style="position:relative; left: 6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 3)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->nama }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Nama</span>
+                                <span style="position:relative; left: 9%;">
+                                    :
+                                </span>
+                                <span style="position:relative; left: 6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 4)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->nama }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Nama</span>
+                                <span style="position:relative; left: 9%;">
+                                    :
+                                </span>
+                                <span style="position:relative; left: 6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 5)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->nama }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Nama</span>
+                                <span style="position:relative; left: 9%;">
+                                    :
+                                </span>
+                                <span style="position:relative; left: 6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 6)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->nama }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12.5px;" id="kolom_jabatan_pemohon">
+                                <span style="position: relative; 3%">Jabatan</span>
+                                <span style="position:relative; left: 3.7%;">:</span>
+                                <span style="position: relative; left: 2.6%;" nowrap>
+                                    {{ $pds->jabatan_pemohon }}
+                                </span>
+                            </td>
+                            <td style="border:none;"></td>
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Jabatan</span>
+                                <span style="position:relative; left: 3.7%;">:</span>
+                                <span style="position: relative; left: 2.6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 1)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->jabatan }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Jabatan</span>
+                                <span style="position:relative; left: 3.7%;">:</span>
+                                <span style="position: relative; left: 2.6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 2)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->jabatan }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Jabatan</span>
+                                <span style="position:relative; left: 3.7%;">:</span>
+                                <span style="position: relative; left: 2.6%;" nowrap>
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 3)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->jabatan }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Jabatan</span>
+                                <span style="position:relative; left: 3.7%;">:</span>
+                                <span style="position: relative; left:3%;">
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 4)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->jabatan }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Jabatan</span>
+                                <span style="position:relative; left: 3.7%;">:</span>
+                                <span style="position: relative; left:3%;">
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 5)
+                                            @php
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->jabatan }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+
+                            <td style="font-size:12px;">
+                                <span style="position: relative; 3%">Jabatan</span>
+                                <span style="position:relative; left: 3.7%;">:</span>
+                                <span style="position: relative; left:3%;">
+                                    @php
+                                        $pds = $pengajuan_danas->first();
+                                        $pemeriksaIds = json_decode($pds->pemeriksa, true);
+                                        $persetujuanIds = json_decode($pds->persetujuan, true);
+                                    @endphp
+
+                                    @foreach ($tags_approval_data as $approval)
+                                        @if ($approval->id == 6)
+                                            @php
+                                                $isPemeriksa = in_array($approval->id, $pemeriksaIds);
+                                                $isPersetujuan = in_array($approval->id, $persetujuanIds);
+                                            @endphp
+
+                                            @if ($isPersetujuan)
+                                                {{ $approval->jabatan }}
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="font-size:12.5px;" id="date_pemoho">
+                                <span style="position: relative; 3%">Date</span>
+                                <span style="position:relative; left: 15%;">:</span>
+                                <span style="position: relative; left: 14%;" nowrap>
+                                    {{ \Carbon\Carbon::parse($pds->tanggal_pengajuan)->translatedFormat('d F Y') }}
+                                </span>
+                            </td>
+
+                            <td style="border:none;"></td>
+
+                            <td style="font-size:12.5px;" id="date_id_1">
+                                <span style="position: relative; 3%">Date</span>
+                                <span style="position:relative; left: 14%;">:</span>
+                                <span style="position: relative; left: 14%;" nowrap></span>
+                            </td>
+
+                            <td style="font-size:12.5px;" id="date_id_2">
+                                <span style="position: relative; 3%">Date</span>
+                                <span style="position:relative; left: 14%;">:</span>
+                                <span style="position: relative; left: 14%;" nowrap></span>
+                            </td>
+
+                            <td style="font-size:12.5px;" id="date_id_3">
+                                <span style="position: relative; 3%">Date</span>
+                                <span style="position:relative; left: 14%;">:</span>
+                                <span style="position: relative; left: 14%;" nowrap></span>
+                            </td>
+
+                            <td style="font-size:12.5px;" id="date_id_4">
+                                <span style="position: relative; 3%">Date</span>
+                                <span style="position:relative; left: 14.2%;">:</span>
+                                <span style="position: relative; left: 15%;" nowrap></span>
+                            </td>
+
+                            <td style="font-size:12.5px;" id="date_id_5">
+                                <span style="position: relative; 3%">Date</span>
+                                <span style="position:relative; left: 14%;">:</span>
+                                <span style="position: relative; left: 15%;" nowrap></span>
+                            </td>
+
+                            <td style="font-size:12.5px;" id="date_id_6">
+                                <span style="position: relative; 3%">Date</span>
+                                <span style="position:relative; left: 14%;">:</span>
+                                <span style="position: relative; left: 15%;" nowrap></span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div> --}}
             <br>
             <br>
         @endforeach

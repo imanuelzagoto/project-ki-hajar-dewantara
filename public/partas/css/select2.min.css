@@ -265,13 +265,13 @@
 
 .select2-container--default .select2-selection--multiple {
     background-color: #F8F9FA;
-    border: 1px solid #ebedf2;
+    border: 1px solid #ebedf2 !important;
     border-radius: 4px;
     cursor: text;
     padding-bottom: 5px;
     padding-right: 5px;
     position: relative;
-    height: 40px;
+    height: auto;
 }
 
 .form-controll .select2-container--default .select2-selection--multiple.select2-selection--clearable {

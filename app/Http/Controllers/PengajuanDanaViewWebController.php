@@ -202,7 +202,8 @@ class PengajuanDanaViewWebController extends Controller
     public function show($id)
     {
         $pengajuan_danas = PengajuanDana::with('items', 'details')->where('id', (int)$id)->get();
-        $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas'));
+        $tags_approval_data = RequestApproval::all();
+        $pdf = PDF::loadView('pengajuanDana.show', compact('pengajuan_danas', 'tags_approval_data'));
         $pdf->setPaper(array(0, 0, 899.45, 1080));
         return $pdf->stream();
     }
@@ -274,9 +275,13 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
 
-        // Hanya ambil ID dari tags_approval
-        $pemeriksa_ids = array_map('intval', $request->input('pemeriksa'));
-        $persetujuan_ids = array_map('intval', $request->input('persetujuan'));
+        // Default to empty array if null
+        $pemeriksa = $request->input('pemeriksa', []);
+        $persetujuan = $request->input('persetujuan', []);
+
+        // Map pemeriksa dan persetujuan menjadi array integer
+        $pemeriksa_ids = array_map('intval', $pemeriksa);
+        $persetujuan_ids = array_map('intval', $persetujuan);
 
         $userData = Session::get('user');
         $userId = $userData['id'];

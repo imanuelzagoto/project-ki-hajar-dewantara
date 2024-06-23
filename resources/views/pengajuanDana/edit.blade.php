@@ -401,7 +401,7 @@
                                                     class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
                                                 <select name="persetujuan[]" id="nama_menyetujui"
                                                     class="form-control select2" multiple="multiple"
-                                                    style="width: 100% !important;">
+                                                    style="width: 100% !important;" required>
                                                     <option value="1"
                                                         {{ in_array(1, json_decode($pengajuanDana->persetujuan)) ? 'selected' : '' }}>
                                                         Endar - PM Koordinator

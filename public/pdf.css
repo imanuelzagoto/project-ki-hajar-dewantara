@@ -1,0 +1,153 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+}
+
+th,
+td {
+    background-color: #ffffff;
+    border: 1px solid #000000;
+    font-weight: 0;
+}
+
+.table-header {
+    width: 80px;
+}
+
+.text-pengajuan-dana {
+    font-size: 23px;
+    text-align: center;
+    font-weight: bold;
+    vertical-align: top;
+    width: 10px;
+}
+
+.text-date-table {
+    font-size: 10px;
+}
+
+.coloumn-tanggal-pengajuan {
+    font-size: 14.5px;
+    border-bottom: 0px;
+    width: 120px;
+    padding-left: 3px;
+}
+
+.coloumn-no-doc {
+    font-size: 14.5px;
+    border-bottom: 0px;
+    border-top: 0px;
+    padding-left: 3px;
+}
+
+.column-revisi {
+    border-top: 0px;
+    font-size: 14.5px;
+    padding-left: 3px;
+}
+
+.column-subject {
+    width: 266px;
+    font-size: 14.5px;
+    padding-left: 3px;
+}
+
+.column_nama_pemohon {
+    font-size: 14.5px;
+    padding-left: 3px;
+}
+
+.detail_pengajuan_dana {
+    font-size: 14.5px;
+    padding-left: 8px;
+}
+
+.data_lokasi {
+    font-size: 14.5px;
+    padding-left: 8px;
+}
+
+.data_batas_waktu {
+    font-size: 14.5px;
+    padding-left: 8px;
+}
+
+.data_nominal {
+    font-size: 14.5px;
+    padding-left: 8px;
+}
+
+.data_no_rekening {
+    font-size: 14.5px;
+    padding-left: 8px;
+}
+
+.data_catatan {
+    font-size: 14.5px;
+    padding-left: 8px;
+}
+
+.teks_drafting {
+    font-size: 14.5px;
+    padding-left: 8px;
+}
+
+.column-diajukan {
+    font-size: 14.5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.column_persetujuan {
+    font-size: 14.5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.head_pengajuan_dana {
+    padding-bottom: 2%;
+}
+
+.items_pengajuan_dana {
+    position: relative;
+    bottom: 1%;
+}
+
+.label_pemohon {
+    font-size: 14px;
+    font-weight: bold;
+    vertical-align: middle;
+    position: relative;
+    left: 50px;
+}
+
+.tanda_tangan {
+    border-right: 1px solid black;
+
+    height: 300px;
+}
+
+
+.pemohon {
+    border: 1px solid black;
+    width: 205px;
+}
+
+.colon_nama {
+    padding-left: 14px;
+}
+
+.colon_jabatan {
+    padding-left: 3px;
+}
+
+.colon_date {
+    padding-left: 21px;
+}
+
+.colon_date_approval {
+    padding-left: 19px;
+}
