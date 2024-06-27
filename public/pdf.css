@@ -1,5 +1,6 @@
+/* CSS PENGAJUAN DANA */
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'arial', sans-serif;
 }
 
 table {
@@ -151,3 +152,464 @@ td {
 .colon_date_approval {
     padding-left: 19px;
 }
+
+
+/* CSS SURAT PERINTAH KERJA */
+
+.frame_box_spk {
+    outline: 2px solid black;
+    height: 1230px;
+}
+
+.right_box_position {
+    border-right: 2px solid black;
+    margin-right: 4px;
+    height: 1230px;
+}
+
+.bottom_box_position {
+    border-bottom: 3px solid black;
+    position: relative;
+    top: 143px;
+    width: 950px;
+}
+
+.table_form_project {
+    position: relative;
+    left: 16px;
+    width: 100px;
+    font-size: 16px;
+}
+
+.label_kode_project {
+    border: 1.5px solid black;
+    line-height: normal;
+    width: 245px;
+    padding-left: 5px;
+}
+
+.colon_kode_project {
+    border: 1.5px solid black;
+    line-height: normal;
+    font-weight: normal;
+    width: 15px;
+    padding-left: 5px;
+}
+
+.value_kode_project {
+    border: 1.5px solid black;
+    line-height: normal;
+    padding-left: 5px;
+    width: 283px;
+}
+
+.label_nama_project {
+    border: 1.5px solid black;
+    padding-left: 5px;
+}
+
+.colon_nama_project {
+    border: 1.5px solid black;
+    padding-left: 5px;
+}
+
+.value_nama_project {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 283px;
+}
+
+.label_no_spk {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 163px;
+}
+
+.colon_no_spk {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 11px;
+}
+
+.value_no_spk {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 165px;
+}
+
+.label_user {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 163px;
+}
+
+.colon_user {
+    border: 1.5px solid black;
+    padding-left: 5px;
+}
+
+.value_user {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 283px;
+}
+
+.label_tanggal_spk {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 163px;
+}
+
+.colon_tanggal_spk {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 11px;
+}
+
+.value_tanggal_spk {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 165px;
+}
+
+.label_contractor {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 163px;
+}
+
+.colon_contractor {
+    border: 1.5px solid black;
+    padding-left: 5px;
+}
+
+.value_contractor {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 283px;
+}
+
+.label_prioritas {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 163px;
+}
+
+.colon_prioritas {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 11px;
+}
+
+.value_prioritas {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 165px;
+}
+
+.label_manager_project {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 163px;
+}
+
+.colon_manager_project {
+    border: 1.5px solid black;
+    padding-left: 5px;
+}
+
+.value_manager_project {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 283px;
+}
+
+.label_batas_waktu {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 163px;
+}
+
+.colon_batas_waktu {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 11px;
+}
+
+.value_batas_waktu {
+    border: 1.5px solid black;
+    padding-left: 5px;
+    width: 165px;
+}
+
+.table_approval_spk {
+    width: 933px;
+}
+
+.name_pic {
+    font-family: arial, sans-serif;
+    text-align: right;
+    padding-right: 6%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 13pt;
+    font-weight: bold;
+    color: #000;
+}
+
+.title_company {
+    font-family: arial, sans-serif;
+    color: #1066ad;
+    font-size: 18pt;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.sub-title-spk {
+    font-family: arial, sans-serif;
+    color: #000000;
+    font-size: 18pt;
+    text-align: center;
+    position: relative;
+    bottom: 6px;
+    font-weight: bold;
+}
+
+.Yth {
+    font-family: Arial, sans-serif;
+    padding-left: 140px;
+    font-size: 22px;
+    font-weight: bold;
+    position: relative;
+    bottom: 1px;
+}
+
+.teks_pelaksanaan {
+    font-family: Arial, sans-serif;
+    position: relative;
+    bottom: 7px;
+    left: 290px;
+    font-size: 20px;
+}
+
+.border_horizontal {
+    position: relative;
+    bottom: 40px;
+}
+
+.border_horizontal_bottom {
+    margin-top: 10px;
+
+}
+
+.hr_dokumen {
+    background-color: #000;
+    height: 0.5px;
+    width: 65%;
+    position: relative;
+    left: 42px;
+    top: 2.5%;
+}
+
+
+.border_horizontal_1 {
+    border-bottom: 2px solid black;
+    width: 951px;
+    position: relative;
+    top: 3%;
+}
+
+.border_horizontal_2 {
+    border-bottom: 2px solid black;
+    width: 951px;
+    position: relative;
+    top: 0.8%;
+}
+
+.supporting_documents {
+    position: relative;
+    top: 8px;
+}
+
+.border_horizontal_3 {
+    border-bottom: 2px solid black;
+    width: 951px;
+    position: relative;
+    top: 3%;
+}
+
+.border_horizontal_4 {
+    border-bottom: 2px solid black;
+    width: 951px;
+    position: relative;
+    top: 0.8%;
+}
+
+.detail_spk {
+    position: relative;
+    top: 50px;
+    width: 935px;
+    left: 14.8px;
+}
+
+.jenis_pekerjaan {
+    border: 1.8px solid black;
+    font-size: 15px;
+    text-align: center;
+    line-height: normal;
+    width: 340px;
+    padding-left: .8px;
+    font-weight: bold;
+}
+
+.uraian_pekerjaan {
+    border: 1.5px solid black;
+    font-size: 15px;
+    text-align: center;
+    line-height: normal;
+    padding-left: 16px;
+    font-weight: bold;
+    border-right: none;
+}
+
+.value_jenis_pekerjaan {
+    border: 1.5px solid black;
+    text-align: center;
+    vertical-align: top;
+    height: 250px;
+}
+
+.value_uraian_pekerjaan {
+    border: 1.5px solid black;
+    border-right: none;
+    padding-left: 5px;
+    text-align: left;
+    vertical-align: top;
+    height: 250px;
+}
+
+.approval_spk {
+    position: relative;
+    top: 130px;
+    width: 875px;
+    left: 15px;
+}
+
+.hormat_kami {
+    position: relative;
+    top: 85px;
+    left: 23px;
+}
+
+
+.teks_dokumen_pendukung {
+    padding-left: 2.9%;
+    position: relative;
+    top: 39px;
+}
+
+.teks_file_pendukung {
+    padding-left: 2.9%;
+    position: relative;
+    top: 5%;
+}
+
+.checkbox_brosur .box2 {
+    width: 18px;
+    height: 30px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1.5px solid #000;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox_brosur .box2:checked {
+    background-color: #ffffff;
+}
+
+.checkbox_brosur .box2:checked::after {
+    content: '✓';
+    font-size: 20px;
+    color: #000000;
+    position: relative;
+    bottom: 9px;
+    left: 2px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.checkbox_brosur .box2::before {
+    content: '';
+    display: none;
+}
+
+
+.checkbox_gambar .box1 {
+    width: 25px;
+    height: 30px;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border: 1.5px solid #000;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox_gambar .box1:checked {
+    background-color: #ffffff;
+}
+
+.checkbox_gambar .box1:checked::after {
+    content: '✓';
+    font-size: 20px;
+    color: #000000;
+    position: relative;
+    bottom: 9px;
+    left: 6px;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+}
+
+.checkbox_gambar .box1::before {
+    content: '';
+    display: none;
+}
+
+.form_number_spk {
+    position: relative;
+    top: 143px;
+}
+
+.value_form_number {
+    margin-left: 76%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.page-break {
+    /* page-break-after: always; */
+    page-break-inside: avoid;
+}
+
+/* .image-container {
+    width: 100%;
+    height: auto;
+    text-align: center;
+}
+
+.image-container img {
+    max-width: 100%;
+    height: auto;
+} */

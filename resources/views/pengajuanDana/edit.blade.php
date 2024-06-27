@@ -162,6 +162,7 @@
                                         <span class="head-detail">Detail</span>
                                         <span class="detail-text">Pengaju</span>
                                     </div>
+
                                     <div class="d-block w-100">
                                         @php
                                             $detail = $pengajuanDana->details->first();
@@ -218,6 +219,7 @@
                                                         class="form-control bg-light w-100" type="text" required
                                                         readonly>
                                                 </div>
+
                                                 <div class="pr-4 py-2 col-3">
                                                     <span
                                                         class="text-sm font-weight-bold text-form-detail">Terbilang</span>
@@ -447,6 +449,7 @@
             </div>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const deleteButtons = document.querySelectorAll('.JS-delete-btn');
@@ -570,7 +573,6 @@
                     var selectedData = e.params.data.id;
                     var otherSelect = $(otherSelector);
                     var otherValues = otherSelect.val();
-
 
                     // Remove the selected item from the other select
                     otherValues = otherValues.filter(function(value) {

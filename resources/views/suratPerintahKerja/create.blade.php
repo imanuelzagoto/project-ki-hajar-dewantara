@@ -76,7 +76,8 @@
             <div class="">
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
-                        <form action="{{ url('/surat-perintah-kerja/store') }}" method="POST">
+                        <form action="{{ url('/surat-perintah-kerja/store') }}" enctype="multipart/form-data" method="POST"
+                            onsubmit="return handleSubmit(event)">
                             @csrf
                             <div class="row pr-3 pt-3">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
@@ -140,8 +141,9 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan</span>
                                                 <input id="submission_date" name="submission_date"
-                                                    class="form-control w-100 disabled-input" type="date" required
-                                                    style="background-color: #D9D9D9;">
+                                                    class="form-control w-100 disabled-input-project" type="date"
+                                                    required
+                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
                                             </div>
 
                                             <div class="pr-4 py-2 col-4">
@@ -210,10 +212,11 @@
                                                         <span for="checkbox_brosur" class="text-checkbox">Brosur</span>
                                                     </div>
                                                 </div>
+
                                                 <label for="choosefile" class="drop-container" id="dropcontainer">
-                                                    <span class="drop-title">Drop files here</span>
-                                                    <input name="supporting_document_file" type="file" id="choosefile"
-                                                        multiple onchange="handleFileSelect(this)">
+                                                    <span class="drop-title">Drop files here or click to upload</span>
+                                                    <input name="supporting_document_file[]" type="file"
+                                                        id="choosefile" multiple onchange="handleFileSelect(this)">
                                                 </label>
                                                 <div id="fileList" class="mt-2"></div>
                                             </div>
@@ -286,7 +289,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button id="saveButton" class="btn btn-save" type="submit"
+                                        <button id="submitSave" class="btn btn-save" type="submit"
                                             style="border-radius: 25px; font-weight:bold; font-size: 14px;">
                                             SAVE
                                         </button>
@@ -405,20 +408,87 @@
             textarea.value = text;
         });
 
-        // Handling submit save 
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("saveForm").addEventListener("submit", function(event) {
-                const saveButton = document.getElementById("saveButton");
-                saveButton.disabled = true;
-                saveButton.innerText = "Saving...";
+        // handling disabled button save
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = document.getElementById('submitSave');
 
-                // Optionally disable all form fields
-                const formElements = event.target.elements;
-                for (let i = 0; i < formElements.length; i++) {
-                    formElements[i].disabled = true;
+            // Check form validity
+            if (isFormValid(form)) {
+                submitButton.disabled = true;
+                submitButton.innerText = 'Processing...';
+                console.log('Button has been disabled successfully.');
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            } else {
+                console.log('Form is not valid. Please fill out all required fields.');
+            }
+        }
+
+        function isFormValid(form) {
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let allValid = true;
+
+            requiredFields.forEach((field) => {
+                if (!isVisible(field) || field.value.trim() !== '') {
+                    return;
                 }
+                allValid = false;
             });
+
+            return allValid;
+        }
+
+        function isVisible(elem) {
+            return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+        }
+
+        // function to handle button save with click enter
+        // function handleEnterKey(event) {
+        //     if (event.key === 'Enter') {
+        //         event.preventDefault();
+        //         // document.getElementById('submitSave').click();
+        //     }
+        // }
+        document.addEventListener('keydown', handleEnterKey);
+        document.getElementById('submitSave').addEventListener('click', function() {
+            console.log('Submit Save button clicked');
         });
+    </script>
+
+
+    {{-- handling untuk upload file pdf excel dan word --}}
+    <script>
+        function handleFileSelect(input) {
+            var files = input.files;
+            var fileList = document.getElementById('fileList');
+            var errorMessages = [];
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var fileType = file.type.toLowerCase();
+
+                if (fileType === 'application/pdf' ||
+                    fileType === 'application/msword' ||
+                    fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+                    fileType === 'application/vnd.ms-excel' ||
+                    fileType === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                    errorMessages.push('<span class="error-message">' + file.name +
+                        ' cannot be uploaded. Please choose another file.</span>');
+                }
+            }
+
+            if (errorMessages.length > 0) {
+                var errorMessageHtml = '<div class="alert alert-danger" role="alert">' + errorMessages.join('<br>') +
+                    '</div>';
+                fileList.innerHTML = errorMessageHtml;
+                input.value = '';
+            } else {
+                fileList.innerHTML = '';
+            }
+        }
     </script>
 @endsection
 
@@ -449,7 +519,6 @@
 
             var datetimeElement = document.getElementById('datetime');
             if (datetimeElement) {
-                // Perbarui innerHTML elemen 'datetime' jika ditemukan
                 datetimeElement.innerHTML = dateTimeString;
             } else {
                 console.error("Datetime element not found.");

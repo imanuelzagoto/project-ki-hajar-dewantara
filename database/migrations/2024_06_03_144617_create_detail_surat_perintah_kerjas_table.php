@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('detail_surat_perintah_kerjas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('surat_perintah_kerja_id');
-            $table->string('job_type');
+            $table->text('job_type');
             $table->text('job_description');
             $table->integer('supporting_document_type')->nullable()->default(1);
             $table->string('supporting_document_file')->nullable();

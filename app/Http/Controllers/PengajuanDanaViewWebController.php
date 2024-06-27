@@ -83,7 +83,6 @@ class PengajuanDanaViewWebController extends Controller
         $token = Session::get('token');
         $curl = curl_init();
         curl_setopt_array($curl, array(
-            // CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_URL => 'https://luna.intek.co.id/api/get-project/',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',

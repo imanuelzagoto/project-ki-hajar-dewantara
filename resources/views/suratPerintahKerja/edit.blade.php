@@ -77,7 +77,7 @@
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
                         <form action="/surat-perintah-kerja/update/{{ $suratPerintahKerjas->id }}"
-                            enctype="multipart/form-data" method="POST">
+                            enctype="multipart/form-data" method="POST" onsubmit="return handleSubmit(event)">
                             @csrf
                             @method('PUT')
                             <div class="row pr-3 pt-3">
@@ -178,8 +178,9 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row pr-3 pt-3">
-                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
                                     <div class="font-weight-bold text-lg padding-project pt-form-create text-center">
                                         <span class="head-project" style="margin-left:17px;">Detail</span>
                                         <span class="hide-project">Project</span>
@@ -204,9 +205,7 @@
                                                 </div>
                                                 <div class="pr-4 py-2 col-6">
                                                     <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
-                                                        style="margin-top: 7px;">
-                                                        File Pendukung
-                                                    </div>
+                                                        style="margin-top: 7px;">File Pendukung</div>
                                                     <div class="d-flex">
                                                         <div class="form-checkbox-gambar d-flex">
                                                             <input name="supporting_document_type" type="checkbox"
@@ -234,16 +233,22 @@
                                                         </div>
                                                     </div>
                                                     <label for="choosefile" class="drop-container" id="dropcontainer">
-                                                        <span class="drop-title">Drop files here</span>
-                                                        <input name="supporting_document_file" type="file"
+                                                        <span class="drop-title">Drop files here or click to upload</span>
+                                                        <input name="supporting_document_file[]" type="file"
                                                             id="choosefile" multiple onchange="handleFileSelect(this)">
                                                     </label>
-                                                    {{-- <div id="fileList" class="mt-2"></div> --}}
+
                                                     @if ($detail->supporting_document_file)
-                                                        <p id="fileName">File yang sudah dipilih:
-                                                            {{ $detail->supporting_document_file }}</p>
+                                                        <p id="fileName">Files yang sudah dipilih:</p>
+                                                        <ul>
+                                                            @foreach (json_decode($detail->supporting_document_file) as $filePath)
+                                                                <li>{{ basename($filePath) }}</li>
+                                                            @endforeach
+                                                        </ul>
+                                                    @else
+                                                        <div id="fileList" class="mt-2"></div>
                                                     @endif
-                                                    <!-- Hidden inputs to signal clearing dokumen_pendukung_file and supporting_document_type -->
+
                                                     <input type="hidden" id="supporting_document_file_clear"
                                                         name="supporting_document_file_clear" value="false">
                                                     <input type="hidden" id="supporting_document_type_clear"
@@ -254,6 +259,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row pr-3 pb-2" style="position: relative; bottom:18px;">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                     <div class="font-weight-bold text-lg padding-project pt-form-create text-center">
@@ -341,7 +347,7 @@
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
-                                        <button id="saveButton" class="btn btn-save" type="submit"
+                                        <button id="submitSave" class="btn btn-save" type="submit"
                                             style="border-radius: 25px; font-weight:bold; font-size: 14px; position: relative; bottom:10px;">
                                             SAVE
                                         </button>
@@ -410,9 +416,9 @@
             // Periksa jika lebih dari 3 file yang dipilih
             if (input.files.length > 3) {
                 alert('Anda hanya bisa mengunggah maksimal 3 file.');
-                input.value = ''; // Kosongkan input
+                input.value = '';
             } else {
-                displayFileNames(); // Tampilkan nama file
+                displayFileNames();
             }
 
             var fileInput = input;
@@ -484,19 +490,53 @@
             textarea.value = text;
         });
 
-        // Handling submit save 
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("saveForm").addEventListener("submit", function(event) {
-                const saveButton = document.getElementById("saveButton");
-                saveButton.disabled = true;
-                saveButton.innerText = "Saving...";
+        // handling disabled button save
+        function handleSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const submitButton = document.getElementById('submitSave');
 
-                // Optionally disable all form fields
-                const formElements = event.target.elements;
-                for (let i = 0; i < formElements.length; i++) {
-                    formElements[i].disabled = true;
+            // Check form validity
+            if (isFormValid(form)) {
+                submitButton.disabled = true;
+                submitButton.innerText = 'Processing...';
+                console.log('Button has been disabled successfully.');
+                setTimeout(() => {
+                    form.submit();
+                }, 1000);
+            } else {
+                console.log('Form is not valid. Please fill out all required fields.');
+            }
+        }
+
+        function isFormValid(form) {
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
+            let allValid = true;
+
+            requiredFields.forEach((field) => {
+                if (!isVisible(field) || field.value.trim() !== '') {
+                    return;
                 }
+                allValid = false;
             });
+
+            return allValid;
+        }
+
+        function isVisible(elem) {
+            return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
+        }
+
+        // Function to handle button save with click enter
+        // function handleEnterKey(event) {
+        //     if (event.key === 'Enter') {
+        //         event.preventDefault();
+        //         document.getElementById('submitSave').click();
+        //     }
+        // }
+        // document.addEventListener('keydown', handleEnterKey);
+        document.getElementById('submitSave').addEventListener('click', function() {
+            console.log('Submit Save button clicked');
         });
     </script>
 @endsection

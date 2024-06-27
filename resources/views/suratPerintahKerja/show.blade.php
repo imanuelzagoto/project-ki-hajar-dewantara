@@ -1,6 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,322 +6,172 @@
     <title>{{ config('app.name') }} | Show Surat Perintah Kerja</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
-
-        .box_surat_perintah_kerja {
-            width: 1050px;
-            height: 1240px;
-            border: 2px solid black;
-            right: 13px;
-            position: relative;
-        }
-
-        .right-box-position {
-            border-right: 2px solid black;
-            height: 1240.4px;
-            position: relative;
-            right: 4px;
-            bottom: 5px;
-        }
-
-        .name-pic {
-            font-family: arial, sans-serif;
-            text-align: right;
-            padding-right: 6%;
-            padding-top: 1%;
-            margin-top: 5px;
-            margin-bottom: 5px;
-            font-size: 13pt;
-            font-weight: bold;
-            top: 5px;
-            right: 5px;
-            color: #000;
-        }
-
-        .title_company {
-            font-family: arial, sans-serif;
-            color: #1066ad;
-            font-size: 18pt;
-            text-align: center;
-            margin-bottom: 5px;
-            margin-top: 5px;
-            font-weight: bold;
-        }
-
-        .sub-title-spk {
-            font-family: arial, sans-serif;
-            color: #000000;
-            font-size: 18pt;
-            text-align: center;
-            position: relative;
-            bottom: 6px;
-            font-weight: bold;
-        }
-
-        .Yth {
-            font-family: Arial, sans-serif;
-            padding-left: 18%;
-            font-size: 17pt;
-            font-weight: bold;
-            position: relative;
-            bottom: 20px;
-        }
-
-        .teks-pelaksanaan {
-            font-family: Arial, sans-serif;
-            position: relative;
-            bottom: 27px;
-            left: 32.8%;
-            font-size: 13pt;
-        }
-
-        .border_horizontal_1 {
-            border-bottom: 2px solid black;
-            width: 1044px;
-            position: relative;
-            left: 4px;
-            top: 3%;
-        }
-
-        .border_horizontal_2 {
-            border-bottom: 2px solid black;
-            width: 1044px;
-            position: relative;
-            top: 0.8%;
-        }
-
-        .border_horizontal_3 {
-            border-bottom: 2px solid black;
-            width: 1044px;
-            position: relative;
-            left: 4px;
-            top: 2%;
-        }
-
-        .border_horizontal_4 {
-            border-bottom: 2px solid black;
-            width: 1044px;
-            position: relative;
-            top: 1%;
-        }
-
-        .border_horizontal_5 {
-            border-bottom: 4px solid black;
-            width: 1045px;
-            position: relative;
-            top: 80%;
-            margin-left: 3px;
-        }
-
-        .teks_dokumen_pendukung {
-            padding-left: 2.9%;
-            position: relative;
-            top: 4%;
-        }
-
-        .teks_file_pendukung {
-            padding-left: 2.9%;
-            position: relative;
-            top: 5%;
-        }
-
-        .checkbox_gambar .box1 {
-            width: 30px;
-            height: 30px;
-            -webkit-appearance: none;
-            appearance: none;
-            background-color: #fff;
-            border: 1px solid #000;
-            display: inline-block;
-            position: relative;
-            cursor: pointer;
-        }
-
-        .checkbox_gambar .box1:checked {
-            background-color: #ffffff;
-        }
-
-        .checkbox_gambar .box1:checked::after {
-            content: '✓';
-            font-size: 20px;
-            color: #000000;
-            position: absolute;
-            top: 38%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .checkbox_gambar .box1::before {
-            content: '';
-            display: none;
-        }
-    </style>
+    <link rel="stylesheet" href="pdf.css">
 </head>
+
 
 <body>
     @foreach ($suratPerintahKerjas as $suratPerintahKerja)
-        <div class="box_surat_perintah_kerja">
-            <div class="right-box-position">
-                <div class="name-pic">
-                    <Span>PIC : {{ $suratPerintahKerja->pic }}</Span>
-                </div>
-                <div class="title_company">
-                    <span style="font-family: Times New Roman, Times, serif; ">PT. SOLUSI INTEK INDONESIA</span>
-                </div>
-                <div class="sub-title-spk">
-                    <span style="font-family: Times New Roman, Times, serif; ">SURAT PERINTAH KERJA WORKSHOP</span>
-                </div>
-                <br>
+        <div class="frame_box_spk">
+            <div class="right_box_position">
+                <div class="header_surat_perintah_kerja">
+                    <div class="name_pic">
+                        <Span>PIC : {{ $suratPerintahKerja->pic }}</Span>
+                    </div>
 
-                <div class="Yth">
-                    Kepada Yth
-                    <span style="padding-left:5px;">:</span>
-                    <span style="padding-left:6px;">Workshop Manager</span>
-                </div>
-                <div class="teks-pelaksanaan">
-                    <span style="letter-spacing: 1px;">Mohon dapat dilaksanakan pekerjaan di bawah ini :</span>
+                    <div class="title_company">
+                        <span style="font-family: Times New Roman, Times, serif; ">PT. SOLUSI INTEK INDONESIA</span>
+                    </div>
+
+                    <div class="sub-title-spk">
+                        <span style="font-family: Times New Roman, Times, serif; ">SURAT PERINTAH KERJA
+                            WORKSHOP</span>
+                    </div>
+
+                    <div class="Yth">
+                        Kepada Yth
+                        <span style="padding-left:5px;">:</span>
+                        <span style="padding-left:6px;">Workshop Manager</span>
+                    </div>
+
+                    <div class="teks_pelaksanaan">
+                        <span style="letter-spacing: 1px;">Mohon dapat dilaksanakan pekerjaan di bawah ini :</span>
+                    </div>
                 </div>
 
-                <div class="table-project-spk">
-                    <table
-                        style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px;">
+                <div class="table_project_spk" style="margin-top: 24px;">
+                    <table class="table_form_project">
                         <thead>
                             <tr>
-                                <th style="border: 2px solid black; font-size:19px; line-height:normal; width:308px; padding-left:5px;"
-                                    nowrap>
-                                    Kode Project
-                                </th>
-                                <th style="border: 2px solid black; font-size:19px; line-height:normal; font-weight:normal; width:21px; padding-left:5px;"
-                                    nowrap>
+
+                                <th class="label_kode_project font-weight-bold" nowrap> Kode Project</th>
+                                <th class="colon_kode_project" nowrap>
                                     :
                                 </th>
-                                <th colspan="4"
-                                    style="border: 2px solid black; font-size:19px; line-height:normal; padding-left:5px;"
-                                    nowrap>
+                                <th colspan="4" class="value_kode_project font-weight-bold" nowrap>
                                     {{ $suratPerintahKerja->code }}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>Nama project</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
+                                <td class="label_nama_project" nowrap>Nama project</td>
+                                <td class="colon_nama_project" nowrap>:</td>
+                                <td class="value_nama_project" nowrap>
                                     {{ $suratPerintahKerja->title }}</td>
-                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>
-                                    <span style="font-weight: bold;">NO SPK</span>
-                                </td>
-                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->no_spk }}</td>
+
+                                <td class="label_no_spk" nowrap>NO SPK</td>
+                                <td class="colon_no_spk" nowrap>:</td>
+                                <td class="value_no_spk" nowrap>{{ $suratPerintahKerja->no_spk }}</td>
                             </tr>
+
                             <tr>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>User</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
+                                <td class="label_user" nowrap>User</td>
+                                <td class="colon_user" nowrap>:</td>
+                                <td class="value_user" nowrap>
                                     {{ $suratPerintahKerja->user }}</td>
-                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Tanggal</td>
-                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->submission_date }}</td>
+
+                                <td class="label_tanggal_spk" nowrap>Tanggal</td>
+                                <td class="colon_tanggal_spk" nowrap>:</td>
+                                <td class="value_tanggal_spk" nowrap>{{ $suratPerintahKerja->submission_date }}</td>
                             </tr>
+
                             <tr>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>Main Contractor</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->main_contractor }}</td>
-                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Prioritas
+                                <td class="label_contractor" nowrap>Main Contractor</td>
+                                <td class="colon_contractor" nowrap>:</td>
+                                <td class="value_contractor" nowrap>
+                                    {{ $suratPerintahKerja->main_contractor }}
                                 </td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;">
-                                    {{ $suratPerintahKerja->priority }}</td>
+
+                                <td class="label_prioritas" nowrap>Prioritas</td>
+                                <td class="colon_prioritas" nowrap>:</td>
+                                <td class="value_prioritas" nowrap>{{ $suratPerintahKerja->priority }}</td>
                             </tr>
+
                             <tr>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>Project Manager</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
-                                    {{ $suratPerintahKerja->project_manager }}</td>
-                                <td style="border: 2px solid black; padding-left:5px; width:0.1px;" nowrap>Waktu
-                                    Penyelesaian</td>
-                                <td style="border: 2px solid black; padding-left:5px; width:11px;" nowrap>:</td>
-                                <td style="border: 2px solid black; padding-left:5px;" nowrap>
+                                <td class="label_manager_project" nowrap>Project Manager</td>
+                                <td class="colon_manager_project" nowrap>:</td>
+                                <td class="value_manager_project" nowrap>
+                                    {{ $suratPerintahKerja->project_manager }}
+                                </td>
+
+                                <td class="label_batas_waktu" nowrap>Waktu Penyelesaian</td>
+                                <td class="colon_batas_waktu" nowrap>:</td>
+                                <td class="value_batas_waktu" nowrap>
                                     {{ \Carbon\Carbon::parse($suratPerintahKerja->completion_time)->format('d/m/y') }}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div class="border_horizontal">
-                        <div class="border_horizontal_1">
-                            <div class="border_horizontal_2">
-                            </div>
+                </div>
+
+                <div class="border_horizontal" style="margin-top: 13px">
+                    <div class="border_horizontal_1">
+                        <div class="border_horizontal_2">
+                            @foreach ($suratPerintahKerja->details as $detail)
+                                <div class="supporting_documents">
+                                    <div class="chekbox-dokumen">
+                                        <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
+                                        <span class="checkbox_gambar" style="position: relative; top: 43px; left:73px;">
+                                            <input class="box1" type="checkbox"
+                                                @if ($detail->supporting_document_type == 1) checked @endif>
+                                            <span class="teks_gambar"
+                                                style="position: relative; bottom:1%;">Gambar</span>
+                                        </span>
+                                        <span class="checkbox_gambar"
+                                            style="position: relative; top: 43px; left:260px;">
+                                            <input class="box1" type="checkbox"
+                                                @if ($detail->supporting_document_type == 2) checked @endif>
+                                            <span class="teks_gambar"
+                                                style="position: relative; bottom:1%;">Kontrak</span>
+                                        </span>
+                                        <span class="checkbox_brosur"
+                                            style="position: relative; top: 43px; left:356px;">
+                                            <input class="box2" type="checkbox"
+                                                @if ($detail->supporting_document_type == 3) checked @endif>
+                                            <span class="teks_gambar"
+                                                style="position: relative; bottom:1%;">Brosur</span>
+                                        </span>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                @foreach ($suratPerintahKerja->details as $detail)
-                    <div class="supporting documents">
-                        <div class="chekbox-dokumen">
-                            <span class="teks_dokumen_pendukung">Dokumen Pendukung</span>
-                            <span class="checkbox_gambar" style="position: relative; top:5%; left:14%; width:10%;">
-                                <input class="box1" type="checkbox" @if ($detail->supporting_document_type == 1) checked @endif>
-                                <span class="teks_gambar" style="position: relative; bottom:1%;">Gambar</span>
-                            </span>
-                            <span class="checkbox_gambar" style="position: relative; top:5%; left:25.5%; width:10%;">
-                                <input class="box1" type="checkbox" @if ($detail->supporting_document_type == 2) checked @endif>
-                                <span class="teks_gambar" style="position: relative; bottom:1%;">Kontrak</span>
-                            </span>
-                            <span class="checkbox_gambar" style="position: relative; top:5%; left:33%; width:10%;">
-                                <input class="box1" type="checkbox" @if ($detail->supporting_document_type == 3) checked @endif>
-                                <span class="teks_gambar" style="position: relative; bottom:1%;">Brosur</span>
-                            </span>
-                        </div>
-                    </div>
 
-
-                    <div class="other_supporting">
-                        <span class="teks_file_pendukung">File Pendukung Lainnya :</span>
-                        <hr
-                            style="background-color:#000; height:0.5px; width:59%; position: relative; left:5px; top:2.5%;">
-                    </div>
-
-                    <div class="border_horizontal">
+                <div class="other_supporting">
+                    <span class="teks_file_pendukung">
+                        File Pendukung Lainnya :
+                    </span>
+                    <hr class="hr_dokumen">
+                    <div class="border_horizontal_bottom">
                         <div class="border_horizontal_3">
                             <div class="border_horizontal_4">
                             </div>
                         </div>
                     </div>
-                    <br>
+                </div>
 
-                    <div class="detail_spk">
-                        <table
-                            style="border-collapse: collapse; width: 97%; margin: 0 auto; position: relative; left: 9px; margin-top:10px;">
-                            <thead>
-                                <tr>
-                                    <th style="border: 1.5px solid black; font-size:17px; text-align:center; line-height:normal; width:340px; padding-left:5px;"
-                                        nowrap>
-                                        JENIS PEKERJAAN
-                                    </th>
-                                    <th style="border: 1.5px solid black; font-size:17px; border-right:none; text-align:center; line-height:normal; width:664px; padding-left:16px;"
-                                        nowrap>
-                                        URAIAN PEKERJAAN</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                <div class="detail_spk">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="jenis_pekerjaan">JENIS PEKERJAAN</th>
+                                <th class="uraian_pekerjaan">URAIAN PEKERJAAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($suratPerintahKerja->details as $detail)
                                 <tr>
                                     <td style="border: 1.5px solid black;"></td>
                                     <td style="border: 1.5px solid black; border-right:none;"></td>
                                 </tr>
                                 <tr>
-                                    <td
-                                        style="border: 1.5px solid black; text-align:center; vertical-align:top; height:250px;">
+                                    <td class="value_jenis_pekerjaan">
                                         {{ $detail->job_type }}
                                     </td>
-                                    <td
-                                        style="border: 1.5px solid black; border-right:none; padding-left:5px; text-align:left; vertical-align:top; height:250px;">
-                                        {!! nl2br(e($detail->job_description)) !!}
-                                    </td>
+                                    <td class="value_uraian_pekerjaan">
+                                        {!! nl2br(e($detail->job_description)) !!}</td>
                                 </tr>
                                 <tr>
                                     <td style="border: 1.5px solid black; padding-left:5px;"></td>
@@ -332,19 +179,17 @@
                                         style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
                                     </td>
                                 </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <br>
-                @endforeach
-
-                <div class="teks_hormat_kami" style="margin-top: 4%;">
-                    <span style="position: relative; padding-left:3%;">Hormat Kami,</span>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
 
-                <div class="table_persetujuan" style="margin-top: 1%;">
-                    <table
-                        style="border-collapse: collapse; width: 98%; margin: 0 auto; position: relative; left: 8px; margin-top:10px;">
+                <div class="hormat_kami"x>
+                    <span class="line_hormat_kami">Hormat Kami,</span>
+                </div>
+
+                <div class="approval_spk">
+                    <table class="table_approval_spk">
                         <thead>
                             <tr>
                                 <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black;"
@@ -443,8 +288,8 @@
                                         style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
                                     </td>
                                     <td
-                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; padding-left:2%;">
-                                        <span style="padding-left:18px;">...........................</span>
+                                        style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align: left;">
+                                        <span style="position: relative; left:20px;">...........................</span>
                                     </td>
                                 </tr>
                                 <tr>
@@ -485,7 +330,7 @@
                                 <tr>
                                     <td
                                         style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; padding-left:7px;">
-                                        <span class="nama_pemohon">Nama</span>
+                                        <span class="nama_pemohon_spk">Nama</span>
                                         <span style="padding-left: 15px;">:</span>
                                         <span class="data_pemohon">{{ $approval->applicant_name }}</span>
                                     </td>
@@ -549,15 +394,42 @@
                         </tbody>
                     </table>
                 </div>
-
                 <div class="form_number_spk">
-                    <span style="font-size: 10pt; font-weight:bold; position: relative; top:45%; padding-left:79%;">
-                        Form Number : {{ $suratPerintahKerja->form_number }}</span>
+                    <span class="value_form_number"> Form Number : {{ $suratPerintahKerja->form_number }}</span>
                 </div>
-                <div class="border_horizontal">
-                    <div class="border_horizontal_5">
-                    </div>
+
+                <div class="bottom_box_position">
                 </div>
+
+                @php include_once(app_path().'/Helpers/helpers.php') @endphp
+                <div class="detail_image_dokumen">
+                    @foreach ($suratPerintahKerja->details as $detail)
+                        @php
+                            $paths = json_decode($detail->supporting_document_file, true);
+                        @endphp
+
+                        @if (is_array($paths))
+                            @foreach ($paths as $path)
+                                <div class="page-break">
+                                    @php
+                                        $base64Image = imageToBase64($path);
+                                    @endphp
+                                    @if ($base64Image)
+                                        <img src="{{ $base64Image }}" alt="Supporting Document"
+                                            style="width: 913px; height: 1184px; margin-left:20px; margin-top:20px;">
+                                    @else
+                                        <p>Gambar tidak dapat dimuat</p>
+                                    @endif
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="page-break">
+                                <p>No valid paths found</p>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
             </div>
         </div>
     @endforeach
@@ -565,5 +437,3 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
 </body>
-
-</html>
