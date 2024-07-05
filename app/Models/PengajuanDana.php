@@ -12,6 +12,7 @@ class PengajuanDana extends Model
 
     protected $fillable = [
         'user_id',
+        'division_id',
         'project',
         'code',
         'nama_pemohon',

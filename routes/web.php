@@ -100,7 +100,8 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     // Rute HOME untuk Surat Perintah Kerja
     Route::get('/surat-perintah-kerja/edit/{id}', [HomeViewController::class, 'editSuratPerintahKerja'])->name('surat-perintah-kerja.edit');
     Route::put('/surat-perintah-kerja/update/{id}', [HomeViewController::class, 'updateSuratPerintahKerja'])->name('surat-perintah-kerja.update');
-    Route::get('/surat-perintah-kerja/show/{id}', [HomeViewController::class, 'showSuratPerintahKerja'])->name('surat-perintah-kerja.show');
+    Route::get('/surat-perintah-kerja/show/{id}', [HomeViewController::class, 'ShowSuratPerintahKerja'])->name('suratPerintahKerja.ShowSuratPerintahKerja');
+    Route::get('/surat-permintaan-barang/show/{id}', [SuratPerintahKerjaViewWebController::class, 'ShowPermintaanBarang'])->name('suratPerintahKerja.ShowSuratPermintaanBarang');
     Route::get('/surat-perintah-kerja/delete/{id}', [HomeViewController::class, 'destroySuratPerintahKerja'])->name('surat-perintah-kerja.delete');
 
     // Routes Master Projek
@@ -118,7 +119,6 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     Route::post('/pengajuan-dana/store', [PengajuanDanaViewWebController::class, 'store'])->name('pengajuanDana.store');
     Route::put('/pengajuan-dana/update/{id}', [PengajuanDanaViewWebController::class, 'update'])->name('pengajuanDana.update');
     Route::get('/pengajuan-dana/edit/{id}', [PengajuanDanaViewWebController::class, 'edit'])->name('pengajuanDana.edit');
-    // Route::put('/pengajuan-dana/update/{id}', [PengajuanDanaViewWebController::class, 'update'])->name('pengajuanDana.update');
     Route::get('/pengajuan-dana/show/{id}', [PengajuanDanaViewWebController::class, 'show'])->name('pengajuanDana.show');
     Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
 
@@ -131,6 +131,7 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     Route::post('/surat-perintah-kerja/store', [SuratPerintahKerjaViewWebController::class, 'store'])->name('suratPerintahKerja.store');
     Route::put('/surat-perintah-kerja/update/{id}', [SuratPerintahKerjaViewWebController::class, 'update'])->name('suratPerintahKerja.update');
     Route::get('/surat-perintah-kerja/edit/{id}', [SuratPerintahKerjaViewWebController::class, 'edit'])->name('suratPerintahKerja.edit');
-    Route::get('/surat-perintah-kerja/show/{id}', [SuratPerintahKerjaViewWebController::class, 'show'])->name('suratPerintahKerja.show');
+    Route::get('/surat-perintah-kerja/show/{id}', [SuratPerintahKerjaViewWebController::class, 'ShowSuratPerintahKerja'])->name('suratPerintahKerja.ShowSuratPerintahKerja');
+    Route::get('/surat-permintaan-barang/show/{id}', [SuratPerintahKerjaViewWebController::class, 'ShowPermintaanBarang'])->name('suratPerintahKerja.ShowSuratPermintaanBarang');
     Route::get('/surat-perintah-kerja/delete/{id}', [SuratPerintahKerjaViewWebController::class, 'destroy'])->name('surat_perintah_kerja.delete');
 });

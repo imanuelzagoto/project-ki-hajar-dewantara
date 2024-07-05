@@ -71,6 +71,7 @@
             @csrf
         </form>
     </div>
+
     <div class="container-fluid">
         <div class="element-scrollbar">
             <div class="">
@@ -111,8 +112,10 @@
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nama Projek</span>
-                                                <input name="title" class="form-control w-100 disabled_input"
-                                                    id="nama" type="text" required>
+                                                <input name="title" class="form-control w-100 disabled-input-project"
+                                                    id="nama" type="text"
+                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
+                                                    required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
@@ -166,32 +169,98 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row pr-3 pt-3">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                     <div class="font-weight-bold text-lg padding-project pt-form-create text-center">
                                         <span class="head-project" style="margin-left:17px;">Detail</span>
                                         <span class="hide-project">Project</span>
                                     </div>
+
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-12">
+                                            <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jenis
                                                     Pekerjaan</span>
-                                                <input name="job_type" class="form-control bg-light w-100" type="text"
+                                                <input name="job_type" id="job_type" class="form-control bg-light w-100"
+                                                    type="text" required>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-6" id="container_type_format">
+                                                <span class="text-sm font-weight-bold text-form-detail">Type Format
+                                                    Pekerjaan</span>
+                                                <select name="type_format_pekerjaan" id="type_format_pekerjaan"
+                                                    class="form-control bg-light w-100" onchange="toggleTypeFormat()"
+                                                    required>
+                                                    <option value="Surat Perintah Kerja">Surat Perintah Kerja</option>
+                                                    <option value="Surat Permintaan Barang">Surat Permintaan Barang
+                                                    </option>
+                                                </select>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-12" id="tambahFieldContainer"
+                                                style="display: none; margin-top:3px;">
+                                                <button id="tambahField" type="button"
+                                                    class="btn button-tambah font-weight-bold">
+                                                    <span class="btn-label">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                        Tambah
+                                                    </span>
+                                                </button>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-3" id="spesifikasiContainer"
+                                                style="display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
+                                                <input type="text" id="spesifikasi" name="spesifikasi"
+                                                    class="form-control bg-light" style="height: 40px;" required>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-2" id="jumlahContainer" style="display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                                                <input type="number" id="jumlah" name="jumlah"
+                                                    class="form-control bg-light text-center" style="height: 40px;"
                                                     required>
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
+
+                                            <div class="pr-4 py-2 col-2" id="satuanContainer" style="display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
+                                                <input type="text" id="satuan" name="satuan"
+                                                    class="form-control bg-light text-center" style="height: 40px;"
+                                                    required>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-4" id="keteranganContainer" style="display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Keterangan</span>
+                                                <textarea name="keterangan" id="keterangan" class="form-control bg-light" rows="3" style="height: 40px;"
+                                                    required></textarea>
+                                            </div>
+
+                                            <div class="py-2 col-1 JS-button-delete" id="deleteContainer"
+                                                style="display: none;">
+                                                <button class="btn btn-danger font-weight-bold JS-delete-btn"
+                                                    id="buttonDelete"
+                                                    style="font-size: 11px; margin-top:21px; position: absolute; right: 29px; width:54px;"
+                                                    disabled>
+                                                    <i class="fa-solid fa-minus"></i>
+                                                </button>
+                                            </div>
+
+                                            <div id="itemFields"></div>
+
+                                            <div class="pr-4 py-2 col-6" id="uraianPekerjaan">
                                                 <span class="text-sm font-weight-bold text-form-detail">Uraian
                                                     Pekerjaan</span>
                                                 <textarea name="job_description" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
                                                     style="height: 138px;" required></textarea>
                                             </div>
 
-                                            <div class="pr-4 py-2 col-6">
+                                            <div class="pr-4 py-2 col-6" id="filePendukung">
                                                 <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
                                                     style="margin-top: 7px;">
                                                     File Pendukung
                                                 </div>
+
                                                 <div class="d-flex">
                                                     <div class="form-checkbox-gambar d-flex">
                                                         <input name="supporting_document_type" type="checkbox"
@@ -218,14 +287,26 @@
                                                     <input name="supporting_document_file[]" type="file"
                                                         id="choosefile" multiple onchange="handleFileSelect(this)">
                                                 </label>
-                                                <div id="fileList" class="mt-2"></div>
+
+                                                <div>
+                                                    <ul id="fileList" class="mt-2"></ul>
+                                                </div>
+
+                                                <div id="alertFileLimit" class="alert alert-danger"
+                                                    style="display: none; position: relative; bottom:3px;">
+                                                    <strong style="color: red; font-weight: bold; font-size: 17px;">
+                                                        Peringatan!
+                                                    </strong>
+                                                    <p>Anda hanya dapat memilih maksimal 3 file.</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row pr-3 pt-3">
-                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
                                     <div class="font-weight-bold text-lg padding-project pt-form-create text-center">
                                         <span class="head-project">Hormat<br>Kami</span>
                                         <span class="hide-project">Project</span>
@@ -286,6 +367,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="row justify-content-center">
                                 <div class="col-md-6">
                                     <div class="d-flex justify-content-center p-4 rounded-pill">
@@ -302,119 +384,25 @@
             </div>
         </div>
     </div>
+
     <script>
-        // function tanggal pengajuan
-        var submissionDateInput = document.getElementById('submission_date');
-        var today = new Date().toISOString().split('T')[0];
-        submissionDateInput.value = today;
-
-        // function checkbox input file
-        function handleCheckboxClick(checkboxName) {
-            var checkboxes = ['gambar', 'kontrak', 'brosur'];
-            checkboxes.forEach(function(name) {
-                if (name !== checkboxName) {
-                    document.getElementById('checkbox_' + name).checked = false;
-                }
-            });
-
-            // Hapus file input jika tidak ada checkbox yang dipilih
-            var anyCheckboxChecked = checkboxes.some(function(name) {
-                return document.getElementById('checkbox_' + name).checked;
-            });
-
-            if (anyCheckboxChecked) {
-                if (document.getElementById("choosefile").files.length == 0) {
-                    document.getElementById("choosefile").required = true;
-                }
-            } else {
-                document.getElementById("choosefile").required = false;
-            }
-
-            if (!anyCheckboxChecked) {
-                clearFileInput();
-            }
-        }
-
-        function clearFileInput() {
-            var fileInput = document.getElementById('choosefile');
-            fileInput.value = '';
-            displayFileNames();
-        }
-
-        function handleFileSelect(input) {
-            var checkboxes = ['gambar', 'kontrak', 'brosur'];
-
-            // Jika tidak ada checkbox yang dipilih, otomatis pilih checkbox "gambar"
-            var anyCheckboxChecked = checkboxes.some(function(name) {
-                return document.getElementById('checkbox_' + name).checked;
-            });
-
-            if (!anyCheckboxChecked) {
-                selectCheckbox('gambar');
-            }
-
-            // Periksa jika lebih dari 3 file yang dipilih
-            if (input.files.length > 3) {
-                alert('Anda hanya bisa mengunggah maksimal 3 file.');
-                input.value = '';
-            } else {
-                displayFileNames();
-            }
-        }
-
-        function displayFileNames() {
-            var fileInput = document.getElementById('choosefile');
-            var fileList = document.getElementById('fileList');
-            fileList.innerHTML = '';
-
-            var files = fileInput.files;
-            for (var i = 0; i < files.length; i++) {
-                var fileItem = document.createElement('div');
-                fileItem.textContent = files[i].name;
-                fileList.appendChild(fileItem);
-            }
-        }
-
-        function selectCheckbox(checkboxName) {
-            var checkbox = document.getElementById('checkbox_' + checkboxName);
-            checkbox.checked = true;
-        }
-
-        // Tambahkan event listener untuk memastikan file input dihapus jika tidak ada checkbox yang dipilih
-        document.querySelectorAll('input[name="supporting_document_type"]').forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                var checkboxes = ['gambar', 'kontrak', 'brosur'];
-                var anyCheckboxChecked = checkboxes.some(function(name) {
-                    return document.getElementById('checkbox_' + name).checked;
-                });
-
-                if (!anyCheckboxChecked) {
-                    clearFileInput();
-                }
-            });
-        });
-
-        // project id
+        // PROJECT ID
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
             document.getElementById("nama").value = selectedValue;
         }
-
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
             var textarea = event.target;
             var text = textarea.value;
-            // Set value textarea dengan teks yang belum diubah
             textarea.value = text;
         });
 
-        // handling disabled button save
         function handleSubmit(event) {
             event.preventDefault();
             const form = event.target;
             const submitButton = document.getElementById('submitSave');
 
-            // Check form validity
             if (isFormValid(form)) {
                 submitButton.disabled = true;
                 submitButton.innerText = 'Processing...';
@@ -444,23 +432,12 @@
         function isVisible(elem) {
             return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
         }
-
-        // function to handle button save with click enter
-        // function handleEnterKey(event) {
-        //     if (event.key === 'Enter') {
-        //         event.preventDefault();
-        //         // document.getElementById('submitSave').click();
-        //     }
-        // }
-        document.addEventListener('keydown', handleEnterKey);
         document.getElementById('submitSave').addEventListener('click', function() {
             console.log('Submit Save button clicked');
         });
-    </script>
 
 
-    {{-- handling untuk upload file pdf excel dan word --}}
-    <script>
+        // handle file select
         function handleFileSelect(input) {
             var files = input.files;
             var fileList = document.getElementById('fileList');
@@ -489,6 +466,116 @@
                 fileList.innerHTML = '';
             }
         }
+
+        // function tanggal pengajuan
+        var submissionDateInput = document.getElementById('submission_date');
+        var today = new Date().toISOString().split('T')[0];
+        submissionDateInput.value = today;
+
+
+        // HANDLE FILE PENDUKUNG SPK
+        document.addEventListener('DOMContentLoaded', function() {
+            const fileInput = document.getElementById('choosefile');
+            const fileListElement = document.getElementById('fileList');
+            const checkboxGambar = document.getElementById('checkbox_gambar');
+            const checkboxKontrak = document.getElementById('checkbox_kontrak');
+            const checkboxBrosur = document.getElementById('checkbox_brosur');
+            const alertFileLimit = document.getElementById('alertFileLimit');
+
+            function isAnyCheckboxSelected() {
+                return checkboxGambar.checked || checkboxKontrak.checked || checkboxBrosur.checked;
+            }
+
+            function updateFileInputRequired() {
+                if (isAnyCheckboxSelected() && fileInput.files.length === 0) {
+                    fileInput.setAttribute('required', 'required');
+                } else {
+                    fileInput.removeAttribute('required');
+                }
+            }
+
+            fileInput.addEventListener('change', function() {
+                const files = fileInput.files;
+
+                alertFileLimit.style.display = 'none';
+
+                fileListElement.innerHTML = '';
+
+                // Batasi jumlah file maksimal 3
+                if (files.length > 3) {
+                    alertFileLimit.style.display = 'block';
+                    fileInput.value = '';
+                    return;
+                }
+
+                if (files.length > 0) {
+                    fileInput.removeAttribute('required');
+
+                    if (!isAnyCheckboxSelected()) {
+                        checkboxGambar.checked = true;
+                        handleCheckboxClick('gambar');
+                    }
+
+                    for (let i = 0; i < files.length; i++) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = files[i].name;
+                        fileListElement.appendChild(listItem);
+                    }
+                } else {
+                    updateFileInputRequired();
+                    // fileInput.setAttribute('required', 'required');
+                }
+            });
+
+            window.handleCheckboxClick = function(type) {
+                console.log(type + ' checkbox clicked');
+
+                let clickedCheckbox;
+
+                switch (type) {
+                    case 'gambar':
+                        clickedCheckbox = checkboxGambar;
+                        checkboxKontrak.checked = false;
+                        checkboxBrosur.checked = false;
+                        break;
+                    case 'kontrak':
+                        clickedCheckbox = checkboxKontrak;
+                        checkboxGambar.checked = false;
+                        checkboxBrosur.checked = false;
+                        break;
+                    case 'brosur':
+                        clickedCheckbox = checkboxBrosur;
+                        checkboxGambar.checked = false;
+                        checkboxKontrak.checked = false;
+                        break;
+                    default:
+                        return;
+                }
+
+                if (!isAnyCheckboxSelected()) {
+                    fileListElement.innerHTML = '';
+                    fileInput.value = '';
+                    fileInput.setAttribute('required', 'required');
+                } else {
+                    fileInput.removeAttribute('required');
+                }
+
+                updateFileInputRequired();
+
+                console.log(type + ' checkbox clicked');
+            };
+
+            checkboxGambar.addEventListener('change', function() {
+                handleCheckboxClick('gambar');
+            });
+            checkboxKontrak.addEventListener('change', function() {
+                handleCheckboxClick('kontrak');
+            });
+            checkboxBrosur.addEventListener('change', function() {
+                handleCheckboxClick('brosur');
+            });
+        });
+        // END HANDLE FILE PENDUKUNG SPK
     </script>
 @endsection
 
@@ -506,7 +593,6 @@
                 'November', 'Desember'
             ];
 
-            // Set timezone to Asia/Jakarta
             var options = {
                 timeZone: 'Asia/Jakarta',
                 weekday: 'long'
@@ -535,5 +621,134 @@
             var strTime = hours + ':' + minutes + ':' + seconds;
             return strTime;
         }
+
+        // DETAIL SPK
+        function toggleTypeFormat() {
+            var selectBox = document.getElementById('type_format_pekerjaan');
+            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+
+            var uraianPekerjaan = document.getElementById('uraianPekerjaan');
+            var filePendukung = document.getElementById('filePendukung');
+            var tambahFieldContainer = document.getElementById('tambahFieldContainer');
+            var spesifikasiContainer = document.getElementById('spesifikasiContainer');
+            var jumlahContainer = document.getElementById('jumlahContainer');
+            var satuanContainer = document.getElementById('satuanContainer');
+            var keteranganContainer = document.getElementById('keteranganContainer');
+            var deleteContainer = document.getElementById('deleteContainer');
+            var fileListContainer = document.getElementById('fileList');
+
+            if (selectedValue === 'Surat Perintah Kerja') {
+                uraianPekerjaan.style.display = 'block';
+                filePendukung.style.display = 'block';
+
+                tambahFieldContainer.style.display = 'none';
+                spesifikasiContainer.style.display = 'none';
+                jumlahContainer.style.display = 'none';
+                satuanContainer.style.display = 'none';
+                keteranganContainer.style.display = 'none';
+                deleteContainer.style.display = 'none';
+
+                document.getElementById('spesifikasi').removeAttribute('required');
+                document.getElementById('jumlah').removeAttribute('required');
+                document.getElementById('satuan').removeAttribute('required');
+                document.getElementById('keterangan').removeAttribute('required');
+
+                document.getElementById('spesifikasi').value = null;
+                document.getElementById('jumlah').value = null;
+                document.getElementById('satuan').value = null;
+                document.getElementById('keterangan').value = null;
+
+                document.getElementById('uraian-pekerjaan').setAttribute('required', 'required');
+                // document.getElementById('choosefile').setAttribute('required', 'required');
+            } else if (selectedValue === 'Surat Permintaan Barang') {
+                tambahFieldContainer.style.display = 'block';
+                spesifikasiContainer.style.display = 'block';
+                jumlahContainer.style.display = 'block';
+                satuanContainer.style.display = 'block';
+                keteranganContainer.style.display = 'block';
+                deleteContainer.style.display = 'block';
+
+                uraianPekerjaan.style.display = 'none';
+                filePendukung.style.display = 'none';
+
+                document.getElementById('uraian-pekerjaan').removeAttribute('required');
+                document.getElementById('choosefile').removeAttribute('required');
+
+                document.getElementById('uraian-pekerjaan').value = null;
+                document.getElementById('choosefile').value = null;
+                document.getElementById('checkbox_gambar').value = null;
+                document.getElementById('checkbox_kontrak').value = null;
+                document.getElementById('checkbox_brosur').value = null;
+                document.getElementById('fileList').value = null;
+
+                document.getElementById('checkbox_gambar').checked = false;
+                document.getElementById('checkbox_kontrak').checked = false;
+                document.getElementById('checkbox_brosur').checked = false;
+
+                document.getElementById('spesifikasi').setAttribute('required', 'required');
+                document.getElementById('jumlah').setAttribute('required', 'required');
+
+
+                if (fileListContainer) {
+                    fileListContainer.innerHTML = '';
+                }
+            }
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            toggleTypeFormat();
+        });
+        // END DETAIL SPK
+
+
+
+        $(document).ready(function() {
+            // Ketika tombol Tambah diklik
+            $("#tambahField").click(function(e) {
+                e.preventDefault();
+                addNewRow();
+            });
+
+            // Fungsi untuk menambahkan baris baru
+            function addNewRow() {
+                var newRow = `
+            <div class="row mb-2" style="margin-left: 0px;">
+                <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
+                    <input type="text" name="spesifikasi[]" class="form-control bg-light w-100" style="height: 40px;" required>
+                </div>
+
+                <div class="pr-4 py-2 col-2" id="jumlahContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                    <input type="number" name="jumlah[]" class="form-control bg-light text-center w-100" style="height: 40px;" required>
+                </div>
+
+                <div class="pr-4 py-2 col-2" id="satuanContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
+                    <input type="text" name="satuan[]" class="form-control bg-light text-center w-100" style="height: 40px;" required>
+                </div>
+
+                <div class="pr-4 py-2 col-4" id="keteranganContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Keterangan</span>
+                    <textarea name="keterangan[]" class="form-control bg-light w-100" rows="3" style="height: 40px;" required></textarea>
+                </div>
+
+                <div class="py-2 col-1 JS-button-delete" id="deleteContainer">
+                    <button class="btn btn-danger font-weight-bold JS-delete-btn"
+                        style="font-size: 11px; margin-top:21px; padding-right: 29px; width:54px;">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                </div>
+            </div>`;
+                $("#itemFields").append(newRow);
+                activateDeleteButtons();
+            }
+
+            // Fungsi untuk mengaktifkan tombol delete pada baris baru
+            function activateDeleteButtons() {
+                $(".JS-delete-btn").click(function() {
+                    $(this).closest(".row").remove();
+                });
+            }
+        });
     </script>
 @endpush

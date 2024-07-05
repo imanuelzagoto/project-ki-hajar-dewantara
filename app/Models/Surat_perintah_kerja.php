@@ -22,6 +22,8 @@ class Surat_perintah_kerja extends Model
         'priority',
         'completion_time',
         'pic',
+        'job_type',
+        'type_format_pekerjaan',
         'form_number',
     ];
 
@@ -32,7 +34,12 @@ class Surat_perintah_kerja extends Model
 
     public function getSubmissionDateAttribute($value)
     {
-        return Carbon::parse($value)->translatedFormat('d/m/y');
+        // return Carbon::parse($value)->translatedFormat('d/m/y');
+        // Check if the value is null
+        if ($value === null) {
+            return null;
+        }
+        return Carbon::parse($value)->format('d-m-Y');
     }
 
     public function getCompletionTimeAttribute($value)
@@ -73,5 +80,10 @@ class Surat_perintah_kerja extends Model
     public function details()
     {
         return $this->hasMany(DetailSuratPerintahKerja::class);
+    }
+
+    public function details_permintaan()
+    {
+        return $this->hasMany(detail_surat_permintaan_barang::class);
     }
 }

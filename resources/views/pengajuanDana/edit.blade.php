@@ -707,7 +707,6 @@
 
             var datetimeElement = document.getElementById('datetime');
             if (datetimeElement) {
-                // Perbarui innerHTML elemen 'datetime' jika ditemukan
                 datetimeElement.innerHTML = dateTimeString;
             } else {
                 console.error("Datetime element not found.");
@@ -763,12 +762,12 @@
         }
 
         // Function to handle button save with click enter
-        function handleEnterKey(event) {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                document.getElementById('submitSave').click();
-            }
-        }
+        // function handleEnterKey(event) {
+        //     if (event.key === 'Enter') {
+        //         event.preventDefault();
+        //         document.getElementById('submitSave').click();
+        //     }
+        // }
         document.addEventListener('keydown', handleEnterKey);
         document.getElementById('submitSave').addEventListener('click', function() {
             console.log('Submit Save button clicked');
@@ -801,12 +800,12 @@
                             </div>
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style=" left:-11px; text-align:center;" required>
+                                <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style="left:-11px; text-align:center;" required>
                         
                             </div>
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail" >Satuan</span>
-                                <input name="satuan[]" class="form-control bg-light w-100" type="text" style=" text-align:center;" required>
+                                <input name="satuan[]" class="form-control bg-light w-100" type="text" style="text-align:center;" required>
                         
                             </div>
                             <div class="py-2 col-2">

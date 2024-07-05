@@ -168,7 +168,8 @@
                                                 {{ $spk->pic }}
                                             </td>
                                             <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->submission_date)->format('d-m-Y') }}
+                                                {{-- {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->submission_date)->format('d-m-Y') }} --}}
+                                                {{ $spk->submission_date }}
                                             </td>
                                             <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ $spk->completion_time }}

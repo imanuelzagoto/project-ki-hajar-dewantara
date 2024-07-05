@@ -65,7 +65,7 @@
                     <li
                         class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ||
                         request()->routeIs('suratPerintahKerja.create') ||
-                        request()->routeIs('suratPerintahKerja.show') ||
+                        request()->routeIs('suratPerintahKerja.ShowSuratPerintahKerja') ||
                         request()->routeIs('suratPerintahKerja.edit')
                             ? 'active'
                             : '' }}">
@@ -155,7 +155,7 @@
                     <li
                         class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ||
                         request()->routeIs('suratPerintahKerja.create') ||
-                        request()->routeIs('suratPerintahKerja.show') ||
+                        request()->routeIs('suratPerintahKerja.ShowSuratPerintahKerja') ||
                         request()->routeIs('suratPerintahKerja.edit')
                             ? 'active'
                             : '' }}">
@@ -229,7 +229,7 @@
                     <li
                         class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ||
                         request()->routeIs('suratPerintahKerja.create') ||
-                        request()->routeIs('suratPerintahKerja.show') ||
+                        request()->routeIs('suratPerintahKerja.ShowSuratPerintahKerja') ||
                         request()->routeIs('suratPerintahKerja.edit')
                             ? 'active'
                             : '' }}">
@@ -303,7 +303,7 @@
                     <li
                         class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ||
                         request()->routeIs('suratPerintahKerja.create') ||
-                        request()->routeIs('suratPerintahKerja.show') ||
+                        request()->routeIs('suratPerintahKerja.ShowSuratPerintahKerja') ||
                         request()->routeIs('suratPerintahKerja.edit')
                             ? 'active'
                             : '' }}">
@@ -377,7 +377,7 @@
                     <li
                         class="nav-item {{ request()->routeIs('surat_perintah_kerja.index') ||
                         request()->routeIs('suratPerintahKerja.create') ||
-                        request()->routeIs('suratPerintahKerja.show') ||
+                        request()->routeIs('suratPerintahKerja.ShowSuratPerintahKerja') ||
                         request()->routeIs('suratPerintahKerja.edit')
                             ? 'active'
                             : '' }}">

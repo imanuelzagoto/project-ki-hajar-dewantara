@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('pengajuan_danas', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
+            $table->integer('division_id')->nullable();
             $table->string('project');
             $table->string('code')->nullable();
             $table->string('nama_pemohon');

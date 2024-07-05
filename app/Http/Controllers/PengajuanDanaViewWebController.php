@@ -39,21 +39,16 @@ class PengajuanDanaViewWebController extends Controller
         $userData = Session::get('user');
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
+        $devisionId = $userData['division_id'];
 
-        $pengajuanDanas = PengajuanDana::with(['details', 'items'])->orderBy('created_at', 'desc')->get();
+        if ($userId == 1 || $userId == 127) {
+            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->orderBy('created_at', 'desc')->get();
+        } else if ($devisionId == "" || $devisionId == 0 || $devisionId == null || $devisionId == "null" || $devisionId == "0") {
+            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+        } else {
+            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->where('division_id', $devisionId)->get();
+        }
         return view('pengajuanDana.index', compact('pengajuanDanas'));
-        // if ($userrole === 'Super Admin') {
-        // $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->get();
-        // dd($pengajuanDanas);
-        // } elseif ($userrole === 'user biasa') {
-        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // } elseif ($userrole === 'Driver') {
-        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // } elseif ($userrole === 'General Affair') {
-        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // } elseif ($userrole === 'Hr') {
-        //     $pengajuanDanas = PengajuanDana::orderBy('created_at', 'desc')->where('user_id', $userId)->get();
-        // }
     }
 
     public function getApproval(Request $request)
@@ -151,9 +146,13 @@ class PengajuanDanaViewWebController extends Controller
         // Mengambil data pengguna dari sesi dan ID
         $userData = Session::get('user');
         $userId = $userData['id'];
+        $devisionId = $userData['division_id'];
+        // dd($devisionId);
+
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
             'user_id' => $userId,
+            'division_id' => $devisionId,
             'project' => $request->project,
             'code' => $request->code,
             'nama_pemohon' => $request->nama_pemohon,
@@ -193,6 +192,7 @@ class PengajuanDanaViewWebController extends Controller
                 'harga' => $harga, 'total' => $subtotal_item,
             ]);
         }
+
         $pengajuanDanas->update(['subtotal' => $subtotal]);
 
         return redirect()->route('pengajuanDana.index')->with(['success' => 'Data Berhasil Disimpan!']);
@@ -284,9 +284,12 @@ class PengajuanDanaViewWebController extends Controller
 
         $userData = Session::get('user');
         $userId = $userData['id'];
+        $devisionId = $userData['division_id'];
+
         $pengajuanDana->update([
             'form_number' => 'doc_pd',
             'user_id' => $userId,
+            'division_id' => $devisionId,
             'project' => $request->project,
             'code' => $request->code,
             'nama_pemohon' => $request->nama_pemohon,

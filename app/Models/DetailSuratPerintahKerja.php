@@ -9,7 +9,6 @@ class DetailSuratPerintahKerja extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'job_type',
         'job_description',
         'supporting_document_type',
         'supporting_document_file',

@@ -20,12 +20,11 @@
                     </div>
 
                     <div class="title_company">
-                        <span style="font-family: Times New Roman, Times, serif; ">PT. SOLUSI INTEK INDONESIA</span>
+                        <span class="company">PT. SOLUSI INTEK INDONESIA</span>
                     </div>
 
                     <div class="sub-title-spk">
-                        <span style="font-family: Times New Roman, Times, serif; ">SURAT PERINTAH KERJA
-                            WORKSHOP</span>
+                        <span class="titel_perintah_kerja">SURAT PERINTAH KERJA WORKSHOP</span>
                     </div>
 
                     <div class="Yth">
@@ -55,12 +54,12 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="label_nama_project" nowrap>Nama project</td>
+                                <td class="label_nama_project" nowrap>Nama Project</td>
                                 <td class="colon_nama_project" nowrap>:</td>
                                 <td class="value_nama_project" nowrap>
                                     {{ $suratPerintahKerja->title }}</td>
 
-                                <td class="label_no_spk" nowrap>NO SPK</td>
+                                <td class="label_no_spk font-weight-bold" nowrap>NO SPK</td>
                                 <td class="colon_no_spk" nowrap>:</td>
                                 <td class="value_no_spk" nowrap>{{ $suratPerintahKerja->no_spk }}</td>
                             </tr>
@@ -196,7 +195,7 @@
                                     nowrap>
                                     <span style="font-weight: normal; padding-left:7px;">Pemohon</span>
                                 </th>
-                                <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black;"
+                                <th style="border-bottom: none; border-top: 3px solid black; border-left:3px solid black; border-right:6px solid black; width:215px;"
                                     nowrap>
                                     <span style="font-weight: normal; padding-left:7px;">Penerima</span>
                                 </th>
@@ -394,39 +393,53 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="form_number_spk">
-                    <span class="value_form_number"> Form Number : {{ $suratPerintahKerja->form_number }}</span>
+
+                <div style="position: relative; top: 143px;">
+                    <span style="margin-left: 76%; font-size: 14px; font-weight: bold;"> Form Number :
+                        {{ $suratPerintahKerja->form_number }}</span>
                 </div>
 
-                <div class="bottom_box_position">
+                <div style="border-bottom: 3px solid black; position: relative; top: 143px; width: 950px;">
                 </div>
 
                 @php include_once(app_path().'/Helpers/helpers.php') @endphp
                 <div class="detail_image_dokumen">
                     @foreach ($suratPerintahKerja->details as $detail)
-                        @php
-                            $paths = json_decode($detail->supporting_document_file, true);
-                        @endphp
+                        @foreach ($suratPerintahKerjas as $suratPerintahKerja)
+                            @php
+                                $paths = json_decode($detail->supporting_document_file, true);
+                            @endphp
 
-                        @if (is_array($paths))
-                            @foreach ($paths as $path)
+                            @if (is_array($paths))
+                                @foreach ($paths as $path)
+                                    <div class="page-break">
+                                        @php
+                                            $base64Image = imageToBase64($path);
+                                        @endphp
+
+                                        <span class="form_number font-weight-bold"
+                                            style="font-size: 14px; position: relative; top: 97.5%; left:76%">
+                                            Form Number : {{ $suratPerintahKerja->form_number }}
+                                        </span>
+
+                                        <div
+                                            style="border-bottom: 3px solid black; position: relative; top:97.5%; width: 950px;">
+                                        </div>
+
+                                        @if ($base64Image)
+                                            <img src="{{ $base64Image }}" alt="Supporting Document"
+                                                style="object-fit: cover; image-rendering: crisp-edges; width: 927px; height: 1184px; position: relative; left:13px; bottom: 15px;">
+                                        @else
+                                            <p>Gambar tidak dapat dimuat</p>
+                                        @endif
+                                    </div>
+                                @endforeach
+                            @else
                                 <div class="page-break">
-                                    @php
-                                        $base64Image = imageToBase64($path);
-                                    @endphp
-                                    @if ($base64Image)
-                                        <img src="{{ $base64Image }}" alt="Supporting Document"
-                                            style="width: 913px; height: 1184px; margin-left:20px; margin-top:20px;">
-                                    @else
-                                        <p>Gambar tidak dapat dimuat</p>
-                                    @endif
+                                    <p>No valid paths found</p>
                                 </div>
-                            @endforeach
-                        @else
-                            <div class="page-break">
-                                <p>No valid paths found</p>
-                            </div>
-                        @endif
+                            @endif
+                        @endforeach
                     @endforeach
                 </div>
 

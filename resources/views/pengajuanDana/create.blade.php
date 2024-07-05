@@ -113,7 +113,6 @@
                                                     style="display: block;">Projek</span>
                                                 <select id="kode_Project" name="project" class="form-control bg-light w-100"
                                                     onchange="onchangeProjectid()" required>
-                                                    {{-- <option value="" disabled selected></option> --}}
                                                     <option value="Project">Project</option>
                                                     <option value="Non Project">Non Project</option>
                                                 </select>
@@ -232,6 +231,7 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
+
                                             <div class="pr-4 py-2 col-6">
                                                 <button id="tambahField" type="button"
                                                     class="btn btn-sm button-tambah font-weight-bold">
@@ -241,6 +241,7 @@
                                                     </span>
                                                 </button>
                                             </div>
+
                                             <div id="input_tunai_container" class="col-2">
                                                 <input id="inputTunai" name="tunai" class="form-control bg-light"
                                                     type="text"
@@ -316,11 +317,9 @@
             const containerSelectProject = document.getElementById('container_selectProject');
             const selectProject = document.getElementById('selectProject');
 
-            // Handling kolom tanggal pengajuan
             const columnsToResizeTanggal = [
                 document.getElementById('container_tanggalPengajuan')
             ];
-            // Handling kolom Kode Projek
             const columnsToResizeProjek = [
                 document.getElementById('container_method')
             ];
@@ -417,7 +416,6 @@
                     var otherSelect = $(otherSelector);
                     var otherValues = otherSelect.val();
 
-                    // Remove the selected item from the other select
                     otherValues = otherValues.filter(function(value) {
                         return value !== selectedData;
                     });
@@ -429,11 +427,8 @@
 
             }
 
-            // Initialize select2 for input "Pemeriksa"
             initializeSelect2('#nama_pemeriksa', 'Pemeriksa', '#nama_menyetujui');
             initializeSelect2('#nama_menyetujui', 'Menyetujui', '#nama_pemeriksa');
-
-            // handling untuk menghapus pilihan yang sama
             $('#nama_pemeriksa, #nama_menyetujui').on('change', function() {
                 var pemeriksaValue = $('#nama_pemeriksa').val();
                 var menyetujuiValue = $('#nama_menyetujui').val();
@@ -452,7 +447,6 @@
             });
         });
 
-        // format huruf kapital pada kolom input terbilang
         document.addEventListener("DOMContentLoaded", function() {
             var inputElement = document.querySelector('input[name="terbilang"]');
             if (inputElement) {
@@ -570,13 +564,11 @@
             return strTime;
         }
 
-        // handling disabled button save
         function handleSubmit(event) {
             event.preventDefault();
             const form = event.target;
             const submitButton = document.getElementById('submitSave');
 
-            // Check form validity
             if (isFormValid(form)) {
                 submitButton.disabled = true;
                 submitButton.innerText = 'Processing...';
@@ -607,12 +599,6 @@
             return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
         }
 
-        // function to handle button save with click enter
-        function handleEnterKey(event) {
-            if (event.key === 'Enter') {
-                document.getElementById('submitSave').click();
-            }
-        }
         document.addEventListener('keydown', handleEnterKey);
     </script>
 @endsection
@@ -624,13 +610,13 @@
             $("#tambahField").click(function() {
                 addNewRow();
             });
-            $(document).on('click', '.JS-delete-btn', function() {
-                $(this).closest('.row').remove();
-                hitungSubtotal();
-                activateDeleteButtons
-                    ();
-            });
-            // Fungsi untuk menambahkan baris baru
+
+            // $(document).on('click', '.JS-delete-btn', function() {
+            //     $(this).closest('.row').remove();
+            //     activateDeleteButtons
+            //         ();
+            // });
+
             function addNewRow() {
                 var newRow = `
                         <div class="row py-2" style="margin-left: 90px;">
@@ -698,32 +684,22 @@
                     }
                 }
 
-                // Mengambil nilai subtotal dari input
                 var subtotal = parseFloat($('#subtotalInput').val().replace(/[^\d]/g, '')) || 0;
-
-                // Mengonversi subtotal menjadi terbilang
                 var terbilangText = bilang(subtotal);
-
-                // Menambahkan kata "rupiah" di akhir teks terbilang
                 terbilangText += 'rupiah';
-
-                // Mengisi kolom terbilang dengan nilai terbilang
                 $('input[name="terbilang"]').val(terbilangText);
             }
 
             $(document).on('input', '.harga', function() {
-                // Panggil fungsi formatRupiah untuk memformat nilai input
                 $(this).val(formatRupiah($(this).val(), "Rp. "));
             });
 
-            // Event listener untuk input jumlah dan harga
             $(document).on('input', '.jumlah, .harga', function() {
                 var row = $(this).closest('.row');
                 hitungTotal(row);
                 hitungSubtotal();
             });
 
-            // Fungsi untuk menghitung total
             function hitungTotal(row) {
                 var jumlah = parseFloat($(row).find('.jumlah').val()) || 0;
                 var harga = parseFloat($(row).find('.harga').val().replace(/[^\d]/g, '')) || 0;
@@ -731,26 +707,22 @@
                 $(row).find('.total').val(formatRupiah(total.toString(), "Rp. "));
             }
 
-            // Fungsi untuk menghitung subtotal
             function hitungSubtotal() {
                 var subtotal = 0;
                 $('.total').each(function() {
                     subtotal += parseFloat($(this).val().replace(/[^\d]/g, '')) ||
                         0;
                 });
-                // Format nilai subtotal sebagai rupiah
                 var formattedSubtotal = formatRupiah(subtotal.toString(), "Rp. ");
                 $('#subtotalInput').val(formattedSubtotal);
                 updateTerbilang();
             }
 
-            // Fungsi untuk mengaktifkan atau menonaktifkan tombol delete
             function activateDeleteButtons() {
                 $('.JS-button-delete').first().find('.JS-delete-btn').prop('disabled', true);
                 $('.JS-button-delete').not(':first').find('.JS-delete-btn').prop('disabled', false);
             }
 
-            /* Fungsi formatRupiah */
             function formatRupiah(angka, prefix) {
                 var number_string = angka.toString().replace(/[^,\d]/g, "").toString(),
                     split = number_string.split(","),
@@ -758,7 +730,6 @@
                     rupiah = split[0].substr(0, sisa),
                     ribuan = split[0].substr(sisa).match(/\d{3}/gi);
 
-                // tambahkan titik jika yang di input sudah menjadi angka ribuan
                 if (ribuan) {
                     separator = sisa ? "." : "";
                     rupiah += separator + ribuan.join(".");

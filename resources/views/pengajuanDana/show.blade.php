@@ -210,10 +210,11 @@
                             </tr>
                         @endforeach
                         <tr>
-                            <td colspan="8" style="font-weight: bold; text-align: right; padding-right:5px;">Sub
+                            <td colspan="8" class="font-weight-bold"
+                                style="text-align: right; padding-right:5px;">Sub
                                 Total
                             </td>
-                            <td style="text-align: right; padding-right:5px; font-weight:bold;">
+                            <td class="font-weight-bold" style="text-align: right; padding-right:5px;">
                                 {{ number_format(floatval(str_replace(['Rp.', '.', ','], '', $detail->subtotal)), 0, ',', '.') }}
                             </td>
                         </tr>

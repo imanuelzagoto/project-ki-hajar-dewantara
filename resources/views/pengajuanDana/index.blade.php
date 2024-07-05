@@ -1,12 +1,19 @@
+{{-- @php
+    $userData = Session::get('user');
+    $userrole = $userData['modules']['name'];
+    $email = $userData['email'];
+    $division_id = $userData['division_id'];
+@endphp --}}
+
 @extends('layouts.master')
 @section('title')
     Pengajuan Dana
 @endsection
+
 @section('content')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-
     <div class="main-dashboard mt--3">
         <nav aria-label="breadcrumb">
             <div class="breadcrumb mt-1 d-flex justify-content-between">
@@ -92,6 +99,22 @@
                     </span>
                     <span class="tambah-perintah">Tambah Pengajuan</span>
                 </button>
+                {{-- @if ($dievision_id === null || $division_id === '')
+                        <button class="btn btn-perintah mb-1" style="border-radius: 19px;" disabled>
+                            <span class="btn-label">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                            <span class="tambah-perintah">Tambah Pengajuan</span>
+                        </button>
+                    @else
+                        <button class="btn btn-perintah mb-1" style="border-radius: 19px;"
+                            onclick="window.location.href='{{ route('pengajuanDana.create') }}'">
+                            <span class="btn-label">
+                                <i class="fa fa-plus"></i>
+                            </span>
+                            <span class="tambah-perintah">Tambah Pengajuan</span>
+                        </button>
+                    @endif --}}
             </div>
         </div>
         <div class="row">
@@ -183,8 +206,9 @@
                                                     style="color:#4FD1C5; font-size:20px;">
                                                     <span class="tooltip-edit">Edit</span>
                                                 </a>
-                                                <a href="/pengajuan-dana/show/{{ $pdts->id }}" target="_blank"
-                                                    type="button" class="fas fa-eye btn btn-sm tooltip-container"
+                                                {{-- target="_blank" type="button" --}}
+                                                <a href="/pengajuan-dana/show/{{ $pdts->id }}"
+                                                    class="fas fa-eye btn btn-sm tooltip-container"
                                                     style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
                                                     <span class="tooltip-show">View</span>
                                                 </a>
@@ -210,6 +234,7 @@
             </div>
         </div>
     </div>
+
     <script>
         // JS DELETE
         function submitDelete(id) {
