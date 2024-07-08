@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 
+
 class SuratPerintahKerjaViewWebController extends Controller
 {
     function numberToRomanRepresentation($number)
@@ -27,6 +28,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         }
         return $returnValue;
     }
+
 
     public function index(Request $request)
     {
@@ -46,6 +48,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $no_spk = $nextId . '-SPK/SII/' . $this->numberToRomanRepresentation($currentMonth) . '/' . $currentYear;
         return $no_spk;
     }
+
 
     public function create()
     {
@@ -74,6 +77,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             ->with('no_spk', $no_spk);
     }
 
+
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -100,10 +104,10 @@ class SuratPerintahKerjaViewWebController extends Controller
             'supporting_document_type' => 'nullable|string',
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
-            'spesifikasi'               => 'nullable|string',
-            'jumlah' => 'nullable|integer',
-            'satuan' => 'nullable|string',
-            'keterangan'               => 'nullable|string',
+            'spesifikasi.*'               => 'nullable|string',
+            'jumlah.*' => 'nullable|integer',
+            'satuan.*' => 'nullable|string',
+            'keterangan.*'               => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -114,7 +118,6 @@ class SuratPerintahKerjaViewWebController extends Controller
 
         $userData = Session::get('user');
         $userId = $userData['id'];
-
 
         $suratPerintahKerjas = Surat_perintah_kerja::create([
             'form_number' => 'spk',
@@ -133,15 +136,21 @@ class SuratPerintahKerjaViewWebController extends Controller
             'type_format_pekerjaan' => $request->type_format_pekerjaan,
         ]);
 
+        if ($request->has('spesifikasi') && $request->has('jumlah') && $request->has('satuan') && $request->has('keterangan')) {
+            $details = [];
 
-        $suratPerintahKerjas->details_permintaan()->create([
-            'spesifikasi' => $request->spesifikasi,
-            'jumlah' => $request->jumlah,
-            'satuan' => $request->satuan,
-            'keterangan' => $request->keterangan,
-        ]);
+            foreach ($request->spesifikasi as $index => $spesifikasi) {
+                $details[] = [
+                    'spesifikasi' => $spesifikasi,
+                    'jumlah' => $request->jumlah[$index],
+                    'satuan' => $request->satuan[$index],
+                    'keterangan' => $request->keterangan[$index],
+                ];
+            }
 
-        // Logika penyimpanan file baru dan penghapusan file lama
+            $suratPerintahKerjas->details_permintaan()->createMany($details);
+        }
+
         if ($request->hasFile('supporting_document_file')) {
             $filePaths = [];
 
@@ -162,9 +171,9 @@ class SuratPerintahKerjaViewWebController extends Controller
             $suratPerintahKerjas->details()->create([
                 'job_description' => $request->job_description,
                 'supporting_document_type' => $request->supporting_document_type,
+                'supporting_document_file' => $suratPerintahKerjas->details()->first()->supporting_document_file,
             ]);
         }
-
 
         $suratPerintahKerjas->approvals()->create([
             'applicant_name' => $request->applicant_name,
@@ -188,6 +197,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         return redirect(route('surat_perintah_kerja.index'))->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
+
     public function ShowSuratPerintahKerja($id)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->where('id', (int)$id)->get();
@@ -196,6 +206,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         return $pdf->stream();
     }
 
+
     public function ShowPermintaanBarang($id)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->where('id', (int)$id)->get();
@@ -203,6 +214,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $pdf->setPaper(array(0, 0, 785, 1010));
         return $pdf->stream();
     }
+
 
     public function edit($id)
     {
@@ -223,142 +235,157 @@ class SuratPerintahKerjaViewWebController extends Controller
         ));
 
         $response = curl_exec($curl);
-
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details', 'details_permintaan')->find($id);
-        if ($suratPerintahKerjas) {
-            $approvals = $suratPerintahKerjas->approvals;
-            $details_permintaan = $suratPerintahKerjas->details_permintaan;
-            $details = $suratPerintahKerjas->details;
-            return view('suratPerintahKerja.edit', compact('suratPerintahKerjas', 'projects', 'approvals', 'details_permintaan', 'details'));
-        } else {
-            return view('page404');
+
+        $suratPerintahKerja = Surat_perintah_kerja::with(['details_permintaan', 'details', 'approvals'])->find($id);
+
+        if (!$suratPerintahKerja) {
+            return redirect(route('surat_perintah_kerja.index'))->with(['error' => 'Data Tidak Ditemukan!']);
         }
+
+        return view('suratPerintahKerja.edit')
+            ->with('projects', $projects)
+            ->with('suratPerintahKerja', $suratPerintahKerja)
+            ->with('details', $suratPerintahKerja->details_permintaan)
+            ->with('details_job', $suratPerintahKerja->details);
     }
 
 
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'code'          => 'required|string',
-            'applicant_name'               => 'required|string',
-            'receiver_name'               => 'nullable|string',
-            'approver_name'               => 'required|string',
-            'board_of_directors'               => 'required|string',
-            'applicant_position'               => 'required|string',
-            'receiver_position'               => 'nullable|string',
-            'approver_position'               => 'required|string',
-            'position'               => 'required|string',
-            'title'          => 'required|string',
-            'user'                  => 'required|string',
-            'main_contractor'       => 'required|string',
-            'project_manager'       => 'required|string',
-            'submission_date' => 'required|string',
-            'priority' => 'required|string',
-            'completion_time' => 'nullable|string',
-            'pic' => 'nullable|string',
-            'type_format_pekerjaan' =>  'required|string',
-            'job_type'               => 'required|string',
-            'job_description'               => 'nullable|string',
+            'code'                     => 'required|string',
+            'applicant_name'           => 'required|string',
+            'receiver_name'            => 'nullable|string',
+            'approver_name'            => 'required|string',
+            'board_of_directors'       => 'required|string',
+            'applicant_position'       => 'required|string',
+            'receiver_position'        => 'nullable|string',
+            'approver_position'        => 'required|string',
+            'position'                 => 'required|string',
+            'title'                    => 'required|string',
+            'user'                     => 'required|string',
+            'main_contractor'          => 'required|string',
+            'project_manager'          => 'required|string',
+            'submission_date'          => 'required|string',
+            'priority'                 => 'required|string',
+            'completion_time'          => 'nullable|string',
+            'pic'                      => 'nullable|string',
+            'type_format_pekerjaan'    => 'required|string',
+            'job_type'                 => 'required|string',
+            'job_description'          => 'nullable|string',
             'supporting_document_type' => 'nullable|string',
             'supporting_document_file' => 'nullable|array|max:3',
-            'supporting_document_file.*' => 'nullable|file',
-            'spesifikasi'               => 'nullable|string',
-            'jumlah' => 'nullable|integer',
-            'satuan' => 'nullable|string',
-            'keterangan'               => 'nullable|string',
+            'supporting_document_file.*' => 'nullable|file|max:5000',
+            'spesifikasi.*'            => 'nullable|string',
+            'jumlah.*'                 => 'nullable|integer',
+            'satuan.*'                 => 'nullable|string',
+            'keterangan.*'             => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        $suratPerintahKerjas = Surat_perintah_kerja::find($id);
-        $userData = Session::get('user');
-        $userId = $userData['id'];
+        $submission_date = date("Y-m-d", strtotime(str_replace('/', '-', $request->submission_date)));
 
-        $suratPerintahKerjas->update([
-            'user_id' => $userId,
-            'code' => $request->code,
-            'title' => $request->title,
-            'user' => $request->user,
-            'main_contractor' => $request->main_contractor,
-            'project_manager' => $request->project_manager,
-            'submission_date' => $request->submission_date,
-            'priority' => $request->priority,
-            'completion_time' => $request->completion_time,
-            'pic' => $request->pic,
-            'type_format_pekerjaan' => $request->type_format_pekerjaan,
+        $suratPerintahKerja = Surat_perintah_kerja::find($id);
+
+        if (!$suratPerintahKerja) {
+            return redirect(route('surat_perintah_kerja.index'))->with(['error' => 'Data Tidak Ditemukan!']);
+        }
+
+        $suratPerintahKerja->update([
+            'code'                     => $request->code,
+            'title'                    => $request->title,
+            'user'                     => $request->user,
+            'main_contractor'          => $request->main_contractor,
+            'project_manager'          => $request->project_manager,
+            'submission_date'          => $submission_date,
+            'priority'                 => $request->priority,
+            'completion_time'          => $request->completion_time,
+            'pic'                      => $request->pic,
+            'job_type'                 => $request->job_type,
+            'type_format_pekerjaan'    => $request->type_format_pekerjaan,
         ]);
 
         if ($request->type_format_pekerjaan === 'Surat Perintah Kerja') {
             if ($request->hasFile('supporting_document_file')) {
-                $filePaths = [];
-                $destinationPath = public_path('partas/posts/images');
-
-                $currentFiles = glob($destinationPath . '/*_' . $suratPerintahKerjas->id . '_*');
-                foreach ($currentFiles as $currentFile) {
-                    if (file_exists($currentFile)) {
-                        unlink($currentFile);
+                $oldFiles = json_decode($suratPerintahKerja->details->first()->supporting_document_file);
+                if ($oldFiles) {
+                    foreach ($oldFiles as $oldFile) {
+                        if (file_exists(public_path($oldFile))) {
+                            unlink(public_path($oldFile));
+                        }
                     }
                 }
 
-                foreach ($request->file('supporting_document_file') as $file) {
-                    $fileName = uniqid() . '_' . $suratPerintahKerjas->id . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    $filePath = 'partas/posts/images/' . $fileName;
+                $filePaths = [];
 
+                foreach ($request->file('supporting_document_file') as $file) {
+                    $fileName = uniqid() . '_' . $suratPerintahKerja->id . '_' . time() . '.' . $file->getClientOriginalExtension();
+                    $destinationPath = public_path('partas/posts/images');
                     $file->move($destinationPath, $fileName);
-                    $filePaths[] = $filePath;
+                    $filePaths[] = 'partas/posts/images/' . $fileName;
                 }
 
-                $suratPerintahKerjas->details()->update([
-                    'job_description' => $request->job_description,
+                $suratPerintahKerja->details()->update([
+                    'job_description'          => $request->job_description,
                     'supporting_document_type' => $request->supporting_document_type,
                     'supporting_document_file' => json_encode($filePaths),
                 ]);
             } else {
-                $suratPerintahKerjas->details()->update([
-                    'job_description' => $request->job_description,
+                $suratPerintahKerja->details()->update([
+                    'job_description'          => $request->job_description,
                     'supporting_document_type' => $request->supporting_document_type,
-                    'supporting_document_file' => $suratPerintahKerjas->details()->first()->supporting_document_file,
+                    'supporting_document_file' => $suratPerintahKerja->details->first()->supporting_document_file,
                 ]);
             }
 
-            $suratPerintahKerjas->details_permintaan()->update([
+            $suratPerintahKerja->details_permintaan()->update([
                 'spesifikasi' => null,
-                'jumlah' => null,
-                'satuan' => null,
-                'keterangan' => null,
+                'jumlah'      => null,
+                'satuan'      => null,
+                'keterangan'  => null,
             ]);
         } elseif ($request->type_format_pekerjaan === 'Surat Permintaan Barang') {
-            $suratPerintahKerjas->details_permintaan()->update([
-                'spesifikasi' => $request->spesifikasi,
-                'jumlah' => $request->jumlah,
-                'satuan' => $request->satuan,
-                'keterangan' => $request->keterangan,
-            ]);
+            if ($request->has('spesifikasi') && $request->has('jumlah') && $request->has('satuan') && $request->has('keterangan')) {
+                $suratPerintahKerja->details_permintaan()->delete();
 
-            $suratPerintahKerjas->details()->update([
-                'job_description' => null,
+                $details = [];
+
+                foreach ($request->spesifikasi as $index => $spesifikasi) {
+                    $details[] = [
+                        'spesifikasi' => $spesifikasi,
+                        'jumlah'      => $request->jumlah[$index],
+                        'satuan'      => $request->satuan[$index],
+                        'keterangan'  => $request->keterangan[$index],
+                    ];
+                }
+
+                $suratPerintahKerja->details_permintaan()->createMany($details);
+            }
+
+            $suratPerintahKerja->details()->update([
+                'job_description'          => null,
                 'supporting_document_type' => null,
                 'supporting_document_file' => null,
             ]);
         }
 
-        $suratPerintahKerjas->approvals()->update([
-            'applicant_name' => $request->applicant_name,
-            'receiver_name' => $request->receiver_name,
-            'approver_name' => $request->approver_name,
+        $suratPerintahKerja->approvals()->update([
+            'applicant_name'     => $request->applicant_name,
+            'receiver_name'      => $request->receiver_name,
+            'approver_name'      => $request->approver_name,
             'board_of_directors' => $request->board_of_directors,
             'applicant_position' => $request->applicant_position,
-            'receiver_position' => $request->receiver_position,
-            'approver_position' => $request->approver_position,
-            'position' => $request->position,
+            'receiver_position'  => $request->receiver_position,
+            'approver_position'  => $request->approver_position,
+            'position'           => $request->position,
         ]);
 
-        $suratPerintahKerjas->save();
-        return redirect(route('surat_perintah_kerja.index'));
+        return redirect(route('surat_perintah_kerja.index'))->with(['success' => 'Data Berhasil Diperbarui!']);
     }
 
 

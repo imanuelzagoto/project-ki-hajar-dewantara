@@ -212,41 +212,41 @@
                                             <div class="pr-4 py-2 col-3" id="spesifikasiContainer"
                                                 style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
-                                                <input type="text" id="spesifikasi" name="spesifikasi"
+                                                <input type="text" id="spesifikasi" name="spesifikasi[]"
                                                     class="form-control bg-light" style="height: 40px;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-2" id="jumlahContainer" style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                                <input type="number" id="jumlah" name="jumlah"
+                                                <input type="number" id="jumlah" name="jumlah[]"
                                                     class="form-control bg-light text-center" style="height: 40px;"
                                                     required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-2" id="satuanContainer" style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
-                                                <input type="text" id="satuan" name="satuan"
+                                                <input type="text" id="satuan" name="satuan[]"
                                                     class="form-control bg-light text-center" style="height: 40px;"
                                                     required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-4" id="keteranganContainer" style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Keterangan</span>
-                                                <textarea name="keterangan" id="keterangan" class="form-control bg-light" rows="3" style="height: 40px;"
+                                                <textarea name="keterangan[]" id="keterangan" class="form-control bg-light" rows="3" style="height: 40px;"
                                                     required></textarea>
                                             </div>
 
                                             <div class="py-2 col-1 JS-button-delete" id="deleteContainer"
-                                                style="display: none;">
+                                                style="display: flex; justify-content: flex-end; padding-right: 35px;">
                                                 <button class="btn btn-danger font-weight-bold JS-delete-btn"
                                                     id="buttonDelete"
-                                                    style="font-size: 11px; margin-top:21px; position: absolute; right: 29px; width:54px;"
+                                                    style=" font-size: 11px; margin-top:21px; position: absolute; right: 29px; width:54px;"
                                                     disabled>
                                                     <i class="fa-solid fa-minus"></i>
                                                 </button>
                                             </div>
 
-                                            <div id="itemFields"></div>
+                                            <div style="width:99.5%; margin-right:16px;" id="itemFields"></div>
 
                                             <div class="pr-4 py-2 col-6" id="uraianPekerjaan">
                                                 <span class="text-sm font-weight-bold text-form-detail">Uraian
@@ -435,7 +435,6 @@
         document.getElementById('submitSave').addEventListener('click', function() {
             console.log('Submit Save button clicked');
         });
-
 
         // handle file select
         function handleFileSelect(input) {
@@ -636,6 +635,7 @@
             var keteranganContainer = document.getElementById('keteranganContainer');
             var deleteContainer = document.getElementById('deleteContainer');
             var fileListContainer = document.getElementById('fileList');
+            var itemFieldsContainer = document.getElementById('itemFields');
 
             if (selectedValue === 'Surat Perintah Kerja') {
                 uraianPekerjaan.style.display = 'block';
@@ -647,6 +647,7 @@
                 satuanContainer.style.display = 'none';
                 keteranganContainer.style.display = 'none';
                 deleteContainer.style.display = 'none';
+                itemFieldsContainer.style.display = 'none';
 
                 document.getElementById('spesifikasi').removeAttribute('required');
                 document.getElementById('jumlah').removeAttribute('required');
@@ -659,7 +660,9 @@
                 document.getElementById('keterangan').value = null;
 
                 document.getElementById('uraian-pekerjaan').setAttribute('required', 'required');
-                // document.getElementById('choosefile').setAttribute('required', 'required');
+                while (itemFieldsContainer.firstChild) {
+                    itemFieldsContainer.removeChild(itemFieldsContainer.firstChild);
+                }
             } else if (selectedValue === 'Surat Permintaan Barang') {
                 tambahFieldContainer.style.display = 'block';
                 spesifikasiContainer.style.display = 'block';
@@ -667,6 +670,7 @@
                 satuanContainer.style.display = 'block';
                 keteranganContainer.style.display = 'block';
                 deleteContainer.style.display = 'block';
+                itemFieldsContainer.style.display = 'block';
 
                 uraianPekerjaan.style.display = 'none';
                 filePendukung.style.display = 'none';
@@ -676,9 +680,9 @@
 
                 document.getElementById('uraian-pekerjaan').value = null;
                 document.getElementById('choosefile').value = null;
-                document.getElementById('checkbox_gambar').value = null;
-                document.getElementById('checkbox_kontrak').value = null;
-                document.getElementById('checkbox_brosur').value = null;
+                // document.getElementById('checkbox_gambar').value = null;
+                // document.getElementById('checkbox_kontrak').value = null;
+                // document.getElementById('checkbox_brosur').value = null;
                 document.getElementById('fileList').value = null;
 
                 document.getElementById('checkbox_gambar').checked = false;
@@ -687,6 +691,8 @@
 
                 document.getElementById('spesifikasi').setAttribute('required', 'required');
                 document.getElementById('jumlah').setAttribute('required', 'required');
+                document.getElementById('satuan').setAttribute('required', 'required');
+                document.getElementById('keterangan').setAttribute('required', 'required');
 
 
                 if (fileListContainer) {
@@ -699,46 +705,42 @@
         });
         // END DETAIL SPK
 
-
-
         $(document).ready(function() {
-            // Ketika tombol Tambah diklik
             $("#tambahField").click(function(e) {
                 e.preventDefault();
                 addNewRow();
             });
 
-            // Fungsi untuk menambahkan baris baru
             function addNewRow() {
                 var newRow = `
-            <div class="row mb-2" style="margin-left: 0px;">
-                <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
-                    <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
-                    <input type="text" name="spesifikasi[]" class="form-control bg-light w-100" style="height: 40px;" required>
-                </div>
+                <div class="row mb-2" style="margin-left: 0px;">
+                    <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
+                        <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
+                        <input type="text" id="newspesifikasi" name="spesifikasi[]" class="form-control bg-light w-100" style="height: 40px;" required>
+                    </div>
 
-                <div class="pr-4 py-2 col-2" id="jumlahContainer">
-                    <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                    <input type="number" name="jumlah[]" class="form-control bg-light text-center w-100" style="height: 40px;" required>
-                </div>
+                    <div class="pr-4 py-2 col-2" id="jumlahContainer">
+                        <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                        <input type="number" name="jumlah[]" id="newjumlah" class="form-control bg-light text-center w-100" style="height: 40px;" required>
+                    </div>
 
-                <div class="pr-4 py-2 col-2" id="satuanContainer">
-                    <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
-                    <input type="text" name="satuan[]" class="form-control bg-light text-center w-100" style="height: 40px;" required>
-                </div>
+                    <div class="pr-4 py-2 col-2" id="satuanContainer">
+                        <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
+                        <input type="text" name="satuan[]" id="newsatuan" class="form-control bg-light text-center w-100" style="height: 40px;" required>
+                    </div>
 
-                <div class="pr-4 py-2 col-4" id="keteranganContainer">
-                    <span class="text-sm font-weight-bold text-form-detail">Keterangan</span>
-                    <textarea name="keterangan[]" class="form-control bg-light w-100" rows="3" style="height: 40px;" required></textarea>
-                </div>
+                    <div class="pr-4 py-2 col-4" id="keteranganContainer">
+                        <span class="text-sm font-weight-bold text-form-detail">Keterangan</span>
+                        <textarea name="keterangan[]" id="newketerangan" class="form-control bg-light w-100" rows="3" style="height: 40px;" required></textarea>
+                    </div>
 
-                <div class="py-2 col-1 JS-button-delete" id="deleteContainer">
-                    <button class="btn btn-danger font-weight-bold JS-delete-btn"
-                        style="font-size: 11px; margin-top:21px; padding-right: 29px; width:54px;">
-                        <i class="fa-solid fa-minus"></i>
-                    </button>
-                </div>
-            </div>`;
+                    <div class="py-2 col-1 JS-button-delete" id="deleteContainer" style="display: flex; justify-content: flex-end; padding-right: 35px; position:relative; left:9px;">
+                        <button class="btn btn-danger font-weight-bold JS-delete-btn"
+                            style=" font-size: 11px; margin-top:21px; padding-right: 29px; width:54px;">
+                            <i class="fa-solid fa-minus"></i>
+                        </button>
+                    </div>
+                </div>`;
                 $("#itemFields").append(newRow);
                 activateDeleteButtons();
             }

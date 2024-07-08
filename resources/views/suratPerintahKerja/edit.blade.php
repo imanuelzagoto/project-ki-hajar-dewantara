@@ -51,7 +51,7 @@
                 <h2 class="text-mp font-weight-bold display-6">
                     Edit Form SPK <span style="font-size: 22px; padding-left:8px;">&rArr;</span>
                     <span style="color: #a43b19; font-size: 17px; padding-left:8px;">
-                        {{ $suratPerintahKerjas->no_spk }}
+                        {{ $suratPerintahKerja->no_spk }}
                     </span>
                 </h2>
             </div>
@@ -76,7 +76,7 @@
             <div class="">
                 <div class="card card-with-scrollbar">
                     <div class="card-body">
-                        <form action="/surat-perintah-kerja/update/{{ $suratPerintahKerjas->id }}"
+                        <form action="/surat-perintah-kerja/update/{{ $suratPerintahKerja->id }}"
                             enctype="multipart/form-data" method="POST" onsubmit="return handleSubmit(event)">
                             @csrf
                             @method('PUT')
@@ -91,11 +91,11 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
                                                 <input type="hidden" id="kode_project_hidden" name="code"
-                                                    value="{{ $suratPerintahKerjas->code }}">
+                                                    value="{{ $suratPerintahKerja->code }}">
                                                 <select id="project_id" name="code" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()">
-                                                    <option value="{{ $suratPerintahKerjas->code }}" selected>
-                                                        {{ $suratPerintahKerjas->code }}
+                                                    <option value="{{ $suratPerintahKerja->code }}" selected>
+                                                        {{ $suratPerintahKerja->code }}
                                                     </option>
                                                     @foreach ($projects as $p)
                                                         <option value="{{ $p['code'] }}"
@@ -107,39 +107,39 @@
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nama Projek</span>
                                                 <input name="title" class="form-control w-100 disabled_input"
-                                                    id="nama" type="text" value="{{ $suratPerintahKerjas->title }}"
+                                                    id="nama" type="text" value="{{ $suratPerintahKerja->title }}"
                                                     required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
                                                 <input name="user" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $suratPerintahKerjas->user }}">
+                                                    value="{{ $suratPerintahKerja->user }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Main
                                                     Contractor</span>
                                                 <input name="main_contractor" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->main_contractor }}">
+                                                    type="text" value="{{ $suratPerintahKerja->main_contractor }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Project
                                                     Manager</span>
                                                 <input name="project_manager" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerjas->project_manager }}">
+                                                    type="text" value="{{ $suratPerintahKerja->project_manager }}">
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">PIC</span>
                                                 <input name="pic" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $suratPerintahKerjas->pic }}">
+                                                    value="{{ $suratPerintahKerja->pic }}">
                                             </div>
 
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan</span>
                                                 <?php
-                                                if ($suratPerintahKerjas->submission_date) {
-                                                    $submission_date = date('Y-m-d', strtotime(str_replace('/', '-', $suratPerintahKerjas->submission_date)));
+                                                if ($suratPerintahKerja->submission_date) {
+                                                    $submission_date = date('Y-m-d', strtotime(str_replace('/', '-', $suratPerintahKerja->submission_date)));
                                                 } else {
                                                     $submission_date = '';
                                                 }
@@ -154,13 +154,13 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Prioritas</span>
                                                 <select name="priority" class="form-control bg-light w-100">
                                                     <option value="" disabled
-                                                        {{ $suratPerintahKerjas->priority == '' ? 'selected' : '' }}>--
+                                                        {{ $suratPerintahKerja->priority == '' ? 'selected' : '' }}>--
                                                         Pilih Prioritas --</option>
                                                     <option value="-"
-                                                        {{ $suratPerintahKerjas->priority == '-' ? 'selected' : '' }}> -
+                                                        {{ $suratPerintahKerja->priority == '-' ? 'selected' : '' }}> -
                                                     </option>
                                                     <option value="Segera"
-                                                        {{ $suratPerintahKerjas->priority == 'Segera' ? 'selected' : '' }}>
+                                                        {{ $suratPerintahKerja->priority == 'Segera' ? 'selected' : '' }}>
                                                         Segera</option>
                                                 </select>
                                             </div>
@@ -169,8 +169,8 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Waktu
                                                     Penyelesaian</span>
                                                 <?php
-                                                if ($suratPerintahKerjas->completion_time) {
-                                                    $completion_time = date('Y-m-d', strtotime(str_replace('/', '-', $suratPerintahKerjas->completion_time)));
+                                                if ($suratPerintahKerja->completion_time) {
+                                                    $completion_time = date('Y-m-d', strtotime(str_replace('/', '-', $suratPerintahKerja->completion_time)));
                                                 } else {
                                                     $completion_time = '';
                                                 }
@@ -184,18 +184,20 @@
                             </div>
 
                             <div class="row pr-3 pt-3">
-                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex">
+                                <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                     <div class="font-weight-bold text-lg padding-project pt-form-create text-center">
                                         <span class="head-project" style="margin-left:17px;">Detail</span>
                                         <span class="hide-project">Project</span>
                                     </div>
+
                                     <div class="d-block w-100">
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">
-                                                    Jenis Pekerjaan</span>
-                                                <input name="job_type" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $suratPerintahKerjas->job_type }}">
+                                                <span class="text-sm font-weight-bold text-form-detail">Jenis
+                                                    Pekerjaan</span>
+                                                <input name="job_type" value="{{ $suratPerintahKerja->job_type }}"
+                                                    id="job_type" class="form-control bg-light w-100" type="text"
+                                                    required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6" id="container_type_format">
@@ -205,83 +207,99 @@
                                                     class="form-control bg-light w-100" onchange="toggleTypeFormat()"
                                                     required>
                                                     <option value="Surat Perintah Kerja"
-                                                        {{ $suratPerintahKerjas->type_format_pekerjaan == 'Surat Perintah Kerja' ? 'selected' : '' }}>
+                                                        {{ $suratPerintahKerja->type_format_pekerjaan == 'Surat Perintah Kerja' ? 'selected' : '' }}>
                                                         Surat Perintah Kerja</option>
                                                     <option value="Surat Permintaan Barang"
-                                                        {{ $suratPerintahKerjas->type_format_pekerjaan == 'Surat Permintaan Barang' ? 'selected' : '' }}>
-                                                        Surat Permintaan Barang
-                                                    </option>
+                                                        {{ $suratPerintahKerja->type_format_pekerjaan == 'Surat Permintaan Barang' ? 'selected' : '' }}>
+                                                        Surat Permintaan Barang</option>
                                                 </select>
                                             </div>
 
-                                            @foreach ($details_permintaan as $dp)
-                                                <div class="pr-4 py-2 col-12" id="tambahFieldContainer"
-                                                    style="display: none;">
-                                                    <button id="tambahField" type="button"
-                                                        class="btn button-tambah font-weight-bold">
-                                                        <span class="btn-label">
-                                                            <i class="fa-solid fa-plus"></i>
-                                                            Tambah
-                                                        </span>
-                                                    </button>
-                                                </div>
-                                                <div class="pr-4 py-2 col-3" id="spesifikasiContainer"
-                                                    style="display: none;">
-                                                    <span
-                                                        class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
-                                                    <input type="text" id="spesifikasi" name="spesifikasi"
-                                                        class="form-control bg-light" style="height: 50px;"
-                                                        value="{{ $dp->spesifikasi }}" required>
-                                                </div>
-                                                <div class="pr-4 py-2 col-2" id="jumlahContainer" style="display: none;">
-                                                    <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                                    <input type="number" id="jumlah" name="jumlah"
-                                                        class="form-control bg-light text-center" style="height: 50px;"
-                                                        value="{{ $dp->jumlah }}" required>
-                                                </div>
-                                                <div class="pr-4 py-2 col-2" id="satuanContainer" style="display: none;">
-                                                    <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
-                                                    <input type="text" id="satuan" name="satuan"
-                                                        value="{{ $dp->satuan }}"
-                                                        class="form-control bg-light text-center" style="height: 50px;"
-                                                        required>
-                                                </div>
-                                                <div class="pr-4 py-2 col-4" id="keteranganContainer"
-                                                    style="display: none;">
-                                                    <span
-                                                        class="text-sm font-weight-bold text-form-detail">Keterangan</span>
-                                                    <textarea name="keterangan" id="keterangan" class="form-control bg-light" rows="3"
-                                                        style="height: 50px; text-align: left;" required>{{ $dp->keterangan }}</textarea>
-                                                </div>
+                                            <div class="pr-4 py-2 col-12" id="tambahFieldContainer"
+                                                style="display: none; margin-top:3px;">
+                                                <button id="tambahField" type="button"
+                                                    class="btn button-tambah font-weight-bold">
+                                                    <span class="btn-label">
+                                                        <i class="fa-solid fa-plus"></i>
+                                                        Tambah
+                                                    </span>
+                                                </button>
+                                            </div>
 
-                                                <div class="py-2 col-1 JS-button-delete" id="deleteContainer"
-                                                    style="display: none;">
-                                                    <button class="btn btn-danger font-weight-bold JS-delete-btn"
-                                                        id="buttonDelete"
-                                                        style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;"
-                                                        disabled>
-                                                        <i class="fa-solid fa-minus"></i>
-                                                    </button>
-                                                </div>
-                                            @endforeach
+                                            <div style="width:99.5%;" id="itemFields">
+                                                @if (isset($details))
+                                                    @foreach ($details as $detail)
+                                                        <div class="row mb-2" style="margin-left: 0px;">
+                                                            <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
+                                                                <span
+                                                                    class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
+                                                                <input type="text" id="spesifikasi"
+                                                                    name="spesifikasi[]"
+                                                                    value="{{ $detail->spesifikasi }}"
+                                                                    class="form-control bg-light" style="height: 40px;"
+                                                                    required>
+                                                            </div>
 
-                                            @foreach ($details as $detail)
+                                                            <div class="pr-4 py-2 col-2" id="jumlahContainer">
+                                                                <span
+                                                                    class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                                                                <input type="number" id="jumlah" name="jumlah[]"
+                                                                    value="{{ $detail->jumlah }}"
+                                                                    class="form-control bg-light text-center"
+                                                                    style="height: 40px;" required>
+                                                            </div>
+
+                                                            <div class="pr-4 py-2 col-2" id="satuanContainer">
+                                                                <span
+                                                                    class="text-sm font-weight-bold text-form-detail">Satuan</span>
+                                                                <input type="text" id="satuan" name="satuan[]"
+                                                                    value="{{ $detail->satuan }}"
+                                                                    class="form-control bg-light text-center"
+                                                                    style="height: 40px;" required>
+                                                            </div>
+
+                                                            <div class="pr-4 py-2 col-4" id="keteranganContainer">
+                                                                <span
+                                                                    class="text-sm font-weight-bold text-form-detail">Keterangan</span>
+                                                                <textarea name="keterangan[]" id="keterangan" class="form-control bg-light" rows="3" style="height: 40px;"
+                                                                    required>{{ $detail->keterangan }}</textarea>
+                                                            </div>
+
+                                                            <div class="py-2 col-1 JS-button-delete" id="deleteContainer"
+                                                                style="display: flex; justify-content: flex-end; padding-right: 35px;">
+                                                                <button
+                                                                    class="btn btn-danger font-weight-bold JS-delete-btn"
+                                                                    id="buttonDelete"
+                                                                    style=" font-size: 11px; margin-top:21px; position: absolute; right: 29px; width:54px;"
+                                                                    disabled>
+                                                                    <i class="fa-solid fa-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
+
+                                            @foreach ($details_job as $detailss)
                                                 <div class="pr-4 py-2 col-6" id="uraianPekerjaan">
                                                     <span class="text-sm font-weight-bold text-form-detail">Uraian
                                                         Pekerjaan</span>
                                                     <textarea name="job_description" id="uraian-pekerjaan" class="form-control bg-light" rows="3"
-                                                        style="height: 138px;" required>{{ $detail->job_description }}</textarea>
+                                                        style="height: 138px;" required>{{ $detailss->job_description }}</textarea>
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-6" id="filePendukung">
                                                     <div class="text-sm font-weight-bold w-100 mb-2 text-form-detail"
-                                                        style="margin-top: 7px;">File Pendukung</div>
+                                                        style="margin-top: 7px;">
+                                                        File Pendukung
+                                                    </div>
+
                                                     <div class="d-flex">
                                                         <div class="form-checkbox-gambar d-flex">
                                                             <input name="supporting_document_type" type="checkbox"
                                                                 id="checkbox_gambar" value="1"
                                                                 onclick="handleCheckboxClick('gambar')"
-                                                                {{ $detail->supporting_document_type == 1 ? 'checked' : '' }}>
+                                                                {{ $detailss->supporting_document_type == 1 ? 'checked' : '' }}>
                                                             <span for="checkbox_gambar"
                                                                 class="text-checkbox">Gambar</span>
                                                         </div>
@@ -289,7 +307,7 @@
                                                             <input name="supporting_document_type" type="checkbox"
                                                                 id="checkbox_kontrak" value="2"
                                                                 onclick="handleCheckboxClick('kontrak')"
-                                                                {{ $detail->supporting_document_type == 2 ? 'checked' : '' }}>
+                                                                {{ $detailss->supporting_document_type == 2 ? 'checked' : '' }}>
                                                             <span for="checkbox_kontrak"
                                                                 class="text-checkbox">Kontrak</span>
                                                         </div>
@@ -297,7 +315,7 @@
                                                             <input name="supporting_document_type" type="checkbox"
                                                                 id="checkbox_brosur" value="3"
                                                                 onclick="handleCheckboxClick('brosur')"
-                                                                {{ $detail->supporting_document_type == 3 ? 'checked' : '' }}>
+                                                                {{ $detailss->supporting_document_type == 3 ? 'checked' : '' }}>
                                                             <span for="checkbox_brosur"
                                                                 class="text-checkbox">Brosur</span>
                                                         </div>
@@ -309,9 +327,10 @@
                                                             id="choosefile" multiple onchange="handleFileSelect(this)">
                                                     </label>
 
+
                                                     <div>
                                                         <ul id="fileList" class="mt-2">
-                                                            @foreach ($suratPerintahKerjas->details as $detail)
+                                                            @foreach ($suratPerintahKerja->details as $detail)
                                                                 @if (isset($detail['supporting_document_file']))
                                                                     @foreach (json_decode($detail['supporting_document_file'], true) as $filePath)
                                                                         <li name="supporting_document_file[]">
@@ -321,6 +340,7 @@
                                                                 @endif
                                                             @endforeach
                                                         </ul>
+
                                                     </div>
 
                                                     <div id="alertFileLimit" class="alert alert-danger"
@@ -337,7 +357,7 @@
                                 </div>
                             </div>
 
-                            <div class="row pr-3 pb-2" style="position: relative; bottom:18px;">
+                            <div class="row pr-3 pb-2" style="position: relative; top:18px;">
                                 <div class="col-12 col-lg-12 col-md-12 col-sm-12 d-flex ">
                                     <div class="font-weight-bold text-lg padding-project pt-form-create text-center">
                                         <span class="head-project">Hormat<br>Kami</span>
@@ -345,29 +365,29 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            @foreach ($approvals as $suratPerintahKerjas)
+                                            @foreach ($suratPerintahKerja->approvals as $suratPerintahKerja)
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
                                                     <input name="applicant_name" class="form-control bg-light w-100"
-                                                        type="text" value="{{ $suratPerintahKerjas->applicant_name }}"
+                                                        type="text" value="{{ $suratPerintahKerja->applicant_name }}"
                                                         required>
                                                 </div>
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
                                                     <input name="applicant_position" class="form-control bg-light w-100"
                                                         type="text"
-                                                        value="{{ $suratPerintahKerjas->applicant_position }}" required>
+                                                        value="{{ $suratPerintahKerja->applicant_position }}" required>
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
                                                     <input name="receiver_name" class="form-control bg-light w-100"
-                                                        type="text" value="{{ $suratPerintahKerjas->receiver_name }}">
+                                                        type="text" value="{{ $suratPerintahKerja->receiver_name }}">
                                                 </div>
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
                                                     <input name="receiver_position" class="form-control bg-light w-100"
-                                                        value="{{ $suratPerintahKerjas->receiver_position }}"
+                                                        value="{{ $suratPerintahKerja->receiver_position }}"
                                                         type="text">
                                                 </div>
 
@@ -375,14 +395,14 @@
                                                     <span
                                                         class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
                                                     <input name="approver_name" class="form-control bg-light w-100"
-                                                        type="text" value="{{ $suratPerintahKerjas->approver_name }}"
+                                                        type="text" value="{{ $suratPerintahKerja->approver_name }}"
                                                         required>
                                                 </div>
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
                                                     <input name="approver_position" class="form-control bg-light w-100"
                                                         type="text"
-                                                        value="{{ $suratPerintahKerjas->approver_position }}" required>
+                                                        value="{{ $suratPerintahKerja->approver_position }}" required>
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-6">
@@ -391,18 +411,18 @@
                                                     <select name="board_of_directors" class="form-control bg-light w-100"
                                                         required>
                                                         <option value="" disabled selected
-                                                            {{ $suratPerintahKerjas->board_of_directors == '' ? 'selected' : '' }}>
+                                                            {{ $suratPerintahKerja->board_of_directors == '' ? 'selected' : '' }}>
                                                         </option>
                                                         <option value="Erwin Danuaji"
-                                                            {{ $suratPerintahKerjas->board_of_directors == 'Erwin Danuaji' ? 'selected' : '' }}>
+                                                            {{ $suratPerintahKerja->board_of_directors == 'Erwin Danuaji' ? 'selected' : '' }}>
                                                             Erwin Danuaji
                                                         </option>
                                                         <option value="Victor"
-                                                            {{ $suratPerintahKerjas->board_of_directors == 'Victor' ? 'selected' : '' }}>
+                                                            {{ $suratPerintahKerja->board_of_directors == 'Victor' ? 'selected' : '' }}>
                                                             Victor
                                                         </option>
                                                         <option value="Sindu Irawan"
-                                                            {{ $suratPerintahKerjas->board_of_directors == 'Sindu Irawan' ? 'selected' : '' }}>
+                                                            {{ $suratPerintahKerja->board_of_directors == 'Sindu Irawan' ? 'selected' : '' }}>
                                                             Sindu Irawan
                                                         </option>
                                                     </select>
@@ -413,7 +433,7 @@
                                                     </span>
                                                     <input name="position"
                                                         class="form-control bg-light w-100 disabled-input"
-                                                        value="{{ $suratPerintahKerjas->position }}" type="text"
+                                                        value="{{ $suratPerintahKerja->position }}" type="text"
                                                         style="background-color: #D9D9D9 !important;" required>
                                                 </div>
                                             @endforeach
@@ -521,8 +541,6 @@
                 alertFileLimit.style.display = 'none';
 
                 fileListElement.innerHTML = '';
-
-                // Batasi jumlah file maksimal 3
                 if (files.length > 3) {
                     alertFileLimit.style.display = 'block';
                     fileInput.value = '';
@@ -544,7 +562,7 @@
                     }
                 } else {
                     updateFileInputRequired();
-                    // fileInput.setAttribute('required', 'required');
+
                 }
             });
 
@@ -597,6 +615,13 @@
             });
         });
         // END HANDLE FILE PENDUKUNG SPK
+
+
+        const deleteButtons = document.querySelectorAll('.JS-delete-btn');
+        for (let i = 1; i < deleteButtons.length; i++) {
+            deleteButtons[i].disabled = false;
+        }
+        deleteButtons[0].addEventListener('click', function() {});
     </script>
 @endsection
 
@@ -607,6 +632,7 @@
             updateClock();
         });
 
+
         function updateClock() {
             var now = new Date();
             var days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
@@ -614,7 +640,6 @@
                 'November', 'Desember'
             ];
 
-            // Set timezone to Asia/Jakarta
             var options = {
                 timeZone: 'Asia/Jakarta',
                 weekday: 'long'
@@ -627,12 +652,13 @@
 
             var datetimeElement = document.getElementById('datetime');
             if (datetimeElement) {
-                // Perbarui innerHTML elemen 'datetime' jika ditemukan
+
                 datetimeElement.innerHTML = dateTimeString;
             } else {
                 console.error("Datetime element not found.");
             }
         }
+
 
         function formatTime(date) {
             var hours = date.getHours();
@@ -645,10 +671,10 @@
             return strTime;
         }
 
-        // DETAIL SPK
+
         function toggleTypeFormat() {
             var selectBox = document.getElementById('type_format_pekerjaan');
-            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+            var selectedValue = selectBox ? selectBox.options[selectBox.selectedIndex].value : null;
 
             var uraianPekerjaan = document.getElementById('uraianPekerjaan');
             var filePendukung = document.getElementById('filePendukung');
@@ -659,58 +685,76 @@
             var keteranganContainer = document.getElementById('keteranganContainer');
             var deleteContainer = document.getElementById('deleteContainer');
             var fileListContainer = document.getElementById('fileList');
+            var itemFieldsContainer = document.getElementById('itemFields');
+
+            if (!selectedValue) {
+                console.error("Select box or its value is not found.");
+                return;
+            }
 
             if (selectedValue === 'Surat Perintah Kerja') {
-                uraianPekerjaan.style.display = 'block';
-                filePendukung.style.display = 'block';
+                if (uraianPekerjaan) uraianPekerjaan.style.display = 'block';
+                if (filePendukung) filePendukung.style.display = 'block';
 
-                tambahFieldContainer.style.display = 'none';
-                spesifikasiContainer.style.display = 'none';
-                jumlahContainer.style.display = 'none';
-                satuanContainer.style.display = 'none';
-                keteranganContainer.style.display = 'none';
-                deleteContainer.style.display = 'none';
+                if (tambahFieldContainer) tambahFieldContainer.style.display = 'none';
+                if (spesifikasiContainer) spesifikasiContainer.style.display = 'none';
+                if (jumlahContainer) jumlahContainer.style.display = 'none';
+                if (satuanContainer) satuanContainer.style.display = 'none';
+                if (keteranganContainer) keteranganContainer.style.display = 'none';
+                if (deleteContainer) deleteContainer.style.display = 'none';
+                if (itemFieldsContainer) {
+                    if (itemFieldsContainer.children.length > 1) {
+                        while (itemFieldsContainer.children.length > 1) {
+                            itemFieldsContainer.removeChild(itemFieldsContainer.lastChild);
+                        }
+                    }
+                    itemFieldsContainer.style.display = 'none';
+                }
 
-                document.getElementById('spesifikasi').removeAttribute('required');
-                document.getElementById('jumlah').removeAttribute('required');
-                document.getElementById('satuan').removeAttribute('required');
-                document.getElementById('keterangan').removeAttribute('required');
+                if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').removeAttribute(
+                    'required');
+                if (document.getElementById('jumlah')) document.getElementById('jumlah').removeAttribute('required');
+                if (document.getElementById('satuan')) document.getElementById('satuan').removeAttribute('required');
+                if (document.getElementById('keterangan')) document.getElementById('keterangan').removeAttribute(
+                    'required');
 
-                document.getElementById('spesifikasi').value = null;
-                document.getElementById('jumlah').value = null;
-                document.getElementById('satuan').value = null;
-                document.getElementById('keterangan').value = null;
+                if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').value = null;
+                if (document.getElementById('jumlah')) document.getElementById('jumlah').value = null;
+                if (document.getElementById('satuan')) document.getElementById('satuan').value = null;
+                if (document.getElementById('keterangan')) document.getElementById('keterangan').value = null;
 
-                document.getElementById('uraian-pekerjaan').setAttribute('required', 'required');
-                // document.getElementById('choosefile').setAttribute('required', 'required');
+                if (document.getElementById('uraian-pekerjaan')) document.getElementById('uraian-pekerjaan').setAttribute(
+                    'required', 'required');
+
             } else if (selectedValue === 'Surat Permintaan Barang') {
-                tambahFieldContainer.style.display = 'block';
-                spesifikasiContainer.style.display = 'block';
-                jumlahContainer.style.display = 'block';
-                satuanContainer.style.display = 'block';
-                keteranganContainer.style.display = 'block';
-                deleteContainer.style.display = 'block';
+                if (tambahFieldContainer) tambahFieldContainer.style.display = 'block';
+                if (spesifikasiContainer) spesifikasiContainer.style.display = 'block';
+                if (jumlahContainer) jumlahContainer.style.display = 'block';
+                if (satuanContainer) satuanContainer.style.display = 'block';
+                if (keteranganContainer) keteranganContainer.style.display = 'block';
+                if (deleteContainer) deleteContainer.style.display = 'block';
+                if (itemFieldsContainer) itemFieldsContainer.style.display = 'block';
+                if (uraianPekerjaan) uraianPekerjaan.style.display = 'none';
+                if (filePendukung) filePendukung.style.display = 'none';
 
-                uraianPekerjaan.style.display = 'none';
-                filePendukung.style.display = 'none';
+                if (document.getElementById('uraian-pekerjaan')) document.getElementById('uraian-pekerjaan')
+                    .removeAttribute('required');
+                if (document.getElementById('choosefile')) document.getElementById('choosefile').removeAttribute(
+                    'required');
 
-                document.getElementById('uraian-pekerjaan').removeAttribute('required');
-                document.getElementById('choosefile').removeAttribute('required');
+                if (document.getElementById('uraian-pekerjaan')) document.getElementById('uraian-pekerjaan').value = null;
+                if (document.getElementById('choosefile')) document.getElementById('choosefile').value = null;
+                if (fileListContainer) fileListContainer.value = null;
 
-                document.getElementById('uraian-pekerjaan').value = null;
-                document.getElementById('choosefile').value = null;
-                document.getElementById('checkbox_gambar').value = null;
-                document.getElementById('checkbox_kontrak').value = null;
-                document.getElementById('checkbox_brosur').value = null;
-                document.getElementById('fileList').value = null;
+                if (document.getElementById('checkbox_gambar')) document.getElementById('checkbox_gambar').checked = false;
+                if (document.getElementById('checkbox_kontrak')) document.getElementById('checkbox_kontrak').checked =
+                    false;
+                if (document.getElementById('checkbox_brosur')) document.getElementById('checkbox_brosur').checked = false;
 
-                document.getElementById('checkbox_gambar').checked = false;
-                document.getElementById('checkbox_kontrak').checked = false;
-                document.getElementById('checkbox_brosur').checked = false;
-
-                document.getElementById('spesifikasi').setAttribute('required', 'required');
-                document.getElementById('jumlah').setAttribute('required', 'required');
-
+                if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').setAttribute('required',
+                    'required');
+                if (document.getElementById('jumlah')) document.getElementById('jumlah').setAttribute('required',
+                    'required');
 
                 if (fileListContainer) {
                     fileListContainer.innerHTML = '';
@@ -720,6 +764,85 @@
         document.addEventListener("DOMContentLoaded", function() {
             toggleTypeFormat();
         });
-        // END DETAIL SPK
+
+
+        $(document).ready(function() {
+            $("#tambahField").click(function(e) {
+                e.preventDefault();
+                addNewRow();
+            });
+
+            function addNewRow() {
+                var newRow = `
+            <div class="row mb-2" style="margin-left: 0px;">
+                <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
+                    <input type="text" id="newspesifikasi" name="spesifikasi[]" class="form-control bg-light w-100" style="height: 40px;" required>
+                </div>
+
+                <div class="pr-4 py-2 col-2" id="jumlahContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                    <input type="number" name="jumlah[]" id="newjumlah" class="form-control bg-light text-center w-100" style="height: 40px;" required>
+                </div>
+
+                <div class="pr-4 py-2 col-2" id="satuanContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
+                    <input type="text" name="satuan[]" id="newsatuan" class="form-control bg-light text-center w-100" style="height: 40px;" required>
+                </div>
+
+                <div class="pr-4 py-2 col-4" id="keteranganContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Keterangan</span>
+                    <textarea name="keterangan[]" id="newketerangan" class="form-control bg-light w-100" rows="3" style="height: 40px;" required></textarea>
+                </div>
+
+                <div class="py-2 col-1 JS-button-delete" id="deleteContainer" style="display: flex; justify-content: flex-end; padding-right: 35px; position:relative; left:9px;">
+                    <button class="btn btn-danger font-weight-bold JS-delete-btn"
+                        style=" font-size: 11px; margin-top:21px; padding-right: 29px; width:54px;">
+                        <i class="fa-solid fa-minus"></i>
+                    </button>
+                </div>
+            </div>`;
+                $("#itemFields").append(newRow);
+                activateDeleteButtons();
+            }
+
+            function activateDeleteButtons() {
+                $(".JS-delete-btn").click(function() {
+                    $(this).closest(".row").remove();
+                });
+            }
+
+            activateDeleteButtons();
+        });
+
+
+        function handleFileSelect(input) {
+            var files = input.files;
+            var fileList = document.getElementById('fileList');
+            var errorMessages = [];
+
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var fileType = file.type.toLowerCase();
+
+                if (fileType === 'application/pdf' ||
+                    fileType === 'application/msword' ||
+                    fileType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' ||
+                    fileType === 'application/vnd.ms-excel' ||
+                    fileType === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
+                    errorMessages.push('<span class="error-message">' + file.name +
+                        ' cannot be uploaded. Please choose another file.</span>');
+                }
+            }
+
+            if (errorMessages.length > 0) {
+                var errorMessageHtml = '<div class="alert alert-danger" role="alert">' + errorMessages.join('<br>') +
+                    '</div>';
+                fileList.innerHTML = errorMessageHtml;
+                input.value = '';
+            } else {
+                fileList.innerHTML = '';
+            }
+        }
     </script>
 @endpush
