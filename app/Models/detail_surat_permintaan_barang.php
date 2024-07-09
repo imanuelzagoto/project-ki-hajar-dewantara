@@ -9,6 +9,7 @@ class detail_surat_permintaan_barang extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'jenis_pekerjaan',
         'spesifikasi',
         'jumlah',
         'satuan',

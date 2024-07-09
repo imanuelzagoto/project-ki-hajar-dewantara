@@ -34,6 +34,7 @@ class PengajuanDanaViewWebController extends Controller
         return $returnValue;
     }
 
+
     public function index(Request $request)
     {
         $userData = Session::get('user');
@@ -50,6 +51,7 @@ class PengajuanDanaViewWebController extends Controller
         }
         return view('pengajuanDana.index', compact('pengajuanDanas'));
     }
+
 
     public function getApproval(Request $request)
     {
@@ -71,6 +73,7 @@ class PengajuanDanaViewWebController extends Controller
 
         return response()->json($formatted_tags_approval);
     }
+
 
     public function create()
     {
@@ -101,6 +104,7 @@ class PengajuanDanaViewWebController extends Controller
         $tags_approval_data = RequestApproval::all();
         return view('pengajuanDana.create', compact('no_doc', 'tags_approval_data', 'projects'));
     }
+
 
     public function store(Request $request)
     {
@@ -134,19 +138,15 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json($validator->errors(), 422);
         }
 
-        // Default to empty array if null
         $pemeriksa = $request->input('pemeriksa', []);
         $persetujuan = $request->input('persetujuan', []);
 
-        // Map pemeriksa dan persetujuan menjadi array integer
         $pemeriksa_ids = array_map('intval', $pemeriksa);
         $persetujuan_ids = array_map('intval', $persetujuan);
 
-        // Mengambil data pengguna dari sesi dan ID
         $userData = Session::get('user');
         $userId = $userData['id'];
         $devisionId = $userData['division_id'];
-        // dd($devisionId);
 
         $pengajuanDanas = PengajuanDana::create([
             'form_number' => 'doc_pd',
@@ -196,6 +196,7 @@ class PengajuanDanaViewWebController extends Controller
         return redirect()->route('pengajuanDana.index')->with(['success' => 'Data Berhasil Disimpan!']);
     }
 
+
     public function show($id)
     {
         $pengajuan_danas = PengajuanDana::with('items', 'details')->where('id', (int)$id)->get();
@@ -204,6 +205,7 @@ class PengajuanDanaViewWebController extends Controller
         $pdf->setPaper(array(0, 0, 899.45, 1080));
         return $pdf->stream();
     }
+
 
     public function edit($id)
     {
@@ -234,6 +236,7 @@ class PengajuanDanaViewWebController extends Controller
             return view('page404');
         }
     }
+
 
     public function update(Request $request, $id)
     {
@@ -341,6 +344,7 @@ class PengajuanDanaViewWebController extends Controller
         return redirect()->route('pengajuanDana.index')->with(['success' => 'Data Berhasil Diperbarui!']);
     }
 
+
     public function destroy($id)
     {
         $pengajuanDana = PengajuanDana::find($id);
@@ -353,6 +357,7 @@ class PengajuanDanaViewWebController extends Controller
 
         return redirect(route('pengajuanDana.index'));
     }
+
 
     public function exportPDF($id)
     {

@@ -192,13 +192,26 @@
 
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jenis
-                                                    Pekerjaan</span>
-                                                <input name="job_type" value="{{ $suratPerintahKerja->job_type }}"
-                                                    id="job_type" class="form-control bg-light w-100" type="text"
-                                                    required>
+
+                                            <div class="pr-4 py-2 col-6" id="job_type_Container">
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Jenis Pekerjaan
+                                                </span>
+                                                <input name="job_type" id="job_type"
+                                                    value="{{ $suratPerintahKerja->job_type }}"
+                                                    class="form-control bg-light w-100" type="text" required>
                                             </div>
+
+                                            @foreach ($details as $detail)
+                                                <div class="pr-4 py-2 col-6" id="jenis_pekerjaan_Container">
+                                                    <span class="text-sm font-weight-bold text-form-detail">
+                                                        Jenis
+                                                    </span>
+                                                    <input name="jenis_pekerjaan" id="jenis_pekerjaan"
+                                                        value="{{ $detail->jenis_pekerjaan }}"
+                                                        class="form-control bg-light w-100" type="text" required>
+                                                </div>
+                                            @endforeach
 
                                             <div class="pr-4 py-2 col-6" id="container_type_format">
                                                 <span class="text-sm font-weight-bold text-form-detail">Type Format
@@ -676,6 +689,9 @@
             var selectBox = document.getElementById('type_format_pekerjaan');
             var selectedValue = selectBox ? selectBox.options[selectBox.selectedIndex].value : null;
 
+            var job_type_Container = document.getElementById('job_type_Container');
+            var jenis_pekerjaan_Container = document.getElementById('jenis_pekerjaan_Container');
+
             var uraianPekerjaan = document.getElementById('uraianPekerjaan');
             var filePendukung = document.getElementById('filePendukung');
             var tambahFieldContainer = document.getElementById('tambahFieldContainer');
@@ -693,9 +709,11 @@
             }
 
             if (selectedValue === 'Surat Perintah Kerja') {
+                if (job_type_Container) job_type_Container.style.display = 'block';
                 if (uraianPekerjaan) uraianPekerjaan.style.display = 'block';
                 if (filePendukung) filePendukung.style.display = 'block';
 
+                if (jenis_pekerjaan_Container) jenis_pekerjaan_Container.style.display = 'none';
                 if (tambahFieldContainer) tambahFieldContainer.style.display = 'none';
                 if (spesifikasiContainer) spesifikasiContainer.style.display = 'none';
                 if (jumlahContainer) jumlahContainer.style.display = 'none';
@@ -711,6 +729,8 @@
                     itemFieldsContainer.style.display = 'none';
                 }
 
+                if (document.getElementById('jenis_pekerjaan')) document.getElementById('jenis_pekerjaan').removeAttribute(
+                    'required');
                 if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').removeAttribute(
                     'required');
                 if (document.getElementById('jumlah')) document.getElementById('jumlah').removeAttribute('required');
@@ -718,6 +738,7 @@
                 if (document.getElementById('keterangan')) document.getElementById('keterangan').removeAttribute(
                     'required');
 
+                if (document.getElementById('jenis_pekerjaan')) document.getElementById('jenis_pekerjaan').value = null;
                 if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').value = null;
                 if (document.getElementById('jumlah')) document.getElementById('jumlah').value = null;
                 if (document.getElementById('satuan')) document.getElementById('satuan').value = null;
@@ -727,6 +748,7 @@
                     'required', 'required');
 
             } else if (selectedValue === 'Surat Permintaan Barang') {
+                if (jenis_pekerjaan_Container) jenis_pekerjaan_Container.style.display = 'block';
                 if (tambahFieldContainer) tambahFieldContainer.style.display = 'block';
                 if (spesifikasiContainer) spesifikasiContainer.style.display = 'block';
                 if (jumlahContainer) jumlahContainer.style.display = 'block';
@@ -734,14 +756,18 @@
                 if (keteranganContainer) keteranganContainer.style.display = 'block';
                 if (deleteContainer) deleteContainer.style.display = 'block';
                 if (itemFieldsContainer) itemFieldsContainer.style.display = 'block';
+
+                if (job_type_Container) job_type_Container.style.display = 'none';
                 if (uraianPekerjaan) uraianPekerjaan.style.display = 'none';
                 if (filePendukung) filePendukung.style.display = 'none';
 
+                if (document.getElementById('job_type')) document.getElementById('job_type').removeAttribute('required');
                 if (document.getElementById('uraian-pekerjaan')) document.getElementById('uraian-pekerjaan')
                     .removeAttribute('required');
                 if (document.getElementById('choosefile')) document.getElementById('choosefile').removeAttribute(
                     'required');
 
+                if (document.getElementById('job_type')) document.getElementById('job_type').value = null;
                 if (document.getElementById('uraian-pekerjaan')) document.getElementById('uraian-pekerjaan').value = null;
                 if (document.getElementById('choosefile')) document.getElementById('choosefile').value = null;
                 if (fileListContainer) fileListContainer.value = null;

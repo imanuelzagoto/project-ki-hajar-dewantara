@@ -166,44 +166,50 @@
                                 <th class="keterangan_pekerjaan_PB font-weight-bold text-center">KETERANGAN</th>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="value_jenis_pekerjaan_PB" rowspan="5">Pemesanan Konsumsi Paparan</td>
+                                @foreach ($suratPerintahKerjas as $suratPerintahKerja)
+                                    @foreach ($suratPerintahKerja->details_permintaan as $detail)
+                                        <tr>
+                                            <td class="value_jenis_pekerjaan_PB" rowspan="5">
+                                                {{ $detail->job_description }}
+                                            </td>
 
-                                    <td class="hidden_column_detail" rowspan="5">
+                                            <td class="hidden_column_detail" rowspan="5"></td>
 
-                                    </td>
+                                            <td class="value_spefikasi_pekerjaan_PB" rowspan="5">
+                                                {{ $detail->spesifikasi }}
+                                            </td>
 
-                                    <td class="value_spefikasi_pekerjaan_PB" rowspan="5">
-                                        Snack :
-                                        Holland (3 jenis)
-                                    </td>
+                                            <td class="value_jumlah_PB text-center" rowspan="5">
+                                                {{ $detail->jumlah ?? '' }} {{ $detail->satuan ?? '' }}
+                                            </td>
 
-                                    <td class="value_jumlah_PB text-center" rowspan="5">35 box</td>
+                                            <td class="value_keterangan_pekerjaan_PB text-center" rowspan="5">Untuk
+                                                {{ $detail->keterangan }}
+                                            </td>
+                                        </tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr>
+                                            <td style=" border: 1.8px solid black; border-top: none;" rowspan="5">
 
-                                    <td class="value_keterangan_pekerjaan_PB text-center" rowspan="5">Untuk
-                                        Kegiatan Paparan
-                                        Produk ISA, Admiralty dan</td>
-                                </tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr>
-                                    <td style=" border: 1.8px solid black; border-top: none;" rowspan="5">
-
-                                    </td>
-                                    <td class="hidden_column_detail" rowspan="5">
-                                    </td>
-                                    <td style=" border: 1.8px solid black; border-top: none;" rowspan="5">
-                                    </td>
-                                    <td style=" border: 1.8px solid black; border-top: none;" rowspan="5"></td>
-                                    <td style=" border: 1.8px solid black; border-right: none; border-top: none;"
-                                        rowspan="5"></td>
-                                </tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
+                                            </td>
+                                            <td class="hidden_column_detail" rowspan="5">
+                                            </td>
+                                            <td style=" border: 1.8px solid black; border-top: none;" rowspan="5">
+                                            </td>
+                                            <td style=" border: 1.8px solid black; border-top: none;" rowspan="5">
+                                            </td>
+                                            <td style=" border: 1.8px solid black; border-right: none; border-top: none;"
+                                                rowspan="5"></td>
+                                        </tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                        <tr></tr>
+                                    @endforeach
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

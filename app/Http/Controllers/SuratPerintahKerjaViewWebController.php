@@ -99,11 +99,12 @@ class SuratPerintahKerjaViewWebController extends Controller
             'completion_time' => 'nullable|string',
             'pic' => 'nullable|string',
             'type_format_pekerjaan' => 'required|string',
-            'job_type' => 'required|string',
+            'job_type' => 'nullable|string',
             'job_description' => 'nullable|string',
             'supporting_document_type' => 'nullable|string',
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
+            'jenis_pekerjaan'          => 'nullable|string',
             'spesifikasi.*' => 'nullable|string',
             'jumlah.*' => 'nullable|integer',
             'satuan.*' => 'nullable|string',
@@ -141,6 +142,7 @@ class SuratPerintahKerjaViewWebController extends Controller
 
             foreach ($request->spesifikasi as $index => $spesifikasi) {
                 $details[] = [
+                    'jenis_pekerjaan' => $request->jenis_pekerjaan,
                     'spesifikasi' => $spesifikasi,
                     'jumlah' => $request->jumlah[$index],
                     'satuan' => $request->satuan[$index],
@@ -201,9 +203,8 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function ShowPDF($id)
     {
-        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->where('id', (int)$id)->get();
+        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details', 'details_permintaan')->where('id', (int)$id)->get();
         $typeFormatPekerjaan = $suratPerintahKerjas->first()->type_format_pekerjaan;
-        // dd($typeFormatPekerjaan);
         if ($typeFormatPekerjaan == 'Surat Perintah Kerja') {
             $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja', compact('suratPerintahKerjas'));
         } elseif ($typeFormatPekerjaan == 'Surat Permintaan Barang') {
@@ -273,11 +274,12 @@ class SuratPerintahKerjaViewWebController extends Controller
             'completion_time'          => 'nullable|string',
             'pic'                      => 'nullable|string',
             'type_format_pekerjaan'    => 'required|string',
-            'job_type'                 => 'required|string',
+            'job_type'                 => 'nullable|string',
             'job_description'          => 'nullable|string',
             'supporting_document_type' => 'nullable|string',
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
+            'jenis_pekerjaan'          => 'nullable|string',
             'spesifikasi.*'            => 'nullable|string',
             'jumlah.*'                 => 'nullable|integer',
             'satuan.*'                 => 'nullable|string',
@@ -344,6 +346,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             }
 
             $suratPerintahKerja->details_permintaan()->update([
+                'jenis_pekerjaan' => null,
                 'spesifikasi' => null,
                 'jumlah'      => null,
                 'satuan'      => null,
@@ -357,6 +360,7 @@ class SuratPerintahKerjaViewWebController extends Controller
 
                 foreach ($request->spesifikasi as $index => $spesifikasi) {
                     $details[] = [
+                        'jenis_pekerjaan' => $request->jenis_pekerjaan,
                         'spesifikasi' => $spesifikasi,
                         'jumlah'      => $request->jumlah[$index],
                         'satuan'      => $request->satuan[$index],

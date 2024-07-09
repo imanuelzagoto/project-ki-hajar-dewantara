@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('priority');
             $table->date('completion_time')->nullable();
             $table->string('pic')->nullable();
-            $table->text('job_type');
+            $table->text('job_type')->nullable();
             $table->string('type_format_pekerjaan');
             $table->timestamps();
         });

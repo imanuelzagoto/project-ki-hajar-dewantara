@@ -179,11 +179,21 @@
 
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Jenis
-                                                    Pekerjaan</span>
+
+                                            <div class="pr-4 py-2 col-6" id="job_type_Container">
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Jenis Pekerjaan
+                                                </span>
                                                 <input name="job_type" id="job_type" class="form-control bg-light w-100"
                                                     type="text" required>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-6" id="jenis_pekerjaan_Container">
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Jenis Pekerjaan
+                                                </span>
+                                                <input name="jenis_pekerjaan" id="jenis_pekerjaan"
+                                                    class="form-control bg-light w-100" type="text" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6" id="container_type_format">
@@ -192,8 +202,11 @@
                                                 <select name="type_format_pekerjaan" id="type_format_pekerjaan"
                                                     class="form-control bg-light w-100" onchange="toggleTypeFormat()"
                                                     required>
-                                                    <option value="Surat Perintah Kerja">Surat Perintah Kerja</option>
-                                                    <option value="Surat Permintaan Barang">Surat Permintaan Barang
+                                                    <option value="Surat Perintah Kerja">
+                                                        Surat Perintah Kerja
+                                                    </option>
+                                                    <option value="Surat Permintaan Barang">
+                                                        Surat Permintaan Barang
                                                     </option>
                                                 </select>
                                             </div>
@@ -626,6 +639,9 @@
             var selectBox = document.getElementById('type_format_pekerjaan');
             var selectedValue = selectBox.options[selectBox.selectedIndex].value;
 
+            var job_type_Container = document.getElementById('job_type_Container');
+            var jenis_pekerjaan_Container = document.getElementById('jenis_pekerjaan_Container');
+
             var uraianPekerjaan = document.getElementById('uraianPekerjaan');
             var filePendukung = document.getElementById('filePendukung');
             var tambahFieldContainer = document.getElementById('tambahFieldContainer');
@@ -638,9 +654,11 @@
             var itemFieldsContainer = document.getElementById('itemFields');
 
             if (selectedValue === 'Surat Perintah Kerja') {
+                job_type_Container.style.display = 'block';
                 uraianPekerjaan.style.display = 'block';
                 filePendukung.style.display = 'block';
 
+                jenis_pekerjaan_Container.style.display = 'none';
                 tambahFieldContainer.style.display = 'none';
                 spesifikasiContainer.style.display = 'none';
                 jumlahContainer.style.display = 'none';
@@ -649,11 +667,13 @@
                 deleteContainer.style.display = 'none';
                 itemFieldsContainer.style.display = 'none';
 
+                document.getElementById('jenis_pekerjaan').removeAttribute('required');
                 document.getElementById('spesifikasi').removeAttribute('required');
                 document.getElementById('jumlah').removeAttribute('required');
                 document.getElementById('satuan').removeAttribute('required');
                 document.getElementById('keterangan').removeAttribute('required');
 
+                document.getElementById('jenis_pekerjaan').value = null;
                 document.getElementById('spesifikasi').value = null;
                 document.getElementById('jumlah').value = null;
                 document.getElementById('satuan').value = null;
@@ -664,6 +684,7 @@
                     itemFieldsContainer.removeChild(itemFieldsContainer.firstChild);
                 }
             } else if (selectedValue === 'Surat Permintaan Barang') {
+                jenis_pekerjaan_Container.style.display = 'block';
                 tambahFieldContainer.style.display = 'block';
                 spesifikasiContainer.style.display = 'block';
                 jumlahContainer.style.display = 'block';
@@ -672,12 +693,15 @@
                 deleteContainer.style.display = 'block';
                 itemFieldsContainer.style.display = 'block';
 
+                job_type_Container.style.display = 'none';
                 uraianPekerjaan.style.display = 'none';
                 filePendukung.style.display = 'none';
 
+                document.getElementById('job_type').removeAttribute('required');
                 document.getElementById('uraian-pekerjaan').removeAttribute('required');
                 document.getElementById('choosefile').removeAttribute('required');
 
+                document.getElementById('job_type').value = null;
                 document.getElementById('uraian-pekerjaan').value = null;
                 document.getElementById('choosefile').value = null;
                 // document.getElementById('checkbox_gambar').value = null;
