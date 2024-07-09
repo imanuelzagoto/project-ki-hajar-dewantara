@@ -3,7 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="{{ asset('sets/images/siops.svg') }}" type="image/x-icon">
     <link rel="shortcut icon" href="{{ asset('sets/images/siops.svg') }}" type="image/x-icon">
-    <title>{{ config('app.name') }} | Show Surat Permintaan Barang</title>
+    <title>{{ config('app.name') }} | Show Surat Perintah Kerja</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="pdf.css">
@@ -14,101 +14,97 @@
     @foreach ($suratPerintahKerjas as $suratPerintahKerja)
         <div class="frame_box_spk">
             <div class="right_box_position">
-                <div class="row_header_permintaan_barang">
-
-                    <div class="Company">
-                        <span>PT. SOLUSI INTEK INDONESIA</span>
+                <div class="header_surat_perintah_kerja">
+                    <div class="name_pic">
+                        <Span>PIC : {{ $suratPerintahKerja->pic }}</Span>
                     </div>
 
-                    <div class="title_permintaan_barang">
-                        <span>SURAT PERMINTAAN BARANG G.A. & PURCHASING</span>
+                    <div class="title_company">
+                        <span class="company">PT. SOLUSI INTEK INDONESIA</span>
                     </div>
 
-                    <div class="General_Affair">
+                    <div class="sub-title-spk">
+                        <span class="titel_perintah_kerja">SURAT PERINTAH KERJA WORKSHOP</span>
+                    </div>
+
+                    <div class="Yth">
                         Kepada Yth
                         <span style="padding-left:5px;">:</span>
-                        <span style="padding-left:6px;">GA</span>
+                        <span style="padding-left:6px;">Workshop Manager</span>
                     </div>
 
-                    <div class="pelaksanaan">
-                        <span>Mohon dapat dilaksanakan pekerjaan di bawah ini :</span>
+                    <div class="teks_pelaksanaan">
+                        <span style="letter-spacing: 1px;">Mohon dapat dilaksanakan pekerjaan di bawah ini :</span>
                     </div>
                 </div>
 
                 <div class="table_project_spk" style="margin-top: 24px;">
-                    <table class="table_form_project_permintaan_barang">
+                    <table class="table_form_project">
                         <thead>
                             <tr>
 
-                                <th class="label_kode_project_permintaan_barang font-weight-bold" nowrap> Kode Project
-                                </th>
-                                <th class="colon_kode_project_permintaan_barang" nowrap>
+                                <th class="label_kode_project font-weight-bold" nowrap> Kode Project</th>
+                                <th class="colon_kode_project" nowrap>
                                     :
                                 </th>
-                                <th colspan="4" class="value_kode_project_permintaan_barang font-weight-bold" nowrap>
+                                <th colspan="4" class="value_kode_project font-weight-bold" nowrap>
                                     {{ $suratPerintahKerja->code }}
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td class="label_nama_project_permintaan_barang" nowrap>Nama Project</td>
-                                <td class="colon_nama_project_permintaan_barang" nowrap>:</td>
-                                <td class="value_nama_project_permintaan_barang" nowrap>
+                                <td class="label_nama_project" nowrap>Nama Project</td>
+                                <td class="colon_nama_project" nowrap>:</td>
+                                <td class="value_nama_project" nowrap>
                                     {{ $suratPerintahKerja->title }}</td>
 
-                                <td class="label_tanggal_spk_permintaan_barang" nowrap>Tanggal</td>
-                                <td class="colon_tanggal_spk_permintaan_barang" nowrap>:</td>
-                                <td class="value_tanggal_spk_permintaan_barang text-center" nowrap>
-                                    {{ \Carbon\Carbon::parse($suratPerintahKerja->submission_date)->format('d-M-y') }}
-                                </td>
+                                <td class="label_no_spk font-weight-bold" nowrap>NO SPK</td>
+                                <td class="colon_no_spk" nowrap>:</td>
+                                <td class="value_no_spk" nowrap>{{ $suratPerintahKerja->no_spk }}</td>
                             </tr>
 
                             <tr>
-                                <td class="label_user_permintaan_barang" nowrap>User</td>
-                                <td class="colon_user_permintaan_barang" nowrap>:</td>
-                                <td class="value_user_permintaan_barang text-center" nowrap>
+                                <td class="label_user" nowrap>User</td>
+                                <td class="colon_user" nowrap>:</td>
+                                <td class="value_user" nowrap>
                                     {{ $suratPerintahKerja->user }}</td>
 
-                                <td class="label_prioritas_permintaan_barang" nowrap>Prioritas</td>
-                                <td class="colon_prioritas_permintaan_barang" nowrap>:</td>
-                                <td class="value_prioritas_permintaan_barang text-center" nowrap>
-                                    {{ $suratPerintahKerja->priority }}
-                                </td>
+                                <td class="label_tanggal_spk" nowrap>Tanggal</td>
+                                <td class="colon_tanggal_spk" nowrap>:</td>
+                                <td class="value_tanggal_spk" nowrap>{{ $suratPerintahKerja->submission_date }}</td>
                             </tr>
 
                             <tr>
-                                <td class="label_contractor_permintaan_barang" nowrap>Main Contractor</td>
-                                <td class="colon_contractor_permintaan_barang" nowrap>:</td>
-                                <td class="value_contractor_permintaan_barang text-center" nowrap>
+                                <td class="label_contractor" nowrap>Main Contractor</td>
+                                <td class="colon_contractor" nowrap>:</td>
+                                <td class="value_contractor" nowrap>
                                     {{ $suratPerintahKerja->main_contractor }}
                                 </td>
 
-                                <td class="label_batas_waktu_permintaan_barang" nowrap>Waktu Penyelesaian</td>
-                                <td class="colon_batas_waktu_permintaan_barang" nowrap>:</td>
-                                <td class="value_batas_waktu_permintaan_barang text-center" nowrap>
-                                    {{ \Carbon\Carbon::parse($suratPerintahKerja->completion_time)->format('d-M-y') }}
-                                </td>
+                                <td class="label_prioritas" nowrap>Prioritas</td>
+                                <td class="colon_prioritas" nowrap>:</td>
+                                <td class="value_prioritas" nowrap>{{ $suratPerintahKerja->priority }}</td>
                             </tr>
 
                             <tr>
-                                <td class="label_manager_project_permintaan_barang" nowrap>Project Manager</td>
-                                <td class="colon_manager_projec_permintaan_barang" nowrap>:</td>
-                                <td class="value_manager_project_permintaan_barang text-center" nowrap>
+                                <td class="label_manager_project" nowrap>Project Manager</td>
+                                <td class="colon_manager_project" nowrap>:</td>
+                                <td class="value_manager_project" nowrap>
                                     {{ $suratPerintahKerja->project_manager }}
                                 </td>
 
-                                <td class="label_no_spk_permintaan_barang font-weight-bold" nowrap>NO SPK</td>
-                                <td class="colon_no_spk_permintaan_barang" nowrap>:</td>
-                                <td class="value_no_spk_permintaan_barang text-center" nowrap>
-                                    {{ $suratPerintahKerja->no_spk }}
+                                <td class="label_batas_waktu" nowrap>Waktu Penyelesaian</td>
+                                <td class="colon_batas_waktu" nowrap>:</td>
+                                <td class="value_batas_waktu" nowrap>
+                                    {{ \Carbon\Carbon::parse($suratPerintahKerja->completion_time)->format('d/m/y') }}
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="border_horizontal" style="margin-top: 2px">
+                <div class="border_horizontal" style="margin-top: 13px">
                     <div class="border_horizontal_1">
                         <div class="border_horizontal_2">
                             @foreach ($suratPerintahKerja->details as $detail)
@@ -155,61 +151,39 @@
                     </div>
                 </div>
 
-                <div class="box_detail">
-                    <div class="detail_pekerjaan">
-                        <table>
-                            <thead>
-                                <th class="jenis_pekerjaan_PB font-weight-bold text-center">JENIS PEKERJAAN</th>
-                                <th class="hidden_column_detail"></th>
-                                <th class="spefikasi_pekerjaan_PB font-weight-bold text-center">SPESIFIKASI</th>
-                                <th class="jumlah_PB font-weight-bold text-center">JUMLAH</th>
-                                <th class="keterangan_pekerjaan_PB font-weight-bold text-center">KETERANGAN</th>
-                            </thead>
-                            <tbody>
+                <div class="detail_spk">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="jenis_pekerjaan">JENIS PEKERJAAN</th>
+                                <th class="uraian_pekerjaan">URAIAN PEKERJAAN</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($suratPerintahKerja->details as $detail)
                                 <tr>
-                                    <td class="value_jenis_pekerjaan_PB" rowspan="5">Pemesanan Konsumsi Paparan</td>
-
-                                    <td class="hidden_column_detail" rowspan="5">
-
-                                    </td>
-
-                                    <td class="value_spefikasi_pekerjaan_PB" rowspan="5">
-                                        Snack :
-                                        Holland (3 jenis)
-                                    </td>
-
-                                    <td class="value_jumlah_PB text-center" rowspan="5">35 box</td>
-
-                                    <td class="value_keterangan_pekerjaan_PB text-center" rowspan="5">Untuk
-                                        Kegiatan Paparan
-                                        Produk ISA, Admiralty dan</td>
+                                    <td style="border: 1.5px solid black;"></td>
+                                    <td style="border: 1.5px solid black; border-right:none;"></td>
                                 </tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
                                 <tr>
-                                    <td style=" border: 1.8px solid black; border-top: none;" rowspan="5">
-
+                                    <td class="value_jenis_pekerjaan">
+                                        {{ $detail->job_type }}
                                     </td>
-                                    <td class="hidden_column_detail" rowspan="5">
-                                    </td>
-                                    <td style=" border: 1.8px solid black; border-top: none;" rowspan="5">
-                                    </td>
-                                    <td style=" border: 1.8px solid black; border-top: none;" rowspan="5"></td>
-                                    <td style=" border: 1.8px solid black; border-right: none; border-top: none;"
-                                        rowspan="5"></td>
+                                    <td class="value_uraian_pekerjaan">
+                                        {!! nl2br(e($detail->job_description)) !!}</td>
                                 </tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
-                                <tr></tr>
-                            </tbody>
-                        </table>
-                    </div>
+                                <tr>
+                                    <td style="border: 1.5px solid black; padding-left:5px;"></td>
+                                    <td
+                                        style="border: 1.5px solid black; border-right:none; text-align:right; line-height:normal;">
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
 
-                {{-- <div class="hormat_kami">
+                <div class="hormat_kami"x>
                     <span class="line_hormat_kami">Hormat Kami,</span>
                 </div>
 
@@ -418,13 +392,14 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div> --}}
-
-                <div class="form_number_spk">
-                    <span class="value_form_number"> Form Number : {{ $suratPerintahKerja->form_number }}</span>
                 </div>
 
-                <div class="bottom_box_position">
+                <div style="position: relative; top: 143px;">
+                    <span style="margin-left: 76%; font-size: 14px; font-weight: bold;"> Form Number :
+                        {{ $suratPerintahKerja->form_number }}</span>
+                </div>
+
+                <div style="border-bottom: 3px solid black; position: relative; top: 143px; width: 950px;">
                 </div>
 
                 @php include_once(app_path().'/Helpers/helpers.php') @endphp
@@ -443,7 +418,7 @@
                                         @endphp
 
                                         <span class="form_number font-weight-bold"
-                                            style="font-size: 13px; position: relative; top: 97.5%; left:76%">
+                                            style="font-size: 14px; position: relative; top: 97.5%; left:76%">
                                             Form Number : {{ $suratPerintahKerja->form_number }}
                                         </span>
 

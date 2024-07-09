@@ -81,33 +81,33 @@ class SuratPerintahKerjaViewWebController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'code'          => 'required|string',
-            'applicant_name'               => 'required|string',
-            'receiver_name'               => 'nullable|string',
-            'approver_name'               => 'required|string',
-            'board_of_directors'               => 'required|string',
-            'applicant_position'               => 'required|string',
-            'receiver_position'               => 'nullable|string',
-            'approver_position'               => 'required|string',
-            'position'               => 'required|string',
-            'title'          => 'required|string',
-            'user'                  => 'required|string',
-            'main_contractor'       => 'required|string',
-            'project_manager'       => 'required|string',
+            'code' => 'required|string',
+            'applicant_name' => 'required|string',
+            'receiver_name' => 'nullable|string',
+            'approver_name' => 'required|string',
+            'board_of_directors' => 'required|string',
+            'applicant_position' => 'required|string',
+            'receiver_position' => 'nullable|string',
+            'approver_position' => 'required|string',
+            'position' => 'required|string',
+            'title' => 'required|string',
+            'user' => 'required|string',
+            'main_contractor' => 'required|string',
+            'project_manager' => 'required|string',
             'submission_date' => 'required|string',
             'priority' => 'required|string',
             'completion_time' => 'nullable|string',
             'pic' => 'nullable|string',
-            'type_format_pekerjaan' =>  'required|string',
-            'job_type'               => 'required|string',
-            'job_description'               => 'nullable|string',
+            'type_format_pekerjaan' => 'required|string',
+            'job_type' => 'required|string',
+            'job_description' => 'nullable|string',
             'supporting_document_type' => 'nullable|string',
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
-            'spesifikasi.*'               => 'nullable|string',
+            'spesifikasi.*' => 'nullable|string',
             'jumlah.*' => 'nullable|integer',
             'satuan.*' => 'nullable|string',
-            'keterangan.*'               => 'nullable|string',
+            'keterangan.*' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -168,10 +168,11 @@ class SuratPerintahKerjaViewWebController extends Controller
                 'supporting_document_file' => json_encode($filePaths),
             ]);
         } else {
+            $existingDetail = $suratPerintahKerjas->details()->first();
             $suratPerintahKerjas->details()->create([
                 'job_description' => $request->job_description,
                 'supporting_document_type' => $request->supporting_document_type,
-                'supporting_document_file' => $suratPerintahKerjas->details()->first()->supporting_document_file,
+                'supporting_document_file' => $existingDetail ? $existingDetail->supporting_document_file : null,
             ]);
         }
 
@@ -198,19 +199,18 @@ class SuratPerintahKerjaViewWebController extends Controller
     }
 
 
-    public function ShowSuratPerintahKerja($id)
+    public function ShowPDF($id)
     {
         $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->where('id', (int)$id)->get();
-        $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja', compact('suratPerintahKerjas'));
-        $pdf->setPaper(array(0, 0, 785, 1010));
-        return $pdf->stream();
-    }
-
-
-    public function ShowPermintaanBarang($id)
-    {
-        $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details')->where('id', (int)$id)->get();
-        $pdf = PDF::loadView('suratPerintahKerja.surat_permintaan_barang', compact('suratPerintahKerjas'));
+        $typeFormatPekerjaan = $suratPerintahKerjas->first()->type_format_pekerjaan;
+        // dd($typeFormatPekerjaan);
+        if ($typeFormatPekerjaan == 'Surat Perintah Kerja') {
+            $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja', compact('suratPerintahKerjas'));
+        } elseif ($typeFormatPekerjaan == 'Surat Permintaan Barang') {
+            $pdf = PDF::loadView('suratPerintahKerja.surat_permintaan_barang', compact('suratPerintahKerjas'));
+        } else {
+            abort(404, 'Type format pekerjaan tidak dikenali');
+        }
         $pdf->setPaper(array(0, 0, 785, 1010));
         return $pdf->stream();
     }
@@ -339,7 +339,7 @@ class SuratPerintahKerjaViewWebController extends Controller
                 $suratPerintahKerja->details()->update([
                     'job_description'          => $request->job_description,
                     'supporting_document_type' => $request->supporting_document_type,
-                    'supporting_document_file' => $suratPerintahKerja->details->first()->supporting_document_file,
+                    'supporting_document_file' => $suratPerintahKerja->details()->first()->supporting_document_file,
                 ]);
             }
 

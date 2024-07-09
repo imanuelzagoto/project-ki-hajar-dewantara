@@ -168,25 +168,26 @@
                                                 {{ $spk->pic }}
                                             </td>
                                             <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{-- {{ \Carbon\Carbon::createFromFormat('d/m/y', $spk->submission_date)->format('d-m-Y') }} --}}
                                                 {{ $spk->submission_date }}
                                             </td>
                                             <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ $spk->completion_time }}
                                             </td>
                                             <td class="text-center" style="font-weight:400;" nowrap>
-                                                <a href="/surat-perintah-kerja/edit/{{ $spk->id }}" type="button"
+                                                <a href="/surat-perintah-kerja/edit/{{ $spk->id }}"
                                                     class="fas fa-pen btn btn-sm tooltip-container"
                                                     style="color:#4FD1C5; font-size:20px;">
                                                     <span class="tooltip-edit">Edit</span>
                                                 </a>
-                                                <a href="/surat-perintah-kerja/show/{{ $spk->id }}" target="_blank"
-                                                    type="button" class="fas fa-eye btn btn-sm tooltip-container"
+
+                                                <a href="/surat-perintah-kerja/show/{{ $spk->id }}"
+                                                    class="fas fa-eye btn btn-sm tooltip-container" target="_blank"
                                                     style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
                                                     <span class="tooltip-show">View</span>
                                                 </a>
+
                                                 <a href="/surat-perintah-kerja/delete/{{ $spk->id }}"
-                                                    class="fas fa-trash-alt btn btn-sm tooltip-container" type="button"
+                                                    class="fas fa-trash-alt btn btn-sm tooltip-container"
                                                     style="color:#F31414; font-size:20px;"
                                                     onclick="submitDelete({{ $spk->id }})">
                                                     <span class="tooltip-delete">Delete</span>

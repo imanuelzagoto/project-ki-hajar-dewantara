@@ -61,7 +61,6 @@ class PengajuanDanaViewWebController extends Controller
             ->get(['id', 'nama', 'jabatan']);
 
 
-        // Format data untuk ditampilkan dalam select
         $formatted_tags_approval = [];
         foreach ($tags_approval as $tag) {
             $formatted_tags_approval[] = [
@@ -186,7 +185,6 @@ class PengajuanDanaViewWebController extends Controller
             $subtotal_item = $jumlah * $harga;
             $subtotal += $subtotal_item;
 
-            // Simpan item pengajuan dana
             $pengajuanDanas->items()->create([
                 'nama_item' => $item, 'jumlah' => $jumlah, 'satuan' => $items['satuan'][$key],
                 'harga' => $harga, 'total' => $subtotal_item,
@@ -274,11 +272,9 @@ class PengajuanDanaViewWebController extends Controller
             return response()->json(['message' => 'Pengajuan Dana tidak ditemukan!'], 404);
         }
 
-        // Default to empty array if null
         $pemeriksa = $request->input('pemeriksa', []);
         $persetujuan = $request->input('persetujuan', []);
 
-        // Map pemeriksa dan persetujuan menjadi array integer
         $pemeriksa_ids = array_map('intval', $pemeriksa);
         $persetujuan_ids = array_map('intval', $persetujuan);
 
@@ -324,7 +320,6 @@ class PengajuanDanaViewWebController extends Controller
             $subtotal_item = $jumlah * $harga;
             $subtotal += $subtotal_item;
 
-            // Simpan item pengajuan dana yang diperbarui
             $pengajuanDana->items()->create([
                 'nama_item' => $item,
                 'jumlah' => $jumlah,
