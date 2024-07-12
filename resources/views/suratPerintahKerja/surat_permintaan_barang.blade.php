@@ -193,7 +193,7 @@
                                             ($count_td >= 8 && $count_td_2 % 11 === 0) ||
                                             $count_td == count($suratPerintahKerja->details_permintaan))
                                         <td class="text-center"
-                                            style=" border:none; border-left:1.8px solid black; border-bottom: 1.8px solid black; vertical-align: top;  height:100px;">
+                                            style=" border:none; border-left:1.8px solid black; border-bottom: 1.8px solid black; vertical-align: top; height:100px;">
                                             @if ($index == 0 || $count_td == 8 || ($count_td >= 8 && ($count_td_2 - 1) % 11 === 0))
                                                 <div
                                                     style="word-break: break-all; word-wrap: break-word; width: 220px;">
@@ -212,7 +212,6 @@
                                             @endif
                                         </td>
                                     @endif
-
 
                                     <td
                                         style="border:none;border-bottom:1.8px solid black;  border-left: 1.8px solid black; vertical-align: top;  height:100px;">
@@ -249,16 +248,12 @@
                                 <tr></tr>
                             </thead>
                             <tbody>
-                                <td id="jobDescription"
-                                    style="max-height: 200px; overflow: auto; page-break-inside: avoid;">
+                                <td id="jobDescription" style="overflow: auto; page-break-inside: avoid; height:100px; vertical-align: top;">
                                     {!! nl2br(e($suratPerintahKerja->job_description)) !!}
                                 </td>
                             </tbody>
                         </table>
                     </div>
-                </div>
-
-                <div style="page-break-inside: avoid;">
                     <div class="approval_spk" style="margin-top:70px; margin-left:17px;">
                         <div>
                             <span>Hormat Kami,</span>
@@ -332,7 +327,7 @@
                                             style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:center">
                                         </td>
                                         <td
-                                            style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; ">
+                                            style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
                                             <span style="visibility: hidden;">4</span>
                                         </td>
                                     </tr>
@@ -488,57 +483,3 @@
     </script>
 </body>
 
-
-
-{{-- @php
-    $totalDetails = count($suratPerintahKerja->details_permintaan);
-    $rowsPerPage = 7;
-    $totalPages = ceil($totalDetails / $rowsPerPage);
-@endphp
-
-<div style="margin-top: 50px; width: 927px; margin-left: 23px;">
-    @for ($page = 0; $page < $totalPages; $page++)
-        <table
-            style="border-collapse: collapse; border: 1.8px solid black; width: 100%; page-break-inside: avoid;">
-            <thead>
-                <tr>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">JENIS
-                        PEKERJAAN</th>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">
-                        SPESIFIKASI</th>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">JUMLAH
-                    </th>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">
-                        KETERANGAN</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for ($index = $page * $rowsPerPage; $index < min(($page + 1) * $rowsPerPage, $totalDetails); $index++)
-                    <tr>
-                        <td class="text-center"
-                            style="border: none; height:100px; vertical-align: top; width: 30%;">
-                            @if ($page == 0)
-                                {{ $suratPerintahKerja->job_type }}
-                            @endif
-                        </td>
-                        <td style="border: 1.8px solid black; vertical-align: top;">
-                            {{ $suratPerintahKerja->details_permintaan[$index]->spesifikasi }}
-                        </td>
-                        <td class="text-center"
-                            style="border: 1.8px solid black; vertical-align: top;">
-                            {{ $suratPerintahKerja->details_permintaan[$index]->jumlah ?? '' }}
-                            {{ $suratPerintahKerja->details_permintaan[$index]->satuan ?? '' }}
-                        </td>
-                        <td class="text-center"
-                            style="border: 1.8px solid black; vertical-align: top;">
-                            {{ $suratPerintahKerja->details_permintaan[$index]->keterangan }}
-                        </td>
-                    </tr>
-                @endfor
-            </tbody>
-        </table>
-        @if ($page < $totalPages - 1)
-            <div style="page-break-before: always;"></div>
-        @endif
-    @endfor
-</div> --}}
