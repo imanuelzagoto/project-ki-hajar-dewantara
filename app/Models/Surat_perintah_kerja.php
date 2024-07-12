@@ -23,6 +23,7 @@ class Surat_perintah_kerja extends Model
         'completion_time',
         'pic',
         'job_type',
+        'job_description',
         'type_format_pekerjaan',
         'form_number',
     ];

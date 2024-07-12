@@ -158,13 +158,24 @@ td {
 
 .frame_box_spk {
     outline: 2px solid black;
-    height: 1230px;
+    height: 1250px;
+}
+
+.frame_box_spb {
+    outline: 2px solid black;
+    height: 1250px;
 }
 
 .right_box_position {
     border-right: 2px solid black;
     margin-right: 4px;
-    height: 1230px;
+    height: 1250px;
+}
+
+.right_box_position_spb {
+    border-right: 2px solid black;
+    margin-right: 4px;
+    height: 1250px;
 }
 
 .bottom_box_position {
@@ -485,18 +496,18 @@ td {
     height: 250px;
 }
 
-.approval_spk {
-    position: relative;
-    top: 130px;
+/* .approval_spk {
+    position: fixed;
+    bottom: 1px;
     width: 875px;
     left: 15px;
-}
+} */
 
-.hormat_kami {
-    position: relative;
+/* .hormat_kami {
+    position: absolute;
     top: 85px;
     left: 23px;
-}
+} */
 
 
 .teks_dokumen_pendukung {
@@ -584,13 +595,15 @@ td {
 
 .form_number_spk {
     /* position: relative; */
-    padding-top: 270px;
+    padding-top: 230px;
 }
 
 .value_form_number {
     margin-left: 76%;
     font-size: 14px;
     font-weight: bold;
+    position: relative;
+    top: 43px;
 }
 
 .page-break {
@@ -814,11 +827,11 @@ td {
     padding: 4.5px;
 }
 
-.detail_pekerjaan {
-    margin-top: 1px;
+/* .detail_pekerjaan {
+    margin-top: 50px;
     width: 927px;
-    margin-left: 2px;
-}
+    margin-left: 23px;
+} */
 
 .jenis_pekerjaan_PB {
     border: 1.8px solid black;
@@ -837,6 +850,7 @@ td {
 
 .keterangan_pekerjaan_PB {
     border: 1.8px solid black;
+    border-right: none;
 }
 
 .hidden_column_detail {
@@ -849,6 +863,7 @@ td {
     border: 1.8px solid black;
     text-align: center;
     border-bottom: none;
+    width: 30%;
 }
 
 .value_spefikasi_pekerjaan_PB {
@@ -865,24 +880,10 @@ td {
     border: 1.8px solid black;
     border-right: none;
     border-bottom: none;
+    word-wrap: break-word;
+    width: 100%;
 }
 
-/* .jenis_pekerjaan_PB {
-    border: 1.5px solid black;
-    font-size: 15px;
-    text-align: center;
-    line-height: normal;
-    width: 340px;
-    padding-left: .8px;
-    font-weight: bold;
-} */
-
-/* .uraian_pekerjaan_PB {
-    border: 1.5px solid black;
-    font-size: 15px;
-    text-align: center;
-    line-height: normal;
-    padding-left: 16px;
-    font-weight: bold;
-    border-right: none;
-} */
+.page-break {
+    page-break-before: always;
+}

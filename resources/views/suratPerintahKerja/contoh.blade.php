@@ -155,111 +155,164 @@
                     </div>
                 </div>
 
-                <div style="margin-top: 50px; width: 900px; margin-left: 23px;">
-                    <table style="border-collapse: collapse; border:none; ">
+
+                <!-- <div style="margin-top: 50px; width: 927px; margin-left: 23px;">
+                    <table>
                         <thead>
                             <tr>
                                 <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">
                                     JENIS PEKERJAAN
                                 </th>
-                                <th style="border: 1.8px solid black; border-right: none; font-weight:bold;"
+                                <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
                                     class="text-center">
                                     SPESIFIKASI
                                 </th>
-                                <th style="border: 1.8px solid black; border-right: none; font-weight:bold;"
+                                <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
                                     class="text-center">
                                     JUMLAH
                                 </th>
-                                <th style="border: 1.8px solid black;  font-weight:bold;" class="text-center">
+                                <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
+                                    class="text-center">
                                     KETERANGAN
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @php
-                                $count_td = 0;
-                            @endphp
                             @foreach ($suratPerintahKerja->details_permintaan as $index => $detail)
-                                @php
-                                    $count_td_2 = 0;
-                                    $count_td += 1;
-                                    if ($count_td >= 8) {
-                                        $count_td_2 = $count_td - 7;
-                                    }
-                                @endphp
-                                <tr style="border-bottom:none;">
-                                    @if (
-                                        $count_td == 7 ||
-                                            ($count_td >= 8 && $count_td_2 % 11 === 0) ||
-                                            $count_td == count($suratPerintahKerja->details_permintaan))
-                                        <td class="text-center"
-                                            style=" border:none; border-left:1.8px solid black; border-bottom: 1.8px solid black; vertical-align: top;  height:100px;">
-                                            @if ($index == 0 || $count_td == 8 || ($count_td >= 8 && ($count_td_2 - 1) % 11 === 0))
-                                                <div
-                                                    style="word-break: break-all; word-wrap: break-word; width: 220px;">
-                                                    {{ $suratPerintahKerja->job_type }}
-                                                </div>
-                                            @endif
-                                        </td>
-                                    @else
-                                        <td class="text-center"
-                                            style=" border:none; border-left:1.8px solid black; vertical-align: top;  height:100px;">
-                                            @if ($index == 0 || $count_td == 8 || ($count_td >= 8 && ($count_td_2 - 1) % 11 === 0))
-                                                <div
-                                                    style="word-break: break-all; word-wrap: break-word; width: 220px;">
-                                                    {{ $suratPerintahKerja->job_type }}
-                                                </div>
-                                            @endif
-                                        </td>
-                                    @endif
-
+                                <tr>
+                                    <td class="text-center"
+                                        style="border: 1.8px solid black; vertical-align: top; width: 30%;">
+                                        @if ($index == 0)
+                                            {{ $suratPerintahKerja->job_type }}
+                                        @endif
+                                    </td>
 
                                     <td
-                                        style="border:none;border-bottom:1.8px solid black;  border-left: 1.8px solid black; vertical-align: top;  height:100px;">
-                                        <div style="word-break: break-all; word-wrap: break-word; width: 220px;">
-                                            {{ $detail->spesifikasi }}
-                                        </div>
+                                        style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top; height:100px;">
+                                        {{ $detail->spesifikasi }}
                                     </td>
                                     <td class="text-center"
-                                        style="border:none;border-bottom:1.8px solid black;  border-left: 1.8px solid black; vertical-align: top; height:100px;">
-                                        <div style="word-break: break-all; word-wrap: break-word; width: 220px;">
-                                            {{ $detail->jumlah ?? '' }}
-                                            {{ $detail->satuan ?? '' }}
-                                        </div>
+                                        style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top;">
+                                        {{ $detail->jumlah ?? '' }} {{ $detail->satuan ?? '' }}
                                     </td>
                                     <td class="text-center"
-                                        style="border:none;border-bottom:1.8px solid black;  border-left: 1.8px solid black; border-right:1.8px solid black;vertical-align: top; height:100px;">
-                                        <div style="word-break: break-all; word-wrap: break-word; width: 220px;">
-                                            {{ $detail->keterangan }}
-                                        </div>
+                                        style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top;">
+                                        {{ $detail->keterangan }}
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
-                </div>
+                </div> -->
 
-                <div style="page-break-inside: avoid;">
-                    <div class="column_catatan" style="position: relative; top: 40px; left: 24px; width: 897.5px;">
-                        <div>
-                            <span>Catatan :</span>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr></tr>
-                            </thead>
-                            <tbody>
-                                <td id="jobDescription"
-                                    style="max-height: 200px; overflow: auto; page-break-inside: avoid;">
-                                    {!! nl2br(e($suratPerintahKerja->job_description)) !!}
+                @php
+                $totalDetails = count($suratPerintahKerja->details_permintaan);
+            @endphp
+
+            <div style=" margin-top: 50px; width: 927px; margin-left: 23px;">
+                <table style="border-collapse: collapse;" style="border: 1.8px solid black;">
+                    <thead>
+                        <tr>
+                            <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">
+                                JENIS PEKERJAAN
+                            </th>
+                            <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
+                                class="text-center">
+                                SPESIFIKASI
+                            </th>
+                            <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
+                                class="text-center">
+                                JUMLAH
+                            </th>
+                            <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
+                                class="text-center">
+                                KETERANGAN
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($suratPerintahKerja->details_permintaan as $index => $detail)
+                            <tr>
+                                <td class="text-center"
+                                    style="border: none; height:100px; vertical-align: top;  width: 30%;">
+                                    @if ($index == 0)
+                                        {{ $suratPerintahKerja->job_type }}
+                                    @endif
                                 </td>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                                <td
+                                    style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top;">
+                                    {{ $detail->spesifikasi }}
+                                </td>
+                                <td class="text-center"
+                                    style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top;">
+                                    {{ $detail->jumlah ?? '' }} {{ $detail->satuan ?? '' }}
+                                </td>
+                                <td class="text-center"
+                                    style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top;">
+                                    {{ $detail->keterangan }}
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
-                <div style="page-break-inside: avoid;">
-                    <div class="approval_spk" style="margin-top:70px; margin-left:17px;">
+
+                @php
+                    <!-- $totalDetails = count($suratPerintahKerja->details_permintaan);
+                @endphp
+
+                <div style="margin-top: 50px; width: 927px; margin-left: 23px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">
+                                    JENIS PEKERJAAN
+                                </th>
+                                <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
+                                    class="text-center">
+                                    SPESIFIKASI
+                                </th>
+                                <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
+                                    class="text-center">
+                                    JUMLAH
+                                </th>
+                                <th style="border: 1.8px solid black; border-left: 1.8px solid black; font-weight:bold;"
+                                    class="text-center">
+                                    KETERANGAN
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($suratPerintahKerja->details_permintaan as $index => $detail)
+                                <tr>
+                                    @if ($index == 0)
+                                        <td class="text-center" rowspan="{{ $totalDetails }}"
+                                            style="border: 1.8px solid black; vertical-align: top; width: 30%;">
+                                            {{ $suratPerintahKerja->job_type }}
+                                        </td>
+                                    @endif
+                                    <td
+                                        style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top; height:100px;">
+                                        {{ $detail->spesifikasi }}
+                                    </td>
+                                    <td class="text-center"
+                                        style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top;">
+                                        {{ $detail->jumlah ?? '' }} {{ $detail->satuan ?? '' }}
+                                    </td>
+                                    <td class="text-center"
+                                        style="border: 1.8px solid black; border-left: 1.8px solid black; vertical-align: top;">
+                                        {{ $detail->keterangan }}
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div> -->
+
+
+                <div style="page-break-inside: avoid; page-break-before: always;">
+                    <div class="approval_spk" style="position: relative; top: 92px; left: 16px;">
                         <div>
                             <span>Hormat Kami,</span>
                         </div>
@@ -480,6 +533,7 @@
                     <div style="border-bottom: 3px solid black; position: absolute; top: 100%; width: 950px;">
                     </div>
                 </div>
+
             </div>
         </div>
     @endforeach
@@ -487,58 +541,3 @@
         integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
     </script>
 </body>
-
-
-
-{{-- @php
-    $totalDetails = count($suratPerintahKerja->details_permintaan);
-    $rowsPerPage = 7;
-    $totalPages = ceil($totalDetails / $rowsPerPage);
-@endphp
-
-<div style="margin-top: 50px; width: 927px; margin-left: 23px;">
-    @for ($page = 0; $page < $totalPages; $page++)
-        <table
-            style="border-collapse: collapse; border: 1.8px solid black; width: 100%; page-break-inside: avoid;">
-            <thead>
-                <tr>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">JENIS
-                        PEKERJAAN</th>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">
-                        SPESIFIKASI</th>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">JUMLAH
-                    </th>
-                    <th style="border: 1.8px solid black; font-weight:bold;" class="text-center">
-                        KETERANGAN</th>
-                </tr>
-            </thead>
-            <tbody>
-                @for ($index = $page * $rowsPerPage; $index < min(($page + 1) * $rowsPerPage, $totalDetails); $index++)
-                    <tr>
-                        <td class="text-center"
-                            style="border: none; height:100px; vertical-align: top; width: 30%;">
-                            @if ($page == 0)
-                                {{ $suratPerintahKerja->job_type }}
-                            @endif
-                        </td>
-                        <td style="border: 1.8px solid black; vertical-align: top;">
-                            {{ $suratPerintahKerja->details_permintaan[$index]->spesifikasi }}
-                        </td>
-                        <td class="text-center"
-                            style="border: 1.8px solid black; vertical-align: top;">
-                            {{ $suratPerintahKerja->details_permintaan[$index]->jumlah ?? '' }}
-                            {{ $suratPerintahKerja->details_permintaan[$index]->satuan ?? '' }}
-                        </td>
-                        <td class="text-center"
-                            style="border: 1.8px solid black; vertical-align: top;">
-                            {{ $suratPerintahKerja->details_permintaan[$index]->keterangan }}
-                        </td>
-                    </tr>
-                @endfor
-            </tbody>
-        </table>
-        @if ($page < $totalPages - 1)
-            <div style="page-break-before: always;"></div>
-        @endif
-    @endfor
-</div> --}}

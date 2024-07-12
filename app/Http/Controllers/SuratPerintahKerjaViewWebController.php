@@ -80,6 +80,14 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function store(Request $request)
     {
+        // $data_each_row = explode("\r\n",$request->job_description);
+        // foreach($data_each_row as $data ){
+        //     $count_string_data = strlen($data);
+        //     if($count_string_data >84){
+        //         $data = $count_string_data;
+        //     }
+
+        // }
         $validator = Validator::make($request->all(), [
             'code' => 'required|string',
             'applicant_name' => 'required|string',
@@ -104,7 +112,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'supporting_document_type' => 'nullable|string',
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
-            'jenis_pekerjaan'          => 'nullable|string',
             'spesifikasi.*' => 'nullable|string',
             'jumlah.*' => 'nullable|integer',
             'satuan.*' => 'nullable|string',
@@ -134,6 +141,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'completion_time' => $request->completion_time,
             'pic' => $request->pic,
             'job_type' => $request->job_type,
+            'job_description' => $request->job_description,
             'type_format_pekerjaan' => $request->type_format_pekerjaan,
         ]);
 
@@ -142,7 +150,6 @@ class SuratPerintahKerjaViewWebController extends Controller
 
             foreach ($request->spesifikasi as $index => $spesifikasi) {
                 $details[] = [
-                    'jenis_pekerjaan' => $request->jenis_pekerjaan,
                     'spesifikasi' => $spesifikasi,
                     'jumlah' => $request->jumlah[$index],
                     'satuan' => $request->satuan[$index],
@@ -165,14 +172,12 @@ class SuratPerintahKerjaViewWebController extends Controller
             }
 
             $suratPerintahKerjas->details()->create([
-                'job_description' => $request->job_description,
                 'supporting_document_type' => $request->supporting_document_type,
                 'supporting_document_file' => json_encode($filePaths),
             ]);
         } else {
             $existingDetail = $suratPerintahKerjas->details()->first();
             $suratPerintahKerjas->details()->create([
-                'job_description' => $request->job_description,
                 'supporting_document_type' => $request->supporting_document_type,
                 'supporting_document_file' => $existingDetail ? $existingDetail->supporting_document_file : null,
             ]);
@@ -212,7 +217,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         } else {
             abort(404, 'Type format pekerjaan tidak dikenali');
         }
-        $pdf->setPaper(array(0, 0, 785, 1010));
+        $pdf->setPaper(array(0, 0, 785, 1000));
         return $pdf->stream();
     }
 
@@ -279,7 +284,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             'supporting_document_type' => 'nullable|string',
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
-            'jenis_pekerjaan'          => 'nullable|string',
             'spesifikasi.*'            => 'nullable|string',
             'jumlah.*'                 => 'nullable|integer',
             'satuan.*'                 => 'nullable|string',
@@ -309,6 +313,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'completion_time'          => $request->completion_time,
             'pic'                      => $request->pic,
             'job_type'                 => $request->job_type,
+            'job_description'          => $request->job_description,
             'type_format_pekerjaan'    => $request->type_format_pekerjaan,
         ]);
 
@@ -333,20 +338,24 @@ class SuratPerintahKerjaViewWebController extends Controller
                 }
 
                 $suratPerintahKerja->details()->update([
-                    'job_description'          => $request->job_description,
                     'supporting_document_type' => $request->supporting_document_type,
                     'supporting_document_file' => json_encode($filePaths),
                 ]);
             } else {
-                $suratPerintahKerja->details()->update([
-                    'job_description'          => $request->job_description,
-                    'supporting_document_type' => $request->supporting_document_type,
-                    'supporting_document_file' => $suratPerintahKerja->details()->first()->supporting_document_file,
-                ]);
+                if ($request->supporting_document_type === null) {
+                    $suratPerintahKerja->details()->update([
+                        'supporting_document_type' => null,
+                        'supporting_document_file' => null,
+                    ]);
+                } else {
+                    $suratPerintahKerja->details()->update([
+                        'supporting_document_type' => $request->supporting_document_type,
+                        'supporting_document_file' => $suratPerintahKerja->details()->first()->supporting_document_file,
+                    ]);
+                }
             }
 
             $suratPerintahKerja->details_permintaan()->update([
-                'jenis_pekerjaan' => null,
                 'spesifikasi' => null,
                 'jumlah'      => null,
                 'satuan'      => null,
@@ -360,7 +369,6 @@ class SuratPerintahKerjaViewWebController extends Controller
 
                 foreach ($request->spesifikasi as $index => $spesifikasi) {
                     $details[] = [
-                        'jenis_pekerjaan' => $request->jenis_pekerjaan,
                         'spesifikasi' => $spesifikasi,
                         'jumlah'      => $request->jumlah[$index],
                         'satuan'      => $request->satuan[$index],
@@ -372,7 +380,6 @@ class SuratPerintahKerjaViewWebController extends Controller
             }
 
             $suratPerintahKerja->details()->update([
-                'job_description'          => null,
                 'supporting_document_type' => null,
                 'supporting_document_file' => null,
             ]);

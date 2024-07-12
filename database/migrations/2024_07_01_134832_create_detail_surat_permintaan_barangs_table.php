@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('detail_surat_permintaan_barangs', function (Blueprint $table) {
             $table->unsignedBigInteger('surat_perintah_kerja_id');
-            $table->text('jenis_pekerjaan')->nullable();
             $table->text('spesifikasi')->nullable();
             $table->integer('jumlah')->nullable();
             $table->string('satuan')->nullable();
