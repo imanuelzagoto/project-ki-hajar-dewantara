@@ -71,6 +71,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
+        // dd($projects);
         $no_spk = $this->generateDocumentNumber();
         return view('suratPerintahKerja.create')
             ->with('projects', $projects)

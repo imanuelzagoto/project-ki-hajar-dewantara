@@ -88,18 +88,21 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
-                                                <input type="hidden" id="kode_project_hidden" name="code"
-                                                    value="{{ $suratPerintahKerja->code }}">
+                                                <input type="hidden" id="kode_project_hidden" name="code"  value="{{ $suratPerintahKerja->code }}" required>
                                                 <select id="project_id" name="code" class="form-control bg-light w-100"
-                                                    onchange="changeProjectName()">
+                                                    onchange="changeProjectName()" required>
                                                     <option value="{{ $suratPerintahKerja->code }}" selected>
                                                         {{ $suratPerintahKerja->code }}
                                                     </option>
                                                     @foreach ($projects as $p)
-                                                        <option value="{{ $p['code'] }}"
-                                                            data-title="{{ $p['title'] }}">{{ $p['code'] }}</option>
+                                                        @if ($p['code'] !== null)
+                                                            <option value="{{ $p['code'] }}"
+                                                                data-title="{{ $p['title'] }}">{{ $p['code'] }}
+                                                            </option>
+                                                        @endif
                                                     @endforeach
                                                 </select>
                                             </div>
