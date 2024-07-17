@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('satuan')->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
-
             $table->foreign('surat_perintah_kerja_id')->references('id')->on('surat_perintah_kerjas')->onDelete('cascade');
         });
     }

@@ -27,7 +27,6 @@ return new class extends Migration
             $table->text('job_type')->nullable();
             $table->text('job_description')->nullable();
             $table->string('type_format_pekerjaan');
-            $table->string('to')->nullable();
             $table->timestamps();
         });
     }
