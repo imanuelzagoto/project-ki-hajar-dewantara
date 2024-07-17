@@ -137,7 +137,7 @@
                                                         - 
                                                     </option>
                                                     <option value="Saring Puspo Hidayat" {{ $suratPerintahKerja->pic == 'Saring Puspo Hidayat' ? 'selected' : '' }}>Saring Puspo Hidayat</option>
-                                                    <option value="Edward Halley" {{ $suratPerintahKerja->pic == 'Edward Halley' ? 'selected' : '' }}>Edward Halley</option>
+                                                    <option value="Edward Halley" {{ $suratPerintahKerja->pic == 'Edward Helly' ? 'selected' : '' }}>Edward Helly</option>
                                                     <option value="Awan Setiawan" {{ $suratPerintahKerja->pic == 'Awan Setiawan' ? 'selected' : '' }}>Awan Setiawan</option>
                                                     <option value="Rizal Affandi" {{ $suratPerintahKerja->pic == 'Rizal Affandi' ? 'selected' : '' }}>Rizal Affandi</option>
                                                 </select>
@@ -211,6 +211,16 @@
                                                     <option value="Surat Permintaan Barang"
                                                         {{ $suratPerintahKerja->type_format_pekerjaan == 'Surat Permintaan Barang' ? 'selected' : '' }}>
                                                         Surat Permintaan Barang</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-3" id="to_container">
+                                                <span class="text-sm font-weight-bold text-form-detail">To</span>
+                                                <select name="to" id="select_to" class="form-control bg-light w-100">
+                                                    <option value="" {{ $suratPerintahKerja->to == '' ? 'selected' : '' }} disabled selected></option>
+                                                    <option value="GA Manager" {{ $suratPerintahKerja->to == 'GA Manager' ? 'selected' : '' }}>GA Manager</option>
+                                                    <option value="Purchase Manager" {{ $suratPerintahKerja->to == 'Purchase Manager' ? 'selected' : '' }}>Purchase Manager</option>
+                                                    <option value="Design Manager" {{ $suratPerintahKerja->to == 'Design Manager' ? 'selected' : '' }}>Design Manager</option>
                                                 </select>
                                             </div>
 
@@ -704,6 +714,8 @@
             var uraianPekerjaan = document.getElementById('uraianPekerjaan');
             var uraianPekerjaanLabel = uraianPekerjaan.querySelector('span.text-form-detail');
             var uraianPekerjaanTextarea = document.getElementById('uraian-pekerjaan');
+            var toContainer = document.getElementById('to_container');
+            var containerTypeFormat = document.getElementById('container_type_format');
 
             if (!selectedValue) {
                 console.error("Select box or its value is not found.");
@@ -739,10 +751,15 @@
                 if (document.getElementById('jumlah')) document.getElementById('jumlah').value = null;
                 if (document.getElementById('satuan')) document.getElementById('satuan').value = null;
                 if (document.getElementById('keterangan')) document.getElementById('keterangan').value = null;
+                if (document.getElementById('select_to')) document.getElementById('select_to').value = null;
 
                 uraianPekerjaan.classList.remove('col-12');
                 uraianPekerjaan.classList.add('col-6');
                 if (uraianPekerjaanLabel) uraianPekerjaanLabel.textContent = 'Uraian Pekerjaan';
+
+                if (toContainer) toContainer.style.display = 'none';
+                containerTypeFormat.classList.remove('col-3');
+                containerTypeFormat.classList.add('col-6');
 
             } else if (selectedValue === 'Surat Permintaan Barang') {
                 if (tambahFieldContainer) tambahFieldContainer.style.display = 'block';
@@ -778,6 +795,10 @@
                 uraianPekerjaan.classList.remove('col-6');
                 uraianPekerjaan.classList.add('col-12');
                 if (uraianPekerjaanLabel) uraianPekerjaanLabel.textContent = 'Catatan';
+
+                if (toContainer) toContainer.style.display = 'block';
+                containerTypeFormat.classList.remove('col-6');
+                containerTypeFormat.classList.add('col-3');
 
             }
         }

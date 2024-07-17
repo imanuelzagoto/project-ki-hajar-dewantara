@@ -114,6 +114,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'completion_time' => 'nullable|string',
             'pic' => 'nullable|string',
             'type_format_pekerjaan' => 'required|string',
+            'to' => 'nullable|string',
             'job_type' => 'nullable|string',
             'job_description' => 'nullable|string',
             'supporting_document_type' => 'nullable|string',
@@ -150,6 +151,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'job_type' => $request->job_type,
             'job_description' => $request->job_description,
             'type_format_pekerjaan' => $request->type_format_pekerjaan,
+            'to' => $request->to,
         ]);
 
         if ($request->has('spesifikasi') && $request->has('jumlah') && $request->has('satuan') && $request->has('keterangan')) {
@@ -286,6 +288,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'completion_time'          => 'nullable|string',
             'pic'                      => 'nullable|string',
             'type_format_pekerjaan'    => 'required|string',
+            'to'                 => 'nullable|string',
             'job_type'                 => 'nullable|string',
             'job_description'          => 'nullable|string',
             'supporting_document_type' => 'nullable|string',
@@ -322,6 +325,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'job_type'                 => $request->job_type,
             'job_description'          => $request->job_description,
             'type_format_pekerjaan'    => $request->type_format_pekerjaan,
+            'to'    => $request->to,
         ]);
 
         if ($request->type_format_pekerjaan === 'Surat Perintah Kerja') {

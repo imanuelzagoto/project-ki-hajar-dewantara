@@ -25,6 +25,7 @@ class Surat_perintah_kerja extends Model
         'job_type',
         'job_description',
         'type_format_pekerjaan',
+        'to',
         'form_number',
     ];
 

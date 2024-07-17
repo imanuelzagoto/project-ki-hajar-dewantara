@@ -138,7 +138,7 @@
                                                 <select id="picSelect" name="pic" class="form-control bg-light w-100">
                                                     <option value="-"> - </option>
                                                     <option value="Saring Puspo Hidayat">Saring Puspo Hidayat</option>
-                                                    <option value="Edward Halley">Edward Halley</option>
+                                                    <option value="Edward Helly">Edward Helly</option>
                                                     <option value="Awan Setiawan">Awan Setiawan</option>
                                                     <option value="Rizal Affandi">Rizal Affandi</option>
                                                 </select>
@@ -196,6 +196,16 @@
                                                     </option>
                                                 </select>
                                             </div>
+
+                                            <div class="pr-4 py-2 col-3" id="to_container">
+                                                <span class="text-sm font-weight-bold text-form-detail">To</span>
+                                                <select name="to" id="select_to" class="form-control bg-light w-100">
+                                                    <option value="" disabled selected></option>
+                                                    <option value="GA Manager">GA Manager</option>
+                                                    <option value="Purchase Manager">Purchase Manager</option>
+                                                    <option value="Design Manager">Design Manager</option>
+                                                </select>
+                                            </div>   
 
                                             <div class="pr-4 py-2 col-6" id="job_type_Container">
                                                 <span class="text-sm font-weight-bold text-form-detail">
@@ -388,7 +398,6 @@
             </div>
         </div>
     </div>
-
     <script>
         document.getElementById('board_of_directors').addEventListener('change', function() {
             var positionInput = document.getElementById('position');
@@ -678,6 +687,8 @@
             var uraianPekerjaan = document.getElementById('uraianPekerjaan');
             var uraianPekerjaanLabel = uraianPekerjaan.querySelector('span.text-form-detail');
             var uraianPekerjaanTextarea = document.getElementById('uraian-pekerjaan');
+            var toContainer = document.getElementById('to_container');
+            var containerTypeFormat = document.getElementById('container_type_format');
 
             if (selectedValue === 'Surat Perintah Kerja') {
                 filePendukung.style.display = 'block';
@@ -699,6 +710,7 @@
                 document.getElementById('jumlah').value = null;
                 document.getElementById('satuan').value = null;
                 document.getElementById('keterangan').value = null;
+                document.getElementById('select_to').value = null;
 
                 while (itemFieldsContainer.firstChild) {
                     itemFieldsContainer.removeChild(itemFieldsContainer.firstChild);
@@ -707,6 +719,10 @@
                 uraianPekerjaan.classList.remove('col-12');
                 uraianPekerjaan.classList.add('col-6');
                 uraianPekerjaanLabel.textContent = 'Uraian Pekerjaan';
+
+                toContainer.style.display = 'none';
+                containerTypeFormat.classList.remove('col-3');
+                containerTypeFormat.classList.add('col-6');
 
             } else if (selectedValue === 'Surat Permintaan Barang') {
                 tambahFieldContainer.style.display = 'block';
@@ -741,6 +757,10 @@
                 uraianPekerjaan.classList.remove('col-6');
                 uraianPekerjaan.classList.add('col-12');
                 uraianPekerjaanLabel.textContent = 'Catatan';
+
+                toContainer.style.display = 'block';
+                containerTypeFormat.classList.remove('col-6');
+                containerTypeFormat.classList.add('col-3');
             }
         }
         document.addEventListener("DOMContentLoaded", function() {

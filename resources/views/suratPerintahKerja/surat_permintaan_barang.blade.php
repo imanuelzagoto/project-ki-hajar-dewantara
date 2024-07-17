@@ -21,13 +21,23 @@
                     </div>
 
                     <div class="title_permintaan_barang">
-                        <span>SURAT PERINTAH KERJA</span>
+                        <span>
+                            @if ($suratPerintahKerja->to === 'GA Manager')
+                                SURAT PERINTAH KERJA G.A.
+                            @elseif ($suratPerintahKerja->to === 'Purchase Manager')
+                                SURAT PERINTAH KERJA PURCHASING
+                            @elseif ($suratPerintahKerja->to === 'Design Manager')
+                                SURAT PERINTAH KERJA DESIGN
+                            @else
+                                SURAT PERINTAH KERJA
+                            @endif
+                        </span>
                     </div>
 
                     <div class="General_Affair">
                         Kepada Yth
                         <span style="padding-left:5px;">:</span>
-                        <span style="padding-left:6px;">GA</span>
+                        <span style="padding-left:6px;">{{ $suratPerintahKerja->to }}</span>
                     </div>
 
                     <div class="pelaksanaan">
