@@ -33,6 +33,8 @@ class SuratPerintahKerjaViewWebController extends Controller
     public function index(Request $request)
     {
         $userData = Session::get('user');
+        $username = $userData ['first_name'];
+        $designation = $userData ['designation'];
         $userrole = $userData['modules']['name'];
         $userId = $userData['id'];
         $suratPerintahKerjas = Surat_perintah_kerja::with(['approvals', 'details'])->orderBy('created_at', 'desc')->get();
@@ -71,11 +73,15 @@ class SuratPerintahKerjaViewWebController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-        // dd($projects);
+        $userData = Session::get('user');
+        $username = $userData['first_name'];
+        $designation = $userData['designation'];
         $no_spk = $this->generateDocumentNumber();
         return view('suratPerintahKerja.create')
             ->with('projects', $projects)
-            ->with('no_spk', $no_spk);
+            ->with('no_spk', $no_spk)
+            ->with('username', $username)
+            ->with('designation', $designation);
     }
 
 

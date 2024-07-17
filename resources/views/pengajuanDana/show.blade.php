@@ -45,7 +45,7 @@
             </div>
 
             <div class="acc_pengajuan_dana" style="position: relative; bottom:0.5%;">
-                <span style="font-size: 13px; font-weight:bold; position: relative; top:1.7%; left:1%;">ACC :</span>
+                <span style="font-size: 13px; font-weight:bold; position: relative; top:1.7%; left:1%;">CC :</span>
                 @php
                     $hasData = false;
                 @endphp

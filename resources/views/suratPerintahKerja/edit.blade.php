@@ -109,9 +109,7 @@
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Nama Projek</span>
-                                                <input name="title" class="form-control w-100 disabled_input"
-                                                    id="nama" type="text" value="{{ $suratPerintahKerja->title }}"
-                                                    required>
+                                                <input name="title" class="form-control w-100 disabled-input-project" id="nama" type="text" value="{{ $suratPerintahKerja->title }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
@@ -131,11 +129,19 @@
                                                 <input name="project_manager" class="form-control bg-light w-100"
                                                     type="text" value="{{ $suratPerintahKerja->project_manager }}">
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">PIC</span>
-                                                <input name="pic" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $suratPerintahKerja->pic }}">
-                                            </div>
+                                                <select id="picSelect" name="pic" class="form-control bg-light w-100">
+                                                    <option value="-" {{ $suratPerintahKerja->pic == '-' ? 'selected' : '' }}>
+                                                        - 
+                                                    </option>
+                                                    <option value="Saring Puspo Hidayat" {{ $suratPerintahKerja->pic == 'Saring Puspo Hidayat' ? 'selected' : '' }}>Saring Puspo Hidayat</option>
+                                                    <option value="Edward Halley" {{ $suratPerintahKerja->pic == 'Edward Halley' ? 'selected' : '' }}>Edward Halley</option>
+                                                    <option value="Awan Setiawan" {{ $suratPerintahKerja->pic == 'Awan Setiawan' ? 'selected' : '' }}>Awan Setiawan</option>
+                                                    <option value="Rizal Affandi" {{ $suratPerintahKerja->pic == 'Rizal Affandi' ? 'selected' : '' }}>Rizal Affandi</option>
+                                                </select>
+                                            </div>      
 
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
@@ -147,10 +153,7 @@
                                                     $submission_date = '';
                                                 }
                                                 ?>
-                                                <input id="submission_date" name="submission_date"
-                                                    class="form-control w-100 disabled-input"
-                                                    value="{{ $submission_date }}" type="date" required
-                                                    style="background-color: #D9D9D9;">
+                                                <input id="submission_date" name="submission_date" class="form-control w-100 disabled-input-project" value="{{ $submission_date }}" type="date" style="background-color: #D9D9D9;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-4">
@@ -375,41 +378,30 @@
                                             @foreach ($suratPerintahKerja->approvals as $suratPerintahKerja)
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                    <input name="applicant_name" class="form-control bg-light w-100"
-                                                        type="text" value="{{ $suratPerintahKerja->applicant_name }}"
-                                                        required>
+                                                    <input name="applicant_name" class="form-control w-100 disabled-input-project" type="text" value="{{ $suratPerintahKerja->applicant_name }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                                 </div>
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                    <input name="applicant_position" class="form-control bg-light w-100"
-                                                        type="text"
-                                                        value="{{ $suratPerintahKerja->applicant_position }}" required>
+                                                    <input name="applicant_position" class="form-control w-100 disabled-input-project" type="text" value="{{ $suratPerintahKerja->applicant_position }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                    <input name="receiver_name" class="form-control bg-light w-100"
-                                                        type="text" value="{{ $suratPerintahKerja->receiver_name }}">
-                                                </div>
-                                                <div class="pr-4 py-2 col-6">
-                                                    <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                    <input name="receiver_position" class="form-control bg-light w-100"
-                                                        value="{{ $suratPerintahKerja->receiver_position }}"
-                                                        type="text">
+                                                    <input id="receiverInput" name="receiver_name" class="form-control w-100 disabled-input-project" type="text" value="{{ $suratPerintahKerja->receiver_name }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-6">
-                                                    <span
-                                                        class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                    <input name="approver_name" class="form-control bg-light w-100"
-                                                        type="text" value="{{ $suratPerintahKerja->approver_name }}"
-                                                        required>
+                                                    <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                    <input id="positionInput" name="receiver_position" class="form-control w-100 disabled-input-project" type="text" value="{{ $suratPerintahKerja->receiver_position }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
+                                                </div>
+
+                                                <div class="pr-4 py-2 col-6">
+                                                    <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
+                                                    <input name="approver_name" class="form-control w-100 disabled-input-project" type="text" value="{{ $suratPerintahKerja->approver_name }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                                 </div>
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                    <input name="approver_position" class="form-control bg-light w-100"
-                                                        type="text"
-                                                        value="{{ $suratPerintahKerja->approver_position }}" required>
+                                                    <input name="approver_position" class="form-control w-100 disabled-input-project" type="text" value="{{ $suratPerintahKerja->approver_position }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-6">
@@ -438,10 +430,7 @@
                                                     <span class="text-sm font-weight-bold text-form-detail">
                                                         Jabatan
                                                     </span>
-                                                    <input name="position"
-                                                        class="form-control bg-light w-100 disabled-input"
-                                                        value="{{ $suratPerintahKerja->position }}" type="text"
-                                                        style="background-color: #D9D9D9 !important;" required>
+                                                    <input name="position" class="form-control w-100 disabled-input-project" value="{{ $suratPerintahKerja->position }}" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -464,8 +453,31 @@
             </div>
         </div>
     </div>
-
     <script>
+        // Function PIC auto penerima
+        document.addEventListener('DOMContentLoaded', function() {
+            var picSelect = document.getElementById('picSelect');
+            var receiverInput = document.getElementById('receiverInput');
+            var positionInput = document.getElementById('positionInput');
+            function setInitialValues() {
+                if (picSelect.value === "-") {
+                    receiverInput.value = "-";
+                    positionInput.value = "-";
+                }
+            }
+            setInitialValues();
+            picSelect.addEventListener('change', function() {
+                var selectedValue = this.value;
+                if (selectedValue === "-") {
+                    receiverInput.value = "-";
+                    positionInput.value = "-";
+                } else {
+                    receiverInput.value = selectedValue;
+                    positionInput.value = "Asisten";
+                }
+            });
+        });
+
         // project id
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");

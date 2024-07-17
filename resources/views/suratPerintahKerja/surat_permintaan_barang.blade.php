@@ -21,7 +21,7 @@
                     </div>
 
                     <div class="title_permintaan_barang">
-                        <span>SURAT PERMINTAAN BARANG G.A. & PURCHASING</span>
+                        <span>SURAT PERINTAH KERJA</span>
                     </div>
 
                     <div class="General_Affair">

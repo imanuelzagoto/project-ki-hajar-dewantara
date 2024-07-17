@@ -132,17 +132,22 @@
                                                 <input name="project_manager" class="form-control bg-light w-100"
                                                     type="text" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">PIC</span>
-                                                <input name="pic" class="form-control bg-light w-100" type="text">
-                                            </div>
+                                                <select id="picSelect" name="pic" class="form-control bg-light w-100">
+                                                    <option value="-"> - </option>
+                                                    <option value="Saring Puspo Hidayat">Saring Puspo Hidayat</option>
+                                                    <option value="Edward Halley">Edward Halley</option>
+                                                    <option value="Awan Setiawan">Awan Setiawan</option>
+                                                    <option value="Rizal Affandi">Rizal Affandi</option>
+                                                </select>
+                                            </div>   
+
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan</span>
-                                                <input id="submission_date" name="submission_date"
-                                                    class="form-control w-100 disabled-input-project" type="date"
-                                                    required
-                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
+                                                <input id="submission_date" name="submission_date" class="form-control w-100 disabled-input-project" type="date" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-4">
@@ -161,6 +166,7 @@
                                                 <input name="completion_time" class="form-control bg-light w-100"
                                                     type="date" required>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -288,8 +294,6 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Keterangan</span>
                                                 <input type="text" name="keterangan[]" id="keterangan"
                                                     class="form-control bg-light" style="height: 40px;" required>
-                                                {{-- <textarea name="keterangan[]" id="keterangan" class="form-control bg-light" rows="3" style="height: 40px;"
-                                                    required></textarea> --}}
                                             </div>
 
                                             <div class="py-2 col-1 JS-button-delete" id="deleteContainer"
@@ -318,54 +322,51 @@
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Pemohon</span>
-                                                <input name="applicant_name" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <input name="applicant_name" class="form-control w-100 disabled-input-project" value="{{ $username }}"
+                                                    type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
+                                                    required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="applicant_position" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <input name="applicant_position" class="form-control w-100 disabled-input-project" value="{{ $designation }}"
+                                                    type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Penerima</span>
-                                                <input name="receiver_name" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <input id="receiverInput" name="receiver_name" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="receiver_position" class="form-control bg-light w-100"
-                                                    type="text">
+                                                <input id="positionInput" name="receiver_position" value="Asisten" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <input name="approver_name" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <input name="approver_name" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" value="Endar" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
-                                                <input name="approver_position" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <input name="approver_position" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" value="Koordinator PM" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
-                                                <select name="board_of_directors" class="form-control bg-light w-100"
-                                                    required>
+                                                <select name="board_of_directors" class="form-control bg-light w-100" id="board_of_directors" required>
                                                     <option value="" disabled selected></option>
                                                     <option value="Erwin Danuaji">Erwin Danuaji</option>
                                                     <option value="Victor">Victor</option>
                                                     <option value="Sindu Irawan">Sindu Irawan</option>
                                                 </select>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">
-                                                    Jabatan
-                                                </span>
-                                                <input name="position" class="form-control bg-light w-100 disabled-input"
-                                                    value="BOD" type="text"
-                                                    style="background-color: #D9D9D9 !important;" required>
+                                                <span class="text-sm font-weight-bold text-form-detail">Jabatan</span>
+                                                <input name="position" id="position" value="" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -389,6 +390,41 @@
     </div>
 
     <script>
+        document.getElementById('board_of_directors').addEventListener('change', function() {
+            var positionInput = document.getElementById('position');
+            var selectedValue = this.value;
+
+            if (selectedValue === "Erwin Danuaji" || selectedValue === "Victor" || selectedValue === "Sindu Irawan") {
+                positionInput.value = "BOD";
+            } else {
+                positionInput.value = "";
+            }
+        });
+
+        // Function PIC auto penerima
+        document.addEventListener('DOMContentLoaded', function() {
+            var picSelect = document.getElementById('picSelect');
+            var receiverInput = document.getElementById('receiverInput');
+            var positionInput = document.getElementById('positionInput');
+            function setInitialValues() {
+                if (picSelect.value === "-") {
+                    receiverInput.value = "-";
+                    positionInput.value = "-";
+                }
+            }
+            setInitialValues();
+            picSelect.addEventListener('change', function() {
+                var selectedValue = this.value;
+                if (selectedValue === "-") {
+                    receiverInput.value = "-";
+                    positionInput.value = "-";
+                } else {
+                    receiverInput.value = selectedValue;
+                    positionInput.value = "Asisten";
+                }
+            });
+        });
+        
         // PROJECT ID
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
