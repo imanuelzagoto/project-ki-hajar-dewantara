@@ -145,7 +145,8 @@
 
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
-                                                    Pengajuan</span>
+                                                    Pengajuan
+                                                </span>
                                                 <?php
                                                 if ($suratPerintahKerja->submission_date) {
                                                     $submission_date = date('Y-m-d', strtotime(str_replace('/', '-', $suratPerintahKerja->submission_date)));

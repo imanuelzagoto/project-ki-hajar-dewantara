@@ -101,7 +101,8 @@
                                             <div class="pr-4 py-2 col-6" id="container_tanggalPengajuan"
                                                 style="position: relative; bottom:3px;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
-                                                    Pengajuan</span>
+                                                    Pengajuan
+                                                </span>
                                                 <?php
                                                 if ($pengajuanDana->tanggal_pengajuan) {
                                                     $tanggal_pengajuan = date('d/m/y', strtotime(str_replace('/', '-', $pengajuanDana->tanggal_pengajuan)));
@@ -674,7 +675,7 @@
             }
         }
 
-        // Functio  Datetime
+        // Function  Datetime
         var currentDate = new Date();
         var year = currentDate.getFullYear();
         var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
