@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::table('column_into_surat_perintah_kerjas', function (Blueprint $table) {
             //
+            $table->string('to')->nullable();
         });
     }
 
