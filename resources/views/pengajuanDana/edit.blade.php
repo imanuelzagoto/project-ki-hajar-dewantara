@@ -98,26 +98,19 @@
                                                     class="form-control bg-light w-100" type="text" required>
                                             </div>
 
-                                            <div class="pr-4 py-2 col-6" id="container_tanggalPengajuan"
-                                                style="position: relative; bottom:3px;">
+                                            <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan
                                                 </span>
                                                 <?php
                                                 if ($pengajuanDana->tanggal_pengajuan) {
-                                                    $tanggal_pengajuan = date('d/m/y', strtotime(str_replace('/', '-', $pengajuanDana->tanggal_pengajuan)));
+                                                    $tanggal_pengajuan = date('Y-m-d', strtotime(str_replace('/', '-', $pengajuanDana->tanggal_pengajuan)));
                                                 } else {
                                                     $tanggal_pengajuan = '';
                                                 }
                                                 ?>
-                                                <input name="tanggal_pengajuan"
-                                                    value="{{ $pengajuanDana->tanggal_pengajuan }}" id="tanggalPengajuan"
-                                                    class="form-control w-100 disabled-input-project"
-                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;"
-                                                    required>
-                                                <i class="fa-regular fa-calendar icon_calender"></i>
+                                                <input id="tanggalPengajuan" name="tanggal_pengajuan" class="form-control w-100 disabled-input-project" value="{{ $tanggal_pengajuan }}" type="date" style="background-color: #D9D9D9;" required>
                                             </div>
-
 
                                             <div class="pr-4 py-2 col-6" id="container_method">
                                                 <span class="text-sm font-weight-bold text-form-detail"
@@ -675,13 +668,13 @@
             }
         }
 
-        // Function  Datetime
-        var currentDate = new Date();
-        var year = currentDate.getFullYear();
-        var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-        var day = ('0' + currentDate.getDate()).slice(-2);
-        var formattedDate = year + '-' + month + '-' + day;
-        document.getElementById('tanggalPengajuan').value = formattedDate;
+        // // Function  Datetime
+        // var currentDate = new Date();
+        // var year = currentDate.getFullYear();
+        // var month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
+        // var day = ('0' + currentDate.getDate()).slice(-2);
+        // var formattedDate = year + '-' + month + '-' + day;
+        // document.getElementById('tanggalPengajuan').value = formattedDate;
 
         document.addEventListener('DOMContentLoaded', function() {
             setInterval(updateClock, 1000);
