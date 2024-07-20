@@ -281,11 +281,18 @@
                                                 </button>
                                             </div>
 
-                                            <div class="pr-4 py-2 col-3" id="spesifikasiContainer"
+                                            <div class="pr-4 py-2 col-2" id="spesifikasiContainer"
                                                 style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
                                                 <input type="text" id="spesifikasi" name="spesifikasi[]"
                                                     class="form-control bg-light" style="height: 40px;" required>
+                                            </div>
+
+                                            <div class="pr-4 py-2 col-2" id="aliasContainer"
+                                                style="display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Alias</span>
+                                                <input type="text" id="alias" name="alias[]"
+                                                    class="form-control bg-light" style="height: 40px;">
                                             </div>
 
                                             <div class="pr-4 py-2 col-2" id="jumlahContainer" style="display: none;">
@@ -295,7 +302,7 @@
                                                     required>
                                             </div>
 
-                                            <div class="pr-4 py-2 col-2" id="satuanContainer" style="display: none;">
+                                            <div class="pr-4 py-2 col-1" id="satuanContainer" style="display: none;">
                                                 <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
                                                 <input type="text" id="satuan" name="satuan[]"
                                                     class="form-control bg-light text-center" style="height: 40px;"
@@ -687,6 +694,7 @@
             var filePendukung = document.getElementById('filePendukung');
             var tambahFieldContainer = document.getElementById('tambahFieldContainer');
             var spesifikasiContainer = document.getElementById('spesifikasiContainer');
+            var aliasContainer = document.getElementById('aliasContainer');
             var jumlahContainer = document.getElementById('jumlahContainer');
             var satuanContainer = document.getElementById('satuanContainer');
             var keteranganContainer = document.getElementById('keteranganContainer');
@@ -704,6 +712,7 @@
 
                 tambahFieldContainer.style.display = 'none';
                 spesifikasiContainer.style.display = 'none';
+                aliasContainer.style.display = 'none';
                 jumlahContainer.style.display = 'none';
                 satuanContainer.style.display = 'none';
                 keteranganContainer.style.display = 'none';
@@ -716,6 +725,7 @@
                 document.getElementById('keterangan').removeAttribute('required');
 
                 document.getElementById('spesifikasi').value = null;
+                document.getElementById('alias').value = null;
                 document.getElementById('jumlah').value = null;
                 document.getElementById('satuan').value = null;
                 document.getElementById('keterangan').value = null;
@@ -736,6 +746,7 @@
             } else if (selectedValue === 'Surat Permintaan Barang') {
                 tambahFieldContainer.style.display = 'block';
                 spesifikasiContainer.style.display = 'block';
+                aliasContainer.style.display = 'block';
                 jumlahContainer.style.display = 'block';
                 satuanContainer.style.display = 'block';
                 keteranganContainer.style.display = 'block';
@@ -786,9 +797,14 @@
             function addNewRow() {
                 var newRow = `
                 <div class="row mb-2" style="margin-left: 0px;">
-                    <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
+                    <div class="pr-4 py-2 col-2" id="spesifikasiContainer">
                         <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
                         <input type="text" id="newspesifikasi" name="spesifikasi[]" class="form-control bg-light w-100" style="height: 40px;" required>
+                    </div>
+
+                    <div class="pr-4 py-2 col-2" id="aliasContainer">
+                        <span class="text-sm font-weight-bold text-form-detail">Alias</span>
+                        <input type="text" id="newalias" name="alias[]" class="form-control bg-light w-100" style="height: 40px;">
                     </div>
 
                     <div class="pr-4 py-2 col-2" id="jumlahContainer">
@@ -796,7 +812,7 @@
                         <input type="number" name="jumlah[]" id="newjumlah" class="form-control bg-light text-center w-100" style="height: 40px;" required>
                     </div>
 
-                    <div class="pr-4 py-2 col-2" id="satuanContainer">
+                    <div class="pr-4 py-2 col-1" id="satuanContainer">
                         <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
                         <input type="text" name="satuan[]" id="newsatuan" class="form-control bg-light text-center w-100" style="height: 40px;" required>
                     </div>

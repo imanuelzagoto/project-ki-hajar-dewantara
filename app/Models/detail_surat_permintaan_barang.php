@@ -10,6 +10,7 @@ class detail_surat_permintaan_barang extends Model
     use HasFactory;
     protected $fillable = [
         'spesifikasi',
+        'alias',
         'jumlah',
         'satuan',
         'keterangan',

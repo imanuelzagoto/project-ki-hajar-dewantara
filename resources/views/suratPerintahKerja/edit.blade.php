@@ -321,51 +321,40 @@
                                                 @if (isset($details))
                                                     @foreach ($details as $detail)
                                                         <div class="row mb-2" style="margin-left: 0px;">
-                                                            <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
+                                                            <div class="pr-4 py-2 col-2" id="spesifikasiContainer">
                                                                 <span
                                                                     class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
-                                                                <input type="text" id="spesifikasi"
-                                                                    name="spesifikasi[]"
-                                                                    value="{{ $detail->spesifikasi }}"
-                                                                    class="form-control bg-light" style="height: 40px;"
-                                                                    required>
+                                                                <input type="text" id="spesifikasi" name="spesifikasi[]" value="{{ $detail->spesifikasi }}" class="form-control bg-light" style="height: 40px;" required>
+                                                            </div>
+
+                                                            <div class="pr-4 py-2 col-2" id="aliasContainer">
+                                                                <span
+                                                                    class="text-sm font-weight-bold text-form-detail">Alias</span>
+                                                                <input type="text" id="alias" name="alias[]" value="{{ $detail->alias }}" class="form-control bg-light" style="height: 40px;">
                                                             </div>
 
                                                             <div class="pr-4 py-2 col-2" id="jumlahContainer">
                                                                 <span
                                                                     class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                                                <input type="number" id="jumlah" name="jumlah[]"
-                                                                    value="{{ $detail->jumlah }}"
-                                                                    class="form-control bg-light text-center"
-                                                                    style="height: 40px;" required>
+                                                                <input type="number" id="jumlah" name="jumlah[]" value="{{ $detail->jumlah }}" class="form-control bg-light text-center" style="height: 40px;" required>
                                                             </div>
 
-                                                            <div class="pr-4 py-2 col-2" id="satuanContainer">
+                                                            <div class="pr-4 py-2 col-1" id="satuanContainer">
                                                                 <span
                                                                     class="text-sm font-weight-bold text-form-detail">Satuan</span>
-                                                                <input type="text" id="satuan" name="satuan[]"
-                                                                    value="{{ $detail->satuan }}"
-                                                                    class="form-control bg-light text-center"
-                                                                    style="height: 40px;" required>
+                                                                <input type="text" id="satuan" name="satuan[]" value="{{ $detail->satuan }}" class="form-control bg-light text-center" style="height: 40px;" required>
                                                             </div>
 
                                                             <div class="pr-4 py-2 col-4" id="keteranganContainer">
                                                                 <span class="text-sm font-weight-bold text-form-detail">
                                                                     Keterangan
                                                                 </span>
-                                                                <input type="text" value="{{ $detail->keterangan }}"
-                                                                    name="keterangan[]" id="keterangan"
-                                                                    class="form-control bg-light" style="height: 40px;"
-                                                                    required>
+                                                                <input type="text" value="{{ $detail->keterangan }}" name="keterangan[]" id="keterangan" class="form-control bg-light" style="height: 40px;" required>
                                                             </div>
 
                                                             <div class="py-2 col-1 JS-button-delete" id="deleteContainer"
                                                                 style="display: flex; justify-content: flex-end; padding-right: 35px;">
-                                                                <button
-                                                                    class="btn btn-danger font-weight-bold JS-delete-btn"
-                                                                    id="buttonDelete"
-                                                                    style=" font-size: 11px; margin-top:21px; position: absolute; right: 29px; width:54px;"
-                                                                    disabled>
+                                                                <button class="btn btn-danger font-weight-bold JS-delete-btn" id="buttonDelete" style=" font-size: 11px; margin-top:21px; position: absolute; right: 29px; width:54px;" disabled>
                                                                     <i class="fa-solid fa-minus"></i>
                                                                 </button>
                                                             </div>
@@ -706,6 +695,7 @@
             var filePendukung = document.getElementById('filePendukung');
             var tambahFieldContainer = document.getElementById('tambahFieldContainer');
             var spesifikasiContainer = document.getElementById('spesifikasiContainer');
+            var aliasContainer = document.getElementById('aliasContainer');
             var jumlahContainer = document.getElementById('jumlahContainer');
             var satuanContainer = document.getElementById('satuanContainer');
             var keteranganContainer = document.getElementById('keteranganContainer');
@@ -728,6 +718,7 @@
 
                 if (tambahFieldContainer) tambahFieldContainer.style.display = 'none';
                 if (spesifikasiContainer) spesifikasiContainer.style.display = 'none';
+                if (aliasContainer) aliasContainer.style.display = 'none';
                 if (jumlahContainer) jumlahContainer.style.display = 'none';
                 if (satuanContainer) satuanContainer.style.display = 'none';
                 if (keteranganContainer) keteranganContainer.style.display = 'none';
@@ -741,14 +732,13 @@
                     itemFieldsContainer.style.display = 'none';
                 }
 
-                if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').removeAttribute(
-                    'required');
+                if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').removeAttribute('required');
                 if (document.getElementById('jumlah')) document.getElementById('jumlah').removeAttribute('required');
                 if (document.getElementById('satuan')) document.getElementById('satuan').removeAttribute('required');
-                if (document.getElementById('keterangan')) document.getElementById('keterangan').removeAttribute(
-                    'required');
+                if (document.getElementById('keterangan')) document.getElementById('keterangan').removeAttribute('required');
 
                 if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').value = null;
+                if (document.getElementById('alias')) document.getElementById('alias').value = null;
                 if (document.getElementById('jumlah')) document.getElementById('jumlah').value = null;
                 if (document.getElementById('satuan')) document.getElementById('satuan').value = null;
                 if (document.getElementById('keterangan')) document.getElementById('keterangan').value = null;
@@ -765,6 +755,7 @@
             } else if (selectedValue === 'Surat Permintaan Barang') {
                 if (tambahFieldContainer) tambahFieldContainer.style.display = 'block';
                 if (spesifikasiContainer) spesifikasiContainer.style.display = 'block';
+                if (aliasContainer) aliasContainer.style.display = 'block';
                 if (jumlahContainer) jumlahContainer.style.display = 'block';
                 if (satuanContainer) satuanContainer.style.display = 'block';
                 if (keteranganContainer) keteranganContainer.style.display = 'block';
@@ -773,8 +764,7 @@
 
                 if (filePendukung) filePendukung.style.display = 'none';
 
-                if (document.getElementById('choosefile')) document.getElementById('choosefile').removeAttribute(
-                    'required');
+                if (document.getElementById('choosefile')) document.getElementById('choosefile').removeAttribute('required');
 
                 if (document.getElementById('choosefile')) document.getElementById('choosefile').value = null;
                 if (fileListContainer) fileListContainer.value = null;
@@ -817,9 +807,14 @@
             function addNewRow() {
                 var newRow = `
             <div class="row mb-2" style="margin-left: 0px;">
-                <div class="pr-4 py-2 col-3" id="spesifikasiContainer">
+                <div class="pr-4 py-2 col-2" id="spesifikasiContainer">
                     <span class="text-sm font-weight-bold text-form-detail">Spesifikasi</span>
                     <input type="text" id="newspesifikasi" name="spesifikasi[]" class="form-control bg-light w-100" style="height: 40px;" required>
+                </div>
+
+                <div class="pr-4 py-2 col-2" id="aliasContainer">
+                    <span class="text-sm font-weight-bold text-form-detail">Alias</span>
+                    <input type="text" id="newsalias" name="alias[]" class="form-control bg-light w-100" style="height: 40px;" required>
                 </div>
 
                 <div class="pr-4 py-2 col-2" id="jumlahContainer">
@@ -827,7 +822,7 @@
                     <input type="number" name="jumlah[]" id="newjumlah" class="form-control bg-light text-center w-100" style="height: 40px;" required>
                 </div>
 
-                <div class="pr-4 py-2 col-2" id="satuanContainer">
+                <div class="pr-4 py-2 col-1" id="satuanContainer">
                     <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
                     <input type="text" name="satuan[]" id="newsatuan" class="form-control bg-light text-center w-100" style="height: 40px;" required>
                 </div>

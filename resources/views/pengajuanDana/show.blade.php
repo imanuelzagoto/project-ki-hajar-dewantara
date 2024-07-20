@@ -83,6 +83,22 @@
                     <thead>
                         <tr>
                             <th class="column-subject">
+                                <span>Kode Project</span>
+                                <span style="position: relative; left:165.7px;">:</span>
+                            </th>
+                            <th style="padding-left:3px; font-size:14.5px;">
+                                {{ $pds->code ?? '-' }}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="column-subject">
+                                <span>Project Manager</span>
+                                <span style="position: relative; left:141.5px;">:</span>
+                            </th>
+                            <th style="padding-left:3px; font-size:14.5px;">{{ $pds->project_manager }}</th>
+                        </tr>
+                        <tr>
+                            <th class="column-subject">
                                 Subject
                                 <span style="padding-left: 200px;">:</span>
                             </th>

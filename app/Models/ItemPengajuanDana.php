@@ -11,11 +11,11 @@ class ItemPengajuanDana extends Model
 
     protected $fillable = [
         'nama_item',
+        'alias',
         'jumlah',
         'satuan',
         'harga',
         'total',
-        'alias',
     ];
 
     public function pengajuanDana()
