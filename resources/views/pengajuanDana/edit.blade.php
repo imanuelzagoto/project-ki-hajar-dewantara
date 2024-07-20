@@ -87,18 +87,30 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
+                                            <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
                                                 <input name="subject" value="{{ $pengajuanDana->subject }}"
                                                     class="form-control bg-light w-100" type="text" required>
                                             </div>
-                                            <div class="pr-4 py-2 col-6">
+
+                                            <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
-                                                <input name="revisi" value="{{ $pengajuanDana->revisi }}"
-                                                    class="form-control bg-light w-100" type="text" required>
+                                                <input name="revisi" value="{{ $pengajuanDana->revisi }}" class="form-control bg-light w-100" type="text" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-4">
+                                                <span class="text-sm font-weight-bold text-form-detail">Project Manager</span>
+                                                <select name="project_manager" class="form-control bg-light w-100" required>
+                                                    <option value="{{ $pengajuanDana->project_manager }}" selected>
+                                                        {{ $pengajuanDana->project_manager }}
+                                                    </option>
+                                                    @foreach ($projects as $p)
+                                                        <option value="{{ $p['project_manager'] }}">{{ $p['project_manager'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>                                            
+
+                                            <div class="pr-4 py-2 col-6" id="container_tanggalPengajuan">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal
                                                     Pengajuan
                                                 </span>
@@ -191,8 +203,9 @@
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-3" id="deadline_container">
-                                                    <span class="text-sm font-weight-bold text-form-detail">Batas
-                                                        Waktu</span>
+                                                    <span class="text-sm font-weight-bold text-form-detail">
+                                                        Batas Waktu
+                                                    </span>
                                                     <?php
                                                     if ($detail->batas_waktu) {
                                                         $batas_waktu = date('Y-m-d', strtotime(str_replace('/', '-', $detail->batas_waktu)));
@@ -224,8 +237,9 @@
                                                 </div>
 
                                                 <div class="pr-4 py-2 col-2" id="container_penerimaan">
-                                                    <span class="text-sm font-weight-bold text-form-detail">Metode
-                                                        Penerimaan</span>
+                                                    <span class="text-sm font-weight-bold text-form-detail">
+                                                        Metode Penerimaan
+                                                    </span>
                                                     <select id="metode_penerimaan" class="form-control bg-light w-100"
                                                         onchange="toggleRekeningInput()">
                                                         <option value="transfer" name="non_tunai">Transfer</option>
@@ -235,8 +249,9 @@
 
                                                 <div id="nomorRekeningInput" class="pr-4 col-2"
                                                     style="margin-top: 8px; display: none;">
-                                                    <span class="text-sm font-weight-bold text-form-detail">Nomor
-                                                        Rekening</span>
+                                                    <span class="text-sm font-weight-bold text-form-detail">
+                                                        Nomor Rekening
+                                                    </span>
                                                     <input id="nomor_rekening" name="non_tunai"
                                                         class="form-control bg-light w-100" type="text"
                                                         placeholder="Masukan nomor rekening"
@@ -246,8 +261,9 @@
 
                                                 <div id="namaBankInput" class="pr-4 col-2"
                                                     style="margin-top: 8px; display: none;">
-                                                    <span class="text-sm font-weight-bold text-form-detail">Nama
-                                                        Bank</span>
+                                                    <span class="text-sm font-weight-bold text-form-detail">
+                                                        Nama Bank
+                                                    </span>
                                                     <input id="namabank" name="nama_bank"
                                                         class="form-control bg-light w-100" type="text"
                                                         placeholder="Bank tujuan" value="{{ $detail->nama_bank }}"
@@ -289,48 +305,37 @@
 
                                             @foreach ($pengajuanDana->items as $item)
                                                 <div class="row py-2" style="margin-left: 1px; width:100%;">
-                                                    <div class="py-2 col-3">
-                                                        <span class="text-sm font-weight-bold text-form-detail">Nama
-                                                            item</span>
+                                                    <div class="py-2 col-2">
+                                                        <span class="text-sm font-weight-bold text-form-detail">
+                                                            Nama item
+                                                        </span>
                                                         <input name="nama_item[]" class="form-control bg-light w-100"
                                                             value="{{ $item->nama_item }}" type="text" required>
                                                     </div>
+
                                                     <div class="py-2 col-2">
-                                                        <span
-                                                            class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                                        <input name="jumlah[]" class="form-control bg-light jumlah w-100"
-                                                            value="{{ $item->jumlah }}" type="number"
-                                                            style=" left:-11px; text-align:center;" required>
+                                                        <span class="text-sm font-weight-bold text-form-detail">Nama Alias</span>
+                                                        <input name="alias[]"value="{{ $item->alias }}" class="form-control bg-light w-100" type="text">
+                                                    </div>
+
+                                                    <div class="py-2 col-2">
+                                                        <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
+                                                        <input name="jumlah[]" class="form-control bg-light jumlah w-100" value="{{ $item->jumlah }}" type="number" style=" left:-11px; text-align:center;" required>
+                                                    </div>
+                                                    <div class="py-2 col-1">
+                                                        <span class="text-sm font-weight-bold text-form-detail">Satuan</span>
+                                                        <input name="satuan[]" class="form-control bg-light w-100" value="{{ $item->satuan }}" type="text" style="text-align:center;" required>
                                                     </div>
                                                     <div class="py-2 col-2">
-                                                        <span
-                                                            class="text-sm font-weight-bold text-form-detail">Satuan</span>
-                                                        <input name="satuan[]" class="form-control bg-light w-100"
-                                                            value="{{ $item->satuan }}" type="text"
-                                                            style=" text-align:center;" required>
+                                                        <span class="text-sm font-weight-bold text-form-detail" style="">Harga</span>
+                                                        <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right;" value="{{ 'Rp. ' . number_format($item->harga, 0, ',', '.') }}" required>
                                                     </div>
                                                     <div class="py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail"
-                                                            style="">Harga</span>
-                                                        <input name="harga[]" class="form-control bg-light harga"
-                                                            type="text" style="text-align:right;"
-                                                            value="{{ 'Rp. ' . number_format($item->harga, 0, ',', '.') }}"
-                                                            required>
-                                                    </div>
-                                                    <div class="py-2 col-2">
-                                                        <span class="text-sm font-weight-bold text-form-detail"
-                                                            style="">Total</span>
-                                                        <input name="total"
-                                                            class="form-control bg-light text-right total" type="text"
-                                                            value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}"
-                                                            style="background-color: #b7b7b7 !important; color:black; font-weight:500;"
-                                                            required readonly>
+                                                        <span class="text-sm font-weight-bold text-form-detail" style="">Total</span>
+                                                        <input name="total" class="form-control bg-light text-right total" type="text" value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}" style="background-color: #b7b7b7 !important; color:black; font-weight:500;" required readonly>
                                                     </div>
                                                     <div class=" py-2 col-1 JS-button-delete">
-                                                        <button
-                                                            class="btn btn-sm btn-danger font-weight-bold JS-delete-btn"
-                                                            style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;"
-                                                            disabled><i class="fa-solid fa-minus"></i></button>
+                                                        <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 29px;" disabled><i class="fa-solid fa-minus"></i></button>
                                                     </div>
                                                 </div>
                                             @endforeach
@@ -755,14 +760,6 @@
             return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
         }
 
-        // Function to handle button save with click enter
-        // function handleEnterKey(event) {
-        //     if (event.key === 'Enter') {
-        //         event.preventDefault();
-        //         document.getElementById('submitSave').click();
-        //     }
-        // }
-        document.addEventListener('keydown', handleEnterKey);
         document.getElementById('submitSave').addEventListener('click', function() {
             console.log('Submit Save button clicked');
         });
@@ -787,31 +784,35 @@
             function addNewRow() {
                 var newRow = `
                     <div class="row py-2" style="margin-left: 90px;">
-                            <div class="py-2 col-3">
+                            <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
-                        
                             </div>
+
+                            <div class="py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail">Nama Alias</span>
+                                <input name="alias[]" class="form-control bg-light w-100" type="text">
+                            </div>
+
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
                                 <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style="left:-11px; text-align:center;" required>
-                        
                             </div>
-                            <div class="py-2 col-2">
+                            <div class="py-2 col-1">
                                 <span class="text-sm font-weight-bold text-form-detail" >Satuan</span>
                                 <input name="satuan[]" class="form-control bg-light w-100" type="text" style="text-align:center;" required>
-                        
                             </div>
+
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Harga</span>
                                 <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right;"  required>
-                        
                             </div>
+
                             <div class="py-2 col-2">
                                 <span class="text-sm font-weight-bold text-form-detail">Total</span>
                                 <input name="total" class="form-control bg-light text-right total disabled-input-project" type="text" style="background-color: #b7b7b7 !important; color:black; text-align: left; font-weight:400;" required readonly>
-                        
                             </div>
+
                             <div class=" py-2 col-1 JS-button-delete">
                                 <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;"><i class="fa-solid fa-minus"></i></button>
                             </div>

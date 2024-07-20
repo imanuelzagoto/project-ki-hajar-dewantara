@@ -87,17 +87,28 @@
                                     </div>
                                     <div class="d-block w-100">
                                         <div class="row py-2">
-                                            <div class="pr-4 py-2 col-6">
+                                            <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Subjek</span>
                                                 <input name="subject" class="form-control bg-light w-100" type="text"
                                                     autofocus required>
                                                 <span id="subject-error" class="error-message"></span>
                                             </div>
-                                            <div class="pr-4 py-2 col-6" id="container_revisi">
+
+                                            <div class="pr-4 py-2 col-4" id="container_revisi">
                                                 <span class="text-sm font-weight-bold text-form-detail">Revisi</span>
                                                 <input name="revisi" class="form-control bg-light w-100" type="text"
                                                     required>
                                             </div>
+
+                                            <div class="pr-4 py-2 col-4">
+                                                <span class="text-sm font-weight-bold text-form-detail">Project Manager</span>
+                                                <select name="project_manager" class="form-control bg-light w-100" required>
+                                                    <option value="" disabled selected></option>
+                                                    @foreach ($projects as $p)
+                                                        <option value="{{ $p['project_manager'] }}">{{ $p['project_manager'] }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>            
 
                                             <div class="pr-4 py-2 col-6" id="container_tanggalPengajuan"
                                                 style="position: relative; bottom:3px;">
@@ -599,7 +610,7 @@
             return !!(elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length);
         }
 
-        document.addEventListener('keydown', handleEnterKey);
+        // document.addEventListener('keydown', handleEnterKey);
     </script>
 @endsection
 
@@ -610,42 +621,42 @@
             $("#tambahField").click(function() {
                 addNewRow();
             });
-
-            // $(document).on('click', '.JS-delete-btn', function() {
-            //     $(this).closest('.row').remove();
-            //     activateDeleteButtons
-            //         ();
-            // });
-
             function addNewRow() {
                 var newRow = `
                         <div class="row py-2" style="margin-left: 90px;">
-                            <div class="py-2 col-3">
-                                <span class="text-sm font-weight-bold text-form-detail">Nama item</span>
+                            <div class="py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail form_item">Nama item</span>
                                 <input name="nama_item[]" class="form-control bg-light w-100" type="text" required>
                         
                             </div>
+
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail">Jumlah</span>
-                                <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style=" left:-11px; text-align:center;" required>
+                                <span class="text-sm font-weight-bold text-form-detail form_item">Nama Alias</span>
+                                <input name="alias[]" class="form-control bg-light w-100" type="text">
+                        
+                            </div>
+
+                            <div class="py-2 col-2">
+                                <span class="text-sm font-weight-bold text-form-detail form_item">Jumlah</span>
+                                <input name="jumlah[]" class="form-control bg-light jumlah w-100" type="number" style="left:-11px; text-align:center;" required>
+                        
+                            </div>
+                            <div class="py-2 col-1">
+                                <span class="text-sm font-weight-bold text-form-detail form_item">Satuan</span>
+                                <input name="satuan[]" class="form-control bg-light w-100" type="text" style="text-align:center; font-size:11px;" required>
                         
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail" >Satuan</span>
-                                <input name="satuan[]" class="form-control bg-light w-100" type="text" style=" text-align:center;" required>
-                        
-                            </div>
-                            <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail">Harga</span>
+                                <span class="text-sm font-weight-bold text-form-detail form_item">Harga</span>
                                 <input name="harga[]" class="form-control bg-light harga" type="text" style="text-align:right;"  required>
                         
                             </div>
                             <div class="py-2 col-2">
-                                <span class="text-sm font-weight-bold text-form-detail">Total</span>
+                                <span class="text-sm font-weight-bold text-form-detail form_item">Total</span>
                                 <input name="total" class="form-control bg-light text-right total disabled-input-project" type="text" style="background-color: #D9D9D9 !important; text-align: left; color:black; font-weight:500;" required>
                         
                             </div>
-                            <div class=" py-2 col-1 JS-button-delete">
+                            <div class="py-2 col-1 JS-button-delete">
                                 <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;" disabled><i class="fa-solid fa-minus"></i></button>
                             </div>
                         </div>`;

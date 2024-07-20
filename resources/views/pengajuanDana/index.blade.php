@@ -1,3 +1,5 @@
+
+
 {{-- @php
     $userData = Session::get('user');
     $userrole = $userData['modules']['name'];
@@ -153,7 +155,9 @@
                                                 {{ $i }}
                                             </td>
                                             <td class="text-left" style="font-weight:500;" nowrap>
-                                                {{ $pdts->no_doc }}
+                                                <a href="javascript:void(0)" class="clickable" data-id="{{ $pdts->id }}" style="color: #000000; text-decoration: none;">
+                                                    {{ $pdts->no_doc }}
+                                                </a>
                                             </td>
                                             <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $pdts->revisi }}
@@ -211,11 +215,74 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="modalss" id="itemsModal" tabindex="-1" role="dialog" aria-labelledby="itemsModalLabel" aria-hidden="true">
+                            <div class="card-modals">
+                                <span id="close" style="float:right; cursor:pointer;">&times;</span>
+                                <p id="modal-content"></p>
+                                <table class="table-bordered" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th class="fw-bold text-center">Nama Item</th>
+                                            <th class="fw-bold text-center">Nama Alias</th>
+                                            <th class="fw-bold text-center">Jumlah</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
+    <script>
+        $(document).ready(function() {
+            $('.clickable').on('click', function() {
+                var id = $(this).data('id');
+                $('#modal-content').html('<span class="bold-text">No.Doc :</span> <span class="text-document">' + $(this).text() + '</span>');
+        
+                $.ajax({
+                    url: '/pengajuan-dana/' + id,
+                    method: 'GET',
+                    dataType: 'json',
+                    success: function(data) {
+                        var tableBody = '';
+                        if (data.length > 0) {
+                            data.forEach(function(item, index) {
+                                tableBody += '<tr>';    
+                                tableBody += '<td class="text-center">' + item.nama_item + '</td>';
+                                tableBody += '<td class="text-center">' + item.alias + '</td>';
+                                tableBody += '<td class="text-center">' + item.jumlah + '</td>';
+                                tableBody += '</tr>';
+                            });
+                            $('#itemsModal tbody').html(tableBody);
+                        } else {
+                            $('#itemsModal tbody').html('<tr><td colspan="5" class="text-center">No items found</td></tr>');
+                        }
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('AJAX Error:', textStatus, errorThrown);
+                        $('#itemsModal tbody').html('<tr><td colspan="5" class="text-center">Error retrieving data.</td></tr>');
+                    }
+                });
+        
+                $('#itemsModal').show();
+            });
+        
+            $('#close').on('click', function() {
+                $('#itemsModal').hide();
+            });
+        
+            $(window).on('click', function(event) {
+                if ($(event.target).is('#itemsModal')) {
+                    $('#itemsModal').hide();
+                }
+            });
+        });
+    </script>
 
     <script>
         // JS DELETE
@@ -248,11 +315,8 @@
             });
         }
 
-        // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
         document.addEventListener('DOMContentLoaded', function() {
-            // Panggil updateClock secara berkala setiap detik
             setInterval(updateClock, 1000);
-            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
             updateClock();
         });
 
@@ -263,7 +327,6 @@
                 'November', 'Desember'
             ];
 
-            // Set timezone to Asia/Jakarta
             var options = {
                 timeZone: 'Asia/Jakarta',
                 weekday: 'long'
@@ -276,7 +339,6 @@
 
             var datetimeElement = document.getElementById('datetime');
             if (datetimeElement) {
-                // Perbarui innerHTML elemen 'datetime' jika ditemukan
                 datetimeElement.innerHTML = dateTimeString;
             } else {
                 console.error("Datetime element not found.");
@@ -300,7 +362,6 @@
     <script>
         // JS DATATABLE
         $(document).ready(function() {
-            // Function to get page length from localStorage
             function getPageLengthFromLocalStorage(tableId) {
                 var storedLength = localStorage.getItem(tableId + '_pageLength');
                 if (storedLength) {
@@ -310,7 +371,6 @@
                 }
             }
 
-            // table spk
             var tablePengajuanDana = $('#tablePengajuanDana').DataTable({
                 "pageLength": getPageLengthFromLocalStorage('tablePengajuanDana'),
                 // "info": false, // Menonaktifkan pesan info
@@ -336,24 +396,19 @@
                 }
             });
 
-            // Set value for show entries dropdown on page load
             $('#showEntriesProject').val(getPageLengthFromLocalStorage('tablePengajuanDana'));
 
-            // fitur show entri
             $('#showEntriesProject').change(function() {
                 var val = $(this).val();
                 tablePengajuanDana.page.len(val).draw();
                 localStorage.setItem('tablePengajuanDana_pageLength', val);
             });
 
-
-            // fitur search
             $('#filtersButtonPD').click(function() {
                 var searchText = $('#searchPD').val();
                 tablePengajuanDana.search(searchText).draw();
             });
 
-            // Memantau perubahan pada input pencarian
             $('#searchPD').on('input', function() {
                 var searchText = $(this).val();
                 if (!searchText.trim()) {
@@ -361,7 +416,6 @@
                 }
             });
 
-            // Menambahkan event listener untuk tombol "Enter"
             $('#searchPD').keypress(function(event) {
                 if (event.keyCode === 13) {
                     var searchText = $(this).val();
@@ -373,3 +427,4 @@
         // End JS Table
     </script>
 @endpush
+

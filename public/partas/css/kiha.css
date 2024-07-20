@@ -40,9 +40,28 @@
     }
 }
 
+@media screen and (max-width: 1309.09px) {
+    .form_item{
+        font-size: 10px !important;
+    }
+}
+
 @media screen and (max-width: 1440px) {
     .form_pengajuan_spk {
         margin-right: 10px !important;
+    }
+
+    .card-modals{
+        max-width: 767px !important;
+        margin-left: 463px !important;
+    }
+
+    .form_item{
+        font-size: 10px !important;
+    }
+
+    .text-form-detail{
+        font-size: 10px !important;
     }
 
     .header_text_spk {
@@ -1422,6 +1441,11 @@ input[type=file]::file-selector-button:hover {
         height: 38px;
     }
 
+    .card-modals{
+        max-width: 868px !important;
+        margin-left: 463px !important;
+    }
+
     .form_spk {
         margin-left: 15px !important;
     }
@@ -1490,3 +1514,38 @@ input[type=file]::file-selector-button:hover {
 .error-message {
     color: red;
 }
+
+.bold-text {
+    font-weight: bold;
+}
+
+.text-document{
+    color: #718EBF;
+    font-weight: 700;
+    background-color: azure;
+}
+
+.card-modals{
+    border-top: 10px solid #4FD1C5;
+    background-color:white;
+    margin:15% auto;
+    padding:20px;
+    width:80%;
+    max-width:887px ; 
+    margin-left:562px; 
+    margin-top:180px;
+    border-radius: 6px;
+}
+
+.modalss{
+    display:none; 
+    position:fixed; 
+    top:0; left:0; 
+    width:100%; 
+    height:100%; 
+    background-color:rgba(0,0,0,0.5);
+}
+
+
+
+

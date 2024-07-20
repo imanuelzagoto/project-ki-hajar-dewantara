@@ -220,6 +220,7 @@
                                     <table class="table display-6 mb-6 table-hover w-100" id="TablePengajuanDana">
                                         <thead>
                                             <tr class="tr-table">
+                                                <th class="text-left" style="font-weight:700;" nowrap>No.</th>
                                                 <th class="text-left" style="font-weight:700;" nowrap>No.Doc</th>
                                                 <th class="text-center" style="font-weight:700;" nowrap>Revisi</th>
                                                 <th class="text-left" style="font-weight:700;" nowrap>Pemohon</th>
@@ -240,9 +241,18 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $i = 0;
+                                            @endphp
                                             @foreach ($pengajuan_dana_per_day_by_user_id as $pdt)
                                                 @foreach ($pdt->details as $detail)
+                                                    @php
+                                                        $i += 1;
+                                                    @endphp
                                                     <tr class="Column_td">
+                                                        <td class="text-left" style="font-weight:500;" nowrap>
+                                                            {{ $i }}
+                                                        </td>
                                                         <td class="text-left" style="font-weight:500;" nowrap>
                                                             {{ $pdt->no_doc }}
                                                         </td>
@@ -293,6 +303,9 @@
                                         <thead>
                                             <tr class="column_th">
                                                 <th class="text-left" style="width:25px; font-weight: 700;" nowrap>
+                                                    No.
+                                                </th>
+                                                <th class="text-left" style="width:25px; font-weight: 700;" nowrap>
                                                     No SPK
                                                 </th>
                                                 <th class="text-center" style="font-weight: 700;" nowrap>
@@ -310,16 +323,26 @@
                                                     PIC
                                                 </th>
                                                 <th class="text-center" style="width:23px; font-weight:700;" nowrap>
-                                                    Tanggal</th>
-                                                <th class="text-center" style="font-weight:700;" nowrap>Tanggal
-                                                    selesai
+                                                    Tanggal
+                                                </th>
+                                                <th class="text-center" style="font-weight:700;" nowrap>
+                                                    Tanggal selesai
                                                 </th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $i = 0;
+                                            @endphp
                                             @foreach ($pengajuan_spk_per_day as $pst)
                                                 @foreach ($pst->approvals as $approval)
+                                                    @php
+                                                        $i += 1;
+                                                    @endphp
                                                     <tr class="Column_td">
+                                                        <td class="text-left" style="font-weight: 500;" nowrap>
+                                                            {{ $i }}
+                                                        </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $pst->no_spk }}
                                                         </td>

@@ -88,14 +88,6 @@ class SuratPerintahKerjaViewWebController extends Controller
 
     public function store(Request $request)
     {
-        // $data_each_row = explode("\r\n",$request->job_description);
-        // foreach($data_each_row as $data ){
-        //     $count_string_data = strlen($data);
-        //     if($count_string_data >84){
-        //         $data = $count_string_data;
-        //     }
-
-        // }
         $validator = Validator::make($request->all(), [
             'code' => 'required|string',
             'applicant_name' => 'required|string',

@@ -15,6 +15,7 @@ class ItemPengajuanDana extends Model
         'satuan',
         'harga',
         'total',
+        'alias',
     ];
 
     public function pengajuanDana()

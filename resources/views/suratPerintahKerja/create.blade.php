@@ -89,7 +89,7 @@
                                     <div class="d-block w-100">
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Kode project</span>
+                                                <span class="text-sm font-weight-bold text-form-detail">Kode Project</span>
                                                 <input type="hidden" id="kode_project_hidden" name="code" required>
                                                 <select id="project_id" name="code" class="form-control bg-light w-100"
                                                     onchange="changeProjectName()" required>
@@ -99,7 +99,8 @@
                                                     @foreach ($projects as $p)
                                                         @if ($p['code'] !== null)
                                                             <option value="{{ $p['code'] }}"
-                                                                data-title="{{ $p['title'] }}">{{ $p['code'] }}
+                                                                data-title="{{ $p['title'] }}" data-user="{{ $p['user'] }}" data-main-contractor="{{ $p['main_contractor'] }}" data-project-manager="{{ $p['project_manager'] }}">
+                                                                {{ $p['code'] }}
                                                             </option>
                                                         @endif
                                                     @endforeach
@@ -116,21 +117,22 @@
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
-                                                <input name="user" class="form-control bg-light w-100" type="text"
-                                                    required>
+                                                <input name="user" id="user"  class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Main
-                                                    Contractor</span>
-                                                <input name="main_contractor" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Main Contractor
+                                                </span>
+                                                <input name="main_contractor" id="main_contractor" class="form-control w-100 disabled-input-project"
+                                                    type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Project
-                                                    Manager</span>
-                                                <input name="project_manager" class="form-control bg-light w-100"
-                                                    type="text" required>
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Project Manager
+                                                </span>
+                                                <input name="project_manager" id="project_manager" class="form-control w-100 disabled-input-project"
+                                                    type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
@@ -438,8 +440,15 @@
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-user');
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-main-contractor');
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-project-manager');
             document.getElementById("nama").value = selectedValue;
+            document.getElementById("user").value = selectedValue;
+            document.getElementById("main_contractor").value = selectedValue;
+            document.getElementById("project_manager").value = selectedValue;
         }
+
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
             var textarea = event.target;
             var text = textarea.value;

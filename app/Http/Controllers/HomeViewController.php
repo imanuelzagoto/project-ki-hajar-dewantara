@@ -36,8 +36,8 @@ class HomeViewController extends Controller
             $pengajuan_dana_per_day_by_user_id = PengajuanDana::with('items', 'details')
                 ->whereDate('created_at', $today)
                 ->orderBy('id', 'desc')
-                ->take(5)
-                ->get();
+                ->get()
+                ->take(5);
 
             $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->count();
 
@@ -54,12 +54,13 @@ class HomeViewController extends Controller
             $monthly_pengajuan_spk = Surat_perintah_kerja::select(DB::raw('MONTH(created_at) as month'), DB::raw('COUNT(*) as total'))
                 ->groupBy(DB::raw('MONTH(created_at)'))
                 ->get();
+
         } else if ($devisionId == "" || $devisionId == 0 || $devisionId == null || $devisionId == "null" || $devisionId == "0") {
             $pengajuan_dana_per_day_by_user_id = PengajuanDana::whereDate('created_at', $today)
                 ->where('user_id', $userId)
                 ->orderBy('id', 'desc')
-                ->take(5)
-                ->get();
+                ->get()
+                ->take(5);
 
             $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->where('user_id', $userId)->count();
 
@@ -81,8 +82,8 @@ class HomeViewController extends Controller
         } else {
             $pengajuan_dana_per_day_by_user_id = PengajuanDana::whereDate('created_at', $today)
                 ->where('division_id', $devisionId)
-                ->take(5)
-                ->get();
+                ->get()
+                ->take(5);
 
             $total_pengajuan_dana_by_user_id = PengajuanDana::whereDate('created_at', $today)->where('division_id', $devisionId)->count();
 

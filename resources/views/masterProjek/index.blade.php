@@ -95,7 +95,6 @@
                             </select>
                             <span class="labelentris">entries per page</span>
                         </div>
-                        {{-- <div class="table-responsive"> --}}
                         <table class="element-scrollbar table-responsive-goto table table-hover display-6 w-100"
                             id="tableProject">
                             <thead>
@@ -103,6 +102,9 @@
                                     <th class="text-center" style="font-weight:700;">No</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Nama Projek</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Kode Projek</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>User</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Main Contractor</th>
+                                    <th class="text-center" style="font-weight:700;" nowrap>Project Manager</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Tenggat</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Mulai</th>
                                     <th class="text-center" style="font-weight:700;" nowrap>Akhir</th>
@@ -114,21 +116,34 @@
                                     @php $i += 1; @endphp
                                     <tr class="Column_td">
                                         <td class="text-center" style="font-weight:500;">{{ $i }}</td>
-                                        <td class="text-left" style="font-weight:500;" nowrap>{{ $project['title'] }}
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ $project['title'] }}
                                         </td>
-                                        <td class="text-left" style="font-weight:500;" nowrap>{{ $project['code'] }}
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ $project['code'] }}
                                         </td>
                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
+                                            {{ $project['user'] }}
+                                        </td>
                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}</td>
+                                            {{ $project['main_contractor'] }}
+                                        </td>
                                         <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}</td>
+                                            {{ $project['project_manager'] }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}
+                                        </td>
+                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
                         </table>
-                        {{-- </div> --}}
                     </div>
                 </div>
             </div>
@@ -169,11 +184,8 @@
         }
 
 
-        // Pastikan kode ini berada setelah elemen-elemen HTML yang diperlukan dimuat
         document.addEventListener('DOMContentLoaded', function() {
-            // Panggil updateClock secara berkala setiap detik
             setInterval(updateClock, 1000);
-            // Panggil updateClock untuk memastikan waktu ditampilkan saat halaman dimuat
             updateClock();
         });
 
@@ -197,7 +209,6 @@
 
             var datetimeElement = document.getElementById('datetime');
             if (datetimeElement) {
-                // Perbarui innerHTML elemen 'datetime' jika ditemukan
                 datetimeElement.innerHTML = dateTimeString;
             } else {
                 console.error("Datetime element not found.");
@@ -218,13 +229,12 @@
 
         // JS DATATABLE
         $(document).ready(function() {
-            // Function to get page length from localStorage
             function getPageLengthFromLocalStorage(tableId) {
                 var storedLength = localStorage.getItem(tableId + '_pageLength');
                 if (storedLength) {
                     return parseInt(storedLength);
                 } else {
-                    return 10; // Default page length
+                    return 10;
                 }
             }
 
@@ -257,31 +267,17 @@
             // Set value for show entries dropdown on page load
             $('#showEntriesProject').val(getPageLengthFromLocalStorage('tableProject'));
 
-            // fitur show entri
             $('#showEntriesProject').change(function() {
                 var val = $(this).val();
                 tableProject.page.len(val).draw();
                 localStorage.setItem('tableProject_pageLength', val);
             });
 
-            // // Set value for show entries dropdown on page load
-            // $('#showEntriesProject').val(getPageLengthFromLocalStorage('tableProject'));
-
-            // // fitur show entri
-            // $('#showEntriesProject').change(function() {
-            //     var val = $(this).val();
-            //     tableProject.page.len(val).draw();
-            //     localStorage.setItem('tableProject', val);
-            // });
-
-
-            // fitur search
             $('#filtersButtonProject').click(function() {
                 var searchText = $('#searchProject').val();
                 tableProject.search(searchText).draw();
             });
 
-            // Memantau perubahan pada input pencarian
             $('#searchProject').on('input', function() {
                 var searchText = $(this).val();
                 if (!searchText.trim()) {
@@ -289,7 +285,6 @@
                 }
             });
 
-            // Menambahkan event listener untuk tombol "Enter" pada input pencarian
             $('#dataTableSearchForm').submit(function(event) {
                 event.preventDefault();
                 $('#filtersButtonProject').click();

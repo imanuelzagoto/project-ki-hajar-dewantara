@@ -16,7 +16,6 @@ class MasterProjekViewController extends Controller
     {
         $token = Session::get('token');
         $curl = curl_init();
-
         curl_setopt_array($curl, array(
             CURLOPT_URL => env('API_MASTER_PROJECT') . 'get-project/',
             CURLOPT_RETURNTRANSFER => true,
@@ -32,10 +31,8 @@ class MasterProjekViewController extends Controller
         ));
 
         $response = curl_exec($curl);
-        // dd($response);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-        // dd($projects);
         return view('masterProjek.index', ['projects' => $projects]);
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Models\PengajuanDana;
+use App\Models\ItemPengajuanDana;
 use App\Models\RequestApproval;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -34,25 +35,6 @@ class PengajuanDanaViewWebController extends Controller
         return $returnValue;
     }
 
-
-    public function index(Request $request)
-    {
-        $userData = Session::get('user');
-        $userrole = $userData['modules']['name'];
-        $userId = $userData['id'];
-        $devisionId = $userData['division_id'];
-
-        if ($userId == 1 || $userId == 127) {
-            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->orderBy('created_at', 'desc')->get();
-        } else if ($devisionId == "" || $devisionId == 0 || $devisionId == null || $devisionId == "null" || $devisionId == "0") {
-            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->where('user_id', $userId)->orderBy('created_at', 'desc')->get();
-        } else {
-            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->where('division_id', $devisionId)->get();
-        }
-        return view('pengajuanDana.index', compact('pengajuanDanas'));
-    }
-
-
     public function getApproval(Request $request)
     {
         $tags_approval = [];
@@ -74,6 +56,32 @@ class PengajuanDanaViewWebController extends Controller
         return response()->json($formatted_tags_approval);
     }
 
+    public function index(Request $request)
+    {
+        $userData = Session::get('user');
+        $userrole = $userData['modules']['name'];
+        $userId = $userData['id'];
+        $devisionId = $userData['division_id'];
+
+        if ($userId == 1 || $userId == 127) {
+            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->orderBy('created_at', 'desc')->get();
+        } else if ($devisionId == "" || $devisionId == 0 || $devisionId == null || $devisionId == "null" || $devisionId == "0") {
+            $pengajuanDanas = PengajuanDana::with(['details', 'ItemPengajuanDana'])->where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+        } else {
+            $pengajuanDanas = PengajuanDana::with(['details', 'ItemPengajuanDana'])->where('division_id', $devisionId)->get();
+        }
+
+        return view('pengajuanDana.index', compact('pengajuanDanas'));
+    }
+
+    public function getShowItems($id)
+    {
+        $pengajuanDana = PengajuanDana::where('id', $id)->with('items')->first();
+        if (!$pengajuanDana) {
+            return response()->json(['message' => 'Data not found'], 404);
+        }
+        return response()->json($pengajuanDana->items);
+    }
 
     public function create()
     {
@@ -122,6 +130,7 @@ class PengajuanDanaViewWebController extends Controller
             'subtotal' => 'required|string',
             'total' => 'required|string',
             'nama_item.*' => 'required|string',
+            'alias.*' => 'nullable|string',
             'jumlah.*' => 'required|integer',
             'satuan.*' => 'required|string',
             'harga.*' => 'required|string',
@@ -132,6 +141,7 @@ class PengajuanDanaViewWebController extends Controller
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
+            'project_manager' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -162,6 +172,7 @@ class PengajuanDanaViewWebController extends Controller
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
+            'project_manager' => $request->project_manager,
         ]);
 
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDanas->id)->first();
@@ -177,19 +188,31 @@ class PengajuanDanaViewWebController extends Controller
             'terbilang' => $request->terbilang, 'tunai' => $request->tunai, 'non_tunai' => $request->non_tunai, 'nama_bank' => $request->nama_bank, 'catatan' => $request->catatan,
         ]);
 
-        $items = $request->only('nama_item', 'jumlah', 'satuan', 'harga');
+        $items = [
+            'nama_item' => $request->input('nama_item', []),
+            'alias' => $request->input('alias', []),
+            'jumlah' => $request->input('jumlah', []),
+            'satuan' => $request->input('satuan', []),
+            'harga' => $request->input('harga', []),
+            'form_number' => 'doc_pd',
+        ];
+        
         $subtotal = 0;
         foreach ($items['nama_item'] as $key => $item) {
             $jumlah = intval($items['jumlah'][$key]);
             $harga = intval(str_replace(['Rp.', '.', ','], '', $items['harga'][$key]));
             $subtotal_item = $jumlah * $harga;
             $subtotal += $subtotal_item;
-
+        
             $pengajuanDanas->items()->create([
-                'nama_item' => $item, 'jumlah' => $jumlah, 'satuan' => $items['satuan'][$key],
-                'harga' => $harga, 'total' => $subtotal_item,
+                'nama_item' => $item,
+                'alias' => $items['alias'][$key],
+                'jumlah' => $jumlah,
+                'satuan' => $items['satuan'][$key],
+                'harga' => $harga,
+                'total' => $subtotal_item,
             ]);
-        }
+        }        
 
         $pengajuanDanas->update(['subtotal' => $subtotal]);
 
@@ -254,6 +277,7 @@ class PengajuanDanaViewWebController extends Controller
             'subtotal' => 'required|string',
             'total' => 'required|string',
             'nama_item.*' => 'required|string',
+            'alias.*' => 'nullable|string',
             'jumlah.*' => 'required|integer',
             'satuan.*' => 'required|string',
             'harga.*' => 'required|string',
@@ -264,6 +288,7 @@ class PengajuanDanaViewWebController extends Controller
             'catatan' => 'nullable|string',
             'tanggal_pengajuan' => 'required|date',
             'revisi' => 'nullable|string',
+            'project_manager' => 'nullable|string',
         ]);
 
         if ($validator->fails()) {
@@ -299,6 +324,7 @@ class PengajuanDanaViewWebController extends Controller
             'tanggal_pengajuan' => $request->tanggal_pengajuan,
             'no_doc' => 'doc_pd',
             'revisi' => $request->revisi,
+            'project_manager' => $request->project_manager,
         ]);
 
         $pengajuanDana->details()->update([
@@ -313,10 +339,16 @@ class PengajuanDanaViewWebController extends Controller
             'catatan' => $request->catatan,
         ]);
 
-        $items = $request->only('nama_item', 'jumlah', 'satuan', 'harga');
+        $items = [
+            'nama_item' => $request->input('nama_item', []),
+            'alias' => $request->input('alias', []),
+            'jumlah' => $request->input('jumlah', []),
+            'satuan' => $request->input('satuan', []),
+            'harga' => $request->input('harga', []),
+        ];
+
         $subtotal = 0;
         $pengajuanDana->items()->delete();
-
         foreach ($items['nama_item'] as $key => $item) {
             $jumlah = intval($items['jumlah'][$key]);
             $harga = intval(str_replace(['Rp.', '.', ','], '', $items['harga'][$key]));
@@ -325,12 +357,13 @@ class PengajuanDanaViewWebController extends Controller
 
             $pengajuanDana->items()->create([
                 'nama_item' => $item,
+                'alias' => $items['alias'][$key],
                 'jumlah' => $jumlah,
                 'satuan' => $items['satuan'][$key],
                 'harga' => $harga,
                 'total' => $subtotal_item,
             ]);
-        }
+        }        
 
         $pengajuanDana->update(['subtotal' => $subtotal]);
         $datas_no_doc = PengajuanDana::where('id', $pengajuanDana->id)->first();
@@ -366,3 +399,4 @@ class PengajuanDanaViewWebController extends Controller
         return $pdf->stream("", array("Attachment" => false));
     }
 }
+        

@@ -122,6 +122,8 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     Route::get('/pengajuan-dana/edit/{id}', [PengajuanDanaViewWebController::class, 'edit'])->name('pengajuanDana.edit');
     Route::get('/pengajuan-dana/show/{id}', [PengajuanDanaViewWebController::class, 'show'])->name('pengajuanDana.show');
     Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
+    Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
+    Route::get('/pengajuan-dana/{id}', [PengajuanDanaViewWebController::class, 'getShowItems'])->name('pengajuanDana.getShowItems');
 
     // Route for getApproval
     Route::get('/get-approval', [PengajuanDanaViewWebController::class, 'getApproval'])->name('getApproval');
