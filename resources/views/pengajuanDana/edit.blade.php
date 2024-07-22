@@ -98,11 +98,10 @@
                                                 <input name="revisi" value="{{ $pengajuanDana->revisi }}" class="form-control bg-light w-100" type="text" required>
                                             </div>
 
-
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Project Manager</span>
                                                 <select name="project_manager" class="form-control bg-light w-100" required>
-                                                    <option value="-" {{ $pengajuanDana->project_manager == '' ? 'selected' : '' }}></option>
+                                                    <option value="" {{ $pengajuanDana->project_manager == '' ? 'selected' : '' }}></option>
                                                     <option value="Endar Suryadi" {{ $pengajuanDana->project_manager == 'Endar Suryadi' ? 'selected' : '' }}>Endar Suryadi</option>
                                                     <option value="Ferry Kusmadi" {{ $pengajuanDana->project_manager == 'Ferry Kusmadi' ? 'selected' : '' }}>Ferry Kusmadi</option>
                                                     <option value="Imam Mucharam Ridwan" {{ $pengajuanDana->project_manager == 'Imam Mucharam Ridwan' ? 'selected' : '' }}>Imam Mucharam Ridwan</option>
