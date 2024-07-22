@@ -94,8 +94,7 @@
                                                     </option>
                                                     @foreach ($projects as $p)
                                                         @if ($p['code'] !== null)
-                                                            <option value="{{ $p['code'] }}"
-                                                                data-title="{{ $p['title'] }}" data-user="{{ $p['user'] }}" data-main-contractor="{{ $p['main_contractor'] }}" data-project-manager="{{ $p['project_manager'] }}">
+                                                            <option value="{{ $p['code'] }}" data-title="{{ $p['title'] }}" data-user="{{ $p['user'] }}" data-main-contractor="{{ $p['main_contractor'] }}" data-project-manager="{{ $p['project_manager'] }}">
                                                                 {{ $p['code'] }}
                                                             </option>
                                                         @endif
@@ -442,15 +441,29 @@
         // PROJECT ID
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
-            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
-            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-user');
-            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-main-contractor');
-            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-project-manager');
-            document.getElementById("nama").value = selectedValue;
-            document.getElementById("user").value = selectedValue;
-            document.getElementById("main_contractor").value = selectedValue;
-            document.getElementById("project_manager").value = selectedValue;
+            var selectedOption = selectBox.options[selectBox.selectedIndex];
+
+            var title = selectedOption.getAttribute('data-title');
+            var user = selectedOption.getAttribute('data-user');
+            var mainContractor = selectedOption.getAttribute('data-main-contractor');
+            var projectManager = selectedOption.getAttribute('data-project-manager');
+
+            document.getElementById("nama").value = title ? title : '';
+            document.getElementById("user").value = user ? user : '';
+            document.getElementById("main_contractor").value = mainContractor ? mainContractor : '';
+            document.getElementById("project_manager").value = projectManager ? projectManager : '';
         }
+        // function changeProjectName() {
+        //     var selectBox = document.getElementById("project_id");
+        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
+        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-user');
+        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-main-contractor');
+        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-project-manager');
+        //     document.getElementById("nama").value = selectedValue;
+        //     document.getElementById("user").value = selectedValue;
+        //     document.getElementById("main_contractor").value = selectedValue;
+        //     document.getElementById("project_manager").value = selectedValue;
+        // }
 
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
             var textarea = event.target;
