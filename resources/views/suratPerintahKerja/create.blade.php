@@ -17,27 +17,23 @@
                 <div class="d-none d-lg-block d-sm-none breadcrumb-item">
                     <ul class="header_text_spk">
                         <li class="breadcrumbs__item">
-                            <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                            <a href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link f-w-500" style="color: #A0AEC0;">
                                 Pages
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
-                            <a id="saveForm" href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link"
-                                style="color: #A0AEC0;font-size: 14px; font-weight: 500;">
+                            <a id="saveForm" href="{{ route('surat_perintah_kerja.index') }}" class="breadcrumbs__link f-w-500" style="color: #A0AEC0;">
                                 Surat Perintah Kerja
                             </a>
                         </li>
                         <li class="breadcrumbs__item">
-                            <a href="{{ route('suratPerintahKerja.create') }}" class="breadcrumbs__link"
-                                style="color: #17a2b8;font-size: 14px; font-weight: 500;">
+                            <a href="{{ route('suratPerintahKerja.create') }}" class="breadcrumbs__link f-w-500" style="color: #17a2b8;">
                                 Form Pengisian SPK
                             </a>
                         </li>
                     </ul>
                 </div>
-                <button class="btn btn-sm mt--2 rounded tooltip-container" type="button"
-                    style="float: left; margin-right:3px; background-color:#F1F4FA; margin-bottom:8px;">
+                <button class="btn btn-sm mt--2 rounded tooltip-container header-logout" type="button">
                     <a class="button-logout" onclick="$('#logout-form').submit()" style="color: #D41B14;">
                         Logout
                         <i class="fas fa-sign-out-alt"></i>

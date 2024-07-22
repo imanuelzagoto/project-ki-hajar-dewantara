@@ -98,17 +98,19 @@
                                                 <input name="revisi" value="{{ $pengajuanDana->revisi }}" class="form-control bg-light w-100" type="text" required>
                                             </div>
 
+
                                             <div class="pr-4 py-2 col-4">
                                                 <span class="text-sm font-weight-bold text-form-detail">Project Manager</span>
                                                 <select name="project_manager" class="form-control bg-light w-100" required>
-                                                    <option value="{{ $pengajuanDana->project_manager }}" selected>
-                                                        {{ $pengajuanDana->project_manager }}
-                                                    </option>
-                                                    @foreach ($projects as $p)
-                                                        <option value="{{ $p['project_manager'] }}">{{ $p['project_manager'] }}</option>
-                                                    @endforeach
+                                                    <option value="-" {{ $pengajuanDana->project_manager == '' ? 'selected' : '' }}></option>
+                                                    <option value="Endar Suryadi" {{ $pengajuanDana->project_manager == 'Endar Suryadi' ? 'selected' : '' }}>Endar Suryadi</option>
+                                                    <option value="Ferry Kusmadi" {{ $pengajuanDana->project_manager == 'Ferry Kusmadi' ? 'selected' : '' }}>Ferry Kusmadi</option>
+                                                    <option value="Imam Mucharam Ridwan" {{ $pengajuanDana->project_manager == 'Imam Mucharam Ridwan' ? 'selected' : '' }}>Imam Mucharam Ridwan</option>
+                                                    <option value="Rudi Apriyanto" {{ $pengajuanDana->project_manager == 'Rudi Apriyanto' ? 'selected' : '' }}>Rudi Apriyanto</option>
+                                                    <option value="Gunawan Tamin" {{ $pengajuanDana->project_manager == 'Gunawan Tamin' ? 'selected' : '' }}>Gunawan Tamin</option>
+                                                    <option value="RD. Agus Fajar Saputra" {{ $pengajuanDana->project_manager == 'RD. Agus Fajar Saputra' ? 'selected' : '' }}>RD. Agus Fajar Saputra</option>
                                                 </select>
-                                            </div>                                            
+                                            </div> 
 
                                             <div class="pr-4 py-2 col-6" id="container_tanggalPengajuan">
                                                 <span class="text-sm font-weight-bold text-form-detail">Tanggal

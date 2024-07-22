@@ -104,9 +104,15 @@
                                                 <span class="text-sm font-weight-bold text-form-detail">Project Manager</span>
                                                 <select name="project_manager" class="form-control bg-light w-100" required>
                                                     <option value="" disabled selected></option>
-                                                    @foreach ($projects as $p)
+                                                    <option value="Endar Suryadi">Endar Suryadi</option>
+                                                    <option value="Ferry Kusmadi">Ferry Kusmadi</option>
+                                                    <option value="Imam Mucharam Ridwan">Imam Mucharam Ridwan</option>
+                                                    <option value="Rudi Apriyanto">Rudi Apriyanto</option>
+                                                    <option value="Gunawan Tamin">Gunawan Tamin</option>
+                                                    <option value="RD. Agus Fajar Saputra">RD. Agus Fajar Saputra</option>
+                                                    {{-- @foreach ($projects as $p)
                                                         <option value="{{ $p['project_manager'] }}">{{ $p['project_manager'] }}</option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>            
 
