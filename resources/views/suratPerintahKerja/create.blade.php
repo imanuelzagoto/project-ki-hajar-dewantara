@@ -113,7 +113,7 @@
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
-                                                <input name="user" id="user"  class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
+                                                <input name="user" id="user" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">

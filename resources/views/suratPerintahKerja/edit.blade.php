@@ -99,8 +99,7 @@
                                                     </option>
                                                     @foreach ($projects as $p)
                                                         @if ($p['code'] !== null)
-                                                            <option value="{{ $p['code'] }}"
-                                                                data-title="{{ $p['title'] }}">{{ $p['code'] }}
+                                                            <option value="{{ $p['code'] }}" data-user="{{ $p['user'] }}" data-main-contractor="{{ $p['main_contractor'] }}" data-project-manager="{{ $p['project_manager'] }}">{{ $p['code'] }}
                                                             </option>
                                                         @endif
                                                     @endforeach
@@ -114,20 +113,23 @@
 
                                             <div class="pr-4 py-2 col-6">
                                                 <span class="text-sm font-weight-bold text-form-detail">User</span>
-                                                <input name="user" class="form-control bg-light w-100" type="text"
-                                                    value="{{ $suratPerintahKerja->user }}">
+                                                <input name="user" id="user" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" value="{{ $suratPerintahKerja->user }}" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Main
-                                                    Contractor</span>
-                                                <input name="main_contractor" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerja->main_contractor }}">
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Main Contractor
+                                                </span>
+                                                <input name="main_contractor" id="main_contractor" class="form-control w-100 disabled-input-project"
+                                                    type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" value="{{ $suratPerintahKerja->main_contractor }}" required>
                                             </div>
+
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Project
-                                                    Manager</span>
-                                                <input name="project_manager" class="form-control bg-light w-100"
-                                                    type="text" value="{{ $suratPerintahKerja->project_manager }}">
+                                                <span class="text-sm font-weight-bold text-form-detail">
+                                                    Project Manager
+                                                </span>
+                                                <input name="project_manager" id="project_manager" class="form-control w-100 disabled-input-project"
+                                                    type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" value="{{ $suratPerintahKerja->project_manager }}" required>
                                             </div>
 
                                             <div class="pr-4 py-2 col-6">
@@ -482,7 +484,13 @@
         function changeProjectName() {
             var selectBox = document.getElementById("project_id");
             var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-user');
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-main-contractor');
+            var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-project-manager');
             document.getElementById("nama").value = selectedValue;
+            document.getElementById("user").value = selectedValue;
+            document.getElementById("main_contractor").value = selectedValue;
+            document.getElementById("project_manager").value = selectedValue;
         }
 
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
