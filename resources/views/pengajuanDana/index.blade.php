@@ -219,12 +219,14 @@
                             <div class="card-modals">
                                 <span id="close" style="float:right; cursor:pointer;">&times;</span>
                                 <p id="modal-content"></p>
-                                <table class="table-bordered" style="width: 100%;">
+                                <table class="table-bordered" style="width: 100%; overflow: auto;">
                                     <thead>
                                         <tr>
                                             <th class="fw-bold text-center">Nama Item</th>
                                             <th class="fw-bold text-center">Nama Alias</th>
                                             <th class="fw-bold text-center">Jumlah</th>
+                                            <th class="fw-bold text-center">harga</th>
+                                            <th class="fw-bold text-center">total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -243,7 +245,7 @@
             $('.clickable').on('click', function() {
                 var id = $(this).data('id');
                 $('#modal-content').html('<span class="bold-text">No.Doc :</span> <span class="text-document">' + $(this).text() + '</span>');
-        
+
                 $.ajax({
                     url: '/pengajuan-dana/' + id,
                     method: 'GET',
@@ -252,10 +254,12 @@
                         var tableBody = '';
                         if (data.length > 0) {
                             data.forEach(function(item, index) {
-                                tableBody += '<tr>';    
+                                tableBody += '<tr>';
                                 tableBody += '<td class="text-center">' + item.nama_item + '</td>';
-                                tableBody += '<td class="text-center">' + item.alias + '</td>';
+                                tableBody += '<td class="text-center">' + (item.alias ? item.alias : '') + '</td>';
                                 tableBody += '<td class="text-center">' + item.jumlah + '</td>';
+                                tableBody += '<td class="text-right">' + formatRupiah(item.harga) + '</td>';
+                                tableBody += '<td class="text-right">' + formatRupiah(item.total) + '</td>';
                                 tableBody += '</tr>';
                             });
                             $('#itemsModal tbody').html(tableBody);
@@ -268,19 +272,35 @@
                         $('#itemsModal tbody').html('<tr><td colspan="5" class="text-center">Error retrieving data.</td></tr>');
                     }
                 });
-        
-                $('#itemsModal').show();
+
+                $('#itemsModal').css('display', 'flex');
             });
-        
+
             $('#close').on('click', function() {
-                $('#itemsModal').hide();
+                $('#itemsModal').css('display', 'none');
             });
-        
+
             $(window).on('click', function(event) {
                 if ($(event.target).is('#itemsModal')) {
                     $('#itemsModal').hide();
                 }
             });
+
+            function formatRupiah(angka) {
+                var number_string = angka.toString().replace(/[^,\d]/g, ''),
+                    split = number_string.split(','),
+                    sisa = split[0].length % 3,
+                    rupiah = split[0].substr(0, sisa),
+                    ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    var separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+
+                rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+                return 'Rp.' + rupiah;
+            }
         });
     </script>
 

@@ -51,10 +51,10 @@
         margin-right: 10px !important;
     }
 
-    .card-modals{
+    /* .card-modals{
         max-width: 767px !important;
         margin-left: 463px !important;
-    }
+    } */
 
     .form_item{
         font-size: 10px !important;
@@ -1441,10 +1441,10 @@ input[type=file]::file-selector-button:hover {
         height: 38px;
     }
 
-    .card-modals{
-        max-width: 868px !important;
+    /* .card-modals{
+        max-width: auto !important;
         margin-left: 463px !important;
-    }
+    } */
 
     .form_spk {
         margin-left: 15px !important;
@@ -1526,25 +1526,48 @@ input[type=file]::file-selector-button:hover {
 }
 
 .card-modals{
-    border-top: 10px solid #4FD1C5;
     background-color:white;
-    margin:15% auto;
     padding:20px;
-    width:80%;
-    max-width:887px ; 
-    margin-left:562px; 
-    margin-top:180px;
+    width:60%;
+    height:50%;
+    overflow-y: auto;
     border-radius: 6px;
 }
 
 .modalss{
-    display:none; 
+    display:none ;
+    justify-content: center;
+    align-items: center; 
     position:fixed; 
     top:0; left:0; 
-    width:100%; 
-    height:100%; 
+    width:100vw; 
+    height:100vh; 
     background-color:rgba(0,0,0,0.5);
+    z-index: 9999!important;
 }
+
+/* .card-modals {
+    background-color: white;
+    padding: 20px;
+    width: 60%;
+    max-height: 70%;
+    overflow-y: auto;
+    border-radius: 6px;
+    margin-bottom: 70px;
+}
+
+.modalss {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 9999 !important;
+} */
 
 
 
