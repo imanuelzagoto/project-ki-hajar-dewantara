@@ -57,7 +57,7 @@
                                 <td class="label_nama_project" nowrap>Nama Project</td>
                                 <td class="colon_nama_project" nowrap>:</td>
                                 <td class="value_nama_project" nowrap>
-                                    Pengadilan persiapan pendidikan dan pelatihan keamanan maritim pada universitas pertahanan smdkmsdksmd mksmkdkskdskdk knskdskndknskndk
+                                    {{ $suratPerintahKerja->title }}
                                 </td>
 
                                 <td class="label_no_spk font-weight-bold" nowrap>NO SPK</td>
