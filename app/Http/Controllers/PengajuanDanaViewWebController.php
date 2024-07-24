@@ -66,9 +66,9 @@ class PengajuanDanaViewWebController extends Controller
         if ($userId == 1 || $userId == 127) {
             $pengajuanDanas = PengajuanDana::with(['details', 'items'])->orderBy('created_at', 'desc')->get();
         } else if ($devisionId == "" || $devisionId == 0 || $devisionId == null || $devisionId == "null" || $devisionId == "0") {
-            $pengajuanDanas = PengajuanDana::with(['details', 'ItemPengajuanDana'])->where('user_id', $userId)->orderBy('created_at', 'desc')->get();
+            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->where('user_id', $userId)->orderBy('created_at', 'desc')->get();
         } else {
-            $pengajuanDanas = PengajuanDana::with(['details', 'ItemPengajuanDana'])->where('division_id', $devisionId)->get();
+            $pengajuanDanas = PengajuanDana::with(['details', 'items'])->where('division_id', $devisionId)->get();
         }
 
         return view('pengajuanDana.index', compact('pengajuanDanas'));
