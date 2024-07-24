@@ -118,11 +118,8 @@
 
                                             <div class="pr-4 py-2 col-6" id="container_tanggalPengajuan"
                                                 style="position: relative; bottom:3px;">
-                                                <span class="text-sm font-weight-bold text-form-detail">Tanggal
-                                                    Pengajuan</span>
-                                                <input name="tanggal_pengajuan" id="tanggalPengajuan" type="date"
-                                                    class="form-control w-100 disabled-input-project" required
-                                                    style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
+                                                <span class="text-sm font-weight-bold text-form-detail">Tanggal Pengajuan</span>
+                                                <input name="tanggal_pengajuan" id="tanggalPengajuan" type="date" class="form-control w-100 disabled-input-project" required style="background-color: #D9D9D9 !important; color:black; font-weight:500;">
                                             </div>
 
                                             <div class="pr-4 py-2 col-6" id="container_method">
@@ -135,14 +132,9 @@
                                                 </select>
                                             </div>
 
-                                            <div class="pr-4 py-2 col-4" id="container_selectProject"
-                                                style="display: none;">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position:relative; bottom:2.8px;">Pilih Kode
-                                                    Projek</span>
-                                                <select id="selectProject" name="code"
-                                                    class="form-control bg-light selectProject"
-                                                    style="max-width: 100%; width:100%;" required>
+                                            <div class="pr-4 py-2 col-4" id="container_selectProject" style="display: none;">
+                                                <span class="text-sm font-weight-bold text-form-detail" style="position:relative; bottom:2.8px;">Pilih Kode Projek</span>
+                                                <select id="selectProject" name="code" class="form-control bg-light selectProject" style="max-width: 100%; width:100%;" required>
                                                     <option value="" disabled selected></option>
                                                     @foreach ($projects as $p)
                                                         <option value="{{ $p['code'] }}">{{ $p['code'] }}</option>
@@ -279,33 +271,20 @@
                                     <div class="d-block w-100">
                                         <div class="row py-2">
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; left:2px;">Pemohon</span>
-                                                <input name="nama_pemohon" class="form-control bg-light w-100"
-                                                    type="text" style="position: relative; left:1px;" required>
+                                                <span class="text-sm font-weight-bold text-form-detail" style="position: relative; left:2px;">Pemohon</span>
+                                                <input name="nama_pemohon" class="form-control bg-light w-100" type="text" style="position: relative; left:1px;" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail"
-                                                    style="position: relative; right:2px;">Jabatan</span>
-                                                <input name="jabatan_pemohon" class="form-control bg-light w-100"
-                                                    style="position: relative; right:3px;" type="text" required>
+                                                <span class="text-sm font-weight-bold text-form-detail" style="position: relative; right:2px;">Jabatan</span>
+                                                <input name="jabatan_pemohon" class="form-control bg-light w-100" style="position: relative; right:3px;" type="text" required>
                                             </div>
                                             <div class="pr-4 py-2 col-6">
-                                                <span for="nama_pemeriksa"
-                                                    class="text-sm font-weight-bold text-form-detail">Pemeriksa</span>
-                                                <select name="pemeriksa[]" id="nama_pemeriksa"
-                                                    class="form-control select2" multiple="multiple"
-                                                    style="width: 100% !important;">
-                                                </select>
+                                                <span for="nama_pemeriksa" class="text-sm font-weight-bold text-form-detail">Pemeriksa</span>
+                                                <select name="pemeriksa[]" id="nama_pemeriksa" class="form-control select2" multiple="multiple" style="width: 100% !important;"></select>
                                             </div>
-                                            <div class="pr-4 py-2 col-6"
-                                                style="position: relative !important; right: 4px !important;">
-                                                <span for="nama_menyetujui"
-                                                    class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
-                                                <select name="persetujuan[]" id="nama_menyetujui"
-                                                    class="form-control select2" multiple="multiple"
-                                                    style="width: 100% !important;" required>
-                                                </select>
+                                            <div class="pr-4 py-2 col-6" style="position: relative !important; right: 4px !important;">
+                                                <span for="nama_menyetujui" class="text-sm font-weight-bold text-form-detail">Menyetujui</span>
+                                                <select name="persetujuan[]" id="nama_menyetujui" class="form-control select2" multiple="multiple" style="width: 100% !important;" required></select>
                                             </div>
                                         </div>
                                     </div>
@@ -328,6 +307,19 @@
     </div>
 
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll('.JS-delete-btn');
+            if (deleteButtons.length > 1) {
+                deleteButtons.forEach((button, index) => {
+                    if (index === 0) {
+                        button.disabled = true;
+                    } else {
+                        button.disabled = false;
+                    }
+                });
+            }
+        });
+
         function onchangeProjectid() {
             const projectDropdown = document.getElementById('kode_Project');
             const selectedValue = projectDropdown.value;
@@ -623,10 +615,18 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+            
+            $(document).on('click', '.JS-delete-btn', function() {
+                $(this).closest('.row').remove();
+                hitungSubtotal();
+                activateDeleteButtons();
+            });
+
             addNewRow();
             $("#tambahField").click(function() {
                 addNewRow();
             });
+            
             function addNewRow() {
                 var newRow = `
                         <div class="row py-2" style="margin-left: 90px;">
@@ -662,8 +662,8 @@
                                 <input name="total" class="form-control bg-light text-right total disabled-input-project" type="text" style="background-color: #D9D9D9 !important; text-align: left; color:black; font-weight:500;" required>
                         
                             </div>
-                            <div class="py-2 col-1 JS-button-delete">
-                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;" disabled><i class="fa-solid fa-minus"></i></button>
+                            <div class=" py-2 col-1 JS-button-delete">
+                                <button class="btn btn-sm btn-danger font-weight-bold JS-delete-btn" style="font-size: 14px; margin-top:21px;position: absolute;right: 26px;"><i class="fa-solid fa-minus"></i></button>
                             </div>
                         </div>`;
                 $("#itemFields").append(newRow);

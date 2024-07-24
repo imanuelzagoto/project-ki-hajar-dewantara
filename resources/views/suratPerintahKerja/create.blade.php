@@ -363,13 +363,10 @@
                                                 <input name="approver_position" class="form-control w-100 disabled-input-project" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" value="Koordinator PM" required>
                                             </div>
 
-                                            <div class="pr-4 py-2 col-6">
-                                                <span class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
-                                                <select name="board_of_directors" class="form-control bg-light w-100" id="board_of_directors" required>
-                                                    <option value="" disabled selected></option>
-                                                    <option value="Erwin Danuaji">Erwin Danuaji</option>
-                                                    <option value="Victor">Victor</option>
-                                                    <option value="Sindu Irawan">Sindu Irawan</option>
+                                            <div class="pr-4 py-2 col-6"
+                                                style="position: relative !important; right: 4px !important;">
+                                                <span for="board_of_directors" class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
+                                                <select name="board_of_directors[]" id="board_of_directors" class="form-control select2" multiple="multiple" style="width: 100% !important;" required>
                                                 </select>
                                             </div>
 
@@ -400,16 +397,37 @@
         </div>
     </div>
     <script>
-        document.getElementById('board_of_directors').addEventListener('change', function() {
-            var positionInput = document.getElementById('position');
-            var selectedValue = this.value;
-
-            if (selectedValue === "Erwin Danuaji" || selectedValue === "Victor" || selectedValue === "Sindu Irawan") {
-                positionInput.value = "BOD";
-            } else {
-                positionInput.value = "";
-            }
+        $(document).ready(function() {
+            $('#board_of_directors').select2({
+                placeholder: 'Pilih Mengetahui',
+                allowClear: true,
+                ajax: {
+                    url: '{{ route("getApprovalSpk") }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            name: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                maximumSelectionLength: 2
+            }).on('change', function() {
+                if ($(this).val() && $(this).val().length > 0) {
+                    $('#position').val('BOD');
+                } else {
+                    $('#position').val('');
+                }
+            });
         });
+
+
 
         // Function PIC auto penerima
         document.addEventListener('DOMContentLoaded', function() {
@@ -450,17 +468,6 @@
             document.getElementById("main_contractor").value = mainContractor ? mainContractor : '';
             document.getElementById("project_manager").value = projectManager ? projectManager : '';
         }
-        // function changeProjectName() {
-        //     var selectBox = document.getElementById("project_id");
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-user');
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-main-contractor');
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-project-manager');
-        //     document.getElementById("nama").value = selectedValue;
-        //     document.getElementById("user").value = selectedValue;
-        //     document.getElementById("main_contractor").value = selectedValue;
-        //     document.getElementById("project_manager").value = selectedValue;
-        // }
 
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
             var textarea = event.target;

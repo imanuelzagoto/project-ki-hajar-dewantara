@@ -407,33 +407,29 @@
                                                     <input name="approver_position" class="form-control w-100 disabled-input-project" type="text" value="{{ $suratPerintahKerja->approver_position }}" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                                 </div>
 
-                                                <div class="pr-4 py-2 col-6">
-                                                    <span
-                                                        class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
-                                                    <select name="board_of_directors" class="form-control bg-light w-100"
-                                                        required>
-                                                        <option value="" disabled selected
-                                                            {{ $suratPerintahKerja->board_of_directors == '' ? 'selected' : '' }}>
-                                                        </option>
-                                                        <option value="Erwin Danuaji"
-                                                            {{ $suratPerintahKerja->board_of_directors == 'Erwin Danuaji' ? 'selected' : '' }}>
+                                                <div class="pr-4 py-2 col-6" style="position: relative !important; right: 4px !important;">
+                                                    <span for="board_of_directors" class="text-sm font-weight-bold text-form-detail">Mengetahui</span>
+                                                    <select name="board_of_directors[]" id="board_of_directors" class="form-control select2" multiple="multiple" style="width: 100% !important;" required>
+                                                        <option value="1"
+                                                            {{ in_array(1, json_decode($suratPerintahKerja->board_of_directors)) ? 'selected' : '' }}>
                                                             Erwin Danuaji
                                                         </option>
-                                                        <option value="Victor"
-                                                            {{ $suratPerintahKerja->board_of_directors == 'Victor' ? 'selected' : '' }}>
+                                                        <option value="2"
+                                                            {{ in_array(2, json_decode($suratPerintahKerja->board_of_directors)) ? 'selected' : '' }}>
                                                             Victor
                                                         </option>
-                                                        <option value="Sindu Irawan"
-                                                            {{ $suratPerintahKerja->board_of_directors == 'Sindu Irawan' ? 'selected' : '' }}>
+                                                        <option value="3"
+                                                            {{ in_array(3, json_decode($suratPerintahKerja->board_of_directors)) ? 'selected' : '' }}>
                                                             Sindu Irawan
                                                         </option>
                                                     </select>
                                                 </div>
+
                                                 <div class="pr-4 py-2 col-6">
                                                     <span class="text-sm font-weight-bold text-form-detail">
                                                         Jabatan
                                                     </span>
-                                                    <input name="position" class="form-control w-100 disabled-input-project" value="{{ $suratPerintahKerja->position }}" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
+                                                    <input name="position" id="position" class="form-control w-100 disabled-input-project" value="{{ $suratPerintahKerja->position }}" type="text" style="background-color: #D9D9D9 !important; color:black; font-weight:500;" required>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -457,6 +453,48 @@
         </div>
     </div>
     <script>
+        // function approval spk
+        $(document).ready(function() {
+            $('#board_of_directors').select2({
+                placeholder: 'Pilih Mengetahui',
+                allowClear: true,
+                ajax: {
+                    url: '{{ route("getApprovalSpk") }}',
+                    dataType: 'json',
+                    delay: 250,
+                    data: function(params) {
+                        return {
+                            name: params.term
+                        };
+                    },
+                    processResults: function(data) {
+                        return {
+                            results: data
+                        };
+                    },
+                    cache: true
+                },
+                maximumSelectionLength: 2 
+            }).on('change', function() {
+                let selectedValues = $(this).val();
+                console.log('Selected values:', selectedValues);
+                
+                if (selectedValues && selectedValues.length > 2) {
+                    $(this).val(selectedValues.slice(0, 2)).trigger('change');
+                    alert('Anda hanya bisa memilih maksimal dua item.');
+                }
+                
+                if (selectedValues && selectedValues.length > 0) {
+                    $('#position').val('BOD');
+                } else {
+                    $('#position').val('');
+                }
+
+                console.log('Position value set to:', $('#position').val());
+            });
+        });
+
+
         // Function PIC auto penerima
         document.addEventListener('DOMContentLoaded', function() {
             var picSelect = document.getElementById('picSelect');
@@ -496,18 +534,6 @@
             document.getElementById("main_contractor").value = mainContractor ? mainContractor : '';
             document.getElementById("project_manager").value = projectManager ? projectManager : '';
         }
-
-        // function changeProjectName() {
-        //     var selectBox = document.getElementById("project_id");
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-title');
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-user');
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-main-contractor');
-        //     var selectedValue = selectBox.options[selectBox.selectedIndex].getAttribute('data-project-manager');
-        //     document.getElementById("nama").value = selectedValue;
-        //     document.getElementById("user").value = selectedValue;
-        //     document.getElementById("main_contractor").value = selectedValue;
-        //     document.getElementById("project_manager").value = selectedValue;
-        // }
 
         document.getElementById('uraian-pekerjaan').addEventListener('input', function(event) {
             var textarea = event.target;

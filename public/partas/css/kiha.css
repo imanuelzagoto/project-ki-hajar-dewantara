@@ -1200,8 +1200,9 @@
     border-radius: 25px !important;
     font-weight: bold !important;
     font-size: 14px !important;
-    position: relative;
-    top: 15px;
+    margin-top: 69px;
+    /* position: relative;
+    top: 15px; */
     -webkit-border-radius: 25px !important;
     -moz-border-radius: 25px !important;
     -ms-border-radius: 25px !important;

@@ -124,8 +124,6 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
     Route::get('/pengajuan-dana/delete/{id}', [PengajuanDanaViewWebController::class, 'destroy'])->name('pengajuanDana.delete');
     Route::get('/pengajuan-dana/{id}', [PengajuanDanaViewWebController::class, 'getShowItems'])->name('pengajuanDana.getShowItems');
-
-    // Route for getApproval
     Route::get('/get-approval', [PengajuanDanaViewWebController::class, 'getApproval'])->name('getApproval');
 
     // Routes Surat perintah kerja
@@ -135,7 +133,6 @@ Route::middleware(['middleware' => 'auth'])->group(function () {
     Route::put('/surat-perintah-kerja/update/{id}', [SuratPerintahKerjaViewWebController::class, 'update'])->name('suratPerintahKerja.update');
     Route::get('/surat-perintah-kerja/edit/{id}', [SuratPerintahKerjaViewWebController::class, 'edit'])->name('suratPerintahKerja.edit');
     Route::get('/surat-perintah-kerja/show/{id}', [SuratPerintahKerjaViewWebController::class, 'ShowPDF'])->name('suratPerintahKerja.ShowPDF');
-    // Route::get('/surat-perintah-kerja/show/{id}', [SuratPerintahKerjaViewWebController::class, 'ShowSuratPerintahKerja'])->name('suratPerintahKerja.ShowSuratPerintahKerja');
-    // Route::get('/surat-permintaan-barang/show/{id}', [SuratPerintahKerjaViewWebController::class, 'ShowPermintaanBarang'])->name('suratPerintahKerja.ShowSuratPermintaanBarang');
+    Route::get('/get-approval-spk', [SuratPerintahKerjaViewWebController::class, 'getApprovalSpk'])->name('getApprovalSpk');
     Route::get('/surat-perintah-kerja/delete/{id}', [SuratPerintahKerjaViewWebController::class, 'destroy'])->name('surat_perintah_kerja.delete');
 });

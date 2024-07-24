@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Http\Controllers\Controller;
 use App\Models\Surat_perintah_kerja;
+use App\Models\RequestApprovalSpk;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
@@ -29,6 +30,26 @@ class SuratPerintahKerjaViewWebController extends Controller
         }
         return $returnValue;
     }
+
+    public function getApprovalSpk(Request $request)
+    {
+        $tags_approval = [];
+        $search = $request->input('name');
+
+        $tags_approval = RequestApprovalSpk::where('nama', 'LIKE', "%$search%")
+            ->get(['id', 'nama']);
+
+        $formatted_tags_approval = [];
+        foreach ($tags_approval as $tag) {
+            $formatted_tags_approval[] = [
+                'id' => $tag->id,
+                'text' => $tag->nama
+            ];
+        }
+
+        return response()->json($formatted_tags_approval);
+    }
+
 
 
     public function index(Request $request)
@@ -78,11 +99,13 @@ class SuratPerintahKerjaViewWebController extends Controller
         $username = $userData['first_name'];
         $designation = $userData['designation'];
         $no_spk = $this->generateDocumentNumber();
+        $tags_approval_data = RequestApprovalSpk::all();
         return view('suratPerintahKerja.create')
             ->with('projects', $projects)
             ->with('no_spk', $no_spk)
             ->with('username', $username)
-            ->with('designation', $designation);
+            ->with('designation', $designation)
+            ->with('tags_approval_data', $tags_approval_data);
     }
 
 
@@ -93,7 +116,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'applicant_name' => 'required|string',
             'receiver_name' => 'nullable|string',
             'approver_name' => 'required|string',
-            'board_of_directors' => 'required|string',
+            'board_of_directors' => 'required|array',
             'applicant_position' => 'required|string',
             'receiver_position' => 'nullable|string',
             'approver_position' => 'required|string',
@@ -187,11 +210,13 @@ class SuratPerintahKerjaViewWebController extends Controller
             ]);
         }
 
+        $board_of_directors = $request->input('board_of_directors', []);
+        $board_of_directors_ids = array_map('intval', $board_of_directors);
         $suratPerintahKerjas->approvals()->create([
             'applicant_name' => $request->applicant_name,
             'receiver_name' => $request->receiver_name,
             'approver_name' => $request->approver_name,
-            'board_of_directors' => $request->board_of_directors,
+            'board_of_directors' => json_encode($board_of_directors_ids),
             'applicant_position' => $request->applicant_position,
             'receiver_position' => $request->receiver_position,
             'approver_position' => $request->approver_position,
@@ -214,10 +239,11 @@ class SuratPerintahKerjaViewWebController extends Controller
     {
         $suratPerintahKerjas = Surat_perintah_kerja::with('approvals', 'details', 'details_permintaan')->where('id', (int)$id)->get();
         $typeFormatPekerjaan = $suratPerintahKerjas->first()->type_format_pekerjaan;
+        $tags_approval_data = RequestApprovalSpk::all();
         if ($typeFormatPekerjaan == 'Surat Perintah Kerja') {
-            $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja', compact('suratPerintahKerjas'));
+            $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja', compact('suratPerintahKerjas', 'tags_approval_data'));
         } elseif ($typeFormatPekerjaan == 'Surat Permintaan Barang') {
-            $pdf = PDF::loadView('suratPerintahKerja.surat_permintaan_barang', compact('suratPerintahKerjas'));
+            $pdf = PDF::loadView('suratPerintahKerja.surat_permintaan_barang', compact('suratPerintahKerjas', 'tags_approval_data'));
         } else {
             abort(404, 'Type format pekerjaan tidak dikenali');
         }
@@ -247,9 +273,8 @@ class SuratPerintahKerjaViewWebController extends Controller
         $response = curl_exec($curl);
         curl_close($curl);
         $projects = json_decode($response, true)['data'];
-
+        $tags_approval_data = RequestApprovalSpk::all();
         $suratPerintahKerja = Surat_perintah_kerja::with(['details_permintaan', 'details', 'approvals'])->find($id);
-
         if (!$suratPerintahKerja) {
             return redirect(route('surat_perintah_kerja.index'))->with(['error' => 'Data Tidak Ditemukan!']);
         }   
@@ -257,6 +282,7 @@ class SuratPerintahKerjaViewWebController extends Controller
         return view('suratPerintahKerja.edit')
             ->with('projects', $projects)
             ->with('suratPerintahKerja', $suratPerintahKerja)
+            ->with('tags_approval_data', $tags_approval_data)
             ->with('details', $suratPerintahKerja->details_permintaan)
             ->with('details_job', $suratPerintahKerja->details);
     }
@@ -269,7 +295,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'applicant_name'           => 'required|string',
             'receiver_name'            => 'nullable|string',
             'approver_name'            => 'required|string',
-            'board_of_directors'       => 'required|string',
+            'board_of_directors'       => 'required|array',
             'applicant_position'       => 'required|string',
             'receiver_position'        => 'nullable|string',
             'approver_position'        => 'required|string',
@@ -394,11 +420,13 @@ class SuratPerintahKerjaViewWebController extends Controller
             ]);
         }
 
+        $board_of_directors = $request->input('board_of_directors', []);
+        $board_of_directors_ids = array_map('intval', $board_of_directors);
         $suratPerintahKerja->approvals()->update([
             'applicant_name'     => $request->applicant_name,
             'receiver_name'      => $request->receiver_name,
             'approver_name'      => $request->approver_name,
-            'board_of_directors' => $request->board_of_directors,
+            'board_of_directors' => json_encode($board_of_directors_ids),
             'applicant_position' => $request->applicant_position,
             'receiver_position'  => $request->receiver_position,
             'approver_position'  => $request->approver_position,

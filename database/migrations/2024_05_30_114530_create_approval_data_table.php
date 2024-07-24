@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('applicant_name');
             $table->string('receiver_name')->nullable();
             $table->string('approver_name');
-            $table->string('board_of_directors');
+            $table->text('board_of_directors');
             $table->string('applicant_position');
             $table->string('receiver_position')->nullable();
             $table->string('approver_position');
