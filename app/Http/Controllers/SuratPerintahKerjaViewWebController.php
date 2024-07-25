@@ -137,7 +137,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
             'spesifikasi.*' => 'nullable|string',
-            'alias.*' => 'nullable|string',
+            // 'alias.*' => 'nullable|string',
             'jumlah.*' => 'nullable|integer',
             'satuan.*' => 'nullable|string',
             'keterangan.*' => 'nullable|string',
@@ -171,13 +171,13 @@ class SuratPerintahKerjaViewWebController extends Controller
             'to' => $request->to,
         ]);
 
-        if ($request->has('spesifikasi') && $request->has('alias') && $request->has('jumlah') && $request->has('satuan') && $request->has('keterangan')) {
+        if ($request->has('spesifikasi') && $request->has('jumlah') && $request->has('satuan') && $request->has('keterangan')) {
             $details = [];
 
             foreach ($request->spesifikasi as $index => $spesifikasi) {
                 $details[] = [
                     'spesifikasi' => $spesifikasi,
-                    'alias' => $request->alias[$index],
+                    // 'alias' => $request->alias[$index],
                     'jumlah' => $request->jumlah[$index],
                     'satuan' => $request->satuan[$index],
                     'keterangan' => $request->keterangan[$index],
@@ -317,7 +317,7 @@ class SuratPerintahKerjaViewWebController extends Controller
             'supporting_document_file' => 'nullable|array|max:3',
             'supporting_document_file.*' => 'nullable|file|max:5000',
             'spesifikasi.*'            => 'nullable|string',
-            'alias.*'            => 'nullable|string',
+            // 'alias.*'            => 'nullable|string',
             'jumlah.*'                 => 'nullable|integer',
             'satuan.*'                 => 'nullable|string',
             'keterangan.*'             => 'nullable|string',
@@ -391,13 +391,13 @@ class SuratPerintahKerjaViewWebController extends Controller
 
             $suratPerintahKerja->details_permintaan()->update([
                 'spesifikasi' => null,
-                'alias' => null,
+                // 'alias' => null,
                 'jumlah'      => null,
                 'satuan'      => null,
                 'keterangan'  => null,
             ]);
         } elseif ($request->type_format_pekerjaan === 'Surat Permintaan Barang') {
-            if ($request->has('spesifikasi') && $request->has('alias') && $request->has('jumlah') && $request->has('satuan') && $request->has('keterangan')) {
+            if ($request->has('spesifikasi') && $request->has('jumlah') && $request->has('satuan') && $request->has('keterangan')) {
                 $suratPerintahKerja->details_permintaan()->delete();
 
                 $details = [];
@@ -405,7 +405,7 @@ class SuratPerintahKerjaViewWebController extends Controller
                 foreach ($request->spesifikasi as $index => $spesifikasi) {
                     $details[] = [
                         'spesifikasi' => $spesifikasi,
-                        'alias'      => $request->alias[$index],
+                        // 'alias'      => $request->alias[$index],
                         'jumlah'      => $request->jumlah[$index],
                         'satuan'      => $request->satuan[$index],
                         'keterangan'  => $request->keterangan[$index],
