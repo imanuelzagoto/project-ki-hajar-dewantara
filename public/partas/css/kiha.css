@@ -1592,7 +1592,7 @@ input[type=file]::file-selector-button:hover {
     padding: 20px;
     pointer-events: none;
     position: absolute;
-    width: 85%;
+    width: 100%;
     -webkit-transform: translateY(10px);
     -moz-transform: translateY(10px);
     -ms-transform: translateY(10px);
