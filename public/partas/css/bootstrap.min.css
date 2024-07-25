@@ -5991,7 +5991,8 @@ button.close {
     line-break: auto;
     font-size: .875rem;
     word-wrap: break-word;
-    opacity: 0
+    opacity: 1;
+    transition: opacity 0.1s ease-in-out
 }
 
 .tooltip.show {
@@ -6087,9 +6088,9 @@ button.close {
 .tooltip-inner {
     max-width: 400px;
     padding: .25rem .5rem;
+    color: #fff;
     position: relative;
     top: 30px;
-    color: #fff;
     text-align: center;
     background-color: #000;
     border-radius: .25rem

@@ -149,8 +149,9 @@
                                             <td class="text-center" style="font-weight: 500;" nowrap>
                                                 {{ $spk->no_spk }}
                                             </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap title="{{ $spk['title'] }}">
+                                            <td class="text-left wrapper" style="font-weight:500;" nowrap>
                                                 {{ Str::limit($spk['title'], 50) }}
+                                                <div class="tooltip">{{ $spk['title'] }}</div>
                                             </td>
                                             <td class="text-left" style="font-weight: 500;" nowrap>
                                                 {{ $approval->applicant_name }}
@@ -209,9 +210,15 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
-                new bootstrap.Tooltip(tooltipTriggerEl);
+            var wrappers = document.querySelectorAll('.wrapper');
+            wrappers.forEach(function(wrapper) {
+                var title = wrapper.textContent.trim();
+                if (title) {
+                    var tooltip = document.createElement('div');
+                    tooltip.className = 'tooltip';
+                    tooltip.textContent = title;
+                    wrapper.appendChild(tooltip);
+                }
             });
         });
         // JS DELETE
