@@ -397,19 +397,10 @@
                                 @endforeach
                                 <tr>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        <span class="nama_pemohon_spk">Nama</span>
-                                        <span style="padding-left: 15px;">:</span>
-                                        <span class="data_pemohon">{{ $approval->applicant_name }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        <span class="nama_penerima">Nama</span>
-                                        <span style="padding-left: 15px;">:</span>
-                                        <span class="data_pemohon">{{ $approval->receiver_name }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        <span class="nama_menyetujui">Nama</span>
-                                        <span style="padding-left: 15px;">:</span>
-                                        <span class="data_pemohon">{{ $approval->approver_name }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
                                         <span style="padding-left: 5px;">{{ $currentIteration + 1 }}.</span>
@@ -420,19 +411,10 @@
                                 </tr>
                                 <tr>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        <span class="Jabatan_pemohon">Jabatan</span>
-                                        <span>:</span>
-                                        <span class="data_pemohon">{{ $approval->applicant_position }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        <span class="Jabatan_pemohon">Jabatan</span>
-                                        <span>:</span>
-                                        <span class="data_pemohon">{{ $approval->receiver_position }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        <span class="Jabatan_pemohon">Jabatan</span>
-                                        <span>:</span>
-                                        <span class="data_pemohon">{{ $approval->approver_position }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black;">
                                         <span style="padding-left: 21px;">Jabatan</span>
@@ -457,13 +439,19 @@
                                 </tr>
                                 <tr>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        
+                                        <span class="nama_pemohon_spk">Nama</span>
+                                        <span style="padding-left: 15px;">:</span>
+                                        <span class="data_pemohon">{{ $approval->applicant_name }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        
+                                        <span class="nama_penerima">Nama</span>
+                                        <span style="padding-left: 15px;">:</span>
+                                        <span class="data_pemohon">{{ $approval->receiver_name }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        
+                                        <span class="nama_menyetujui">Nama</span>
+                                        <span style="padding-left: 15px;">:</span>
+                                        <span class="data_pemohon">{{ $approval->approver_name }}</span>
                                     </td>
                                     <td style="border-bottom: none; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align:center">
                                         <span style="visibility: hidden;">4</span>
@@ -471,13 +459,19 @@
                                 </tr>
                                 <tr>
                                     <td style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        
+                                        <span class="Jabatan_pemohon">Jabatan</span>
+                                        <span>:</span>
+                                        <span class="data_pemohon">{{ $approval->applicant_position }}</span>
                                     </td>
                                     <td style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        
+                                        <span class="Jabatan_pemohon">Jabatan</span>
+                                        <span>:</span>
+                                        <span class="data_pemohon">{{ $approval->receiver_position }}</span>
                                     </td>
                                     <td style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:6px solid black; text-align:left">
-                                        
+                                        <span class="Jabatan_pemohon">Jabatan</span>
+                                        <span>:</span>
+                                        <span class="data_pemohon">{{ $approval->approver_position }}</span>
                                     </td>
                                     <td style="border-bottom: 3px solid black; border-top: none; border-left:3px solid black; border-right:3px solid black; text-align: left; position: relative;">
                                         <span style="position: relative; left:20px;">...........................</span>
