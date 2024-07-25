@@ -111,13 +111,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php
+                                    use Illuminate\Support\Str;
+                                @endphp
+
                                 @php $i = 0; @endphp
                                 @foreach ($projects as $project)
                                     @php $i += 1; @endphp
                                     <tr class="Column_td">
                                         <td class="text-center" style="font-weight:500;">{{ $i }}</td>
-                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                            {{ $project['title'] }}
+                                        <td class="text-left" style="font-weight:500;" nowrap title="{{ $project['title'] }}">
+                                            {{ Str::limit($project['title'], 50) }}
                                         </td>
                                         <td class="text-left" style="font-weight:500; " nowrap>
                                             {{ $project['code'] }}
@@ -149,6 +153,15 @@
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+    
 @endsection
 
 @push('scripts')

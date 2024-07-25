@@ -149,8 +149,8 @@
                                             <td class="text-center" style="font-weight: 500;" nowrap>
                                                 {{ $spk->no_spk }}
                                             </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->title }}
+                                            <td class="text-left" style="font-weight: 500;" nowrap title="{{ $spk['title'] }}">
+                                                {{ Str::limit($spk['title'], 50) }}
                                             </td>
                                             <td class="text-left" style="font-weight: 500;" nowrap>
                                                 {{ $approval->applicant_name }}
@@ -207,8 +207,13 @@
             </div>
         </div>
     </div>
-
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.forEach(function (tooltipTriggerEl) {
+                new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
         // JS DELETE
         function submitDelete(id) {
             event.preventDefault();

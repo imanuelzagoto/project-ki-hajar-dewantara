@@ -1565,6 +1565,16 @@ input[type=file]::file-selector-button:hover {
     z-index: 9999!important;
 }
 
+.ui-tooltip {
+    width: 300px;
+    margin-top: 25px;
+}
+
+.ui-tooltip-content {
+    margin-top: 10px;
+}
+
+
 
 
 
