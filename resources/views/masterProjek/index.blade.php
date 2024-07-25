@@ -116,13 +116,13 @@
                                     @php $i += 1; @endphp
                                     <tr class="Column_td">
                                         <td class="text-center" style="font-weight:500;">{{ $i }}</td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                        <td class="text-left" style="font-weight:500;" nowrap>
                                             {{ $project['title'] }}
                                         </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                        <td class="text-left" style="font-weight:500; " nowrap>
                                             {{ $project['code'] }}
                                         </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
+                                        <td class="text-left" style="font-weight:500;" nowrap>
                                             {{ $project['user'] }}
                                         </td>
                                         <td class="text-center" style="font-weight:500;" nowrap>

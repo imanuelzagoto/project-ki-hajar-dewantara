@@ -867,8 +867,13 @@
 }
 
 @media screen and (min-width: 2160px) {
+    /* .table-responsive-goto {
+        display:  !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+    } */
     .table-responsive-goto {
-        display: table !important;
+        display: block;
         overflow-x: auto;
         overflow-y: hidden;
     }
