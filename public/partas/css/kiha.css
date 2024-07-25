@@ -1581,8 +1581,9 @@ input[type=file]::file-selector-button:hover {
 }
 
 .wrapper .tooltip {
-    background: #000;
+    background: #4FD1C5;
     bottom: 70%;
+    font-size: 15px;
     color: #fff;
     display: block;
     left: 43px;
@@ -1624,7 +1625,7 @@ input[type=file]::file-selector-button:hover {
 .wrapper .tooltip:after {
     border-left: solid transparent 10px;
     border-right: solid transparent 10px;
-    border-top: solid #000 10px;
+    border-top: solid #4FD1C5 10px;
     bottom: -10px;
     content: " ";
     height: 0;

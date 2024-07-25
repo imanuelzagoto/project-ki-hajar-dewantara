@@ -212,12 +212,14 @@
         document.addEventListener('DOMContentLoaded', function () {
             var wrappers = document.querySelectorAll('.wrapper');
             wrappers.forEach(function(wrapper) {
-                var title = wrapper.textContent.trim();
-                if (title) {
-                    var tooltip = document.createElement('div');
-                    tooltip.className = 'tooltip';
-                    tooltip.textContent = title;
-                    wrapper.appendChild(tooltip);
+                var tooltip = wrapper.querySelector('.tooltip');
+                if (tooltip) {
+                    var fullTitle = tooltip.textContent.trim();
+                    tooltip.remove();
+                    var newTooltip = document.createElement('div');
+                    newTooltip.className = 'tooltip';
+                    newTooltip.textContent = fullTitle;
+                    wrapper.appendChild(newTooltip);
                 }
             });
         });
