@@ -201,16 +201,6 @@
                                                 </select>
                                             </div>
 
-                                            {{-- <div class="pr-4 py-2 col-3" id="to_container">
-                                                <span class="text-sm font-weight-bold text-form-detail">To</span>
-                                                <select name="to" id="select_to" class="form-control bg-light w-100" required>
-                                                    <option value="" disabled selected></option>
-                                                    <option value="GA Manager">GA Manager</option>
-                                                    <option value="Purchase Manager">Purchase Manager</option>
-                                                    <option value="Design Manager">Design Manager</option>
-                                                </select>
-                                            </div>    --}}
-
                                             <div class="pr-4 py-2 col-6" id="job_type_Container">
                                                 <span class="text-sm font-weight-bold text-form-detail">
                                                     Jenis Pekerjaan
