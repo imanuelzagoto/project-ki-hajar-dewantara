@@ -242,12 +242,13 @@ class SuratPerintahKerjaViewWebController extends Controller
         $tags_approval_data = RequestApprovalSpk::all();
         if ($typeFormatPekerjaan == 'Surat Perintah Kerja') {
             $pdf = PDF::loadView('suratPerintahKerja.surat_perintah_kerja', compact('suratPerintahKerjas', 'tags_approval_data'));
+            $pdf->setPaper(array(0, 0, 785, 1000));
         } elseif ($typeFormatPekerjaan == 'Surat Permintaan Barang') {
             $pdf = PDF::loadView('suratPerintahKerja.surat_permintaan_barang', compact('suratPerintahKerjas', 'tags_approval_data'));
+            $pdf->setPaper(array(0, 0, 785, 1000));
         } else {
             abort(404, 'Type format pekerjaan tidak dikenali');
         }
-        $pdf->setPaper(array(0, 0, 785, 1000));
         return $pdf->stream();
     }
 

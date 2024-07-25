@@ -193,13 +193,23 @@
 
                                             <div class="pr-4 py-2 col-3" id="to_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">To</span>
-                                                <select name="to" id="select_to" class="form-control bg-light w-100">
+                                                <select name="to" id="select_to" class="form-control bg-light w-100" required>
                                                     <option value="" disabled selected></option>
                                                     <option value="GA Manager">GA Manager</option>
                                                     <option value="Purchase Manager">Purchase Manager</option>
                                                     <option value="Design Manager">Design Manager</option>
                                                 </select>
-                                            </div>   
+                                            </div>
+
+                                            {{-- <div class="pr-4 py-2 col-3" id="to_container">
+                                                <span class="text-sm font-weight-bold text-form-detail">To</span>
+                                                <select name="to" id="select_to" class="form-control bg-light w-100" required>
+                                                    <option value="" disabled selected></option>
+                                                    <option value="GA Manager">GA Manager</option>
+                                                    <option value="Purchase Manager">Purchase Manager</option>
+                                                    <option value="Design Manager">Design Manager</option>
+                                                </select>
+                                            </div>    --}}
 
                                             <div class="pr-4 py-2 col-6" id="job_type_Container">
                                                 <span class="text-sm font-weight-bold text-form-detail">
@@ -736,6 +746,7 @@
                 document.getElementById('jumlah').removeAttribute('required');
                 document.getElementById('satuan').removeAttribute('required');
                 document.getElementById('keterangan').removeAttribute('required');
+                document.getElementById('select_to').removeAttribute('required');
 
                 document.getElementById('spesifikasi').value = null;
                 document.getElementById('alias').value = null;
@@ -781,6 +792,7 @@
                 document.getElementById('jumlah').setAttribute('required', 'required');
                 document.getElementById('satuan').setAttribute('required', 'required');
                 document.getElementById('keterangan').setAttribute('required', 'required');
+                document.getElementById('select_to').setAttribute('required', 'required');
 
 
                 if (fileListContainer) {

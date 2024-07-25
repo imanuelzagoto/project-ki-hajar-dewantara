@@ -220,7 +220,7 @@
 
                                             <div class="pr-4 py-2 col-3" id="to_container">
                                                 <span class="text-sm font-weight-bold text-form-detail">To</span>
-                                                <select name="to" id="select_to" class="form-control bg-light w-100">
+                                                <select name="to" id="select_to" class="form-control bg-light w-100" required>
                                                     <option value="" {{ $suratPerintahKerja->to == '' ? 'selected' : '' }} disabled selected></option>
                                                     <option value="GA Manager" {{ $suratPerintahKerja->to == 'GA Manager' ? 'selected' : '' }}>GA Manager</option>
                                                     <option value="Purchase Manager" {{ $suratPerintahKerja->to == 'Purchase Manager' ? 'selected' : '' }}>Purchase Manager</option>
@@ -757,6 +757,7 @@
             var uraianPekerjaanTextarea = document.getElementById('uraian-pekerjaan');
             var toContainer = document.getElementById('to_container');
             var containerTypeFormat = document.getElementById('container_type_format');
+            var selectTo = document.getElementById('select_to');
 
             if (!selectedValue) {
                 console.error("Select box or its value is not found.");
@@ -786,13 +787,16 @@
                 if (document.getElementById('jumlah')) document.getElementById('jumlah').removeAttribute('required');
                 if (document.getElementById('satuan')) document.getElementById('satuan').removeAttribute('required');
                 if (document.getElementById('keterangan')) document.getElementById('keterangan').removeAttribute('required');
+                if (selectTo) {
+                    selectTo.removeAttribute('required');
+                    selectTo.value = null;
+                }
 
                 if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').value = null;
                 if (document.getElementById('alias')) document.getElementById('alias').value = null;
                 if (document.getElementById('jumlah')) document.getElementById('jumlah').value = null;
                 if (document.getElementById('satuan')) document.getElementById('satuan').value = null;
                 if (document.getElementById('keterangan')) document.getElementById('keterangan').value = null;
-                if (document.getElementById('select_to')) document.getElementById('select_to').value = null;
 
                 uraianPekerjaan.classList.remove('col-12');
                 uraianPekerjaan.classList.add('col-6');
@@ -820,14 +824,12 @@
                 if (fileListContainer) fileListContainer.value = null;
 
                 if (document.getElementById('checkbox_gambar')) document.getElementById('checkbox_gambar').checked = false;
-                if (document.getElementById('checkbox_kontrak')) document.getElementById('checkbox_kontrak').checked =
-                    false;
+                if (document.getElementById('checkbox_kontrak')) document.getElementById('checkbox_kontrak').checked = false;
                 if (document.getElementById('checkbox_brosur')) document.getElementById('checkbox_brosur').checked = false;
 
-                if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').setAttribute('required',
-                    'required');
-                if (document.getElementById('jumlah')) document.getElementById('jumlah').setAttribute('required',
-                    'required');
+                if (document.getElementById('spesifikasi')) document.getElementById('spesifikasi').setAttribute('required', 'required');
+                if (document.getElementById('jumlah')) document.getElementById('jumlah').setAttribute('required', 'required');
+                if (selectTo) selectTo.setAttribute('required', 'required');
 
                 if (fileListContainer) {
                     fileListContainer.innerHTML = '';
