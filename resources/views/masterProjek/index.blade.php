@@ -133,7 +133,7 @@
                                             <td class="text-center" style="font-weight:500;" nowrap>
                                                 {{ $project['main_contractor'] }}
                                             </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
                                                 {{ $project['project_manager'] }}
                                             </td>
                                             <td class="text-center" style="font-weight:500;" nowrap>
