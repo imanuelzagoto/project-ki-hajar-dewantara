@@ -99,8 +99,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card" style="margin-top: 14px;">
-                    <div class="card-body">
-                        <div class="align-items-center d-flex-center">
+                    <div class="card-body" >
+                        <div class="align-items-center d-flex-center" style="margin-bottom: -77px;">
                             <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
                                 style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
                                 <option value="10">10</option>
@@ -110,99 +110,100 @@
                             </select>
                             <span class="labelentris">entries per page</span>
                         </div>
-                        <table class="element-scrollbar table-responsive-goto table table-hover display-6 w-100"
-                            id="tablespk">
-                            <thead>
-                                <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
-                                    <th class="text-center" style="font-weight: 700;" nowrap>No</th>
-                                    <th class="text-center" style="width:25px; font-weight: 700;" nowrap>No SPK</th>
-                                    <th class="text-center" style="font-weight: 700;" nowrap>
-                                        Nama Project
-                                    </th>
-                                    <th class="text-center" style="font-weight: 700;" nowrap>Pemohon</th>
-                                    <th class="text-center" style="font-weight: 700;" nowrap>User</th>
-                                    <th class="text-center" style="font-weight: 700;" nowrap>
-                                        Main Contractor
-                                    </th>
-                                    <th class="text-center" style="font-weight: 700;" nowrap>
-                                        Project Manager
-                                    </th>
-                                    <th class="text-center" style="width:19px; font-weight:700;" nowrap>PIC</th>
-                                    <th class="text-center" style="width:23px; font-weight:700;" nowrap>Tanggal</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Tanggal Selesai</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    $i = 0;
-                                @endphp
-                                @foreach ($suratPerintahKerjas as $spk)
-                                    @foreach ($spk->approvals as $approval)
-                                        @php
-                                            $i += 1;
-                                        @endphp
-                                        <tr class="Column_td">
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ $i }}
-                                            </td>
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ $spk->no_spk }}
-                                            </td>
-                                            <td class="text-left wrapper" style="font-weight:500;" nowrap>
-                                                {{ Str::limit($spk['title'], 50) }}
-                                                <div class="tooltip">{{ $spk['title'] }}</div>
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $approval->applicant_name }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->user }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->main_contractor }}
-                                            </td>
-                                            <td class="text-left" style="font-weight: 500;" nowrap>
-                                                {{ $spk->project_manager }}
-                                            </td>
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ $spk->pic }}
-                                            </td>
-                                            <td class="text-center" style="font-weight: 500;" nowrap>
-                                                {{ $spk->submission_date }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:500;" nowrap>
-                                                {{ $spk->completion_time }}
-                                            </td>
-                                            <td class="text-center" style="font-weight:400;" nowrap>
-                                                <a href="/surat-perintah-kerja/edit/{{ $spk->id }}"
-                                                    class="fas fa-pen btn btn-sm tooltip-container"
-                                                    style="color:#4FD1C5; font-size:20px;">
-                                                    <span class="tooltip-edit">Edit</span>
-                                                </a>
+                        <div class="custom_table_wrapper">
+                            <table class="element-scrollbar table table-hover display-6 w-100" style="overflow-x: auto; display: block; padding-top: 20px; overflow-y: hidden;" id="tablespk">
+                                <thead>
+                                    <tr style="color: #718EBF; font-family: 'Inter', sans-serif; line-height:19.36px;">
+                                        <th class="text-center" style="font-weight: 700;" nowrap>No</th>
+                                        <th class="text-center" style="width:25px; font-weight: 700;" nowrap>No SPK</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>
+                                            Nama Project
+                                        </th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>Pemohon</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>User</th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>
+                                            Main Contractor
+                                        </th>
+                                        <th class="text-center" style="font-weight: 700;" nowrap>
+                                            Project Manager
+                                        </th>
+                                        <th class="text-center" style="width:19px; font-weight:700;" nowrap>PIC</th>
+                                        <th class="text-center" style="width:23px; font-weight:700;" nowrap>Tanggal</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Tanggal Selesai</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        $i = 0;
+                                    @endphp
+                                    @foreach ($suratPerintahKerjas as $spk)
+                                        @foreach ($spk->approvals as $approval)
+                                            @php
+                                                $i += 1;
+                                            @endphp
+                                            <tr class="Column_td">
+                                                <td class="text-center" style="font-weight: 500;" nowrap>
+                                                    {{ $i }}
+                                                </td>
+                                                <td class="text-center" style="font-weight: 500;" nowrap>
+                                                    {{ $spk->no_spk }}
+                                                </td>
+                                                <td class="text-left wrapper first-column" style="font-weight:500;" nowrap>
+                                                    {{ Str::limit($spk['title'], 50) }}
+                                                    <span class="tooltip_custom" id="tooltip_{{ $loop->index }}">{{ $spk['title'] }}</span>
+                                                </td>
+                                                <td class="text-left" style="font-weight: 500;" nowrap>
+                                                    {{ $approval->applicant_name }}
+                                                </td>
+                                                <td class="text-left" style="font-weight: 500;" nowrap>
+                                                    {{ $spk->user }}
+                                                </td>
+                                                <td class="text-left" style="font-weight: 500;" nowrap>
+                                                    {{ $spk->main_contractor }}
+                                                </td>
+                                                <td class="text-left" style="font-weight: 500;" nowrap>
+                                                    {{ $spk->project_manager }}
+                                                </td>
+                                                <td class="text-center" style="font-weight: 500;" nowrap>
+                                                    {{ $spk->pic }}
+                                                </td>
+                                                <td class="text-center" style="font-weight: 500;" nowrap>
+                                                    {{ $spk->submission_date }}
+                                                </td>
+                                                <td class="text-center" style="font-weight:500;" nowrap>
+                                                    {{ $spk->completion_time }}
+                                                </td>
+                                                <td class="text-center" style="font-weight:400;" nowrap>
+                                                    <a href="/surat-perintah-kerja/edit/{{ $spk->id }}"
+                                                        class="fas fa-pen btn btn-sm tooltip-container"
+                                                        style="color:#4FD1C5; font-size:20px;">
+                                                        <span class="tooltip-edit">Edit</span>
+                                                    </a>
 
-                                                <a href="/surat-perintah-kerja/show/{{ $spk->id }}"
-                                                    class="fas fa-eye btn btn-sm tooltip-container" target="_blank"
-                                                    style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
-                                                    <span class="tooltip-show">View</span>
-                                                </a>
+                                                    <a href="/surat-perintah-kerja/show/{{ $spk->id }}"
+                                                        class="fas fa-eye btn btn-sm tooltip-container" target="_blank"
+                                                        style="color:#1814F3; font-size:20px; border: none; margin-left:2px;">
+                                                        <span class="tooltip-show">View</span>
+                                                    </a>
 
-                                                <a href="/surat-perintah-kerja/delete/{{ $spk->id }}"
-                                                    class="fas fa-trash-alt btn btn-sm tooltip-container"
-                                                    style="color:#F31414; font-size:20px;"
-                                                    onclick="submitDelete({{ $spk->id }})">
-                                                    <span class="tooltip-delete">Delete</span>
-                                                </a>
-                                                <form id="delete-form-{{ $spk->id }}"
-                                                    action="/surat-perintah-kerja/delete/{{ $spk->id }}"
-                                                    method="get" style="display: none;">
-                                                </form>
-                                            </td>
-                                        </tr>
+                                                    <a href="/surat-perintah-kerja/delete/{{ $spk->id }}"
+                                                        class="fas fa-trash-alt btn btn-sm tooltip-container"
+                                                        style="color:#F31414; font-size:20px;"
+                                                        onclick="submitDelete({{ $spk->id }})">
+                                                        <span class="tooltip-delete">Delete</span>
+                                                    </a>
+                                                    <form id="delete-form-{{ $spk->id }}"
+                                                        action="/surat-perintah-kerja/delete/{{ $spk->id }}"
+                                                        method="get" style="display: none;">
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     @endforeach
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -212,17 +213,40 @@
         document.addEventListener('DOMContentLoaded', function () {
             var wrappers = document.querySelectorAll('.wrapper');
             wrappers.forEach(function(wrapper) {
-                var tooltip = wrapper.querySelector('.tooltip');
+                var tooltip = wrapper.querySelector('.tooltip_custom');
                 if (tooltip) {
                     var fullTitle = tooltip.textContent.trim();
                     tooltip.remove();
-                    var newTooltip = document.createElement('div');
-                    newTooltip.className = 'tooltip';
+                    var newTooltip = document.createElement('span');
+                    newTooltip.className = 'tooltip_custom';
                     newTooltip.textContent = fullTitle;
                     wrapper.appendChild(newTooltip);
                 }
             });
         });
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.tooltip_custom').forEach(function(tooltip) {
+                const text = tooltip.textContent || tooltip.innerText;
+                const wrapper = tooltip.closest('.wrapper');
+
+                if (text.length > 30) {
+                    tooltip.style.background = '#4FD1C5';
+                    tooltip.style.width = '130%';
+                    tooltip.style.wordBreak = 'break-word';
+                    tooltip.style.whiteSpace = 'normal';
+
+                    if (wrapper && wrapper.classList.contains('first-column')) {
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.bottom = '20px'; 
+                    }
+                } else {
+                    tooltip.style.background = '#4FD1C5';
+                    tooltip.style.width = '50%';
+                }
+            });
+        });
+
+
         // JS DELETE
         function submitDelete(id) {
             event.preventDefault();

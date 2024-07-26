@@ -85,7 +85,7 @@
             <div class="col-md-12">
                 <div class="card" style="margin-top: 10px;">
                     <div class="card-body">
-                        <div class="align-items-center d-flex-center">
+                        <div class="align-items-center d-flex-center" style="margin-bottom: -77px;">
                             <select id="showEntriesProject" class="form-control form-control-sm mr-2 select_entries"
                                 style="width: 70px; border-color:#ECEDF2; position: relative; left:10px;">
                                 <option value="10">10</option>
@@ -95,60 +95,61 @@
                             </select>
                             <span class="labelentris">entries per page</span>
                         </div>
-                        <table class="element-scrollbar table-responsive-goto table table-hover display-6 w-100"
-                            id="tableProject">
-                            <thead>
-                                <tr>
-                                    <th class="text-center" style="font-weight:700;">No</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Nama Projek</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Kode Projek</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>User</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Main Contractor</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Project Manager</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Tenggat</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Mulai</th>
-                                    <th class="text-center" style="font-weight:700;" nowrap>Akhir</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @php
-                                    use Illuminate\Support\Str;
-                                @endphp
-
-                                @php $i = 0; @endphp
-                                @foreach ($projects as $project)
-                                    @php $i += 1; @endphp
-                                    <tr class="Column_td">
-                                        <td class="text-center" style="font-weight:500;">{{ $i }}</td>
-                                        <td class="text-left wrapper" style="font-weight:500;" nowrap>
-                                            {{ Str::limit($project['title'], 50) }}
-                                            <div class="tooltip">{{ $project['title'] }}</div>
-                                        </td>                                                                                                                                                                                                     
-                                        <td class="text-left" style="font-weight:500; " nowrap>
-                                            {{ $project['code'] }}
-                                        </td>
-                                        <td class="text-left" style="font-weight:500;" nowrap>
-                                            {{ $project['user'] }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ $project['main_contractor'] }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ $project['project_manager'] }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}
-                                        </td>
-                                        <td class="text-center" style="font-weight:500;" nowrap>
-                                            {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
-                                        </td>
+                        <div class="custom_table_wrapper">
+                            <table class="element-scrollbar table table-hover display-6 w-100" style="overflow-x: auto; display: block; padding-top: 20px; overflow-y: hidden;" id="tableProject">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" style="font-weight:700;">No</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Nama Projek</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Kode Projek</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>User</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Main Contractor</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Project Manager</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Tenggat</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Mulai</th>
+                                        <th class="text-center" style="font-weight:700;" nowrap>Akhir</th>
                                     </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        use Illuminate\Support\Str;
+                                    @endphp
+    
+                                    @php $i = 0; @endphp
+                                    @foreach ($projects as $project)
+                                        @php $i += 1; @endphp
+                                        <tr class="Column_td">
+                                            <td class="text-center" style="font-weight:500;">{{ $i }}</td>
+                                            <td class="text-left wrapper first-column" style="font-weight:500;" nowrap>
+                                                {{ Str::limit($project['title'], 50) }}
+                                                <span class="tooltip_custom" id="tooltip_{{ $loop->index }}">{{ $project['title'] }}</span>
+                                            </td>                                                                                                                                                                                                     
+                                            <td class="text-left" style="font-weight:500; " nowrap>
+                                                {{ $project['code'] }}
+                                            </td>
+                                            <td class="text-left" style="font-weight:500;" nowrap>
+                                                {{ $project['user'] }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ $project['main_contractor'] }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ $project['project_manager'] }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ Carbon\Carbon::parse($project['start_date'])->format('d-m-Y') }}
+                                            </td>
+                                            <td class="text-center" style="font-weight:500;" nowrap>
+                                                {{ Carbon\Carbon::parse($project['end_date'])->format('d-m-Y') }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -158,14 +159,35 @@
         document.addEventListener('DOMContentLoaded', function () {
             var wrappers = document.querySelectorAll('.wrapper');
             wrappers.forEach(function(wrapper) {
-                var tooltip = wrapper.querySelector('.tooltip');
+                var tooltip = wrapper.querySelector('.tooltip_custom');
                 if (tooltip) {
                     var fullTitle = tooltip.textContent.trim();
                     tooltip.remove();
-                    var newTooltip = document.createElement('div');
-                    newTooltip.className = 'tooltip';
+                    var newTooltip = document.createElement('span');
+                    newTooltip.className = 'tooltip_custom';
                     newTooltip.textContent = fullTitle;
                     wrapper.appendChild(newTooltip);
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.tooltip_custom').forEach(function(tooltip) {
+                const text = tooltip.textContent || tooltip.innerText;
+                const wrapper = tooltip.closest('.wrapper');
+
+                if (text.length > 30) {
+                    tooltip.style.background = '#4FD1C5';
+                    tooltip.style.width = '130%';
+                    tooltip.style.wordBreak = 'break-word';
+                    tooltip.style.whiteSpace = 'normal';
+
+                    if (wrapper && wrapper.classList.contains('first-column')) {
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.bottom = '20px';
+                    }
+                } else {
+                    tooltip.style.background = '#4FD1C5';
+                    tooltip.style.width = '50%';
                 }
             });
         });

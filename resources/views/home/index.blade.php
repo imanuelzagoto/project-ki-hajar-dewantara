@@ -220,7 +220,7 @@
                                     <table class="table display-6 mb-6 table-hover w-100" id="TablePengajuanDana">
                                         <thead>
                                             <tr class="tr-table">
-                                                <th class="text-left" style="font-weight:700;" nowrap>No.</th>
+                                                {{-- <th class="text-left" style="font-weight:700;" nowrap>No.</th> --}}
                                                 <th class="text-left" style="font-weight:700;" nowrap>No.Doc</th>
                                                 <th class="text-center" style="font-weight:700;" nowrap>Revisi</th>
                                                 <th class="text-left" style="font-weight:700;" nowrap>Pemohon</th>
@@ -250,9 +250,9 @@
                                                         $i += 1;
                                                     @endphp
                                                     <tr class="Column_td">
-                                                        <td class="text-left" style="font-weight:500;" nowrap>
+                                                        {{-- <td class="text-left" style="font-weight:500;" nowrap>
                                                             {{ $i }}
-                                                        </td>
+                                                        </td> --}}
                                                         <td class="text-left" style="font-weight:500;" nowrap>
                                                             {{ $pdt->no_doc }}
                                                         </td>
@@ -299,12 +299,12 @@
                         <div class="card mt-lg-2 card-table-pd">
                             <div class="card-body ml-4">
                                 <div class="table-responsive">
-                                    <table class="table display-6 mb-6 table-hover w-100" id="TablePengajuanSPK">
+                                    <table class="table display-6 mb-6 table-hover w-100" style="overflow-x: auto; display: block; padding-top: 20px; overflow-y: hidden;" id="TablePengajuanSPK">
                                         <thead>
                                             <tr class="column_th">
-                                                <th class="text-left" style="width:25px; font-weight: 700;" nowrap>
+                                                {{-- <th class="text-left" style="width:25px; font-weight: 700;" nowrap>
                                                     No.
-                                                </th>
+                                                </th> --}}
                                                 <th class="text-left" style="width:25px; font-weight: 700;" nowrap>
                                                     No SPK
                                                 </th>
@@ -340,14 +340,15 @@
                                                         $i += 1;
                                                     @endphp
                                                     <tr class="Column_td">
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
+                                                        {{-- <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $i }}
-                                                        </td>
+                                                        </td> --}}
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $pst->no_spk }}
                                                         </td>
-                                                        <td class="text-left" style="font-weight: 500;" nowrap>
-                                                            {{ $pst->title }}
+                                                        <td class="text-left wrapper_home first-column" style="font-weight:500;" nowrap>
+                                                            {{ Str::limit($pst['title'], 50) }}
+                                                            <span class="tooltip_custom_home" id="tooltip_{{ $loop->index }}">{{ $pst['title'] }}</span>
                                                         </td>
                                                         <td class="text-left" style="font-weight: 500;" nowrap>
                                                             {{ $approval->applicant_name }}
@@ -386,8 +387,42 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    {{-- <script src="https://cdn-script.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script> --}}
     <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var wrappers = document.querySelectorAll('.wrapper_home');
+            wrappers.forEach(function(wrapper_home) {
+                var tooltip = wrapper_home.querySelector('.tooltip_custom_home');
+                if (tooltip) {
+                    var fullTitle = tooltip.textContent.trim();
+                    tooltip.remove();
+                    var newTooltip = document.createElement('span');
+                    newTooltip.className = 'tooltip_custom_home';
+                    newTooltip.textContent = fullTitle;
+                    wrapper_home.appendChild(newTooltip);
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            document.querySelectorAll('.tooltip_custom_home').forEach(function(tooltip) {
+                const text = tooltip.textContent || tooltip.innerText;
+                const wrapper_home = tooltip.closest('.wrapper_home');
+
+                if (text.length > 30) {
+                    tooltip.style.background = '#4FD1C5';
+                    tooltip.style.width = '130%';
+                    tooltip.style.wordBreak = 'break-word';
+                    tooltip.style.whiteSpace = 'normal';
+
+                    if (wrapper_home && wrapper_home.classList.contains('first-column')) {
+                        tooltip.style.position = 'absolute';
+                        tooltip.style.bottom = '20px';
+                    }
+                } else {
+                    tooltip.style.background = '#4FD1C5';
+                    tooltip.style.width = '50%';
+                }
+            });
+        });
         // JS DELETE
         function submitDelete(id) {
             event.preventDefault();
