@@ -187,7 +187,7 @@
                     }
                 } else {
                     tooltip.style.background = '#4FD1C5';
-                    tooltip.style.width = '50%';
+                    tooltip.style.width = '55%';
                 }
             });
         });
