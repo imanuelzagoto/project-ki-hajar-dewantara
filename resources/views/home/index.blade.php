@@ -402,7 +402,10 @@
                 }
             });
         });
+
         document.addEventListener("DOMContentLoaded", function() {
+            let hasLargeTooltip = false;
+
             document.querySelectorAll('.tooltip_custom_home').forEach(function(tooltip) {
                 const text = tooltip.textContent || tooltip.innerText;
                 const wrapper_home = tooltip.closest('.wrapper_home');
@@ -417,9 +420,24 @@
                         tooltip.style.position = 'absolute';
                         tooltip.style.bottom = '20px';
                     }
-                } else {
-                    tooltip.style.background = '#4FD1C5';
-                    tooltip.style.width = '50%';
+
+                    hasLargeTooltip = true;
+                }
+            });
+
+            document.querySelectorAll('.tooltip_custom_home').forEach(function(tooltip) {
+                const text = tooltip.textContent || tooltip.innerText;
+                const wrapper_home = tooltip.closest('.wrapper_home');
+
+                if (text.length <= 30) {
+                    if (hasLargeTooltip) {
+                        tooltip.style.background = '#4FD1C5';
+                        tooltip.style.width = '55%';
+                    } else {
+                        tooltip.style.background = '#4FD1C5';
+                        tooltip.style.width = '100%';
+                        tooltip.style.left = '30px';
+                    }
                 }
             });
         });
