@@ -38,7 +38,7 @@
                         <li class="breadcrumbs__item">
                             <a href="{{ route('pengajuanDana.index') }}" class="breadcrumbs__link"
                                 style="color: #17a2b8;font-size: 15px; font-weight: 500;">
-                                Surat Perintah Kerja
+                                Pengajuan Dana
                             </a>
                         </li>
                     </ul>
